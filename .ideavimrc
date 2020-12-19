@@ -1,0 +1,2 @@
+nnoremap <space> :
+inoremap jj <esc>
