@@ -16,7 +16,8 @@
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
    '("~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/INBOX_TODO_2020.txt" "~/Documents/nvALT/projx-eix.txt"))
- '(package-selected-packages '(git-gutter helm magit exec-path-from-shell))
+ '(package-selected-packages
+   '(elpy multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -24,7 +25,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
-  '(org-level-1 ((t (:inherit outline-1 :weight bold :width normal))))
+ '(org-level-1 ((t (:inherit outline-1 :weight bold :width normal))))
  '(org-level-2 ((t (:inherit outline-2 :overline t :underline t))))
  '(org-level-3 ((t (:inherit outline-3 :underline t :weight bold))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
@@ -210,3 +211,14 @@
 ;; Git-Gutter 2020-12-18
 (global-git-gutter-mode +1)
 
+;; Multiple-Cursors Package 2020-12-19
+(require 'multiple-cursors)
+; for multiple-line
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+; for keyword
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+
+(setq org-ditaa-jar-path "/Users/osickwon/Applications/")

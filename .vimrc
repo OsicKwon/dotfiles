@@ -18,6 +18,7 @@ set history=500  " default was 50 "
 set autoread
 set clipboard=unnamed
 set ttimeoutlen=0 "elminating time delay to Normal mode
+set nowrap
 set sidescroll=1 " 0, 1, 2, ....
 " set virtualedit=all
 set modeline
@@ -94,8 +95,9 @@ Plugin 'tpope/vim-repeat'
 " Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
 " Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'terryma/vim-expand-region'
-" Plugin 'w0rp/ale'                       " Asynchronous Lint Engine ??
-" Plugin 'ap/vim-css-color'             " complicted with vim modeline filetype markdown
+" Plugin 'w0rp/ale'                      " Asynchronous Lint Engine ??
+" Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
+Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
 
 
 "----------Git--------------
@@ -117,8 +119,8 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 " Plugin 'iamcco/markdown-preview.nvim'
 Plugin 'reedes/vim-wordy'
-" Plugin 'reedes/vim-lexical'           " perhaps be included in internal Vim
-" Plugin 'reedes/vim-pencil'            " perhaps be included in internal Vim
+" Plugin 'reedes/vim-lexical'            " perhaps be included in internal Vim
+" Plugin 'reedes/vim-pencil'             " perhaps be included in internal Vim
 " Plugin 'xolox/vim-notes'
 Plugin 'blueyed/vim-diminactive'
 Plugin 'vim-pandoc/vim-pandoc'
@@ -578,6 +580,7 @@ function! DarkFocusMode()
     autocmd InsertLeave * :set norelativenumber
     set scrolloff=999  " centering
     set spell
+    set wrap
     set ignorecase
     set smartcase
     call EasyMode()
@@ -609,6 +612,7 @@ function! EditMode()
     Limelight!
     autocmd InsertLeave * :set norelativenumber
     set spell
+    set wrap
     set ignorecase
     set smartcase
     call EasyMode()
@@ -630,6 +634,7 @@ function! UnFocusMode()
     autocmd InsertLeave * :set relativenumber
     set scrolloff=0
     set nospell
+    set nowrap
     set noignorecase
     set nosmartcase
     syntax enable  " redraw markdown highlighting
