@@ -5,7 +5,7 @@
 ;; You may delete these explanatory comments.
 ;(package-initialize)
 
-(tool-bar-mode 0)
+;(tool-bar-mode 0)
 ;(menu-bar-mode 0)
 ;(scroll-bar-mode -1)
 
@@ -17,7 +17,7 @@
  '(org-agenda-files
    '("~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/INBOX_TODO_2020.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(package-selected-packages
-   '(elpy multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(buffer-move markdown-mode elpy multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -25,6 +25,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
+ '(org-block ((t (:background "#EFF0F1" :extend t))))
+ '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
+ '(org-block-end-line ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
+ '(org-drawer ((t (:background "#e8e8e8" :foreground "#a685e2" :extend t))))
  '(org-level-1 ((t (:inherit outline-1 :weight bold :width normal))))
  '(org-level-2 ((t (:inherit outline-2 :overline t :underline t))))
  '(org-level-3 ((t (:inherit outline-3 :underline t :weight bold))))
@@ -222,3 +226,12 @@
 
 
 (setq org-ditaa-jar-path "/Users/osickwon/Applications/")
+
+
+;; buffer move package 2020-12-22
+(global-set-key (kbd "<C-S-up>")     'buf-move-up)
+(global-set-key (kbd "<C-S-down>")   'buf-move-down)
+(global-set-key (kbd "<C-S-left>")   'buf-move-left)
+(global-set-key (kbd "<C-S-right>")  'buf-move-right)
+
+
