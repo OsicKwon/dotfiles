@@ -1,4 +1,3 @@
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -36,7 +35,7 @@
  '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
 
 ;; Backup files relocated 2020-10-09
-(setq backup-directory-alist `(("." . "~/.saves")))
+(setq backup-directory-alist `(("." . "~/.saves/")))
 
 ;; No welcome startup screen
 (setq inhibit-startup-screen t)
@@ -60,6 +59,7 @@
    (shell . t)
    (python . t)
    (R . t)
+   (plantuml . t)
    (ditaa . t)
    (dot . t)
    (emacs-lisp . t)
@@ -225,10 +225,7 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 
-(setq org-ditaa-jar-path "/Users/osickwon/Applications/")
-
-
-;; buffer move package 2020-12-22
+;; Buffer move package 2020-12-22
 (global-set-key (kbd "<C-S-up>")     'buf-move-up)
 (global-set-key (kbd "<C-S-down>")   'buf-move-down)
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)

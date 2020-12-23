@@ -18,7 +18,6 @@ set history=500  " default was 50 "
 set autoread
 set clipboard=unnamed
 set ttimeoutlen=0 "elminating time delay to Normal mode
-set nowrap
 set sidescroll=1 " 0, 1, 2, ....
 " set virtualedit=all
 set modeline
@@ -153,7 +152,6 @@ set omnifunc=syntaxcomplete#Complete
 syntax on
 
 let g:searchfold_maxdepth=1
-" let g:vim_markdown_folding_disabled = 1
 let g:solarized_termcolors=256
 let g:airline_theme='tomorrow'  "default minimalist bubblegum raven angr
 " air-line
@@ -580,7 +578,6 @@ function! DarkFocusMode()
     autocmd InsertLeave * :set norelativenumber
     set scrolloff=999  " centering
     set spell
-    set wrap
     set ignorecase
     set smartcase
     call EasyMode()
@@ -612,7 +609,6 @@ function! EditMode()
     Limelight!
     autocmd InsertLeave * :set norelativenumber
     set spell
-    set wrap
     set ignorecase
     set smartcase
     call EasyMode()
@@ -634,7 +630,6 @@ function! UnFocusMode()
     autocmd InsertLeave * :set relativenumber
     set scrolloff=0
     set nospell
-    set nowrap
     set noignorecase
     set nosmartcase
     syntax enable  " redraw markdown highlighting
@@ -707,7 +702,7 @@ command! T2 call TestFunction2()
 
 if has('gui_running')
     set guioptions=     " disabled mac style tab"
-    set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h15
+    set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
     set linespace=1
     " set colorcolumn=105
     set cursorcolumn!
