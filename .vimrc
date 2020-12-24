@@ -22,6 +22,8 @@ set sidescroll=1 " 0, 1, 2, ....
 " set virtualedit=all
 set modeline
 set modelines=10
+set spell
+
 
 "--------
 " NUMBER
@@ -547,7 +549,6 @@ function! FocusMode()
     Limelight 0.8
     autocmd InsertLeave * :set norelativenumber
     set scrolloff=999  " centering
-    set spell
     set ignorecase
     set smartcase
     call EasyMode()
@@ -577,7 +578,6 @@ function! DarkFocusMode()
     Limelight 0.8
     autocmd InsertLeave * :set norelativenumber
     set scrolloff=999  " centering
-    set spell
     set ignorecase
     set smartcase
     call EasyMode()
@@ -608,7 +608,6 @@ function! EditMode()
     Goyo 100%x100%
     Limelight!
     autocmd InsertLeave * :set norelativenumber
-    set spell
     set ignorecase
     set smartcase
     call EasyMode()
@@ -629,7 +628,6 @@ function! UnFocusMode()
     Limelight!
     autocmd InsertLeave * :set relativenumber
     set scrolloff=0
-    set nospell
     set noignorecase
     set nosmartcase
     syntax enable  " redraw markdown highlighting
@@ -706,7 +704,6 @@ if has('gui_running')
     set linespace=1
     " set colorcolumn=105
     set cursorcolumn!
-    set nospell
     set background=light
     colorscheme PaperColor
     let g:airline_theme='powerlineish'  "default raven luna monochrome
