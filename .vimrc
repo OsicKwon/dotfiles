@@ -97,7 +97,7 @@ Plugin 'tpope/vim-repeat'
 Plugin 'terryma/vim-expand-region'
 " Plugin 'w0rp/ale'                      " Asynchronous Lint Engine ??
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
-Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
+" Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
 
 
 "----------Git--------------
@@ -140,6 +140,14 @@ Plugin 'haya14busa/incsearch-fuzzy.vim'
 Plugin 'haya14busa/incsearch-easymotion.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'searchfold.vim'               " embigiuous with marker
+" Plugin 'wincent/command-t'            " ruby required
+Plugin 'ervandew/supertab'
+
+
+"----------Python-----------
+Plugin 'nvie/vim-flake8'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'sirver/ultisnips'
 
 
 "------Other-plugins--------
