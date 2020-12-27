@@ -90,7 +90,6 @@ Plugin 'tpope/vim-repeat'
 " Plugin 'terryma/vim-multiple-cursors'  " good but not Vim way
 " Plugin 'gcmt/wildfire.vim'             " good but conflict with Tagbar keys like <C-m>|<enter>
 " Plugin 'shougo/neocomplete.vim'        " lua required
-" Plugin 'ervandew/supertab'             " code completion with tab
 " Plugin 'valloric/youcompleteme'        " gave up due to too-hard to insall 2020-11-20
 " Plugin 'davidhalter/jedi-vim'          " not working - hard to solve 2020-11-20
 " Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
@@ -99,7 +98,6 @@ Plugin 'terryma/vim-expand-region'
 " Plugin 'w0rp/ale'                      " Asynchronous Lint Engine ??
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
 " Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
-Plugin 'ervandew/supertab'
 
 
 "----------Git--------------
@@ -142,6 +140,14 @@ Plugin 'haya14busa/incsearch-fuzzy.vim'
 Plugin 'haya14busa/incsearch-easymotion.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'searchfold.vim'               " embigiuous with marker
+" Plugin 'wincent/command-t'            " ruby required
+Plugin 'ervandew/supertab'
+
+
+"----------Python-----------
+Plugin 'nvie/vim-flake8'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'sirver/ultisnips'
 
 
 "------Other-plugins--------
@@ -708,7 +714,7 @@ if has('gui_running')
     set background=light
     colorscheme PaperColor
     let g:airline_theme='powerlineish'  "default raven luna monochrome
-    " hi EasyMotionTarget guifg=black guibg=yellow
+    hi EasyMotionTarget guifg=red guibg=black
 endif
 
 
