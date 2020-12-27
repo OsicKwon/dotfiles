@@ -200,15 +200,17 @@ let g:airline_symbols.linenr = ''
 set thesaurus+=~/.vim/thesaurus/mthesaur.txt
 set thesaurus+=~/.vim/thesaurus/test_thesaur.txt
 
+
 " -------------------------
 " PERSISTENT UNDO TREE SAVE
 " -------------------------
-" if has("persistent_undo")
-"     set undodir=$HOME."/.undodir"
-"     set undofile
-" endif
-set undofile
+" must create '~/.undodir' directory first
+if has("persistent_undo")
+    set undodir=$HOME."/.undodir"
+    set undofile
+endif
 set undodir=~/.undodir
+set undofile
 
 
 "----------------------------------------------
