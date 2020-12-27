@@ -100,7 +100,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# alias emacs="/opt/local/bin/emacs"
+alias emacs="/opt/local/bin/emacs"
 
 alias vim="/usr/local/Cellar/vim/8.1.2350/bin/vim"
 alias vi="/usr/local/Cellar/vim/8.1.2350/bin/vim"
