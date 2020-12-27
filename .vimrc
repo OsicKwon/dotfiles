@@ -98,7 +98,8 @@ Plugin 'tpope/vim-repeat'
 Plugin 'terryma/vim-expand-region'
 " Plugin 'w0rp/ale'                      " Asynchronous Lint Engine ??
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
-Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
+" Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
+Plugin 'ervandew/supertab'
 
 
 "----------Git--------------
