@@ -24,6 +24,7 @@ set modeline
 set modelines=10
 set spell
 
+
 "--------
 " NUMBER
 "--------
@@ -89,7 +90,6 @@ Plugin 'tpope/vim-repeat'
 " Plugin 'terryma/vim-multiple-cursors'  " good but not Vim way
 " Plugin 'gcmt/wildfire.vim'             " good but conflict with Tagbar keys like <C-m>|<enter>
 " Plugin 'shougo/neocomplete.vim'        " lua required
-" Plugin 'ervandew/supertab'             " code completion with tab
 " Plugin 'valloric/youcompleteme'        " gave up due to too-hard to insall 2020-11-20
 " Plugin 'davidhalter/jedi-vim'          " not working - hard to solve 2020-11-20
 " Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
@@ -161,7 +161,6 @@ set omnifunc=syntaxcomplete#Complete
 syntax on
 
 let g:searchfold_maxdepth=1
-" let g:vim_markdown_folding_disabled = 1
 let g:solarized_termcolors=256
 let g:airline_theme='tomorrow'  "default minimalist bubblegum raven angr
 " air-line
