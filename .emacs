@@ -236,3 +236,10 @@
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
 
+;; org-level whole line background in org-mode 2020-12-27
+; ':extend t' option required to apply
+; it also adjust in 'customize' menu in emacs configuaration 
+(setq org-fontify-whole-heading-line t
+      org-fontify-done-headline t
+      org-fontify-quote-and-verse-blocks t)
+

@@ -171,7 +171,7 @@ if !exists('g:airline_symbols')
 endif
 " the separator used on the left side
 let g:airline_left_sep=''
-" the separator used on the right side 
+" the separator used on the right side
 let g:airline_right_sep=''
 
 " unicode symbols
@@ -200,15 +200,17 @@ let g:airline_symbols.linenr = ''
 set thesaurus+=~/.vim/thesaurus/mthesaur.txt
 set thesaurus+=~/.vim/thesaurus/test_thesaur.txt
 
+
 " -------------------------
 " PERSISTENT UNDO TREE SAVE
 " -------------------------
-" if has("persistent_undo")
-"     set undodir=$HOME."/.undodir"
-"     set undofile
-" endif
-set undofile
+" must create '~/.undodir' directory first
+if has("persistent_undo")
+    set undodir=$HOME."/.undodir"
+    set undofile
+endif
 set undodir=~/.undodir
+set undofile
 
 
 "----------------------------------------------
@@ -222,9 +224,9 @@ augroup text_to_markdown
     let g:indentLine_concealcursor=""
     let g:indentLine_conceallevel=2
     "autocmd BufRead,BufNewFile *.txt set concealcursor="" | set conceallevel=2
-    " Default was 'inc' stands for insert, normal, and command 
+    " Default was 'inc' stands for insert, normal, and command
     " except for visual by 'indentline' plugin
-    " When cursor is on a markdown syntax, 
+    " When cursor is on a markdown syntax,
     " it will be show its markdown grammar automatically
 augroup END
 
@@ -267,7 +269,7 @@ colorscheme papercolor
 "----------------------
 " hi VertSplit cterm=NONE
 " hi VertSplit ctermbg=darkgray ctermfg=237
-" set fillchars+=vert:\ 
+" set fillchars+=vert:\
 
 
 "-----------------
@@ -537,7 +539,7 @@ endfunction
 command! EasyMode call EasyMode()
 
 
-" Focusing 
+" Focusing
 "----------
 
 function! FocusMode()
@@ -648,6 +650,7 @@ function! UnFocusMode()
         set background=light
         colorscheme PaperColor
         set cursorline
+        " hi EasyMotionTarget guifg=red guibg=yellow
     elseif exists('$TMUX')
         silent !tmux set status on
     endif
@@ -662,7 +665,7 @@ command! UnFocusMode call UnFocusMode()
 " argument test"
 " --------------
 function! TestFunction(arg)
-    if a:arg == "abc" 
+    if a:arg == "abc"
         echo "abc"
     else
         echo "456"
@@ -714,12 +717,12 @@ if has('gui_running')
     set background=light
     colorscheme PaperColor
     let g:airline_theme='powerlineish'  "default raven luna monochrome
-    hi EasyMotionTarget guifg=red guibg=black
+    " hi EasyMotionTarget guifg=red guibg=yellow
 endif
 
 
 "------------------------------------------
-" LEADER KEY SETTING 
+" LEADER KEY SETTING
 " > could be, 'a', 'ab', 'A', 'AB', etc
 " > The Less The Better
 "------------------------------------------
@@ -741,11 +744,11 @@ nnoremap <silent> <leader>q :UnFocusMode<cr>
 nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
 nnoremap <silent> <leader>t  :TagbarToggle<cr>
 " nnoremap <silent> <leader>b  :bro old<cr>
-" maximize window size -> insted, vanila Vim: c-w _ / c-w 
+" maximize window size -> insted, vanila Vim: c-w _ / c-w
 " nnoremap <silent> <leader>mw  :vert resize 999<cr>
 " nnoremap <silent> <leader>mh  :resize 999<cr>
 
-nnoremap <silent> <leader><leader>r :source $MYVIMRC<cr> 
+nnoremap <silent> <leader><leader>r :source $MYVIMRC<cr>
     \ :echo "<<< .vimrc reloaded >>>"<cr>
 " undo leader shortcuts "
 nnoremap <silent> <leader>u   :UndotreeToggle<cr>
@@ -886,7 +889,7 @@ function! NaturalOrder(firstNr, secondNr)
     return -1
   elseif a:firstNr > a:secondNr
     return 1
-  else 
+  else
     return 0
   endif
 endfunction
