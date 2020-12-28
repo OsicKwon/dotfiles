@@ -648,7 +648,7 @@ function! UnFocusMode()
         " unlet g:line_size_before
         " unlet g:column_size_before
         set background=light
-        colorscheme PaperColor
+        " colorscheme PaperColor
         set cursorline
         " hi EasyMotionTarget guifg=red guibg=yellow
     elseif exists('$TMUX')
@@ -715,15 +715,11 @@ if has('gui_running')
     " set colorcolumn=105
     set cursorcolumn!
     set background=light
-    colorscheme PaperColor
+    colorscheme github
     let g:airline_theme='powerlineish'  "default raven luna monochrome
     " hi EasyMotionTarget guifg=red guibg=yellow
 endif
 
-
-"------------------------------------------
-" LEADER KEY SETTING
-" > could be, 'a', 'ab', 'A', 'AB', etc
 " > The Less The Better
 "------------------------------------------
 "let mapleader = ','
