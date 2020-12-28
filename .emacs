@@ -22,16 +22,13 @@
  '(org-fontify-whole-heading-line t)
  '(package-selected-packages
    '(buffer-move markdown-mode elpy multiple-cursors git-gutter helm magit exec-path-from-shell))
- '(tool-bar-mode nil))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
- '(org-block ((t (:background "#EFF0F1" :extend t))))
- '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
- '(org-block-end-line ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
  '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
  '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
@@ -239,7 +236,8 @@
 ;; org-level whole line background in org-mode 2020-12-27
 ; ':extend t' option required to apply
 ; it also adjust in 'customize' menu in emacs configuaration 
-(setq org-fontify-whole-heading-line t
-      org-fontify-done-headline t
-      org-fontify-quote-and-verse-blocks t)
+; -------- Applied Automatically at Line 20 ------------------
+;(setq org-fontify-whole-heading-line t
+;      org-fontify-done-headline t
+;      org-fontify-quote-and-verse-blocks t)
 
