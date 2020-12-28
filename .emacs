@@ -17,9 +17,12 @@
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
    '("~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/INBOX_TODO_2020.txt" "~/Documents/nvALT/projx-eix.txt"))
+ '(org-fontify-done-headline t)
+ '(org-fontify-quote-and-verse-blocks t)
+ '(org-fontify-whole-heading-line t)
  '(package-selected-packages
    '(buffer-move markdown-mode elpy multiple-cursors git-gutter helm magit exec-path-from-shell))
- '(tool-bar-mode nil))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -233,7 +236,8 @@
 ;; org-level whole line background in org-mode 2020-12-27
 ; ':extend t' option required to apply
 ; it also adjust in 'customize' menu in emacs configuaration 
-(setq org-fontify-whole-heading-line t
-      org-fontify-done-headline t
-      org-fontify-quote-and-verse-blocks t)
+; -------- Applied Automatically at Line 20 ------------------
+;(setq org-fontify-whole-heading-line t
+;      org-fontify-done-headline t
+;      org-fontify-quote-and-verse-blocks t)
 
