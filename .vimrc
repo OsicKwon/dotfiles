@@ -648,7 +648,10 @@ function! UnFocusMode()
         " unlet g:line_size_before
         " unlet g:column_size_before
         set background=light
-        colorscheme PaperColor
+        " colorscheme github
+        " highlight LineNr guibg=white
+        " highlight SignColumn guibg='#f0f0f0'  " for gitgutter
+        " highlight FoldColumn guibg=white  " for foldcolumn
         set cursorline
         " hi EasyMotionTarget guifg=red guibg=yellow
     elseif exists('$TMUX')
@@ -715,7 +718,10 @@ if has('gui_running')
     " set colorcolumn=105
     set cursorcolumn!
     set background=light
-    colorscheme PaperColor
+    colorscheme basic-light
+    " highlight LineNr guibg=white
+    " highlight SignColumn guibg='#f0f0f0'  " for gitgutter
+    " highlight FoldColumn guibg=white  " for foldcolumn
     let g:airline_theme='powerlineish'  "default raven luna monochrome
     " hi EasyMotionTarget guifg=red guibg=yellow
 endif
