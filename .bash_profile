@@ -42,5 +42,5 @@ export JAVA_HOME=$JAVA_HOME_11
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # Finished adapting your PATH environment variable for use with MacPorts.
 
-clear
-fortune | cowsay && date
+clear && cal && date +%F && curl wttr.in/?format=3; 
+# fortune | cowsay && date
