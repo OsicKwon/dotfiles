@@ -119,12 +119,14 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 " Plugin 'iamcco/markdown-preview.nvim'
 Plugin 'reedes/vim-wordy'
-" Plugin 'reedes/vim-lexical'            " perhaps be included in internal Vim
-" Plugin 'reedes/vim-pencil'             " perhaps be included in internal Vim
+Plugin 'reedes/vim-lexical'
+" Plugin 'reedes/vim-pencil'
 " Plugin 'xolox/vim-notes'
 Plugin 'blueyed/vim-diminactive'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'dbmrq/vim-ditto'                " find repeated words
+
 
 "------Functionality--------
 " Plugin 'kien/ctrlp.vim'
@@ -722,7 +724,7 @@ if has('gui_running')
     " highlight LineNr guibg=white
     " highlight SignColumn guibg='#f0f0f0'  " for gitgutter
     " highlight FoldColumn guibg=white  " for foldcolumn
-    let g:airline_theme='powerlineish'  "default raven luna monochrome
+    let g:airline_theme='luna'  "default raven luna monochrome powerlineish
     " hi EasyMotionTarget guifg=red guibg=yellow
 endif
 
