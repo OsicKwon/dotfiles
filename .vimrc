@@ -726,6 +726,10 @@ if has('gui_running')
     " hi EasyMotionTarget guifg=red guibg=yellow
 endif
 
+
+"------------------------------------------
+" LEADER KEY SETTING
+" > could be, 'a', 'ab', 'A', 'AB', etc
 " > The Less The Better
 "------------------------------------------
 "let mapleader = ','
@@ -753,7 +757,7 @@ nnoremap <silent> <leader>t  :TagbarToggle<cr>
 nnoremap <silent> <leader><leader>r :source $MYVIMRC<cr>
     \ :echo "<<< .vimrc reloaded >>>"<cr>
 " undo leader shortcuts "
-nnoremap <silent> <leader>u   :UndotreeToggle<cr>
+nnoremap <silent> <leader>uu   :UndotreeToggle<cr>
 nnoremap <silent> <leader>uf  :UndotreeFocus<cr>
 nnoremap <silent> <leader>us  :UndotreeShow<cr>
 nnoremap <silent> <leader>uh  :UndotreeHide<cr>
