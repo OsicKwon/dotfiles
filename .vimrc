@@ -119,8 +119,8 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 " Plugin 'iamcco/markdown-preview.nvim'
 Plugin 'reedes/vim-wordy'
-Plugin 'reedes/vim-lexical'
-" Plugin 'reedes/vim-pencil'
+" Plugin 'reedes/vim-lexical'            " no idea
+" Plugin 'reedes/vim-pencil'             " no idea
 " Plugin 'xolox/vim-notes'
 Plugin 'blueyed/vim-diminactive'
 Plugin 'vim-pandoc/vim-pandoc'
@@ -560,6 +560,7 @@ function! FocusMode()
     Limelight 0.8
     autocmd InsertLeave * :set norelativenumber
     set scrolloff=999  " centering
+    set sidescrolloff=30
     set ignorecase
     set smartcase
     call EasyMode()
@@ -589,6 +590,7 @@ function! DarkFocusMode()
     Limelight 0.8
     autocmd InsertLeave * :set norelativenumber
     set scrolloff=999  " centering
+    set sidescrolloff=30
     set ignorecase
     set smartcase
     call EasyMode()
@@ -639,6 +641,7 @@ function! UnFocusMode()
     Limelight!
     autocmd InsertLeave * :set relativenumber
     set scrolloff=0
+    set sidescrolloff=0
     set noignorecase
     set nosmartcase
     syntax enable  " redraw markdown highlighting
