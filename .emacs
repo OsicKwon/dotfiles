@@ -10,6 +10,12 @@
       (menu-bar-mode -1)
       (scroll-bar-mode -1)))
 
+
+;; Enable Evil 2020-12-30
+(require 'evil)
+(evil-mode 1)
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
