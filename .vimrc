@@ -23,8 +23,7 @@ set sidescroll=1 " 0, 1, 2, ....
 set modeline
 set modelines=10
 set spell
-set nowrap
-set colorcolumn=80,120
+" set colorcolumn=80,120
 
 
 "--------
@@ -519,7 +518,6 @@ function! HardMode()
     silent! nnoremap ll <nop>
     silent! unmap j
     silent! unmap k
-    silent! set nowrap
 endfunction
 command! HardMode call HardMode()
 
@@ -540,7 +538,6 @@ function! EasyMode()
     silent! unmap ll
     silent! nnoremap j gj
     silent! nnoremap k gk
-    silent! set wrap
 endfunction
 command! EasyMode call EasyMode()
 
@@ -567,7 +564,6 @@ function! FocusMode()
     set sidescrolloff=30
     set ignorecase
     set smartcase
-    set wrap
     call EasyMode()
     let g:OnFocusing=1
     if has('gui_running')
@@ -628,7 +624,6 @@ function! EditMode()
     autocmd InsertLeave * :set norelativenumber
     set ignorecase
     set smartcase
-    set wrap
     call EasyMode()
     let g:OnEditing=1
     if has('gui_running')
@@ -650,7 +645,6 @@ function! UnFocusMode()
     set sidescrolloff=0
     set noignorecase
     set nosmartcase
-    set nowrap
     syntax enable  " redraw markdown highlighting
     call HardMode()
     if has('gui_running')
@@ -734,7 +728,7 @@ if has('gui_running')
     " highlight LineNr guibg=white
     " highlight SignColumn guibg='#f0f0f0'  " for gitgutter
     " highlight FoldColumn guibg=white  " for foldcolumn
-    let g:airline_theme='term'  "default raven luna monochrome powerlineish
+    let g:airline_theme='luna'  "default raven luna monochrome powerlineish term
     " hi EasyMotionTarget guifg=red guibg=yellow
 endif
 
