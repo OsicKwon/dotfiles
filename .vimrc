@@ -418,11 +418,11 @@ nnoremap <C-j> :3wincmd -<cr>
 nnoremap <C-h> :3wincmd <<cr>
 nnoremap <C-l> :3wincmd ><cr>
 
-" Hard Mode
-nnoremap hh <nop>
-nnoremap jj <nop>
-nnoremap kk <nop>
-nnoremap ll <nop>
+" " Hard Mode
+" nnoremap hh <nop>
+" nnoremap jj <nop>
+" nnoremap kk <nop>
+" nnoremap ll <nop>
 
 inoremap <up> <nop>
 inoremap <down> <nop>
@@ -512,12 +512,12 @@ endfunction
 command! SurroundLine call SurroundLine()
 
 function! HardMode()
-    silent! nnoremap hh <nop>
-    silent! nnoremap jj <nop>
-    silent! nnoremap kk <nop>
-    silent! nnoremap ll <nop>
-    silent! unmap j
-    silent! unmap k
+    " silent! nnoremap hh <nop>
+    " silent! nnoremap jj <nop>
+    " silent! nnoremap kk <nop>
+    " silent! nnoremap ll <nop>
+    " silent! unmap j
+    " silent! unmap k
 endfunction
 command! HardMode call HardMode()
 
@@ -728,7 +728,7 @@ if has('gui_running')
     " highlight LineNr guibg=white
     " highlight SignColumn guibg='#f0f0f0'  " for gitgutter
     " highlight FoldColumn guibg=white  " for foldcolumn
-    let g:airline_theme='luna'  "default raven luna monochrome powerlineish term
+    let g:airline_theme='term'  "default raven luna monochrome powerlineish term
     " hi EasyMotionTarget guifg=red guibg=yellow
 endif
 
