@@ -12,8 +12,8 @@
 
 
 ;; Enable Evil 2020-12-30
-(require 'evil)
-(evil-mode 1)
+;(require 'evil)
+;(evil-mode 1)
 
 
 (custom-set-variables
