@@ -33,7 +33,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(buffer-move markdown-mode elpy multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(evil buffer-move markdown-mode elpy multiple-cursors git-gutter helm magit exec-path-from-shell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
