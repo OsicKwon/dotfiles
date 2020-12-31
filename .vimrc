@@ -32,8 +32,8 @@ set spell
 set nu
 set rnu "relativenumber
 augroup auto_set_number
-    autocmd InsertEnter * set nornu | hi StatusLine guifg=yellow | hi CursorLine gui=NONE guibg=lightyellow
-    autocmd InsertLeave * set rnu  | hi StatusLine guifg=#cfd8dc | hi CursorLine gui=bold,underline guibg=NONE
+    autocmd InsertEnter * set nornu | hi StatusLine guifg=yellow | hi CursorLine gui=bold guibg=#f0f0f0
+    autocmd InsertLeave * set rnu  | hi StatusLine guifg=#cfd8dc | hi CursorLine gui=underline guibg=NONE
 augroup END
 
 "--------
