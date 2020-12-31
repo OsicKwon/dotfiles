@@ -32,8 +32,8 @@ set spell
 set nu
 set rnu "relativenumber
 augroup auto_set_number
-    autocmd InsertEnter * set nornu | hi StatusLine guifg=yellow
-    autocmd InsertLeave * set rnu  | hi StatusLine guifg=#cfd8dc
+    autocmd InsertEnter * set nornu | hi StatusLine guifg=yellow | hi CursorLine gui=NONE guibg=lightyellow
+    autocmd InsertLeave * set rnu  | hi StatusLine guifg=#cfd8dc | hi CursorLine gui=bold,underline guibg=NONE
 augroup END
 
 "--------
@@ -357,42 +357,56 @@ function! StatuslineGit()
   return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 endfunction
 
+function! FileSize()  
+    let bytes = getfsize(expand("%:p"))  
+    if bytes <= 0  
+        return ""  
+    endif  
+    if bytes < 1024  
+        " return bytes  
+        return "| " . (bytes) . "b"  
+    else  
+        return "| " . (bytes / 1024) . "k"  
+    endif  
+endfunction
 
 set statusline=
 " set statusline+=\               " blank
-"set statusline=\[%{mode()}\]    " current mode
+" set statusline=\[%{mode()}\]    " current mode
 set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 set statusline+=%#PmenuSel#
 set statusline+=%{StatuslineGit()}
 set statusline+=\               " blank
-set statusline+=%#TablineFill#
-"set statusline+=\ Osic
-"set statusline+=\ World
+set statusline+=%#Tabline#
+" set statusline+=\ Osic
+" set statusline+=\ World
 set statusline+=\               " blank
 set statusline+=%f              " path
 "set statusline+=\ -\            " separator
 "set statusline+=FileType:       " label
 set statusline+=\               " blank
 set statusline+=%m              " modified flag [+]
+set statusline+=%{FileSize()}
 "------------------
 set statusline+=%=              " right align
 set statusline+=%#PmenuSel#
 set statusline+=%y              " filetype of the file
-set statusline+=%#Statusline#
+" set statusline+=%#MoreMsg#
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=\               " blank
-set statusline+=\[%{&fileformat}\]
-set statusline+=\               " blank
-set statusline+=Col:\ %c          " coloumn
-set statusline+=\               " blank
-set statusline+=Line:\ %l/%L           " line of total
-set statusline+=\               " blank
-set statusline+=%p              " percentage of lines
-set statusline+=\%%
-"set statusline+=%2*0x%04B\ %*   " character under cursor
-set statusline+=\               " blank
-"set statusline+=%P              " percentage of file/buffer
-
+" set statusline+=\[%{&fileformat}\]
+set statusline+=\ %{&fileformat}
+set statusline+=\             " blank
+" set statusline+=Line:\ %l/%L  " line of total
+set statusline+=%l\ of\ %L\ [%p%%]
+" set statusline+=\%%           " percent sign only
+" set statusline+=%2*0x%04B\ %* " character under cursor
+" set statusline+=\             " blank
+" set statusline+=%P            " percentage of file/buffer
+set statusline+=\ \-\ Col:\ %c      " coloumn
+" set statusline+=%-7.(%l of %L [%p%%] - Col: %c%V%) "Current line, percentage of size, column,
+" required to know how to apply statuline grouping grammar 2020-12-31
+set statusline+=\             " blank
 
 "--------------
 " TEXT EDITING
