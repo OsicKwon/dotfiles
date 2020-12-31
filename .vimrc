@@ -32,8 +32,8 @@ set spell
 set nu
 set rnu "relativenumber
 augroup auto_set_number
-    autocmd InsertEnter * set nornu
-    autocmd InsertLeave * set rnu
+    autocmd InsertEnter * set nornu | hi StatusLine guifg=yellow
+    autocmd InsertLeave * set rnu  | hi StatusLine guifg=#cfd8dc
 augroup END
 
 "--------
@@ -65,7 +65,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "---------Themes------------
-Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'itchyny/lightline.vim'
 "Plugin 'powerline/powerline'
@@ -322,11 +322,50 @@ set cursorline
 " STATUSLINE
 "------------
 set ruler
-set laststatus=1
+set laststatus=2
 set showcmd
 
+" Status Line Custom
+let g:currentmode={
+    \ 'n'  : 'Normal',
+    \ 'no' : 'Normal·Operator Pending',
+    \ 'v'  : 'Visual',
+    \ 'V'  : 'V·Line',
+    \ "\<C-V>" : 'V·Block',
+    \ 's'  : 'Select',
+    \ 'S'  : 'S·Line',
+    \ '^S' : 'S·Block',
+    \ 'i'  : 'Insert',
+    \ 'R'  : 'Replace',
+    \ 'Rv' : 'V·Replace',
+    \ 'c'  : 'Command',
+    \ 'cv' : 'Vim Ex',
+    \ 'ce' : 'Ex',
+    \ 'r'  : 'Prompt',
+    \ 'rm' : 'More',
+    \ 'r?' : 'Confirm',
+    \ '!'  : 'Shell',
+    \ 't'  : 'Terminal'
+    \}
+
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+
+
+set statusline=
+" set statusline+=\               " blank
+"set statusline=\[%{mode()}\]    " current mode
+set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
+set statusline+=%#PmenuSel#
+set statusline+=%{StatuslineGit()}
 set statusline+=\               " blank
-set statusline=\[%{mode()}\]    " current mode
+set statusline+=%#TablineFill#
 "set statusline+=\ Osic
 "set statusline+=\ World
 set statusline+=\               " blank
@@ -334,10 +373,12 @@ set statusline+=%f              " path
 "set statusline+=\ -\            " separator
 "set statusline+=FileType:       " label
 set statusline+=\               " blank
-set statusline+=%y              " filetype of the file
 set statusline+=%m              " modified flag [+]
 "------------------
 set statusline+=%=              " right align
+set statusline+=%#PmenuSel#
+set statusline+=%y              " filetype of the file
+set statusline+=%#Statusline#
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=\               " blank
 set statusline+=\[%{&fileformat}\]
@@ -658,6 +699,8 @@ function! UnFocusMode()
         " highlight LineNr guibg=white
         " highlight SignColumn guibg='#f0f0f0'  " for gitgutter
         " highlight FoldColumn guibg=white  " for foldcolumn
+        highlight CursorLineNr guibg=black guifg=white
+        highlight CursorLine gui=bold,underline guibg=NONE
         set cursorline
         " hi EasyMotionTarget guifg=red guibg=yellow
     elseif exists('$TMUX')
@@ -728,7 +771,10 @@ if has('gui_running')
     " highlight LineNr guibg=white
     " highlight SignColumn guibg='#f0f0f0'  " for gitgutter
     " highlight FoldColumn guibg=white  " for foldcolumn
-    let g:airline_theme='luna'  "default raven luna monochrome powerlineish term
+    hi Visual  guifg=black guibg=lightblue gui=NONE
+    highlight CursorLineNr guibg=black guifg=white
+    highlight CursorLine gui=bold,underline guibg=NONE
+    let g:airline_theme='term'  "default raven luna monochrome powerlineish term
     " hi EasyMotionTarget guifg=red guibg=yellow
 endif
 
@@ -763,7 +809,7 @@ nnoremap <silent> <leader>t  :TagbarToggle<cr>
 nnoremap <silent> <leader><leader>r :source $MYVIMRC<cr>
     \ :echo "<<< .vimrc reloaded >>>"<cr>
 " undo leader shortcuts "
-nnoremap <silent> <leader>uu   :UndotreeToggle<cr>
+nnoremap <silent> <leader>uu  :UndotreeToggle<cr>
 nnoremap <silent> <leader>uf  :UndotreeFocus<cr>
 nnoremap <silent> <leader>us  :UndotreeShow<cr>
 nnoremap <silent> <leader>uh  :UndotreeHide<cr>
