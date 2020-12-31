@@ -10,6 +10,11 @@
       (menu-bar-mode -1)
       (scroll-bar-mode -1)))
 
+;; Recent opened file history 2020-12-31
+(require 'recentf)
+(recentf-mode 1)
+(global-set-key "\C-xf" 'recentf-open-files)
+(setq recentf-auto-cleanup 'never)
 
 ;; Enable Evil 2020-12-30
 ;(require 'evil)
