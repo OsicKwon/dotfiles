@@ -32,7 +32,7 @@ set spell
 set nu
 set rnu "relativenumber
 augroup auto_set_number
-    autocmd InsertEnter * set nornu | hi StatusLine guifg=yellow | hi CursorLine gui=bold guibg=#f0f0f0
+    autocmd InsertEnter * set nornu | hi StatusLine guifg=yellow | hi CursorLine gui=bold guibg=lightyellow
     autocmd InsertLeave * set rnu  | hi StatusLine guifg=#cfd8dc | hi CursorLine gui=underline guibg=NONE
 augroup END
 
@@ -714,7 +714,7 @@ function! UnFocusMode()
         " highlight SignColumn guibg='#f0f0f0'  " for gitgutter
         " highlight FoldColumn guibg=white  " for foldcolumn
         highlight CursorLineNr guibg=black guifg=white
-        highlight CursorLine gui=bold,underline guibg=NONE
+        highlight CursorLine gui=underline guibg=NONE
         set cursorline
         " hi EasyMotionTarget guifg=red guibg=yellow
     elseif exists('$TMUX')
@@ -787,7 +787,7 @@ if has('gui_running')
     " highlight FoldColumn guibg=white  " for foldcolumn
     hi Visual  guifg=black guibg=lightblue gui=NONE
     highlight CursorLineNr guibg=black guifg=white
-    highlight CursorLine gui=bold,underline guibg=NONE
+    highlight CursorLine gui=underline guibg=NONE
     let g:airline_theme='term'  "default raven luna monochrome powerlineish term
     " hi EasyMotionTarget guifg=red guibg=yellow
 endif
