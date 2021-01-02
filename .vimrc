@@ -584,18 +584,13 @@ function! HardMode()
     silent! nnoremap ll <nop>
     silent! unmap j
     silent! unmap k
+    silent! noremap <up>    <nop>
+    silent! noremap <down>  <nop>
+    silent! noremap <left>  <nop>
+    silent! noremap <right> <nop>
 endfunction
 command! HardMode call HardMode()
 
-"function! MediumMode()
-"    silent! nnoremap hh <nop>
-"    "silent! nnoremap jj <nop>
-"    "silent! nnoremap kk <nop>
-"    silent! nnoremap ll <nop>
-"    silent! nnoremap j gj
-"    silent! nnoremap k gk
-"endfunction
-"command! Medium call MediumMode()
 
 function! EasyMode()
     silent! unmap hh
@@ -606,6 +601,16 @@ function! EasyMode()
     silent! nnoremap k gk
 endfunction
 command! EasyMode call EasyMode()
+
+
+function! SuperEasyMode()
+    call EasyMode()
+    silent! unmap <up>
+    silent! unmap <down>
+    silent! unmap <left>
+    silent! unmap <right>
+endfunction
+command! SuperEasyMode call SuperEasyMode()
 
 
 " Focusing
