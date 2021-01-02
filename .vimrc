@@ -34,7 +34,7 @@ set rnu "relativenumber
 augroup auto_set_number
     autocmd InsertEnter * set nornu
         \ | hi StatusLine guifg=yellow ctermfg=yellow 
-        \ | hi CursorLine gui=bold guibg=lightyellow 
+        \ | hi CursorLine gui=NONE guibg=lightyellow 
         \ | hi CursorLineNr guibg=red
     autocmd InsertLeave * set rnu  
         \ | hi StatusLine guifg=#cfd8dc ctermfg=66 
