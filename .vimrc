@@ -438,13 +438,18 @@ set wildmode=list,full
 " KEY-REMAP
 "-----------
 
+noremap <up>    <nop>
+noremap <down>  <nop>
+noremap <left>  <nop>
+noremap <right> <nop>
+
 nnoremap <space> :
 vnoremap <space> :
 
-nnoremap <up>    <nop>
-nnoremap <down>  <nop>
-nnoremap <left>  <nop>
-nnoremap <right> <nop>
+" nnoremap <up>    <nop>
+" nnoremap <down>  <nop>
+" nnoremap <left>  <nop>
+" nnoremap <right> <nop>
 
 " nnoremap <up>    <C-w>k
 " nnoremap <down>  <C-w>j
@@ -515,15 +520,15 @@ inoremap <silent>kk <Esc>
 " inoremap < <><Left>
 " inoremap " ""<Left>
 
-vnoremap <up> <nop>
-vnoremap <down> <nop>
-vnoremap <left> <nop>
-vnoremap <right> <nop>
+" vnoremap <up> <nop>
+" vnoremap <down> <nop>
+" vnoremap <left> <nop>
+" vnoremap <right> <nop>
 
-cnoremap <up> <nop>
-cnoremap <down> <nop>
-cnoremap <left> <nop>
-cnoremap <right> <nop>
+" cnoremap <up> <nop>
+" cnoremap <down> <nop>
+" cnoremap <left> <nop>
+" cnoremap <right> <nop>
 
 " Emacs style Keybinding in command mode
 "----------------------------------------
@@ -579,18 +584,13 @@ function! HardMode()
     silent! nnoremap ll <nop>
     silent! unmap j
     silent! unmap k
+    silent! noremap <up>    <nop>
+    silent! noremap <down>  <nop>
+    silent! noremap <left>  <nop>
+    silent! noremap <right> <nop>
 endfunction
 command! HardMode call HardMode()
 
-"function! MediumMode()
-"    silent! nnoremap hh <nop>
-"    "silent! nnoremap jj <nop>
-"    "silent! nnoremap kk <nop>
-"    silent! nnoremap ll <nop>
-"    silent! nnoremap j gj
-"    silent! nnoremap k gk
-"endfunction
-"command! Medium call MediumMode()
 
 function! EasyMode()
     silent! unmap hh
@@ -601,6 +601,16 @@ function! EasyMode()
     silent! nnoremap k gk
 endfunction
 command! EasyMode call EasyMode()
+
+
+function! SuperEasyMode()
+    call EasyMode()
+    silent! unmap <up>
+    silent! unmap <down>
+    silent! unmap <left>
+    silent! unmap <right>
+endfunction
+command! SuperEasyMode call SuperEasyMode()
 
 
 " Focusing
@@ -633,6 +643,11 @@ function! FocusMode()
     elseif exists('$TMUX')
         silent !tmux set status off
     endif
+    " allow arrows
+    silent! unmap <up>
+    silent! unmap <down>
+    silent! unmap <left>
+    silent! unmap <right>
 endfunction
 command! FocusMode call FocusMode()
 
@@ -726,6 +741,11 @@ function! UnFocusMode()
     elseif exists('$TMUX')
         silent !tmux set status on
     endif
+    " disable arrows
+    silent! map <up>    <nop>
+    silent! map <down>  <nop>
+    silent! map <left>  <nop>
+    silent! map <right> <nop>
 endfunction
 command! UnFocusMode call UnFocusMode()
 
