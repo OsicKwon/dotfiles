@@ -32,8 +32,14 @@ set spell
 set nu
 set rnu "relativenumber
 augroup auto_set_number
-    autocmd InsertEnter * set nornu | hi StatusLine guifg=yellow | hi CursorLine gui=bold guibg=lightyellow | hi CursorLineNr guibg=red
-    autocmd InsertLeave * set rnu  | hi StatusLine guifg=#cfd8dc | hi CursorLine gui=underline guibg=NONE | hi CursorLineNr guibg=black
+    autocmd InsertEnter * set nornu
+        \ | hi StatusLine guifg=yellow ctermfg=yellow 
+        \ | hi CursorLine gui=bold guibg=lightyellow 
+        \ | hi CursorLineNr guibg=red
+    autocmd InsertLeave * set rnu  
+        \ | hi StatusLine guifg=#cfd8dc ctermfg=66 
+        \ | hi CursorLine gui=underline guibg=NONE 
+        \ | hi CursorLineNr guibg=black
 augroup END
 
 "--------
@@ -376,7 +382,7 @@ set statusline=
 set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 set statusline+=%#PmenuSel#
 set statusline+=%{StatuslineGit()}
-set statusline+=\               " blank
+" set statusline+=\               " blank
 set statusline+=%#Tabline#
 " set statusline+=\ Osic
 " set statusline+=\ World
@@ -389,7 +395,7 @@ set statusline+=%m              " modified flag [+]
 set statusline+=%{FileSize()}
 "------------------
 set statusline+=%=              " right align
-set statusline+=%#PmenuSel#
+" set statusline+=%#PmenuSel#
 set statusline+=%y              " filetype of the file
 " set statusline+=%#MoreMsg#
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
