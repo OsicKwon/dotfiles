@@ -31,6 +31,12 @@ set spell
 "--------
 set nu
 set rnu "relativenumber
+
+
+"-----------
+" Autogroup
+"-----------
+
 augroup auto_set_number
     autocmd InsertEnter * set nornu
         \ | hi StatusLine guifg=yellow ctermfg=yellow 
@@ -78,7 +84,6 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'altercation/vim-colors-solarized'
 
-
 "--------SnipMate-----------
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
@@ -91,7 +96,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 Plugin 'yggdroot/indentline'
 Plugin 'tpope/vim-commentary'
-"Plugin 'scrooloose/nerdcommenter'
+" Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 " Plugin 'terryma/vim-multiple-cursors'  " good but not Vim way
@@ -106,17 +111,14 @@ Plugin 'terryma/vim-expand-region'
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
 " Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
 
-
 "----------Git--------------
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'junegunn/gv.vim'
 
-
 "----------Data-------------
 " Plugin 'chrisbra/csv.vim'              " not working. instead, >> Plug 'chrisbra/csv.vim'
 Plugin 'mechatroner/rainbow_csv'
-
 
 "---------Writing-----------
 Plugin 'junegunn/goyo.vim'
@@ -134,10 +136,9 @@ Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'dbmrq/vim-ditto'                " find repeated words
 
-
 "------Functionality--------
 " Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'          " not a vimway instead use find command
 Plugin 'mbbill/undotree'
 Plugin 'sjl/gundo.vim'                  " visualize your Vim undo tree
 " Plugin 'wincent/command-t'            " Ruby required
@@ -152,12 +153,10 @@ Plugin 'searchfold.vim'               " embigiuous with marker
 " Plugin 'wincent/command-t'            " ruby required
 Plugin 'ervandew/supertab'
 
-
 "----------Python-----------
 Plugin 'nvie/vim-flake8'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'sirver/ultisnips'
-
 
 "------Other-plugins--------
 Plugin 'itchyny/calendar.vim'
@@ -399,7 +398,7 @@ set statusline+=%=              " right align
 set statusline+=%y              " filetype of the file
 " set statusline+=%#MoreMsg#
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-set statusline+=\               " blank
+" set statusline+=\               " blank
 " set statusline+=\[%{&fileformat}\]
 set statusline+=\ %{&fileformat}
 set statusline+=\             " blank
@@ -434,9 +433,9 @@ set wildmenu  " :find <tab> -> show wildmenu (suggesting files)
 set wildmode=list,full
 
 
-"-----------
+"===========
 " KEY-REMAP
-"-----------
+"============
 
 noremap <up>    <nop>
 noremap <down>  <nop>
@@ -446,6 +445,9 @@ noremap <right> <nop>
 nnoremap <space> :
 vnoremap <space> :
 
+" --------
+"  Normal
+" --------
 " nnoremap <up>    <nop>
 " nnoremap <down>  <nop>
 " nnoremap <left>  <nop>
@@ -490,6 +492,9 @@ nnoremap jj <nop>
 nnoremap kk <nop>
 nnoremap ll <nop>
 
+" --------
+"  Insert
+" --------
 inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
@@ -530,6 +535,10 @@ inoremap <silent>kk <Esc>
 " cnoremap <left> <nop>
 " cnoremap <right> <nop>
 
+" ---------
+"  Command
+" ---------
+
 " Emacs style Keybinding in command mode
 "----------------------------------------
 cnoremap <C-a> <Home>
@@ -545,10 +554,11 @@ cnoremap <Esc>d <S-Right><Delete>
 cnoremap <C-g> <C-c>
 
 
-"-----------
+"===========
 " FUNCTIONS
-"-----------
+"===========
 
+"-----------
 " Draw Line
 "-----------
 function! UnderLine()
@@ -615,6 +625,7 @@ endfunction
 command! SuperEasyMode call SuperEasyMode()
 
 
+"----------
 " Focusing
 "----------
 
@@ -767,15 +778,12 @@ endfunction
 " test search and replace
 " -----------------------
 function! TestFunction2()
-
     call EasyMode()
-
     " let v = "\*\{2\}"
     " echo v
     " execute "%s/\\v(" . v . ")/x/"
     " " execute "%s/\\v*{2}.*/xxx/"
     " echo "Test Done"
-
     " Original Pattern: (\*{2}).{-}\1
     let bold_pattern = "\*\{2\}.\{-\}\*\{2\}"
     " non greedy regex in vim -> {-} (standard: '.*?')
@@ -783,7 +791,6 @@ function! TestFunction2()
     execute "%s/\\v" . bold_pattern . "/\\=setreg('A', submatch(0), 'V')/gn"
     " 'Very Magic Mode' -> '\v' => escaped -> '\\v' in script
     put A  " same as "AP
-
 endfunction
 command! T2 call TestFunction2()
 
@@ -808,7 +815,7 @@ if has('gui_running')
     " highlight LineNr guibg=white
     " highlight SignColumn guibg='#f0f0f0'  " for gitgutter
     " highlight FoldColumn guibg=white  " for foldcolumn
-    hi Visual  guifg=black guibg=lightblue gui=NONE
+    highlight Visual guifg=bg guibg=DarkGreen gui=NONE
     highlight CursorLineNr guibg=black guifg=white
     highlight CursorLine gui=underline guibg=NONE
     let g:airline_theme='term'  "default raven luna monochrome powerlineish term
