@@ -1,3 +1,14 @@
+
+;; since 2020
+;;    ___  ____ ___  ____ ___________
+;;   / _ \/ __ `__ \/ __ `/ ___/ ___/
+;; _/  __/ / / / / / /_/ / /__(__  ) 
+;;(_)___/_/ /_/ /_/\__,_/\___/____/  
+                                   
+;;=================
+;; Initial Setting
+;;==================
+
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -16,7 +27,12 @@
 (global-set-key "\C-xf" 'recentf-open-files)
 (setq recentf-auto-cleanup 'never)
 
+;; Bettery mode 2021-01-03
+(display-battery-mode 1)
+
+;;------------------------
 ;; Enable Evil 2020-12-30
+;;------------------------
 ;(require 'evil)
 ;(evil-mode 1)
 
@@ -191,9 +207,9 @@
  'append)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;=========================
 ;; Key Bindings 2020-12-10
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;==========================
 
 ;; scroll window up/down by one line
 ;; http://pragmaticemacs.com/emacs/scrolling-and-moving-by-line/
@@ -259,4 +275,3 @@
 ;(setq org-fontify-whole-heading-line t
 ;      org-fontify-done-headline t
 ;      org-fontify-quote-and-verse-blocks t)
-
