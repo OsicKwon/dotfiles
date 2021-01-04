@@ -54,33 +54,32 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(evil buffer-move markdown-mode elpy multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(buffer-move markdown-mode elpy multiple-cursors git-gutter helm magit exec-path-from-shell)))
 (custom-set-faces
+
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
- '(org-block ((t (:background "#f1f6f9" :extend t))))
- '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#f0f0f0" :extend t))))
- '(org-block-end-line ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#f0f0f0" :extend t))))
  '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
  '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
 
-;; Backup files relocated 2020-10-09
-(setq backup-directory-alist `(("." . "~/.saves/")))
+;; ======================
+;; Emacs-Initial-Setting
+;; ======================
+(setq backup-directory-alist `(("." . "~/.saves/")))         ;; Backup files relocated 2020-10-09
+(setq inhibit-startup-screen t)                              ;; No welcome startup screen
+(setq initial-scratch-message "")                            ;; No scratch message 2020-10-10
+(add-to-list 'default-frame-alist '(fullscreen . maximized)) ;; Maximize GUI window
 
-;; No welcome startup screen
-(setq inhibit-startup-screen t)
 
-;; No scratch message 2020-10-10
-(setq initial-scratch-message "")
-
-;; Maximize GUI window
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; =========================
+;; Org-Mode-Initial-Setting
+;; =========================
 
 ;; Show Closed(DONE) date in ORG-mode
 (setq org-log-done 'time)
