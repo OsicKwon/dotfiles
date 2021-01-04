@@ -304,6 +304,7 @@ set shiftwidth=4
 set expandtab
 set bs=2 "back space
 
+
 "---------
 " TABLINE
 "---------
@@ -633,13 +634,13 @@ function! FocusMode()
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnFocusing')
-        call UnFocusMode()
         unlet g:OnFocusing
+        call UnFocusMode()
         echo "debug logging: UnFocusMode executed"
         return 0
     elseif exists('g:OnEditing')
-        call UnFocusMode()
         unlet g:OnEditing
+        call UnFocusMode()
     endif
     Goyo 100%x100%
     Limelight 0.8
@@ -653,6 +654,7 @@ function! FocusMode()
     if has('gui_running')
         " set guifont=Menlo-Regular:h20
         " set lines=99 columns=999   " to maximize window size"
+        highlight Visual guifg=bg guibg=DarkGreen gui=NONE
     elseif exists('$TMUX')
         silent !tmux set status off
     endif
@@ -663,13 +665,13 @@ function! DarkFocusMode()
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnFocusing')
-        call UnFocusMode()
         unlet g:OnFocusing
+        call UnFocusMode()
         echo "debug logging: UnFocusMode executed"
         return 0
     elseif exists('g:OnEditing')
-        call UnFocusMode()
         unlet g:OnEditing
+        call UnFocusMode()
     endif
     Goyo
     Limelight 0.8
@@ -695,13 +697,13 @@ function! EditMode()
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnEditing')
-        call UnFocusMode()
         unlet g:OnEditing
+        call UnFocusMode()
         echo "debug logging: UnFocusMode executed"
         return 0
     elseif exists('g:OnFocusing')
-        call UnFocusMode()
         unlet g:OnFocusing
+        call UnFocusMode()
     endif
     Goyo 100%x100%
     Limelight!
@@ -714,16 +716,19 @@ function! EditMode()
         " set guifont=Menlo-Regular:h15
         " set lines=99 columns=999
         " colorscheme github
+        highlight Visual guifg=bg guibg=DarkGreen gui=NONE
     elseif exists('$TMUX')
         silent !tmux set status off
     endif
-    normal zz
+    " normal zz
 endfunction
 command! EditMode call EditMode()
 
 function! UnFocusMode()
     Goyo!
     Limelight!
+    silent! unlet g:OnFocusing
+    silent! unlet g:OnEditing
     autocmd InsertLeave * :set relativenumber
     set scrolloff=0
     set sidescrolloff=0
@@ -744,6 +749,7 @@ function! UnFocusMode()
         " highlight FoldColumn guibg=white  " for foldcolumn
         highlight CursorLineNr guibg=black guifg=white
         highlight CursorLine gui=underline guibg=NONE
+        highlight Visual guifg=bg guibg=DarkGreen gui=NONE
         set cursorline
         " hi EasyMotionTarget guifg=red guibg=yellow
     elseif exists('$TMUX')
@@ -823,16 +829,17 @@ if has('gui_running')
 endif
 
 
-"------------------------------------------
+"========================================
 " LEADER KEY SETTING
 " > could be, 'a', 'ab', 'A', 'AB', etc
 " > The Less The Better
-"------------------------------------------
+"========================================
 "let mapleader = ','
 
 " delete all contents for whole ine
 " nnoremap <leader>d :normal ggVGD<cr>i
 
+"---------------
 " Focusing Mode
 "---------------
 " nnoremap <silent> <leader>f :FocusToggle<cr>
@@ -841,6 +848,7 @@ nnoremap <silent> <leader>d :DarkFocusMode<cr>
 nnoremap <silent> <leader>e :EditMode<cr>
 nnoremap <silent> <leader>q :UnFocusMode<cr>
 
+"------------
 " Utilitises
 "------------
 nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
@@ -860,6 +868,7 @@ nnoremap <silent> <leader>uh  :UndotreeHide<cr>
 " markdown support"
 vnoremap <silent> <leader>* s**<C-r>"**<esc>
 
+"------------
 " EasyMotion
 "------------
 " <Leader>f{char} to move to {char}
@@ -874,6 +883,7 @@ nmap <Leader>L <Plug>(easymotion-overwin-line)
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 
+"------------
 " IncSearch
 "------------
 " You can use other keymappings like <C-l> instead of <CR> if you want to
