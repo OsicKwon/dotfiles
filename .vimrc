@@ -437,13 +437,32 @@ set wildmode=list,full
 " KEY-REMAP
 "============
 
-noremap <up>    <nop>
-noremap <down>  <nop>
-noremap <left>  <nop>
-noremap <right> <nop>
+" --------
+"  Global
+" --------
+map <up>    <nop>
+map <down>  <nop>
+map <left>  <nop>
+map <right> <nop>
 
+" --------
+"  Space
+" --------
 nnoremap <space> :
 vnoremap <space> :
+
+" Buffer: show list and ready to choose
+" nnoremap <silent><space>bl :buffers<CR>:buffer<Space>
+" better way -> :b {keyword that I remember}<tab>
+
+" Navigate Windows
+nnoremap <silent><space>1 1<C-w><C-w>
+nnoremap <silent><space>2 2<C-w><C-w>
+nnoremap <silent><space>3 3<C-w><C-w>
+nnoremap <silent><space>4 4<C-w><C-w>
+nnoremap <silent><space>5 5<C-w><C-w>
+nnoremap <silent><space>6 6<C-w><C-w>
+nnoremap <silent><space>7 7<C-w><C-w>
 
 " --------
 "  Normal
@@ -485,6 +504,11 @@ nnoremap <C-k> :3wincmd +<cr>
 nnoremap <C-j> :3wincmd -<cr>
 nnoremap <C-h> :3wincmd <<cr>
 nnoremap <C-l> :3wincmd ><cr>
+
+" nnoremap <silent><space>wh <C-w>h
+" nnoremap <silent><space>wj <C-w>j
+" nnoremap <silent><space>wk <C-w>k
+" nnoremap <silent><space>wl <C-w>l
 
 " Hard Mode
 nnoremap hh <nop>
