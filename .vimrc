@@ -439,14 +439,6 @@ set wildmode=list,full
 "============
 
 " --------
-"  Global
-" --------
-map <up>    <nop>
-map <down>  <nop>
-map <left>  <nop>
-map <right> <nop>
-
-" --------
 "  Space
 " --------
 nnoremap <space> :
@@ -456,22 +448,14 @@ vnoremap <space> :
 " nnoremap <silent><space>bl :buffers<CR>:buffer<Space>
 " better way -> :b {keyword that I remember}<tab>
 
-" Navigate Windows
-nnoremap <silent><space>1 1<C-w><C-w>
-nnoremap <silent><space>2 2<C-w><C-w>
-nnoremap <silent><space>3 3<C-w><C-w>
-nnoremap <silent><space>4 4<C-w><C-w>
-nnoremap <silent><space>5 5<C-w><C-w>
-nnoremap <silent><space>6 6<C-w><C-w>
-nnoremap <silent><space>7 7<C-w><C-w>
 
 " --------
 "  Normal
 " --------
-" nnoremap <up>    <nop>
-" nnoremap <down>  <nop>
-" nnoremap <left>  <nop>
-" nnoremap <right> <nop>
+nnoremap <up>    <nop>
+nnoremap <down>  <nop>
+nnoremap <left>  <nop>
+nnoremap <right> <nop>
 
 " nnoremap <up>    <C-w>k
 " nnoremap <down>  <C-w>j
@@ -520,9 +504,9 @@ nnoremap ll <nop>
 " --------
 "  Insert
 " --------
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
+inoremap <up>    <nop>
+inoremap <down>  <nop>
+inoremap <left>  <nop>
 inoremap <right> <nop>
 
 "inoremap <C-h> <Left>
@@ -550,19 +534,18 @@ inoremap <silent>kk <Esc>
 " inoremap < <><Left>
 " inoremap " ""<Left>
 
-" vnoremap <up> <nop>
-" vnoremap <down> <nop>
-" vnoremap <left> <nop>
-" vnoremap <right> <nop>
-
-" cnoremap <up> <nop>
-" cnoremap <down> <nop>
-" cnoremap <left> <nop>
-" cnoremap <right> <nop>
+vnoremap <up> <nop>
+vnoremap <down> <nop>
+vnoremap <left> <nop>
+vnoremap <right> <nop>
 
 " ---------
 "  Command
 " ---------
+cnoremap <up> <nop>
+cnoremap <down> <nop>
+cnoremap <left> <nop>
+cnoremap <right> <nop>
 
 " Emacs style Keybinding in command mode
 "----------------------------------------
@@ -627,27 +610,27 @@ endfunction
 command! HardMode call HardMode()
 
 
-function! EasyMode()
-    silent! unmap hh
-    silent! unmap jj
-    silent! unmap kk
-    silent! unmap ll
-    silent! nnoremap j gj
-    silent! nnoremap k gk
-endfunction
-command! EasyMode call EasyMode()
+" function! EasyMode()
+"     silent! unmap hh
+"     silent! unmap jj
+"     silent! unmap kk
+"     silent! unmap ll
+"     silent! nnoremap j gj
+"     silent! nnoremap k gk
+" endfunction
+" command! EasyMode call EasyMode()
 
 
-function! SuperEasyMode()
-    call EasyMode()
-    silent! unmap <up>
-    silent! unmap <down>
-    silent! unmap <left>
-    silent! unmap <right>
-    silent! noremap <up> gk
-    silent! noremap <down> gj
-endfunction
-command! SuperEasyMode call SuperEasyMode()
+" function! SuperEasyMode()
+"     call EasyMode()
+"     silent! unmap   <up>
+"     silent! unmap   <down>
+"     silent! unmap   <left>
+"     silent! unmap   <right>
+"     silent! noremap <up> gk
+"     silent! noremap <down> gj
+" endfunction
+" command! SuperEasyMode call SuperEasyMode()
 
 
 "----------
@@ -666,14 +649,28 @@ function! FocusMode()
         unlet g:OnEditing
         call UnFocusMode()
     endif
-    Goyo 100%x100%
-    Limelight 0.8
+    Goyo
+    Limelight
     autocmd InsertLeave * :set norelativenumber
     set scrolloff=999  " centering
     set sidescrolloff=30
     set ignorecase
     set smartcase
-    call SuperEasyMode()
+    " Prevent Use More
+    " call SuperEasyMode()
+    silent! unmap hh
+    silent! unmap jj
+    silent! unmap kk
+    silent! unmap ll
+    silent! nnoremap j gj
+    silent! nnoremap k gk
+    silent! unmap   <up>
+    silent! unmap   <down>
+    silent! unmap   <left>
+    silent! unmap   <right>
+    silent! noremap <up> gk
+    silent! noremap <down> gj
+    " set focusing variable
     let g:OnFocusing=1
     if has('gui_running')
         " set guifont=Menlo-Regular:h20
@@ -704,7 +701,15 @@ function! DarkFocusMode()
     set sidescrolloff=30
     set ignorecase
     set smartcase
-    call EasyMode()
+    " Prevent from lot of use Easy mode in normal
+    " call EasyMode()
+    silent! unmap hh
+    silent! unmap jj
+    silent! unmap kk
+    silent! unmap ll
+    silent! nnoremap j gj
+    silent! nnoremap k gk
+    " set variable
     let g:OnFocusing=1
     if has('gui_running')
         " set guifont=Menlo-Regular:h20
@@ -734,7 +739,15 @@ function! EditMode()
     autocmd InsertLeave * :set norelativenumber
     set ignorecase
     set smartcase
-    call EasyMode()
+    " Prevent from lot of use Easy mode in normal
+    " call EasyMode()
+    silent! unmap hh
+    silent! unmap jj
+    silent! unmap kk
+    silent! unmap ll
+    silent! nnoremap j gj
+    silent! nnoremap k gk
+    " set variable
     let g:OnEditing=1
     if has('gui_running')
         " set guifont=Menlo-Regular:h15
@@ -808,7 +821,7 @@ endfunction
 " test search and replace
 " -----------------------
 function! TestFunction2()
-    call EasyMode()
+    " call EasyMode()
     " let v = "\*\{2\}"
     " echo v
     " execute "%s/\\v(" . v . ")/x/"
