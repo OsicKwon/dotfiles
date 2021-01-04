@@ -78,9 +78,9 @@ Plugin 'VundleVim/Vundle.vim'
 
 "---------Themes------------
 " Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'itchyny/lightline.vim'
-"Plugin 'powerline/powerline'
+" Plugin 'powerline/powerline'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'altercation/vim-colors-solarized'
 
@@ -106,7 +106,7 @@ Plugin 'tpope/vim-repeat'
 " Plugin 'davidhalter/jedi-vim'          " not working - hard to solve 2020-11-20
 " Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
 " Plugin 'severin-lemaignan/vim-minimap'
-Plugin 'terryma/vim-expand-region'
+" Plugin 'terryma/vim-expand-region'
 " Plugin 'w0rp/ale'                      " Asynchronous Lint Engine ??
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
 " Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
@@ -128,26 +128,26 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 " Plugin 'iamcco/markdown-preview.nvim'
 Plugin 'reedes/vim-wordy'
+Plugin 'dbmrq/vim-ditto'                " find repeated words
 " Plugin 'reedes/vim-lexical'            " no idea
 " Plugin 'reedes/vim-pencil'             " no idea
 " Plugin 'xolox/vim-notes'
 Plugin 'blueyed/vim-diminactive'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'dbmrq/vim-ditto'                " find repeated words
 
 "------Functionality--------
 " Plugin 'kien/ctrlp.vim'
 " Plugin 'scrooloose/nerdtree'          " not a vimway instead use find command
 Plugin 'mbbill/undotree'
-Plugin 'sjl/gundo.vim'                  " visualize your Vim undo tree
+" Plugin 'sjl/gundo.vim'                  " visualize your Vim undo tree
 " Plugin 'wincent/command-t'            " Ruby required
 " Plugin 'junegunn/fzf'                 " fzf require Go lang
 " Plugin 'junegunn/fzf.vim'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'haya14busa/incsearch.vim'
-Plugin 'haya14busa/incsearch-fuzzy.vim'
-Plugin 'haya14busa/incsearch-easymotion.vim'
+" Plugin 'haya14busa/incsearch.vim'
+" Plugin 'haya14busa/incsearch-fuzzy.vim'
+" Plugin 'haya14busa/incsearch-easymotion.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'searchfold.vim'               " embigiuous with marker
 " Plugin 'wincent/command-t'            " ruby required
@@ -159,7 +159,7 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'sirver/ultisnips'
 
 "------Other-plugins--------
-Plugin 'itchyny/calendar.vim'
+" Plugin 'itchyny/calendar.vim'
 
 
 call vundle#end()
@@ -890,31 +890,31 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 " use these mappings as default search and sometimes want to move cursor with
 " EasyMotion.
 
-function! s:incsearch_config(...) abort
-  return incsearch#util#deepextend(deepcopy({
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {
-  \     "\<CR>": '<Over>(easymotion)'
-  \   },
-  \   'is_expr': 0
-  \ }), get(a:, 1, {}))
-endfunction
-noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
-noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
-noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+" function! s:incsearch_config(...) abort
+"   return incsearch#util#deepextend(deepcopy({
+"   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+"   \   'keymap': {
+"   \     "\<CR>": '<Over>(easymotion)'
+"   \   },
+"   \   'is_expr': 0
+"   \ }), get(a:, 1, {}))
+" endfunction
+" noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+" noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
+" noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
 
 " IncSearch - Fuzzy "
 
-function! s:config_easyfuzzymotion(...) abort
-  return extend(copy({
-  \   'converters': [incsearch#config#fuzzyword#converter()],
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-  \   'is_expr': 0,
-  \   'is_stay': 1
-  \ }), get(a:, 1, {}))
-endfunction
-noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+" function! s:config_easyfuzzymotion(...) abort
+"   return extend(copy({
+"   \   'converters': [incsearch#config#fuzzyword#converter()],
+"   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+"   \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+"   \   'is_expr': 0,
+"   \   'is_stay': 1
+"   \ }), get(a:, 1, {}))
+" endfunction
+" noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
 
 "------------------
