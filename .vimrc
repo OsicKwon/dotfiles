@@ -743,7 +743,7 @@ function! UnFocusMode()
         " unlet g:line_size_before
         " unlet g:column_size_before
         set background=light
-        " colorscheme github
+        colorscheme basic-light
         " highlight LineNr guibg=white
         " highlight SignColumn guibg='#f0f0f0'  " for gitgutter
         " highlight FoldColumn guibg=white  " for foldcolumn
