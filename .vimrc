@@ -24,6 +24,7 @@ set modeline
 set modelines=10
 set spell
 " set colorcolumn=80,120
+set path+=**    " include sub directories when searching 2021-01-06
 
 
 "--------
@@ -79,7 +80,7 @@ Plugin 'VundleVim/Vundle.vim'
 "---------Themes------------
 " Plugin 'vim-airline/vim-airline'
 " Plugin 'vim-airline/vim-airline-themes'
-" Plugin 'itchyny/lightline.vim'
+Plugin 'itchyny/lightline.vim'
 " Plugin 'powerline/powerline'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'altercation/vim-colors-solarized'
@@ -106,7 +107,7 @@ Plugin 'tpope/vim-repeat'
 " Plugin 'davidhalter/jedi-vim'          " not working - hard to solve 2020-11-20
 " Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
 " Plugin 'severin-lemaignan/vim-minimap'
-" Plugin 'terryma/vim-expand-region'
+Plugin 'terryma/vim-expand-region'
 " Plugin 'w0rp/ale'                      " Asynchronous Lint Engine ??
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
 " Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
@@ -609,7 +610,7 @@ function! HardMode()
 endfunction
 command! HardMode call HardMode()
 
-
+" Disabled to prevent from overuse
 " function! EasyMode()
 "     silent! unmap hh
 "     silent! unmap jj
@@ -656,7 +657,7 @@ function! FocusMode()
     set sidescrolloff=30
     set ignorecase
     set smartcase
-    " Prevent Use More
+    " Prevent from overuse 
     " call SuperEasyMode()
     silent! unmap hh
     silent! unmap jj
@@ -701,7 +702,7 @@ function! DarkFocusMode()
     set sidescrolloff=30
     set ignorecase
     set smartcase
-    " Prevent from lot of use Easy mode in normal
+    " Prevent from overuse Easy mode in normal
     " call EasyMode()
     silent! unmap hh
     silent! unmap jj
@@ -739,7 +740,7 @@ function! EditMode()
     autocmd InsertLeave * :set norelativenumber
     set ignorecase
     set smartcase
-    " Prevent from lot of use Easy mode in normal
+    " Prevent from overuse Easy mode in normal
     " call EasyMode()
     silent! unmap hh
     silent! unmap jj

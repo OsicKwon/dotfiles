@@ -1,4 +1,3 @@
-
 ;; since 2020
 ;;    ___  ____ ___  ____ ___________
 ;;   / _ \/ __ `__ \/ __ `/ ___/ ___/
@@ -54,9 +53,8 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(buffer-move markdown-mode elpy multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(ob-ipython elpy ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 (custom-set-faces
-
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
@@ -113,6 +111,18 @@
 ;(global-display-line-numbers-mode)
 
 
+
+;;==========
+;; window
+;;==========
+
+;; Buffer move package 2020-12-22
+(global-set-key (kbd "<C-S-up>")     'buf-move-up)
+(global-set-key (kbd "<C-S-down>")   'buf-move-down)
+(global-set-key (kbd "<C-S-left>")   'buf-move-left)
+(global-set-key (kbd "<C-S-right>")  'buf-move-right)
+
+
 ;;----------------------------------------------------------------
 ;; ACE JUMP MODE
 ;;----------------------------------------------------------------
@@ -165,6 +175,8 @@
 (setq display-time-day-and-date t)
 (display-time)
 
+;; display file size in modeline 2021-01-05
+(size-indication-mode t)
 
 ;; pdflatex -> path "/Library/Tex/texbin" 2020-12-07
 (setq latex-run-command "pdflatex")
@@ -244,8 +256,11 @@
 
 
 ;; Interactive Do Mode like showing suggestion keyword 2020-12-18
+;; Added ido-vertical-mode 2021-01-04
+(require 'ido-vertical-mode)
 (ido-mode 1)
-
+(ido-vertical-mode 1)
+(setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
 
 ;; Git-Gutter 2020-12-18
 (global-git-gutter-mode +1)
@@ -260,13 +275,6 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 
-;; Buffer move package 2020-12-22
-(global-set-key (kbd "<C-S-up>")     'buf-move-up)
-(global-set-key (kbd "<C-S-down>")   'buf-move-down)
-(global-set-key (kbd "<C-S-left>")   'buf-move-left)
-(global-set-key (kbd "<C-S-right>")  'buf-move-right)
-
-
 ;; org-level whole line background in org-mode 2020-12-27
 ; ':extend t' option required to apply
 ; it also adjust in 'customize' menu in emacs configuaration 
@@ -274,3 +282,17 @@
 ;(setq org-fontify-whole-heading-line t
 ;      org-fontify-done-headline t
 ;      org-fontify-quote-and-verse-blocks t)
+
+
+;; For Python Development
+;; 2021-01-06
+
+;; https://realpython.com/emacs-the-best-python-editor/#integration-with-jupyter-and-ipython
+;; Enable elpy
+(elpy-enable)
+
+;; Use IPython for REPL
+(setq python-shell-interpreter "jupyter"
+      python-shell-interpreter-args "console --simple-prompt"
+      python-shell-prompt-detect-failure-warning nil)
+(add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
