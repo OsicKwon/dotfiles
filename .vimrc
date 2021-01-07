@@ -58,6 +58,14 @@ set noignorecase
 set nosmartcase
 
 
+"-------
+" NETRW
+"-------
+let g:netrw_altv=1             " open split to the right
+let g:netrw_browse_split=4     " open in prior window
+let g:netrw_liststyle=3        " treeview
+
+
 filetype off
 " for vundle -> re-set after vundle like : filetype plug indent 'on'
 "---------
