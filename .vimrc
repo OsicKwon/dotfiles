@@ -924,8 +924,8 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 " command TB TagbarToggle
 command PI PluginInstall
 command MD set filetype=markdown
-command HT set filetype=html
-command TX set filetype=text
+" command HT set filetype=html
+" command TX set filetype=text
 command PD :w | set filetype=pandoc | Pandoc html
 command WH windo wincmd H
 
