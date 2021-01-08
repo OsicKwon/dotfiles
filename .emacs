@@ -1,4 +1,3 @@
-
 ;; since 2020
 ;;    ___  ____ ___  ____ ___________
 ;;   / _ \/ __ `__ \/ __ `/ ___/ ___/
@@ -54,7 +53,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(evil buffer-move markdown-mode elpy multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(centered-window csv-mode pandoc-mode pandoc smex ob-ipython elpy ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -70,17 +69,18 @@
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
 
-;; Backup files relocated 2020-10-09
-(setq backup-directory-alist `(("." . "~/.saves/")))
+;; ======================
+;; Emacs-Initial-Setting
+;; ======================
+(setq backup-directory-alist `(("." . "~/.saves/")))         ;; Backup files relocated 2020-10-09
+(setq inhibit-startup-screen t)                              ;; No welcome startup screen
+(setq initial-scratch-message "")                            ;; No scratch message 2020-10-10
+(add-to-list 'default-frame-alist '(fullscreen . maximized)) ;; Maximize GUI window
 
-;; No welcome startup screen
-(setq inhibit-startup-screen t)
 
-;; No scratch message 2020-10-10
-(setq initial-scratch-message "")
-
-;; Maximize GUI window
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; =========================
+;; Org-Mode-Initial-Setting
+;; =========================
 
 ;; Show Closed(DONE) date in ORG-mode
 (setq org-log-done 'time)
@@ -112,6 +112,18 @@
 
 ;; Display Line Numbers On
 ;(global-display-line-numbers-mode)
+
+
+
+;;==========
+;; window
+;;==========
+
+;; Buffer move package 2020-12-22
+(global-set-key (kbd "<C-S-up>")     'buf-move-up)
+(global-set-key (kbd "<C-S-down>")   'buf-move-down)
+(global-set-key (kbd "<C-S-left>")   'buf-move-left)
+(global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
 
 ;;----------------------------------------------------------------
@@ -166,6 +178,8 @@
 (setq display-time-day-and-date t)
 (display-time)
 
+;; display file size in modeline 2021-01-05
+(size-indication-mode t)
 
 ;; pdflatex -> path "/Library/Tex/texbin" 2020-12-07
 (setq latex-run-command "pdflatex")
@@ -245,7 +259,22 @@
 
 
 ;; Interactive Do Mode like showing suggestion keyword 2020-12-18
+;; Added ido-vertical-mode 2021-01-04
+(require 'ido-vertical-mode)
 (ido-mode 1)
+(ido-vertical-mode 1)
+(setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
+
+;; smex with ido for M-x :: consider helm alternatively
+;; 2021-01-07
+(require 'smex)
+(smex-initialize)
+
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c M-x") 'smex-update)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
 
 
 ;; Git-Gutter 2020-12-18
@@ -261,13 +290,6 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 
-;; Buffer move package 2020-12-22
-(global-set-key (kbd "<C-S-up>")     'buf-move-up)
-(global-set-key (kbd "<C-S-down>")   'buf-move-down)
-(global-set-key (kbd "<C-S-left>")   'buf-move-left)
-(global-set-key (kbd "<C-S-right>")  'buf-move-right)
-
-
 ;; org-level whole line background in org-mode 2020-12-27
 ; ':extend t' option required to apply
 ; it also adjust in 'customize' menu in emacs configuaration 
@@ -275,3 +297,17 @@
 ;(setq org-fontify-whole-heading-line t
 ;      org-fontify-done-headline t
 ;      org-fontify-quote-and-verse-blocks t)
+
+
+;; For Python Development
+;; 2021-01-06
+
+;; https://realpython.com/emacs-the-best-python-editor/#integration-with-jupyter-and-ipython
+;; Enable elpy
+(elpy-enable)
+
+;; Use IPython for REPL
+(setq python-shell-interpreter "jupyter"
+      python-shell-interpreter-args "console --simple-prompt"
+      python-shell-prompt-detect-failure-warning nil)
+(add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
