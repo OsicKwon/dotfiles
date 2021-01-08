@@ -660,7 +660,7 @@ function! FocusMode()
     endif
     Goyo
     Limelight
-    autocmd InsertLeave * :set norelativenumber
+    autocmd InsertLeave * :set norelativenumber | hi CursorLine gui=NONE
     set scrolloff=999  " centering
     set sidescrolloff=30
     set ignorecase
@@ -677,6 +677,10 @@ function! FocusMode()
     silent! unmap   <down>
     silent! unmap   <left>
     silent! unmap   <right>
+    silent! iunmap   <up>
+    silent! iunmap   <down>
+    silent! iunmap   <left>
+    silent! iunmap   <right>
     silent! noremap <up> gk
     silent! noremap <down> gj
     " set focusing variable
@@ -685,6 +689,7 @@ function! FocusMode()
         " set guifont=Menlo-Regular:h20
         " set lines=99 columns=999   " to maximize window size"
         highlight Visual guifg=bg guibg=DarkGreen gui=NONE
+        highlight CursorLine gui=NONE guibg=NONE
     elseif exists('$TMUX')
         silent !tmux set status off
     endif
