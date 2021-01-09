@@ -105,6 +105,12 @@
    (js . t)
    ))
 
+
+;; set plantuml path 2021-01-08
+(setq org-plantuml-jar-path
+      (expand-file-name "~/Applications/plantuml.jar"))
+
+
 ;; Auto Refresh
 (global-auto-revert-mode t)
 
