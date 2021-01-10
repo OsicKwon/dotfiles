@@ -54,7 +54,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(use-package centered-window csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(ace-jump-mode elpy use-package centered-window csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -200,8 +200,8 @@
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 ;; -- Unnecessary call -- see Line #6 in this file
 (package-initialize)
-(package-refresh-contents)
-(package-install 'use-package)
+;; (package-refresh-contents)
+;; (package-install 'use-package)
 
 ;; (use-package elpy
 ;;   :ensure t
@@ -332,10 +332,9 @@
 (setq python-indent-guess-indent-offset-verbose nil)
 
 (setq org-babel-python-command "python3")
-(setq python-shell-interpreter "python3")
-
-;; (setq python-shell-interpreter "ipython3"
-;;       python-shell-interpreter-args "-i --simple-prompt")
+;; (setq python-shell-interpreter "python3")
+(setq python-shell-interpreter "ipython3"
+      python-shell-interpreter-args "-i --simple-prompt")
 
 ;; (setq python-shell-completion-native-enable t)
 ;; (setq python-shell-completion-toggle t)

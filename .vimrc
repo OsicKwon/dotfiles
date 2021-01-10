@@ -154,9 +154,9 @@ Plugin 'mbbill/undotree'
 " Plugin 'junegunn/fzf'                 " fzf require Go lang
 " Plugin 'junegunn/fzf.vim'
 Plugin 'easymotion/vim-easymotion'
-" Plugin 'haya14busa/incsearch.vim'
-" Plugin 'haya14busa/incsearch-fuzzy.vim'
-" Plugin 'haya14busa/incsearch-easymotion.vim'
+Plugin 'haya14busa/incsearch.vim'
+Plugin 'haya14busa/incsearch-fuzzy.vim'
+Plugin 'haya14busa/incsearch-easymotion.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'searchfold.vim'               " embigiuous with marker
 " Plugin 'wincent/command-t'            " ruby required
@@ -941,31 +941,31 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 " use these mappings as default search and sometimes want to move cursor with
 " EasyMotion.
 
-" function! s:incsearch_config(...) abort
-"   return incsearch#util#deepextend(deepcopy({
-"   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-"   \   'keymap': {
-"   \     "\<CR>": '<Over>(easymotion)'
-"   \   },
-"   \   'is_expr': 0
-"   \ }), get(a:, 1, {}))
-" endfunction
-" noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
-" noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
-" noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+function! s:incsearch_config(...) abort
+  return incsearch#util#deepextend(deepcopy({
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {
+  \     "\<CR>": '<Over>(easymotion)'
+  \   },
+  \   'is_expr': 0
+  \ }), get(a:, 1, {}))
+endfunction
+noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
+noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
 
 " IncSearch - Fuzzy "
 
-" function! s:config_easyfuzzymotion(...) abort
-"   return extend(copy({
-"   \   'converters': [incsearch#config#fuzzyword#converter()],
-"   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-"   \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-"   \   'is_expr': 0,
-"   \   'is_stay': 1
-"   \ }), get(a:, 1, {}))
-" endfunction
-" noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzyword#converter()],
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 
 
 "------------------
