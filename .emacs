@@ -41,8 +41,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(doc-view-continuous t)
  '(org-agenda-files
-   '("~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/INBOX_TODO_2020.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/INBOX_TODO_2020.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-export-backends '(ascii beamer html icalendar latex odt))
  '(org-fontify-done-headline t)
  '(org-fontify-quote-and-verse-blocks t)
@@ -313,10 +314,10 @@
 ;      org-fontify-done-headline t
 ;      org-fontify-quote-and-verse-blocks t)
 
-
+;; ==============================================================
 ;; ;; For Python Development
-;; ;; 2021-01-06
-
+;; ;; Since 2021-01-06
+;; ==============================================================
 ;; ;; src1: https://realpython.com/emacs-the-best-python-editor/#integration-with-jupyter-and-ipython
 
 ;; ;Enable elpy
@@ -340,3 +341,6 @@
 ;; (setq python-shell-completion-toggle t)
 
 (setq python-shell-completion-native-enable nil)
+
+(when (executable-find "ipython")
+  (setq python-shell-interpreter "ipython"))

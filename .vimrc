@@ -86,9 +86,9 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "---------Themes------------
-" Plugin 'vim-airline/vim-airline'
-" Plugin 'vim-airline/vim-airline-themes'
-Plugin 'itchyny/lightline.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'itchyny/lightline.vim'
 " Plugin 'powerline/powerline'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'altercation/vim-colors-solarized'
@@ -317,7 +317,7 @@ set bs=2 "back space
 "---------
 " TABLINE
 "---------
-"set showtabline=2
+" set showtabline=2
 " let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -337,7 +337,7 @@ set cursorline
 " STATUSLINE
 "------------
 set ruler
-set laststatus=2
+set laststatus=0
 set showcmd
 
 " Status Line Custom
@@ -875,7 +875,7 @@ if has('gui_running')
     highlight Visual guifg=bg guibg=DarkGreen gui=NONE
     highlight CursorLineNr guibg=black guifg=white
     highlight CursorLine gui=underline guibg=NONE
-    let g:airline_theme='term'  "default raven luna monochrome powerlineish term
+    let g:airline_theme='luna'  "default raven luna monochrome powerlineish term transparent
     " hi EasyMotionTarget guifg=red guibg=yellow
 endif
 
