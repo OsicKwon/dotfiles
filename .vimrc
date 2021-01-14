@@ -1,3 +1,4 @@
+" vim: foldmethod=manual foldcolumn=3
 "        _
 "       (_)
 " __   ___ _ __ ___  _ __ ___
@@ -619,17 +620,16 @@ function! HardMode()
 endfunction
 command! HardMode call HardMode()
 
-" prevent from overuse
-function! EasyMode()
-    silent! unmap hh
-    silent! unmap jj
-    silent! unmap kk
-    silent! unmap ll
-    silent! nnoremap j gj
-    silent! nnoremap k gk
-endfunction
-command! EasyMode call EasyMode()
-
+" Disabled to prevent from overuse
+" function! EasyMode()
+"     silent! unmap hh
+"     silent! unmap jj
+"     silent! unmap kk
+"     silent! unmap ll
+"     silent! nnoremap j gj
+"     silent! nnoremap k gk
+" endfunction
+" command! EasyMode call EasyMode()
 
 " function! SuperEasyMode()
 "     call EasyMode()
@@ -749,9 +749,9 @@ function! EditMode()
         unlet g:OnFocusing
         call UnFocusMode()
     endif
-    " Goyo 100%x100%
-    windo set nonumber
-    windo set norelativenumber
+    Goyo 100%x100%
+    " windo set nonumber
+    " windo set norelativenumber
     Limelight!
     autocmd InsertLeave * :set norelativenumber
     set ignorecase
@@ -771,7 +771,7 @@ function! EditMode()
         " set lines=99 columns=999
         " colorscheme github
         highlight Visual guifg=bg guibg=DarkGreen gui=NONE
-        AirlineTheme transparent
+        " AirlineTheme transparent
     elseif exists('$TMUX')
         silent !tmux set status off
     endif
@@ -781,8 +781,8 @@ command! EditMode call EditMode()
 
 function! UnFocusMode()
     Goyo!
-    windo set number
-    windo set relativenumber
+    " windo set number
+    " windo set relativenumber
     Limelight!
     silent! unlet g:OnFocusing
     silent! unlet g:OnEditing
@@ -809,7 +809,7 @@ function! UnFocusMode()
         highlight Visual guifg=bg guibg=DarkGreen gui=NONE
         set cursorline
         " hi EasyMotionTarget guifg=red guibg=yellow
-        AirlineTheme luna
+        " AirlineTheme luna
     elseif exists('$TMUX')
         silent !tmux set status on
     endif
