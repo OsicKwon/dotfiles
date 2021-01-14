@@ -620,27 +620,27 @@ function! HardMode()
 endfunction
 command! HardMode call HardMode()
 
-" Disabled to prevent from overuse
-" function! EasyMode()
-"     silent! unmap hh
-"     silent! unmap jj
-"     silent! unmap kk
-"     silent! unmap ll
-"     silent! nnoremap j gj
-"     silent! nnoremap k gk
-" endfunction
-" command! EasyMode call EasyMode()
+" Prevent from overuse
+function! EasyMode()
+    silent! unmap hh
+    silent! unmap jj
+    silent! unmap kk
+    silent! unmap ll
+    silent! nnoremap j gj
+    silent! nnoremap k gk
+endfunction
+command! EasyMode call EasyMode()
 
-" function! SuperEasyMode()
-"     call EasyMode()
-"     silent! unmap   <up>
-"     silent! unmap   <down>
-"     silent! unmap   <left>
-"     silent! unmap   <right>
-"     silent! noremap <up> gk
-"     silent! noremap <down> gj
-" endfunction
-" command! SuperEasyMode call SuperEasyMode()
+function! SuperEasyMode()
+    call EasyMode()
+    silent! unmap   <up>
+    silent! unmap   <down>
+    silent! unmap   <left>
+    silent! unmap   <right>
+    silent! noremap <up> gk
+    silent! noremap <down> gj
+endfunction
+command! SuperEasyMode call SuperEasyMode()
 
 
 "----------
@@ -666,24 +666,7 @@ function! FocusMode()
     set sidescrolloff=30
     set ignorecase
     set smartcase
-    " Prevent from overuse 
-    " call SuperEasyMode()
-    silent! unmap hh
-    silent! unmap jj
-    silent! unmap kk
-    silent! unmap ll
-    silent! nnoremap j gj
-    silent! nnoremap k gk
-    silent! unmap   <up>
-    silent! unmap   <down>
-    silent! unmap   <left>
-    silent! unmap   <right>
-    silent! iunmap   <up>
-    silent! iunmap   <down>
-    silent! iunmap   <left>
-    silent! iunmap   <right>
-    silent! noremap <up> gk
-    silent! noremap <down> gj
+    call SuperEasyMode()
     " set focusing variable
     let g:OnFocusing=1
     if has('gui_running')
@@ -716,14 +699,7 @@ function! DarkFocusMode()
     set sidescrolloff=30
     set ignorecase
     set smartcase
-    " Prevent from overuse Easy mode in normal
-    " call EasyMode()
-    silent! unmap hh
-    silent! unmap jj
-    silent! unmap kk
-    silent! unmap ll
-    silent! nnoremap j gj
-    silent! nnoremap k gk
+    call EasyMode()
     " set variable
     let g:OnFocusing=1
     if has('gui_running')
@@ -750,20 +726,11 @@ function! EditMode()
         call UnFocusMode()
     endif
     Goyo 100%x100%
-    " windo set nonumber
-    " windo set norelativenumber
     Limelight!
     autocmd InsertLeave * :set norelativenumber
     set ignorecase
     set smartcase
-    " Prevent from overuse Easy mode in normal
-    " call EasyMode()
-    silent! unmap hh
-    silent! unmap jj
-    silent! unmap kk
-    silent! unmap ll
-    silent! nnoremap j gj
-    silent! nnoremap k gk
+    call EasyMode()
     " set variable
     let g:OnEditing=1
     if has('gui_running')
@@ -781,8 +748,6 @@ command! EditMode call EditMode()
 
 function! UnFocusMode()
     Goyo!
-    " windo set number
-    " windo set relativenumber
     Limelight!
     silent! unlet g:OnFocusing
     silent! unlet g:OnEditing
@@ -813,11 +778,6 @@ function! UnFocusMode()
     elseif exists('$TMUX')
         silent !tmux set status on
     endif
-    " disable arrows
-    silent! map <up>    <nop>
-    silent! map <down>  <nop>
-    silent! map <left>  <nop>
-    silent! map <right> <nop>
 endfunction
 command! UnFocusMode call UnFocusMode()
 
