@@ -14,18 +14,19 @@
 " INITIAL SETTING
 "-----------------
 set nocompatible
-set history=500  " default was 50 "
+set history=500               " default was 50
 set autoread
 set clipboard=unnamed
-set ttimeoutlen=0 "elminating time delay to Normal mode
-set sidescroll=1 " 0, 1, 2, ....
+set ttimeoutlen=0             " eliminating time delay to Normal mode
+set noesckeys                 " disable recognition esc key in insert mode
+set sidescroll=1              " options: 0, 1, 2, ....
 " set virtualedit=all
 set modeline
 set modelines=10
 set spell
 " set colorcolumn=80,120
-set path+=**    " include sub directories when searching 2021-01-06
-
+set path+=**                  " include sub directories when searching 2021-01-06
+set updatetime=1000           " for gitgutter 2021-01-13
 
 "--------
 " NUMBER
@@ -450,8 +451,8 @@ set wildmode=list,full
 " --------
 "  Space
 " --------
-nnoremap <space> :
-vnoremap <space> :
+noremap <Space> :
+vnoremap <Space> :
 
 " Buffer: show list and ready to choose
 " nnoremap <silent><space>bl :buffers<CR>:buffer<Space>
@@ -504,7 +505,7 @@ nnoremap <C-l> :3wincmd ><cr>
 " nnoremap <silent><space>wk <C-w>k
 " nnoremap <silent><space>wl <C-w>l
 
-" Hard Mode
+" Hard Mode (Anti-Pattern)
 nnoremap hh <nop>
 nnoremap jj <nop>
 nnoremap kk <nop>
@@ -885,7 +886,7 @@ endif
 " > could be, 'a', 'ab', 'A', 'AB', etc
 " > The Less The Better
 "========================================
-"let mapleader = ','
+" let mapleader = ','
 
 " delete all contents for whole ine
 " nnoremap <leader>d :normal ggVGD<cr>i
@@ -900,10 +901,10 @@ nnoremap <silent> <leader>e :EditMode<cr>
 nnoremap <silent> <leader>q :UnFocusMode<cr>
 
 "------------
-" Utilitises
+" Utilities
 "------------
-nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
-nnoremap <silent> <leader>t  :TagbarToggle<cr>
+" nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
+" nnoremap <silent> <leader>t  :TagbarToggle<cr>
 " nnoremap <silent> <leader>b  :bro old<cr>
 " maximize window size -> insted, vanila Vim: c-w _ / c-w
 " nnoremap <silent> <leader>mw  :vert resize 999<cr>

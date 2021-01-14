@@ -32,8 +32,8 @@
 ;;------------------------
 ;; Enable Evil 2020-12-30
 ;;------------------------
-;(require 'evil)
-;(evil-mode 1)
+;; (require 'evil)
+;; (evil-mode 1)
 
 
 (custom-set-variables
@@ -43,7 +43,7 @@
  ;; If there is more than one, they won't work right.
  '(doc-view-continuous t)
  '(org-agenda-files
-   '("~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/INBOX_TODO_2020.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-export-backends '(ascii beamer html icalendar latex odt))
  '(org-fontify-done-headline t)
  '(org-fontify-quote-and-verse-blocks t)
@@ -55,7 +55,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(ace-jump-mode elpy use-package centered-window csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(evil ace-jump-mode elpy use-package centered-window csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -111,6 +111,8 @@
 (setq org-plantuml-jar-path
       (expand-file-name "~/Applications/plantuml.jar"))
 
+;; ditta path 2021-01-14
+(setq org-ditaa-jar-path "/Applications/ditaa0_9.jar")
 
 ;; Auto Refresh
 (global-auto-revert-mode t)
