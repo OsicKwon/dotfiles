@@ -1,3 +1,4 @@
+" vim: foldmethod=manual ignorecase smartcase
 "        _
 "       (_)
 " __   ___ _ __ ___  _ __ ___
@@ -14,16 +15,18 @@
 " INITIAL SETTING
 "-----------------
 set nocompatible
-set history=500  " default was 50 "
+set history=500               " default was 50
 set autoread
 set clipboard=unnamed
-set ttimeoutlen=0 "elminating time delay to Normal mode
-set sidescroll=1 " 0, 1, 2, ....
+set ttimeoutlen=0             " eliminating time delay to Normal mode
+set sidescroll=1              " options: 0, 1, 2, ....
 " set virtualedit=all
 set modeline
 set modelines=10
 set spell
 " set colorcolumn=80,120
+set path+=**                  " include sub directories when searching 2021-01-06
+set updatetime=1000           " for gitgutter 2021-01-13
 
 
 "--------
@@ -55,6 +58,14 @@ set hlsearch
 set incsearch
 set noignorecase
 set nosmartcase
+
+
+"-------
+" NETRW
+"-------
+let g:netrw_altv=1             " open split to the right
+let g:netrw_browse_split=4     " open in prior window
+let g:netrw_liststyle=3        " treeview
 
 
 filetype off
@@ -106,7 +117,7 @@ Plugin 'tpope/vim-repeat'
 " Plugin 'davidhalter/jedi-vim'          " not working - hard to solve 2020-11-20
 " Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
 " Plugin 'severin-lemaignan/vim-minimap'
-" Plugin 'terryma/vim-expand-region'
+Plugin 'terryma/vim-expand-region'
 " Plugin 'w0rp/ale'                      " Asynchronous Lint Engine ??
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
 " Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
@@ -145,9 +156,9 @@ Plugin 'mbbill/undotree'
 " Plugin 'junegunn/fzf'                 " fzf require Go lang
 " Plugin 'junegunn/fzf.vim'
 Plugin 'easymotion/vim-easymotion'
-" Plugin 'haya14busa/incsearch.vim'
-" Plugin 'haya14busa/incsearch-fuzzy.vim'
-" Plugin 'haya14busa/incsearch-easymotion.vim'
+Plugin 'haya14busa/incsearch.vim'
+Plugin 'haya14busa/incsearch-fuzzy.vim'
+Plugin 'haya14busa/incsearch-easymotion.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'searchfold.vim'               " embigiuous with marker
 " Plugin 'wincent/command-t'            " ruby required
@@ -308,7 +319,7 @@ set bs=2 "back space
 "---------
 " TABLINE
 "---------
-"set showtabline=2
+" set showtabline=2
 " let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -328,7 +339,7 @@ set cursorline
 " STATUSLINE
 "------------
 set ruler
-set laststatus=2
+set laststatus=0
 set showcmd
 
 " Status Line Custom
@@ -472,7 +483,7 @@ nnoremap <right> <nop>
 " useful but not vimway
 " nnoremap <tab> <C-w>w
 " nnoremap <S-tab> <C-w>W
-nnoremap <tab> za
+
 
 "RESIZING WINDOWS but Not Vim Way
 " nnoremap <up>       :3wincmd +<CR>
@@ -495,7 +506,7 @@ nnoremap <C-l> :3wincmd ><cr>
 " nnoremap <silent><space>wk <C-w>k
 " nnoremap <silent><space>wl <C-w>l
 
-" Hard Mode
+" Hard Mode (Anti-Pattern)
 nnoremap hh <nop>
 nnoremap jj <nop>
 nnoremap kk <nop>
@@ -609,7 +620,7 @@ function! HardMode()
 endfunction
 command! HardMode call HardMode()
 
-
+" Disabled to prevent from overuse
 function! EasyMode()
     silent! unmap hh
     silent! unmap jj
@@ -627,6 +638,10 @@ function! SuperEasyMode()
     silent! unmap   <down>
     silent! unmap   <left>
     silent! unmap   <right>
+    silent! iunmap   <up>
+    silent! iunmap   <down>
+    silent! iunmap   <left>
+    silent! iunmap   <right>
     silent! noremap <up> gk
     silent! noremap <down> gj
 endfunction
@@ -651,7 +666,7 @@ function! FocusMode()
     endif
     Goyo
     Limelight
-    autocmd InsertLeave * :set norelativenumber
+    autocmd InsertLeave * :set norelativenumber | hi CursorLine gui=NONE
     set scrolloff=999  " centering
     set sidescrolloff=30
     set ignorecase
@@ -663,6 +678,7 @@ function! FocusMode()
         " set guifont=Menlo-Regular:h20
         " set lines=99 columns=999   " to maximize window size"
         highlight Visual guifg=bg guibg=DarkGreen gui=NONE
+        highlight CursorLine gui=NONE guibg=NONE
     elseif exists('$TMUX')
         silent !tmux set status off
     endif
@@ -689,6 +705,7 @@ function! DarkFocusMode()
     set ignorecase
     set smartcase
     call EasyMode()
+    " set variable
     let g:OnFocusing=1
     if has('gui_running')
         " set guifont=Menlo-Regular:h20
@@ -719,6 +736,7 @@ function! EditMode()
     set ignorecase
     set smartcase
     call EasyMode()
+    " set variable
     let g:OnEditing=1
     if has('gui_running')
         " set guifont=Menlo-Regular:h15
@@ -827,7 +845,7 @@ if has('gui_running')
     highlight Visual guifg=bg guibg=DarkGreen gui=NONE
     highlight CursorLineNr guibg=black guifg=white
     highlight CursorLine gui=underline guibg=NONE
-    let g:airline_theme='luna'  "default raven luna monochrome powerlineish term
+    let g:airline_theme='luna'  "default raven luna monochrome powerlineish term transparent
     " hi EasyMotionTarget guifg=red guibg=yellow
 endif
 
@@ -854,8 +872,8 @@ nnoremap <silent> <leader>q :UnFocusMode<cr>
 "------------
 " Utilitises
 "------------
-" nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
-" nnoremap <silent> <leader>t  :TagbarToggle<cr>
+nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
+nnoremap <silent> <leader>t  :TagbarToggle<cr>
 " nnoremap <silent> <leader>b  :bro old<cr>
 " maximize window size -> insted, vanila Vim: c-w _ / c-w
 " nnoremap <silent> <leader>mw  :vert resize 999<cr>
