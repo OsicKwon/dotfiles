@@ -390,9 +390,9 @@ endfunction
 set statusline=
 " set statusline+=\               " blank
 " set statusline=\[%{mode()}\]    " current mode
-set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
-set statusline+=%#PmenuSel#
-set statusline+=%{StatuslineGit()}
+" set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
+" set statusline+=%#PmenuSel#
+" set statusline+=%{StatuslineGit()}
 " set statusline+=\               " blank
 set statusline+=%#Tabline#
 " set statusline+=\ Osic
@@ -533,8 +533,8 @@ inoremap <C-d> <Delete>
 inoremap <C-e> <End>
 
 " Escape in many ways in Insert mode"
-inoremap <silent>jj <Esc>
-inoremap <silent>kk <Esc>
+" inoremap <silent>jj <Esc>
+" inoremap <silent>kk <Esc>
 " inoremap kj <Esc>
 " inoremap jk <Esc>
 
@@ -567,9 +567,10 @@ cnoremap <C-d> <Delete>
 cnoremap <M-b> <S-Left>
 cnoremap <M-f> <S-Right>
 cnoremap <M-d> <S-Right><Delete>
-cnoremap <Esc>b <S-Left>
-cnoremap <Esc>f <S-Right>
-cnoremap <Esc>d <S-Right><Delete>
+" delay esc storke
+" cnoremap <Esc>b <S-Left>
+" cnoremap <Esc>f <S-Right>
+" cnoremap <Esc>d <S-Right><Delete>
 cnoremap <C-g> <C-c>
 
 
@@ -855,7 +856,7 @@ endif
 " > could be, 'a', 'ab', 'A', 'AB', etc
 " > The Less The Better
 "========================================
-"let mapleader = ','
+" let mapleader = ','
 
 " delete all contents for whole ine
 " nnoremap <leader>d :normal ggVGD<cr>i
@@ -870,10 +871,10 @@ nnoremap <silent> <leader>e :EditMode<cr>
 nnoremap <silent> <leader>q :UnFocusMode<cr>
 
 "------------
-" Utilitises
+" Utilities
 "------------
-nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
-nnoremap <silent> <leader>t  :TagbarToggle<cr>
+" nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
+" nnoremap <silent> <leader>t  :TagbarToggle<cr>
 " nnoremap <silent> <leader>b  :bro old<cr>
 " maximize window size -> insted, vanila Vim: c-w _ / c-w
 " nnoremap <silent> <leader>mw  :vert resize 999<cr>
@@ -926,17 +927,17 @@ noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
 
 " IncSearch - Fuzzy "
 
-function! s:config_easyfuzzymotion(...) abort
-  return extend(copy({
-  \   'converters': [incsearch#config#fuzzyword#converter()],
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-  \   'is_expr': 0,
-  \   'is_stay': 1
-  \ }), get(a:, 1, {}))
-endfunction
-noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
-
+" function! s:config_easyfuzzymotion(...) abort
+"   return extend(copy({
+"   \   'converters': [incsearch#config#fuzzyword#converter()],
+"   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+"   \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+"   \   'is_expr': 0,
+"   \   'is_stay': 1
+"   \ }), get(a:, 1, {}))
+" endfunction
+" noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+" **** Occured Space Delay ****
 
 "------------------
 " Command Shortcut
