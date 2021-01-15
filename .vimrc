@@ -1,4 +1,3 @@
-" vim: foldmethod=manual foldcolumn=3
 "        _
 "       (_)
 " __   ___ _ __ ___  _ __ ___
@@ -15,19 +14,17 @@
 " INITIAL SETTING
 "-----------------
 set nocompatible
-set history=500               " default was 50
+set history=500  " default was 50 "
 set autoread
 set clipboard=unnamed
-set ttimeoutlen=0             " eliminating time delay to Normal mode
-set noesckeys                 " disable recognition esc key in insert mode
-set sidescroll=1              " options: 0, 1, 2, ....
+set ttimeoutlen=0 "elminating time delay to Normal mode
+set sidescroll=1 " 0, 1, 2, ....
 " set virtualedit=all
 set modeline
 set modelines=10
 set spell
 " set colorcolumn=80,120
-set path+=**                  " include sub directories when searching 2021-01-06
-set updatetime=1000           " for gitgutter 2021-01-13
+
 
 "--------
 " NUMBER
@@ -60,14 +57,6 @@ set noignorecase
 set nosmartcase
 
 
-"-------
-" NETRW
-"-------
-let g:netrw_altv=1             " open split to the right
-let g:netrw_browse_split=4     " open in prior window
-let g:netrw_liststyle=3        " treeview
-
-
 filetype off
 " for vundle -> re-set after vundle like : filetype plug indent 'on'
 "---------
@@ -93,7 +82,7 @@ Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'itchyny/lightline.vim'
 " Plugin 'powerline/powerline'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
 
 "--------SnipMate-----------
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -117,7 +106,7 @@ Plugin 'tpope/vim-repeat'
 " Plugin 'davidhalter/jedi-vim'          " not working - hard to solve 2020-11-20
 " Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
 " Plugin 'severin-lemaignan/vim-minimap'
-Plugin 'terryma/vim-expand-region'
+" Plugin 'terryma/vim-expand-region'
 " Plugin 'w0rp/ale'                      " Asynchronous Lint Engine ??
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
 " Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
@@ -156,9 +145,9 @@ Plugin 'mbbill/undotree'
 " Plugin 'junegunn/fzf'                 " fzf require Go lang
 " Plugin 'junegunn/fzf.vim'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'haya14busa/incsearch.vim'
-Plugin 'haya14busa/incsearch-fuzzy.vim'
-Plugin 'haya14busa/incsearch-easymotion.vim'
+" Plugin 'haya14busa/incsearch.vim'
+" Plugin 'haya14busa/incsearch-fuzzy.vim'
+" Plugin 'haya14busa/incsearch-easymotion.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'searchfold.vim'               " embigiuous with marker
 " Plugin 'wincent/command-t'            " ruby required
@@ -319,7 +308,7 @@ set bs=2 "back space
 "---------
 " TABLINE
 "---------
-" set showtabline=2
+"set showtabline=2
 " let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -339,7 +328,7 @@ set cursorline
 " STATUSLINE
 "------------
 set ruler
-set laststatus=0
+set laststatus=2
 set showcmd
 
 " Status Line Custom
@@ -452,8 +441,8 @@ set wildmode=list,full
 " --------
 "  Space
 " --------
-noremap <Space> :
-vnoremap <Space> :
+nnoremap <space> :
+vnoremap <space> :
 
 " Buffer: show list and ready to choose
 " nnoremap <silent><space>bl :buffers<CR>:buffer<Space>
@@ -506,7 +495,7 @@ nnoremap <C-l> :3wincmd ><cr>
 " nnoremap <silent><space>wk <C-w>k
 " nnoremap <silent><space>wl <C-w>l
 
-" Hard Mode (Anti-Pattern)
+" Hard Mode
 nnoremap hh <nop>
 nnoremap jj <nop>
 nnoremap kk <nop>
@@ -620,7 +609,7 @@ function! HardMode()
 endfunction
 command! HardMode call HardMode()
 
-" Prevent from overuse
+
 function! EasyMode()
     silent! unmap hh
     silent! unmap jj
@@ -630,6 +619,7 @@ function! EasyMode()
     silent! nnoremap k gk
 endfunction
 command! EasyMode call EasyMode()
+
 
 function! SuperEasyMode()
     call EasyMode()
@@ -661,7 +651,7 @@ function! FocusMode()
     endif
     Goyo
     Limelight
-    autocmd InsertLeave * :set norelativenumber | hi CursorLine gui=NONE
+    autocmd InsertLeave * :set norelativenumber
     set scrolloff=999  " centering
     set sidescrolloff=30
     set ignorecase
@@ -673,7 +663,6 @@ function! FocusMode()
         " set guifont=Menlo-Regular:h20
         " set lines=99 columns=999   " to maximize window size"
         highlight Visual guifg=bg guibg=DarkGreen gui=NONE
-        highlight CursorLine gui=NONE guibg=NONE
     elseif exists('$TMUX')
         silent !tmux set status off
     endif
@@ -700,7 +689,6 @@ function! DarkFocusMode()
     set ignorecase
     set smartcase
     call EasyMode()
-    " set variable
     let g:OnFocusing=1
     if has('gui_running')
         " set guifont=Menlo-Regular:h20
@@ -731,14 +719,12 @@ function! EditMode()
     set ignorecase
     set smartcase
     call EasyMode()
-    " set variable
     let g:OnEditing=1
     if has('gui_running')
         " set guifont=Menlo-Regular:h15
         " set lines=99 columns=999
         " colorscheme github
         highlight Visual guifg=bg guibg=DarkGreen gui=NONE
-        " AirlineTheme transparent
     elseif exists('$TMUX')
         silent !tmux set status off
     endif
@@ -774,7 +760,6 @@ function! UnFocusMode()
         highlight Visual guifg=bg guibg=DarkGreen gui=NONE
         set cursorline
         " hi EasyMotionTarget guifg=red guibg=yellow
-        " AirlineTheme luna
     elseif exists('$TMUX')
         silent !tmux set status on
     endif
@@ -842,7 +827,7 @@ if has('gui_running')
     highlight Visual guifg=bg guibg=DarkGreen gui=NONE
     highlight CursorLineNr guibg=black guifg=white
     highlight CursorLine gui=underline guibg=NONE
-    let g:airline_theme='luna'  "default raven luna monochrome powerlineish term transparent
+    let g:airline_theme='luna'  "default raven luna monochrome powerlineish term
     " hi EasyMotionTarget guifg=red guibg=yellow
 endif
 
@@ -852,7 +837,7 @@ endif
 " > could be, 'a', 'ab', 'A', 'AB', etc
 " > The Less The Better
 "========================================
-" let mapleader = ','
+"let mapleader = ','
 
 " delete all contents for whole ine
 " nnoremap <leader>d :normal ggVGD<cr>i
@@ -867,7 +852,7 @@ nnoremap <silent> <leader>e :EditMode<cr>
 nnoremap <silent> <leader>q :UnFocusMode<cr>
 
 "------------
-" Utilities
+" Utilitises
 "------------
 " nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
 " nnoremap <silent> <leader>t  :TagbarToggle<cr>
