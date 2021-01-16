@@ -4,15 +4,9 @@
 ;; _/  __/ / / / / / /_/ / /__(__  ) 
 ;;(_)___/_/ /_/ /_/\__,_/\___/____/  
                                    
-;;=================
+;;==================
 ;; Initial Setting
 ;;==================
-
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-;(package-initialize)
 
 (if (display-graphic-p)
     (progn
@@ -26,14 +20,17 @@
 (global-set-key "\C-xf" 'recentf-open-files)
 (setq recentf-auto-cleanup 'never)
 
+(setq backup-directory-alist `(("." . "~/.saves/")))         ;; Backup files relocated 2020-10-09
+(setq inhibit-startup-screen t)                              ;; No welcome startup screen
+(setq initial-scratch-message "")                            ;; No scratch message 2020-10-10
+(add-to-list 'default-frame-alist '(fullscreen . maximized)) ;; Maximize GUI window
+(global-auto-revert-mode t)                                  ;; Auto Refresh
+(global-visual-line-mode 1)                                  ;; Visual Line Mode On
+;; (global-display-line-numbers-mode)                           ;; Display Line Numbers On
+
 ;; Bettery mode 2021-01-03
 (display-battery-mode 1)
 
-;;------------------------
-;; Enable Evil 2020-12-30
-;;------------------------
-;; (require 'evil)
-;; (evil-mode 1)
 
 
 (custom-set-variables
@@ -41,6 +38,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
+ '(confirm-kill-emacs 'yes-or-no-p)
+ '(custom-enabled-themes nil)
  '(doc-view-continuous t)
  '(org-agenda-files
    '("~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
@@ -55,7 +56,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(evil ace-jump-mode elpy use-package centered-window csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package centered-window csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -71,57 +72,8 @@
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
 
-;; ======================
-;; Emacs-Initial-Setting
-;; ======================
-(setq backup-directory-alist `(("." . "~/.saves/")))         ;; Backup files relocated 2020-10-09
-(setq inhibit-startup-screen t)                              ;; No welcome startup screen
-(setq initial-scratch-message "")                            ;; No scratch message 2020-10-10
-(add-to-list 'default-frame-alist '(fullscreen . maximized)) ;; Maximize GUI window
 
 
-;; =========================
-;; Org-Mode-Initial-Setting
-;; =========================
-
-;; Show Closed(DONE) date in ORG-mode
-(setq org-log-done 'time)
-
-;; Org Agenda View shortcut
-(global-set-key "\C-ca" 'org-agenda)
-
-;; Org Babel - inline code 2020-10-19
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '(
-   (shell . t)
-   (python . t)
-   (R . t)
-   (plantuml . t)
-   (ditaa . t)
-   (dot . t)
-   (emacs-lisp . t)
-   (latex . t)
-   (java . t)
-   (js . t)
-   ))
-
-
-;; set plantuml path 2021-01-08
-(setq org-plantuml-jar-path
-      (expand-file-name "~/Applications/plantuml.jar"))
-
-;; ditta path 2021-01-14
-(setq org-ditaa-jar-path "/Applications/ditaa0_9.jar")
-
-;; Auto Refresh
-(global-auto-revert-mode t)
-
-;; Visual Line Mode On
-(global-visual-line-mode 1)
-
-;; Display Line Numbers On
-;(global-display-line-numbers-mode)
 
 
 
@@ -136,11 +88,76 @@
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
 
+
+;; built-in org-mouse turn on
+(require `org-mouse)
+
+;; display date in modeline 2020-12-07
+(setq display-time-day-and-date t)
+(display-time)
+
+;; display file size in modeline 2021-01-05
+(size-indication-mode t)
+
+;; pdflatex -> path "/Library/Tex/texbin" 2020-12-07
+(setq latex-run-command "pdflatex")
+
+
+;;===============================================================
+;; PACKAGES
+;;===============================================================
+
+;; MELPA 2020-12-08
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+;; and `package-pinned-packages`. Most users will not need or want to do this.
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; -- Unnecessary call -- see Line #6 in this file
+(package-initialize)
+;; (package-refresh-contents)
+;; (package-install 'use-package)
+
+;; (use-package elpy
+;;   :ensure t
+;;   :init
+;;   (elpy-enable))
+
+;; ignore byte-compile warnings
+;; 2021-01-16
+;; http://tsengf.blogspot.com/2011/06/disable-byte-compile-warning-in-emacs.html
+(setq byte-compile-warnings '(not nresolved
+                                  free-vars
+                                  callargs
+                                  redefine
+                                  obsolete
+                                  noruntime
+                                  cl-functions
+                                  interactive-only
+                                  ))
+
+
+;; PLUG-IN: exec-path-from-shell 2020-12-08
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
+;; PLUG-IN: deft -> do not use: Korean issue, change filename forcely 2020-12-08
+;(require 'deft)
+;(setq deft-extensions '("txt" "tex" "org" "md"))
+;(setq deft-directory "~/Documents/nvALT/")
+;;(setq deft-directory "~/Documents/test/")
+;(setq deft-recursive t)
+
+;;------------------------
+;; Enable Evil 2020-12-30
+;;------------------------
+;; (require 'evil)
+;; (evil-mode 1)
+
+
 ;;----------------------------------------------------------------
 ;; ACE JUMP MODE
 ;;----------------------------------------------------------------
-
-;;
 ;; ace jump mode major function
 ;; 
 (add-to-list 'load-path "/Users/osickwon/.emacs.d/ace-jump-mode/")
@@ -177,57 +194,51 @@
 ;;If you use evil
 ;(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 
-
 ;;_EOL_ACE_SETTING------------------------------------------------
 
-;; built-in org-mouse turn on
-(require `org-mouse)
 
 
-;; display date in modeline 2020-12-07
-(setq display-time-day-and-date t)
-(display-time)
+;;===============================================================
+;; ORG-MODE
+;;===============================================================
 
-;; display file size in modeline 2021-01-05
-(size-indication-mode t)
+(setq org-log-done 'time)                               ;; Show Closed(DONE) date in ORG-mode
+(global-set-key "\C-ca" 'org-agenda)                    ;; Org Agenda View shortcut
 
-;; pdflatex -> path "/Library/Tex/texbin" 2020-12-07
-(setq latex-run-command "pdflatex")
-
-
-;; MELPA 2020-12-08
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
-;; and `package-pinned-packages`. Most users will not need or want to do this.
-;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-;; -- Unnecessary call -- see Line #6 in this file
-(package-initialize)
-;; (package-refresh-contents)
-;; (package-install 'use-package)
-
-;; (use-package elpy
-;;   :ensure t
-;;   :init
-;;   (elpy-enable))
+;; Org Babel - inline code 2020-10-19
+;;------------------------------------
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (shell . t)
+   (python . t)
+   (R . t)
+   (plantuml . t)
+   (ditaa . t)
+   (dot . t)
+   (emacs-lisp . t)
+   (latex . t)
+   (java . t)
+   (js . t)
+   ))
 
 
-;; PLUG-IN: exec-path-from-shell 2020-12-08
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
+;; set plantuml path 2021-01-08
+(setq org-plantuml-jar-path
+      (expand-file-name "~/Applications/plantuml.jar"))
 
-;; PLUG-IN: deft -> do not use: Korean issue, change filename forcely 2020-12-08
-;(require 'deft)
-;(setq deft-extensions '("txt" "tex" "org" "md"))
-;(setq deft-directory "~/Documents/nvALT/")
-;;(setq deft-directory "~/Documents/test/")
-;(setq deft-recursive t)
+;; ditta path 2021-01-14
+(setq org-ditaa-jar-path "/Applications/ditaa0_9.jar")
+
+;; babel inline images 2021-01-15
+;; https://emacs.stackexchange.com/questions/30520/org-mode-c-c-c-c-to-display-inline-image
+(add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ORG - Done checkbox with strike through 2020-12-08
 ;; https://jft.home.blog/2019/07/17/use-unicode-symbol-to-display-org-mode-checkboxes/
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;------------------------------------------------------------------------------------
+
 (defface org-checkbox-done-text
   '((t (:foreground "#71696A" :strike-through t)))
   "Face for the text part of a checked org-mode checkbox.")
@@ -294,7 +305,6 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 
-
 ;; Git-Gutter 2020-12-18
 (global-git-gutter-mode +1)
 
@@ -316,11 +326,11 @@
 ;      org-fontify-done-headline t
 ;      org-fontify-quote-and-verse-blocks t)
 
-;; ==============================================================
-;; ;; For Python Development
-;; ;; Since 2021-01-06
-;; ==============================================================
-;; ;; src1: https://realpython.com/emacs-the-best-python-editor/#integration-with-jupyter-and-ipython
+
+;;==============================================================
+;; Python Development - Since 2021-01-06
+;;==============================================================
+;; src1: https://realpython.com/emacs-the-best-python-editor/#integration-with-jupyter-and-ipython
 
 ;; ;Enable elpy
 ;; (elpy-enable)

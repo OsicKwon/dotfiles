@@ -156,9 +156,9 @@ Plugin 'mbbill/undotree'
 " Plugin 'junegunn/fzf'                 " fzf require Go lang
 " Plugin 'junegunn/fzf.vim'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'haya14busa/incsearch.vim'
-Plugin 'haya14busa/incsearch-fuzzy.vim'
-Plugin 'haya14busa/incsearch-easymotion.vim'
+" Plugin 'haya14busa/incsearch.vim'
+" Plugin 'haya14busa/incsearch-fuzzy.vim'
+" Plugin 'haya14busa/incsearch-easymotion.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'searchfold.vim'               " embigiuous with marker
 " Plugin 'wincent/command-t'            " ruby required
@@ -483,7 +483,9 @@ nnoremap <right> <nop>
 " useful but not vimway
 " nnoremap <tab> <C-w>w
 " nnoremap <S-tab> <C-w>W
-
+" nnoremap <tab> za
+" nnoremap <tab> zo
+" nnoremap <S-tab> zc
 
 "RESIZING WINDOWS but Not Vim Way
 " nnoremap <up>       :3wincmd +<CR>
@@ -912,18 +914,18 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 " use these mappings as default search and sometimes want to move cursor with
 " EasyMotion.
 
-function! s:incsearch_config(...) abort
-  return incsearch#util#deepextend(deepcopy({
-  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-  \   'keymap': {
-  \     "\<CR>": '<Over>(easymotion)'
-  \   },
-  \   'is_expr': 0
-  \ }), get(a:, 1, {}))
-endfunction
-noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
-noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
-noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+" function! s:incsearch_config(...) abort
+"   return incsearch#util#deepextend(deepcopy({
+"   \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+"   \   'keymap': {
+"   \     "\<CR>": '<Over>(easymotion)'
+"   \   },
+"   \   'is_expr': 0
+"   \ }), get(a:, 1, {}))
+" endfunction
+" noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+" noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
+" noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
 
 " IncSearch - Fuzzy "
 
@@ -936,7 +938,7 @@ noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
 "   \   'is_stay': 1
 "   \ }), get(a:, 1, {}))
 " endfunction
-" noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+"" noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
 " **** Occured Space Delay ****
 
 "------------------
@@ -1000,78 +1002,3 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 "  5 -> blinking vertical bar
 "  6 -> solid vertical bar
 
-
-" test ------------------------------------------------
-"
-" https://vim.fandom.com/wiki/Word_frequency_statistics_for_a_file
-" Sorts numbers in ascending order.
-" Examples:
-" [2, 3, 1, 11, 2] --> [1, 2, 2, 3, 11]
-" ['2', '1', '10','-1'] --> [-1, 1, 2, 10]
-function! Sorted(list)
-  " Make sure the list consists of numbers (and not strings)
-  " This also ensures that the original list is not modified
-  let nrs = ToNrs(a:list)
-  let sortedList = sort(nrs, "NaturalOrder")
-  echo sortedList
-  return sortedList
-endfunction
-
-" Comparator function for natural ordering of numbers
-function! NaturalOrder(firstNr, secondNr)
-  if a:firstNr < a:secondNr
-    return -1
-  elseif a:firstNr > a:secondNr
-    return 1
-  else
-    return 0
-  endif
-endfunction
-
-" Coerces every element of a list to a number. Returns a new list without
-" modifying the original list.
-function! ToNrs(list)
-  let nrs = []
-  for elem in a:list
-    let nr = 0 + elem
-    call add(nrs, nr)
-  endfor
-
-  return nrs
-endfunction
-
-function! WordFrequency() range
-  " Words are separated by whitespace or punctuation characters
-  let wordSeparators = '[[:blank:][:punct:]]\+'
-  let allWords = split(join(getline(a:firstline, a:lastline)), wordSeparators)
-  let wordToCount = {}
-  for word in allWords
-    let wordToCount[word] = get(wordToCount, word, 0) + 1
-  endfor
-
-  let countToWords = {}
-  for [word,cnt] in items(wordToCount)
-    let words = get(countToWords,cnt,"")
-    " Append this word to the other words that occur as many times in the text
-    let countToWords[cnt] = words . " " . word
-  endfor
-
-  " Create a new buffer to show the results in
-  new
-  setlocal buftype=nofile bufhidden=hide noswapfile tabstop=20
-
-  " List of word counts in ascending order
-  let sortedWordCounts = Sorted(keys(countToWords))
-
-  call append("$", "count \t words")
-  call append("$", "--------------------------")
-  " Show the most frequent words first -> Descending order
-  for cnt in reverse(sortedWordCounts)
-    let words = countToWords[cnt]
-    call append("$", cnt . "\t" . words)
-  endfor
-endfunction
-
-command! -range=% WordFrequency <line1>,<line2>call WordFrequency()
-
-"----------------------------------------"
