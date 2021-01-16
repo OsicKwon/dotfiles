@@ -1,4 +1,4 @@
-" vim: foldmethod=manual ignorecase smartcase
+" vim: foldmethod=marker foldcolumn=3 ignorecase smartcase
 "        _
 "       (_)
 " __   ___ _ __ ___  _ __ ___
@@ -14,6 +14,7 @@
 "-----------------
 " INITIAL SETTING
 "-----------------
+"{{{
 set nocompatible
 set history=500               " default was 50
 set autoread
@@ -27,6 +28,7 @@ set spell
 " set colorcolumn=80,120
 set path+=**                  " include sub directories when searching 2021-01-06
 set updatetime=1000           " for gitgutter 2021-01-13
+"}}}
 
 
 "--------
@@ -39,7 +41,7 @@ set rnu "relativenumber
 "-----------
 " Autogroup
 "-----------
-
+"{{{
 augroup auto_set_number
     autocmd InsertEnter * set nornu
         \ | hi StatusLine guifg=yellow ctermfg=yellow 
@@ -50,6 +52,7 @@ augroup auto_set_number
         \ | hi CursorLine gui=underline guibg=NONE 
         \ | hi CursorLineNr guibg=black
 augroup END
+"}}}
 
 "--------
 " SEARCH
@@ -192,7 +195,7 @@ endif
 let g:airline_left_sep=''
 " the separator used on the right side
 let g:airline_right_sep=''
-
+"{{{
 " unicode symbols
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
@@ -215,7 +218,7 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
-
+"}}}
 set thesaurus+=~/.vim/thesaurus/mthesaur.txt
 set thesaurus+=~/.vim/thesaurus/test_thesaur.txt
 
@@ -236,6 +239,7 @@ set undofile
  "MARKDOWN SUPPORT for 'plasticboy/vim-markdown'
  "A Text file as a Markdown file 2020-11-21
 "----------------------------------------------
+"{{{
 augroup text_to_markdown
     autocmd BufRead,BufNewFile *.txt set filetype=markdown
     let g:vim_markdown_folding_disabled = 1
@@ -251,7 +255,7 @@ augroup END
 
 " this is for markdown files only
 " foldmethod from 'expr' to 'manual'
-
+"}}}
 
 "--------
 " TRAILS
@@ -341,7 +345,7 @@ set cursorline
 set ruler
 set laststatus=0
 set showcmd
-
+"{{{
 " Status Line Custom
 let g:currentmode={
     \ 'n'  : 'Normal',
@@ -364,7 +368,7 @@ let g:currentmode={
     \ '!'  : 'Shell',
     \ 't'  : 'Terminal'
     \}
-
+"}}}
 function! GitBranch()
   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
@@ -386,7 +390,7 @@ function! FileSize()
         return "| " . (bytes / 1024) . "k"  
     endif  
 endfunction
-
+"{{{
 set statusline=
 " set statusline+=\               " blank
 " set statusline=\[%{mode()}\]    " current mode
@@ -424,6 +428,7 @@ set statusline+=\ \-\ Col:\ %c      " coloumn
 " set statusline+=%-7.(%l of %L [%p%%] - Col: %c%V%) "Current line, percentage of size, column,
 " required to know how to apply statuline grouping grammar 2020-12-31
 set statusline+=\             " blank
+"}}}
 
 "--------------
 " TEXT EDITING
@@ -463,6 +468,7 @@ vnoremap <space> :
 " --------
 "  Normal
 " --------
+"{{{
 nnoremap <up>    <nop>
 nnoremap <down>  <nop>
 nnoremap <left>  <nop>
@@ -513,10 +519,12 @@ nnoremap hh <nop>
 nnoremap jj <nop>
 nnoremap kk <nop>
 nnoremap ll <nop>
+"}}}
 
 " --------
 "  Insert
 " --------
+"{{{
 inoremap <up>    <nop>
 inoremap <down>  <nop>
 inoremap <left>  <nop>
@@ -551,10 +559,12 @@ vnoremap <up> <nop>
 vnoremap <down> <nop>
 vnoremap <left> <nop>
 vnoremap <right> <nop>
+"}}}
 
 " ---------
 "  Command
 " ---------
+"{{{
 cnoremap <up> <nop>
 cnoremap <down> <nop>
 cnoremap <left> <nop>
@@ -574,7 +584,7 @@ cnoremap <M-d> <S-Right><Delete>
 " cnoremap <Esc>f <S-Right>
 " cnoremap <Esc>d <S-Right><Delete>
 cnoremap <C-g> <C-c>
-
+"}}}
 
 "===========
 " FUNCTIONS
@@ -583,6 +593,8 @@ cnoremap <C-g> <C-c>
 "-----------
 " Draw Line
 "-----------
+
+"{{{
 function! UnderLine()
     normal yy
     normal p
@@ -591,7 +603,9 @@ function! UnderLine()
     " echo "underlined"
 endfunction
 command! UnderLine call UnderLine()
+"}}}
 
+"{{{
 function! DoubleLine()
     normal yy
     normal p
@@ -599,7 +613,9 @@ function! DoubleLine()
     noh
 endfunction
 command! DoubleLine call DoubleLine()
+"}}}
 
+"{{{
 function! SurroundLine()
     normal yy
     normal p
@@ -608,8 +624,10 @@ function! SurroundLine()
     noh
 endfunction
 command! SurroundLine call SurroundLine()
+"}}}
 
-function! HardMode()
+
+function! HardMode()"{{{
     silent! nnoremap hh <nop>
     silent! nnoremap jj <nop>
     silent! nnoremap kk <nop>
@@ -621,10 +639,10 @@ function! HardMode()
     silent! noremap <left>  <nop>
     silent! noremap <right> <nop>
 endfunction
-command! HardMode call HardMode()
+command! HardMode call HardMode()"}}}
 
 " Disabled to prevent from overuse
-function! EasyMode()
+function! EasyMode()"{{{
     silent! unmap hh
     silent! unmap jj
     silent! unmap kk
@@ -632,10 +650,9 @@ function! EasyMode()
     silent! nnoremap j gj
     silent! nnoremap k gk
 endfunction
-command! EasyMode call EasyMode()
+command! EasyMode call EasyMode()"}}}
 
-
-function! SuperEasyMode()
+function! SuperEasyMode()"{{{
     call EasyMode()
     silent! unmap   <up>
     silent! unmap   <down>
@@ -648,14 +665,14 @@ function! SuperEasyMode()
     silent! noremap <up> gk
     silent! noremap <down> gj
 endfunction
-command! SuperEasyMode call SuperEasyMode()
+command! SuperEasyMode call SuperEasyMode()"}}}
 
 
 "----------
 " Focusing
 "----------
 
-function! FocusMode()
+function! FocusMode()"{{{
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnFocusing')
@@ -686,9 +703,9 @@ function! FocusMode()
         silent !tmux set status off
     endif
 endfunction
-command! FocusMode call FocusMode()
+command! FocusMode call FocusMode()"}}}
 
-function! DarkFocusMode()
+function! DarkFocusMode()"{{{
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnFocusing')
@@ -719,9 +736,9 @@ function! DarkFocusMode()
         silent !tmux set status off
     endif
 endfunction
-command! DarkFocusMode call DarkFocusMode()
+command! DarkFocusMode call DarkFocusMode()"}}}
 
-function! EditMode()
+function! EditMode()"{{{
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnEditing')
@@ -751,9 +768,9 @@ function! EditMode()
     endif
     " normal zz
 endfunction
-command! EditMode call EditMode()
+command! EditMode call EditMode()"}}}
 
-function! UnFocusMode()
+function! UnFocusMode()"{{{
     Goyo!
     Limelight!
     silent! unlet g:OnFocusing
@@ -785,12 +802,12 @@ function! UnFocusMode()
         silent !tmux set status on
     endif
 endfunction
-command! UnFocusMode call UnFocusMode()
+command! UnFocusMode call UnFocusMode()"}}}
 
 " ==========================
 " Debugging & Test Function"
 " ==========================
-
+"{{{
 " --------------
 " argument test"
 " --------------
@@ -823,7 +840,7 @@ function! TestFunction2()
     put A  " same as "AP
 endfunction
 command! T2 call TestFunction2()
-
+"}}}
 
 
 " [FYI] checking terminal mode
@@ -834,7 +851,7 @@ command! T2 call TestFunction2()
 " GUI
 " ---
 
-if has('gui_running')
+if has('gui_running')"{{{
     set guioptions=     " disabled mac style tab"
     set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
     set linespace=1
@@ -850,7 +867,7 @@ if has('gui_running')
     highlight CursorLine gui=underline guibg=NONE
     let g:airline_theme='luna'  "default raven luna monochrome powerlineish term transparent
     " hi EasyMotionTarget guifg=red guibg=yellow
-endif
+endif"}}}
 
 
 "========================================
@@ -910,7 +927,7 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 "------------
 " IncSearch
 "------------
-" You can use other keymappings like <C-l> instead of <CR> if you want to
+" You can use other keymappings like <C-l> instead of <CR> if you want to{{{
 " use these mappings as default search and sometimes want to move cursor with
 " EasyMotion.
 
@@ -939,7 +956,7 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 "   \ }), get(a:, 1, {}))
 " endfunction
 "" noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
-" **** Occured Space Delay ****
+" **** Occured Space Delay ****}}}
 
 "------------------
 " Command Shortcut
