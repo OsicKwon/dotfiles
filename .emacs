@@ -173,13 +173,17 @@
 ;; https://evil.readthedocs.io/en/latest/hooks.html
 (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "gray")))
 (add-hook 'evil-operator-state-entry-hook (lambda () (set-background-color "gray")))
-(add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color nil)))
+(add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color "white")))  ;; TODO change to nil or default
 (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
 (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
-(add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color nil)))
-;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color "yellow")))
+(add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color "white")))  ;; TODO change to nil or default
 (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
-;; (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color "blue")))
+(add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color "white")))  ;; TODO change to nil or default
+
+;; evil key binding
+(define-key evil-normal-state-map (kbd "SPC") 'evil-ex)
+
+
 
 ;;----------------------------------------------------------------
 ;; ACE JUMP MODE
