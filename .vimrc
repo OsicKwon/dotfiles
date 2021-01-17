@@ -638,20 +638,27 @@ function! HardMode()
     silent! noremap <right> <nop>
     silent! unmap <tab>
     silent! unmap <S-tab>
+    Limelight!
+    set scrolloff=0
 endfunction
 command! HardMode call HardMode()
 "}}}
 
 " Disabled to prevent from overuse
-function! EasyMode()"{{{
+function! EasyMode()
+"{{{
     silent! unmap hh
     silent! unmap jj
     silent! unmap kk
     silent! unmap ll
     silent! nnoremap j gj
     silent! nnoremap k gk
+    silent! unmap <tab>
+    Limelight!
+    set scrolloff=0
 endfunction
-command! EasyMode call EasyMode()"}}}
+command! EasyMode call EasyMode()
+"}}}
 
 function! SuperEasyMode()
 "{{{
@@ -669,6 +676,8 @@ function! SuperEasyMode()
     nnoremap <tab> za
     " nnoremap <tab> zo
     " nnoremap <S-tab> zc
+    Limelight
+    set scrolloff=999
 endfunction
 command! SuperEasyMode call SuperEasyMode()
 "}}}
