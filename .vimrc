@@ -67,7 +67,7 @@ set nosmartcase
 " NETRW
 "-------
 let g:netrw_altv=1             " open split to the right
-let g:netrw_browse_split=4     " open in prior window
+" let g:netrw_browse_split=4     " open in prior window
 let g:netrw_liststyle=3        " treeview
 
 
@@ -142,7 +142,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 " Plugin 'iamcco/markdown-preview.nvim'
 Plugin 'reedes/vim-wordy'
-Plugin 'dbmrq/vim-ditto'                " find repeated words
+Plugin 'dbmrq/vim-ditto'                 " find repeated words
 " Plugin 'reedes/vim-lexical'            " no idea
 " Plugin 'reedes/vim-pencil'             " no idea
 " Plugin 'xolox/vim-notes'
@@ -489,9 +489,6 @@ nnoremap <right> <nop>
 " useful but not vimway
 " nnoremap <tab> <C-w>w
 " nnoremap <S-tab> <C-w>W
-" nnoremap <tab> za
-" nnoremap <tab> zo
-" nnoremap <S-tab> zc
 
 "RESIZING WINDOWS but Not Vim Way
 " nnoremap <up>       :3wincmd +<CR>
@@ -627,7 +624,8 @@ command! SurroundLine call SurroundLine()
 "}}}
 
 
-function! HardMode()"{{{
+function! HardMode()
+"{{{
     silent! nnoremap hh <nop>
     silent! nnoremap jj <nop>
     silent! nnoremap kk <nop>
@@ -638,8 +636,11 @@ function! HardMode()"{{{
     silent! noremap <down>  <nop>
     silent! noremap <left>  <nop>
     silent! noremap <right> <nop>
+    silent! unmap <tab>
+    silent! unmap <S-tab>
 endfunction
-command! HardMode call HardMode()"}}}
+command! HardMode call HardMode()
+"}}}
 
 " Disabled to prevent from overuse
 function! EasyMode()"{{{
@@ -652,7 +653,8 @@ function! EasyMode()"{{{
 endfunction
 command! EasyMode call EasyMode()"}}}
 
-function! SuperEasyMode()"{{{
+function! SuperEasyMode()
+"{{{
     call EasyMode()
     silent! unmap   <up>
     silent! unmap   <down>
@@ -664,8 +666,12 @@ function! SuperEasyMode()"{{{
     silent! iunmap   <right>
     silent! noremap <up> gk
     silent! noremap <down> gj
+    nnoremap <tab> za
+    " nnoremap <tab> zo
+    " nnoremap <S-tab> zc
 endfunction
-command! SuperEasyMode call SuperEasyMode()"}}}
+command! SuperEasyMode call SuperEasyMode()
+"}}}
 
 
 "----------
@@ -770,7 +776,8 @@ function! EditMode()"{{{
 endfunction
 command! EditMode call EditMode()"}}}
 
-function! UnFocusMode()"{{{
+function! UnFocusMode()
+"{{{
     Goyo!
     Limelight!
     silent! unlet g:OnFocusing
@@ -781,6 +788,7 @@ function! UnFocusMode()"{{{
     set noignorecase
     set nosmartcase
     syntax enable  " redraw markdown highlighting
+    " syntax on
     call HardMode()
     if has('gui_running')
         " set guifont=Menlo-Regular:h15
@@ -802,7 +810,8 @@ function! UnFocusMode()"{{{
         silent !tmux set status on
     endif
 endfunction
-command! UnFocusMode call UnFocusMode()"}}}
+command! UnFocusMode call UnFocusMode()
+"}}}
 
 " ==========================
 " Debugging & Test Function"
@@ -969,6 +978,9 @@ command HT set filetype=html
 command TX set filetype=text
 command PD :w | set filetype=pandoc | Pandoc html
 command WH windo wincmd H
+command HD call HardMode() | echo "HardMode Activated"
+command EA call EasyMode() | echo "EasyMode Activated"
+command SE call SuperEasyMode() | echo "SuperEasyMode Activated"
 
 
 " --------------"
