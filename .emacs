@@ -40,7 +40,6 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
- '(confirm-kill-emacs 'yes-or-no-p)
  '(custom-enabled-themes nil)
  '(doc-view-continuous t)
  '(org-agenda-files
@@ -56,7 +55,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package centered-window csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package centered-window csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -137,9 +136,23 @@
                                   ))
 
 
+;; auto complete 2021-01-16
+;; https://www.youtube.com/watch?v=HTUE03LnaXA
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
+
+
+;; yasnippet 2021-01-16
+;; https://www.youtube.com/watch?v=HTUE03LnaXA
+(require 'yasnippet)
+(yas-global-mode 1)
+
 ;; PLUG-IN: exec-path-from-shell 2020-12-08
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
+
+
 
 ;; PLUG-IN: deft -> do not use: Korean issue, change filename forcely 2020-12-08
 ;(require 'deft)
@@ -152,8 +165,21 @@
 ;; Enable Evil 2020-12-30
 ;;------------------------
 ;; (require 'evil)
-;; (evil-mode 1)
-
+(evil-mode 1)
+(setq-default evil-default-state 'emacs)
+;; Change color of which-func when entering and leaving Evil visual state
+;;  - Resolves the "white on white" issue :: 2021-01-17
+;; https://www.reddit.com/r/emacs/comments/6tdqt0/how_can_i_change_the_background_color_when/
+;; https://evil.readthedocs.io/en/latest/hooks.html
+(add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "gray")))
+(add-hook 'evil-operator-state-entry-hook (lambda () (set-background-color "gray")))
+(add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color nil)))
+(add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
+(add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
+(add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color nil)))
+;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color "yellow")))
+(add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
+;; (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color "blue")))
 
 ;;----------------------------------------------------------------
 ;; ACE JUMP MODE
@@ -334,6 +360,13 @@
 
 ;; ;Enable elpy
 ;; (elpy-enable)
+
+
+;; jedi 2021-01-16
+;; https://tkf.github.io/emacs-jedi/latest/
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)                 ; optional
+
 
 ;; ;; ;; Use IPython for REPL
 ;; ;; (setq python-shell-interpreter "jupyter"
