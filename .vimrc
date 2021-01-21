@@ -171,6 +171,7 @@ Plugin 'ervandew/supertab'
 Plugin 'nvie/vim-flake8'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'sirver/ultisnips'
+Plugin 'klen/python-mode'
 
 "------Other-plugins--------
 " Plugin 'itchyny/calendar.vim'
@@ -323,7 +324,7 @@ set bs=2 "back space
 "---------
 " TABLINE
 "---------
-" set showtabline=2
+set showtabline=2
 " let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -640,6 +641,8 @@ function! HardMode()
     silent! unmap <S-tab>
     Limelight!
     set scrolloff=0
+    set noignorecase
+    set nosmartcase
 endfunction
 command! HardMode call HardMode()
 "}}}
@@ -656,6 +659,8 @@ function! EasyMode()
     silent! unmap <tab>
     Limelight!
     set scrolloff=0
+    set ignorecase
+    set smartcase
 endfunction
 command! EasyMode call EasyMode()
 "}}}

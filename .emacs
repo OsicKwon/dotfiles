@@ -73,9 +73,6 @@
 
 
 
-
-
-
 ;;==========
 ;; window
 ;;==========
@@ -197,15 +194,21 @@
   "Emacs quick move minor mode"
   t)
 ;; you can select the key you prefer to
-;(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-char-mode)
 ;;
 ;; conflict org-mode: C-c SPC => org-table-blank-field
+
+;; `C-u C-c SPC` was not worked properly, so Used `C-c C-c` 2021-01-17
+;; (define-key global-map (kbd "C-c C-c SPC") 'ace-jump-char-mode)
+
 
 ;; When org-mode starts it (org-mode-map) overrides the ace-jump-mode.
 ;; (https://github.com/winterTTr/ace-jump-mode/issues/47)
 (add-hook 'org-mode-hook
           (lambda ()
-            (local-set-key (kbd "\C-c SPC") 'ace-jump-mode)))
+            ;; (local-set-key (kbd "\C-c SPC") 'ace-jump-mode)))
+            (local-set-key (kbd "\C-c SPC") 'ace-jump-char-mode)))
  
 ;; 
 ;; enable a more powerful jump back function from ace jump mode
@@ -234,6 +237,9 @@
 
 (setq org-log-done 'time)                               ;; Show Closed(DONE) date in ORG-mode
 (global-set-key "\C-ca" 'org-agenda)                    ;; Org Agenda View shortcut
+
+
+;; === ORG-BABEL ===
 
 ;; Org Babel - inline code 2020-10-19
 ;;------------------------------------
@@ -362,10 +368,11 @@
 ;;==============================================================
 ;; src1: https://realpython.com/emacs-the-best-python-editor/#integration-with-jupyter-and-ipython
 
+;; === ELPI ===
 ;; ;Enable elpy
 ;; (elpy-enable)
 
-
+;; === JEDI ===
 ;; jedi 2021-01-16
 ;; https://tkf.github.io/emacs-jedi/latest/
 (add-hook 'python-mode-hook 'jedi:setup)
