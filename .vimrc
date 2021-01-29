@@ -17,7 +17,7 @@
 "{{{
 set nocompatible
 set history=500               " default was 50
-set autoread
+" set autoread                 " preventing something that I just write
 set clipboard=unnamed
 set ttimeoutlen=0             " eliminating time delay to Normal mode
 set sidescroll=1              " options: 0, 1, 2, ....
@@ -678,6 +678,8 @@ function! SuperEasyMode()
     silent! iunmap   <right>
     silent! noremap <up> gk
     silent! noremap <down> gj
+    silent! inoremap <up> gk
+    silent! inoremap <down> gj
     nnoremap <tab> za
     " nnoremap <tab> zo
     " nnoremap <S-tab> zc
