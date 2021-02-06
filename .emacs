@@ -186,10 +186,15 @@
 (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
 (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
 (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
-(add-hook 'evil-insert-state-exi-hook (lambda () (set-foreground-color original-foreground)))
+(add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color original-foreground)))
 
 (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
 (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color original-background)))
+
+(add-hook 'evil-replace-state-entry-hook (lambda () (set-background-color "lightyellow")))
+(add-hook 'evil-replace-state-entry-hook (lambda () (set-foreground-color "black")))
+(add-hook 'evil-replace-state-exit-hook (lambda () (set-background-color original-background)))
+(add-hook 'evil-replace-state-exit-hook (lambda () (set-foreground-color original-foreground)))
 
 ;; https://emacs.stackexchange.com/questions/34251/change-modeline-background-when-in-normal-evil-mode
 ;;
@@ -223,6 +228,10 @@
 
 ;; evil key binding
 (define-key evil-normal-state-map (kbd "SPC") 'evil-ex)
+
+;; evil undo 2021-02-06
+;; https://emacs.stackexchange.com/questions/3358/how-can-i-get-undo-behavior-in-evil-similar-to-vims
+(setq evil-want-fine-undo 'fine)
 
 ;; evil-surround package 2021-01-29
 (global-evil-surround-mode 1)
