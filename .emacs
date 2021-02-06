@@ -58,7 +58,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package centered-window csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package centered-window csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -175,19 +175,33 @@
 ;;  - Resolves the "white on white" issue :: 2021-01-17
 ;; https://www.reddit.com/r/emacs/comments/6tdqt0/how_can_i_change_the_background_color_when/
 ;; https://evil.readthedocs.io/en/latest/hooks.html
+(setq original-background (face-attribute 'default :background))
 (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "gray")))
 (add-hook 'evil-operator-state-entry-hook (lambda () (set-background-color "gray")))
-(add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color "white")))  ;; TODO change to nil or default
+(add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color original-background)))
 (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
 (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
-(add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color "white")))  ;; TODO change to nil or default
+(add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
 (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
-(add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color "white")))  ;; TODO change to nil or default
+(add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color original-background)))
+
+;; https://emacs.stackexchange.com/questions/34251/change-modeline-background-when-in-normal-evil-mode
+;;
+;; (setq original-background (face-attribute 'mode-line :background))
+;; (setq normal-state-background "#ff0000")
+;; (add-hook 'evil-normal-state-entry-hook
+;;           (lambda ()
+;;             (set-face-attribute 'mode-line nil :background normal-state-background)))
+;; (add-hook 'evil-normal-state-exit-hook
+;;           (lambda ()
+;;             (set-face-attribute 'mode-line nil :background original-background)))
+
 
 ;; evil key binding
 (define-key evil-normal-state-map (kbd "SPC") 'evil-ex)
 
-
+;; evil-surround package 2021-01-29
+(global-evil-surround-mode 1)
 
 ;;----------------------------------------------------------------
 ;; ACE JUMP MODE
@@ -237,6 +251,15 @@
 ;;_EOL_ACE_SETTING------------------------------------------------
 
 
+;; projectile package 2021-01-29
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+;; use 'helm-projectile-ag' inseted of C-c p s s, which stands for ag serching in projectile
+;; once install package of 'helm-projectile', you can also use 'helm-projectile-ag'
+;; or install 'helm-ag' package to use same function
+;; however, required intall '(sudo) port install the_silver_searcher' first (the_silver_searcher = ag)
 
 ;;===============================================================
 ;; ORG-MODE
@@ -370,9 +393,7 @@
 ;      org-fontify-quote-and-verse-blocks t)
 
 
-
-(which-key-mode)     ; which-key package 2021-01-28
-
+(which-key-mode)                        ;; which-key package 2021-01-28
 
 ;;==============================================================
 ;; Python Development - Since 2021-01-06

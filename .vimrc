@@ -16,11 +16,14 @@
 "-----------------
 "{{{
 set nocompatible
-set history=500               " default was 50
-" set autoread                 " preventing something that I just write
+set history=500                       " default was 50
+set autoread                          " preventing something that I just write
+au FocusGained,BufEnter * :silent! !  " -- reload when entering the buffer or gaining focus
+au FocusLost,WinLeave * :silent! w    " -- save when exiting the buffer or losing focus
+
 set clipboard=unnamed
-set ttimeoutlen=0             " eliminating time delay to Normal mode
-set sidescroll=1              " options: 0, 1, 2, ....
+set ttimeoutlen=0                     " eliminating time delay to Normal mode
+set sidescroll=1                      " options: 0, 1, 2, ....
 " set virtualedit=all
 set modeline
 set modelines=10
@@ -139,7 +142,7 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+" Plugin 'plasticboy/vim-markdown'         " conflicted with `ge` command  2021-02-04
 " Plugin 'iamcco/markdown-preview.nvim'
 Plugin 'reedes/vim-wordy'
 Plugin 'dbmrq/vim-ditto'                 " find repeated words
@@ -185,6 +188,31 @@ syntax on
 
 let g:searchfold_maxdepth=1
 let g:solarized_termcolors=256
+
+"----------------------------------------------
+ "MARKDOWN SUPPORT for 'plasticboy/vim-markdown'
+ "A Text file as a Markdown file 2020-11-21
+"----------------------------------------------
+"{{{
+augroup text_to_markdown
+    autocmd BufRead,BufNewFile *.txt set filetype=markdown
+    let g:vim_markdown_folding_disabled = 1
+    " foldmethod from 'expr' to 'manual'
+    " let g:vim_markdown_follow_anchor = 0  " to use vim `ge` command avoiding in markdown mode
+    let g:indentLine_concealcursor=""
+    let g:indentLine_conceallevel=2
+    "autocmd BufRead,BufNewFile *.txt set concealcursor="" | set conceallevel=2
+    " Default was 'inc' stands for insert, normal, and command
+    " except for visual by 'indentline' plugin
+    " When cursor is on a markdown syntax,
+    " it will be show its markdown grammar automatically
+augroup END
+
+" this is for markdown files only
+" foldmethod from 'expr' to 'manual'
+"}}}
+
+
 let g:airline_theme='tomorrow'  "default minimalist bubblegum raven angr
 " air-line
 let g:airline_powerline_fonts = 1
@@ -235,28 +263,6 @@ endif
 set undodir=~/.undodir
 set undofile
 
-
-"----------------------------------------------
- "MARKDOWN SUPPORT for 'plasticboy/vim-markdown'
- "A Text file as a Markdown file 2020-11-21
-"----------------------------------------------
-"{{{
-augroup text_to_markdown
-    autocmd BufRead,BufNewFile *.txt set filetype=markdown
-    let g:vim_markdown_folding_disabled = 1
-    " foldmethod from 'expr' to 'manual'
-    let g:indentLine_concealcursor=""
-    let g:indentLine_conceallevel=2
-    "autocmd BufRead,BufNewFile *.txt set concealcursor="" | set conceallevel=2
-    " Default was 'inc' stands for insert, normal, and command
-    " except for visual by 'indentline' plugin
-    " When cursor is on a markdown syntax,
-    " it will be show its markdown grammar automatically
-augroup END
-
-" this is for markdown files only
-" foldmethod from 'expr' to 'manual'
-"}}}
 
 "--------
 " TRAILS
