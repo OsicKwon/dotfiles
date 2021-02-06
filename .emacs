@@ -178,15 +178,20 @@
 (setq original-background (face-attribute 'default :background))
 (setq original-foreground (face-attribute 'default :foreground))
 
+;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "gray")))
+;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color "black")))
+(add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background original-background :underline t)))
 
-(add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "gray")))
-(add-hook 'evil-operator-state-entry-hook (lambda () (set-background-color "gray")))
 (add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color original-background)))
+(add-hook 'evil-normal-state-exit-hook (lambda () (set-foreground-color original-foreground)))
 
-(add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
-(add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
-(add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
-(add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color original-foreground)))
+(add-hook 'evil-operator-state-entry-hook (lambda () (set-background-color "gray")))
+
+;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
+;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
+;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
+;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color original-foreground)))
+(add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightyellow" :underline nil)))
 
 (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
 (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color original-background)))
@@ -196,17 +201,36 @@
 (add-hook 'evil-replace-state-exit-hook (lambda () (set-background-color original-background)))
 (add-hook 'evil-replace-state-exit-hook (lambda () (set-foreground-color original-foreground)))
 
+(add-hook 'evil-emacs-state-entry-hook (lambda () (set-background-color original-background)))
+(add-hook 'evil-emacs-state-entry-hook (lambda () (set-foreground-color original-foreground)))
+(add-hook 'evil-emacs-state-entry-hook (lambda () (hl-line-mode 0)))
+
+
+;; (defun highlight-selected-window ()
+;;   "Highlight selected window with a different background color."
+;;   (walk-windows (lambda (w)
+;;                   (unless (eq w (selected-window))
+;;                     (with-current-buffer (window-buffer w)
+;;                       (buffer-face-set '(:background "white"))))))
+;;   (buffer-face-set 'default))
+;; (add-hook 'buffer-list-update-hook 'highlight-selected-window)
+
+
 ;; https://emacs.stackexchange.com/questions/34251/change-modeline-background-when-in-normal-evil-mode
 ;;
-;; (setq original-background (face-attribute 'mode-line :background))
-;; (setq normal-state-background "#ff0000")
-;; (add-hook 'evil-normal-state-entry-hook
-;;           (lambda ()
-;;             (set-face-attribute 'mode-line nil :background normal-state-background)))
-;; (add-hook 'evil-normal-state-exit-hook
-;;           (lambda ()
-;;             (set-face-attribute 'mode-line nil :background original-background)))
+;; (setq original-modeline-background (face-attribute 'mode-line :background))
+;; (setq normal-state-background "red")
+;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-face-attribute 'mode-line nil :background normal-state-background)))
+;; (add-hook 'evil-normal-state-exit-hook  (lambda () (set-face-attribute 'mode-line nil :background original-modeline-background)))
 
+
+;; evil cursor in modes 2021-02-06
+;; https://github.com/hlissner/doom-emacs/issues/1848
+;; http://fnwiya.hatenablog.com/entry/2016/01/12/213149 
+(setq evil-normal-state-cursor '(box "darkblue")
+      ;; evil-insert-state-cursor '(bar "black")
+      ;; evil-visual-state-cursor '(hollow "black")
+      evil-emacs-state-cursor '(box "black"))
 
 ;; https://emacs.stackexchange.com/questions/30582/how-do-i-change-the-mode-indicators-for-evil-mode-in-the-spaceline-mode-line-pac
 (setq evil-normal-state-tag "NORMAL")
@@ -224,10 +248,10 @@
       evil-visual-state-tag   (propertize " VISUAL " 'face '((:background "darkgray"      :foreground "black")))
       evil-operator-state-tag (propertize " <O> " 'face '((:background "sandy brown"      :foreground "black"))))
 
-;; (setq evil-insert-state-tag ('buffer-face-set '((:background "yellow")))
-
 ;; evil key binding
 (define-key evil-normal-state-map (kbd "SPC") 'evil-ex)
+(define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
 ;; evil undo 2021-02-06
 ;; https://emacs.stackexchange.com/questions/3358/how-can-i-get-undo-behavior-in-evil-similar-to-vims
@@ -465,3 +489,8 @@
 
 (when (executable-find "ipython")
   (setq python-shell-interpreter "ipython"))
+
+
+;; ============== TEST =================
+
+
