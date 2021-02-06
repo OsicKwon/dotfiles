@@ -58,7 +58,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package centered-window csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package centered-window csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -176,12 +176,18 @@
 ;; https://www.reddit.com/r/emacs/comments/6tdqt0/how_can_i_change_the_background_color_when/
 ;; https://evil.readthedocs.io/en/latest/hooks.html
 (setq original-background (face-attribute 'default :background))
+(setq original-foreground (face-attribute 'default :foreground))
+
+
 (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "gray")))
 (add-hook 'evil-operator-state-entry-hook (lambda () (set-background-color "gray")))
 (add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color original-background)))
+
 (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
 (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
 (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
+(add-hook 'evil-insert-state-exi-hook (lambda () (set-foreground-color original-foreground)))
+
 (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
 (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color original-background)))
 
@@ -196,6 +202,24 @@
 ;;           (lambda ()
 ;;             (set-face-attribute 'mode-line nil :background original-background)))
 
+
+;; https://emacs.stackexchange.com/questions/30582/how-do-i-change-the-mode-indicators-for-evil-mode-in-the-spaceline-mode-line-pac
+(setq evil-normal-state-tag "NORMAL")
+(setq evil-insert-state-tag "INSERT")
+(setq evil-visual-state-tag "VISUAL")
+(setq evil-replace-state-tag "REPLACE")
+
+;; Color the evil tag - colors taken from spaceline
+;; https://github.com/Malabarba/smart-mode-line/issues/195
+(setq evil-normal-state-tag   (propertize " NORMAL " 'face '((:background "black"         :foreground "white")))
+      evil-emacs-state-tag    (propertize " <E> " 'face '((:background 'nil               :foreground "black")))
+      evil-insert-state-tag   (propertize " INSERT " 'face '((:background "lightyellow"   :foreground "black")))
+      evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "chocolate"    :foreground "black")))
+      evil-motion-state-tag   (propertize " <M> " 'face '((:background "plum3"            :foreground "black")))
+      evil-visual-state-tag   (propertize " VISUAL " 'face '((:background "darkgray"      :foreground "black")))
+      evil-operator-state-tag (propertize " <O> " 'face '((:background "sandy brown"      :foreground "black"))))
+
+;; (setq evil-insert-state-tag ('buffer-face-set '((:background "yellow")))
 
 ;; evil key binding
 (define-key evil-normal-state-map (kbd "SPC") 'evil-ex)
