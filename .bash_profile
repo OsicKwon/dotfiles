@@ -52,6 +52,6 @@ echo " 1) wn      :: wn 'word' -over";
 echo " 2) trans   :: trans 'word' :ko";
 echo " 3) dict    :: curl dict://dict/org/d:word:wn";
 echo " 4) googler :: googler -n 5 -t m12 -w abc.com -N 'word'";
-echo " 4) wikit   :: wikit 'word'";
+echo " 5) wikit   :: wikit 'word'";
 echo "-------------------------------------------------------------";
 

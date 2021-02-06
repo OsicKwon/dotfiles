@@ -54,7 +54,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(centered-window csv-mode pandoc-mode pandoc smex ob-ipython elpy ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(use-package centered-window csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -200,6 +200,14 @@
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 ;; -- Unnecessary call -- see Line #6 in this file
 (package-initialize)
+(package-refresh-contents)
+(package-install 'use-package)
+
+;; (use-package elpy
+;;   :ensure t
+;;   :init
+;;   (elpy-enable))
+
 
 ;; PLUG-IN: exec-path-from-shell 2020-12-08
 (when (memq window-system '(mac ns x))
@@ -306,16 +314,31 @@
 ;      org-fontify-quote-and-verse-blocks t)
 
 
-;; For Python Development
-;; 2021-01-06
+;; ;; For Python Development
+;; ;; 2021-01-06
 
-;; https://realpython.com/emacs-the-best-python-editor/#integration-with-jupyter-and-ipython
-;; Enable elpy
-(elpy-enable)
+;; ;; src1: https://realpython.com/emacs-the-best-python-editor/#integration-with-jupyter-and-ipython
 
-;; Use IPython for REPL
-(setq python-shell-interpreter "jupyter"
-      python-shell-interpreter-args "console --simple-prompt"
-      python-shell-prompt-detect-failure-warning nil)
-(add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
+;; ;Enable elpy
+;; (elpy-enable)
+
+;; ;; ;; Use IPython for REPL
+;; ;; (setq python-shell-interpreter "jupyter"
+;; ;;       python-shell-interpreter-args "console --simple-prompt"
+;; ;;       python-shell-prompt-detect-failure-warning nil)
+;; ;; (add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
+
+(setq python-indent-guess-indent-offset t)  
+(setq python-indent-guess-indent-offset-verbose nil)
+
+(setq org-babel-python-command "python3")
+(setq python-shell-interpreter "python3")
+
+;; (setq python-shell-interpreter "ipython3"
+;;       python-shell-interpreter-args "-i --simple-prompt")
+
+;; (setq python-shell-completion-native-enable t)
+;; (setq python-shell-completion-toggle t)
+
+(setq python-shell-completion-native-enable nil)
 
