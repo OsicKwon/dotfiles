@@ -1,3 +1,4 @@
+" vim: foldmethod=marker foldcolumn=3 ignorecase smartcase
 "        _
 "       (_)
 " __   ___ _ __ ___  _ __ ___
@@ -13,18 +14,24 @@
 "-----------------
 " INITIAL SETTING
 "-----------------
+"{{{
 set nocompatible
-set history=500  " default was 50 "
-set autoread
+set history=500                       " default was 50
+set autoread                          " preventing something that I just write
+au FocusGained,BufEnter * :silent! !  " -- reload when entering the buffer or gaining focus
+au FocusLost,WinLeave * :silent! w    " -- save when exiting the buffer or losing focus
+
 set clipboard=unnamed
-set ttimeoutlen=0 "elminating time delay to Normal mode
-set sidescroll=1 " 0, 1, 2, ....
+set ttimeoutlen=0                     " eliminating time delay to Normal mode
+set sidescroll=1                      " options: 0, 1, 2, ....
 " set virtualedit=all
 set modeline
 set modelines=10
 set spell
 " set colorcolumn=80,120
-set path+=**    " include sub directories when searching 2021-01-06
+set path+=**                  " include sub directories when searching 2021-01-06
+set updatetime=1000           " for gitgutter 2021-01-13
+"}}}
 
 
 "--------
@@ -37,7 +44,7 @@ set rnu "relativenumber
 "-----------
 " Autogroup
 "-----------
-
+"{{{
 augroup auto_set_number
     autocmd InsertEnter * set nornu
         \ | hi StatusLine guifg=yellow ctermfg=yellow 
@@ -48,6 +55,7 @@ augroup auto_set_number
         \ | hi CursorLine gui=underline guibg=NONE 
         \ | hi CursorLineNr guibg=black
 augroup END
+"}}}
 
 "--------
 " SEARCH
@@ -62,7 +70,7 @@ set nosmartcase
 " NETRW
 "-------
 let g:netrw_altv=1             " open split to the right
-let g:netrw_browse_split=4     " open in prior window
+" let g:netrw_browse_split=4     " open in prior window
 let g:netrw_liststyle=3        " treeview
 
 
@@ -86,12 +94,12 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "---------Themes------------
-" Plugin 'vim-airline/vim-airline'
-" Plugin 'vim-airline/vim-airline-themes'
-Plugin 'itchyny/lightline.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'itchyny/lightline.vim'
 " Plugin 'powerline/powerline'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
 
 "--------SnipMate-----------
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -134,10 +142,10 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+" Plugin 'plasticboy/vim-markdown'         " conflicted with `ge` command  2021-02-04
 " Plugin 'iamcco/markdown-preview.nvim'
 Plugin 'reedes/vim-wordy'
-Plugin 'dbmrq/vim-ditto'                " find repeated words
+Plugin 'dbmrq/vim-ditto'                 " find repeated words
 " Plugin 'reedes/vim-lexical'            " no idea
 " Plugin 'reedes/vim-pencil'             " no idea
 " Plugin 'xolox/vim-notes'
@@ -166,6 +174,7 @@ Plugin 'ervandew/supertab'
 Plugin 'nvie/vim-flake8'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'sirver/ultisnips'
+Plugin 'klen/python-mode'
 
 "------Other-plugins--------
 " Plugin 'itchyny/calendar.vim'
@@ -179,6 +188,31 @@ syntax on
 
 let g:searchfold_maxdepth=1
 let g:solarized_termcolors=256
+
+"----------------------------------------------
+ "MARKDOWN SUPPORT for 'plasticboy/vim-markdown'
+ "A Text file as a Markdown file 2020-11-21
+"----------------------------------------------
+"{{{
+augroup text_to_markdown
+    autocmd BufRead,BufNewFile *.txt set filetype=markdown
+    let g:vim_markdown_folding_disabled = 1
+    " foldmethod from 'expr' to 'manual'
+    " let g:vim_markdown_follow_anchor = 0  " to use vim `ge` command avoiding in markdown mode
+    let g:indentLine_concealcursor=""
+    let g:indentLine_conceallevel=2
+    "autocmd BufRead,BufNewFile *.txt set concealcursor="" | set conceallevel=2
+    " Default was 'inc' stands for insert, normal, and command
+    " except for visual by 'indentline' plugin
+    " When cursor is on a markdown syntax,
+    " it will be show its markdown grammar automatically
+augroup END
+
+" this is for markdown files only
+" foldmethod from 'expr' to 'manual'
+"}}}
+
+
 let g:airline_theme='tomorrow'  "default minimalist bubblegum raven angr
 " air-line
 let g:airline_powerline_fonts = 1
@@ -190,7 +224,7 @@ endif
 let g:airline_left_sep=''
 " the separator used on the right side
 let g:airline_right_sep=''
-
+"{{{
 " unicode symbols
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
@@ -213,7 +247,7 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
-
+"}}}
 set thesaurus+=~/.vim/thesaurus/mthesaur.txt
 set thesaurus+=~/.vim/thesaurus/test_thesaur.txt
 
@@ -228,27 +262,6 @@ if has("persistent_undo")
 endif
 set undodir=~/.undodir
 set undofile
-
-
-"----------------------------------------------
- "MARKDOWN SUPPORT for 'plasticboy/vim-markdown'
- "A Text file as a Markdown file 2020-11-21
-"----------------------------------------------
-augroup text_to_markdown
-    autocmd BufRead,BufNewFile *.txt set filetype=markdown
-    let g:vim_markdown_folding_disabled = 1
-    " foldmethod from 'expr' to 'manual'
-    let g:indentLine_concealcursor=""
-    let g:indentLine_conceallevel=2
-    "autocmd BufRead,BufNewFile *.txt set concealcursor="" | set conceallevel=2
-    " Default was 'inc' stands for insert, normal, and command
-    " except for visual by 'indentline' plugin
-    " When cursor is on a markdown syntax,
-    " it will be show its markdown grammar automatically
-augroup END
-
-" this is for markdown files only
-" foldmethod from 'expr' to 'manual'
 
 
 "--------
@@ -317,7 +330,7 @@ set bs=2 "back space
 "---------
 " TABLINE
 "---------
-"set showtabline=2
+set showtabline=2
 " let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -337,9 +350,9 @@ set cursorline
 " STATUSLINE
 "------------
 set ruler
-set laststatus=2
+set laststatus=0
 set showcmd
-
+"{{{
 " Status Line Custom
 let g:currentmode={
     \ 'n'  : 'Normal',
@@ -362,7 +375,7 @@ let g:currentmode={
     \ '!'  : 'Shell',
     \ 't'  : 'Terminal'
     \}
-
+"}}}
 function! GitBranch()
   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
@@ -384,13 +397,13 @@ function! FileSize()
         return "| " . (bytes / 1024) . "k"  
     endif  
 endfunction
-
+"{{{
 set statusline=
 " set statusline+=\               " blank
 " set statusline=\[%{mode()}\]    " current mode
-set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
-set statusline+=%#PmenuSel#
-set statusline+=%{StatuslineGit()}
+" set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
+" set statusline+=%#PmenuSel#
+" set statusline+=%{StatuslineGit()}
 " set statusline+=\               " blank
 set statusline+=%#Tabline#
 " set statusline+=\ Osic
@@ -422,6 +435,7 @@ set statusline+=\ \-\ Col:\ %c      " coloumn
 " set statusline+=%-7.(%l of %L [%p%%] - Col: %c%V%) "Current line, percentage of size, column,
 " required to know how to apply statuline grouping grammar 2020-12-31
 set statusline+=\             " blank
+"}}}
 
 "--------------
 " TEXT EDITING
@@ -461,6 +475,7 @@ vnoremap <space> :
 " --------
 "  Normal
 " --------
+"{{{
 nnoremap <up>    <nop>
 nnoremap <down>  <nop>
 nnoremap <left>  <nop>
@@ -481,7 +496,6 @@ nnoremap <right> <nop>
 " useful but not vimway
 " nnoremap <tab> <C-w>w
 " nnoremap <S-tab> <C-w>W
-
 
 "RESIZING WINDOWS but Not Vim Way
 " nnoremap <up>       :3wincmd +<CR>
@@ -504,15 +518,17 @@ nnoremap <C-l> :3wincmd ><cr>
 " nnoremap <silent><space>wk <C-w>k
 " nnoremap <silent><space>wl <C-w>l
 
-" Hard Mode
+" Hard Mode (Anti-Pattern)
 nnoremap hh <nop>
 nnoremap jj <nop>
 nnoremap kk <nop>
 nnoremap ll <nop>
+"}}}
 
 " --------
 "  Insert
 " --------
+"{{{
 inoremap <up>    <nop>
 inoremap <down>  <nop>
 inoremap <left>  <nop>
@@ -531,8 +547,8 @@ inoremap <C-d> <Delete>
 inoremap <C-e> <End>
 
 " Escape in many ways in Insert mode"
-inoremap <silent>jj <Esc>
-inoremap <silent>kk <Esc>
+" inoremap <silent>jj <Esc>
+" inoremap <silent>kk <Esc>
 " inoremap kj <Esc>
 " inoremap jk <Esc>
 
@@ -547,10 +563,12 @@ vnoremap <up> <nop>
 vnoremap <down> <nop>
 vnoremap <left> <nop>
 vnoremap <right> <nop>
+"}}}
 
 " ---------
 "  Command
 " ---------
+"{{{
 cnoremap <up> <nop>
 cnoremap <down> <nop>
 cnoremap <left> <nop>
@@ -565,11 +583,12 @@ cnoremap <C-d> <Delete>
 cnoremap <M-b> <S-Left>
 cnoremap <M-f> <S-Right>
 cnoremap <M-d> <S-Right><Delete>
-cnoremap <Esc>b <S-Left>
-cnoremap <Esc>f <S-Right>
-cnoremap <Esc>d <S-Right><Delete>
+" delay esc storke
+" cnoremap <Esc>b <S-Left>
+" cnoremap <Esc>f <S-Right>
+" cnoremap <Esc>d <S-Right><Delete>
 cnoremap <C-g> <C-c>
-
+"}}}
 
 "===========
 " FUNCTIONS
@@ -578,6 +597,8 @@ cnoremap <C-g> <C-c>
 "-----------
 " Draw Line
 "-----------
+
+"{{{
 function! UnderLine()
     normal yy
     normal p
@@ -586,7 +607,9 @@ function! UnderLine()
     " echo "underlined"
 endfunction
 command! UnderLine call UnderLine()
+"}}}
 
+"{{{
 function! DoubleLine()
     normal yy
     normal p
@@ -594,7 +617,9 @@ function! DoubleLine()
     noh
 endfunction
 command! DoubleLine call DoubleLine()
+"}}}
 
+"{{{
 function! SurroundLine()
     normal yy
     normal p
@@ -603,8 +628,11 @@ function! SurroundLine()
     noh
 endfunction
 command! SurroundLine call SurroundLine()
+"}}}
+
 
 function! HardMode()
+"{{{
     silent! nnoremap hh <nop>
     silent! nnoremap jj <nop>
     silent! nnoremap kk <nop>
@@ -615,38 +643,64 @@ function! HardMode()
     silent! noremap <down>  <nop>
     silent! noremap <left>  <nop>
     silent! noremap <right> <nop>
+    silent! unmap <tab>
+    silent! unmap <S-tab>
+    Limelight!
+    set scrolloff=0
+    set noignorecase
+    set nosmartcase
 endfunction
 command! HardMode call HardMode()
+"}}}
 
 " Disabled to prevent from overuse
-" function! EasyMode()
-"     silent! unmap hh
-"     silent! unmap jj
-"     silent! unmap kk
-"     silent! unmap ll
-"     silent! nnoremap j gj
-"     silent! nnoremap k gk
-" endfunction
-" command! EasyMode call EasyMode()
+function! EasyMode()
+"{{{
+    silent! unmap hh
+    silent! unmap jj
+    silent! unmap kk
+    silent! unmap ll
+    silent! nnoremap j gj
+    silent! nnoremap k gk
+    silent! unmap <tab>
+    Limelight!
+    set scrolloff=0
+    set ignorecase
+    set smartcase
+endfunction
+command! EasyMode call EasyMode()
+"}}}
 
-
-" function! SuperEasyMode()
-"     call EasyMode()
-"     silent! unmap   <up>
-"     silent! unmap   <down>
-"     silent! unmap   <left>
-"     silent! unmap   <right>
-"     silent! noremap <up> gk
-"     silent! noremap <down> gj
-" endfunction
-" command! SuperEasyMode call SuperEasyMode()
+function! SuperEasyMode()
+"{{{
+    call EasyMode()
+    silent! unmap   <up>
+    silent! unmap   <down>
+    silent! unmap   <left>
+    silent! unmap   <right>
+    silent! iunmap   <up>
+    silent! iunmap   <down>
+    silent! iunmap   <left>
+    silent! iunmap   <right>
+    silent! noremap <up> gk
+    silent! noremap <down> gj
+    silent! inoremap <up> gk
+    silent! inoremap <down> gj
+    nnoremap <tab> za
+    " nnoremap <tab> zo
+    " nnoremap <S-tab> zc
+    Limelight
+    set scrolloff=999
+endfunction
+command! SuperEasyMode call SuperEasyMode()
+"}}}
 
 
 "----------
 " Focusing
 "----------
 
-function! FocusMode()
+function! FocusMode()"{{{
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnFocusing')
@@ -665,24 +719,7 @@ function! FocusMode()
     set sidescrolloff=30
     set ignorecase
     set smartcase
-    " Prevent from overuse 
-    " call SuperEasyMode()
-    silent! unmap hh
-    silent! unmap jj
-    silent! unmap kk
-    silent! unmap ll
-    silent! nnoremap j gj
-    silent! nnoremap k gk
-    silent! unmap   <up>
-    silent! unmap   <down>
-    silent! unmap   <left>
-    silent! unmap   <right>
-    silent! iunmap   <up>
-    silent! iunmap   <down>
-    silent! iunmap   <left>
-    silent! iunmap   <right>
-    silent! noremap <up> gk
-    silent! noremap <down> gj
+    call SuperEasyMode()
     " set focusing variable
     let g:OnFocusing=1
     if has('gui_running')
@@ -694,9 +731,9 @@ function! FocusMode()
         silent !tmux set status off
     endif
 endfunction
-command! FocusMode call FocusMode()
+command! FocusMode call FocusMode()"}}}
 
-function! DarkFocusMode()
+function! DarkFocusMode()"{{{
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnFocusing')
@@ -715,14 +752,7 @@ function! DarkFocusMode()
     set sidescrolloff=30
     set ignorecase
     set smartcase
-    " Prevent from overuse Easy mode in normal
-    " call EasyMode()
-    silent! unmap hh
-    silent! unmap jj
-    silent! unmap kk
-    silent! unmap ll
-    silent! nnoremap j gj
-    silent! nnoremap k gk
+    call EasyMode()
     " set variable
     let g:OnFocusing=1
     if has('gui_running')
@@ -734,9 +764,9 @@ function! DarkFocusMode()
         silent !tmux set status off
     endif
 endfunction
-command! DarkFocusMode call DarkFocusMode()
+command! DarkFocusMode call DarkFocusMode()"}}}
 
-function! EditMode()
+function! EditMode()"{{{
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnEditing')
@@ -753,14 +783,7 @@ function! EditMode()
     autocmd InsertLeave * :set norelativenumber
     set ignorecase
     set smartcase
-    " Prevent from overuse Easy mode in normal
-    " call EasyMode()
-    silent! unmap hh
-    silent! unmap jj
-    silent! unmap kk
-    silent! unmap ll
-    silent! nnoremap j gj
-    silent! nnoremap k gk
+    call EasyMode()
     " set variable
     let g:OnEditing=1
     if has('gui_running')
@@ -773,9 +796,10 @@ function! EditMode()
     endif
     " normal zz
 endfunction
-command! EditMode call EditMode()
+command! EditMode call EditMode()"}}}
 
 function! UnFocusMode()
+"{{{
     Goyo!
     Limelight!
     silent! unlet g:OnFocusing
@@ -786,6 +810,7 @@ function! UnFocusMode()
     set noignorecase
     set nosmartcase
     syntax enable  " redraw markdown highlighting
+    " syntax on
     call HardMode()
     if has('gui_running')
         " set guifont=Menlo-Regular:h15
@@ -806,18 +831,14 @@ function! UnFocusMode()
     elseif exists('$TMUX')
         silent !tmux set status on
     endif
-    " disable arrows
-    silent! map <up>    <nop>
-    silent! map <down>  <nop>
-    silent! map <left>  <nop>
-    silent! map <right> <nop>
 endfunction
 command! UnFocusMode call UnFocusMode()
+"}}}
 
 " ==========================
 " Debugging & Test Function"
 " ==========================
-
+"{{{
 " --------------
 " argument test"
 " --------------
@@ -850,7 +871,7 @@ function! TestFunction2()
     put A  " same as "AP
 endfunction
 command! T2 call TestFunction2()
-
+"}}}
 
 
 " [FYI] checking terminal mode
@@ -861,7 +882,7 @@ command! T2 call TestFunction2()
 " GUI
 " ---
 
-if has('gui_running')
+if has('gui_running')"{{{
     set guioptions=     " disabled mac style tab"
     set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
     set linespace=1
@@ -875,9 +896,9 @@ if has('gui_running')
     highlight Visual guifg=bg guibg=DarkGreen gui=NONE
     highlight CursorLineNr guibg=black guifg=white
     highlight CursorLine gui=underline guibg=NONE
-    let g:airline_theme='term'  "default raven luna monochrome powerlineish term
+    let g:airline_theme='luna'  "default raven luna monochrome powerlineish term transparent
     " hi EasyMotionTarget guifg=red guibg=yellow
-endif
+endif"}}}
 
 
 "========================================
@@ -885,7 +906,7 @@ endif
 " > could be, 'a', 'ab', 'A', 'AB', etc
 " > The Less The Better
 "========================================
-"let mapleader = ','
+" let mapleader = ','
 
 " delete all contents for whole ine
 " nnoremap <leader>d :normal ggVGD<cr>i
@@ -900,10 +921,10 @@ nnoremap <silent> <leader>e :EditMode<cr>
 nnoremap <silent> <leader>q :UnFocusMode<cr>
 
 "------------
-" Utilitises
+" Utilities
 "------------
-nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
-nnoremap <silent> <leader>t  :TagbarToggle<cr>
+" nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
+" nnoremap <silent> <leader>t  :TagbarToggle<cr>
 " nnoremap <silent> <leader>b  :bro old<cr>
 " maximize window size -> insted, vanila Vim: c-w _ / c-w
 " nnoremap <silent> <leader>mw  :vert resize 999<cr>
@@ -937,7 +958,7 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 "------------
 " IncSearch
 "------------
-" You can use other keymappings like <C-l> instead of <CR> if you want to
+" You can use other keymappings like <C-l> instead of <CR> if you want to{{{
 " use these mappings as default search and sometimes want to move cursor with
 " EasyMotion.
 
@@ -965,8 +986,8 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 "   \   'is_stay': 1
 "   \ }), get(a:, 1, {}))
 " endfunction
-" noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
-
+"" noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+" **** Occured Space Delay ****}}}
 
 "------------------
 " Command Shortcut
@@ -979,6 +1000,9 @@ command MD set filetype=markdown
 " command TX set filetype=text
 command PD :w | set filetype=pandoc | Pandoc html
 command WH windo wincmd H
+command HD call HardMode() | echo "HardMode Activated"
+command EA call EasyMode() | echo "EasyMode Activated"
+command SE call SuperEasyMode() | echo "SuperEasyMode Activated"
 
 
 " --------------"
@@ -1029,78 +1053,3 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 "  5 -> blinking vertical bar
 "  6 -> solid vertical bar
 
-
-" test ------------------------------------------------
-"
-" https://vim.fandom.com/wiki/Word_frequency_statistics_for_a_file
-" Sorts numbers in ascending order.
-" Examples:
-" [2, 3, 1, 11, 2] --> [1, 2, 2, 3, 11]
-" ['2', '1', '10','-1'] --> [-1, 1, 2, 10]
-function! Sorted(list)
-  " Make sure the list consists of numbers (and not strings)
-  " This also ensures that the original list is not modified
-  let nrs = ToNrs(a:list)
-  let sortedList = sort(nrs, "NaturalOrder")
-  echo sortedList
-  return sortedList
-endfunction
-
-" Comparator function for natural ordering of numbers
-function! NaturalOrder(firstNr, secondNr)
-  if a:firstNr < a:secondNr
-    return -1
-  elseif a:firstNr > a:secondNr
-    return 1
-  else
-    return 0
-  endif
-endfunction
-
-" Coerces every element of a list to a number. Returns a new list without
-" modifying the original list.
-function! ToNrs(list)
-  let nrs = []
-  for elem in a:list
-    let nr = 0 + elem
-    call add(nrs, nr)
-  endfor
-
-  return nrs
-endfunction
-
-function! WordFrequency() range
-  " Words are separated by whitespace or punctuation characters
-  let wordSeparators = '[[:blank:][:punct:]]\+'
-  let allWords = split(join(getline(a:firstline, a:lastline)), wordSeparators)
-  let wordToCount = {}
-  for word in allWords
-    let wordToCount[word] = get(wordToCount, word, 0) + 1
-  endfor
-
-  let countToWords = {}
-  for [word,cnt] in items(wordToCount)
-    let words = get(countToWords,cnt,"")
-    " Append this word to the other words that occur as many times in the text
-    let countToWords[cnt] = words . " " . word
-  endfor
-
-  " Create a new buffer to show the results in
-  new
-  setlocal buftype=nofile bufhidden=hide noswapfile tabstop=20
-
-  " List of word counts in ascending order
-  let sortedWordCounts = Sorted(keys(countToWords))
-
-  call append("$", "count \t words")
-  call append("$", "--------------------------")
-  " Show the most frequent words first -> Descending order
-  for cnt in reverse(sortedWordCounts)
-    let words = countToWords[cnt]
-    call append("$", cnt . "\t" . words)
-  endfor
-endfunction
-
-command! -range=% WordFrequency <line1>,<line2>call WordFrequency()
-
-"----------------------------------------"
