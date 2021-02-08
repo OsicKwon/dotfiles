@@ -58,7 +58,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package centered-window csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -85,11 +85,6 @@
 (global-set-key (kbd "<C-S-down>")   'buf-move-down)
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
-
-
-
-;; built-in org-mouse turn on
-(require `org-mouse)
 
 ;; display date in modeline 2020-12-07
 (setq display-time-day-and-date t)
@@ -140,6 +135,7 @@
 ;; I think it's a kind of auto-completion
 (add-hook 'after-init-hook 'global-company-mode)
 
+
 ;; auto complete 2021-01-16
 ;; https://www.youtube.com/watch?v=HTUE03LnaXA
 (require 'auto-complete)
@@ -152,10 +148,14 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 
+
 ;; PLUG-IN: exec-path-from-shell 2020-12-08
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
+
+;; which-keys
+(which-key-mode)                        ;; which-key package 2021-01-28
 
 
 ;; PLUG-IN: deft -> do not use: Korean issue, change filename forcely 2020-12-08
@@ -181,7 +181,7 @@
 ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "gray")))
 ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color "black")))
 (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color original-foreground)))
-(add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background original-background :underline t)))
+(add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background original-background :background "lightgray")))
 
 (add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color original-background)))
 (add-hook 'evil-normal-state-exit-hook (lambda () (set-foreground-color original-foreground)))
@@ -228,7 +228,7 @@
 ;; evil cursor in modes 2021-02-06
 ;; https://github.com/hlissner/doom-emacs/issues/1848
 ;; http://fnwiya.hatenablog.com/entry/2016/01/12/213149 
-(setq evil-normal-state-cursor '(box "red")
+(setq evil-normal-state-cursor '(box "black")
       ;; evil-insert-state-cursor '(bar "black")
       ;; evil-visual-state-cursor '(hollow "black")
       evil-emacs-state-cursor '(box "black"))
@@ -241,22 +241,27 @@
 
 ;; Color the evil tag - colors taken from spaceline
 ;; https://github.com/Malabarba/smart-mode-line/issues/195
-(setq evil-normal-state-tag   (propertize " NORMAL " 'face '((:background "black"         :foreground "white")))
+(setq evil-normal-state-tag   (propertize " NORMAL " 'face '((:background "black"         :foreground "white" :height 1.2)))
       evil-emacs-state-tag    (propertize " <E> " 'face '((:background 'nil               :foreground "black")))
-      evil-insert-state-tag   (propertize " INSERT " 'face '((:background "lightyellow"   :foreground "black")))
-      evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "chocolate"    :foreground "black")))
+      evil-insert-state-tag   (propertize " INSERT " 'face '((:background "lightyellow"   :foreground "black" :height 1.2)))
+      evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "chocolate"    :foreground "black" :height 1.2)))
       evil-motion-state-tag   (propertize " <M> " 'face '((:background "plum3"            :foreground "black")))
-      evil-visual-state-tag   (propertize " VISUAL " 'face '((:background "darkgray"      :foreground "black")))
+      evil-visual-state-tag   (propertize " VISUAL " 'face '((:background "darkgray"      :foreground "black" :height 1.2)))
       evil-operator-state-tag (propertize " <O> " 'face '((:background "sandy brown"      :foreground "black"))))
 
 ;; evil key binding
 (define-key evil-normal-state-map (kbd "SPC") 'evil-ex)
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
+
 
 ;; evil undo 2021-02-06
 ;; https://emacs.stackexchange.com/questions/3358/how-can-i-get-undo-behavior-in-evil-similar-to-vims
+(setq evil-want-fine-undo 't)
 (setq evil-want-fine-undo 'fine)
+;; (setq evil-undo-system 'undo-tree) ;; not working tested 2021-02-07
 
 ;; evil-surround package 2021-01-29
 (global-evil-surround-mode 1)
@@ -323,9 +328,17 @@
 ;; ORG-MODE
 ;;===============================================================
 
+
+;; built-in org-mouse turn on
+(require `org-mouse)
+
 (setq org-log-done 'time)                               ;; Show Closed(DONE) date in ORG-mode
 (global-set-key "\C-ca" 'org-agenda)                    ;; Org Agenda View shortcut
 
+
+(add-to-list 'org-emphasis-alist
+             '("~" (:foreground "red" :weight bold)
+               ))
 
 ;; === ORG-BABEL ===
 
@@ -372,6 +385,42 @@
  `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)"
     1 'org-checkbox-done-text prepend))
  'append)
+
+
+;; -------------------------------------------------------------------
+;; [Test] ORG Direct Insert Online(Web) Image 2021-02-07
+;; https://emacs.stackexchange.com/questions/42281/org-mode-is-it-possible-to-display-online-images
+;; -------------------------------------------------------------------
+
+;; And again we have a use-case for image data not stored on harddisk.
+;; (The other two use-cases are base64 encoded images in org buffers and displaying previews of youtube videos.)
+
+;; Get org-yt and paste the following elisp code into your init-file.
+;; After evaluating your init-file you can use links analog to the example:
+
+;; [[imghttp://tn-home.de/Pic/tn-home.png]]
+
+;; (require 'org-yt)
+
+;; (defun org-image-link (protocol link _description)
+;;   "Interpret LINK as base64-encoded image data."
+;;   (cl-assert (string-match "\\`img" protocol) nil
+;;              "Expected protocol type starting with img")
+;;   (let ((buf (url-retrieve-synchronously (concat (substring protocol 3) ":" link))))
+;;     (cl-assert buf nil
+;;                "Download of image \"%s\" failed." link)
+;;     (with-current-buffer buf
+;;       (goto-char (point-min))
+;;       (re-search-forward "\r?\n\r?\n")
+;;       (buffer-substring-no-properties (point) (point-max)))))
+
+;; (org-link-set-parameters
+;;  "imghttp"
+;;  :image-data-fun #'org-image-link)
+
+;; (org-link-set-parameters
+;;  "imghttps"
+;;  :image-data-fun #'org-image-link)
 
 
 ;;=========================
@@ -451,8 +500,6 @@
 ;      org-fontify-quote-and-verse-blocks t)
 
 
-(which-key-mode)                        ;; which-key package 2021-01-28
-
 ;;==============================================================
 ;; Python Development - Since 2021-01-06
 ;;==============================================================
@@ -487,9 +534,6 @@
 ;; (setq python-shell-completion-toggle t)
 
 (setq python-shell-completion-native-enable nil)
-
-(when (executable-find "ipython")
-  (setq python-shell-interpreter "ipython"))
 
 
 ;; ============== TEST =================
