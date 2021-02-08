@@ -181,7 +181,7 @@
 ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "gray")))
 ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color "black")))
 (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color original-foreground)))
-(add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background original-background :underline t)))
+(add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :foreground "black" :background "lightgray")))
 
 (add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color original-background)))
 (add-hook 'evil-normal-state-exit-hook (lambda () (set-foreground-color original-foreground)))
@@ -190,7 +190,7 @@
 
 ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
 (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
-(add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightyellow" :underline nil)))
+(add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightyellow")))
 ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
 ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-face-attribute hl-line-face nil :weight 'normal)))
 (add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color original-foreground)))
@@ -229,10 +229,10 @@
 ;; evil cursor in modes 2021-02-06
 ;; https://github.com/hlissner/doom-emacs/issues/1848
 ;; http://fnwiya.hatenablog.com/entry/2016/01/12/213149 
-(setq evil-normal-state-cursor '(box "black")
-      ;; evil-insert-state-cursor '(bar "black")
-      ;; evil-visual-state-cursor '(hollow "black")
-      evil-emacs-state-cursor '(box "black"))
+;; (setq evil-normal-state-cursor '(box "black")
+;;       evil-insert-state-cursor '(bar "black")
+;;       evil-visual-state-cursor '(hollow "black")
+;;       evil-emacs-state-cursor '(box "black"))
 
 ;; https://emacs.stackexchange.com/questions/30582/how-do-i-change-the-mode-indicators-for-evil-mode-in-the-spaceline-mode-line-pac
 (setq evil-normal-state-tag "NORMAL")
@@ -256,6 +256,11 @@
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
+
+;; forward-sentence is based on the sentence-end variable
+;; https://stackoverflow.com/questions/20257022/evil-emacs-mode-sentence-motions-and-other-questions
+(setq sentence-end "[\\.\\?\\!] +") ;; . or ? or ! followed by spaces.
+(define-key evil-normal-state-map ")" 'forward-sentence)
 
 
 ;; evil undo 2021-02-06
@@ -338,7 +343,7 @@
 
 
 (add-to-list 'org-emphasis-alist
-             '("~" (:foreground "red" :weight bold)
+             '("~" (:foreground "red")
                ))
 
 ;; === ORG-BABEL ===
