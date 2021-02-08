@@ -181,7 +181,7 @@
 ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "gray")))
 ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color "black")))
 (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color original-foreground)))
-(add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background original-background :background "lightgray")))
+(add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background original-background :underline t)))
 
 (add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color original-background)))
 (add-hook 'evil-normal-state-exit-hook (lambda () (set-foreground-color original-foreground)))
@@ -192,6 +192,7 @@
 (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
 (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightyellow" :underline nil)))
 ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
+;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-face-attribute hl-line-face nil :weight 'normal)))
 (add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color original-foreground)))
 
 ;; (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
@@ -241,12 +242,12 @@
 
 ;; Color the evil tag - colors taken from spaceline
 ;; https://github.com/Malabarba/smart-mode-line/issues/195
-(setq evil-normal-state-tag   (propertize " NORMAL " 'face '((:background "black"         :foreground "white" :height 1.2)))
+(setq evil-normal-state-tag   (propertize " NORMAL " 'face '((:background "black"         :foreground "white")))
       evil-emacs-state-tag    (propertize " <E> " 'face '((:background 'nil               :foreground "black")))
-      evil-insert-state-tag   (propertize " INSERT " 'face '((:background "lightyellow"   :foreground "black" :height 1.2)))
-      evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "chocolate"    :foreground "black" :height 1.2)))
+      evil-insert-state-tag   (propertize " INSERT " 'face '((:background "lightyellow"   :foreground "black")))
+      evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "chocolate"    :foreground "black")))
       evil-motion-state-tag   (propertize " <M> " 'face '((:background "plum3"            :foreground "black")))
-      evil-visual-state-tag   (propertize " VISUAL " 'face '((:background "darkgray"      :foreground "black" :height 1.2)))
+      evil-visual-state-tag   (propertize " VISUAL " 'face '((:background "darkgray"      :foreground "black")))
       evil-operator-state-tag (propertize " <O> " 'face '((:background "sandy brown"      :foreground "black"))))
 
 ;; evil key binding
