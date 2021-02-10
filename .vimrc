@@ -903,7 +903,7 @@ endif"}}}
 
 
 "========================================
-" LEADER KEY SETTING
+" LEADER KEY
 " > could be, 'a', 'ab', 'A', 'AB', etc
 " > The Less The Better
 "========================================

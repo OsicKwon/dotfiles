@@ -68,6 +68,7 @@
  '(org-block ((t (:background "#f1f6f9" :extend t))))
  '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#f0f0f0" :extend t))))
  '(org-block-end-line ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#f0f0f0" :extend t))))
+ '(org-document-title ((t (:foreground "midnight blue" :weight bold :height 1.4))))
  '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
  '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
@@ -181,7 +182,25 @@
 ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "gray")))
 ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color "black")))
 (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color original-foreground)))
-(add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :foreground "black" :background "lightgray")))
+
+
+(if (display-graphic-p)
+    (progn
+    ;; if graphic (GUI)
+      (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightgray")))
+    )
+    ;; else (optional)
+    (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :foreground "black" :background "lightgray")))
+)
+
+;; [For Reference] GUI detection ~ more readable :)
+;;
+;; (when (display-graphic-p)
+;;     (your)
+;;     (code))
+;;
+;; https://stackoverflow.com/questions/5795451/how-to-detect-that-emacs-is-in-terminal-mode
+;; 2021-02-10
 
 (add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color original-background)))
 (add-hook 'evil-normal-state-exit-hook (lambda () (set-foreground-color original-foreground)))
@@ -271,6 +290,31 @@
 
 ;; evil-surround package 2021-01-29
 (global-evil-surround-mode 1)
+
+;; evil-surround add pairs 2021-02-08
+;; https://github.com/emacs-evil/evil-surround
+;; this macro was copied from here: https://stackoverflow.com/a/22418983/4921402
+(defmacro define-and-bind-quoted-text-object (name key start-regex end-regex)
+  (let ((inner-name (make-symbol (concat "evil-inner-" name)))
+        (outer-name (make-symbol (concat "evil-a-" name))))
+    `(progn
+       (evil-define-text-object ,inner-name (count &optional beg end type)
+         (evil-select-paren ,start-regex ,end-regex beg end type count nil))
+       (evil-define-text-object ,outer-name (count &optional beg end type)
+         (evil-select-paren ,start-regex ,end-regex beg end type count t))
+       (define-key evil-inner-text-objects-map ,key #',inner-name)
+       (define-key evil-outer-text-objects-map ,key #',outer-name))))
+
+(define-and-bind-quoted-text-object "pipe" "|" "|" "|")
+(define-and-bind-quoted-text-object "slash" "/" "/" "/")
+(define-and-bind-quoted-text-object "underscore" "_" "_" "_")
+(define-and-bind-quoted-text-object "code" "~" "~" "~")
+(define-and-bind-quoted-text-object "verbatim" "=" "=" "=")
+(define-and-bind-quoted-text-object "strike_through" "+" "+" "+")
+(define-and-bind-quoted-text-object "asterisk" "*" "*" "*")
+(define-and-bind-quoted-text-object "dollar" "$" "\\$" "\\$") ;; sometimes your have to escape the regex
+
+
 
 ;;----------------------------------------------------------------
 ;; ACE JUMP MODE
