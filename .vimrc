@@ -1,4 +1,4 @@
-" vim: foldmethod=marker foldcolumn=3 ignorecase smartcase
+" vim: foldmethod=marker foldcolumn=2 ignorecase smartcase
 "        _
 "       (_)
 " __   ___ _ __ ___  _ __ ___
@@ -306,6 +306,7 @@ colorscheme papercolor
 " LIGHTLINE THEME
 "-----------------
 let g:lightline = {
+      \ 'colorscheme': 'default',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -350,7 +351,7 @@ set cursorline
 " STATUSLINE
 "------------
 set ruler
-set laststatus=0
+set laststatus=2
 set showcmd
 "{{{
 " Status Line Custom
@@ -684,8 +685,8 @@ function! SuperEasyMode()
     silent! iunmap   <right>
     silent! noremap <up> gk
     silent! noremap <down> gj
-    silent! inoremap <up> gk
-    silent! inoremap <down> gj
+    silent! inoremap <up> <c-\><c-o>gk
+    silent! inoremap <down> <c-\><c-o>gj
     nnoremap <tab> za
     " nnoremap <tab> zo
     " nnoremap <S-tab> zc
@@ -892,11 +893,11 @@ if has('gui_running')"{{{
     colorscheme basic-light
     " highlight LineNr guibg=white
     " highlight SignColumn guibg='#f0f0f0'  " for gitgutter
-    " highlight FoldColumn guibg=white  " for foldcolumn
-    highlight Visual guifg=bg guibg=DarkGreen gui=NONE
+    " highlight FoldColumn guibg=white      " for foldcolumn
+    highlight Visual guifg=black guibg=Cyan gui=NONE
     highlight CursorLineNr guibg=black guifg=white
     highlight CursorLine gui=underline guibg=NONE
-    let g:airline_theme='luna'  "default raven luna monochrome powerlineish term transparent
+    let g:airline_theme='serene'  "default raven serene luna monochrome powerlineish term transparent distinguished
     " hi EasyMotionTarget guifg=red guibg=yellow
 endif"}}}
 
@@ -1000,7 +1001,7 @@ command MD set filetype=markdown
 " command TX set filetype=text
 command PD :w | set filetype=pandoc | Pandoc html
 command WH windo wincmd H
-command HD call HardMode() | echo "HardMode Activated"
+command HA call HardMode() | echo "HardMode Activated"
 command EA call EasyMode() | echo "EasyMode Activated"
 command SE call SuperEasyMode() | echo "SuperEasyMode Activated"
 
