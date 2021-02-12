@@ -45,8 +45,9 @@
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
  '(custom-enabled-themes nil)
  '(doc-view-continuous t)
+ '(fringe-mode 0 nil (fringe))
  '(org-agenda-files
-   '("~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/infox-notex-Jiwoo.txt" "~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-export-backends '(ascii beamer html icalendar latex odt))
  '(org-fontify-done-headline t)
  '(org-fontify-quote-and-verse-blocks t)
@@ -180,6 +181,7 @@
 (setq original-foreground (face-attribute 'default :foreground))
 
 ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "gray")))
+;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
 ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color "black")))
 (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color original-foreground)))
 
@@ -187,11 +189,43 @@
 (if (display-graphic-p)
     (progn
     ;; if graphic (GUI)
-      (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightgray")))
+      (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
+      ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "lightgray")))
+      (add-hook 'evil-operator-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
+      (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :background original-background)))
+      ;; (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightgray")))
+      ;; (add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color original-background)))
+      ;; (add-hook 'evil-normal-state-exit-hook (lambda () (set-foreground-color original-foreground)))
+
+      ;; (add-hook 'evil-operator-state-entry-hook (lambda () (set-background-color "gray")))
+
+      (add-hook 'evil-insert-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightyellow")))
+      ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
+      ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
+      ;; (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightyellow")))
+      ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
+      ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-face-attribute hl-line-face nil :weight 'normal)))
+      ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color original-foreground)))
+
+      (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
+      ;; (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
+      ;; (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color original-background)))
+
+      ;; (add-hook 'evil-replace-state-entry-hook (lambda () (set-background-color "lightyellow")))
+      ;; (add-hook 'evil-replace-state-entry-hook (lambda () (set-foreground-color "black")))
+      ;; (add-hook 'evil-replace-state-exit-hook (lambda () (set-background-color original-background)))
+      ;; (add-hook 'evil-replace-state-exit-hook (lambda () (set-foreground-color original-foreground)))
+      (add-hook 'evil-emacs-state-entry-hook (lambda () (face-remap-add-relative 'default :background original-background)))
+      (add-hook 'evil-emacs-state-entry-hook (lambda () (face-remap-add-relative 'default :foreground original-foreground)))
     )
     ;; else (optional)
-    (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :foreground "black" :background "lightgray")))
+    (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :underline t :background original-background)))
+    (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :underline t :overline 't :background "black")))
+    (add-hook 'evil-emacs-state-entry-hook (lambda () (set-background-color original-background)))
+    (add-hook 'evil-emacs-state-entry-hook (lambda () (set-foreground-color original-foreground)))
+    (add-hook 'evil-emacs-state-entry-hook (lambda () (hl-line-mode 0)))
 )
+
 
 ;; [For Reference] GUI detection ~ more readable :)
 ;;
@@ -201,30 +235,6 @@
 ;;
 ;; https://stackoverflow.com/questions/5795451/how-to-detect-that-emacs-is-in-terminal-mode
 ;; 2021-02-10
-
-(add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color original-background)))
-(add-hook 'evil-normal-state-exit-hook (lambda () (set-foreground-color original-foreground)))
-
-;; (add-hook 'evil-operator-state-entry-hook (lambda () (set-background-color "gray")))
-
-;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
-(add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
-(add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightyellow")))
-;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
-;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-face-attribute hl-line-face nil :weight 'normal)))
-(add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color original-foreground)))
-
-;; (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
-;; (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color original-background)))
-
-(add-hook 'evil-replace-state-entry-hook (lambda () (set-background-color "lightyellow")))
-(add-hook 'evil-replace-state-entry-hook (lambda () (set-foreground-color "black")))
-(add-hook 'evil-replace-state-exit-hook (lambda () (set-background-color original-background)))
-(add-hook 'evil-replace-state-exit-hook (lambda () (set-foreground-color original-foreground)))
-
-(add-hook 'evil-emacs-state-entry-hook (lambda () (set-background-color original-background)))
-(add-hook 'evil-emacs-state-entry-hook (lambda () (set-foreground-color original-foreground)))
-(add-hook 'evil-emacs-state-entry-hook (lambda () (hl-line-mode 0)))
 
 
 ;; (defun highlight-selected-window ()
@@ -373,6 +383,13 @@
 ;; once install package of 'helm-projectile', you can also use 'helm-projectile-ag'
 ;; or install 'helm-ag' package to use same function
 ;; however, required intall '(sudo) port install the_silver_searcher' first (the_silver_searcher = ag)
+
+
+;; Olivetti 2021-02-11
+;; to remove boundry -> '(fringe-mode 0 nil (fringe)) in `(custom-set-variables` lines in front of this file. 
+(setq olivetti-body-width 95)
+(setq olivetti-minimum-body-width 80)
+
 
 ;;===============================================================
 ;; ORG-MODE
@@ -525,7 +542,8 @@
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c M-x") 'smex-update)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+;; confilicted with magit commit command 'C-c C-c' 2021-02-12
+;; (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 
 ;; Git-Gutter 2020-12-18
