@@ -32,7 +32,9 @@
 (setq undo-tree-visualizer-timestamps t)
 (setq undo-tree-visualizer-diff t)
 (setq undo-tree-auto-save-history t)
-(global-auto-revert-mode t)                                  ;; Auto Refresh
+;; (setq auto-save-visited-mode t)                              ;; Auto Save   
+;; (setq auto-save-visited-interval 1)                          ;; Auto Save - Interval
+;; (global-auto-revert-mode t)                                  ;; Auto Refresh
 (global-visual-line-mode 1)                                  ;; Visual Line Mode On
 ;; (global-display-line-numbers-mode)                           ;; Display Line Numbers On
 
@@ -280,13 +282,13 @@
 
 ;; Color the evil tag - colors taken from spaceline
 ;; https://github.com/Malabarba/smart-mode-line/issues/195
-(setq evil-normal-state-tag   (propertize " NORMAL " 'face '((:background "black"         :foreground "white")))
-      evil-emacs-state-tag    (propertize " <E> " 'face '((:background 'nil               :foreground "black")))
-      evil-insert-state-tag   (propertize " INSERT " 'face '((:background "lightyellow"   :foreground "black")))
-      evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "chocolate"    :foreground "black")))
-      evil-motion-state-tag   (propertize " <M> " 'face '((:background "plum3"            :foreground "black")))
-      evil-visual-state-tag   (propertize " VISUAL " 'face '((:background "darkgray"      :foreground "black")))
-      evil-operator-state-tag (propertize " <O> " 'face '((:background "sandy brown"      :foreground "black"))))
+(setq evil-normal-state-tag   (propertize " NORMAL " 'face '((:background "black"          :foreground "white")))
+      evil-emacs-state-tag    (propertize " <E> " 'face '((:background "lightgray"         :foreground "black")))
+      evil-insert-state-tag   (propertize " INSERT " 'face '((:background "lightyellow"    :foreground "black")))
+      evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "chocolate"     :foreground "black")))
+      evil-motion-state-tag   (propertize " <M> " 'face '((:background "plum3"             :foreground "black")))
+      evil-visual-state-tag   (propertize " VISUAL " 'face '((:background "darkgray"       :foreground "black")))
+      evil-operator-state-tag (propertize " <O> " 'face '((:background "sandy brown"       :foreground "black"))))
 
 ;; evil key binding
 (define-key evil-normal-state-map (kbd "SPC") 'evil-ex)
