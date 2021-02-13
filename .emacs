@@ -27,6 +27,11 @@
 (setq inhibit-startup-screen t)                              ;; No welcome startup screen
 (setq initial-scratch-message "")                            ;; No scratch message 2020-10-10
 (add-to-list 'default-frame-alist '(fullscreen . maximized)) ;; Maximize GUI window
+
+(global-undo-tree-mode)                                      ;; Undo-Tree Package 2021-02-13
+(setq undo-tree-visualizer-timestamps t)
+(setq undo-tree-visualizer-diff t)
+(setq undo-tree-auto-save-history t)
 (global-auto-revert-mode t)                                  ;; Auto Refresh
 (global-visual-line-mode 1)                                  ;; Visual Line Mode On
 ;; (global-display-line-numbers-mode)                           ;; Display Line Numbers On
@@ -90,8 +95,11 @@
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
 ;; display date in modeline 2020-12-07
-(setq display-time-day-and-date t)
-(display-time)
+;; (setq display-time-day-and-date t)
+;; (display-time)
+(setq display-time-format "[%Y-%m-%d %H:%M]")
+(display-time-mode 1)
+
 
 ;; display file size in modeline 2021-01-05
 (size-indication-mode t)
