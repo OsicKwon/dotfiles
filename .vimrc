@@ -18,8 +18,8 @@
 set nocompatible
 set history=500                       " default was 50
 set autoread                          " preventing something that I just write
-au FocusGained,BufEnter * :silent! !  " -- reload when entering the buffer or gaining focus
-au FocusLost,WinLeave * :silent! w    " -- save when exiting the buffer or losing focus
+" au FocusGained,BufEnter * :silent! !  " -- reload when entering the buffer or gaining focus
+" au FocusLost,WinLeave * :silent! w    " -- save when exiting the buffer or losing focus
 
 set clipboard=unnamed
 set ttimeoutlen=0                     " eliminating time delay to Normal mode
@@ -47,12 +47,12 @@ set rnu "relativenumber
 "{{{
 augroup auto_set_number
     autocmd InsertEnter * set nornu
-        \ | hi StatusLine guifg=yellow ctermfg=yellow 
-        \ | hi CursorLine gui=bold guibg=lightyellow 
+        \ | hi StatusLine guifg=yellow ctermfg=yellow
+        \ | hi CursorLine gui=bold guibg=lightyellow
         \ | hi CursorLineNr guibg=red
-    autocmd InsertLeave * set rnu  
-        \ | hi StatusLine guifg=#cfd8dc ctermfg=66 
-        \ | hi CursorLine gui=underline guibg=NONE 
+    autocmd InsertLeave * set rnu
+        \ | hi StatusLine guifg=#cfd8dc ctermfg=66
+        \ | hi CursorLine gui=underline guibg=NONE
         \ | hi CursorLineNr guibg=black
 augroup END
 "}}}
@@ -386,17 +386,17 @@ function! StatuslineGit()
   return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 endfunction
 
-function! FileSize()  
-    let bytes = getfsize(expand("%:p"))  
-    if bytes <= 0  
-        return ""  
-    endif  
-    if bytes < 1024  
-        " return bytes  
-        return "| " . (bytes) . "b"  
-    else  
-        return "| " . (bytes / 1024) . "k"  
-    endif  
+function! FileSize()
+    let bytes = getfsize(expand("%:p"))
+    if bytes <= 0
+        return ""
+    endif
+    if bytes < 1024
+        " return bytes
+        return "| " . (bytes) . "b"
+    else
+        return "| " . (bytes / 1024) . "k"
+    endif
 endfunction
 "{{{
 set statusline=

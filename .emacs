@@ -15,7 +15,21 @@
     (progn
       (tool-bar-mode -1)
       (menu-bar-mode -1)
-      (scroll-bar-mode -1)))
+      (scroll-bar-mode -1)
+    )
+ )
+
+;; Spell Check 2021-02-14
+(when (display-graphic-p)
+      (progn
+        (flyspell-mode +1)
+        (add-hook 'text-mode-hook 'turn-on-flyspell)
+        (add-hook 'org-mode-hook 'turn-on-flyspell)
+        (add-hook 'markdown-mode-hook 'turn-on-flyspell)
+        (add-hook 'latex-mode-hook 'turn-on-flyspell)
+        (add-hook 'LaTeX-mode-hook 'turn-on-flyspell)  ;; for AUCTeX
+      )
+)
 
 ;; Recent opened file history 2020-12-31
 (require 'recentf)
@@ -283,12 +297,12 @@
 ;; Color the evil tag - colors taken from spaceline
 ;; https://github.com/Malabarba/smart-mode-line/issues/195
 (setq evil-normal-state-tag   (propertize " NORMAL " 'face '((:background "black"          :foreground "white")))
-      evil-emacs-state-tag    (propertize " <E> " 'face '((:background "lightgray"         :foreground "black")))
+      evil-emacs-state-tag    (propertize " <E> " 'face '((:background "gray"              :foreground "black")))
       evil-insert-state-tag   (propertize " INSERT " 'face '((:background "lightyellow"    :foreground "black")))
       evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "chocolate"     :foreground "black")))
-      evil-motion-state-tag   (propertize " <M> " 'face '((:background "plum3"             :foreground "black")))
+      evil-motion-state-tag   (propertize " <Motion> " 'face '((:background "plum3"             :foreground "black")))
       evil-visual-state-tag   (propertize " VISUAL " 'face '((:background "darkgray"       :foreground "black")))
-      evil-operator-state-tag (propertize " <O> " 'face '((:background "sandy brown"       :foreground "black"))))
+      evil-operator-state-tag (propertize " <Operator> " 'face '((:background "sandy brown"       :foreground "black"))))
 
 ;; evil key binding
 (define-key evil-normal-state-map (kbd "SPC") 'evil-ex)
@@ -532,10 +546,10 @@
 (require 'helm-config)
 (helm-mode 1)
 
-;(global-set-key (kbd "C-x b") 'helm-buffers-list)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
+;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
+;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-s") 'helm-occur)
-(global-set-key (kbd "M-x") 'helm-M-x)
+;; (global-set-key (kbd "M-x") 'helm-M-x)
 
 
 ;; Interactive Do Mode like showing suggestion keyword 2020-12-18
