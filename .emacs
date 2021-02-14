@@ -68,7 +68,7 @@
  '(doc-view-continuous t)
  '(fringe-mode 0 nil (fringe))
  '(org-agenda-files
-   '("~/Documents/nvALT/infox-notex-Jiwoo.txt" "~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/testx-emacs-org-agenda.txt" "~/Documents/nvALT/infox-notex-Jiwoo.txt" "~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-export-backends '(ascii beamer html icalendar latex odt))
  '(org-fontify-done-headline t)
  '(org-fontify-quote-and-verse-blocks t)
