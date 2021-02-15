@@ -1,5 +1,187 @@
-"363085d3f5db3a3a40b895979d0e898c50085c38"
-#s(undo-tree [nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil (#1=[nil nil ((870 . 874)) nil (24617 14679 696538 0) 0 nil]) ((875 . 876) (#("x" 0 1 (fontified t face font-lock-comment-face)) . -875) (undo-tree-id116 . -1) 876 (865 . 876)) nil (24617 14679 696555 0) 0 nil]) ((831 . 836) (#("org" 0 3 (fontified t)) . 831) (undo-tree-id117 . -1) 832) nil (24617 14679 696560 0) 0 nil]) ((777 . 782) (#("org" 0 3 (fontified t)) . 777) (undo-tree-id118 . -1) 778) nil (24617 14679 696564 0) 0 nil]) ((615 . 619) (#("org" 0 3 (fontified t)) . 615) (undo-tree-id119 . -1) 616) nil (24617 14679 696567 0) 0 nil]) ((nil rear-nonsticky nil 816 . 817) (#("
+"53bb4905fe73a55cfa91935568e38a6b12978b03"
+#s(undo-tree [nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil (#1=[nil nil ((500 . 503) (t 24617 47384 0 0)) nil (24617 47733 81948 0) 0 nil]) ((#(" " 0 1 (fontified t)) . -528) (undo-tree-id0 . -1) (undo-tree-id1 . -1) (#(" " 0 1 (fontified t)) . -529) (undo-tree-id2 . -1) (undo-tree-id3 . -1) 530) nil (24617 47384 937401 0) 0 nil]) ((515 . 523)) nil (24617 47384 937406 0) 0 nil]) ((510 . 515)) nil (24617 47384 937407 0) 0 nil]) ((507 . 510)) nil (24617 47384 937409 0) 0 nil]) ((501 . 507) (#("glo" 0 3 (fontified t)) . -501) (undo-tree-id4 . -3) (undo-tree-id5 . 3) 504) nil (24617 47384 937413 0) 0 nil]) ((494 . 504)) nil (24617 47384 937415 0) 0 nil]) ((499 . 501) (#("      " 0 6 (fontified nil)) . 494) (494 . 500) (494 . 495)) nil (24617 47384 937417 0) 0 nil]) ((#("o" 0 1 (fontified t)) . -467) (undo-tree-id6 . -1) 468) nil (24617 47384 937420 0) 0 nil]) ((467 . 468) (t 24617 46094 0 0)) nil (24617 47384 937421 0) 0 nil]) ((3725 . 4797) (#("(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry \"nil\" :family \"Menlo\"))))
+ '(org-block ((t (:background \"#f1f6f9\" :extend t))))
+ '(org-block-begin-line ((t (:underline \"#A7A6AA\" :foreground \"#008ED1\" :background \"#f0f0f0\" :extend t))))
+ '(org-block-end-line ((t (:overline \"#A7A6AA\" :foreground \"#008ED1\" :background \"#f0f0f0\" :extend t))))
+ '(org-document-title ((t (:foreground \"midnight blue\" :weight bold :height 1.4))))
+ '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))" 0 1072 (fontified nil)) . -3725) (3721 . 3723) (#("
+" 0 1 (fontified nil)) . -3721) (3285 . 3722) (#(" " 0 1 (fontified nil)) . 3285) (3255 . 3286) (3230 . 3233) (3193 . 3196) (3158 . 3161) (3108 . 3111) (#("
+" 0 1 (fontified nil)) . -3243) (3219 . 3221) (3185 . 3187) (3153 . 3155) (3106 . 3108) (3235 . 3236) (3212 . 3213) (#("
+" 0 1 (fontified nil)) . 3212) (3212 . 3213) (#(" " 0 1 (fontified nil)) . -3212) (3180 . 3181) (#("
+" 0 1 (fontified nil)) . 3180) (3180 . 3181) (#(" " 0 1 (fontified nil)) . -3180) (3150 . 3151) (#("
+" 0 1 (fontified nil)) . 3150) (3150 . 3151) (#(" " 0 1 (fontified nil)) . -3150) (3105 . 3106) (#("
+" 0 1 (fontified nil)) . 3105) (3105 . 3106) (#(" " 0 1 (fontified nil)) . -3105) (3065 . 3235) (#(" " 0 1 (fontified nil)) . 3065) (2865 . 3066) (#("
+" 0 1 (fontified nil)) . -2865) (2616 . 2866) (#(" " 0 1 (fontified nil)) . 2616) (2508 . 2617) (#("
+" 0 1 (fontified nil)) . -2508) (2423 . 2509) (#(" " 0 1 (fontified nil)) . 2423) (2152 . 2424) (#("(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   [\"#212526\" \"#ff4b4b\" \"#b4fa70\" \"#fce94f\" \"#729fcf\" \"#e090d7\" \"#8cc4ff\" \"#eeeeec\"])
+ '(custom-enabled-themes nil)
+ '(doc-view-continuous t)
+ '(fringe-mode 0 nil (fringe))
+ '(org-agenda-files
+   '(\"~/Documents/nvALT/INBOX_TODO_2021.txt\" \"~/Documents/nvALT/testx-emacs-org-agenda.txt\" \"~/Documents/nvALT/infox-notex-Jiwoo.txt\" \"~/Documents/nvALT/projx-elt_221.txt\" \"~/Documents/nvALT/projx-TorontoLife.txt\" \"~/Documents/nvALT/projx-eix.txt\"))
+ '(org-export-backends '(ascii beamer html icalendar latex odt))
+ '(org-fontify-done-headline t)
+ '(org-fontify-quote-and-verse-blocks t)
+ '(org-fontify-whole-heading-line t)
+ '(org-link-frame-setup
+   '((vm . vm-visit-folder-other-frame)
+     (vm-imap . vm-visit-imap-folder-other-frame)
+     (gnus . org-gnus-no-new-news)
+     (file . find-file-other-window)
+     (wl . wl-other-frame)))
+ '(package-selected-packages
+   '(centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))" 0 1555 (fontified nil)) . -2152) (t 24617 46064 0 0)) nil (24617 46094 506182 0) 0 nil]) ((4837 . 4838)) nil (24617 46064 966210 0) 0 nil]) ((4825 . 4826)) nil (24617 46064 966215 0) 0 nil]) ((4831 . 4832)) nil (24617 46064 966217 0) 0 nil]) ((#(" " 0 1 (face font-lock-comment-face fontified t)) . -4831) (undo-tree-id0 . -1) (undo-tree-id1 . -1) 4832) nil (24617 46064 966238 0) 0 nil]) ((4825 . 4826)) nil (24617 46064 966240 0) 0 nil]) ((#("B" 0 1 (face font-lock-comment-face fontified t)) . -4825) (undo-tree-id2 . -1) (undo-tree-id3 . -1) 4826 (t 24617 21989 0 0)) nil (24617 46064 966245 0) 0 nil]) ((#(" '(org-done ((t (:foreground \"PaleGreen\" :weight normal :strike-through t))))
+" 0 17 (fontified t) 17 28 (fontified t face font-lock-builtin-face) 28 29 (fontified t) 29 40 (fontified t face font-lock-string-face) 40 41 (fontified t) 41 48 (fontified t face font-lock-builtin-face) 48 56 (fontified t) 56 71 (fontified t face font-lock-builtin-face) 71 78 (fontified t)) . 4506) (undo-tree-id0 . -1) (undo-tree-id1 . -78) (undo-tree-id2 . -78) (undo-tree-id3 . -78) (undo-tree-id4 . -78) (undo-tree-id5 . -1) 4507) nil (24617 21989 370426 0) 0 nil]) ((#(" '(org-headline-done ((t (:foreground \"RosyBrown\" :strike-through t))))
+" 0 26 (fontified t) 26 37 (fontified t face font-lock-builtin-face) 37 38 (fontified t) 38 49 (fontified t face font-lock-string-face) 49 50 (fontified t) 50 65 (fontified t face font-lock-builtin-face) 65 72 (fontified t)) . 4584) (undo-tree-id6 . -7) (undo-tree-id7 . -72) (undo-tree-id8 . -7) 4591 (t 24617 21592 0 0)) nil (24617 21989 370437 0) 0 nil]) ((3709 . 4931) (#("(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry \"nil\" :family \"Menlo\"))))
+ '(org-block ((t (:background \"#f1f6f9\" :extend t))))
+ '(org-block-begin-line ((t (:underline \"#A7A6AA\" :foreground \"#008ED1\" :background \"#f0f0f0\" :extend t))))
+ '(org-block-end-line ((t (:overline \"#A7A6AA\" :foreground \"#008ED1\" :background \"#f0f0f0\" :extend t))))
+ '(org-document-title ((t (:foreground \"midnight blue\" :weight bold :height 1.4))))
+ '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))" 0 1072 (fontified nil)) . -3709) (3705 . 3707) (#("
+" 0 1 (fontified nil)) . -3705) (3285 . 3706) (#(" " 0 1 (fontified nil)) . 3285) (3255 . 3286) (3230 . 3233) (3193 . 3196) (3158 . 3161) (3108 . 3111) (#("
+" 0 1 (fontified nil)) . -3243) (3219 . 3221) (3185 . 3187) (3153 . 3155) (3106 . 3108) (3235 . 3236) (3212 . 3213) (#("
+" 0 1 (fontified nil)) . 3212) (3212 . 3213) (#(" " 0 1 (fontified nil)) . -3212) (3180 . 3181) (#("
+" 0 1 (fontified nil)) . 3180) (3180 . 3181) (#(" " 0 1 (fontified nil)) . -3180) (3150 . 3151) (#("
+" 0 1 (fontified nil)) . 3150) (3150 . 3151) (#(" " 0 1 (fontified nil)) . -3150) (3105 . 3106) (#("
+" 0 1 (fontified nil)) . 3105) (3105 . 3106) (#(" " 0 1 (fontified nil)) . -3105) (3065 . 3235) (#(" " 0 1 (fontified nil)) . 3065) (2865 . 3066) (#("
+" 0 1 (fontified nil)) . -2865) (2616 . 2866) (#(" " 0 1 (fontified nil)) . 2616) (2508 . 2617) (#("
+" 0 1 (fontified nil)) . -2508) (2423 . 2509) (#(" " 0 1 (fontified nil)) . 2423) (2152 . 2424) (#("(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   [\"#212526\" \"#ff4b4b\" \"#b4fa70\" \"#fce94f\" \"#729fcf\" \"#e090d7\" \"#8cc4ff\" \"#eeeeec\"])
+ '(custom-enabled-themes nil)
+ '(doc-view-continuous t)
+ '(fringe-mode 0 nil (fringe))
+ '(org-agenda-files
+   '(\"~/Documents/nvALT/INBOX_TODO_2021.txt\" \"~/Documents/nvALT/testx-emacs-org-agenda.txt\" \"~/Documents/nvALT/infox-notex-Jiwoo.txt\" \"~/Documents/nvALT/projx-elt_221.txt\" \"~/Documents/nvALT/projx-TorontoLife.txt\" \"~/Documents/nvALT/projx-eix.txt\"))
+ '(org-export-backends '(ascii beamer html icalendar latex odt))
+ '(org-fontify-done-headline t)
+ '(org-fontify-quote-and-verse-blocks t)
+ '(org-fontify-whole-heading-line t)
+ '(org-link-frame-setup
+   '((vm . vm-visit-folder-other-frame)
+     (vm-imap . vm-visit-imap-folder-other-frame)
+     (gnus . org-gnus-no-new-news)
+     (file . find-file-other-window)
+     (wl . wl-other-frame)))
+ '(package-selected-packages
+   '(centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))" 0 1555 (fontified nil)) . -2152) (t 24617 19774 0 0)) nil (24617 21592 412511 0) 0 nil]) ((3709 . 4781) (#("(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry \"nil\" :family \"Menlo\"))))
+ '(org-block ((t (:background \"#f1f6f9\" :extend t))))
+ '(org-block-begin-line ((t (:underline \"#A7A6AA\" :foreground \"#008ED1\" :background \"#f0f0f0\" :extend t))))
+ '(org-block-end-line ((t (:overline \"#A7A6AA\" :foreground \"#008ED1\" :background \"#f0f0f0\" :extend t))))
+ '(org-document-title ((t (:foreground \"midnight blue\" :weight bold :height 1.4))))
+ '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))" 0 1072 (fontified nil)) . -3709) (3705 . 3707) (#("
+" 0 1 (fontified nil)) . -3705) (3285 . 3706) (#(" " 0 1 (fontified nil)) . 3285) (3255 . 3286) (3230 . 3233) (3193 . 3196) (3158 . 3161) (3108 . 3111) (#("
+" 0 1 (fontified nil)) . -3243) (3219 . 3221) (3185 . 3187) (3153 . 3155) (3106 . 3108) (3235 . 3236) (3212 . 3213) (#("
+" 0 1 (fontified nil)) . 3212) (3212 . 3213) (#(" " 0 1 (fontified nil)) . -3212) (3180 . 3181) (#("
+" 0 1 (fontified nil)) . 3180) (3180 . 3181) (#(" " 0 1 (fontified nil)) . -3180) (3150 . 3151) (#("
+" 0 1 (fontified nil)) . 3150) (3150 . 3151) (#(" " 0 1 (fontified nil)) . -3150) (3105 . 3106) (#("
+" 0 1 (fontified nil)) . 3105) (3105 . 3106) (#(" " 0 1 (fontified nil)) . -3105) (3065 . 3235) (#(" " 0 1 (fontified nil)) . 3065) (2865 . 3066) (#("
+" 0 1 (fontified nil)) . -2865) (2616 . 2866) (#(" " 0 1 (fontified nil)) . 2616) (2508 . 2617) (#("
+" 0 1 (fontified nil)) . -2508) (2423 . 2509) (#(" " 0 1 (fontified nil)) . 2423) (2152 . 2424) (#("(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   [\"#212526\" \"#ff4b4b\" \"#b4fa70\" \"#fce94f\" \"#729fcf\" \"#e090d7\" \"#8cc4ff\" \"#eeeeec\"])
+ '(custom-enabled-themes nil)
+ '(doc-view-continuous t)
+ '(fringe-mode 0 nil (fringe))
+ '(org-agenda-files
+   '(\"~/Documents/nvALT/testx-emacs-org-agenda.txt\" \"~/Documents/nvALT/infox-notex-Jiwoo.txt\" \"~/Documents/nvALT/projx-elt_221.txt\" \"~/Documents/nvALT/projx-TorontoLife.txt\" \"~/Documents/nvALT/projx-eix.txt\"))
+ '(org-export-backends '(ascii beamer html icalendar latex odt))
+ '(org-fontify-done-headline t)
+ '(org-fontify-quote-and-verse-blocks t)
+ '(org-fontify-whole-heading-line t)
+ '(org-link-frame-setup
+   '((vm . vm-visit-folder-other-frame)
+     (vm-imap . vm-visit-imap-folder-other-frame)
+     (gnus . org-gnus-no-new-news)
+     (file . find-file-other-window)
+     (wl . wl-other-frame)))
+ '(package-selected-packages
+   '(centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))" 0 1515 (fontified nil)) . -2152) (t 24617 19673 0 0)) nil (24617 19774 241402 0) 0 nil]) ((3669 . 4741) (#("(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry \"nil\" :family \"Menlo\"))))
+ '(org-block ((t (:background \"#f1f6f9\" :extend t))))
+ '(org-block-begin-line ((t (:underline \"#A7A6AA\" :foreground \"#008ED1\" :background \"#f0f0f0\" :extend t))))
+ '(org-block-end-line ((t (:overline \"#A7A6AA\" :foreground \"#008ED1\" :background \"#f0f0f0\" :extend t))))
+ '(org-document-title ((t (:foreground \"midnight blue\" :weight bold :height 1.4))))
+ '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))" 0 1072 (fontified nil)) . -3669) (3665 . 3667) (#("
+" 0 1 (fontified nil)) . -3665) (3245 . 3666) (#(" " 0 1 (fontified nil)) . 3245) (3215 . 3246) (3190 . 3193) (3153 . 3156) (3118 . 3121) (3068 . 3071) (#("
+" 0 1 (fontified nil)) . -3203) (3179 . 3181) (3145 . 3147) (3113 . 3115) (3066 . 3068) (3195 . 3196) (3172 . 3173) (#("
+" 0 1 (fontified nil)) . 3172) (3172 . 3173) (#(" " 0 1 (fontified nil)) . -3172) (3140 . 3141) (#("
+" 0 1 (fontified nil)) . 3140) (3140 . 3141) (#(" " 0 1 (fontified nil)) . -3140) (3110 . 3111) (#("
+" 0 1 (fontified nil)) . 3110) (3110 . 3111) (#(" " 0 1 (fontified nil)) . -3110) (3065 . 3066) (#("
+" 0 1 (fontified nil)) . 3065) (3065 . 3066) (#(" " 0 1 (fontified nil)) . -3065) (3025 . 3195) (#(" " 0 1 (fontified nil)) . 3025) (2825 . 3026) (#("
+" 0 1 (fontified nil)) . -2825) (2616 . 2826) (#(" " 0 1 (fontified nil)) . 2616) (2508 . 2617) (#("
+" 0 1 (fontified nil)) . -2508) (2423 . 2509) (#(" " 0 1 (fontified nil)) . 2423) (2152 . 2424) (#("(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   [\"#212526\" \"#ff4b4b\" \"#b4fa70\" \"#fce94f\" \"#729fcf\" \"#e090d7\" \"#8cc4ff\" \"#eeeeec\"])
+ '(custom-enabled-themes nil)
+ '(doc-view-continuous t)
+ '(fringe-mode 0 nil (fringe))
+ '(org-agenda-files
+   '(\"~/Documents/nvALT/infox-notex-Jiwoo.txt\" \"~/Documents/nvALT/projx-elt_221.txt\" \"~/Documents/nvALT/projx-TorontoLife.txt\" \"~/Documents/nvALT/projx-eix.txt\"))
+ '(org-export-backends '(ascii beamer html icalendar latex odt))
+ '(org-fontify-done-headline t)
+ '(org-fontify-quote-and-verse-blocks t)
+ '(org-fontify-whole-heading-line t)
+ '(org-link-frame-setup
+   '((vm . vm-visit-folder-other-frame)
+     (vm-imap . vm-visit-imap-folder-other-frame)
+     (gnus . org-gnus-no-new-news)
+     (file . find-file-other-window)
+     (wl . wl-other-frame)))
+ '(package-selected-packages
+   '(centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))" 0 1468 (fontified nil)) . -2152) (t 24617 14679 0 0)) nil (24617 19673 553325 0) 0 nil]) ((870 . 874)) nil (24617 14679 696538 0) 0 nil]) ((875 . 876) (#("x" 0 1 (fontified t face font-lock-comment-face)) . -875) (undo-tree-id116 . -1) 876 (865 . 876)) nil (24617 14679 696555 0) 0 nil]) ((831 . 836) (#("org" 0 3 (fontified t)) . 831) (undo-tree-id117 . -1) 832) nil (24617 14679 696560 0) 0 nil]) ((777 . 782) (#("org" 0 3 (fontified t)) . 777) (undo-tree-id118 . -1) 778) nil (24617 14679 696564 0) 0 nil]) ((615 . 619) (#("org" 0 3 (fontified t)) . 615) (undo-tree-id119 . -1) 616) nil (24617 14679 696567 0) 0 nil]) ((nil rear-nonsticky nil 816 . 817) (#("
 " 0 1 (fontified nil)) . -860) (808 . 861) 765) nil (24617 14679 696569 0) 0 nil]) ((nil rear-nonsticky nil 764 . 765) (#("
 " 0 1 (fontified nil)) . -808) (756 . 809) 708) nil (24617 14679 696571 0) 0 nil]) ((596 . 648) 622 (t 24617 14483 0 0)) nil (24617 14679 696573 0) 0 nil]) ((667 . 675) (#("org" 0 3 (fontified t)) . 667) (undo-tree-id114 . -1) (undo-tree-id115 . -1) 668) nil (24617 14483 489568 0) 0 nil]) ((nil rear-nonsticky nil 655 . 656) (#("
 " 0 1 (fontified nil)) . -699) (647 . 700) 604 (t 24617 14381 0 0)) nil (24617 14483 489573 0) 0 nil]) ((nil rear-nonsticky nil 528 . 529) (nil fontified nil 519 . 529) (519 . 529)) nil (24617 14381 767141 0) 0 nil]) ((#(";" 0 1 (fontified t face font-lock-comment-face)) . -519) (undo-tree-id112 . -1) (undo-tree-id113 . -1) 520) nil (24617 14381 767158 0) 0 nil]) ((504 . 520)) nil (24617 14381 767160 0) 0 nil]) ((503 . 504) (t 24617 14318 0 0)) nil (24617 14381 767162 0) 0 nil]) ((570 . 578)) nil (24617 14318 367073 0) 0 nil]) ((#(" " 0 1 (fontified t)) . -571) (undo-tree-id107 . -1) (undo-tree-id108 . -1) 572) nil (24617 14318 367097 0) 0 nil]) ((571 . 572)) nil (24617 14318 367101 0) 0 nil]) ((#("d" 0 1 (fontified t)) . -613) (undo-tree-id109 . -1) (undo-tree-id110 . -1) (undo-tree-id111 . -1) 614) nil (24617 14318 367110 0) 0 nil]) ((nil rear-nonsticky nil 612 . 613) (nil fontified nil 570 . 613) (570 . 613)) nil (24617 14318 367113 0) 0 nil]) ((nil rear-nonsticky nil 569 . 570) (#("
@@ -17,4 +199,4 @@
 " 0 1 (fontified t)) . -558) (undo-tree-id3 . -1) 559) nil (24617 13382 40071 0) 0 nil]) ((#(" " 0 1 (fontified t)) . -556) (undo-tree-id4 . -1) (#(" " 0 1 (fontified t)) . -557) (undo-tree-id5 . -1) (#(" " 0 1 (fontified t)) . -558) (undo-tree-id6 . -1) (#(" " 0 1 (fontified t)) . -559) (undo-tree-id7 . -1) (#(" " 0 1 (fontified t)) . -560) (undo-tree-id8 . -1) (#(" " 0 1 (fontified t)) . -561) (undo-tree-id9 . -1) 562) nil (24617 13382 40083 0) 0 nil]) ((555 . 562)) nil (24617 13382 40085 0) 0 nil]) ((#("
 " 0 1 (fontified t)) . -555) (undo-tree-id10 . -1) (#(" " 0 1 (fontified t)) . -556) (undo-tree-id11 . -1) (#(" " 0 1 (fontified t)) . -557) (undo-tree-id12 . -1) (#(" " 0 1 (fontified t)) . -558) (undo-tree-id13 . -1) (#(" " 0 1 (fontified t)) . -559) (undo-tree-id14 . -1) (#(" " 0 1 (fontified t)) . -560) (undo-tree-id15 . -1) (#(" " 0 1 (fontified t)) . -561) (undo-tree-id16 . -1) 562) nil (24617 13382 40097 0) 0 nil]) ((555 . 562)) nil (24617 13382 40099 0) 0 nil]) ((543 . 548)) nil (24617 13382 40100 0) 0 nil]) ((#(";" 0 1 (fontified t face font-lock-comment-delimiter-face)) . -543) (undo-tree-id17 . -1) (#(";" 0 1 (fontified t face font-lock-comment-delimiter-face)) . -544) (undo-tree-id18 . -1) (#(" " 0 1 (fontified t face font-lock-comment-delimiter-face)) . -545) (undo-tree-id19 . -1) (#(" " 0 1 (fontified t face font-lock-comment-delimiter-face)) . -546) (undo-tree-id20 . -1) (#(" " 0 1 (fontified t face font-lock-comment-delimiter-face)) . -547) (undo-tree-id21 . -1) (#(" " 0 1 (fontified t face font-lock-comment-delimiter-face)) . -548) (undo-tree-id22 . -1) 549) nil (24617 13382 40110 0) 0 nil]) ((532 . 536)) nil (24617 13382 40112 0) 0 nil]) ((#("   " 0 3 (fontified nil)) . -532) (529 . 530)) nil (24617 13382 40113 0) 0 nil]) ((#("
 " 0 1 (fontified t)) . -529) (undo-tree-id23 . -1) (#(";" 0 1 (fontified t face font-lock-comment-delimiter-face)) . -530) (undo-tree-id24 . -1) (#(";" 0 1 (fontified t face font-lock-comment-delimiter-face)) . -531) (undo-tree-id25 . -1) 532) nil (24617 13382 40119 0) 0 nil]) ((#(";" 0 1 (fontified t face font-lock-comment-delimiter-face)) . -504) (undo-tree-id26 . -1) (#(";" 0 1 (fontified t face font-lock-comment-delimiter-face)) . -505) (undo-tree-id27 . -1) (#(" " 0 1 (fontified t face font-lock-comment-delimiter-face)) . -506) (undo-tree-id28 . -1) 507) nil (24617 13382 40126 0) 0 nil]) ((nil rear-nonsticky nil 561 . 562) (nil fontified nil 554 . 562) (nil fontified nil 547 . 554) (nil fontified nil 540 . 547) (nil fontified nil 533 . 540) (nil fontified nil 507 . 533) (nil fontified nil 504 . 507) (504 . 562)) nil (24617 13382 40129 0) 0 nil]) ((503 . 505)) nil (24617 13382 40130 0) 0 nil]) ((#(" " 0 1 (fontified t)) . -498) (undo-tree-id29 . -1) (#(" " 0 1 (fontified t)) . -499) (undo-tree-id30 . -1) 500) nil (24617 13382 40134 0) 0 nil]) ((#(" " 0 1 (fontified t)) . -503) (undo-tree-id31 . -1) 504) nil (24617 13382 40137 0) 0 nil]) ((502 . 504) (499 . 500) (500 . 501)) nil (24617 13382 40140 0) 0 nil]) ((#(" " 0 1 (fontified t)) . -499) (undo-tree-id32 . -1) 500) nil (24617 13382 40145 0) 0 nil]) ((493 . 500) (t 24616 37261 0 0)) nil (24617 13382 40147 0) 0 nil]) ((22759 . 22762) (t 24616 37212 0 0)) nil (24616 37261 83771 0) 0 nil]) ((22707 . 22709)) nil (24616 37212 921369 0) 0 nil]) ((22848 . 22851) (t 24616 24878 0 0)) nil (24616 37212 921374 0) 0 nil]) ((13933 . 13940)) nil (24616 24878 546225 0) 0 nil]) ((13700 . 13705)) nil (24616 24878 546230 0) 0 nil]) ((#("i" 0 1 (fontified t face font-lock-string-face)) . -13698) (undo-tree-id0 . -1) (undo-tree-id1 . -1) 13699) nil (24616 24878 546254 0) 0 nil]) ((13698 . 13699) (t 24616 22070 0 0)) nil (24616 24878 546256 0) 0 nil]) ((#(" " 0 1 (fontified t)) . -13401) (undo-tree-id0 . -1) (undo-tree-id1 . -1) 13402 (13396 . 13402)) nil (24616 22070 223213 0) 0 nil]) ((#("light" 0 5 (face font-lock-string-face fontified t)) . 13384) (undo-tree-id2 . -4) (undo-tree-id3 . -4) (undo-tree-id4 . -4) (undo-tree-id5 . -5) (undo-tree-id6 . -4) (undo-tree-id7 . -4) 13388 (t 24616 21851 0 0)) nil (24616 22070 223229 0) 0 nil]) ((1385 . 1387)) nil (24616 11972 289622 0) 0 nil]) ((1388 . 1393)) nil (24616 11972 289628 0) 0 nil]) ((1367 . 1388)) nil (24616 11972 289630 0) 0 nil]) ((1346 . 1367)) nil (24616 11972 289632 0) 0 nil]) ((1228 . 1231)) nil (24616 11972 289634 0) 0 nil]) ((1305 . 1308)) nil (24616 11972 289635 0) 0 nil]) ((1341 . 1344) (t 24616 11256 0 0)) nil (24616 11972 289637 0) 0 nil]) ((#(" " 0 1 (fontified t)) . 13338) (#(" " 0 1 (fontified t)) . 13338) (#(" " 0 1 (fontified t)) . 13338)) nil (24616 11256 471489 0) 0 nil]) ((13331 . 13335)) nil (24616 11256 471496 0) 0 nil]) ((13326 . 13331)) nil (24616 11256 471498 0) 0 nil]) ((13327 . 13338)) nil (24616 11256 471500 0) 0 nil]) ((13325 . 13327)) nil (24616 11256 471501 0) 0 nil]) ((#("d" 0 1 (fontified t)) . 13325) (#("n" 0 1 (fontified t)) . 13325) (#("u" 0 1 (fontified t)) . 13325) (#("o" 0 1 (fontified t)) . 13325) (#("r" 0 1 (fontified t)) . 13325) (#("g" 0 1 (fontified t)) . 13325) (#("k" 0 1 (fontified t)) . 13325) (#("c" 0 1 (fontified t)) . 13325) (#("a" 0 1 (fontified t)) . 13325) (#("b" 0 1 (fontified t)) . 13325) (#("-" 0 1 (fontified t)) . 13325) (#("l" 0 1 (fontified t)) . 13325) (#("a" 0 1 (fontified t)) . 13325) (#("n" 0 1 (fontified t)) . 13325) (#("i" 0 1 (fontified t)) . 13325) (#("g" 0 1 (fontified t)) . 13325) (#("i" 0 1 (fontified t)) . 13325) (#("r" 0 1 (fontified t)) . 13325) (#("o" 0 1 (fontified t)) . 13325) (t 24616 11157 0 0)) nil (24616 11256 471508 0) 0 nil]) ((13913 . 13914)) nil (24616 11157 578565 0) 0 nil]) ((13799 . 13800)) nil (24616 11157 578571 0) 0 nil]) ((13685 . 13686)) nil (24616 11157 578573 0) 0 nil]) ((13571 . 13572)) nil (24616 11157 578574 0) 0 nil]) ((13457 . 13458)) nil (24616 11157 578576 0) 0 nil]) ((13230 . 13231)) nil (24616 11157 578577 0) 0 nil]) ((13343 . 13344)) nil (24616 11157 578579 0) 0 nil]) ((#(" " 0 1 (fontified t)) . 13343) (#(" " 0 1 (fontified t)) . 13343) (#(" " 0 1 (fontified t)) . 13343) (#(" " 0 1 (fontified t)) . 13343) (#(" " 0 1 (fontified t)) . 13343) (#(" " 0 1 (fontified t)) . 13343) (#(" " 0 1 (fontified t)) . 13343) (#(" " 0 1 (fontified t)) . 13343) (#(" " 0 1 (fontified t)) . 13343) (#(" " 0 1 (fontified t)) . 13343) (#(" " 0 1 (fontified t)) . 13343) (#(" " 0 1 (fontified t)) . 13343) (#(" " 0 1 (fontified t)) . 13343) (#(" " 0 1 (fontified t)) . 13343) (#(" " 0 1 (fontified t)) . 13343)) nil (24616 11157 578584 0) 0 nil]) ((13324 . 13343) (#("or" 0 2 (fontified t)) . -13324) (undo-tree-id19 . -2) (undo-tree-id20 . 2) (undo-tree-id21 . -2) 13326) nil (24616 11157 578607 0) 0 nil]) ((13324 . 13326)) nil (24616 11157 578609 0) 0 nil]) ((#("l" 0 1 (fontified t)) . 13324) (#("i" 0 1 (fontified t)) . 13324) (#("n" 0 1 (fontified t)) . 13324) (#("'" 0 1 (fontified t)) . 13324) (t 24616 10219 0 0)) nil (24616 11157 578612 0) 0 nil]) ((1292 . 1301)) nil (24616 10219 879409 0) 0 nil]) ((#("a" 0 1 (fontified t face font-lock-comment-face)) . -1292) (undo-tree-id0 . -1) (undo-tree-id1 . -1) 1293) nil (24616 10219 879439 0) 0 nil]) ((1289 . 1293)) nil (24616 10219 879442 0) 0 nil]) ((#("l" 0 1 (fontified t)) . -1289) (undo-tree-id2 . -1) (undo-tree-id3 . -1) (#(";" 0 1 (fontified t face font-lock-comment-delimiter-face)) . -1290) (undo-tree-id4 . -1) (undo-tree-id5 . -1) (#(";" 0 1 (fontified t face font-lock-comment-delimiter-face)) . -1291) (undo-tree-id6 . -1) (undo-tree-id7 . -1) 1292) nil (24616 10219 879456 0) 0 nil]) ((1289 . 1292)) nil (24616 10219 879459 0) 0 nil]) ((1272 . 1291)) nil (24616 10219 879461 0) 0 nil]) ((1259 . 1273)) nil (24616 10219 879463 0) 0 nil]) ((1292 . 1295) (1266 . 1292) (#("auto-save-visi" 0 14 (fontified t)) . -1266) (undo-tree-id8 . -14) 1280 (1275 . 1280) (1261 . 1275) (#("e" 0 1 (fontified t)) . -1261) (undo-tree-id9 . -1) (#("t" 0 1 (fontified t)) . -1262) (undo-tree-id10 . -1) 1263 (1261 . 1263) (#("s" 0 1 (fontified t)) . -1261) (undo-tree-id11 . -1) (#("q" 0 1 (fontified t)) . -1262) (undo-tree-id12 . -1) 1263 (1260 . 1263) (1259 . 1260) (1256 . 1259) (1234 . 1256) (#("auto-save-vis" 0 13 (fontified t)) . -1234) (undo-tree-id13 . -13) 1247 (1242 . 1247) (1239 . 1242) (#("v" 0 1 (fontified t)) . -1239) (undo-tree-id14 . -1) 1240 (1228 . 1240)) nil (24616 10219 879487 0) 0 nil]) ((1227 . 1228) 1191) nil (24616 10219 879492 0) 0 nil]) ((#("(setq auto-save-visited-file-name t)
-" 0 1 (fontified t) 1 5 (fontified t face font-lock-keyword-face) 5 35 (fontified t) 35 36 (fontified t rear-nonsticky t) 36 37 (fontified t)) . 1305) (undo-tree-id15 . -18) (undo-tree-id16 . -37) 1323) nil (24616 10219 879498 0) 0 nil]) ((#("(" 0 1 (fontified t)) . 1305) (undo-tree-id17 . -1) (undo-tree-id18 . -1)) nil (24616 10219 879505 0) 0 nil]) ((#(")" 0 1 (fontified t)) . 1342)) nil (24616 10219 879507 0) 0 nil]) ((nil rear-nonsticky nil 1341 . 1342) (nil fontified nil 1306 . 1342) (1306 . 1342)) nil (24616 10219 879510 0) 0 nil]) ((1305 . 1307)) nil (24616 10219 879511 0) 0 nil]) ((1305 . 1306) (t 24615 54028 0 0)) nil (24616 10219 879513 0) 0 nil]) nil nil (24616 10219 879515 0) 0 nil] #1# 3962 119 nil)
+" 0 1 (fontified t) 1 5 (fontified t face font-lock-keyword-face) 5 35 (fontified t) 35 36 (fontified t rear-nonsticky t) 36 37 (fontified t)) . 1305) (undo-tree-id15 . -18) (undo-tree-id16 . -37) 1323) nil (24616 10219 879498 0) 0 nil]) ((#("(" 0 1 (fontified t)) . 1305) (undo-tree-id17 . -1) (undo-tree-id18 . -1)) nil (24616 10219 879505 0) 0 nil]) ((#(")" 0 1 (fontified t)) . 1342)) nil (24616 10219 879507 0) 0 nil]) ((nil rear-nonsticky nil 1341 . 1342) (nil fontified nil 1306 . 1342) (1306 . 1342)) nil (24616 10219 879510 0) 0 nil]) ((1305 . 1307)) nil (24616 10219 879511 0) 0 nil]) ((1305 . 1306) (t 24615 54028 0 0)) nil (24616 10219 879513 0) 0 nil]) nil nil (24616 10219 879515 0) 0 nil] #1# 16475 141 nil)
