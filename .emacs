@@ -32,6 +32,19 @@
       )
 )
 
+
+;; Focus on `Buffer List` window when it is opened - 2021-02-21
+;; https://www.reddit.com/r/emacs/comments/qjkwf/is_there_a_way_to_make_emacs_switch_to_the_buffer/
+(defun buffer-list-switch ()
+  "Switch to buffer list and activate the window"
+  (interactive)
+  (list-buffers)
+  (select-window (get-buffer-window "*Buffer List*" 0))
+)
+
+(global-set-key (kbd "C-x C-b") 'buffer-list-switch)
+
+
 ;; Recent opened file history 2020-12-31
 (require 'recentf)
 (recentf-mode 1)
@@ -43,13 +56,13 @@
 (setq initial-scratch-message "")                            ;; No scratch message 2020-10-10
 (add-to-list 'default-frame-alist '(fullscreen . maximized)) ;; Maximize GUI window
 
-(global-undo-tree-mode)                                      ;; Undo-Tree Package 2021-02-13
-(setq undo-tree-visualizer-timestamps t)
-(setq undo-tree-visualizer-diff t)
-(setq undo-tree-auto-save-history t)
+;; Interupted Working Process 2021-02-15
 ;; (setq auto-save-visited-mode t)                              ;; Auto Save   
 ;; (setq auto-save-visited-interval 1)                          ;; Auto Save - Interval
+;; (setq auto-save-default t)
+;; (setq auto-save-visited-file-name t)
 ;; (global-auto-revert-mode t)                                  ;; Auto Refresh
+
 (global-visual-line-mode 1)                                  ;; Visual Line Mode On
 ;; (global-display-line-numbers-mode)                           ;; Display Line Numbers On
 
@@ -65,11 +78,18 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
+ '(confirm-kill-emacs 'yes-or-no-p)
  '(custom-enabled-themes nil)
  '(doc-view-continuous t)
  '(fringe-mode 0 nil (fringe))
  '(org-agenda-files
-   '("~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/testx-emacs-org-agenda.txt" "~/Documents/nvALT/infox-notex-Jiwoo.txt" "~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/infox-notex-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/testx-emacs-org-agenda.txt" "~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+ '(org-agenda-time-grid
+   '((daily today require-timed)
+     (800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000)
+     "......" "----------------"))
+ '(org-agenda-use-time-grid t)
+ '(org-confirm-babel-evaluate nil)
  '(org-export-backends '(ascii beamer html icalendar latex odt))
  '(org-fontify-done-headline t)
  '(org-fontify-quote-and-verse-blocks t)
@@ -81,7 +101,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(smart-mode-line powerthesaurus indent-guide focus ace-window neotree helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -89,16 +109,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
- '(org-block ((t (:background "#f1f6f9" :extend t))))
- '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#f0f0f0" :extend t))))
- '(org-block-end-line ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#f0f0f0" :extend t))))
+ ;; '(org-block ((t (:background "#f1f6f9" :extend t))))
+ ;; '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#f0f0f0" :extend t))))
+ ;; '(org-block-end-line ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#f0f0f0" :extend t))))
  '(org-document-title ((t (:foreground "midnight blue" :weight bold :height 1.4))))
  '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
  '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
-
 
 
 ;;==========
@@ -110,6 +129,11 @@
 (global-set-key (kbd "<C-S-down>")   'buf-move-down)
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
+
+
+;; ace-window 2021-02-23
+(global-set-key (kbd "M-o") 'ace-window)
+
 
 ;; display date in modeline 2020-12-07
 ;; (setq display-time-day-and-date t)
@@ -173,8 +197,8 @@
 
 ;; yasnippet 2021-01-16
 ;; https://www.youtube.com/watch?v=HTUE03LnaXA
-(require 'yasnippet)
-(yas-global-mode 1)
+;; (require 'yasnippet)
+;; (yas-global-mode 1)
 
 
 ;; PLUG-IN: exec-path-from-shell 2020-12-08
@@ -192,6 +216,7 @@
 ;(setq deft-directory "~/Documents/nvALT/")
 ;;(setq deft-directory "~/Documents/test/")
 ;(setq deft-recursive t)
+
 
 ;;------------------------
 ;; Enable Evil 2020-12-30
@@ -246,7 +271,7 @@
       (add-hook 'evil-emacs-state-entry-hook (lambda () (face-remap-add-relative 'default :background original-background)))
       (add-hook 'evil-emacs-state-entry-hook (lambda () (face-remap-add-relative 'default :foreground original-foreground)))
     )
-    ;; else (optional)
+    ;; else (optional - terminal mode)
     (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :underline t :background original-background)))
     (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :underline t :overline 't :background "black")))
     (add-hook 'evil-emacs-state-entry-hook (lambda () (set-background-color original-background)))
@@ -359,15 +384,16 @@
 ;;----------------------------------------------------------------
 ;; ace jump mode major function
 ;; 
-(add-to-list 'load-path "/Users/osickwon/.emacs.d/ace-jump-mode/")
-(autoload
-  'ace-jump-mode
-  "ace-jump-mode"
-  "Emacs quick move minor mode"
-  t)
+;; (add-to-list 'load-path "/Users/osickwon/.emacs.d/ace-jump-mode/")
+;; (autoload
+;;   'ace-jump-mode
+;;   "ace-jump-mode"
+;;   "Emacs quick move minor mode"
+;;   t)
+
 ;; you can select the key you prefer to
 ;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-(define-key global-map (kbd "C-c SPC") 'ace-jump-char-mode)
+;; (define-key global-map (kbd "C-c SPC") 'ace-jump-char-mode)
 ;;
 ;; conflict org-mode: C-c SPC => org-table-blank-field
 
@@ -377,32 +403,31 @@
 
 ;; When org-mode starts it (org-mode-map) overrides the ace-jump-mode.
 ;; (https://github.com/winterTTr/ace-jump-mode/issues/47)
-(add-hook 'org-mode-hook
-          (lambda ()
-            ;; (local-set-key (kbd "\C-c SPC") 'ace-jump-mode)))
-            (local-set-key (kbd "\C-c SPC") 'ace-jump-char-mode)))
+;; (add-hook 'org-mode-hook
+;;           (lambda ()
+;;             ;; (local-set-key (kbd "\C-c SPC") 'ace-jump-mode)))
+;;             (local-set-key (kbd "\C-c SPC") 'ace-jump-char-mode)))
  
 ;; 
 ;; enable a more powerful jump back function from ace jump mode
 ;;
-(autoload
-  'ace-jump-mode-pop-mark
-  "ace-jump-mode"
-  "Ace jump back:-)"
-  t)
-(eval-after-load "ace-jump-mode"
-  '(ace-jump-mode-enable-mark-sync))
-(define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
+;; (autoload
+;;   'ace-jump-mode-pop-mark
+;;   "ace-jump-mode"
+;;   "Ace jump back:-)"
+;;   t)
+;; (eval-after-load "ace-jump-mode"
+;;   '(ace-jump-mode-enable-mark-sync))
+;; (define-key global-map (kbd "C-x SPC") 'ace-jump-mode-pop-mark)
 
 ;;If you use viper mode :
 ;(define-key viper-vi-global-user-map (kbd "SPC") 'ace-jump-mode)
 ;;If you use evil
 ;(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
-
-;;_EOL_ACE_SETTING------------------------------------------------
-
+;; ----------------------------------------------------------------
 
 ;; projectile package 2021-01-29
+;; -----------------------------
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
@@ -414,9 +439,20 @@
 
 
 ;; Olivetti 2021-02-11
+;; -------------------
 ;; to remove boundry -> '(fringe-mode 0 nil (fringe)) in `(custom-set-variables` lines in front of this file. 
 (setq olivetti-body-width 95)
 (setq olivetti-minimum-body-width 80)
+
+
+;; Undo-Tree Package 2021-02-13
+;; ------------------------------
+;; prevent accidents :: Redo(C-?)
+;; ------------------------------
+(global-undo-tree-mode)                                      
+(setq undo-tree-visualizer-timestamps t)
+(setq undo-tree-visualizer-diff t)
+(setq undo-tree-auto-save-history t)
 
 
 ;;===============================================================
@@ -480,6 +516,12 @@
  `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)"
     1 'org-checkbox-done-text prepend))
  'append)
+
+
+;; Org-Roam 2021-02-22
+(setq org-roam-directory  "~/Documents/nvALT")  ;; multi-directory ???
+;; (setq org-roam-directory "~/Desktop/MyCloudSync/1. Next Actions/ELT/4. Sector in Finance/Presentation")
+(setq org-roam-file-extensions '("org" "txt"))  ;; https://github.com/org-roam/org-roam/issues/461
 
 
 ;; -------------------------------------------------------------------

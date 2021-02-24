@@ -17,7 +17,7 @@
 "{{{
 set nocompatible
 set history=500                       " default was 50
-set autoread                          " preventing something that I just write
+" set autoread                          " preventing something that I just write
 " au FocusGained,BufEnter * :silent! !  " -- reload when entering the buffer or gaining focus
 " au FocusLost,WinLeave * :silent! w    " -- save when exiting the buffer or losing focus
 
@@ -48,7 +48,7 @@ set rnu "relativenumber
 augroup auto_set_number
     autocmd InsertEnter * set nornu
         \ | hi StatusLine guifg=yellow ctermfg=yellow
-        \ | hi CursorLine gui=bold guibg=lightyellow
+        \ | hi CursorLine gui=NONE guibg=lightyellow
         \ | hi CursorLineNr guibg=red
     autocmd InsertLeave * set rnu
         \ | hi StatusLine guifg=#cfd8dc ctermfg=66
@@ -84,6 +84,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'chrisbra/csv.vim'
+" Plug 'jceb/vim-orgmode'
 call plug#end()
 
 
@@ -155,7 +156,7 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 
 "------Functionality--------
 " Plugin 'kien/ctrlp.vim'
-" Plugin 'scrooloose/nerdtree'          " not a vimway instead use find command
+Plugin 'scrooloose/nerdtree'          " not a vimway instead use find command
 Plugin 'mbbill/undotree'
 " Plugin 'sjl/gundo.vim'                  " visualize your Vim undo tree
 " Plugin 'wincent/command-t'            " Ruby required
@@ -178,7 +179,8 @@ Plugin 'klen/python-mode'
 
 "------Other-plugins--------
 " Plugin 'itchyny/calendar.vim'
-
+Plugin 'jceb/vim-orgmode'
+Plugin 'tpope/vim-speeddating'
 
 call vundle#end()
 
@@ -188,6 +190,8 @@ syntax on
 
 let g:searchfold_maxdepth=1
 let g:solarized_termcolors=256
+let g:NERDTreeWinSize=43
+" let g:org_indent=1
 
 "----------------------------------------------
  "MARKDOWN SUPPORT for 'plasticboy/vim-markdown'
@@ -195,8 +199,8 @@ let g:solarized_termcolors=256
 "----------------------------------------------
 "{{{
 augroup text_to_markdown
-    autocmd BufRead,BufNewFile *.txt set filetype=markdown
-    let g:vim_markdown_folding_disabled = 1
+    " autocmd BufRead,BufNewFile *.txt set filetype=markdown
+    " let g:vim_markdown_folding_disabled = 1
     " foldmethod from 'expr' to 'manual'
     " let g:vim_markdown_follow_anchor = 0  " to use vim `ge` command avoiding in markdown mode
     let g:indentLine_concealcursor=""
@@ -924,9 +928,9 @@ nnoremap <silent> <leader>q :UnFocusMode<cr>
 "------------
 " Utilities
 "------------
-" nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
-" nnoremap <silent> <leader>t  :TagbarToggle<cr>
-" nnoremap <silent> <leader>b  :bro old<cr>
+nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
+nnoremap <silent> <leader>t  :TagbarToggle<cr>
+nnoremap <silent> <leader>b  :bro old<cr>
 " maximize window size -> insted, vanila Vim: c-w _ / c-w
 " nnoremap <silent> <leader>mw  :vert resize 999<cr>
 " nnoremap <silent> <leader>mh  :resize 999<cr>
@@ -1002,8 +1006,8 @@ command MD set filetype=markdown
 command PD :w | set filetype=pandoc | Pandoc html
 command WH windo wincmd H
 command HA call HardMode() | echo "HardMode Activated"
-command EA call EasyMode() | echo "EasyMode Activated"
-command SE call SuperEasyMode() | echo "SuperEasyMode Activated"
+" command EA call EasyMode() | echo "EasyMode Activated"
+" command SE call SuperEasyMode() | echo "SuperEasyMode Activated"
 
 
 " --------------"
