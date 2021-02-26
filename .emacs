@@ -44,6 +44,7 @@
 
 (global-set-key (kbd "C-x C-b") 'buffer-list-switch)
 
+(indent-guide-global-mode) ;; indent-guide package 2021-02-24
 
 ;; Recent opened file history 2020-12-31
 (require 'recentf)
@@ -83,7 +84,7 @@
  '(doc-view-continuous t)
  '(fringe-mode 0 nil (fringe))
  '(org-agenda-files
-   '("~/Documents/nvALT/infox-notex-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/testx-emacs-org-agenda.txt" "~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/infox-notex-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-time-grid
    '((daily today require-timed)
      (800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000)
@@ -109,9 +110,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
- ;; '(org-block ((t (:background "#f1f6f9" :extend t))))
- ;; '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#f0f0f0" :extend t))))
- ;; '(org-block-end-line ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#f0f0f0" :extend t))))
+ '(org-block ((t (:background "#EFF0F1" :extend t))))
+ '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
+ '(org-block-end-line ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
  '(org-document-title ((t (:foreground "midnight blue" :weight bold :height 1.4))))
  '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
  '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
