@@ -1,4 +1,4 @@
-" vim: foldmethod=marker foldcolumn=2 ignorecase smartcase
+" vim: set foldmethod=marker foldcolumn=2 ignorecase smartcase nospell :
 "        _
 "       (_)
 " __   ___ _ __ ___  _ __ ___
@@ -45,16 +45,16 @@ set rnu "relativenumber
 " Autogroup
 "-----------
 "{{{
-augroup auto_set_number
-    autocmd InsertEnter * set nornu
-        \ | hi StatusLine guifg=yellow ctermfg=yellow
-        \ | hi CursorLine gui=NONE guibg=lightyellow
-        \ | hi CursorLineNr guibg=red
-    autocmd InsertLeave * set rnu
-        \ | hi StatusLine guifg=#cfd8dc ctermfg=66
-        \ | hi CursorLine gui=underline guibg=NONE
-        \ | hi CursorLineNr guibg=black
-augroup END
+" augroup auto_set_number
+"     autocmd InsertEnter * set nornu
+"         \ | hi StatusLine guifg=NONE ctermfg=NONE
+"         \ | hi CursorLine gui=NONE guibg=lightyellow
+"         \ | hi CursorLineNr guibg=orange guifg=white
+"     autocmd InsertLeave * set rnu
+"         \ | hi StatusLine guifg=#cfd8dc ctermfg=66
+"         \ | hi CursorLine gui=underline guibg=NONE
+"         \ | hi CursorLineNr guibg=black
+" augroup END
 "}}}
 
 "--------
@@ -95,7 +95,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "---------Themes------------
-Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'itchyny/lightline.vim'
 " Plugin 'powerline/powerline'
@@ -153,6 +153,8 @@ Plugin 'dbmrq/vim-ditto'                 " find repeated words
 Plugin 'blueyed/vim-diminactive'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'beloglazov/vim-online-thesaurus' " 2021-02-26
+
 
 "------Functionality--------
 " Plugin 'kien/ctrlp.vim'
@@ -170,6 +172,8 @@ Plugin 'mileszs/ack.vim'
 Plugin 'searchfold.vim'               " embigiuous with marker
 " Plugin 'wincent/command-t'            " ruby required
 Plugin 'ervandew/supertab'
+Plugin 'machakann/vim-highlightedyank'  " 2021-02-26
+
 
 "----------Python-----------
 Plugin 'nvie/vim-flake8'
@@ -190,8 +194,9 @@ syntax on
 
 let g:searchfold_maxdepth=1
 let g:solarized_termcolors=256
-let g:NERDTreeWinSize=43
+let g:NERDTreeWinSize=40
 " let g:org_indent=1
+let g:highlightedyank_highlight_duration = 2000
 
 "----------------------------------------------
  "MARKDOWN SUPPORT for 'plasticboy/vim-markdown'
@@ -292,7 +297,7 @@ augroup END
 " COLOR
 "--------
 set background=dark
-colorscheme papercolor
+" colorscheme papercolor
 " colorscheme solarized
 " colorscheme monokai
 " highlight LineNr ctermfg=darkgray
@@ -357,90 +362,90 @@ set cursorline
 set ruler
 set laststatus=2
 set showcmd
-"{{{
-" Status Line Custom
-let g:currentmode={
-    \ 'n'  : 'Normal',
-    \ 'no' : 'Normal·Operator Pending',
-    \ 'v'  : 'Visual',
-    \ 'V'  : 'V·Line',
-    \ "\<C-V>" : 'V·Block',
-    \ 's'  : 'Select',
-    \ 'S'  : 'S·Line',
-    \ '^S' : 'S·Block',
-    \ 'i'  : 'Insert',
-    \ 'R'  : 'Replace',
-    \ 'Rv' : 'V·Replace',
-    \ 'c'  : 'Command',
-    \ 'cv' : 'Vim Ex',
-    \ 'ce' : 'Ex',
-    \ 'r'  : 'Prompt',
-    \ 'rm' : 'More',
-    \ 'r?' : 'Confirm',
-    \ '!'  : 'Shell',
-    \ 't'  : 'Terminal'
-    \}
-"}}}
-function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
+""{{{
+"" Status Line Custom
+"let g:currentmode={
+"    \ 'n'  : 'Normal',
+"    \ 'no' : 'Normal·Operator Pending',
+"    \ 'v'  : 'Visual',
+"    \ 'V'  : 'V·Line',
+"    \ "\<C-V>" : 'V·Block',
+"    \ 's'  : 'Select',
+"    \ 'S'  : 'S·Line',
+"    \ '^S' : 'S·Block',
+"    \ 'i'  : 'Insert',
+"    \ 'R'  : 'Replace',
+"    \ 'Rv' : 'V·Replace',
+"    \ 'c'  : 'Command',
+"    \ 'cv' : 'Vim Ex',
+"    \ 'ce' : 'Ex',
+"    \ 'r'  : 'Prompt',
+"    \ 'rm' : 'More',
+"    \ 'r?' : 'Confirm',
+"    \ '!'  : 'Shell',
+"    \ 't'  : 'Terminal'
+"    \}
+""}}}
+"function! GitBranch()
+"  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+"endfunction
 
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
+"function! StatuslineGit()
+"  let l:branchname = GitBranch()
+"  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+"endfunction
 
-function! FileSize()
-    let bytes = getfsize(expand("%:p"))
-    if bytes <= 0
-        return ""
-    endif
-    if bytes < 1024
-        " return bytes
-        return "| " . (bytes) . "b"
-    else
-        return "| " . (bytes / 1024) . "k"
-    endif
-endfunction
-"{{{
-set statusline=
-" set statusline+=\               " blank
-" set statusline=\[%{mode()}\]    " current mode
-" set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
-" set statusline+=%#PmenuSel#
-" set statusline+=%{StatuslineGit()}
-" set statusline+=\               " blank
-set statusline+=%#Tabline#
-" set statusline+=\ Osic
-" set statusline+=\ World
-set statusline+=\               " blank
-set statusline+=%f              " path
-"set statusline+=\ -\            " separator
-"set statusline+=FileType:       " label
-set statusline+=\               " blank
-set statusline+=%m              " modified flag [+]
-set statusline+=%{FileSize()}
-"------------------
-set statusline+=%=              " right align
-" set statusline+=%#PmenuSel#
-set statusline+=%y              " filetype of the file
-" set statusline+=%#MoreMsg#
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-" set statusline+=\               " blank
-" set statusline+=\[%{&fileformat}\]
-set statusline+=\ %{&fileformat}
-set statusline+=\             " blank
-" set statusline+=Line:\ %l/%L  " line of total
-set statusline+=%l\ of\ %L\ [%p%%]
-" set statusline+=\%%           " percent sign only
-" set statusline+=%2*0x%04B\ %* " character under cursor
-" set statusline+=\             " blank
-" set statusline+=%P            " percentage of file/buffer
-set statusline+=\ \-\ Col:\ %c      " coloumn
-" set statusline+=%-7.(%l of %L [%p%%] - Col: %c%V%) "Current line, percentage of size, column,
-" required to know how to apply statuline grouping grammar 2020-12-31
-set statusline+=\             " blank
-"}}}
+"function! FileSize()
+"    let bytes = getfsize(expand("%:p"))
+"    if bytes <= 0
+"        return ""
+"    endif
+"    if bytes < 1024
+"        " return bytes
+"        return "| " . (bytes) . "b"
+"    else
+"        return "| " . (bytes / 1024) . "k"
+"    endif
+"endfunction
+""{{{
+"set statusline=
+"" set statusline+=\               " blank
+"" set statusline=\[%{mode()}\]    " current mode
+"" set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
+"" set statusline+=%#PmenuSel#
+"" set statusline+=%{StatuslineGit()}
+"" set statusline+=\               " blank
+"set statusline+=%#Tabline#
+"" set statusline+=\ Osic
+"" set statusline+=\ World
+"set statusline+=\               " blank
+"set statusline+=%f              " path
+""set statusline+=\ -\            " separator
+""set statusline+=FileType:       " label
+"set statusline+=\               " blank
+"set statusline+=%m              " modified flag [+]
+"set statusline+=%{FileSize()}
+""------------------
+"set statusline+=%=              " right align
+"" set statusline+=%#PmenuSel#
+"set statusline+=%y              " filetype of the file
+"" set statusline+=%#MoreMsg#
+"set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+"" set statusline+=\               " blank
+"" set statusline+=\[%{&fileformat}\]
+"set statusline+=\ %{&fileformat}
+"set statusline+=\             " blank
+"" set statusline+=Line:\ %l/%L  " line of total
+"set statusline+=%l\ of\ %L\ [%p%%]
+"" set statusline+=\%%           " percent sign only
+"" set statusline+=%2*0x%04B\ %* " character under cursor
+"" set statusline+=\             " blank
+"" set statusline+=%P            " percentage of file/buffer
+"set statusline+=\ \-\ Col:\ %c      " coloumn
+"" set statusline+=%-7.(%l of %L [%p%%] - Col: %c%V%) "Current line, percentage of size, column,
+"" required to know how to apply statuline grouping grammar 2020-12-31
+"set statusline+=\             " blank
+""}}}
 
 "--------------
 " TEXT EDITING
@@ -523,11 +528,14 @@ nnoremap <C-l> :3wincmd ><cr>
 " nnoremap <silent><space>wk <C-w>k
 " nnoremap <silent><space>wl <C-w>l
 
+nnoremap j gj
+nnoremap k gk
+
 " Hard Mode (Anti-Pattern)
-nnoremap hh <nop>
-nnoremap jj <nop>
-nnoremap kk <nop>
-nnoremap ll <nop>
+" nnoremap hh <nop>
+" nnoremap jj <nop>
+" nnoremap kk <nop>
+" nnoremap ll <nop>
 "}}}
 
 " --------
@@ -894,15 +902,17 @@ if has('gui_running')"{{{
     " set colorcolumn=105
     set cursorcolumn!
     set background=light
-    colorscheme basic-light
+    " colorscheme basic-light
+    colorscheme default
     " highlight LineNr guibg=white
     " highlight SignColumn guibg='#f0f0f0'  " for gitgutter
     " highlight FoldColumn guibg=white      " for foldcolumn
-    highlight Visual guifg=black guibg=Cyan gui=NONE
-    highlight CursorLineNr guibg=black guifg=white
-    highlight CursorLine gui=underline guibg=NONE
-    let g:airline_theme='serene'  "default raven serene luna monochrome powerlineish term transparent distinguished
+    " highlight Visual guifg=black guibg=Cyan gui=NONE
+    " highlight CursorLineNr guibg=black guifg=white
+    " highlight CursorLine gui=underline guibg=NONE
+    " let g:airline_theme='luna'  "default raven serene luna monochrome powerlineish term transparent distinguished
     " hi EasyMotionTarget guifg=red guibg=yellow
+    highlight Folded guibg=grey guifg=blue
 endif"}}}
 
 
