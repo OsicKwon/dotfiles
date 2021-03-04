@@ -45,6 +45,10 @@ set rnu "relativenumber
 " Autogroup
 "-----------
 "{{{
+augroup auto_set_number
+    autocmd InsertEnter * set nornu | set nocursorline
+    autocmd InsertLeave * set rnu   | set cursorline
+augroup END
 " augroup auto_set_number
 "     autocmd InsertEnter * set nornu
 "         \ | hi StatusLine guifg=NONE ctermfg=NONE
@@ -143,8 +147,9 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'godlygeek/tabular'
-" Plugin 'plasticboy/vim-markdown'         " conflicted with `ge` command  2021-02-04
+Plugin 'plasticboy/vim-markdown'
 " Plugin 'iamcco/markdown-preview.nvim'
+" Plugin 'masukomi/vim-markdown-folding'
 Plugin 'reedes/vim-wordy'
 Plugin 'dbmrq/vim-ditto'                 " find repeated words
 " Plugin 'reedes/vim-lexical'            " no idea
@@ -154,7 +159,6 @@ Plugin 'blueyed/vim-diminactive'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'beloglazov/vim-online-thesaurus' " 2021-02-26
-
 
 "------Functionality--------
 " Plugin 'kien/ctrlp.vim'
@@ -169,11 +173,10 @@ Plugin 'easymotion/vim-easymotion'
 " Plugin 'haya14busa/incsearch-fuzzy.vim'
 " Plugin 'haya14busa/incsearch-easymotion.vim'
 Plugin 'mileszs/ack.vim'
-Plugin 'searchfold.vim'               " embigiuous with marker
+" Plugin 'searchfold.vim'               " embigiuous with marker
 " Plugin 'wincent/command-t'            " ruby required
 Plugin 'ervandew/supertab'
 Plugin 'machakann/vim-highlightedyank'  " 2021-02-26
-
 
 "----------Python-----------
 Plugin 'nvie/vim-flake8'
@@ -181,7 +184,7 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'sirver/ultisnips'
 Plugin 'klen/python-mode'
 
-"------Other-plugins--------
+"------Other_plugins--------
 " Plugin 'itchyny/calendar.vim'
 Plugin 'jceb/vim-orgmode'
 Plugin 'tpope/vim-speeddating'
@@ -196,7 +199,7 @@ let g:searchfold_maxdepth=1
 let g:solarized_termcolors=256
 let g:NERDTreeWinSize=40
 " let g:org_indent=1
-let g:highlightedyank_highlight_duration = 2000
+let g:highlightedyank_highlight_duration = 1000
 
 "----------------------------------------------
  "MARKDOWN SUPPORT for 'plasticboy/vim-markdown'
@@ -215,6 +218,9 @@ augroup text_to_markdown
     " except for visual by 'indentline' plugin
     " When cursor is on a markdown syntax,
     " it will be show its markdown grammar automatically
+    " -------------------
+    let g:vim_markdown_no_default_key_mappings = 1  " enable `ge` command
+    let g:vim_markdown_folding_style_pythonic = 1   " folding including title
 augroup END
 
 " this is for markdown files only
@@ -257,6 +263,7 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 "}}}
+
 set thesaurus+=~/.vim/thesaurus/mthesaur.txt
 set thesaurus+=~/.vim/thesaurus/test_thesaur.txt
 
@@ -334,7 +341,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
-set bs=2 "back space
+set bs=2              " back space
 
 
 "---------
@@ -506,6 +513,9 @@ nnoremap <right> <nop>
 " useful but not vimway
 " nnoremap <tab> <C-w>w
 " nnoremap <S-tab> <C-w>W
+nnoremap <tab> za
+nnoremap <S-tab> zM
+nnoremap <S-M-tab> zR
 
 "RESIZING WINDOWS but Not Vim Way
 " nnoremap <up>       :3wincmd +<CR>

@@ -3,7 +3,14 @@
 ;;   / _ \/ __ `__ \/ __ `/ ___/ ___/
 ;; _/  __/ / / / / / /_/ / /__(__  ) 
 ;;(_)___/_/ /_/ /_/\__,_/\___/____/  
-                                   
+
+
+;; == recent setting ==
+
+;; enable clipboard in emacs
+(setq x-select-enable-clipboard t)
+
+
 ;;==================
 ;; Initial Setting
 ;;==================
@@ -102,7 +109,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(smart-mode-line powerthesaurus indent-guide focus ace-window neotree helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word smart-mode-line powerthesaurus indent-guide focus ace-window neotree helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -110,6 +117,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
+ '(mode-line ((((type x w32 ns)) (:overline t)) (((type tty)) (:inverse-video t))))
+ '(mode-line-inactive ((t (:inherit (shadow mode-line)))))
  '(org-block ((t (:background "#EFF0F1" :extend t))))
  '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
  '(org-block-end-line ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
@@ -122,14 +131,26 @@
 
 
 ;;==========
-;; window
+;; WINDOW
 ;;==========
 
 ;; `buffer-move` package 2020-12-22
-(global-set-key (kbd "<C-S-up>")     'buf-move-up)
-(global-set-key (kbd "<C-S-down>")   'buf-move-down)
-(global-set-key (kbd "<C-S-left>")   'buf-move-left)
-(global-set-key (kbd "<C-S-right>")  'buf-move-right)
+;; (global-set-key (kbd "<C-S-up>")     'buf-move-up)
+;; (global-set-key (kbd "<C-S-down>")   'buf-move-down)
+;; (global-set-key (kbd "<C-S-left>")   'buf-move-left)
+;; (global-set-key (kbd "<C-S-right>")  'buf-move-right)
+
+;; resizing windows (SHIFT+CONTRL) - conflicted to org-mode 2021-02-28
+;; (global-set-key (kbd "S-C-<left>")  'shrink-window-horizontally)
+;; (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+;; (global-set-key (kbd "S-C-<down>")  'shrink-window)
+;; (global-set-key (kbd "S-C-<up>")    'enlarge-window)
+
+;; Remove SHIFT to avoid confilct with Org-Mode
+(global-set-key (kbd "M-C-<left>")  'shrink-window-horizontally)
+(global-set-key (kbd "M-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "M-C-<down>")  'shrink-window)
+(global-set-key (kbd "M-C-<up>")    'enlarge-window)
 
 
 ;; ace-window 2021-02-23
@@ -240,7 +261,7 @@
 
 (if (display-graphic-p)
     (progn
-    ;; if graphic (GUI)
+      ;; if graphic (GUI)
       (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
       (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "gray")))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "lightgray")))
@@ -326,7 +347,7 @@
 ;; Color the evil tag - colors taken from spaceline
 ;; https://github.com/Malabarba/smart-mode-line/issues/195
 (setq evil-normal-state-tag   (propertize " NORMAL " 'face '((:background "black"          :foreground "white")))
-      evil-emacs-state-tag    (propertize " <E> " 'face '((:background "gray"              :foreground "black")))
+      evil-emacs-state-tag    (propertize " <E> " 'face '((:background original-background :foreground original-foreground)))
       evil-insert-state-tag   (propertize " INSERT " 'face '((:background "lightyellow"    :foreground "black")))
       evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "chocolate"     :foreground "black")))
       evil-motion-state-tag   (propertize " <Motion> " 'face '((:background "plum3"             :foreground "black")))
@@ -339,6 +360,8 @@
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
+
 
 ;; forward-sentence is based on the sentence-end variable
 ;; https://stackoverflow.com/questions/20257022/evil-emacs-mode-sentence-motions-and-other-questions
@@ -378,7 +401,8 @@
 (define-and-bind-quoted-text-object "asterisk" "*" "*" "*")
 (define-and-bind-quoted-text-object "dollar" "$" "\\$" "\\$") ;; sometimes your have to escape the regex
 
-
+;; evil-commentary mode package 2021-03-03
+(evil-commentary-mode)
 
 ;;----------------------------------------------------------------
 ;; ACE JUMP MODE
@@ -442,8 +466,14 @@
 ;; Olivetti 2021-02-11
 ;; -------------------
 ;; to remove boundry -> '(fringe-mode 0 nil (fringe)) in `(custom-set-variables` lines in front of this file. 
-(setq olivetti-body-width 95)
-(setq olivetti-minimum-body-width 80)
+(use-package olivetti
+  :init
+  (add-hook 'prog-mode-hook 'olivetti-mode)
+  (add-hook 'text-mode-hook 'olivetti-mode)
+  (setq olivetti-body-width 0.99)
+  ;; (setq olivetti-body-width 100)
+  ;; (setq olivetti-minimum-body-width 80)
+)
 
 
 ;; Undo-Tree Package 2021-02-13
@@ -455,6 +485,16 @@
 (setq undo-tree-visualizer-diff t)
 (setq undo-tree-auto-save-history t)
 
+
+;; beacon mode package 2021-03-03
+(beacon-mode 1)
+
+
+;; org-downloda 2021-03-01
+(require 'org-download)
+;; Drag-and-drop to `dired`
+(add-hook 'dired-mode-hook 'org-download-enable)
+;; (setq-default org-download-image-dir "~/Pictures")
 
 ;;===============================================================
 ;; ORG-MODE
@@ -469,7 +509,7 @@
 
 
 (add-to-list 'org-emphasis-alist
-             '("~" (:foreground "red")
+             '("~" (:foreground "red3")
                ))
 
 ;; === ORG-BABEL ===
