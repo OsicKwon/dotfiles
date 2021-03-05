@@ -155,7 +155,7 @@ Plugin 'dbmrq/vim-ditto'                 " find repeated words
 " Plugin 'reedes/vim-lexical'            " no idea
 " Plugin 'reedes/vim-pencil'             " no idea
 " Plugin 'xolox/vim-notes'
-Plugin 'blueyed/vim-diminactive'
+" Plugin 'blueyed/vim-diminactive'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'beloglazov/vim-online-thesaurus' " 2021-02-26
@@ -915,8 +915,8 @@ if has('gui_running')"{{{
     " colorscheme basic-light
     colorscheme default
     " highlight LineNr guibg=white
-    " highlight SignColumn guibg='#f0f0f0'  " for gitgutter
-    " highlight FoldColumn guibg=white      " for foldcolumn
+    highlight SignColumn guibg='white'       " for gitgutter
+    highlight FoldColumn guibg='white'       " for foldcolumn
     " highlight Visual guifg=black guibg=Cyan gui=NONE
     " highlight CursorLineNr guibg=black guifg=white
     " highlight CursorLine gui=underline guibg=NONE

@@ -109,7 +109,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word smart-mode-line powerthesaurus indent-guide focus ace-window neotree helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word smart-mode-line powerthesaurus indent-guide focus ace-window neotree helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -404,6 +404,11 @@
 ;; evil-commentary mode package 2021-03-03
 (evil-commentary-mode)
 
+;; avy (like ace-jump and easy-motion in vim) 2021-03-04
+(global-set-key (kbd "C-:") 'avy-goto-char)
+(global-set-key (kbd "C-'") 'avy-goto-char-2)
+
+
 ;;----------------------------------------------------------------
 ;; ACE JUMP MODE
 ;;----------------------------------------------------------------
@@ -419,12 +424,10 @@
 ;; you can select the key you prefer to
 ;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 ;; (define-key global-map (kbd "C-c SPC") 'ace-jump-char-mode)
-;;
-;; conflict org-mode: C-c SPC => org-table-blank-field
+;; WARNING :: conflict org-mode: C-c SPC => org-table-blank-field
 
 ;; `C-u C-c SPC` was not worked properly, so Used `C-c C-c` 2021-01-17
 ;; (define-key global-map (kbd "C-c C-c SPC") 'ace-jump-char-mode)
-
 
 ;; When org-mode starts it (org-mode-map) overrides the ace-jump-mode.
 ;; (https://github.com/winterTTr/ace-jump-mode/issues/47)
@@ -449,7 +452,7 @@
 ;(define-key viper-vi-global-user-map (kbd "SPC") 'ace-jump-mode)
 ;;If you use evil
 ;(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
-;; ----------------------------------------------------------------
+
 
 ;; projectile package 2021-01-29
 ;; -----------------------------
@@ -486,9 +489,74 @@
 (setq undo-tree-auto-save-history t)
 
 
+;; ---------------------------------------------------
+;; hydra 2021-03-04
+;; ---------------------------------------------------
+;;https://oremacs.com/2015/04/14/hydra-org-mode/
+(defhydra hydra-global-org (:color blue
+                            :hint nil)
+  "
+Timer^^        ^Clock^         ^Capture^
+--------------------------------------------------
+s_t_art        _w_ clock in    _c_apture
+ _s_top        _o_ clock out   _l_ast capture
+_r_eset        _j_ clock goto
+_p_rint
+"
+  ("t" org-timer-start)
+  ("s" org-timer-stop)
+  ;; Need to be at timer
+  ("r" org-timer-set-timer)
+  ;; Print timer value to buffer
+  ("p" org-timer)
+  ("w" (org-clock-in '(4)))
+  ("o" org-clock-out)
+  ;; Visit the clocked task from any buffer
+  ("j" org-clock-goto)
+  ("c" org-capture)
+  ("l" org-capture-goto-last-stored))
+
+(global-set-key [f11] 'hydra-global-org/body)
+
+
+;;** Example 8: the whole menu for `Buffer-menu-mode'
+;; https://github.com/abo-abo/hydra/blob/master/hydra-examples.el
+(defhydra hydra-buffer-menu (:color pink
+                             :hint nil)
+  "
+^Mark^             ^Unmark^           ^Actions^          ^Search
+^^^^^^^^-----------------------------------------------------------------                        (__)
+_m_: mark          _u_: unmark        _x_: execute       _R_: re-isearch                         (oo)
+_s_: save          _U_: unmark up     _b_: bury          _I_: isearch                      /------\\/
+_d_: delete        ^ ^                _g_: refresh       _O_: multi-occur                 / |    ||
+_D_: delete up     ^ ^                _T_: files only: % -28`Buffer-menu-files-only^^    *  /\\---/\\
+_~_: modified      ^ ^                ^ ^                ^^                                 ~~   ~~
+"
+  ("m" Buffer-menu-mark)
+  ("u" Buffer-menu-unmark)
+  ("U" Buffer-menu-backup-unmark)
+  ("d" Buffer-menu-delete)
+  ("D" Buffer-menu-delete-backwards)
+  ("s" Buffer-menu-save)
+  ("~" Buffer-menu-not-modified)
+  ("x" Buffer-menu-execute)
+  ("b" Buffer-menu-bury)
+  ("g" revert-buffer)
+  ("T" Buffer-menu-toggle-files-only)
+  ("O" Buffer-menu-multi-occur :color blue)
+  ("I" Buffer-menu-isearch-buffers :color blue)
+  ("R" Buffer-menu-isearch-buffers-regexp :color blue)
+  ("c" nil "cancel")
+  ("v" Buffer-menu-select "select" :color blue)
+  ("o" Buffer-menu-other-window "other-window" :color blue)
+  ("q" quit-window "quit" :color blue))
+;; Recommended binding:
+(define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
+
+
+
 ;; beacon mode package 2021-03-03
 (beacon-mode 1)
-
 
 ;; org-downloda 2021-03-01
 (require 'org-download)
@@ -634,9 +702,33 @@
 
 ;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
 ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-s") 'helm-occur)
+;; (global-set-key (kbd "C-s") 'helm-occur)
 ;; (global-set-key (kbd "M-x") 'helm-M-x)
 
+;; Swiper Bundle 2021-03-03
+;; https://github.com/abo-abo/swiper
+;; (ivy-mode 1)  " replaced Helm search - think about this more 2021-03-05
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+;; enable this if you want `swiper' to use it
+;; (setq search-default-mode #'char-fold-to-regexp)
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "<f6>") 'ivy-resume)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+(global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
+(global-set-key (kbd "<f1> l") 'counsel-find-library)
+(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+(global-set-key (kbd "C-c g") 'counsel-git)
+(global-set-key (kbd "C-c j") 'counsel-git-grep)
+(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-x l") 'counsel-locate)
+(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
 ;; Interactive Do Mode like showing suggestion keyword 2020-12-18
 ;; Added ido-vertical-mode 2021-01-04
