@@ -55,3 +55,8 @@ echo " 4) googler :: googler -n 5 -t m12 -w abc.com -N 'word'";
 echo " 5) wikit   :: wikit 'word'";
 echo "-------------------------------------------------------------";
 
+
+# Setting PATH for Python 3.7
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
+export PATH

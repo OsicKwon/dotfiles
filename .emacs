@@ -40,6 +40,9 @@
 )
 
 
+(add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative)))
+
+
 ;; Focus on `Buffer List` window when it is opened - 2021-02-21
 ;; https://www.reddit.com/r/emacs/comments/qjkwf/is_there_a_way_to_make_emacs_switch_to_the_buffer/
 (defun buffer-list-switch ()
@@ -90,6 +93,7 @@
  '(custom-enabled-themes nil)
  '(doc-view-continuous t)
  '(fringe-mode 0 nil (fringe))
+ '(global-undo-tree-mode t)
  '(org-agenda-files
    '("~/Documents/nvALT/infox-notex-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-time-grid
@@ -109,7 +113,10 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word smart-mode-line powerthesaurus indent-guide focus ace-window neotree helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+ '(undo-tree-auto-save-history nil)
+ '(undo-tree-visualizer-diff t)
+ '(undo-tree-visualizer-timestamps t))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -119,9 +126,6 @@
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
  '(mode-line ((((type x w32 ns)) (:overline t)) (((type tty)) (:inverse-video t))))
  '(mode-line-inactive ((t (:inherit (shadow mode-line)))))
- '(org-block ((t (:background "#EFF0F1" :extend t))))
- '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
- '(org-block-end-line ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
  '(org-document-title ((t (:foreground "midnight blue" :weight bold :height 1.4))))
  '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
  '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
@@ -347,10 +351,10 @@
 ;; Color the evil tag - colors taken from spaceline
 ;; https://github.com/Malabarba/smart-mode-line/issues/195
 (setq evil-normal-state-tag   (propertize " NORMAL " 'face '((:background "black"          :foreground "white")))
-      evil-emacs-state-tag    (propertize " <E> " 'face '((:background original-background :foreground original-foreground)))
+;;      evil-emacs-state-tag    (propertize " <E> " 'face '((:background original-background :foreground original-foreground)))
       evil-insert-state-tag   (propertize " INSERT " 'face '((:background "lightyellow"    :foreground "black")))
       evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "chocolate"     :foreground "black")))
-      evil-motion-state-tag   (propertize " <Motion> " 'face '((:background "plum3"             :foreground "black")))
+      evil-motion-state-tag   (propertize " <Motion> " 'face '((:background "plum3"        :foreground "black")))
       evil-visual-state-tag   (propertize " VISUAL " 'face '((:background "darkgray"       :foreground "black")))
       evil-operator-state-tag (propertize " <Operator> " 'face '((:background "sandy brown"       :foreground "black"))))
 
@@ -556,13 +560,27 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 
 
 ;; beacon mode package 2021-03-03
-(beacon-mode 1)
+;; (beacon-mode 1)
 
 ;; org-downloda 2021-03-01
 (require 'org-download)
 ;; Drag-and-drop to `dired`
 (add-hook 'dired-mode-hook 'org-download-enable)
 ;; (setq-default org-download-image-dir "~/Pictures")
+
+
+;; calendar view 2021-03-05
+;; to show calendar :: M-x cfw:open-calendar-buffer
+(require 'calfw)
+;; For Org User (https://github.com/kiwanami/emacs-calfw#for-org-users)
+(require 'calfw-org)
+;; Then, M-x cfw:open-org-calendar
+
+;; For iCal(Google Calendar) Users: (https://github.com/kiwanami/emacs-calfw#for-ical-google-calendar-users)
+(require 'calfw-ical)
+;; (cfw:open-ical-calendar "https://calendar.google.com/calendar/ical/osic.kwon%40gmail.com/public/basic.ics")
+
+
 
 ;;===============================================================
 ;; ORG-MODE
@@ -702,33 +720,33 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 
 ;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
 ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
-;; (global-set-key (kbd "C-s") 'helm-occur)
+(global-set-key (kbd "C-s") 'helm-occur)
 ;; (global-set-key (kbd "M-x") 'helm-M-x)
 
 ;; Swiper Bundle 2021-03-03
 ;; https://github.com/abo-abo/swiper
 ;; (ivy-mode 1)  " replaced Helm search - think about this more 2021-03-05
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
+;; (setq ivy-use-virtual-buffers t)
+;; (setq enable-recursive-minibuffers t)
 ;; enable this if you want `swiper' to use it
 ;; (setq search-default-mode #'char-fold-to-regexp)
-(global-set-key "\C-s" 'swiper)
-(global-set-key (kbd "C-c C-r") 'ivy-resume)
-(global-set-key (kbd "<f6>") 'ivy-resume)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "<f1> f") 'counsel-describe-function)
-(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-(global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
-(global-set-key (kbd "<f1> l") 'counsel-find-library)
-(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-(global-set-key (kbd "C-c g") 'counsel-git)
-(global-set-key (kbd "C-c j") 'counsel-git-grep)
-(global-set-key (kbd "C-c k") 'counsel-ag)
-(global-set-key (kbd "C-x l") 'counsel-locate)
-(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+;; (global-set-key "\C-s" 'swiper)
+;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
+;; (global-set-key (kbd "<f6>") 'ivy-resume)
+;; (global-set-key (kbd "M-x") 'counsel-M-x)
+;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+;; (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
+;; (global-set-key (kbd "<f1> l") 'counsel-find-library)
+;; (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+;; (global-set-key (kbd "C-c g") 'counsel-git)
+;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
+;; (global-set-key (kbd "C-c k") 'counsel-ag)
+;; (global-set-key (kbd "C-x l") 'counsel-locate)
+;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+;; (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
 ;; Interactive Do Mode like showing suggestion keyword 2020-12-18
 ;; Added ido-vertical-mode 2021-01-04
@@ -741,12 +759,11 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 ;; 2021-01-07
 (require 'smex)
 (smex-initialize)
-
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c M-x") 'smex-update)
-;; confilicted with magit commit command 'C-c C-c' 2021-02-12
-;; (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+;; confilicted with magit commit command 'C-c C-c' 2021-02-12 << double check required
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 
 ;; Git-Gutter 2020-12-18

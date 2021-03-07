@@ -188,6 +188,7 @@ Plugin 'klen/python-mode'
 " Plugin 'itchyny/calendar.vim'
 Plugin 'jceb/vim-orgmode'
 Plugin 'tpope/vim-speeddating'
+" Plugin 'takac/vim-hardtime'
 
 call vundle#end()
 
@@ -195,6 +196,7 @@ filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 syntax on
 
+let g:indentLine_char = '┆'
 let g:searchfold_maxdepth=1
 let g:solarized_termcolors=256
 let g:NERDTreeWinSize=40
@@ -213,7 +215,8 @@ augroup text_to_markdown
     " let g:vim_markdown_follow_anchor = 0  " to use vim `ge` command avoiding in markdown mode
     let g:indentLine_concealcursor=""
     let g:indentLine_conceallevel=2
-    "autocmd BufRead,BufNewFile *.txt set concealcursor="" | set conceallevel=2
+    " autocmd BufRead,BufNewFile *.txt set concealcursor="" | set conceallevel=2
+    autocmd BufRead,BufNewFile markdown set concealcursor="" | set conceallevel=0
     " Default was 'inc' stands for insert, normal, and command
     " except for visual by 'indentline' plugin
     " When cursor is on a markdown syntax,
@@ -570,8 +573,8 @@ inoremap <C-d> <Delete>
 inoremap <C-e> <End>
 
 " Escape in many ways in Insert mode"
-" inoremap <silent>jj <Esc>
-" inoremap <silent>kk <Esc>
+inoremap <silent>jj <Esc>
+inoremap <silent>kk <Esc>
 " inoremap kj <Esc>
 " inoremap jk <Esc>
 
