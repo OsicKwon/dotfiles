@@ -311,7 +311,8 @@ set background=dark
 " colorscheme solarized
 " colorscheme monokai
 " highlight LineNr ctermfg=darkgray
-
+highlight SignColumn ctermbg=NONE  " for gitgutter
+highlight FoldColumn ctermbg=NONE  " for foldcolumn
 
 "----------------------
 " SPLIT VERTICAL COLOR
@@ -927,7 +928,6 @@ if has('gui_running')"{{{
     " hi EasyMotionTarget guifg=red guibg=yellow
     highlight Folded guibg=grey guifg=blue
 endif"}}}
-
 
 "========================================
 " LEADER KEY
