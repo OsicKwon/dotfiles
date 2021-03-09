@@ -2,3 +2,4 @@
 #.emacs#
 /.idea/
 *.out
+..emacs.~undo-tree~

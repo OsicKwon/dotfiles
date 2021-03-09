@@ -1,5 +1,63 @@
-"be220cce094f9360b618ad1a39d925df5fd3afda"
-#s(undo-tree [nil ([nil ([nil ([nil (#1=[nil nil ((24308 . 24311) (t 24643 49054 0 0)) nil (24643 56239 65438 0) 0 nil]) ((4843 . 5791) (#("(custom-set-faces
+"d571a01134d9552e625dd21359abbc758fc4feaa"
+#s(undo-tree [nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil ([nil (#1=[nil nil ((24320 . 24321)) nil (24646 58700 538008 0) 0 nil]) ((#("5" 0 1 (fontified t)) . -24320) (undo-tree-id0 . -1) (undo-tree-id1 . -1) (undo-tree-id2 . -1) 24321 (t 24646 30595 0 0)) nil (24646 58700 538034 0) 0 nil]) ((4821 . 5769) (#("(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry \"nil\" :family \"Menlo\"))))
+ '(mode-line ((((type x w32 ns)) (:overline t)) (((type tty)) (:inverse-video t))))
+ '(mode-line-inactive ((t (:inherit (shadow mode-line)))))
+ '(org-document-title ((t (:foreground \"midnight blue\" :weight bold :height 1.4))))
+ '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
+ '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
+ '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
+ '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))" 0 948 (fontified nil)) . -4821) (4711 . 4819) (#("
+" 0 1 (fontified nil)) . -4711) (4058 . 4712) (#(" " 0 1 (fontified nil)) . 4058) (4028 . 4059) (4003 . 4006) (3966 . 3969) (3931 . 3934) (3881 . 3884) (#("
+" 0 1 (fontified nil)) . -4016) (3992 . 3994) (3958 . 3960) (3926 . 3928) (3879 . 3881) (4008 . 4009) (3985 . 3986) (#("
+" 0 1 (fontified nil)) . 3985) (3985 . 3986) (#(" " 0 1 (fontified nil)) . -3985) (3953 . 3954) (#("
+" 0 1 (fontified nil)) . 3953) (3953 . 3954) (#(" " 0 1 (fontified nil)) . -3953) (3923 . 3924) (#("
+" 0 1 (fontified nil)) . 3923) (3923 . 3924) (#(" " 0 1 (fontified nil)) . -3923) (3878 . 3879) (#("
+" 0 1 (fontified nil)) . 3878) (3878 . 3879) (#(" " 0 1 (fontified nil)) . -3878) (3838 . 4008) (#(" " 0 1 (fontified nil)) . 3838) (3572 . 3839) (3541 . 3544) (3471 . 3474) (#("
+" 0 1 (fontified nil)) . -3566) (3536 . 3538) (3469 . 3471) (3562 . 3563) (3533 . 3534) (#(" " 0 1 (fontified nil)) . -3533) (3468 . 3469) (#("
+" 0 1 (fontified nil)) . 3468) (3468 . 3469) (#(" " 0 1 (fontified nil)) . -3468) (3435 . 3562) (#(" " 0 1 (fontified nil)) . 3435) (3410 . 3436) (#("
+" 0 1 (fontified nil)) . -3410) (3208 . 3411) (#(" " 0 1 (fontified nil)) . 3208) (3036 . 3209) (#("
+" 0 1 (fontified nil)) . -3036) (2951 . 3037) (#(" " 0 1 (fontified nil)) . 2951) (2680 . 2952) (#("(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   [\"#212526\" \"#ff4b4b\" \"#b4fa70\" \"#fce94f\" \"#729fcf\" \"#e090d7\" \"#8cc4ff\" \"#eeeeec\"])
+ '(confirm-kill-emacs 'yes-or-no-p)
+ '(custom-enabled-themes nil)
+ '(doc-view-continuous t)
+ '(fringe-mode 0 nil (fringe))
+ '(global-undo-tree-mode t)
+ '(org-agenda-files
+   '(\"~/Documents/nvALT/infox-notex-Jiwoo.txt\" \"~/Documents/nvALT/INBOX_TODO_2021.txt\" \"~/Documents/nvALT/projx-elt_221.txt\" \"~/Documents/nvALT/projx-TorontoLife.txt\" \"~/Documents/nvALT/projx-eix.txt\"))
+ '(org-agenda-time-grid
+   '((daily today require-timed)
+     (800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000)
+     \"......\" \"----------------\"))
+ '(org-agenda-use-time-grid t)
+ '(org-confirm-babel-evaluate nil)
+ '(org-export-backends '(ascii beamer html icalendar latex odt))
+ '(org-fontify-done-headline t)
+ '(org-fontify-quote-and-verse-blocks t)
+ '(org-fontify-whole-heading-line t)
+ '(org-link-frame-setup
+   '((vm . vm-visit-folder-other-frame)
+     (vm-imap . vm-visit-imap-folder-other-frame)
+     (gnus . org-gnus-no-new-news)
+     (file . find-file-other-window)
+     (wl . wl-other-frame)))
+ '(package-selected-packages
+   '(google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+ '(undo-tree-auto-save-history nil)
+ '(undo-tree-visualizer-diff t)
+ '(undo-tree-visualizer-timestamps t))" 0 2161 (fontified nil)) . -2680) (t 24646 29568 0 0)) nil (24646 30595 806011 0) 0 nil]) ((24342 . 24343) (#("7" 0 1 (fontified t)) . 24342) (undo-tree-id17 . -1) (undo-tree-id18 . -1) (undo-tree-id19 . -1) (t 24646 29551 0 0)) nil (24646 29568 583313 0) 0 nil]) ((#(" " 0 1 (fontified t)) . -24344) (undo-tree-id0 . -1) (undo-tree-id1 . -1) (#("w" 0 1 (fontified t)) . -24345) (undo-tree-id2 . -1) (undo-tree-id3 . -1) (#("
+" 0 1 (fontified t)) . -24346) (undo-tree-id4 . -1) (undo-tree-id5 . -1) (undo-tree-id6 . 1) (undo-tree-id7 . -1) (undo-tree-id8 . -1) 24347 (24346 . 24347) (24343 . 24346) (24332 . 24343) (#("c" 0 1 (fontified t)) . -24332) (undo-tree-id9 . -1) (#("o" 0 1 (fontified t)) . -24333) (undo-tree-id10 . -1) (#("n" 0 1 (fontified t)) . -24334) (undo-tree-id11 . -1) (#("-" 0 1 (fontified t)) . -24335) (undo-tree-id12 . -1) (#("s" 0 1 (fontified t)) . -24336) (undo-tree-id13 . -1) (#("i" 0 1 (fontified t)) . -24337) (undo-tree-id14 . -1) (#("z" 0 1 (fontified t)) . -24338) (undo-tree-id15 . -1) (#("e" 0 1 (fontified t)) . -24339) (undo-tree-id16 . -1) 24340 (24325 . 24340) (24324 . 24325) (24323 . 24324) 24309) nil (24646 29551 253083 0) 0 nil]) ((apply 3 24308 24324 undo--wrap-and-run-primitive-undo 24308 24324 ((#(";; " 0 3 (fontified t face font-lock-comment-delimiter-face)) . -24308) 24312)) (t 24646 26589 0 0)) nil (24646 29551 253090 0) 0 nil]) ((24308 . 24311) (t 24645 24088 0 0)) nil (24646 26589 934829 0) 0 nil]) ((apply 3 24308 24324 undo--wrap-and-run-primitive-undo 24308 24324 ((#(";; " 0 3 (fontified t face font-lock-comment-delimiter-face)) . -24308) 24312)) (t 24645 18826 0 0)) nil (24645 24088 372175 0) 0 nil]) ((24308 . 24311) (t 24643 49054 0 0)) nil (24643 56239 65438 0) 0 nil]) ((4843 . 5791) (#("(custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
@@ -170,4 +228,4 @@
    '(google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word smart-mode-line powerthesaurus indent-guide focus ace-window neotree helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(undo-tree-auto-save-history nil)
  '(undo-tree-visualizer-diff t)
- '(undo-tree-visualizer-timestamps t))" 0 2191 (fontified nil)) . -2680) (t 24643 36869 0 0)) nil (24643 48430 624202 0) 0 nil]) nil nil (24643 48430 624214 0) 0 nil] #1# 10920 4 nil)
+ '(undo-tree-visualizer-timestamps t))" 0 2191 (fontified nil)) . -2680) (t 24643 36869 0 0)) nil (24643 48430 624202 0) 0 nil]) nil nil (24643 48430 624214 0) 0 nil] #1# 14999 12 nil)
