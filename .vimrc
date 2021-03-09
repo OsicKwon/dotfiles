@@ -128,7 +128,7 @@ Plugin 'tpope/vim-repeat'
 " Plugin 'davidhalter/jedi-vim'          " not working - hard to solve 2020-11-20
 " Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
 " Plugin 'severin-lemaignan/vim-minimap'
-Plugin 'terryma/vim-expand-region'
+" Plugin 'terryma/vim-expand-region'
 " Plugin 'w0rp/ale'                      " Asynchronous Lint Engine ??
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
 " Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
@@ -147,9 +147,9 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+" Plugin 'plasticboy/vim-markdown'
 " Plugin 'iamcco/markdown-preview.nvim'
-" Plugin 'masukomi/vim-markdown-folding'
+Plugin 'masukomi/vim-markdown-folding'
 Plugin 'reedes/vim-wordy'
 Plugin 'dbmrq/vim-ditto'                 " find repeated words
 " Plugin 'reedes/vim-lexical'            " no idea
@@ -196,7 +196,8 @@ filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 syntax on
 
-let g:indentLine_char = '┆'
+" let g:indentLine_char = '¦'
+" let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:searchfold_maxdepth=1
 let g:solarized_termcolors=256
 let g:NERDTreeWinSize=40
@@ -223,13 +224,16 @@ augroup text_to_markdown
     " it will be show its markdown grammar automatically
     " -------------------
     let g:vim_markdown_no_default_key_mappings = 1  " enable `ge` command
-    let g:vim_markdown_folding_style_pythonic = 1   " folding including title
+    " let g:vim_markdown_folding_style_pythonic = 1   " folding including title
+    let g:vim_markdown_override_foldtext = 0
 augroup END
 
 " this is for markdown files only
 " foldmethod from 'expr' to 'manual'
 "}}}
 
+" for markdown-folding plugin setting
+autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
 
 let g:airline_theme='tomorrow'  "default minimalist bubblegum raven angr
 " air-line
@@ -546,6 +550,7 @@ nnoremap j gj
 nnoremap k gk
 
 " Hard Mode (Anti-Pattern)
+" tips: '+' and '-' move lines, or 'gj' and 'gk' 2021-03-09
 " nnoremap hh <nop>
 " nnoremap jj <nop>
 " nnoremap kk <nop>
@@ -670,8 +675,8 @@ function! HardMode()
     silent! noremap <down>  <nop>
     silent! noremap <left>  <nop>
     silent! noremap <right> <nop>
-    silent! unmap <tab>
-    silent! unmap <S-tab>
+    " silent! unmap <tab>
+    " silent! unmap <S-tab>
     Limelight!
     set scrolloff=0
     set noignorecase
@@ -982,6 +987,9 @@ nmap <Leader>L <Plug>(easymotion-overwin-line)
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
+" Easy to Use (Vimium?)
+" map  f <Plug>(easymotion-bd-f)
+" nmap f <Plug>(easymotion-overwin-f)
 
 "------------
 " IncSearch
