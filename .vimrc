@@ -99,7 +99,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "---------Themes------------
-" Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'itchyny/lightline.vim'
 " Plugin 'powerline/powerline'
@@ -311,7 +311,7 @@ augroup END
 " COLOR
 "--------
 set background=dark
-" colorscheme papercolor
+colorscheme papercolor
 " colorscheme solarized
 " colorscheme monokai
 " highlight LineNr ctermfg=darkgray
@@ -929,7 +929,7 @@ if has('gui_running')"{{{
     " highlight Visual guifg=black guibg=Cyan gui=NONE
     " highlight CursorLineNr guibg=black guifg=white
     " highlight CursorLine gui=underline guibg=NONE
-    " let g:airline_theme='luna'  "default raven serene luna monochrome powerlineish term transparent distinguished
+    let g:airline_theme='luna'  "default raven serene luna monochrome powerlineish term transparent distinguished
     " hi EasyMotionTarget guifg=red guibg=yellow
     highlight Folded guibg=grey guifg=blue
 endif"}}}
