@@ -9,6 +9,10 @@
 ;; enable clipboard in emacs
 (setq x-select-enable-clipboard t)
 
+(unless (display-graphic-p) 
+  ;; terminal mode
+  )
+
 
 ;;==================
 ;; Initial Setting
@@ -95,10 +99,10 @@
  '(doc-view-continuous t)
  '(fringe-mode 0 nil (fringe))
  '(global-undo-tree-mode t)
- '(helm-mode t)
+ '(helm-mode nil)
  '(latex-run-command "pdflatex")
  '(org-agenda-files
-   '("~/Documents/nvALT/infox-notex-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-time-grid
    '((daily today require-timed)
      (800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000)
@@ -117,7 +121,9 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(command-log-mode google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(command-log-mode google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+ '(safe-local-variable-values
+   '((eval face-remap-add-relative 'org-level-1 :inherit 'outline-1 :height 1.3 :background "gray" :extend t))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -125,6 +131,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
+ '(aw-leading-char-face ((t (:foreground "red" :height 2.0))))
  '(helm-match ((t (:extend t :foreground "#b00000" :underline t :weight bold))))
  '(mode-line ((((type x w32 ns)) (:overline t)) (((type tty)) (:inverse-video t))))
  '(mode-line-inactive ((t (:inherit (shadow mode-line)))))
@@ -474,8 +481,8 @@
 
 ;; helm-projectile package 2021
 ;; (setq helm-projectile-fuzzy-match nil)
-(require 'helm-projectile)
-(helm-projectile-on)
+;; (require 'helm-projectile)
+;; (helm-projectile-on)
 
 
 ;; Olivetti 2021-02-11
@@ -485,9 +492,9 @@
   :init
   (add-hook 'prog-mode-hook 'olivetti-mode)
   (add-hook 'text-mode-hook 'olivetti-mode)
-  (setq olivetti-body-width 0.99)
+  (setq olivetti-body-width 0.98)
   ;; (setq olivetti-body-width 100)
-  ;; (setq olivetti-minimum-body-width 80)
+  ;; (setq olivetti-minimum-body-width 10)
 )
 
 
@@ -498,7 +505,7 @@
 (global-undo-tree-mode)                                      
 (setq undo-tree-visualizer-timestamps t)
 (setq undo-tree-visualizer-diff t)
-(setq undo-tree-auto-save-history t)
+(setq undo-tree-auto-save-history nil)
 
 
 ;; ---------------------------------------------------
@@ -729,9 +736,9 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 
 
 ;; helm package key bindings 2020-12-17
-
-(require 'helm-config)
-(helm-mode 1)
+;; ------------------------------------
+;; (require 'helm-config)
+;; (helm-mode 1)
 
 ;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
 ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)  ;; trade off against `counsel-find-file`
@@ -739,6 +746,11 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 ;; (global-set-key (kbd "M-x") 'helm-M-x)
 ;; https://www.youtube.com/watch?v=k78f8NYYIto
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+
+;; https://www.reddit.com/r/emacs/comments/2z7nbv/lean_helm_window/
+(helm-autoresize-mode 1)
+(setq helm-autoresize-max-height 50)
+(setq helm-autoresize-min-height 50)
 
 
 ;; Swiper Bundle 2021-03-03
@@ -766,10 +778,39 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 ;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
 ;; (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
+
+;; https://blog.sumtypeofway.com/posts/emacs-config.html
+
+(use-package ivy
+  :diminish
+  :custom
+  ;; (ivy-height 25)
+  (ivy-use-virtual-buffers t)
+  ;; (ivy-use-selectable-prompt t)
+  :config
+  (ivy-mode 1)
+
+  ;; :bind (("C-c C-r" . #'ivy-resume)
+  ;;        ("C-c s"   . #'swiper-thing-at-point)
+  ;;        ("C-s"     . #'swiper))
+  )
+
+;; ivy-height relative setting
+;; https://github.com/abo-abo/swiper/issues/1722
+(setq ivy-height-alist
+      '((t
+         lambda (_caller)
+         (/ (frame-height) 2))))
+
+;; (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-call)
+
+
 ;; Interactive Do Mode like showing suggestion keyword 2020-12-18
 ;; Added ido-vertical-mode 2021-01-04
 (require 'ido-vertical-mode)
 (ido-mode 1)
+(setq ido-everywhere t)
+(setq ido-enable-flex-matching t)
 (ido-vertical-mode 1)
 (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
 
