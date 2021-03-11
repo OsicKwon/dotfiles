@@ -4,7 +4,6 @@
 ;; _/  __/ / / / / / /_/ / /__(__  ) 
 ;;(_)___/_/ /_/ /_/\__,_/\___/____/  
 
-
 ;; == recent setting ==
 
 ;; enable clipboard in emacs
@@ -51,10 +50,12 @@
   (list-buffers)
   (select-window (get-buffer-window "*Buffer List*" 0))
 )
-
 (global-set-key (kbd "C-x C-b") 'buffer-list-switch)
 
-(indent-guide-global-mode) ;; indent-guide package 2021-02-24
+
+;; indent-guide package 2021-02-24
+(indent-guide-global-mode)
+
 
 ;; Recent opened file history 2020-12-31
 (require 'recentf)
@@ -94,6 +95,8 @@
  '(doc-view-continuous t)
  '(fringe-mode 0 nil (fringe))
  '(global-undo-tree-mode t)
+ '(helm-mode t)
+ '(latex-run-command "pdflatex")
  '(org-agenda-files
    '("~/Documents/nvALT/infox-notex-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-time-grid
@@ -101,6 +104,7 @@
      (800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000)
      "......" "----------------"))
  '(org-agenda-use-time-grid t)
+ '(org-babel-python-command "python3")
  '(org-confirm-babel-evaluate nil)
  '(org-export-backends '(ascii beamer html icalendar latex odt))
  '(org-fontify-done-headline t)
@@ -113,10 +117,8 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
- '(undo-tree-auto-save-history nil)
- '(undo-tree-visualizer-diff t)
- '(undo-tree-visualizer-timestamps t))
+
+   '(command-log-mode google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -124,6 +126,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
+ '(helm-match ((t (:extend t :foreground "#b00000" :underline t :weight bold))))
  '(mode-line ((((type x w32 ns)) (:overline t)) (((type tty)) (:inverse-video t))))
  '(mode-line-inactive ((t (:inherit (shadow mode-line)))))
  '(org-document-title ((t (:foreground "midnight blue" :weight bold :height 1.4))))
@@ -131,7 +134,8 @@
  '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
- '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
+ '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
+ '(org-level-7 ((t (:inherit outline-7 :box (:line-width 2 :color "grey75" :style released-button) :height 1.0)))))
 
 
 ;;==========
@@ -469,6 +473,11 @@
 ;; or install 'helm-ag' package to use same function
 ;; however, required intall '(sudo) port install the_silver_searcher' first (the_silver_searcher = ag)
 
+;; helm-projectile package 2021
+;; (setq helm-projectile-fuzzy-match nil)
+(require 'helm-projectile)
+(helm-projectile-on)
+
 
 ;; Olivetti 2021-02-11
 ;; -------------------
@@ -558,10 +567,17 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 (define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
 
 
-
 ;; beacon mode package 2021-03-03
-(beacon-mode 1)
-(setq beacon-size 6)
+;; (beacon-mode 1)  ;; Interupted `org-tree-slide-mode`
+(setq beacon-size 5)
+(setq beacon-color "black")
+
+
+;; command-log-mode 2021-03-09
+;; https://github.com/lewang/command-log-mode 
+(require 'command-log-mode)
+(add-hook 'LaTeX-mode-hook 'command-log-mode)
+
 
 ;; org-downloda 2021-03-01
 (require 'org-download)
@@ -720,9 +736,12 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 (helm-mode 1)
 
 ;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
-;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
+;; (global-set-key (kbd "C-x C-f") 'helm-find-files)  ;; trade off against `counsel-find-file`
 (global-set-key (kbd "C-s") 'helm-occur)
 ;; (global-set-key (kbd "M-x") 'helm-M-x)
+;; https://www.youtube.com/watch?v=k78f8NYYIto
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+
 
 ;; Swiper Bundle 2021-03-03
 ;; https://github.com/abo-abo/swiper
@@ -735,7 +754,7 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 ;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
 ;; (global-set-key (kbd "<f6>") 'ivy-resume)
 ;; (global-set-key (kbd "M-x") 'counsel-M-x)
-;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
 ;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
 ;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
 ;; (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
