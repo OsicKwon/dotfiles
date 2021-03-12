@@ -14,6 +14,56 @@
   )
 
 
+;; -------------------------------------------------
+;; Recent opened file history 2020-12-31
+;; (Interchangable/trade-off with Dashboard package)
+;; -------------------------------------------------
+;; (require 'recentf)
+;; (recentf-mode 1)
+;; (global-set-key "\C-xf" 'recentf-open-files)
+;; (setq recentf-auto-cleanup 'never)
+
+
+;; ----------------------------
+;; Dashboard package 2021-03-12
+;; ----------------------------
+;; (require 'dashboard)
+;; (dashboard-setup-startup-hook)
+;; Or if you use use-package
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
+
+  ;; Set the title
+  (setq dashboard-banner-logo-title "Welcome to Emacs")
+  ;; Set the banner
+  (setq dashboard-startup-banner 'logo)
+  ;; Value can be
+  ;; 'official which displays the official emacs logo
+  ;; 'logo which displays an alternative emacs logo
+  ;; 1, 2 or 3 which displays one of the text banners
+  ;; "path/to/your/image.png" or "path/to/your/text.txt" which displays whatever image/text you would prefer
+
+  ;; Content is not centered by default. To center, set
+  (setq dashboard-center-content t)
+
+  ;; To disable shortcut "jump" indicators for each section, set
+  (setq dashboard-show-shortcuts t)
+
+  ;; agenda conflicted with `recents` list with org-agenda files 2021-03-12
+  (setq dashboard-items '(
+			  (bookmarks . 5)
+			  (recents  . 15)
+			  (projects . 5)
+			  (agenda . 5)
+			  ;; (registers . 5)
+			  )
+  )
+  
+)
+
+
 ;;==================
 ;; Initial Setting
 ;;==================
@@ -61,12 +111,9 @@
 (indent-guide-global-mode)
 
 
-;; Recent opened file history 2020-12-31
-(require 'recentf)
-(recentf-mode 1)
-(global-set-key "\C-xf" 'recentf-open-files)
-(setq recentf-auto-cleanup 'never)
 
+
+;; Others
 (setq backup-directory-alist `(("." . "~/.saves/")))         ;; Backup files relocated 2020-10-09
 (setq inhibit-startup-screen t)                              ;; No welcome startup screen
 (setq initial-scratch-message "")                            ;; No scratch message 2020-10-10
@@ -121,7 +168,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(counsel command-log-mode google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(dashboard flycheck counsel command-log-mode google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -368,6 +415,7 @@
 
 ;; evil key binding
 (define-key evil-normal-state-map (kbd "SPC") 'evil-ex)
+(define-key evil-visual-state-map (kbd "SPC") 'evil-ex)
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
@@ -417,9 +465,10 @@
 (evil-commentary-mode)
 
 ;; avy (like ace-jump and easy-motion in vim) 2021-03-04
-;; (global-set-key (kbd "C-:") 'avy-goto-char)
+(global-set-key (kbd "C-:") 'avy-goto-char)
 ;; (global-set-key (kbd "C-'") 'avy-goto-char-2)
-(global-set-key (kbd "M-s") 'avy-goto-char)
+;; (global-set-key (kbd "M-s") 'avy-goto-char)
+
 
 
 ;;----------------------------------------------------------------
