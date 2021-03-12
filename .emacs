@@ -417,8 +417,9 @@
 (evil-commentary-mode)
 
 ;; avy (like ace-jump and easy-motion in vim) 2021-03-04
-(global-set-key (kbd "C-:") 'avy-goto-char)
-(global-set-key (kbd "C-'") 'avy-goto-char-2)
+;; (global-set-key (kbd "C-:") 'avy-goto-char)
+;; (global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "M-s") 'avy-goto-char)
 
 
 ;;----------------------------------------------------------------
