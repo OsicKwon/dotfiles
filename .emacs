@@ -788,8 +788,8 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 ;; ------------------------------------
 ;; (require 'helm-config)
 ;; (helm-mode 1)
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
-(global-set-key (kbd "C-x C-b") 'helm-mini)
+;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
+(global-set-key (kbd "C-x b") 'helm-mini)
 ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)  ;; trade off against `counsel-find-file`
 (global-set-key (kbd "C-s") 'helm-occur)
 ;; (global-set-key (kbd "M-x") 'helm-M-x)
