@@ -4,7 +4,23 @@
 ;; _/  __/ / / / / / /_/ / /__(__  ) 
 ;;(_)___/_/ /_/ /_/\__,_/\___/____/  
 
-;; == recent setting ==
+
+;; --------------------
+;; == RECENT SETTING ==
+;; --------------------
+
+;; Makrdown mode key-rebindings from original source code 2021-03-13
+;; https://github.com/jrblevin/markdown-mode/blob/master/markdown-mode.el#L5299
+(defvar markdown-mode-map
+  (let ((map (make-keymap)))
+    ;; Subtree, list, and table editing
+    (define-key map (kbd "M-<up>") 'markdown-move-up)
+    (define-key map (kbd "M-<down>") 'markdown-move-down)
+    (define-key map (kbd "M-<left>") 'markdown-promote)
+    (define-key map (kbd "M-<right>") 'markdown-demote)
+    map)
+  "Keymap for Markdown major mode.")
+
 
 ;; enable clipboard in emacs
 (setq x-select-enable-clipboard t)
@@ -63,11 +79,15 @@
   
 )
 
+;;===============
+;; FIXED SETTING
+;;===============
 
-;;==================
+;; ---------------
 ;; Initial Setting
-;;==================
+;; ---------------
 
+(show-paren-mode)
 
 (setq ns-pop-up-frames nil)                                  ;; only one frame use when openning a file 2021-01-28
 
@@ -168,7 +188,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(dashboard flycheck counsel command-log-mode google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(org-alert dashboard flycheck counsel command-log-mode google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -804,14 +824,15 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 (define-key helm-read-file-map (kbd "<right>")  'right-char)
 (define-key helm-read-file-map (kbd "<left>")   'left-char)
 
-
 ;; https://www.reddit.com/r/emacs/comments/2z7nbv/lean_helm_window/
 (helm-autoresize-mode 1)
 (setq helm-autoresize-max-height 50)
 (setq helm-autoresize-min-height 50)
 
 
-;; Swiper Bundle 2021-03-03
+;; ---------------------------------------
+;; Ivy, Swiper, Counsel Bundle 2021-03-03
+;; ---------------------------------------
 ;; https://github.com/abo-abo/swiper
 ;; (ivy-mode 1)  " replaced Helm search - think about this more 2021-03-05
 ;; (setq ivy-use-virtual-buffers t)
@@ -838,9 +859,7 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 ;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
 ;; (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
-
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
-
 (use-package ivy
   :diminish
   :custom
@@ -849,7 +868,6 @@ _~_: modified      ^ ^                ^ ^                ^^                     
   (ivy-use-selectable-prompt t)
   :config
   (ivy-mode 1)
-
   ;; :bind (("C-c C-r" . #'ivy-resume)
   ;;        ("C-c s"   . #'swiper-thing-at-point)
   ;;        ("C-s"     . #'swiper))
