@@ -146,7 +146,7 @@
  '(doc-view-continuous t)
  '(fringe-mode 0 nil (fringe))
  '(global-undo-tree-mode t)
- '(helm-mode t)
+ '(helm-mode nil)
  '(latex-run-command "pdflatex")
  '(org-agenda-files
    '("~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
@@ -786,12 +786,11 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 
 ;; helm package key bindings 2020-12-17
 ;; ------------------------------------
-
-(require 'helm-config)
-
-(helm-mode 1)
-;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)  ;; trade off against `counsel-find-file`
+;; (require 'helm-config)
+;; (helm-mode 1)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
+(global-set-key (kbd "C-x C-b") 'helm-mini)
+;; (global-set-key (kbd "C-x C-f") 'helm-find-files)  ;; trade off against `counsel-find-file`
 (global-set-key (kbd "C-s") 'helm-occur)
 ;; (global-set-key (kbd "M-x") 'helm-M-x)
 
@@ -820,10 +819,11 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 ;; enable this if you want `swiper' to use it
 ;; (setq search-default-mode #'char-fold-to-regexp)
 ;; (global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "M-s") 'swiper)
 ;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
 ;; (global-set-key (kbd "<f6>") 'ivy-resume)
 ;; (global-set-key (kbd "M-x") 'counsel-M-x)
-;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
 ;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
 ;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
 ;; (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
@@ -832,7 +832,8 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 ;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
 ;; (global-set-key (kbd "C-c g") 'counsel-git)
 ;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
-;; (global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-c t") 'counsel-outline)
 ;; (global-set-key (kbd "C-x l") 'counsel-locate)
 ;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
 ;; (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
@@ -840,29 +841,29 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
 
-;; (use-package ivy
-;;   :diminish
-;;   :custom
-;;   ;; (ivy-height 25)
-;;   (ivy-use-virtual-buffers t)
-;;   (ivy-use-selectable-prompt t)
-;;   :config
-;;   (ivy-mode 1)
+(use-package ivy
+  :diminish
+  :custom
+  ;; (ivy-height 25)
+  (ivy-use-virtual-buffers t)
+  (ivy-use-selectable-prompt t)
+  :config
+  (ivy-mode 1)
 
-;;   ;; :bind (("C-c C-r" . #'ivy-resume)
-;;   ;;        ("C-c s"   . #'swiper-thing-at-point)
-;;   ;;        ("C-s"     . #'swiper))
-;;   )
+  ;; :bind (("C-c C-r" . #'ivy-resume)
+  ;;        ("C-c s"   . #'swiper-thing-at-point)
+  ;;        ("C-s"     . #'swiper))
+  )
 
-;; ;; ivy-height relative setting
-;; ;; https://github.com/abo-abo/swiper/issues/1722
-;; (setq ivy-height-alist
-;;       '((t
-;;          lambda (_caller)
-;;          (/ (frame-height) 2))))
+;; ivy-height relative setting
+;; https://github.com/abo-abo/swiper/issues/1722
+(setq ivy-height-alist
+      '((t
+         lambda (_caller)
+         (/ (frame-height) 2))))
 
-;; ;; (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-call)
-;; ;; (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial)
+;; (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-call)
+(define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial)
 
 
 ;; Interactive Do Mode like showing suggestion keyword 2020-12-18
