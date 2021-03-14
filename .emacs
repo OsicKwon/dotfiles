@@ -9,14 +9,15 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
-;; Makrdown mode key-rebindings from original source code 2021-03-13
+
+;; Makrdown mode key-rebindings from `original source code` 2021-03-13
 ;; https://github.com/jrblevin/markdown-mode/blob/master/markdown-mode.el#L5299
 (defvar markdown-mode-map
   (let ((map (make-keymap)))
     ;; Subtree, list, and table editing
-    (define-key map (kbd "M-<up>") 'markdown-move-up)
-    (define-key map (kbd "M-<down>") 'markdown-move-down)
-    (define-key map (kbd "M-<left>") 'markdown-promote)
+    (define-key map (kbd "M-<up>")    'markdown-move-up)
+    (define-key map (kbd "M-<down>")  'markdown-move-down)
+    (define-key map (kbd "M-<left>")  'markdown-promote)
     (define-key map (kbd "M-<right>") 'markdown-demote)
     map)
   "Keymap for Markdown major mode.")
@@ -25,15 +26,16 @@
 ;; enable clipboard in emacs
 (setq x-select-enable-clipboard t)
 
+
 (unless (display-graphic-p) 
   ;; terminal mode
   )
 
 
-;; -------------------------------------------------
+;; ---------------------------------------------------
 ;; Recent opened file history 2020-12-31
-;; (Interchangable/trade-off with Dashboard package)
-;; -------------------------------------------------
+;; (Interchangable/trade-off with `Dashboard` package)
+;; ---------------------------------------------------
 ;; (require 'recentf)
 ;; (recentf-mode 1)
 ;; (global-set-key "\C-xf" 'recentf-open-files)
@@ -89,7 +91,7 @@
 
 (show-paren-mode)
 
-(setq ns-pop-up-frames nil)                                  ;; only one frame use when openning a file 2021-01-28
+(setq ns-pop-up-frames nil)        ;; only one frame use when openning a file 2021-01-28
 
 (if (display-graphic-p)
     (progn
@@ -113,6 +115,7 @@
 )
 
 
+;; show relative number line in programming modes
 (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative)))
 
 
@@ -131,13 +134,12 @@
 (indent-guide-global-mode)
 
 
-
-
 ;; Others
 (setq backup-directory-alist `(("." . "~/.saves/")))         ;; Backup files relocated 2020-10-09
 (setq inhibit-startup-screen t)                              ;; No welcome startup screen
 (setq initial-scratch-message "")                            ;; No scratch message 2020-10-10
 (add-to-list 'default-frame-alist '(fullscreen . maximized)) ;; Maximize GUI window
+
 
 ;; Interupted Working Process 2021-02-15
 ;; (setq auto-save-visited-mode t)                              ;; Auto Save   
@@ -209,6 +211,12 @@
  '(org-level-7 ((t (:inherit outline-7 :box (:line-width 2 :color "grey75" :style released-button) :height 1.0)))))
 
 
+;; white mode-line came from Binder/Olivetti reddit like below:
+;; https://www.reddit.com/r/emacs/comments/fc8hc2/binder_modes_for_structuring_a_multifile_writing/
+;; Thanks, but there's actually not much theme at all, just these two lines.
+;; https://github.com/rnkn/dotfiles/blob/74dff2b1eadf3134c01e376cf8f42b24a0d1cc05/emacs/settings.el#L416-L417
+
+
 ;;==========
 ;; WINDOW
 ;;==========
@@ -245,6 +253,7 @@
 
 ;; display file size in modeline 2021-01-05
 (size-indication-mode t)
+
 
 ;; pdflatex -> path "/Library/Tex/texbin" 2020-12-07
 (setq latex-run-command "pdflatex")
@@ -307,8 +316,8 @@
   (exec-path-from-shell-initialize))
 
 
-;; which-keys
-(which-key-mode)                        ;; which-key package 2021-01-28
+;; which-key package 2021-01-28
+(which-key-mode)                        
 
 
 ;; PLUG-IN: deft -> do not use: Korean issue, change filename forcely 2020-12-08
@@ -641,6 +650,12 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 (define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
 
 
+;; Hydra-Dired 2021-03-13
+;; https://github.com/abo-abo/hydra/wiki/Dired
+
+;; // end of hydra
+
+
 ;; beacon mode package 2021-03-03
 ;; (beacon-mode 1)  ;; Interupted `org-tree-slide-mode`
 (setq beacon-size 5)
@@ -803,8 +818,8 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 ;; org inline image resize 2020-12-13
 (setq org-image-actual-width nil)
 
-
-;; helm package key bindings 2020-12-17
+;; ------------------------------------
+;; Helm package key bindings 2020-12-17
 ;; ------------------------------------
 ;; (require 'helm-config)
 ;; (helm-mode 1)
