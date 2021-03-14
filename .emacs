@@ -10,17 +10,17 @@
 ;; --------------------
 
 
-;; Makrdown mode key-rebindings from `original source code` 2021-03-13
+;; Makrdown mode key-rebindings 2021-03-13
 ;; https://github.com/jrblevin/markdown-mode/blob/master/markdown-mode.el#L5299
-(defvar markdown-mode-map
-  (let ((map (make-keymap)))
-    ;; Subtree, list, and table editing
-    (define-key map (kbd "M-<up>")    'markdown-move-up)
-    (define-key map (kbd "M-<down>")  'markdown-move-down)
-    (define-key map (kbd "M-<left>")  'markdown-promote)
-    (define-key map (kbd "M-<right>") 'markdown-demote)
-    map)
-  "Keymap for Markdown major mode.")
+;; https://gist.githubusercontent.com/edavis10/6084120/raw/33c2297926d94db6ed4a3f1c0412bae7a3b06a14/init.el
+(add-hook 'markdown-mode-hook
+  (lambda ()
+    (local-set-key (kbd "M-<up>")    'markdown-move-up)
+    (local-set-key (kbd "M-<down>")  'markdown-move-down)
+    (local-set-key (kbd "M-<left>")  'markdown-promote)
+    (local-set-key (kbd "M-<right>") 'markdown-demote)
+  )
+)
 
 
 ;; enable clipboard in emacs
@@ -42,44 +42,44 @@
 ;; (setq recentf-auto-cleanup 'never)
 
 
-;; ----------------------------
-;; Dashboard package 2021-03-12
-;; ----------------------------
-;; (require 'dashboard)
-;; (dashboard-setup-startup-hook)
-;; Or if you use use-package
-(use-package dashboard
-  :ensure t
-  :config
-  (dashboard-setup-startup-hook)
+;; ;; ----------------------------
+;; ;; Dashboard package 2021-03-12
+;; ;; ----------------------------
+;; ;; (require 'dashboard)
+;; ;; (dashboard-setup-startup-hook)
+;; ;; Or if you use use-package
+;; (use-package dashboard
+;;   :ensure t
+;;   :config
+;;   (dashboard-setup-startup-hook)
 
-  ;; Set the title
-  (setq dashboard-banner-logo-title "Welcome to Emacs")
-  ;; Set the banner
-  (setq dashboard-startup-banner 'logo)
-  ;; Value can be
-  ;; 'official which displays the official emacs logo
-  ;; 'logo which displays an alternative emacs logo
-  ;; 1, 2 or 3 which displays one of the text banners
-  ;; "path/to/your/image.png" or "path/to/your/text.txt" which displays whatever image/text you would prefer
+;;   ;; Set the title
+;;   (setq dashboard-banner-logo-title "Welcome to Emacs")
+;;   ;; Set the banner
+;;   (setq dashboard-startup-banner 'logo)
+;;   ;; Value can be
+;;   ;; 'official which displays the official emacs logo
+;;   ;; 'logo which displays an alternative emacs logo
+;;   ;; 1, 2 or 3 which displays one of the text banners
+;;   ;; "path/to/your/image.png" or "path/to/your/text.txt" which displays whatever image/text you would prefer
 
-  ;; Content is not centered by default. To center, set
-  (setq dashboard-center-content t)
+;;   ;; Content is not centered by default. To center, set
+;;   (setq dashboard-center-content t)
 
-  ;; To disable shortcut "jump" indicators for each section, set
-  (setq dashboard-show-shortcuts t)
+;;   ;; To disable shortcut "jump" indicators for each section, set
+;;   (setq dashboard-show-shortcuts t)
 
-  ;; agenda conflicted with `recents` list with org-agenda files 2021-03-12
-  (setq dashboard-items '(
-			  (bookmarks . 5)
-			  (recents  . 15)
-			  (projects . 5)
-			  (agenda . 5)
-			  ;; (registers . 5)
-			  )
-  )
+;;   ;; agenda conflicted with `recents` list with org-agenda files 2021-03-12
+;;   (setq dashboard-items '(
+;; 			  (bookmarks . 5)
+;; 			  (recents  . 15)
+;; 			  (projects . 5)
+;; 			  (agenda . 5)
+;; 			  ;; (registers . 5)
+;; 			  )
+;;   )
   
-)
+;; )
 
 ;;===============
 ;; FIXED SETTING
