@@ -99,7 +99,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "---------Themes------------
-Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'itchyny/lightline.vim'
 " Plugin 'powerline/powerline'
@@ -311,7 +311,7 @@ augroup END
 " COLOR
 "--------
 set background=dark
-colorscheme papercolor
+" colorscheme papercolor
 " colorscheme solarized
 " colorscheme monokai
 " highlight LineNr ctermfg=darkgray
@@ -377,89 +377,92 @@ set cursorline
 set ruler
 set laststatus=2
 set showcmd
-""{{{
-"" Status Line Custom
-"let g:currentmode={
-"    \ 'n'  : 'Normal',
-"    \ 'no' : 'Normal·Operator Pending',
-"    \ 'v'  : 'Visual',
-"    \ 'V'  : 'V·Line',
-"    \ "\<C-V>" : 'V·Block',
-"    \ 's'  : 'Select',
-"    \ 'S'  : 'S·Line',
-"    \ '^S' : 'S·Block',
-"    \ 'i'  : 'Insert',
-"    \ 'R'  : 'Replace',
-"    \ 'Rv' : 'V·Replace',
-"    \ 'c'  : 'Command',
-"    \ 'cv' : 'Vim Ex',
-"    \ 'ce' : 'Ex',
-"    \ 'r'  : 'Prompt',
-"    \ 'rm' : 'More',
-"    \ 'r?' : 'Confirm',
-"    \ '!'  : 'Shell',
-"    \ 't'  : 'Terminal'
-"    \}
-""}}}
-"function! GitBranch()
-"  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-"endfunction
+"{{{
+" Status Line Custom
+let g:currentmode={
+    \ 'n'  : 'Normal',
+    \ 'no' : 'Normal·Operator Pending',
+    \ 'v'  : 'Visual',
+    \ 'V'  : 'V·Line',
+    \ "\<C-V>" : 'V·Block',
+    \ 's'  : 'Select',
+    \ 'S'  : 'S·Line',
+    \ '^S' : 'S·Block',
+    \ 'i'  : 'Insert',
+    \ 'R'  : 'Replace',
+    \ 'Rv' : 'V·Replace',
+    \ 'c'  : 'Command',
+    \ 'cv' : 'Vim Ex',
+    \ 'ce' : 'Ex',
+    \ 'r'  : 'Prompt',
+    \ 'rm' : 'More',
+    \ 'r?' : 'Confirm',
+    \ '!'  : 'Shell',
+    \ 't'  : 'Terminal'
+    \}
+"}}}
 
-"function! StatuslineGit()
-"  let l:branchname = GitBranch()
-"  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-"endfunction
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
 
-"function! FileSize()
-"    let bytes = getfsize(expand("%:p"))
-"    if bytes <= 0
-"        return ""
-"    endif
-"    if bytes < 1024
-"        " return bytes
-"        return "| " . (bytes) . "b"
-"    else
-"        return "| " . (bytes / 1024) . "k"
-"    endif
-"endfunction
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+
+function! FileSize()
+    let bytes = getfsize(expand("%:p"))
+    if bytes <= 0
+        return ""
+    endif
+    if bytes < 1024
+        " return bytes
+        return "| " . (bytes) . "b"
+    else
+        return "| " . (bytes / 1024) . "k"
+    endif
+endfunction
 ""{{{
-"set statusline=
+set statusline=
 "" set statusline+=\               " blank
-"" set statusline=\[%{mode()}\]    " current mode
-"" set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
-"" set statusline+=%#PmenuSel#
-"" set statusline+=%{StatuslineGit()}
-"" set statusline+=\               " blank
+" set statusline=\[%{mode()}\]    " current mode
+set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\ \  " The current mode
+" set statusline+=\ \|\            " separator
 "set statusline+=%#Tabline#
 "" set statusline+=\ Osic
 "" set statusline+=\ World
 "set statusline+=\               " blank
-"set statusline+=%f              " path
-""set statusline+=\ -\            " separator
-""set statusline+=FileType:       " label
-"set statusline+=\               " blank
-"set statusline+=%m              " modified flag [+]
-"set statusline+=%{FileSize()}
-""------------------
-"set statusline+=%=              " right align
+set statusline+=%f              " path
+set statusline+=\ -\            " separator
+"" set statusline+=FileType:       " label
+set statusline+=%y              " filetype of the file
+set statusline+=\               " blank
+set statusline+=%m              " modified flag [+]
+set statusline+=%{FileSize()}
 "" set statusline+=%#PmenuSel#
-"set statusline+=%y              " filetype of the file
+" set statusline+=%{StatuslineGit()}
+"" set statusline+=\               " blank
+""------------------
+set statusline+=%=              " right align
+"" set statusline+=%#PmenuSel#
 "" set statusline+=%#MoreMsg#
-"set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 "" set statusline+=\               " blank
 "" set statusline+=\[%{&fileformat}\]
-"set statusline+=\ %{&fileformat}
-"set statusline+=\             " blank
+set statusline+=\ %{&fileformat}
+" set statusline+=\             " blank
+set statusline+=\ \|\            " separator
 "" set statusline+=Line:\ %l/%L  " line of total
-"set statusline+=%l\ of\ %L\ [%p%%]
+set statusline+=%l\ of\ %L\ [%p%%]
 "" set statusline+=\%%           " percent sign only
 "" set statusline+=%2*0x%04B\ %* " character under cursor
 "" set statusline+=\             " blank
 "" set statusline+=%P            " percentage of file/buffer
-"set statusline+=\ \-\ Col:\ %c      " coloumn
+set statusline+=\ \-\ Col:\ %c      " coloumn
 "" set statusline+=%-7.(%l of %L [%p%%] - Col: %c%V%) "Current line, percentage of size, column,
 "" required to know how to apply statuline grouping grammar 2020-12-31
-"set statusline+=\             " blank
+set statusline+=\             " blank
 ""}}}
 
 "--------------
