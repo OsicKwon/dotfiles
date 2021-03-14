@@ -855,7 +855,7 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 ;; enable this if you want `swiper' to use it
 ;; (setq search-default-mode #'char-fold-to-regexp)
 ;; (global-set-key "\C-s" 'swiper)
-;; (global-set-key (kbd "C-s") 'swiper)
+(global-set-key (kbd "M-s") 'swiper)
 ;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
 ;; (global-set-key (kbd "<f6>") 'ivy-resume)
 ;; (global-set-key (kbd "M-x") 'counsel-M-x)
@@ -897,8 +897,8 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 
 ;; https://emacs.stackexchange.com/questions/32862/ivy-disable-completion-for-a-command-in-minibuffer
 (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-insert-current)
-;; ;; (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial)
-;; ;; (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial-or-done)  ;; default
+;; (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial)
+;; (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial-or-done)  ;; default
 
 
 ;; Interactive Do Mode like showing suggestion keyword 2020-12-18
