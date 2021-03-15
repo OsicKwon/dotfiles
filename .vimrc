@@ -418,16 +418,17 @@ function! FileSize()
     endif
     if bytes < 1024
         " return bytes
-        return "| " . (bytes) . "b"
+        return "┆ " . (bytes) . "b"
     else
-        return "| " . (bytes / 1024) . "k"
+        return "┆ " . (bytes / 1024) . "k"
     endif
 endfunction
 ""{{{
 set statusline=
 "" set statusline+=\               " blank
 " set statusline=\[%{mode()}\]    " current mode
-set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\ \  " The current mode
+set statusline+=%0*\ %{toupper(g:currentmode[mode()])}  " The current mode
+set statusline+=┆\             " separator
 " set statusline+=\ \|\            " separator
 "set statusline+=%#Tabline#
 "" set statusline+=\ Osic
@@ -451,17 +452,21 @@ set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 "" set statusline+=\               " blank
 "" set statusline+=\[%{&fileformat}\]
 set statusline+=\ %{&fileformat}
+set statusline+=\ \┆\            " separator
+" set statusline+=\ ☰ \          " trigram seperator
 " set statusline+=\             " blank
-set statusline+=\ \|\            " separator
 "" set statusline+=Line:\ %l/%L  " line of total
-set statusline+=%l\ of\ %L\ [%p%%]
+set statusline+=%l\ of\ %L\ ☰\ [%p%%]
 "" set statusline+=\%%           " percent sign only
 "" set statusline+=%2*0x%04B\ %* " character under cursor
-"" set statusline+=\             " blank
+" set statusline+=\             " blank
 "" set statusline+=%P            " percentage of file/buffer
 set statusline+=\ \-\ Col:\ %c      " coloumn
 "" set statusline+=%-7.(%l of %L [%p%%] - Col: %c%V%) "Current line, percentage of size, column,
 "" required to know how to apply statuline grouping grammar 2020-12-31
+set statusline+=\ \┆\            " separator
+" set statusline+=\ \¦\            " separator
+set statusline+=%{strftime('%H:%M')}
 set statusline+=\             " blank
 ""}}}
 
