@@ -447,6 +447,8 @@ set statusline+=%{FileSize()}
 " set statusline+=┆\             " separator
 " set statusline+=%{fugitive#statusline()}\   
 "" set statusline+=\               " blank
+" set statusline+=\ -\            " separator
+" set statusline+=%{wordcount().words}\ words
 ""------------------
 set statusline+=%=              " right align
 "" set statusline+=%#PmenuSel#
