@@ -594,7 +594,9 @@
 (global-undo-tree-mode)                                      
 (setq undo-tree-visualizer-timestamps t)
 (setq undo-tree-visualizer-diff t)
-(setq undo-tree-auto-save-history nil)
+(setq undo-tree-auto-save-history t)
+;; https://emacs.stackexchange.com/questions/26993/saving-persistent-undo-to-a-single-directory-alist-format
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 
 
 ;; ---------------------------------------------------
