@@ -439,12 +439,13 @@ set statusline+=%f              " path
 set statusline+=\ -\            " separator
 "" set statusline+=FileType:       " label
 set statusline+=%y              " filetype of the file
-" set statusline+=┆\             " separator
 " set statusline+=%Y              " filetype of the file
 " set statusline+=\               " blank
 set statusline+=%{FileSize()}
 "" set statusline+=%#PmenuSel#
 " set statusline+=%{StatuslineGit()}
+" set statusline+=┆\             " separator
+" set statusline+=%{fugitive#statusline()}\   
 "" set statusline+=\               " blank
 ""------------------
 set statusline+=%=              " right align
@@ -454,6 +455,7 @@ set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 "" set statusline+=\               " blank
 "" set statusline+=\[%{&fileformat}\]
 set statusline+=\ %{&fileformat}
+set statusline+=\             " blank
 set statusline+=┆\            " separator
 " set statusline+=\ ☰ \          " trigram seperator
 " set statusline+=\             " blank
@@ -466,8 +468,9 @@ set statusline+=%l\ of\ %L\ ☰\ [%p%%]
 set statusline+=\ \-\ Col:\ %c      " coloumn
 "" set statusline+=%-7.(%l of %L [%p%%] - Col: %c%V%) "Current line, percentage of size, column,
 "" required to know how to apply statuline grouping grammar 2020-12-31
-set statusline+=\ \┆\            " separator
-" set statusline+=\ \¦\            " separator
+set statusline+=\             " blank
+set statusline+=┆\           " separator
+" set statusline+=\ ¦           " separator
 set statusline+=%{strftime('%H:%M')}
 set statusline+=\             " blank
 ""}}}
