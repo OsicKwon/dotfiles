@@ -1084,6 +1084,12 @@ map <F10> :cprevious<Return>
 map <F11> :cnext<Return>
 
 
+"------
+" Python
+"------
+autocmd BufEnter *.py colorscheme PaperColor
+
+
 "---------------
 " MODE SETTINGS
 "---------------
