@@ -602,7 +602,7 @@
 ;; ---------------------------------------------------
 ;; hydra 2021-03-04
 ;; ---------------------------------------------------
-;;https://oremacs.com/2015/04/14/hydra-org-mode/
+;; https://oremacs.com/2015/04/14/hydra-org-mode/
 (defhydra hydra-global-org (:color blue
                             :hint nil)
   "
@@ -667,6 +667,73 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 ;; Hydra-Dired 2021-03-13
 ;; https://github.com/abo-abo/hydra/wiki/Dired
 
+(defhydra hydra-dired (:hint nil :color pink)
+  "
+
+** Dired navigation
+ ------------------
+ 2021-01-06
+
+ Up Directory (^)
+
+ Next Dirline (>)
+ Prev Dirline (<)
+
+
+_+_ mkdir          _v_iew           _m_ark             _(_ details        _i_nsert-subdir    wdired
+_C_opy             _O_ view other   _U_nmark all       _)_ omit-mode      _$_ hide-subdir    C-x C-q : edit
+_D_elete           _o_pen other     _u_nmark           _l_ redisplay      _w_ kill-subdir    C-c C-c : commit
+_R_ename           _M_ chmod        _t_oggle           _g_ revert buf     _e_ ediff          C-c ESC : abort
+_Y_ rel symlink    _G_ chgrp        _E_xtension mark   _s_ort             _=_ pdiff
+_S_ymlink          ^ ^              _F_ind marked      _._ toggle hydra   \\ flyspell
+_r_sync            ^ ^              ^ ^                ^ ^                _?_ summary
+_z_ compress-file  _A_ find regexp
+_Z_ compress       _Q_ repl regexp
+
+T - tag prefix
+"
+  ("\\" dired-do-ispell)
+  ("(" dired-hide-details-mode)
+  (")" dired-omit-mode)
+  ("+" dired-create-directory)
+  ("=" diredp-ediff)         ;; smart diff
+  ("?" dired-summary)
+  ("$" diredp-hide-subdir-nomove)
+  ("A" dired-do-find-regexp)
+  ("C" dired-do-copy)        ;; Copy all marked files
+  ("D" dired-do-delete)
+  ("E" dired-mark-extension)
+  ("e" dired-ediff-files)
+  ("F" dired-do-find-marked-files)
+  ("G" dired-do-chgrp)
+  ("g" revert-buffer)        ;; read all directories again (refresh)
+  ("i" dired-maybe-insert-subdir)
+  ("l" dired-do-redisplay)   ;; relist the marked or singel directory
+  ("M" dired-do-chmod)
+  ("m" dired-mark)
+  ("O" dired-display-file)
+  ("o" dired-find-file-other-window)
+  ("Q" dired-do-find-regexp-and-replace)
+  ("R" dired-do-rename)
+  ("r" dired-do-rsynch)
+  ("S" dired-do-symlink)
+  ("s" dired-sort-toggle-or-edit)
+  ("t" dired-toggle-marks)
+  ("U" dired-unmark-all-marks)
+  ("u" dired-unmark)
+  ("v" dired-view-file)      ;; q to exit, s to search, = gets line #
+  ("w" dired-kill-subdir)
+  ("Y" dired-do-relsymlink)
+  ("z" diredp-compress-this-file)
+  ("Z" dired-do-compress)
+  ("q" nil)
+  ("." nil :color blue))
+
+;; (define-key dired-mode-map "." 'hydra-dired/body)
+;; (define-key dired-mode-map (kbd "C-o") 'hydra-dired/body)
+(eval-after-load "dired" '(progn
+  (define-key dired-mode-map (kbd ".") 'hydra-dired/body) ))
+
 ;; // end of hydra
 
 
@@ -687,6 +754,19 @@ _~_: modified      ^ ^                ^ ^                ^^                     
 ;; Drag-and-drop to `dired`
 (add-hook 'dired-mode-hook 'org-download-enable)
 ;; (setq-default org-download-image-dir "~/Pictures")
+
+;; https://github.com/abo-abo/org-download/issues/95#issue-413481682
+(use-package org-download
+  :ensure t 
+  :config
+  (require 'org-download)
+  ;; Drag and drop to Dired
+  (add-hook 'dired-mode-hook 'org-download-enable)
+  (setq org-download-method 'directory)
+  (setq-default org-download-image-dir "./img")
+  (setq org-download-screenshot-method "screencapture -i %s")
+  (setq org-download-screenshot-file "./img/tmp.png")
+  )
 
 
 ;; calendar view 2021-03-05
