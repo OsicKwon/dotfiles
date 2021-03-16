@@ -996,6 +996,11 @@ T - tag prefix
 ;; (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial)
 ;; (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial-or-done)  ;; default
 
+;; remove Counsel M-x always shows “^” 2021-03-16
+;; https://emacs.stackexchange.com/questions/38841/counsel-m-x-always-shows
+(setq ivy-initial-inputs-alist nil)
+
+
 
 ;; Interactive Do Mode like showing suggestion keyword 2020-12-18
 ;; Added ido-vertical-mode 2021-01-04
