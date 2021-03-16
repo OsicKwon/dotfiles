@@ -423,33 +423,53 @@ function! FileSize()
         return "┆ " . (bytes / 1024) . "k"
     endif
 endfunction
+
 ""{{{
 set statusline=
-"" set statusline+=\               " blank
+" set statusline+=\               " blank
 " set statusline=\[%{mode()}\]    " current mode
 set statusline+=%0*\ %{toupper(g:currentmode[mode()])}  " The current mode
 set statusline+=┆\             " separator
+" -----------------------------
+" https://vi.stackexchange.com/questions/10458/how-do-i-conditionally-add-items-to-the-statusline
+" 2021-03-15
+" set stl+=%{&spell\ ?\ line(\".\")\ :\ \"\"}
+" set stl+=%{&spell?'SPELL':'NO_SPELL'}
+set stl+=%{&spell?'SPELL┆\ ':''}
+" -----------------------------
+" set statusline+=%{&spelllang}
 " set statusline+=\ \|\            " separator
 "set statusline+=%#Tabline#
-"" set statusline+=\ Osic
-"" set statusline+=\ World
 "set statusline+=\               " blank
 set statusline+=%m              " modified flag [+]
 set statusline+=%f              " path
 set statusline+=\ -\            " separator
 "" set statusline+=FileType:       " label
-set statusline+=%y              " filetype of the file
-" set statusline+=%Y              " filetype of the file
+set statusline+=%y              " [filetype] of the file
+" set statusline+=%Y              " FILETYPE of the file
 " set statusline+=\               " blank
 set statusline+=%{FileSize()}
-"" set statusline+=%#PmenuSel#
+" set statusline+=%#PmenuSel#
 " set statusline+=%{StatuslineGit()}
 " set statusline+=┆\             " separator
-" set statusline+=%{fugitive#statusline()}\   
-"" set statusline+=\               " blank
+" set statusline+=\ %{fugitive#statusline()}\   
+set statusline+=\ %{fugitive#head()}\   
+" set statusline+=\               " blank
+"
+" GitGutter 2021-03-15
+" https://github.com/airblade/vim-gitgutter/pull/709#issuecomment-635856742
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return [a,m,r] == [0,0,0] ? '' : printf('+%d ~%d -%d', a, m, r)
+endfunction
+set statusline+=%{GitStatus()}
+
 " set statusline+=\ -\            " separator
 " set statusline+=%{wordcount().words}\ words
-""------------------
+set stl+=%{&ignorecase?'┆\ IGNORECASE':''}
+
+""~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"
 set statusline+=%=              " right align
 "" set statusline+=%#PmenuSel#
 "" set statusline+=%#MoreMsg#
