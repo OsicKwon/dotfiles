@@ -952,7 +952,7 @@ T - tag prefix
 (global-set-key (kbd "M-s") 'swiper)
 ;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
 ;; (global-set-key (kbd "<f6>") 'ivy-resume)
-;; (global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 ;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
 ;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
@@ -1006,7 +1006,7 @@ T - tag prefix
 (ido-vertical-mode 1)
 (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
 
-;; smex with ido for M-x :: consider helm alternatively
+;; smex with ido for M-x :: consider helm or counsel alternatively
 ;; 2021-01-07
 (require 'smex)
 (smex-initialize)
