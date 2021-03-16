@@ -918,7 +918,7 @@ T - tag prefix
 ;; (require 'helm-config)
 ;; (helm-mode 1)
 ;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
-(global-set-key (kbd "C-x b") 'helm-mini)
+;; (global-set-key (kbd "C-x b") 'helm-mini)  ;; cache problem occured 2021-03-15
 ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)  ;; trade off against `counsel-find-file`
 (global-set-key (kbd "C-s") 'helm-occur)
 ;; (global-set-key (kbd "M-x") 'helm-M-x)
@@ -964,6 +964,8 @@ T - tag prefix
 ;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
 (global-set-key (kbd "C-c k") 'counsel-ag)
 (global-set-key (kbd "C-c t") 'counsel-outline)
+;; (global-set-key (kbd "C-x b") 'counsel-buffer-or-recentf)
+(global-set-key (kbd "C-x f") 'counsel-recentf)
 ;; (global-set-key (kbd "C-x l") 'counsel-locate)
 ;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
 ;; (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
