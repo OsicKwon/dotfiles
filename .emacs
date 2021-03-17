@@ -9,7 +9,6 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
-
 ;; Makrdown mode key-rebindings 2021-03-13
 ;; https://github.com/jrblevin/markdown-mode/blob/master/markdown-mode.el#L5299
 ;; https://gist.githubusercontent.com/edavis10/6084120/raw/33c2297926d94db6ed4a3f1c0412bae7a3b06a14/init.el
@@ -190,7 +189,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(org-alert dashboard flycheck counsel command-log-mode google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -271,8 +270,10 @@
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 ;; -- Unnecessary call -- see Line #6 in this file
 (package-initialize)
-;; (package-refresh-contents)
-;; (package-install 'use-package)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
 ;; (use-package elpy
 ;;   :ensure t
@@ -559,25 +560,40 @@
 
 ;; projectile package 2021-01-29
 ;; -----------------------------
-(projectile-mode +1)
-(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-
+;; (require 'projectile)
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :config
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+)
 ;; use 'helm-projectile-ag' inseted of C-c p s s, which stands for ag serching in projectile
 ;; once install package of 'helm-projectile', you can also use 'helm-projectile-ag'
 ;; or install 'helm-ag' package to use same function
 ;; however, required intall '(sudo) port install the_silver_searcher' first (the_silver_searcher = ag)
 
+
 ;; helm-projectile package 2021
-;; (setq helm-projectile-fuzzy-match nil)
+;; ----------------------------
 ;; (require 'helm-projectile)
-;; (helm-projectile-on)
+(use-package helm-projectile
+  :ensure t
+  :init
+  ;; (setq helm-projectile-fuzzy-match nil)
+  ;; (helm-projectile-on)
+  :config
+  (global-set-key (kbd "C-M-s") 'helm-projectile-ag)
+)
 
 
 ;; Olivetti 2021-02-11
 ;; -------------------
 ;; to remove boundry -> '(fringe-mode 0 nil (fringe)) in `(custom-set-variables` lines in front of this file. 
+;; (require 'olivetti)
 (use-package olivetti
+  :ensure t
   :init
   (add-hook 'prog-mode-hook 'olivetti-mode)
   (add-hook 'text-mode-hook 'olivetti-mode)
@@ -745,28 +761,29 @@ T - tag prefix
 
 ;; command-log-mode 2021-03-09
 ;; https://github.com/lewang/command-log-mode 
-(require 'command-log-mode)
-(add-hook 'LaTeX-mode-hook 'command-log-mode)
+;; (require 'command-log-mode)
+;; (add-hook 'LaTeX-mode-hook 'command-log-mode)
 
 
 ;; org-downloda 2021-03-01
-(require 'org-download)
+;; (require 'org-download)
 ;; Drag-and-drop to `dired`
-(add-hook 'dired-mode-hook 'org-download-enable)
+;; (add-hook 'dired-mode-hook 'org-download-enable)
 ;; (setq-default org-download-image-dir "~/Pictures")
-
 ;; https://github.com/abo-abo/org-download/issues/95#issue-413481682
+;; (require 'org-download)
 (use-package org-download
-  :ensure t 
+  :ensure t
+  :init
   :config
-  (require 'org-download)
   ;; Drag and drop to Dired
   (add-hook 'dired-mode-hook 'org-download-enable)
   (setq org-download-method 'directory)
   (setq-default org-download-image-dir "./img")
   (setq org-download-screenshot-method "screencapture -i %s")
   (setq org-download-screenshot-file "./img/tmp.png")
-  )
+  :bind  
+)
 
 
 ;; calendar view 2021-03-05
