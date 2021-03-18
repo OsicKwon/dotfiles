@@ -12,6 +12,20 @@
 ;; (setq org-ellipsis " ∞ ")
 (setq org-ellipsis " ↩ ")
 
+;; mew-log-commands 2021-03-18
+;; ---------------------------
+;; source :: https://github.com/overtone/live-coding-emacs/blob/master/lib/mwe-log-commands.el
+;; how to set :: http://ergoemacs.org/emacs/emacs_installing_packages.html
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(load "mwe-log-commands")
+;; (add-hook 'text-mode-hook 'mwe:log-keyboard-commands)
+;; (add-hook 'text-mode-hook 'mwe:open-command-log-buffer)
+;; (add-hook 'prog-mode-hook 'mwe:log-keyboard-commands)
+;; (add-hook 'prog-mode-hook 'mwe:open-command-log-buffer)
+;; (add-hook 'text-mode-hook (function mwe:log-keyboard-commands))
+;; (add-hook 'text-mode-hook (function mwe:open-command-log-buffer))
+;; (add-hook 'prog-mode-hook (function mwe:log-keyboard-commands))
+;; (add-hook 'prog-mode-hook (function mwe:open-command-log-buffer))
 
 ;; make a function with kbd binding by myself
 (defun mwe-commands-exec ()
