@@ -9,6 +9,34 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; (setq org-ellipsis " ∞ ")
+(setq org-ellipsis " ↩ ")
+
+
+;; make a function with kbd binding by myself
+(defun mwe-commands-exec ()
+  "activate command-log view"
+  (interactive)
+  (mwe:log-keyboard-commands)
+  (mwe:open-command-log-buffer)
+  (other-window 1)
+  (message "mwe-log-commands is activated now")
+)
+(global-set-key (kbd "C-M-g") 'mwe-commands-exec)
+
+
+;; TODO unload pressing by "C-M-y"
+;; (defun mwe-commands-unload ()
+;;   "activate command-log view"
+;;   (interactive)
+;;   (mwe:log-keyboard-commands nil)
+;;   (mwe:open-command-log-buffer nil)
+
+;;   (message "mwe-log-commands is deactivated now")
+;; )
+;; (global-set-key (kbd "C-M-y") 'mwe-commands-unload)
+
+
 ;; Makrdown mode key-rebindings 2021-03-13
 ;; https://github.com/jrblevin/markdown-mode/blob/master/markdown-mode.el#L5299
 ;; https://gist.githubusercontent.com/edavis10/6084120/raw/33c2297926d94db6ed4a3f1c0412bae7a3b06a14/init.el
@@ -178,6 +206,7 @@
  '(org-agenda-use-time-grid t)
  '(org-babel-python-command "python3")
  '(org-confirm-babel-evaluate nil)
+ '(org-ellipsis " ↩ ")
  '(org-export-backends '(ascii beamer html icalendar latex odt))
  '(org-fontify-done-headline t)
  '(org-fontify-quote-and-verse-blocks t)
@@ -202,6 +231,7 @@
  '(mode-line ((((type x w32 ns)) (:overline t)) (((type tty)) (:inverse-video t))))
  '(mode-line-inactive ((t (:inherit (shadow mode-line)))))
  '(org-document-title ((t (:foreground "midnight blue" :weight bold :height 1.4))))
+ '(org-ellipsis ((t nil)))
  '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
  '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
@@ -344,8 +374,15 @@
 ;;------------------------
 ;; Enable Evil 2020-12-30
 ;;------------------------
-;; (require 'evil)
+
+;; Download Evil
+(unless (package-installed-p 'evil)
+  (package-install 'evil))
+
+;; Enable Evil
+(require 'evil)
 (evil-mode 1)
+
 (setq-default evil-default-state 'emacs)
 ;; Change color of which-func when entering and leaving Evil visual state
 ;;  - Resolves the "white on white" issue :: 2021-01-17
