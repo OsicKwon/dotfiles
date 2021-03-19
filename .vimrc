@@ -202,7 +202,7 @@ let g:searchfold_maxdepth=1
 let g:solarized_termcolors=256
 let g:NERDTreeWinSize=40
 " let g:org_indent=1
-let g:highlightedyank_highlight_duration = 1000
+let g:highlightedyank_highlight_duration = 500
 
 "----------------------------------------------
  "MARKDOWN SUPPORT for 'plasticboy/vim-markdown'
@@ -442,9 +442,22 @@ set stl+=%{&spell?'SPELL\ 🅂\ ┆\ ':''}
 " set statusline+=\ \|\            " separator
 "set statusline+=%#Tabline#
 "set statusline+=\               " blank
+"
+" set statusline+=\ %{fugitive#statusline()}\   
+set statusline+=\ %{fugitive#head()}\   
+"⭠
+" GitGutter 2021-03-15
+" https://github.com/airblade/vim-gitgutter/pull/709#issuecomment-635856742
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return [a,m,r] == [0,0,0] ? '' : printf('+%d ~%d -%d', a, m, r)
+endfunction
+set statusline+=%{GitStatus()}
+" set statusline+=\ -\            " separator
+set statusline+=┆\             " separator
 " set stl+=%{&modified?'[+]\ ':''}  " 
-" set stl+=%{&modified?'***\ ':''}  " test not working
-set stl+=%{&modified?'𝓔𝓭𝓲𝓽𝓮𝓭\ ':''}  " test not working
+set stl+=%{&modified?'***\ ':''}  " test not working
+" set stl+=%{&modified?'𝓔𝓭𝓲𝓽𝓮𝓭\ ':''}  " test not working
 " 𝓜𝓸𝓸𝓭𝓲𝓯𝓲𝓮𝓭 / 𝓒𝓱𝓪𝓷𝓰𝓮𝓭 / 𝓔𝓭𝓲𝓽𝓮𝓭 / 𝓡𝓮𝓿𝓲𝓼𝓮𝓭
 set statusline+=%f              " path
 set statusline+=\               " blank
@@ -457,18 +470,6 @@ set statusline+=%{FileSize()}
 " set statusline+=%#PmenuSel#
 " set statusline+=%{StatuslineGit()}
 " set statusline+=┆\             " separator
-" set statusline+=\ %{fugitive#statusline()}\   
-set statusline+=\ %{fugitive#head()}\   
-"⭠
-" GitGutter 2021-03-15
-" https://github.com/airblade/vim-gitgutter/pull/709#issuecomment-635856742
-function! GitStatus()
-  let [a,m,r] = GitGutterGetHunkSummary()
-  return [a,m,r] == [0,0,0] ? '' : printf('+%d ~%d -%d', a, m, r)
-endfunction
-set statusline+=%{GitStatus()}
-
-" set statusline+=\ -\            " separator
 " set statusline+=%{wordcount().words}\ words
 set stl+=%{&ignorecase?'┆\ IGNORECASE\ ã':''}
 
@@ -488,7 +489,8 @@ set statusline+=┆\            " separator
 " set statusline+=\             " blank
 "" set statusline+=Line:\ %l/%L  " line of total
 " set statusline+=LN⭡:\ %l\ of\ %L\ ☰\ [%p%%]
-set statusline+=LN⭡:\ %l/%L\ ☰\ [%p%%]
+" set statusline+=LN⭡:\ %l/%L\ ☰\ [%p%%]
+set statusline+=\ %l/%L\ ☰\ [%p%%]
 "" set statusline+=\%%           " percent sign only
 "" set statusline+=%2*0x%04B\ %* " character under cursor
 " set statusline+=\             " blank
