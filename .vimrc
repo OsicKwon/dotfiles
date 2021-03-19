@@ -356,6 +356,7 @@ set bs=2              " back space
 " TABLINE
 "---------
 set showtabline=2
+
 " let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -435,14 +436,16 @@ set statusline+=┆\             " separator
 " 2021-03-15
 " set stl+=%{&spell\ ?\ line(\".\")\ :\ \"\"}
 " set stl+=%{&spell?'SPELL':'NO_SPELL'}
-set stl+=%{&spell?'SPELL┆\ ':''}
+set stl+=%{&spell?'SPELL\ 🅂\ ┆\ ':''}
 " -----------------------------
 " set statusline+=%{&spelllang}
 " set statusline+=\ \|\            " separator
 "set statusline+=%#Tabline#
 "set statusline+=\               " blank
 " set stl+=%{&modified?'[+]\ ':''}  " 
-" set stl+=%{&modified?\ %m\ :''}  " test not working
+" set stl+=%{&modified?'***\ ':''}  " test not working
+set stl+=%{&modified?'𝓔𝓭𝓲𝓽𝓮𝓭\ ':''}  " test not working
+" 𝓜𝓸𝓸𝓭𝓲𝓯𝓲𝓮𝓭 / 𝓒𝓱𝓪𝓷𝓰𝓮𝓭 / 𝓔𝓭𝓲𝓽𝓮𝓭 / 𝓡𝓮𝓿𝓲𝓼𝓮𝓭
 set statusline+=%f              " path
 set statusline+=\               " blank
 set statusline+=%m              " modified flag [+]
@@ -456,8 +459,7 @@ set statusline+=%{FileSize()}
 " set statusline+=┆\             " separator
 " set statusline+=\ %{fugitive#statusline()}\   
 set statusline+=\ %{fugitive#head()}\   
-" set statusline+=\               " blank
-"
+"⭠
 " GitGutter 2021-03-15
 " https://github.com/airblade/vim-gitgutter/pull/709#issuecomment-635856742
 function! GitStatus()
@@ -468,9 +470,10 @@ set statusline+=%{GitStatus()}
 
 " set statusline+=\ -\            " separator
 " set statusline+=%{wordcount().words}\ words
-set stl+=%{&ignorecase?'┆\ IGNORECASE':''}
+set stl+=%{&ignorecase?'┆\ IGNORECASE\ ã':''}
 
-""~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+""~~~~~~~~~~~~~~~~<center>~~~~~~~~~~~~~~~~~~~~~~~~
 "
 set statusline+=%=              " right align
 "" set statusline+=%#PmenuSel#
@@ -484,19 +487,21 @@ set statusline+=┆\            " separator
 " set statusline+=\ ☰ \          " trigram seperator
 " set statusline+=\             " blank
 "" set statusline+=Line:\ %l/%L  " line of total
-set statusline+=%l\ of\ %L\ ☰\ [%p%%]
+" set statusline+=LN⭡:\ %l\ of\ %L\ ☰\ [%p%%]
+set statusline+=LN⭡:\ %l/%L\ ☰\ [%p%%]
 "" set statusline+=\%%           " percent sign only
 "" set statusline+=%2*0x%04B\ %* " character under cursor
 " set statusline+=\             " blank
 "" set statusline+=%P            " percentage of file/buffer
-set statusline+=\ \-\ Col:\ %c      " coloumn
+" set statusline+=\ \∞\ Col:\ %c      " coloumn
+set statusline+=\ ∞\ %c      " coloumn
 "" set statusline+=%-7.(%l of %L [%p%%] - Col: %c%V%) "Current line, percentage of size, column,
 "" required to know how to apply statuline grouping grammar 2020-12-31
 set statusline+=\             " blank
 set statusline+=┆\           " separator
 " set statusline+=\ ¦           " separator
 set statusline+=%{strftime('%H:%M')}
-set statusline+=\             " blank
+set statusline+=\         " blank
 ""}}}
 
 "--------------
@@ -949,6 +954,7 @@ command! T2 call TestFunction2()
 
 " ---
 " GUI
+" notice: all gui seeting shoud be located inside this if statement 2021-03-18
 " ---
 
 if has('gui_running')"{{{
@@ -966,6 +972,9 @@ if has('gui_running')"{{{
     " highlight Visual guifg=black guibg=Cyan gui=NONE
     " highlight CursorLineNr guibg=black guifg=white
     " highlight CursorLine gui=underline guibg=NONE
+    hi TabLine gui=NONE guibg=black guifg=white  " Deactive Area
+    " hi TabLineSel gui=NONE guibg=black guifg=white
+    " hi TabLineFill gui=NONE guibg=black guifg=white
     let g:airline_theme='serene'  "default raven serene luna monochrome powerlineish term transparent distinguished
     " hi EasyMotionTarget guifg=red guibg=yellow
     highlight Folded guibg=grey guifg=blue
