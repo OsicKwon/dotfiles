@@ -11,6 +11,7 @@
 
 ;; (setq org-ellipsis " ∞ ")
 (setq org-ellipsis " ↩ ")
+;; (setq org-ellipsis " ↵ ")
 
 ;; mew-log-commands 2021-03-18
 ;; ---------------------------
@@ -220,7 +221,6 @@
  '(org-agenda-use-time-grid t)
  '(org-babel-python-command "python3")
  '(org-confirm-babel-evaluate nil)
- '(org-ellipsis " ↩ ")
  '(org-export-backends '(ascii beamer html icalendar latex odt))
  '(org-fontify-done-headline t)
  '(org-fontify-quote-and-verse-blocks t)
