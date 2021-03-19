@@ -477,8 +477,8 @@ set stl+=%{&ignorecase?'┆\ IGNORECASE\ ã':''}
 ""~~~~~~~~~~~~~~~~<center>~~~~~~~~~~~~~~~~~~~~~~~~
 "
 set statusline+=%=              " right align
-"" set statusline+=%#PmenuSel#
-"" set statusline+=%#MoreMsg#
+" set statusline+=%#PmenuSel#
+" set statusline+=%#MoreMsg#
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 "" set statusline+=\               " blank
 "" set statusline+=\[%{&fileformat}\]
@@ -496,7 +496,7 @@ set statusline+=\ %l/%L\ ☰\ [%p%%]
 " set statusline+=\             " blank
 "" set statusline+=%P            " percentage of file/buffer
 " set statusline+=\ \∞\ Col:\ %c      " coloumn
-set statusline+=\ ∞\ %c      " coloumn
+set statusline+=\ ꜛ%c      " coloumn ∞
 "" set statusline+=%-7.(%l of %L [%p%%] - Col: %c%V%) "Current line, percentage of size, column,
 "" required to know how to apply statuline grouping grammar 2020-12-31
 set statusline+=\             " blank
