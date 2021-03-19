@@ -212,7 +212,7 @@
  '(helm-mode nil)
  '(latex-run-command "pdflatex")
  '(org-agenda-files
-   '("~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-elt_221.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-time-grid
    '((daily today require-timed)
      (800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000)
