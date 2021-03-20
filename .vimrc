@@ -46,8 +46,8 @@ set rnu "relativenumber
 "-----------
 "{{{
 augroup auto_set_number
-    autocmd InsertEnter * set nornu | set nocursorline
-    autocmd InsertLeave * set rnu   | set cursorline
+    autocmd InsertEnter * set nornu | set nocursorline | set nocursorcolumn
+    autocmd InsertLeave * set rnu   | set cursorline | set cursorcolumn
 augroup END
 " augroup auto_set_number
 "     autocmd InsertEnter * set nornu
@@ -456,9 +456,9 @@ set statusline+=%{GitStatus()}
 " set statusline+=\ -\            " separator
 set statusline+=┆\             " separator
 " set stl+=%{&modified?'[+]\ ':''}  " 
-set stl+=%{&modified?'☡\ ':''}  " test not working
+set stl+=%{&modified?'***\ ':''}  " test not working
 " set stl+=%{&modified?'𝓔𝓭𝓲𝓽𝓮𝓭\ ':''}  " test not working
-" 𝓜𝓸𝓸𝓭𝓲𝓯𝓲𝓮𝓭 / 𝓒𝓱𝓪𝓷𝓰𝓮𝓭 / 𝓔𝓭𝓲𝓽𝓮𝓭 / 𝓡𝓮𝓿𝓲𝓼𝓮𝓭 / ✘ / ☡ / ⤴ /  x
+" 𝓜𝓸𝓸𝓭𝓲𝓯𝓲𝓮𝓭 / 𝓒𝓱𝓪𝓷𝓰𝓮𝓭 / 𝓔𝓭𝓲𝓽𝓮𝓭 / 𝓡𝓮𝓿𝓲𝓼𝓮𝓭 / ✘ / ☡ / ⤴  
 "
 " 𝘌𝘋𝘐𝘛 / ℰ𝒹𝒾𝓉 
 set statusline+=%f              " path
