@@ -4,14 +4,36 @@
 ;; _/  __/ / / / / / /_/ / /__(__  ) 
 ;;(_)___/_/ /_/ /_/\__,_/\___/____/  
 
+;; INITIAL SETTING
+
+;;===============================================================
+;; PACKAGES
+;;===============================================================
+
+;; MELPA 2020-12-08
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+;; and `package-pinned-packages`. Most users will not need or want to do this.
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; -- Unnecessary call -- see Line #6 in this file
+(package-initialize)
+
 
 ;; --------------------
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; Search At Point
+;; Next/Previous Matching words for Emacs mode 2021-03-20
+;; https://www.emacswiki.org/emacs/SearchAtPoint 
+(global-set-key (kbd "C-*") 'evil-search-word-forward)
+(global-set-key (kbd "C-#") 'evil-search-word-backward)
+
 
 ;; web-mode package 2021-03-19
 ;; https://web-mode.org/
+(use-package web-mode :ensure t)
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -22,7 +44,8 @@
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 ;; Using web-mode for editing plain HTML files can be done this way
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
+;; keybinding (not working)
+;; (define-key web-mode-map (kbd "Tab") 'web-mode-fold-or-unfold)
 
 ;; (setq org-ellipsis " ∞ ")
 (setq org-ellipsis " ↩ ")
@@ -319,19 +342,6 @@
 ;; pdflatex -> path "/Library/Tex/texbin" 2020-12-07
 (setq latex-run-command "pdflatex")
 
-
-;;===============================================================
-;; PACKAGES
-;;===============================================================
-
-;; MELPA 2020-12-08
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
-;; and `package-pinned-packages`. Most users will not need or want to do this.
-;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-;; -- Unnecessary call -- see Line #6 in this file
-(package-initialize)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)

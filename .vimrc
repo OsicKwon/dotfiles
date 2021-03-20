@@ -46,8 +46,8 @@ set rnu "relativenumber
 "-----------
 "{{{
 augroup auto_set_number
-    autocmd InsertEnter * set nornu | set nocursorline | set nocursorcolumn
-    autocmd InsertLeave * set rnu   | set cursorline | set cursorcolumn
+    autocmd InsertEnter * set nornu | set nocursorline " | set nocursorcolumn
+    autocmd InsertLeave * set rnu   | set cursorline   " | set cursorcolumn
 augroup END
 " augroup auto_set_number
 "     autocmd InsertEnter * set nornu
@@ -60,6 +60,7 @@ augroup END
 "         \ | hi CursorLineNr guibg=black
 " augroup END
 "}}}
+"
 
 "--------
 " SEARCH
@@ -68,6 +69,7 @@ set hlsearch
 set incsearch
 set noignorecase
 set nosmartcase
+
 
 
 "-------
