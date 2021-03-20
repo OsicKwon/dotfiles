@@ -4,6 +4,13 @@
 ;; _/  __/ / / / / / /_/ / /__(__  ) 
 ;;(_)___/_/ /_/ /_/\__,_/\___/____/  
 
+;; ****************************************************************************************
+;; NOTICE / REMINDER
+;; -----------------
+;; 1. always double check variables set by both automatically in M-x customize and manually
+;;
+;; ****************************************************************************************
+
 ;; INITIAL SETTING
 
 ;;===============================================================
@@ -23,6 +30,36 @@
 ;; --------------------
 ;; == RECENT SETTING ==
 ;; --------------------
+
+
+;; abbrev-mode 2021-03-20
+;; https://www.oreilly.com/library/view/learning-gnu-emacs/1565921526/ch04s04.html
+;; http://ergoemacs.org/emacs/emacs_abbrev_mode_tutorial.html
+(setq-default abbrev-mode t)
+(setq abbrev-file-name "~/Documents/nvALT/abbrev_defs.txt")
+;; (read-abbrev-file "~/.abbrev_defs")
+(setq save-abbrevs t)
+
+
+;; sublimity - sublime style minimap
+(require 'sublimity)
+;; (require 'sublimity-scroll)
+(require 'sublimity-map) ;; experimental
+;; (require 'sublimity-attractive)
+
+;; (setq sublimity-scroll-weight 10
+;;       sublimity-scroll-drift-length 5)
+
+;; no `setq`
+;; (sublimity-map-set-delay 5)
+;; to always show
+(sublimity-map-set-delay nil)
+
+(setq sublimity-map-size 30)
+(setq sublimity-map-text-scale -5)
+
+;; (sublimity-mode 1)
+
 
 ;; Search At Point
 ;; Next/Previous Matching words for Emacs mode 2021-03-20
@@ -250,6 +287,8 @@
  '(global-undo-tree-mode t)
  '(helm-mode nil)
  '(latex-run-command "pdflatex")
+ '(minimap-automatically-delete-window 'visible)
+ '(minimap-mode t)
  '(org-agenda-files
    '("~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-time-grid
@@ -270,7 +309,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(sublimity php-mode keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
 
 ;; ^ html-mode, php-mode added 2021-03-19 
 

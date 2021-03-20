@@ -129,7 +129,7 @@ Plugin 'tpope/vim-repeat'
 " Plugin 'valloric/youcompleteme'        " gave up due to too-hard to insall 2020-11-20
 " Plugin 'davidhalter/jedi-vim'          " not working - hard to solve 2020-11-20
 " Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
-" Plugin 'severin-lemaignan/vim-minimap'
+Plugin 'severin-lemaignan/vim-minimap'
 " Plugin 'terryma/vim-expand-region'
 " Plugin 'w0rp/ale'                      " Asynchronous Lint Engine ??
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
