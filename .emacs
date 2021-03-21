@@ -42,22 +42,27 @@
 
 
 ;; sublimity - sublime style minimap
-(require 'sublimity)
-;; (require 'sublimity-scroll)
-(require 'sublimity-map) ;; experimental
-;; (require 'sublimity-attractive)
 
-;; (setq sublimity-scroll-weight 10
-;;       sublimity-scroll-drift-length 5)
+(when (display-graphic-p)
 
-;; no `setq`
-;; (sublimity-map-set-delay 0)
-;; (sublimity-map-set-delay nil)  ;; always show, different from 0 value
+  (require 'sublimity)
+  ;; (require 'sublimity-scroll)
+  (require 'sublimity-map) ;; experimental
+  ;; (require 'sublimity-attractive)
 
-(setq sublimity-map-size 30)
-(setq sublimity-map-text-scale -4)
+  ;; (setq sublimity-scroll-weight 10
+  ;;       sublimity-scroll-drift-length 5)
 
-(sublimity-mode 1)
+  ;; no `setq`
+  (sublimity-map-set-delay 5)
+  ;; (sublimity-map-set-delay nil)  ;; always show, different from 0 value
+
+  (setq sublimity-map-size 30)
+  (setq sublimity-map-text-scale -4)
+
+  (sublimity-mode 1)
+
+)
 
 
 ;; Search At Point
@@ -697,14 +702,14 @@
 ;; helm-projectile package 2021
 ;; ----------------------------
 ;; (require 'helm-projectile)
-(use-package helm-projectile
-  :ensure t
-  :init
-  ;; (setq helm-projectile-fuzzy-match nil)
-  ;; (helm-projectile-on)
-  :config
-  (global-set-key (kbd "C-M-s") 'helm-projectile-ag)
-)
+;; (use-package helm-projectile
+;;   :ensure t
+;;   :init
+;;   ;; (setq helm-projectile-fuzzy-match nil)
+;;   ;; (helm-projectile-on)
+;;   :config
+;;   (global-set-key (kbd "C-M-s") 'helm-projectile-ag)
+;; )
 
 
 ;; Olivetti 2021-02-11
@@ -1057,7 +1062,7 @@ T - tag prefix
 ;; (global-set-key (kbd "C-x b") 'helm-buffers-list)
 ;; (global-set-key (kbd "C-x b") 'helm-mini)  ;; cache problem occured 2021-03-15
 ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)  ;; trade off against `counsel-find-file`
-(global-set-key (kbd "C-s") 'helm-occur)
+;; (global-set-key (kbd "C-s") 'helm-occur)
 ;; (global-set-key (kbd "M-x") 'helm-M-x)
 
 ;; https://www.youtube.com/watch?v=k78f8NYYIto
@@ -1071,9 +1076,9 @@ T - tag prefix
 (define-key helm-read-file-map (kbd "<left>")   'left-char)
 
 ;; https://www.reddit.com/r/emacs/comments/2z7nbv/lean_helm_window/
-(helm-autoresize-mode 1)
-(setq helm-autoresize-max-height 50)
-(setq helm-autoresize-min-height 50)
+;; (helm-autoresize-mode 1)
+;; (setq helm-autoresize-max-height 50)
+;; (setq helm-autoresize-min-height 50)
 
 
 ;; ---------------------------------------
@@ -1085,8 +1090,8 @@ T - tag prefix
 ;; (setq enable-recursive-minibuffers t)
 ;; enable this if you want `swiper' to use it
 ;; (setq search-default-mode #'char-fold-to-regexp)
-;; (global-set-key "\C-s" 'swiper)
-(global-set-key (kbd "M-s") 'swiper)
+(global-set-key "\C-s" 'swiper)
+;; (global-set-key (kbd "M-s") 'swiper)
 ;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
 ;; (global-set-key (kbd "<f6>") 'ivy-resume)
 (global-set-key (kbd "M-x") 'counsel-M-x)
@@ -1101,7 +1106,7 @@ T - tag prefix
 ;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
 (global-set-key (kbd "C-c k") 'counsel-ag)
 (global-set-key (kbd "C-c t") 'counsel-outline)
-;; (global-set-key (kbd "C-x b") 'counsel-buffer-or-recentf)
+(global-set-key (kbd "C-x b") 'counsel-buffer-or-recentf)
 (global-set-key (kbd "C-x f") 'counsel-recentf)
 ;; (global-set-key (kbd "C-x l") 'counsel-locate)
 ;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
@@ -1137,7 +1142,10 @@ T - tag prefix
 ;; https://emacs.stackexchange.com/questions/38841/counsel-m-x-always-shows
 (setq ivy-initial-inputs-alist nil)
 
-
+;; orderless matching like Helm 2021-03-21
+;; https://oremacs.com/swiper/#completion-styles
+(setq ivy-re-builders-alist
+      '((t . ivy--regex-ignore-order)))
 
 ;; Interactive Do Mode like showing suggestion keyword 2020-12-18
 ;; Added ido-vertical-mode 2021-01-04
@@ -1152,8 +1160,8 @@ T - tag prefix
 ;; 2021-01-07
 (require 'smex)
 (smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; (global-set-key (kbd "M-x") 'smex)
+;; (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c M-x") 'smex-update)
 ;; confilicted with magit commit command 'C-c C-c' 2021-02-12 << double check required
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
