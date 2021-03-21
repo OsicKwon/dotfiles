@@ -4,12 +4,12 @@
 ;; _/  __/ / / / / / /_/ / /__(__  ) 
 ;;(_)___/_/ /_/ /_/\__,_/\___/____/  
 
-;; ****************************************************************************************
-;; NOTICE / REMINDER
-;; -----------------
-;; 1. always double check variables set by both automatically in M-x customize and manually
-;;
-;; ****************************************************************************************
+;; *******************************************************************************************************
+;; NOTICE / REMINDER / TIPS
+;; -------------------------
+;; 1. always double check variables set by both automatically in M-x customize and manually    2021-03-20
+;; 2. can cusomize whatever from its source file :: https://youtu.be/AaUlOH4GTCs?t=735         2021-03-21
+;; *******************************************************************************************************
 
 ;; INITIAL SETTING
 
@@ -69,7 +69,8 @@
 ;; Next/Previous Matching words for Emacs mode 2021-03-20
 ;; https://www.emacswiki.org/emacs/SearchAtPoint 
 (global-set-key (kbd "C-*") 'evil-search-word-forward)
-(global-set-key (kbd "C-#") 'evil-search-word-backward)
+;; (global-set-key (kbd "C-#") 'evil-search-word-backward) ;; conflicted with org-table keybinding 2021-03-21
+(global-set-key (kbd "C-&") 'evil-search-word-backward)
 
 
 ;; web-mode package 2021-03-19
@@ -1091,7 +1092,7 @@ T - tag prefix
 ;; enable this if you want `swiper' to use it
 ;; (setq search-default-mode #'char-fold-to-regexp)
 (global-set-key "\C-s" 'swiper)
-;; (global-set-key (kbd "M-s") 'swiper)
+(global-set-key (kbd "M-s") 'swiper-thing-at-point)
 ;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
 ;; (global-set-key (kbd "<f6>") 'ivy-resume)
 (global-set-key (kbd "M-x") 'counsel-M-x)
@@ -1106,7 +1107,7 @@ T - tag prefix
 ;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
 (global-set-key (kbd "C-c k") 'counsel-ag)
 (global-set-key (kbd "C-c t") 'counsel-outline)
-(global-set-key (kbd "C-x b") 'counsel-buffer-or-recentf)
+;; (global-set-key (kbd "C-x b") 'counsel-buffer-or-recentf)
 (global-set-key (kbd "C-x f") 'counsel-recentf)
 ;; (global-set-key (kbd "C-x l") 'counsel-locate)
 ;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
@@ -1144,8 +1145,17 @@ T - tag prefix
 
 ;; orderless matching like Helm 2021-03-21
 ;; https://oremacs.com/swiper/#completion-styles
+;; ---
+;;6.2 ivy–regex-ignore-order
+;;ivy--regex-ignore-order ignores the order of regexp tokens when searching for matching candidates.
+;;For instance, the input "for example" will match "example test for".
+;; ---
 (setq ivy-re-builders-alist
       '((t . ivy--regex-ignore-order)))
+
+;; Tip > `M-o` to show more options after searching 2021-03-21
+;; Those are `open in other window`, 'copy and more for example
+
 
 ;; Interactive Do Mode like showing suggestion keyword 2020-12-18
 ;; Added ido-vertical-mode 2021-01-04
@@ -1155,6 +1165,7 @@ T - tag prefix
 (setq ido-enable-flex-matching t)
 (ido-vertical-mode 1)
 (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
+
 
 ;; smex with ido for M-x :: consider helm or counsel alternatively
 ;; 2021-01-07
