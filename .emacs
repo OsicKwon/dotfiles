@@ -52,12 +52,12 @@
 
 ;; no `setq`
 ;; (sublimity-map-set-delay 0)
-(sublimity-map-set-delay nil)  ;; always show, different from 0 value
+;; (sublimity-map-set-delay nil)  ;; always show, different from 0 value
 
 (setq sublimity-map-size 30)
 (setq sublimity-map-text-scale -4)
 
-;; (sublimity-mode 1)
+(sublimity-mode 1)
 
 
 ;; Search At Point
@@ -83,9 +83,11 @@
 ;; keybinding (not working)
 ;; (define-key web-mode-map (kbd "Tab") 'web-mode-fold-or-unfold)
 
+
 ;; (setq org-ellipsis " ∞ ")
 (setq org-ellipsis " ↩ ")
 ;; (setq org-ellipsis " ↵ ")
+
 
 ;; mew-log-commands 2021-03-18
 ;; ---------------------------
@@ -432,10 +434,10 @@
 (which-key-mode)
 
 ;; https://gitter.im/syl20bnr/spacemacs?at=5912366c33e9ee771c8e538d
-;;
+;; ---
 ;; duianto @duianto May 09 2017 17:50
 ;; @vonHabsi It doesn't seem possible to page through the ESC- which-key popups 2nd and 3rd pages of key bindings. Because when ESC has been pressed, then it's interpreted as if the M (Alt) key is held down, and when C-h is pressed, then it calls the command mark-defun which is bound to C-M-h. A similar issue prevents paging through the C-h which-key popup, because C-h C-h calls the command help-for-help.
-;;
+;; ---
 ;; duianto @duianto May 09 2017 18:04
 ;; @vonHabsi One way I found to see more of the listed keys, is to maximize Spacemacs SPC T M.
 ;; There's an issue here about C-h: Paging through 'C-h' justbur/emacs-which-key#93 , where it is suggested to evaluate: (define-key help-map "\C-h" 'which-key-C-h-dispatch)
