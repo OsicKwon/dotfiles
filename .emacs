@@ -51,13 +51,13 @@
 ;;       sublimity-scroll-drift-length 5)
 
 ;; no `setq`
-;; (sublimity-map-set-delay 0)
-(sublimity-map-set-delay nil)  ;; always show, different from 0 value
+(sublimity-map-set-delay 10)
+;; (sublimity-map-set-delay nil)  ;; always show, different from 0 value
 
 (setq sublimity-map-size 30)
 (setq sublimity-map-text-scale -4)
 
-;; (sublimity-mode 1)
+(sublimity-mode 1)
 
 
 ;; Search At Point
@@ -1056,7 +1056,7 @@ T - tag prefix
 ;; (global-set-key (kbd "C-x b") 'helm-mini)  ;; cache problem occured 2021-03-15
 ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)  ;; trade off against `counsel-find-file`
 (global-set-key (kbd "C-s") 'helm-occur)
-;; (global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "M-x") 'helm-M-x)
 
 ;; https://www.youtube.com/watch?v=k78f8NYYIto
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
@@ -1087,7 +1087,7 @@ T - tag prefix
 (global-set-key (kbd "M-s") 'swiper)
 ;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
 ;; (global-set-key (kbd "<f6>") 'ivy-resume)
-(global-set-key (kbd "M-x") 'counsel-M-x)
+;; (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 ;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
 ;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
