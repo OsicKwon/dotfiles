@@ -51,12 +51,11 @@
 ;;       sublimity-scroll-drift-length 5)
 
 ;; no `setq`
-;; (sublimity-map-set-delay 5)
-;; to always show
-(sublimity-map-set-delay nil)
+;; (sublimity-map-set-delay 0)
+(sublimity-map-set-delay nil)  ;; always show, different from 0 value
 
 (setq sublimity-map-size 30)
-(setq sublimity-map-text-scale -5)
+(setq sublimity-map-text-scale -4)
 
 ;; (sublimity-mode 1)
 

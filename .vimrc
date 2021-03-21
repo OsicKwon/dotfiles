@@ -179,6 +179,7 @@ Plugin 'mileszs/ack.vim'
 " Plugin 'wincent/command-t'            " ruby required
 Plugin 'ervandew/supertab'
 Plugin 'machakann/vim-highlightedyank'  " 2021-02-26
+" Plugin 'justinmk/vim-dirvish'
 
 "----------Python-----------
 Plugin 'nvie/vim-flake8'
@@ -368,7 +369,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 "--------
 " CURSOR
 "--------
-set cursorcolumn
+" set cursorcolumn
 set cursorline
 "hi CursorLine cterm=NONE ctermbg=Black
 "highlight CursorLineNR term=Bold cterm=Bold ctermbg=Black "number column
@@ -444,7 +445,6 @@ set stl+=%{&spell?'SPELL\ 🅂\ ┆\ ':''}
 " set statusline+=\ \|\            " separator
 "set statusline+=%#Tabline#
 "set statusline+=\               " blank
-"
 " set statusline+=\ %{fugitive#statusline()}\   
 set statusline+=\ %{fugitive#head()}\   
 "⭠
@@ -458,7 +458,7 @@ set statusline+=%{GitStatus()}
 " set statusline+=\ -\            " separator
 set statusline+=┆\             " separator
 " set stl+=%{&modified?'[+]\ ':''}  " 
-set stl+=%{&modified?'***\ ':''}  " test not working
+set stl+=%{&modified?'**⤴\ ':''}  " test not working
 " set stl+=%{&modified?'𝓔𝓭𝓲𝓽𝓮𝓭\ ':''}  " test not working
 " 𝓜𝓸𝓸𝓭𝓲𝓯𝓲𝓮𝓭 / 𝓒𝓱𝓪𝓷𝓰𝓮𝓭 / 𝓔𝓭𝓲𝓽𝓮𝓭 / 𝓡𝓮𝓿𝓲𝓼𝓮𝓭 / ✘ / ☡ / ⤴  
 "
@@ -484,8 +484,8 @@ set statusline+=%=              " right align
 " set statusline+=%#PmenuSel#
 " set statusline+=%#MoreMsg#
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-"" set statusline+=\               " blank
-"" set statusline+=\[%{&fileformat}\]
+" set statusline+=\               " blank
+" set statusline+=\[%{&fileformat}\]
 set statusline+=\ %{&fileformat}
 set statusline+=\             " blank
 set statusline+=┆\            " separator
@@ -968,7 +968,7 @@ if has('gui_running')"{{{
     set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
     set linespace=1
     " set colorcolumn=105
-    set cursorcolumn!
+    " set nocursorcolumn
     set background=light
     " colorscheme basic-light
     colorscheme default
