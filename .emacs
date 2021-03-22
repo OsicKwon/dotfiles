@@ -31,6 +31,10 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; minibuffer margin 2021-03-22
+(setq-default left-margin-width 1 right-margin-width 1)
+(set-window-buffer nil (current-buffer))
+
 
 ;; writegood-mode 2021-03-21
 (require 'writegood-mode)
@@ -105,7 +109,7 @@
 ;; (define-key web-mode-map (kbd "Tab") 'web-mode-fold-or-unfold)
 
 
-;; (setq org-ellipsis " ∞ ")
+;; (setq org-ellipsis "  ")  ;; nerd font `v` nf-oct-chevron_down, hex: f47c
 (setq org-ellipsis " ↩ ")
 ;; (setq org-ellipsis " ↵ ")
 
