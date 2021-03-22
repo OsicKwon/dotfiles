@@ -32,6 +32,21 @@
 ;; --------------------
 
 
+;; writegood-mode 2021-03-21
+(require 'writegood-mode)
+(add-hook 'text-mode-hook 'writegood-mode)
+(add-hook 'org-mode-hook 'writegood-mode)
+(add-hook 'markdown-mode-hook 'writegood-mode)
+(add-hook 'latex-mode-hook 'writegood-mode)
+(add-hook 'Latex-mode-hook 'writegood-mode)  ;; AUCTeX
+
+
+;; Preventing to create Lock Files liks `#filename.ext#` 2021-03-21
+;; these cannot be moved to a different directory.
+;; https://www.emacswiki.org/emacs/LockFiles
+ (setq create-lockfiles nil)
+
+
 ;; abbrev-mode 2021-03-20
 ;; https://www.oreilly.com/library/view/learning-gnu-emacs/1565921526/ch04s04.html
 ;; http://ergoemacs.org/emacs/emacs_abbrev_mode_tutorial.html
@@ -54,13 +69,13 @@
   ;;       sublimity-scroll-drift-length 5)
 
   ;; no `setq`
-  (sublimity-map-set-delay 5)
+  ;; (sublimity-map-set-delay 5)
   ;; (sublimity-map-set-delay nil)  ;; always show, different from 0 value
 
   (setq sublimity-map-size 30)
   (setq sublimity-map-text-scale -4)
 
-  (sublimity-mode 1)
+  ;; (sublimity-mode 1)
 
 )
 
@@ -316,7 +331,8 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(sublimity php-mode keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround which-key auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell)))
+   '(writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+ '(writeroom-restore-window-config t))
 
 ;; ^ html-mode, php-mode added 2021-03-19 
 
