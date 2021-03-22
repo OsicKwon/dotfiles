@@ -32,6 +32,16 @@
 ;; --------------------
 
 
+;; show path in title bar 2021-03-22
+;; https://stackoverflow.com/questions/29816326/how-to-show-path-to-file-in-the-emacs-mode-line
+
+(setq frame-title-format
+      '(buffer-file-name "%b - %f" ; File buffer
+        (dired-directory dired-directory ; Dired buffer
+         (revert-buffer-function "%b" ; Buffer Menu
+          ("%b - Dir: " default-directory))))) ; Plain buffer
+
+
 ;; minibuffer margin 2021-03-22
 (setq-default left-margin-width 1 right-margin-width 1)
 (set-window-buffer nil (current-buffer))
@@ -74,14 +84,14 @@
   ;;       sublimity-scroll-drift-length 5)
 
   ;; no `setq`
-  ;; (sublimity-map-set-delay 5)
+  (sublimity-map-set-delay 5)
   ;; (sublimity-map-set-delay nil)  ;; always show, different from 0 value
 
   (setq sublimity-map-size 30)
-  (setq sublimity-map-text-scale -4)
-
+  (setq sublimity-map-text-scale -5)
+  (setq sublimity-map-active-region 'nil)
+  
   ;; (sublimity-mode 1)
-
 )
 
 
@@ -120,7 +130,7 @@
 ;; source :: https://github.com/overtone/live-coding-emacs/blob/master/lib/mwe-log-commands.el
 ;; how to set :: http://ergoemacs.org/emacs/emacs_installing_packages.html
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-(load "mwe-log-commands")
+;; (load "mwe-log-commands")
 ;; (add-hook 'text-mode-hook 'mwe:log-keyboard-commands)
 ;; (add-hook 'text-mode-hook 'mwe:open-command-log-buffer)
 ;; (add-hook 'prog-mode-hook 'mwe:log-keyboard-commands)
@@ -133,6 +143,7 @@
 ;; make a function with kbd binding by myself
 (defun mwe-commands-exec ()
   "activate command-log view"
+  (load "mwe-log-commands")
   (interactive)
   (mwe:log-keyboard-commands)
   (mwe:open-command-log-buffer)
@@ -312,7 +323,7 @@
  '(doc-view-continuous t)
  '(fringe-mode 0 nil (fringe))
  '(global-undo-tree-mode t)
- '(helm-mode nil)
+;; '(helm-mode nil)
  '(latex-run-command "pdflatex")
  '(minimap-automatically-delete-window 'visible)
  '(minimap-mode t)
@@ -349,7 +360,7 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
  '(aw-leading-char-face ((t (:foreground "red" :height 2.0))))
- '(helm-match ((t (:extend t :foreground "#b00000" :underline t :weight bold))))
+;; '(helm-match ((t (:extend t :foreground "#b00000" :underline t :weight bold))))
  '(mode-line ((((type x w32 ns)) (:overline t)) (((type tty)) (:inverse-video t))))
  '(mode-line-inactive ((t (:inherit (shadow mode-line)))))
  '(org-document-title ((t (:foreground "midnight blue" :weight bold :height 1.4))))
@@ -653,10 +664,10 @@
 (evil-commentary-mode)
 
 ;; avy (like ace-jump and easy-motion in vim) 2021-03-04
-(global-set-key (kbd "C-:") 'avy-goto-char)
-;; (global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "C-M-s") 'avy-goto-char)
+;; (global-set-key (kbd "C-:") 'avy-goto-char)
 ;; (global-set-key (kbd "M-s") 'avy-goto-char)
-
+;; (global-set-key (kbd "C-'") 'avy-goto-char-2)
 
 
 ;;----------------------------------------------------------------
@@ -1087,15 +1098,15 @@ T - tag prefix
 ;; (global-set-key (kbd "C-s") 'helm-occur)
 ;; (global-set-key (kbd "M-x") 'helm-M-x)
 
-;; https://www.youtube.com/watch?v=k78f8NYYIto
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+;; Helm Tab autocompletion filenames :: https://www.youtube.com/watch?v=k78f8NYYIto
+;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 
-;; found below-code myself
+;; Use arrow keys in helm-find-files, found below-code myself
 ;; ref: https://github.com/emacs-helm/helm/blob/master/helm-files.el#L741
-(define-key helm-find-files-map (kbd "<right>")  'right-char)
-(define-key helm-find-files-map (kbd "<left>")   'left-char)
-(define-key helm-read-file-map (kbd "<right>")  'right-char)
-(define-key helm-read-file-map (kbd "<left>")   'left-char)
+;; (define-key helm-find-files-map (kbd "<right>")  'right-char)
+;; (define-key helm-find-files-map (kbd "<left>")   'left-char)
+;; (define-key helm-read-file-map (kbd "<right>")  'right-char)
+;; (define-key helm-read-file-map (kbd "<left>")   'left-char)
 
 ;; https://www.reddit.com/r/emacs/comments/2z7nbv/lean_helm_window/
 ;; (helm-autoresize-mode 1)
