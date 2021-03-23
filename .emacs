@@ -147,6 +147,7 @@
   (interactive)
   (mwe:log-keyboard-commands)
   (mwe:open-command-log-buffer)
+  (evil-window-set-width 40)
   (other-window 1)
   (message "mwe-log-commands is activated now")
 )
