@@ -461,33 +461,32 @@ set statusline+=┆\             " separator
 set stl+=%{&modified?'**⤴\ ':''}  " test not working
 " set stl+=%{&modified?'𝓔𝓭𝓲𝓽𝓮𝓭\ ':''}  " test not working
 " 𝓜𝓸𝓸𝓭𝓲𝓯𝓲𝓮𝓭 / 𝓒𝓱𝓪𝓷𝓰𝓮𝓭 / 𝓔𝓭𝓲𝓽𝓮𝓭 / 𝓡𝓮𝓿𝓲𝓼𝓮𝓭 / ✘ / ☡ / ⤴  
-"
 " 𝘌𝘋𝘐𝘛 / ℰ𝒹𝒾𝓉 
 set statusline+=%f              " path
-set statusline+=\               " blank
+" set statusline+=\               " blank
 set statusline+=%m              " modified flag [+]
 " set statusline+=\ -\            " separator
-set statusline+=%y              " [filetype] of the file
+" set statusline+=%y              " [filetype] of the file
 " set statusline+=┆\             " separator
-" set statusline+=%Y              " FILETYPE of the file
 set statusline+=%{FileSize()}
 " set statusline+=%#PmenuSel#
 " set statusline+=%{StatuslineGit()}
 " set statusline+=┆\             " separator
 " set statusline+=%{wordcount().words}\ words
-set stl+=%{&ignorecase?'┆\ IGNORECASE\ ã':''}
-
+" set stl+=%{&ignorecase?'┆\ IGNORECASE\ ã':''}
+set stl+=%{&ignorecase?'┆\ Ignore\ ã':''}
 
 ""~~~~~~~~~~~~~~~~<center>~~~~~~~~~~~~~~~~~~~~~~~~
-"
 set statusline+=%=              " right align
+set statusline+=\ %Y              " FILETYPE of the file
+" set statusline+=┆\            " separator
 " set statusline+=%#PmenuSel#
 " set statusline+=%#MoreMsg#
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+" set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 " set statusline+=\               " blank
 " set statusline+=\[%{&fileformat}\]
-set statusline+=\ %{&fileformat}
-set statusline+=\             " blank
+" set statusline+=\ %{&fileformat}
+" set statusline+=\             " blank
 set statusline+=┆\            " separator
 " set statusline+=\ ☰ \          " trigram seperator
 " set statusline+=\             " blank
@@ -496,7 +495,7 @@ set statusline+=┆\            " separator
 " set statusline+=LN⭡:\ %l/%L\ ☰\ [%p%%]
 set statusline+=\ %l/%L\ ☰\ [%p%%]
 "" set statusline+=\%%           " percent sign only
-"" set statusline+=%2*0x%04B\ %* " character under cursor
+set statusline+=%2*0x%04B\ %* " character under cursor
 " set statusline+=\             " blank
 "" set statusline+=%P            " percentage of file/buffer
 " set statusline+=\ \∞\ Col:\ %c      " coloumn
