@@ -31,6 +31,7 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+(setq default-directory "~/Documents/nvALT/")
 
 ;; show path in title bar 2021-03-22
 ;; https://stackoverflow.com/questions/29816326/how-to-show-path-to-file-in-the-emacs-mode-line
