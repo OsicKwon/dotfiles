@@ -1140,6 +1140,7 @@ T - tag prefix
 (global-set-key (kbd "C-c k") 'counsel-ag)
 (global-set-key (kbd "C-c t") 'counsel-outline)
 ;; (global-set-key (kbd "C-x b") 'counsel-buffer-or-recentf)
+(global-set-key (kbd "C-x b") 'counsel-ibuffer)
 (global-set-key (kbd "C-x f") 'counsel-recentf)
 ;; (global-set-key (kbd "C-x l") 'counsel-locate)
 ;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
