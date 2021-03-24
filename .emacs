@@ -147,6 +147,7 @@
   (interactive)
   (mwe:log-keyboard-commands)
   (mwe:open-command-log-buffer)
+  (evil-window-set-width 40)
   (other-window 1)
   (message "mwe-log-commands is activated now")
 )
@@ -757,6 +758,20 @@
   (setq olivetti-body-width 0.98)
   ;; (setq olivetti-body-width 100)
   ;; (setq olivetti-minimum-body-width 10)
+
+  ;; functions by width
+  (defun olivetti-50-width ()
+    (interactive)
+    (olivetti-set-width 0.5)
+    ) 
+  (global-set-key (kbd "C-M-;") 'olivetti-50-width)
+
+  (defun olivetti-098-width ()
+    (interactive)
+    (olivetti-set-width 0.98)
+    ) 
+  (global-set-key (kbd "C-M-'") 'olivetti-098-width)
+  
 )
 
 
