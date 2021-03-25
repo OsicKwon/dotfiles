@@ -31,6 +31,10 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; redo in evil 2021-03-25
+;; https://github.com/emacs-evil/evil/issues/1382
+(custom-set-variables '(evil-undo-system 'undo-tree))
+
 
 ;; Add counsel-kill-buffer 2021-03-24
 ;; https://github.com/abo-abo/swiper/pull/2776/commits/b873e82282f5e6c3b03610fda5306c2a50087c2c
