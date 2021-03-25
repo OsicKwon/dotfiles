@@ -439,7 +439,8 @@ set statusline+=┆\             " separator
 " 2021-03-15
 " set stl+=%{&spell\ ?\ line(\".\")\ :\ \"\"}
 " set stl+=%{&spell?'SPELL':'NO_SPELL'}
-set stl+=%{&spell?'SPELL\ 🅂\ ┆\ ':''}
+" set stl+=%{&spell?'SPELL\ 🅂\ ┆\ ':''}
+set stl+=%{&spell?'🅂\ \ ':''}
 " -----------------------------
 " set statusline+=%{&spelllang}
 " set statusline+=\ \|\            " separator

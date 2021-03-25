@@ -31,6 +31,18 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; Add counsel-kill-buffer 2021-03-24
+;; https://github.com/abo-abo/swiper/pull/2776/commits/b873e82282f5e6c3b03610fda5306c2a50087c2c
+(defun counsel-kill-buffer ()
+  "Kill a buffer interactively using `ivy'."
+  (interactive)
+  (ivy-read "Kill buffer: " #'internal-complete-buffer
+            :action #'ivy--kill-buffer-action
+            :matcher #'ivy--switch-buffer-matcher
+            :caller 'counsel-kill-buffer))
+(global-set-key (kbd "C-x k") 'counsel-kill-buffer)
+
+
 (setq default-directory "~/Documents/nvALT/")
 
 
