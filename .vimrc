@@ -424,7 +424,8 @@ function! FileSize()
         " return bytes
         return "┆ " . (bytes) . "b"
     else
-        return "┆ " . (bytes / 1024) . "k"
+        " return "┆ " . (bytes / 1024) . "k"  " binary
+        return "┆ " . (bytes / 1000) . "k"
     endif
 endfunction
 
@@ -476,21 +477,20 @@ set statusline+=%{FileSize()}
 " set statusline+=%{wordcount().words}\ words
 " set stl+=%{&ignorecase?'┆\ IGNORECASE\ ã':''}
 set stl+=%{&ignorecase?'┆\ Ignore\ ã':''}
-
 ""~~~~~~~~~~~~~~~~<center>~~~~~~~~~~~~~~~~~~~~~~~~
 set statusline+=%=              " right align
 set statusline+=\ %Y              " FILETYPE of the file
 set statusline+=┆            " separator
 " set statusline+=%#PmenuSel#
 " set statusline+=%#MoreMsg#
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\ [%{&fileencoding?&fileencoding:&encoding}]
 " set statusline+=\               " blank
 set statusline+=\[%{&fileformat}\]
 " set statusline+=\ %{&fileformat}
 " set statusline+=%2*0x%04B\ %* " character under cursor
 " set statusline+=%b " decimal byte '98'
-set statusline+=\               " blank
-set statusline+=\x%02B " hex byte 'x62'
+" set statusline+=\               " blank
+set statusline+=\[x%02B] " hex byte 'x62'
 set statusline+=┆\            " separator
 " set statusline+=\ ☰ \          " trigram seperator
 " set statusline+=\             " blank

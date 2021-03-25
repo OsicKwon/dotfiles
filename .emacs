@@ -31,6 +31,7 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+
 ;; Add counsel-kill-buffer 2021-03-24
 ;; https://github.com/abo-abo/swiper/pull/2776/commits/b873e82282f5e6c3b03610fda5306c2a50087c2c
 (defun counsel-kill-buffer ()
@@ -1220,8 +1221,11 @@ T - tag prefix
 (setq ivy-re-builders-alist
       '((t . ivy--regex-ignore-order)))
 
-;; Tip > `M-o` to show more options after searching 2021-03-21
-;; Those are `open in other window`, 'copy and more for example
+;; Counsel Tip > `M-o` to show more options after searching 2021-03-21
+;; Those are
+;; `open in other window`,
+;; `copy` and more
+;; for example
 
 
 ;; Interactive Do Mode like showing suggestion keyword 2020-12-18
