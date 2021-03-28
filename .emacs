@@ -407,7 +407,6 @@ buffer in current window."
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
  '(aw-leading-char-face ((t (:foreground "red" :height 2.0))))
- '(ivy-current-match ((t (:extend t :background "selectedTextBackgroundColor"))))
  '(mode-line ((((type x w32 ns)) (:overline t)) (((type tty)) (:inverse-video t))))
  '(mode-line-inactive ((t (:inherit (shadow mode-line)))))
  '(org-document-title ((t (:foreground "midnight blue" :weight bold :height 1.4))))
@@ -1199,7 +1198,8 @@ T - tag prefix
 ;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
 ;; (global-set-key (kbd "C-c g") 'counsel-git)
 ;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
-(global-set-key (kbd "C-c k") 'counsel-ag)
+;; (global-set-key (kbd "C-c k") 'counsel-ag)  ;; connected git status
+(global-set-key (kbd "C-c k") 'counsel-ack)  ;; ignore git status 2021-03-28
 (global-set-key (kbd "C-c t") 'counsel-outline)
 ;; (global-set-key (kbd "C-x b") 'counsel-buffer-or-recentf)
 (global-set-key (kbd "C-x b") 'counsel-ibuffer)
