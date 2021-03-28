@@ -135,6 +135,7 @@ Plugin 'severin-lemaignan/vim-minimap'
 " Plugin 'w0rp/ale'                      " Asynchronous Lint Engine ??
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
 " Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
+Plugin 'w0rp/ale'
 
 "----------Git--------------
 Plugin 'airblade/vim-gitgutter'
@@ -164,7 +165,7 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'beloglazov/vim-online-thesaurus' " 2021-02-26
 
 "------Functionality--------
-" Plugin 'kien/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'          " not a vimway instead use find command
 Plugin 'mbbill/undotree'
 " Plugin 'sjl/gundo.vim'                  " visualize your Vim undo tree
@@ -208,6 +209,7 @@ let g:solarized_termcolors=256
 let g:NERDTreeWinSize=40
 " let g:org_indent=1
 let g:highlightedyank_highlight_duration = 500
+
 
 "----------------------------------------------
  "MARKDOWN SUPPORT for 'plasticboy/vim-markdown'
@@ -443,8 +445,8 @@ set statusline+=┆\             " separator
 " set stl+=%{&spell\ ?\ line(\".\")\ :\ \"\"}
 " set stl+=%{&spell?'SPELL':'NO_SPELL'}
 " set stl+=%{&spell?'SPELL\ 🅂\ ┆\ ':''}
-" set stl+=%{&spell?'🅂\ \ ':''}
-set stl+=%{&spell?'🅂\ SPELL:':''}
+set stl+=%{&spell?'🅂\ \ ':''}
+" set stl+=%{&spell?'SPELL:':''}
 set stl+=%{&spell?&spelllang:''}
 set stl+=%{&spell?'\ ┆\ ':''}
 " set statusline+=%{&spelllang}
@@ -463,14 +465,14 @@ endfunction
 set statusline+=%{GitStatus()}
 " set statusline+=\ -\            " separator
 set statusline+=┆\             " separator
-" set stl+=%{&modified?'[+]\ ':''}  " 
 set stl+=%{&modified?'**⤴\ ':''}  " test not working
 " set stl+=%{&modified?'𝓔𝓭𝓲𝓽𝓮𝓭\ ':''}  " test not working
 " 𝓜𝓸𝓸𝓭𝓲𝓯𝓲𝓮𝓭 / 𝓒𝓱𝓪𝓷𝓰𝓮𝓭 / 𝓔𝓭𝓲𝓽𝓮𝓭 / 𝓡𝓮𝓿𝓲𝓼𝓮𝓭 / ✘ / ☡ / ⤴  
 " 𝘌𝘋𝘐𝘛 / ℰ𝒹𝒾𝓉 
 set statusline+=%f              " path
 " set statusline+=\               " blank
-set statusline+=%m              " modified flag [+]
+set stl+=%{&modified?'\ [+]':''}  " 
+" set statusline+=%m              " modified flag [+]
 " set statusline+=\ -\            " separator
 " set statusline+=%y              " [filetype] of the file
 " set statusline+=┆\             " separator
@@ -1133,10 +1135,11 @@ map <F10> :cprevious<Return>
 map <F11> :cnext<Return>
 
 
-"------
-" Python
-"------
-autocmd BufEnter *.py colorscheme PaperColor
+"----------------------
+" PaperColor Filetypes
+"----------------------
+autocmd BufEnter *.py    colorscheme PaperColor
+autocmd BufEnter *.vimrc colorscheme PaperColor
 
 
 "---------------
