@@ -31,9 +31,63 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+
+;; dedicated window 2021-03-27
+;; https://emacs.stackexchange.com/questions/2189/how-can-i-prevent-a-command-from-using-specific-windows
+(defun toggle-window-dedicated ()
+  "Control whether or not Emacs is allowed to display another
+buffer in current window."
+  (interactive)
+  (message
+   (if (let (window (get-buffer-window (current-buffer)))
+         (set-window-dedicated-p window (not (window-dedicated-p window))))
+       "%s: Can't touch this!"
+     "%s is up for grabs.")
+   (current-buffer)))
+
+;; (global-set-key (kbd "C-c t") 'toggle-window-dedicated)
+
+
 ;; redo in evil 2021-03-25
 ;; https://github.com/emacs-evil/evil/issues/1382
-(custom-set-variables '(evil-undo-system 'undo-tree))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
+ '(confirm-kill-emacs 'yes-or-no-p)
+ '(custom-enabled-themes nil)
+ '(doc-view-continuous t)
+ '(evil-undo-system 'undo-tree)
+ '(fringe-mode 0 nil (fringe))
+ '(global-undo-tree-mode t)
+ '(latex-run-command "pdflatex")
+ '(minimap-automatically-delete-window 'visible)
+ '(minimap-mode t)
+ '(org-agenda-files
+   '("~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+ '(org-agenda-time-grid
+   '((daily today require-timed)
+     (800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000)
+     "......" "----------------"))
+ '(org-agenda-use-time-grid t)
+ '(org-babel-python-command "python3")
+ '(org-confirm-babel-evaluate nil)
+ '(org-export-backends '(ascii beamer html icalendar latex odt))
+ '(org-fontify-done-headline t)
+ '(org-fontify-quote-and-verse-blocks t)
+ '(org-fontify-whole-heading-line t)
+ '(org-link-frame-setup
+   '((vm . vm-visit-folder-other-frame)
+     (vm-imap . vm-visit-imap-folder-other-frame)
+     (gnus . org-gnus-no-new-news)
+     (file . find-file-other-window)
+     (wl . wl-other-frame)))
+ '(package-selected-packages
+   '(writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+ '(writeroom-restore-window-config t))
 
 
 ;; Add counsel-kill-buffer 2021-03-24
@@ -145,15 +199,19 @@
 
 
 ;; (setq org-ellipsis "  ")  ;; nerd font `v` nf-oct-chevron_down, hex: f47c
+;; (setq org-ellipsis " ∞ ")
 (setq org-ellipsis " ↩ ")
-;; (setq org-ellipsis " ↵ ")
 
+
+;; manual install packages
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(load "mwe-log-commands")
+(load "sticky-windows.el")  ;; more test required 2021-03-27
 
 ;; mew-log-commands 2021-03-18
 ;; ---------------------------
 ;; source :: https://github.com/overtone/live-coding-emacs/blob/master/lib/mwe-log-commands.el
 ;; how to set :: http://ergoemacs.org/emacs/emacs_installing_packages.html
-(add-to-list 'load-path "~/.emacs.d/lisp/")
 ;; (load "mwe-log-commands")
 ;; (add-hook 'text-mode-hook 'mwe:log-keyboard-commands)
 ;; (add-hook 'text-mode-hook 'mwe:open-command-log-buffer)
@@ -167,11 +225,12 @@
 ;; make a function with kbd binding by myself
 (defun mwe-commands-exec ()
   "activate command-log view"
-  (load "mwe-log-commands")
+  ;; (load "mwe-log-commands")
   (interactive)
   (mwe:log-keyboard-commands)
   (mwe:open-command-log-buffer)
   (evil-window-set-width 40)
+  (setq toggle-window-dedicated 1)  ;; do not allow buffer to change by others
   (other-window 1)
   (message "mwe-log-commands is activated now")
 )
@@ -336,44 +395,7 @@
 
 (setq ispell-program-name "/opt/local/bin/ispell")
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
- '(confirm-kill-emacs 'yes-or-no-p)
- '(custom-enabled-themes nil)
- '(doc-view-continuous t)
- '(fringe-mode 0 nil (fringe))
- '(global-undo-tree-mode t)
-;; '(helm-mode nil)
- '(latex-run-command "pdflatex")
- '(minimap-automatically-delete-window 'visible)
- '(minimap-mode t)
- '(org-agenda-files
-   '("~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
- '(org-agenda-time-grid
-   '((daily today require-timed)
-     (800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000)
-     "......" "----------------"))
- '(org-agenda-use-time-grid t)
- '(org-babel-python-command "python3")
- '(org-confirm-babel-evaluate nil)
- '(org-export-backends '(ascii beamer html icalendar latex odt))
- '(org-fontify-done-headline t)
- '(org-fontify-quote-and-verse-blocks t)
- '(org-fontify-whole-heading-line t)
- '(org-link-frame-setup
-   '((vm . vm-visit-folder-other-frame)
-     (vm-imap . vm-visit-imap-folder-other-frame)
-     (gnus . org-gnus-no-new-news)
-     (file . find-file-other-window)
-     (wl . wl-other-frame)))
- '(package-selected-packages
-   '(writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
- '(writeroom-restore-window-config t))
+
 
 ;; ^ html-mode, php-mode added 2021-03-19 
 
@@ -385,7 +407,7 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
  '(aw-leading-char-face ((t (:foreground "red" :height 2.0))))
-;; '(helm-match ((t (:extend t :foreground "#b00000" :underline t :weight bold))))
+ '(ivy-current-match ((t (:extend t :background "selectedTextBackgroundColor"))))
  '(mode-line ((((type x w32 ns)) (:overline t)) (((type tty)) (:inverse-video t))))
  '(mode-line-inactive ((t (:inherit (shadow mode-line)))))
  '(org-document-title ((t (:foreground "midnight blue" :weight bold :height 1.4))))
@@ -429,6 +451,7 @@
 
 ;; ace-window 2021-02-23
 (global-set-key (kbd "M-o") 'ace-window)
+;; (global-set-key (kbd "M-o") 'other-window)
 
 
 ;; display date in modeline 2020-12-07
@@ -1256,14 +1279,15 @@ T - tag prefix
 ;; Git-Gutter 2020-12-18
 (global-git-gutter-mode +1)
 
+
 ;; Multiple-Cursors Package 2020-12-19
 (require 'multiple-cursors)
 ; for multiple-line
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 ; for keyword
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C->")         'mc/mark-next-like-this)
+(global-set-key (kbd "C-<")         'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<")     'mc/mark-all-like-this)
 
 
 ;; org-level whole line background in org-mode 2020-12-27
