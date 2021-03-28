@@ -28,6 +28,7 @@ set sidescroll=1                      " options: 0, 1, 2, ....
 set modeline
 set modelines=10
 set spell
+set spelllang=en_ca
 " set colorcolumn=80,120
 set path+=**                  " include sub directories when searching 2021-01-06
 set updatetime=1000           " for gitgutter 2021-01-13
@@ -180,6 +181,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'ervandew/supertab'
 Plugin 'machakann/vim-highlightedyank'  " 2021-02-26
 " Plugin 'justinmk/vim-dirvish'
+Plugin 'rking/ag.vim'                   " Silver Searcher (ag) 2021-03-28
 
 "----------Python-----------
 Plugin 'nvie/vim-flake8'
@@ -441,8 +443,10 @@ set statusline+=┆\             " separator
 " set stl+=%{&spell\ ?\ line(\".\")\ :\ \"\"}
 " set stl+=%{&spell?'SPELL':'NO_SPELL'}
 " set stl+=%{&spell?'SPELL\ 🅂\ ┆\ ':''}
-set stl+=%{&spell?'🅂\ \ ':''}
-" -----------------------------
+" set stl+=%{&spell?'🅂\ \ ':''}
+set stl+=%{&spell?'🅂\ SPELL:':''}
+set stl+=%{&spell?&spelllang:''}
+set stl+=%{&spell?'\ ┆\ ':''}
 " set statusline+=%{&spelllang}
 " set statusline+=\ \|\            " separator
 "set statusline+=%#Tabline#
@@ -476,7 +480,7 @@ set statusline+=%{FileSize()}
 " set statusline+=┆\             " separator
 " set statusline+=%{wordcount().words}\ words
 " set stl+=%{&ignorecase?'┆\ IGNORECASE\ ã':''}
-set stl+=%{&ignorecase?'┆\ Ignore\ ã':''}
+set stl+=%{&ignorecase?'┆\ IGNORE\ ã':''}
 ""~~~~~~~~~~~~~~~~<center>~~~~~~~~~~~~~~~~~~~~~~~~
 set statusline+=%=              " right align
 set statusline+=\ %Y              " FILETYPE of the file
