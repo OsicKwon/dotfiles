@@ -1198,8 +1198,8 @@ T - tag prefix
 ;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
 ;; (global-set-key (kbd "C-c g") 'counsel-git)
 ;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
-;; (global-set-key (kbd "C-c k") 'counsel-ag)  ;; connected git status
-(global-set-key (kbd "C-c k") 'counsel-ack)  ;; ignore git status 2021-03-28
+(global-set-key (kbd "C-c k") 'counsel-ag)  ;; connected gitignore, but solved (--skip-vcs-ignores)
+;; (global-set-key (kbd "C-c k") 'counsel-ack)  ;; ignore git status 2021-03-28
 (global-set-key (kbd "C-c t") 'counsel-outline)
 ;; (global-set-key (kbd "C-x b") 'counsel-buffer-or-recentf)
 (global-set-key (kbd "C-x b") 'counsel-ibuffer)
@@ -1247,6 +1247,13 @@ T - tag prefix
 ;; ---
 (setq ivy-re-builders-alist
       '((t . ivy--regex-ignore-order)))
+
+;; ignore gitignore file in counsel-ag 2021-03-28
+;; https://stackoverflow.com/questions/48048529/silver-searcher-how-to-unignore-files-in-the-gitignore
+;; https://github.com/abo-abo/swiper/issues/1641
+;; https://oremacs.com/swiper/Changelog
+(setq counsel-ag-base-command "ag --nocolor --nogroup --skip-vcs-ignores %s -- .")
+
 
 ;; Counsel Tip > `M-o` to show more options after searching 2021-03-21
 ;; Those are
