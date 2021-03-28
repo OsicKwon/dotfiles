@@ -505,7 +505,7 @@ set statusline+=\ %l/%L\ ☰\ [%p%%]
 set statusline+=\ ꜛ%c      " coloumn ∞
 "" set statusline+=%-7.(%l of %L [%p%%] - Col: %c%V%) "Current line, percentage of size, column,
 "" required to know how to apply statuline grouping grammar 2020-12-31
-set statusline+=\             " blank
+" set statusline+=\             " blank
 set statusline+=┆\           " separator
 " set statusline+=\ ¦           " separator
 set statusline+=%{strftime('%H:%M')}
