@@ -31,6 +31,18 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; remove warning of cl is depreciated 2021-03-29
+;; https://github.com/kiwanami/emacs-epc/issues/35#issuecomment-660639327
+(setq byte-compile-warnings '(cl-functions))
+
+
+;; overwrite in selection 2021-03-29
+;; http://pragmaticemacs.com/page/8/
+;; (delete-selection-mode t)
+
+;; turn on visible bell 2021-03-29
+(setq visible-bell t)
+
 
 ;; dedicated window 2021-03-27
 ;; https://emacs.stackexchange.com/questions/2189/how-can-i-prevent-a-command-from-using-specific-windows
@@ -86,7 +98,7 @@ buffer in current window."
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(shell-pop writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(writeroom-restore-window-config t))
 
 
