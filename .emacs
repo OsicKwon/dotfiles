@@ -1264,6 +1264,12 @@ T - tag prefix
 ;; https://oremacs.com/swiper/Changelog
 (setq counsel-ag-base-command "ag --nocolor --nogroup --skip-vcs-ignores %s -- .")
 
+;; ivy-view mode 2021-03-29
+;; save layouts
+(global-set-key (kbd "C-c v") 'ivy-push-view)
+(global-set-key (kbd "C-c V") 'ivy-pop-view)
+(global-set-key (kbd "C-c s") 'ivy-switch-view)
+
 
 ;; Counsel Tip > `M-o` to show more options after searching 2021-03-21
 ;; Those are
