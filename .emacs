@@ -41,7 +41,7 @@
 ;; (delete-selection-mode t)
 
 ;; turn on visible bell 2021-03-29
-(setq visible-bell t)
+;; (setq visible-bell t)
 
 
 ;; dedicated window 2021-03-27
@@ -98,7 +98,7 @@ buffer in current window."
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(shell-pop writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper beacon evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(shell-pop writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(writeroom-restore-window-config t))
 
 
@@ -149,7 +149,7 @@ buffer in current window."
 ;; Preventing to create Lock Files liks `#filename.ext#` 2021-03-21
 ;; these cannot be moved to a different directory.
 ;; https://www.emacswiki.org/emacs/LockFiles
- (setq create-lockfiles nil)
+(setq create-lockfiles nil)
 
 
 ;; abbrev-mode 2021-03-20
@@ -347,7 +347,7 @@ buffer in current window."
 (if (display-graphic-p)
     (progn
       (tool-bar-mode -1)
-      (menu-bar-mode -1)
+      ;; (menu-bar-mode -1)
       (scroll-bar-mode -1)
       ;; (global-hl-line-mode t)
     )
@@ -406,10 +406,6 @@ buffer in current window."
 (display-battery-mode 1)
 
 (setq ispell-program-name "/opt/local/bin/ispell")
-
-
-
-;; ^ html-mode, php-mode added 2021-03-19 
 
 
 (custom-set-faces
@@ -985,9 +981,11 @@ T - tag prefix
 
 
 ;; beacon mode package 2021-03-03
-;; (beacon-mode 1)  ;; Interupted `org-tree-slide-mode`
+;; Emacs 26.3 ok, but Emacs 27.1 issue
+(beacon-mode 1)                             ;; Interupted `org-tree-slide-mode`
 (setq beacon-size 5)
 (setq beacon-color "black")
+(setq beacon-blink-when-window-scrolls nil) ;; Solved 'org-tree-slide-mode` issue 2021-03-29
 
 
 ;; command-log-mode 2021-03-09
