@@ -281,44 +281,44 @@ buffer in current window."
 ;; (setq recentf-auto-cleanup 'never)
 
 
-;; ;; ----------------------------
-;; ;; Dashboard package 2021-03-12
-;; ;; ----------------------------
-;; ;; (require 'dashboard)
-;; ;; (dashboard-setup-startup-hook)
-;; ;; Or if you use use-package
-;; (use-package dashboard
-;;   :ensure t
-;;   :config
-;;   (dashboard-setup-startup-hook)
+;; ----------------------------
+;; Dashboard package 2021-03-12
+;; ----------------------------
+;; (require 'dashboard)
+;; (dashboard-setup-startup-hook)
+;; Or if you use use-package
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
 
-;;   ;; Set the title
-;;   (setq dashboard-banner-logo-title "Welcome to Emacs")
-;;   ;; Set the banner
-;;   (setq dashboard-startup-banner 'logo)
-;;   ;; Value can be
-;;   ;; 'official which displays the official emacs logo
-;;   ;; 'logo which displays an alternative emacs logo
-;;   ;; 1, 2 or 3 which displays one of the text banners
-;;   ;; "path/to/your/image.png" or "path/to/your/text.txt" which displays whatever image/text you would prefer
+  ;; Set the title
+  (setq dashboard-banner-logo-title "Welcome to Emacs")
+  ;; Set the banner
+  (setq dashboard-startup-banner 'logo)
+  ;; Value can be
+  ;; 'official which displays the official emacs logo
+  ;; 'logo which displays an alternative emacs logo
+  ;; 1, 2 or 3 which displays one of the text banners
+  ;; "path/to/your/image.png" or "path/to/your/text.txt" which displays whatever image/text you would prefer
 
-;;   ;; Content is not centered by default. To center, set
-;;   (setq dashboard-center-content t)
+  ;; Content is not centered by default. To center, set
+  (setq dashboard-center-content t)
 
-;;   ;; To disable shortcut "jump" indicators for each section, set
-;;   (setq dashboard-show-shortcuts t)
+  ;; To disable shortcut "jump" indicators for each section, set
+  (setq dashboard-show-shortcuts t)
 
-;;   ;; agenda conflicted with `recents` list with org-agenda files 2021-03-12
-;;   (setq dashboard-items '(
-;; 			  (bookmarks . 5)
-;; 			  (recents  . 15)
-;; 			  (projects . 5)
-;; 			  (agenda . 5)
-;; 			  ;; (registers . 5)
-;; 			  )
-;;   )
+  ;; agenda conflicted with `recents` list with org-agenda files 2021-03-12
+  (setq dashboard-items '(
+			  (bookmarks . 5)
+			  (recents  . 15)
+			  (projects . 5)
+			  (agenda . 5)
+			  ;; (registers . 5)
+			  )
+  )
   
-;; )
+)
 
 ;;===============
 ;; FIXED SETTING
