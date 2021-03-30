@@ -174,12 +174,12 @@ buffer in current window."
   ;;       sublimity-scroll-drift-length 5)
 
   ;; no `setq`
-  (sublimity-map-set-delay 5)
+  ;; (sublimity-map-set-delay 5)
   ;; (sublimity-map-set-delay nil)  ;; always show, different from 0 value
 
-  (setq sublimity-map-size 30)
-  (setq sublimity-map-text-scale -5)
-  (setq sublimity-map-active-region 'nil)
+  (setq sublimity-map-size 25)
+  (setq sublimity-map-text-scale -7)
+  ;; (setq sublimity-map-active-region 'nil)
   
   ;; (sublimity-mode 1)
 )
