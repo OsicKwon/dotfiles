@@ -814,11 +814,11 @@ buffer in current window."
   ;; (setq olivetti-minimum-body-width 10)
 
   ;; functions by width
-  (defun olivetti-50-width ()
+  (defun olivetti-90-width ()
     (interactive)
-    (olivetti-set-width 0.5)
+    (olivetti-set-width 90)
     ) 
-  (global-set-key (kbd "C-M-;") 'olivetti-50-width)
+  (global-set-key (kbd "C-M-;") 'olivetti-90-width)
 
   (defun olivetti-098-width ()
     (interactive)
