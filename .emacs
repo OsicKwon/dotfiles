@@ -38,7 +38,7 @@
 
 ;; overwrite in selection 2021-03-29
 ;; http://pragmaticemacs.com/page/8/
-;; (delete-selection-mode t)
+(delete-selection-mode t)
 
 ;; turn on visible bell 2021-03-29
 ;; (setq visible-bell t)
@@ -395,7 +395,7 @@ buffer in current window."
 ;; Interupted Working Process 2021-02-15
 ;; (setq auto-save-visited-mode t)                              ;; Auto Save   
 ;; (setq auto-save-visited-interval 1)                          ;; Auto Save - Interval
-;; (setq auto-save-default t)
+(setq auto-save-default nil)           ;; Preventing auto saved files like `#filename.ext#`
 ;; (setq auto-save-visited-file-name t)
 ;; (global-auto-revert-mode t)                                  ;; Auto Refresh
 
