@@ -246,7 +246,8 @@ buffer in current window."
   (other-window 1)
   (message "mwe-log-commands is activated now")
 )
-(global-set-key (kbd "C-M-g") 'mwe-commands-exec)
+;; (global-set-key (kbd "C-M-g") 'mwe-commands-exec)
+(global-set-key (kbd "C-M-,") 'mwe-commands-exec)
 
 
 ;; TODO unload pressing by "C-M-y"
@@ -414,7 +415,7 @@ buffer in current window."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
- '(aw-leading-char-face ((t (:foreground "red" :height 2.0))))
+ '(aw-leading-char-face ((t (:background "black" :foreground "White" :box (:line-width 3 :color "Black") :slant italic :weight bold :height 1.4))))
  '(mode-line ((((type x w32 ns)) (:overline t)) (((type tty)) (:inverse-video t))))
  '(mode-line-inactive ((t (:inherit (shadow mode-line)))))
  '(org-document-title ((t (:foreground "midnight blue" :weight bold :height 1.4))))
@@ -814,18 +815,17 @@ buffer in current window."
   ;; (setq olivetti-minimum-body-width 10)
 
   ;; functions by width
-  (defun olivetti-90-width ()
+  (defun olivetti-narrow-width ()
     (interactive)
-    (olivetti-set-width 90)
+    (olivetti-set-width 95)
     ) 
-  (global-set-key (kbd "C-M-;") 'olivetti-90-width)
+  (global-set-key (kbd "C-M-;") 'olivetti-narrow-width)
 
-  (defun olivetti-098-width ()
+  (defun olivetti-default-width ()
     (interactive)
     (olivetti-set-width 0.98)
     ) 
-  (global-set-key (kbd "C-M-'") 'olivetti-098-width)
-  
+  (global-set-key (kbd "C-M-'") 'olivetti-default-width)
 )
 
 
