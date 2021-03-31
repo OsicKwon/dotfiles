@@ -986,7 +986,7 @@ T - tag prefix
 (setq beacon-size 5)
 (setq beacon-color "black")
 (setq beacon-blink-when-window-scrolls nil) ;; Solved 'org-tree-slide-mode` issue 2021-03-29
-(setq beacon-blink-when-focused t)
+;; (setq beacon-blink-when-focused t)
 
 ;; command-log-mode 2021-03-09
 ;; https://github.com/lewang/command-log-mode 
