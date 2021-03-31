@@ -98,7 +98,7 @@ buffer in current window."
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(shell-pop writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(ivy-rich shell-pop writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(writeroom-restore-window-config t))
 
 
@@ -242,7 +242,7 @@ buffer in current window."
   (mwe:log-keyboard-commands)
   (mwe:open-command-log-buffer)
   (evil-window-set-width 40)
-  (setq toggle-window-dedicated 1)  ;; do not allow buffer to change by others
+  (toggle-window-dedicated)  ;; do not allow buffer to change by others
   (other-window 1)
   (message "mwe-log-commands is activated now")
 )
@@ -993,7 +993,7 @@ T - tag prefix
 (setq beacon-size 5)
 (setq beacon-color "black")
 (setq beacon-blink-when-window-scrolls nil) ;; Solved 'org-tree-slide-mode` issue 2021-03-29
-;; (setq beacon-blink-when-focused t)
+(setq beacon-blink-when-focused t)
 
 ;; command-log-mode 2021-03-09
 ;; https://github.com/lewang/command-log-mode 
@@ -1286,6 +1286,30 @@ T - tag prefix
 (global-set-key (kbd "C-c v") 'ivy-push-view)
 (global-set-key (kbd "C-c V") 'ivy-pop-view)
 (global-set-key (kbd "C-c s") 'ivy-switch-view)
+
+
+;; ivy-rich package 2021-03-31
+;; https://github.com/Yevgnen/ivy-rich
+
+;; (use-package ivy-rich
+;;   :config
+;;   (ivy-rich-modify-column 'ivy-switch-buffer
+;;                           'ivy-rich-switch-buffer-major-mode
+;;                           '(:width 20 :face error)))
+
+(use-package ivy-rich
+  :ensure t
+  :hook (ivy-mode . ivy-rich-mode)
+  :custom (ivy-rich-path-style 'abbrev)
+  :config
+  (ivy-rich-modify-columns
+   'ivy-switch-buffer
+   '((ivy-rich-switch-buffer-size (:align right))
+     (ivy-rich-switch-buffer-major-mode (:width 20 :face error)))))
+
+;; Additional settings for ivy-switch-buffer
+;; To abbreviate paths using abbreviate-file-name (e.g. replace “/home/username” with “~”)
+(setq ivy-rich-path-style 'abbrev)
 
 
 ;; Counsel Tip > `M-o` to show more options after searching 2021-03-21

@@ -982,6 +982,7 @@ if has('gui_running')"{{{
     set guioptions=     " disabled mac style tab"
     set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
     " set guifont=MesloLGS\ Nerd\ Font:h14
+    cd ~/Documents/nvALT/
     set linespace=1
     " set colorcolumn=105
     " set nocursorcolumn
