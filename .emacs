@@ -1049,12 +1049,12 @@ T - tag prefix
 
 
 ;; built-in org-mouse turn on
-;; (require `org-mouse)
-(use-package org-mouse :ensure t)
+(require `org-mouse)
+;; (use-package org-mouse :ensure t)
 
 (setq org-log-done 'time)                                  ;; Show Closed(DONE) date in ORG-mode
 (global-set-key "\C-ca" 'org-agenda)                       ;; Org Agenda View shortcut
-(global-set-key kbd("C-M-return") 'org-insert-subheading)  ;; Org Insert Sub-Heading 2021-03-31
+(global-set-key (kbd "C-M-<return>") 'org-insert-subheading)  ;; Org Insert Sub-Heading 2021-03-31
 
 
 (add-to-list 'org-emphasis-alist
