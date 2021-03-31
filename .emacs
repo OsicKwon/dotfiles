@@ -138,13 +138,16 @@ buffer in current window."
 
 
 ;; writegood-mode 2021-03-21
-(require 'writegood-mode)
-(add-hook 'text-mode-hook 'writegood-mode)
-(add-hook 'org-mode-hook 'writegood-mode)
-(add-hook 'markdown-mode-hook 'writegood-mode)
-(add-hook 'latex-mode-hook 'writegood-mode)
-(add-hook 'Latex-mode-hook 'writegood-mode)  ;; AUCTeX
-
+;; (require 'writegood-mode)
+(use-package writegood-mode
+  :ensure t
+  :config
+    (add-hook 'text-mode-hook 'writegood-mode)
+    (add-hook 'org-mode-hook 'writegood-mode)
+    (add-hook 'markdown-mode-hook 'writegood-mode)
+    (add-hook 'latex-mode-hook 'writegood-mode)
+    (add-hook 'Latex-mode-hook 'writegood-mode)  ;; AUCTeX
+)
 
 ;; Preventing to create Lock Files liks `#filename.ext#` 2021-03-21
 ;; these cannot be moved to a different directory.
@@ -195,20 +198,22 @@ buffer in current window."
 
 ;; web-mode package 2021-03-19
 ;; https://web-mode.org/
-(use-package web-mode :ensure t)
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-;; Using web-mode for editing plain HTML files can be done this way
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-;; keybinding (not working)
-;; (define-key web-mode-map (kbd "Tab") 'web-mode-fold-or-unfold)
-
+;; (require 'web-mode)
+(use-package web-mode
+  :ensure t
+  :config
+    (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+    ;; Using web-mode for editing plain HTML files can be done this way
+    (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+    ;; keybinding (not working)
+    ;; (define-key web-mode-map (kbd "Tab") 'web-mode-fold-or-unfold)
+)
 
 ;; (setq org-ellipsis "  ")  ;; nerd font `v` nf-oct-chevron_down, hex: f47c
 ;; (setq org-ellipsis " ∞ ")
@@ -563,8 +568,13 @@ buffer in current window."
   (package-install 'evil))
 
 ;; Enable Evil
-(require 'evil)
-(evil-mode 1)
+;; (require 'evil)
+;; (evil-mode 1)
+(use-package evil
+  :ensure t
+  :config
+    (evil-mode 1)
+)
 
 (setq-default evil-default-state 'emacs)
 ;; Change color of which-func when entering and leaving Evil visual state
@@ -1024,7 +1034,8 @@ T - tag prefix
 
 ;; calendar view 2021-03-05
 ;; to show calendar :: M-x cfw:open-calendar-buffer
-(require 'calfw)
+;; (require 'calfw)
+(use-package calfw :ensure t)
 ;; For Org User (https://github.com/kiwanami/emacs-calfw#for-org-users)
 (require 'calfw-org)
 ;; Then, M-x cfw:open-org-calendar
@@ -1302,6 +1313,7 @@ T - tag prefix
   :hook (ivy-mode . ivy-rich-mode)
   :custom (ivy-rich-path-style 'abbrev)
   :config
+  (ivy-rich-mode 1)
   (ivy-rich-modify-columns
    'ivy-switch-buffer
    '((ivy-rich-switch-buffer-size (:align right))
