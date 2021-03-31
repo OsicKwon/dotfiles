@@ -1301,8 +1301,8 @@ T - tag prefix
 
 ;; ivy-rich package 2021-03-31
 ;; https://github.com/Yevgnen/ivy-rich
-(require 'ivy-rich)
-(ivy-rich-mode 1)
+;; (require 'ivy-rich)
+;; (ivy-rich-mode 1)
 
 ;; (use-package ivy-rich
 ;;   :config
@@ -1314,6 +1314,7 @@ T - tag prefix
   :ensure t
   :hook (ivy-mode . ivy-rich-mode)
   :custom (ivy-rich-path-style 'abbrev)
+  :init (ivy-rich-mode 1)
   :config
   (ivy-rich-modify-columns
    'ivy-switch-buffer
