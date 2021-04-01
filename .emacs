@@ -421,6 +421,9 @@ buffer in current window."
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
  '(aw-leading-char-face ((t (:background "black" :foreground "White" :box (:line-width 3 :color "Black") :slant italic :weight bold :height 1.4))))
+ '(ivy-minibuffer-match-face-2 ((t (:background "#e99ce8" :box (:line-width -1 :color "textBackgroundColor") :weight bold))))
+ '(ivy-minibuffer-match-face-3 ((t (:background "#bbbbff" :box (:line-width -1 :color "selectedControlColor") :weight bold))))
+ '(ivy-minibuffer-match-face-4 ((t (:background "#ffbbff" :box (:line-width -1 :color "controlHighlightColor") :weight bold))))
  '(mode-line ((((type x w32 ns)) (:overline t)) (((type tty)) (:inverse-video t))))
  '(mode-line-inactive ((t (:inherit (shadow mode-line)))))
  '(org-document-title ((t (:foreground "midnight blue" :weight bold :height 1.4))))
