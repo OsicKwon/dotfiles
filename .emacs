@@ -38,7 +38,8 @@
 
 ;; pdf-tools 2021-03-31
 ;; https://github.com/politza/pdf-tools/issues/206
-(require 'pdf-tools)
+;; (require 'pdf-tools)
+(use-package pdf-tools :ensure t)
 (pdf-tools-install)
 
 
