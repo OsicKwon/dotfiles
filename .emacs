@@ -110,7 +110,7 @@ buffer in current window."
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(ivy-rich shell-pop writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(deft ivy-rich shell-pop writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(writeroom-restore-window-config t))
 
 
@@ -556,11 +556,17 @@ buffer in current window."
 
 
 ;; PLUG-IN: deft -> do not use: Korean issue, change filename forcely 2020-12-08
-;(require 'deft)
-;(setq deft-extensions '("txt" "tex" "org" "md"))
-;(setq deft-directory "~/Documents/nvALT/")
-;;(setq deft-directory "~/Documents/test/")
-;(setq deft-recursive t)
+;; (require 'deft)
+(use-package deft
+  :ensure t
+  :init
+  :config
+  (setq deft-extensions '("txt" "tex" "org" "md"))
+  (setq deft-directory "~/Documents/nvALT/")
+  ;;(setq deft-directory "~/Documents/test/")
+  ;;(setq deft-recursive t)
+  (setq deft-use-filename-as-title t)
+  )
 
 
 ;; *****************************************************************
