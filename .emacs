@@ -26,6 +26,10 @@
 ;; -- Unnecessary call -- see Line #6 in this file
 (package-initialize)
 
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
 
 ;; --------------------
 ;; == RECENT SETTING ==
@@ -492,10 +496,6 @@ buffer in current window."
 (setq latex-run-command "pdflatex")
 
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
 ;; (use-package elpy
 ;;   :ensure t
 ;;   :init
@@ -840,7 +840,7 @@ buffer in current window."
   (setq olivetti-body-width 0.98)
   ;; (setq olivetti-body-width 100)
   ;; (setq olivetti-minimum-body-width 10)
-
+  :config
   ;; functions by width
   (defun olivetti-narrow-width ()
     (interactive)
