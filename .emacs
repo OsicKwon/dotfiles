@@ -59,6 +59,15 @@
     "http://www.google.com/search?ie=utf-8&oe=utf-8&q=%s"
     :keybinding "g")
 
+  (defengine google-images
+    "http://www.google.com/images?hl=en&source=hp&biw=1440&bih=795&gbv=2&aq=f&aqi=&aql=&oq=&q=%s")
+
+  (defengine google-news
+    "https://news.google.com/search?q=%s")
+
+  (defengine google-trans
+    "https://translate.google.ca/?sl=auto&tl=ko&text=%s&op=translate")
+
   (defengine naver
     "https://m.search.naver.com/search.naver?sm=mtp_hty.top&where=m&query=%s"
     :keybinding "n")
@@ -66,6 +75,12 @@
   (defengine koDic
     "http://dic.impact.pe.kr/ecmaster-cgi/search.cgi?bool=and&word=yes&kwd=%s"
     :keybinding "k")
+
+  (defengine wordreference
+    "https://www.wordreference.com/koen/%s")
+
+  (defengine bluedic
+    "http://www.bluedic.com/%s")
 
   (defengine youglish
     "https://youglish.com/pronounce/%s"
@@ -102,6 +117,9 @@
   (defengine stack-overflow
     "https://stackoverflow.com/search?q=%s")
 
+  (defengine reddit 
+    "https://www.reddit.com/search/?q=%s")
+  
   (defengine twitter
     "https://twitter.com/search?q=%s")
 
