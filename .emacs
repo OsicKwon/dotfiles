@@ -1248,8 +1248,11 @@ T - tag prefix
      )
   )
 
+;; (global-set-key (kbd "C-M-]") (kbd "C-0 M-x org-capture"))  ; just tried, but not worked 2021-04-02
+
+
 ;; insert current position in a buffer 2021-04-02
-;; tip: When called with a ‘C-0’ (zero) prefix, insert a template at point. > == C-0 M-x `org-caputre` ==
+;; tip: When called with a ‘C-0’ (zero) prefix, insert a template at point. > == C-0 M-x `org-capture` ==
 ;; https://emacs.stackexchange.com/questions/30595/how-to-org-capture-at-current-location
 
 ;; Templage Expansion 2021-04-02
