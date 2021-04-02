@@ -35,6 +35,79 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; engine-mode 2021-04-02
+;; (require 'engine-mode)
+(use-package engine-mode
+  :ensure t
+  :init
+  (engine-mode t)
+
+  :config
+
+  (defengine github
+    "https://github.com/search?ref=simplesearch&q=%s")
+
+  (defengine duckduckgo
+    "https://duckduckgo.com/?q=%s"
+    :keybinding "d")
+
+  (defengine ctan
+    "http://www.ctan.org/search/?x=1&PORTAL=on&phrase=%s"
+    :docstring "Search the Comprehensive TeX Archive Network (ctan.org)")
+
+  (defengine google
+    "http://www.google.com/search?ie=utf-8&oe=utf-8&q=%s"
+    :keybinding "g")
+
+  (defengine naver
+    "https://m.search.naver.com/search.naver?sm=mtp_hty.top&where=m&query=%s"
+    :keybinding "n")
+
+  (defengine koDic
+    "http://dic.impact.pe.kr/ecmaster-cgi/search.cgi?bool=and&word=yes&kwd=%s"
+    :keybinding "k")
+
+  (defengine youglish
+    "https://youglish.com/pronounce/%s"
+    :keybinding "y")
+
+  (defengine onelook
+    "https://www.onelook.com/?w=%s"
+    :keybinding "o")
+
+  (defengine justTheWord
+    "http://www.just-the-word.com/main.pl?word=%s"
+    :keybinding "j")
+
+  (defengine ngram
+    "https://books.google.com/ngrams/graph?content=%s"
+    :keybinding "r")
+
+  (defengine longman
+    "https://www.ldoceonline.com/dictionary/%s"
+    :keybinding "l")
+
+  (defengine powerthesaurus
+    "https://www.powerthesaurus.org/%s"
+    :keybinding "p")
+
+  (defengine wikipedia
+    "http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
+    :keybinding "w"
+    :docstring "Searchin' the wikis.")
+
+  (defengine youtube
+    "http://www.youtube.com/results?aq=f&oq=&search_query=%s")
+
+  (defengine stack-overflow
+    "https://stackoverflow.com/search?q=%s")
+
+  (defengine twitter
+    "https://twitter.com/search?q=%s")
+
+  ;; (setq engine/browser-function 'eww-browse-url)
+  )
+
 
 ;; pdf-tools 2021-03-31
 ;; https://github.com/politza/pdf-tools/issues/206
