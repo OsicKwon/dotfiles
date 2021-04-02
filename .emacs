@@ -1227,6 +1227,51 @@ T - tag prefix
  'append)
 
 
+
+;; === org caputre === 2021-04-02
+;; https://www.reddit.com/r/emacs/comments/7zqc7b/share_your_org_capture_templates/
+(setq org-capture-templates
+    '(("t" "Todo" entry (file "~/Documents/nvALT/org/Refile.org")
+       "* TODO %?\n%U" :empty-lines 1)
+      ("T" "Todo with Clipboard" entry (file "~/Documents/nvALT/org/Refile.org")
+       "* TODO %?\n%U\n   %c" :empty-lines 1)
+      ("n" "Note" entry (file "~/Documents/nvALT/org/Refile.org")
+       "* NOTE %?\n%U" :empty-lines 1)
+      ("N" "Note with Clipboard" entry (file "~/Documents/nvALT/org/Refile.org")
+       "* NOTE %?\n%U\n   %c" :empty-lines 1)
+      ("e" "Event" entry (file+headline "~/Documents/nvALT/org/Events.org" "Transient")
+       "* EVENT %?\n%U" :empty-lines 1)
+      ("E" "Event With Clipboard" entry (file+headline "~/Documents/nvALT/org/Events.org" "Transient")
+       "* EVENT %?\n%U\n   %c" :empty-lines 1)
+      ("x" "Big3" plain ()
+       "%U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
+     )
+  )
+
+;; insert current position in a buffer 2021-04-02
+;; tip: When called with a ‘C-0’ (zero) prefix, insert a template at point. > == C-0 M-x `org-caputre` ==
+;; https://emacs.stackexchange.com/questions/30595/how-to-org-capture-at-current-location
+
+;; Templage Expansion 2021-04-02
+;; https://orgmode.org/manual/Template-expansion.html
+;; ------------------------------------------------------------
+;; ‘%?’        > After completing the template, position point here. 
+;; ‘%t’        > Timestamp, date only.
+;; ‘%T’        > Timestamp, with date and time.
+;; ‘%u’, ‘%U’  > Like ‘%t’, ‘%T’ above, but inactive timestamps.
+;; ------------------------------------------------------------
+
+;; type 2021-04-02
+;; https://orgmode.org/manual/Template-elements.html 
+;; -------
+;; entry
+;; item
+;; checkitem
+;; table-line
+;; plain
+;; -------
+
+
 ;; Org-Roam 2021-02-22
 (setq org-roam-directory  "~/Documents/nvALT")  ;; multi-directory ???
 ;; (setq org-roam-directory "~/Desktop/MyCloudSync/1. Next Actions/ELT/4. Sector in Finance/Presentation")
@@ -1282,7 +1327,8 @@ T - tag prefix
 ;; org refile-multi_level 2020-12-12
 ;; https://www.reddit.com/r/emacs/comments/4366f9/how_do_orgrefiletargets_work/
 (setq org-refile-targets '((nil :maxlevel . 9)
-                                (org-agenda-files :maxlevel . 9)))
+                           ;; (org-agenda-files :maxlevel . 9)
+			   ))
 (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
 (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
 
