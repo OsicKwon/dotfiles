@@ -35,6 +35,39 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+
+;; evil goggles - display visual hint 2021-04-02
+;; https://github.com/edkolev/evil-goggles
+(use-package evil-goggles
+  :ensure t
+  :config
+  (evil-goggles-mode)
+
+  ;; optionally use diff-mode's faces; as a result, deleted text
+  ;; will be highlighed with `diff-removed` face which is typically
+  ;; some red color (as defined by the color theme)
+  ;; other faces such as `diff-added` will be used for other actions
+  (evil-goggles-use-diff-faces))
+
+
+;; pluse (like beacon) bulit-in 2021-04-02
+;; https://karthinks.com/software/batteries-included-with-emacs/
+(defun pulse-line (&rest _)
+      "Pulse the current line."
+      (pulse-momentary-highlight-one-line (point)))
+
+(dolist (command '(scroll-up-command
+		   scroll-down-command
+                   recenter-top-bottom
+		   ;; other-window
+		   org-forward-element
+                   org-backward-element
+		   recenter-top-bottom  ;; C-l
+		   ))
+  (advice-add command :after #'pulse-line)
+  )
+
+
 ;; engine-mode 2021-04-02
 ;; (require 'engine-mode)
 (use-package engine-mode
@@ -525,6 +558,13 @@ buffer in current window."
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
  '(aw-leading-char-face ((t (:background "black" :foreground "White" :box (:line-width 3 :color "Black") :slant italic :weight bold :height 1.4))))
+ '(evil-goggles-change-face ((t (:inherit diff-removed))))
+ '(evil-goggles-delete-face ((t (:inherit diff-removed))))
+ '(evil-goggles-paste-face ((t (:inherit diff-added))))
+ '(evil-goggles-undo-redo-add-face ((t (:inherit diff-added))))
+ '(evil-goggles-undo-redo-change-face ((t (:inherit diff-changed))))
+ '(evil-goggles-undo-redo-remove-face ((t (:inherit diff-removed))))
+ '(evil-goggles-yank-face ((t (:inherit diff-changed))))
  '(ivy-minibuffer-match-face-2 ((t (:background "#e99ce8" :box (:line-width -1 :color "#e99ce8") :weight bold))))
  '(ivy-minibuffer-match-face-3 ((t (:background "#bbbbff" :box (:line-width -1 :color "#bbbbff") :weight bold))))
  '(ivy-minibuffer-match-face-4 ((t (:background "#ffbbff" :box (:line-width -1 :color "#ffbbff") :weight bold))))
@@ -537,7 +577,8 @@ buffer in current window."
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
- '(org-level-7 ((t (:inherit outline-7 :box (:line-width 2 :color "grey75" :style released-button) :height 1.0)))))
+ '(org-level-7 ((t (:inherit outline-7 :box (:line-width 2 :color "grey75" :style released-button) :height 1.0))))
+ '(pulse-highlight-start-face ((t (:background "selectedTextBackgroundColor")))))
 
 
 ;; white mode-line came from Binder/Olivetti reddit like below:
