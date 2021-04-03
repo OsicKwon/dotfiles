@@ -36,6 +36,46 @@
 ;; --------------------
 
 
+;; view mode 2021-04-03
+;; https://karthinks.com/software/batteries-included-with-emacs/
+(setq view-read-only t)
+;; https://www.emacswiki.org/emacs/ViewMode
+(define-key ctl-x-map "\C-q" 'view-mode)  ;; means C-x C-q
+;; key hint : edit 'e' / quit 'q'
+
+;; https://stackoverflow.com/questions/3674637/enabling-certain-emacs-modes-or-features-almost-always
+(add-hook 'text-mode-hook 'view-mode)
+(add-hook 'prog-mode-hook 'view-mode)
+
+;; https://stackoverflow.com/questions/15906332/change-emacs-mode-line-color-based-on-major-mode
+;; (add-hook 'view-mode-hook
+;;           (lambda ()
+;;             (face-remap-add-relative
+;;              'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))))
+
+;; https://emacs.stackexchange.com/questions/32595/is-there-a-hook-that-runs-when-exiting-read-only-mode
+;; (add-hook 'view-mode-off-hook
+;;           (lambda ()
+;;             (face-remap-add-relative
+;;              'mode-line '((:foreground original-foreground :background original-background) mode-line))))
+;; tip > every mode has 'off' hook like below:
+;; https://emacs.stackexchange.com/questions/32595/is-there-a-hook-that-runs-when-exiting-read-only-mode
+;; -------------
+;; MODE-hook
+;; MODE-on-hook
+;; MODE-off-hook
+ 
+;; https://www.reddit.com/r/emacs/comments/knoyz2/need_help_toggling_modes_and_settings_when/
+(defun my-view-mode-hook ()
+  "Custom behaviours for `view-mode'."
+  (if view-mode
+      (face-remap-add-relative 'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))
+    (face-remap-add-relative 'mode-line '((:foreground "black" :background "white") mode-line)))
+  )
+
+(add-hook 'view-mode-hook #'my-view-mode-hook)
+
+
 ;; winner mode 2021-04-02
 (winner-mode 1)
 
@@ -44,6 +84,7 @@
 ;; https://github.com/edkolev/evil-goggles
 (use-package evil-goggles
   :ensure t
+  :disabled nil
   :config
   (evil-goggles-mode)
 
