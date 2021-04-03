@@ -44,8 +44,8 @@
 ;; key hint : edit 'e' / quit 'q'
 
 ;; https://stackoverflow.com/questions/3674637/enabling-certain-emacs-modes-or-features-almost-always
-(add-hook 'text-mode-hook 'view-mode)
-(add-hook 'prog-mode-hook 'view-mode)
+;; (add-hook 'text-mode-hook 'view-mode)
+;; (add-hook 'prog-mode-hook 'view-mode)
 
 ;; https://stackoverflow.com/questions/15906332/change-emacs-mode-line-color-based-on-major-mode
 ;; (add-hook 'view-mode-hook
@@ -55,7 +55,7 @@
 
 ;; https://emacs.stackexchange.com/questions/32595/is-there-a-hook-that-runs-when-exiting-read-only-mode
 ;; (add-hook 'view-mode-off-hook
-;;           (lambda ()
+;;          (lambda ()
 ;;             (face-remap-add-relative
 ;;              'mode-line '((:foreground original-foreground :background original-background) mode-line))))
 ;; tip > every mode has 'off' hook like below:
@@ -629,7 +629,7 @@ buffer in current window."
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
  '(org-level-7 ((t (:inherit outline-7 :box (:line-width 2 :color "grey75" :style released-button) :height 1.0))))
- '(pulse-highlight-start-face ((t (:background "selectedTextBackgroundColor")))))
+ '(pulse-highlight-start-face ((t (:background "gray")))))
 
 ;; white mode-line came from Binder/Olivetti reddit like below:
 ;; https://www.reddit.com/r/emacs/comments/fc8hc2/binder_modes_for_structuring_a_multifile_writing/
@@ -793,7 +793,7 @@ buffer in current window."
 (if (display-graphic-p)
     (progn
       ;; if graphic (GUI)
-      (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
+      ;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
       (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "gray")))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "lightgray")))
       (add-hook 'evil-operator-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
@@ -805,7 +805,7 @@ buffer in current window."
 
       ;; (add-hook 'evil-operator-state-entry-hook (lambda () (set-background-color "gray")))
 
-      (add-hook 'evil-insert-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightyellow")))
+      ;; (add-hook 'evil-insert-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightyellow")))
@@ -813,7 +813,7 @@ buffer in current window."
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-face-attribute hl-line-face nil :weight 'normal)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color original-foreground)))
 
-      (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
+      ;; (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
       ;; (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color original-background)))
 
@@ -864,10 +864,10 @@ buffer in current window."
 ;; evil cursor in modes 2021-02-06
 ;; https://github.com/hlissner/doom-emacs/issues/1848
 ;; http://fnwiya.hatenablog.com/entry/2016/01/12/213149 
-;; (setq evil-normal-state-cursor '(box "black")
-;;       evil-insert-state-cursor '(bar "black")
-;;       evil-visual-state-cursor '(hollow "black")
-;;       evil-emacs-state-cursor '(box "black"))
+(setq evil-normal-state-cursor '(box "black")
+      evil-insert-state-cursor '(bar "red")
+      evil-visual-state-cursor '(hollow "blue")
+      evil-emacs-state-cursor '(box "black"))
 
 ;; https://emacs.stackexchange.com/questions/30582/how-do-i-change-the-mode-indicators-for-evil-mode-in-the-spaceline-mode-line-pac
 (setq evil-normal-state-tag "NORMAL")
@@ -879,19 +879,19 @@ buffer in current window."
 ;; https://github.com/Malabarba/smart-mode-line/issues/195
 (setq evil-normal-state-tag   (propertize " NORMAL " 'face '((:background "black"          :foreground "white")))
 ;;      evil-emacs-state-tag    (propertize " <E> " 'face '((:background original-background :foreground original-foreground)))
-      evil-insert-state-tag   (propertize " INSERT " 'face '((:background "lightyellow"    :foreground "black")))
+      evil-insert-state-tag   (propertize " INSERT " 'face '((:background "red"    :foreground "white")))
       evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "chocolate"     :foreground "black")))
       evil-motion-state-tag   (propertize " <Motion> " 'face '((:background "plum3"        :foreground "black")))
-      evil-visual-state-tag   (propertize " VISUAL " 'face '((:background "darkgray"       :foreground "black")))
+      evil-visual-state-tag   (propertize " VISUAL " 'face '((:background "blue"       :foreground "white")))
       evil-operator-state-tag (propertize " <Operator> " 'face '((:background "sandy brown"       :foreground "black"))))
 
 ;; evil key binding
-(define-key evil-normal-state-map (kbd "SPC") 'evil-ex)
-(define-key evil-visual-state-map (kbd "SPC") 'evil-ex)
-(define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-(define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
-(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-(define-key evil-visual-state-map (kbd "C-u") 'evil-scroll-up)
+(define-key evil-normal-state-map (kbd "SPC")   'evil-ex)
+(define-key evil-visual-state-map (kbd "SPC")   'evil-ex)
+(define-key evil-normal-state-map (kbd "j")     'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "k")     'evil-previous-visual-line)
+(define-key evil-normal-state-map (kbd "C-u")   'evil-scroll-up)
+(define-key evil-visual-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
 
 
