@@ -62,6 +62,8 @@
 		   ;; other-window
 		   org-forward-element
                    org-backward-element
+		   forward-paragraph
+                   backward-paragraph
 		   recenter-top-bottom  ;; C-l
 		   ))
   (advice-add command :after #'pulse-line)
