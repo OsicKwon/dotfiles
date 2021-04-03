@@ -36,6 +36,10 @@
 ;; --------------------
 
 
+;; winner mode 2021-04-02
+(winner-mode 1)
+
+
 ;; evil goggles - display visual hint 2021-04-02
 ;; https://github.com/edkolev/evil-goggles
 (use-package evil-goggles
