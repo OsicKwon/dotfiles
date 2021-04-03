@@ -112,10 +112,11 @@
                    org-backward-element
 		   forward-paragraph
                    backward-paragraph
-		   recenter-top-bottom  ;; C-l
+		   recenter-top-bottom
+		   swiper
 		   ))
   (advice-add command :after #'pulse-line)
-  )
+)
 
 
 ;; engine-mode 2021-04-02
@@ -628,8 +629,7 @@ buffer in current window."
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
  '(org-level-7 ((t (:inherit outline-7 :box (:line-width 2 :color "grey75" :style released-button) :height 1.0))))
- '(pulse-highlight-start-face ((t (:background "selectedTextBackgroundColor")))))
-
+ '(pulse-highlight-start-face ((t (:background "Black")))))
 
 ;; white mode-line came from Binder/Olivetti reddit like below:
 ;; https://www.reddit.com/r/emacs/comments/fc8hc2/binder_modes_for_structuring_a_multifile_writing/
