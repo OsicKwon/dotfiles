@@ -64,13 +64,16 @@
 ;; MODE-hook
 ;; MODE-on-hook
 ;; MODE-off-hook
- 
+
 ;; https://www.reddit.com/r/emacs/comments/knoyz2/need_help_toggling_modes_and_settings_when/
 (defun my-view-mode-hook ()
   "Custom behaviours for `view-mode'."
   (if view-mode
       (face-remap-add-relative 'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))
-    (face-remap-add-relative 'mode-line '((:foreground "black" :background "white") mode-line)))
+    ;; (face-remap-add-relative 'mode-line '((:foreground "black" :background "white") mode-line))
+    ;; (face-remap-add-relative 'mode-line '((:foreground original-foreground :background original-background) mode-line))
+    (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
+    )
   )
 
 (add-hook 'view-mode-hook #'my-view-mode-hook)
@@ -1332,10 +1335,10 @@ T - tag prefix
        "* EVENT %?\n%U" :empty-lines 1)
       ("E" "Event With Clipboard" entry (file+headline "~/Documents/nvALT/org/Events.org" "Transient")
        "* EVENT %?\n%U\n   %c" :empty-lines 1)
+      ("x" "Big3" plain ()
+       "%U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
       ;; ("x" "Big3" plain ()
-      ;;  "%U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
-      ("x" "Big3" item ()
-       "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
+      ;;  "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
      )
   )
 
