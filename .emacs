@@ -87,7 +87,6 @@
 ;; https://github.com/edkolev/evil-goggles
 (use-package evil-goggles
   :ensure t
-  :disabled nil
   :config
   (evil-goggles-mode)
 
@@ -107,7 +106,8 @@
 (dolist (command '(scroll-up-command
 		   scroll-down-command
                    recenter-top-bottom
-		   ;; other-window
+		   ;; other-window   ; beacon is better in same buffer with different window
+		   ;; ace-window     ; beacon is better in same buffer with differnet window
 		   org-forward-element
                    org-backward-element
 		   forward-paragraph
@@ -629,7 +629,7 @@ buffer in current window."
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
  '(org-level-7 ((t (:inherit outline-7 :box (:line-width 2 :color "grey75" :style released-button) :height 1.0))))
- '(pulse-highlight-start-face ((t (:background "Black")))))
+ '(pulse-highlight-start-face ((t (:background "selectedTextBackgroundColor")))))
 
 ;; white mode-line came from Binder/Olivetti reddit like below:
 ;; https://www.reddit.com/r/emacs/comments/fc8hc2/binder_modes_for_structuring_a_multifile_writing/
@@ -1199,6 +1199,9 @@ T - tag prefix
 
 ;; beacon mode package 2021-03-03
 ;; Emacs 26.3 ok, but Emacs 27.1 issue
+;; Pros compared to pulse.el :
+;; 1. show beacon without text when `other-window`
+;; 2. show exact position(column) in a line
 (beacon-mode 1)                             ;; Interupted `org-tree-slide-mode`
 (setq beacon-size 5)
 (setq beacon-color "black")
