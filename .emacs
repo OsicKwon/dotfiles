@@ -55,10 +55,11 @@
 	 ;; ("h" . left-char)
 	 ;; ("l" . right-char)))
 ;; make sure the cursor is changed visually
+;; complicted to Evil cursors
 ;; (setq-default cursor-type 'box)
 ;; (add-hook 'view-mode-hook
 ;; 	  (defun view-mode-change-cursor-type-hook ()
-;;             (setq cursor-type (if view-mode 'hbar 'box))))
+;;             (setq cursor-type (if view-mode 'box 'hbar))))
 
 ;; https://karthinks.com/software/batteries-included-with-emacs/
 (setq view-read-only t)
@@ -846,6 +847,7 @@
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
       (add-hook 'evil-visual-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light cyan")))
+      (add-hook 'evil-visual-state-entry-hook (lambda () (view-mode 0)))
       ;; (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color original-background)))
       (add-hook 'evil-visual-state-exit-hook (lambda () (hl-line-mode 0)))
 
@@ -899,7 +901,8 @@
 (setq evil-normal-state-cursor '(box "black")
       evil-insert-state-cursor '((bar . 2) "red")
       evil-visual-state-cursor '((hollow . 2) "blue")
-      evil-emacs-state-cursor '(box "black"))
+      evil-emacs-state-cursor '(box "black")
+      )
 
 ;; https://emacs.stackexchange.com/questions/30582/how-do-i-change-the-mode-indicators-for-evil-mode-in-the-spaceline-mode-line-pac
 (setq evil-normal-state-tag "NORMAL")
