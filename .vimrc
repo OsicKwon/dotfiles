@@ -28,7 +28,8 @@ set sidescroll=1                      " options: 0, 1, 2, ....
 set modeline
 set modelines=10
 set spell
-set spelllang=en_ca
+" set spelllang=en_ca
+set spelllang=EN_ca
 " set colorcolumn=80,120
 set path+=**                  " include sub directories when searching 2021-01-06
 set updatetime=1000           " for gitgutter 2021-01-13
@@ -443,19 +444,18 @@ set statusline+=┆\             " separator
 " https://vi.stackexchange.com/questions/10458/how-do-i-conditionally-add-items-to-the-statusline
 " 2021-03-15
 " set stl+=%{&spell\ ?\ line(\".\")\ :\ \"\"}
-set stl+=%{&spell?'🅂\ \ ':''}
 " set stl+=%{&spell?'SPELL':'NO_SPELL'}
 " set stl+=%{&spell?'SPELL\ 🅂\ ┆\ ':''}
 " set stl+=%{&spell?'SPELL\ 🅂\ >\ ':''}
-set stl+=%{&spell?'SPELL':''}
+set stl+=%{&spell?'🅂\ ':''}
+" set stl+=%{&spell?'SPELL':''}
 " set stl+=%{&spell?':':''}
 " set stl+=%{&spell?'[':''}
-set stl+=%{&spell?'(':''}
+" set stl+=%{&spell?'(':''}
 set stl+=%{&spell?&spelllang:''}
 " set stl+=%{&spell?']':''}
-set stl+=%{&spell?')':''}
+" set stl+=%{&spell?')':''}
 set stl+=%{&spell?'\ ┆\ ':''}
-" set stl+=%{&spell?'🅂\ \ ':''}
 " set statusline+=%{&spelllang}
 " set statusline+=\ \|\            " separator
 "set statusline+=%#Tabline#
@@ -664,10 +664,10 @@ vnoremap <right> <nop>
 "  Command
 " ---------
 "{{{
-" cnoremap <up> <nop>
-" cnoremap <down> <nop>
-" cnoremap <left> <nop>
-" cnoremap <right> <nop>
+cnoremap <up> <nop>
+cnoremap <down> <nop>
+cnoremap <left> <nop>
+cnoremap <right> <nop>
 
 " Emacs style Keybinding in command mode
 "----------------------------------------
