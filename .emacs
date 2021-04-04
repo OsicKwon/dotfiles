@@ -230,6 +230,7 @@
 ;; http://pragmaticemacs.com/page/8/
 (delete-selection-mode t)
 
+
 ;; turn on visible bell 2021-03-29
 ;; (setq visible-bell t)
 
@@ -237,8 +238,7 @@
 ;; dedicated window 2021-03-27
 ;; https://emacs.stackexchange.com/questions/2189/how-can-i-prevent-a-command-from-using-specific-windows
 (defun toggle-window-dedicated ()
-  "Control whether or not Emacs is allowed to display another
-buffer in current window."
+  "Control whether or not Emacs is allowed to display another buffer in current window."
   (interactive)
   (message
    (if (let (window (get-buffer-window (current-buffer)))
@@ -247,7 +247,7 @@ buffer in current window."
      "%s is up for grabs.")
    (current-buffer)))
 
-;; (global-set-key (kbd "C-c t") 'toggle-window-dedicated)
+(global-set-key (kbd "C-c t") 'toggle-window-dedicated)
 
 
 ;; redo in evil 2021-03-25
