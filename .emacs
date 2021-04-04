@@ -36,7 +36,30 @@
 ;; --------------------
 
 
-;; view mode 2021-04-03
+;; view mode (bult-in) 2021-04-03
+;; https://gist.github.com/ivan-krukov/63a586f2121519ca51b201c634402a84
+;; https://www.youtube.com/watch?v=kZARKLxTeYQ
+
+;; add view mode keybindings
+(use-package view
+  :config (setq view-read-only t) ;; C-x C-q can also toggle view-mode
+  :bind (("<f13>" . view-mode) ;; remap R-Shift to F 13
+	 :map view-mode-map
+	 ("n" . forward-line)
+	 ("p" . previous-line)
+	 ("b" . left-word)
+	 ("f" . right-word)))
+         ;;
+	 ;; ("j" . forward-line)
+	 ;; ("k" . previous-line)
+	 ;; ("h" . left-char)
+	 ;; ("l" . right-char)))
+;; make sure the cursor is changed visually
+;; (setq-default cursor-type 'box)
+;; (add-hook 'view-mode-hook
+;; 	  (defun view-mode-change-cursor-type-hook ()
+;;             (setq cursor-type (if view-mode 'hbar 'box))))
+
 ;; https://karthinks.com/software/batteries-included-with-emacs/
 (setq view-read-only t)
 ;; https://www.emacswiki.org/emacs/ViewMode
