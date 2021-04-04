@@ -152,6 +152,9 @@
   (defengine google-trans
     "https://translate.google.ca/?sl=auto&tl=ko&text=%s&op=translate")
 
+  (defengine google-map
+    "https://www.google.com/maps/search/%s")
+
   (defengine naver
     "https://m.search.naver.com/search.naver?sm=mtp_hty.top&where=m&query=%s"
     :keybinding "n")
@@ -285,7 +288,7 @@ buffer in current window."
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(ivy-posframe deft ivy-rich shell-pop writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel google-this ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(ivy-posframe deft ivy-rich shell-pop writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(writeroom-restore-window-config t))
 
 
@@ -794,9 +797,11 @@ buffer in current window."
     (progn
       ;; if graphic (GUI)
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
-      (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "gray")))
+      (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light gray")))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "lightgray")))
+      ;;
       (add-hook 'evil-operator-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
+      ;;
       (add-hook 'evil-normal-state-exit-hook (lambda () (hl-line-mode 0)))
       (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :background original-background)))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightgray")))
@@ -808,10 +813,11 @@ buffer in current window."
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
-      ;; (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightyellow")))
+      (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light yellow")))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-face-attribute hl-line-face nil :weight 'normal)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color original-foreground)))
+      (add-hook 'evil-insert-state-exit-hook (lambda () (hl-line-mode 0)))
 
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
