@@ -87,6 +87,7 @@
 ;; https://github.com/edkolev/evil-goggles
 (use-package evil-goggles
   :ensure t
+  :disabled t
   :config
   (evil-goggles-mode)
 
@@ -259,6 +260,7 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
+ '(blink-cursor-blinks 0)
  '(confirm-kill-emacs 'yes-or-no-p)
  '(custom-enabled-themes nil)
  '(doc-view-continuous t)
@@ -796,7 +798,7 @@
       (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light gray")))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "lightgray")))
       ;;
-      (add-hook 'evil-operator-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
+      ;; (add-hook 'evil-operator-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
       ;;
       (add-hook 'evil-normal-state-exit-hook (lambda () (hl-line-mode 0)))
       (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :background original-background)))
@@ -867,7 +869,7 @@
 ;; https://github.com/hlissner/doom-emacs/issues/1848
 ;; http://fnwiya.hatenablog.com/entry/2016/01/12/213149 
 (setq evil-normal-state-cursor '(box "black")
-      evil-insert-state-cursor '((bar . 2) "red")
+      evil-insert-state-cursor '((bar . 2) "dark red")
       evil-visual-state-cursor '(hollow "blue")
       evil-emacs-state-cursor '(box "black"))
 
