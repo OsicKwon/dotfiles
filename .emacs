@@ -253,6 +253,8 @@
 
 ;; redo in evil 2021-03-25
 ;; https://github.com/emacs-evil/evil/issues/1382
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -294,7 +296,7 @@
  '(writeroom-restore-window-config t))
 
 
-;; Add counsel-kill-buffer 2021-03-24
+;; replace kill buffer to counsel-kill-buffer 2021-03-24
 ;; https://github.com/abo-abo/swiper/pull/2776/commits/b873e82282f5e6c3b03610fda5306c2a50087c2c
 (defun counsel-kill-buffer ()
   "Kill a buffer interactively using `ivy'."
@@ -869,7 +871,7 @@
 ;; https://github.com/hlissner/doom-emacs/issues/1848
 ;; http://fnwiya.hatenablog.com/entry/2016/01/12/213149 
 (setq evil-normal-state-cursor '(box "black")
-      evil-insert-state-cursor '((bar . 3) "red")
+      evil-insert-state-cursor '((bar . 2) "red")
       evil-visual-state-cursor '(hollow "blue")
       evil-emacs-state-cursor '(box "black"))
 
@@ -1009,17 +1011,18 @@
 ;; however, required intall '(sudo) port install the_silver_searcher' first (the_silver_searcher = ag)
 
 
-;; helm-projectile package 2021
-;; ----------------------------
-;; (require 'helm-projectile)
-;; (use-package helm-projectile
-;;   :ensure t
-;;   :init
-;;   ;; (setq helm-projectile-fuzzy-match nil)
-;;   ;; (helm-projectile-on)
-;;   :config
-;;   (global-set-key (kbd "C-M-s") 'helm-projectile-ag)
-;; )
+helm-projectile package 2021
+----------------------------
+(require 'helm-projectile)
+(use-package helm-projectile
+  :ensure t
+  :disabled t
+  :init
+  ;; (setq helm-projectile-fuzzy-match nil)
+  ;; (helm-projectile-on)
+  :config
+  (global-set-key (kbd "C-M-s") 'helm-projectile-ag)
+)
 
 
 ;; Olivetti 2021-02-11
@@ -1616,7 +1619,7 @@ T - tag prefix
 (global-git-gutter-mode +1)
 
 
-;; Multiple-Cursors Package 2020-12-19
+;; Multiple-Cursors(mc/) Package 2020-12-19
 (require 'multiple-cursors)
 ; for multiple-line
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
