@@ -40,20 +40,39 @@
 ;; https://gist.github.com/ivan-krukov/63a586f2121519ca51b201c634402a84
 ;; https://www.youtube.com/watch?v=kZARKLxTeYQ
 
-;; add view mode keybindings
+;; add view mode keybindings 2021-04-04
 (use-package view
   :config (setq view-read-only t) ;; C-x C-q can also toggle view-mode
   :bind (("<f13>" . view-mode) ;; remap R-Shift to F 13
 	 :map view-mode-map
-	 ("n" . forward-line)
-	 ("p" . previous-line)
+	 ;; Default (built-in)
+	 ;; d . half-page down
+	 ;; u . half-page up
+	 ;; < . top
+	 ;; > . bottom
+	 ;; s . I-search
+	 ;; / . Regex Search ( \ . backward)
+	 ;; n / p . next / previous Regex search result
+	 ;; = . line number
+	 ;; e . edit
+	 ;; q . quit
+	 ;; h . help
+	 ;;
+	 ;; Emacs style
+	 ;; ("n" . forward-line)
+	 ;; ("p" . previous-line)
+	 ("f" . right-word)
 	 ("b" . left-word)
-	 ("f" . right-word)))
-         ;;
-	 ;; ("j" . forward-line)
-	 ;; ("k" . previous-line)
+	 ;;
+         ;; Vim style
+	 ("j" . forward-line)
+	 ("k" . previous-line)
 	 ;; ("h" . left-char)
-	 ;; ("l" . right-char)))
+         ;; ("l" . right-char)
+	 ;; ("w" . right-word)
+         )
+  )
+
 ;; make sure the cursor is changed visually
 ;; complicted to Evil cursors
 ;; (setq-default cursor-type 'box)
@@ -93,13 +112,14 @@
 ;; (defun my-view-mode-hook ()
 ;;   "Custom behaviours for `view-mode'."
 ;;   (if view-mode
-;;       (face-remap-add-relative 'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))
+;;       ;; (face-remap-add-relative 'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))
+;;       ;; (face-remap-add-relative 'mode-line '((:background "ivory" :foreground "DarkOrange2") mode-line))
+;;       (face-remap-add-relative 'mode-line '((:foreground "red") mode-line))
 ;;     ;; (face-remap-add-relative 'mode-line '((:foreground "black" :background "white") mode-line))
 ;;     ;; (face-remap-add-relative 'mode-line '((:foreground original-foreground :background original-background) mode-line))
 ;;     (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
 ;;     )
 ;;   )
-
 ;; (add-hook 'view-mode-hook #'my-view-mode-hook)
 
 
@@ -820,20 +840,23 @@
 (if (display-graphic-p)
     (progn
       ;; if graphic (GUI)
+      ;; <NORMAL>
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
       (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light gray")))
+      (add-hook 'evil-normal-state-entry-hook (lambda () (view-mode 0)))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "lightgray")))
-      ;;
-      ;; (add-hook 'evil-operator-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
-      ;;
       (add-hook 'evil-normal-state-exit-hook (lambda () (hl-line-mode 0)))
+      (add-hook 'evil-normal-state-exit-hook (lambda () (view-mode 1)))
       (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :background original-background)))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightgray")))
       ;; (add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color original-background)))
       ;; (add-hook 'evil-normal-state-exit-hook (lambda () (set-foreground-color original-foreground)))
-
+      ;;
+      ;; =OPERATOR=
+      ;; (add-hook 'evil-operator-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
       ;; (add-hook 'evil-operator-state-entry-hook (lambda () (set-background-color "gray")))
-
+      ;;
+      ;; <INSERT>
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
@@ -843,14 +866,18 @@
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-face-attribute hl-line-face nil :weight 'normal)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color original-foreground)))
       (add-hook 'evil-insert-state-exit-hook (lambda () (hl-line-mode 0)))
-
+      (add-hook 'evil-insert-state-exit-hook (lambda () (view-mode 1)))
+      ;;
+      ;; <VISUAL>
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
       (add-hook 'evil-visual-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light cyan")))
       (add-hook 'evil-visual-state-entry-hook (lambda () (view-mode 0)))
       ;; (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color original-background)))
       (add-hook 'evil-visual-state-exit-hook (lambda () (hl-line-mode 0)))
-
+      (add-hook 'evil-visual-state-exit-hook (lambda () (view-mode 1)))
+      ;;
+      ;; <REPLACE>
       ;; (add-hook 'evil-replace-state-entry-hook (lambda () (set-background-color "lightyellow")))
       ;; (add-hook 'evil-replace-state-entry-hook (lambda () (set-foreground-color "black")))
       ;; (add-hook 'evil-replace-state-exit-hook (lambda () (set-background-color original-background)))
