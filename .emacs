@@ -869,7 +869,7 @@
 ;; https://github.com/hlissner/doom-emacs/issues/1848
 ;; http://fnwiya.hatenablog.com/entry/2016/01/12/213149 
 (setq evil-normal-state-cursor '(box "black")
-      evil-insert-state-cursor '((bar . 2) "dark red")
+      evil-insert-state-cursor '((bar . 3) "red")
       evil-visual-state-cursor '(hollow "blue")
       evil-emacs-state-cursor '(box "black"))
 
