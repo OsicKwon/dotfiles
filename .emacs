@@ -470,10 +470,6 @@
 )
 
 
-;; enable clipboard in emacs
-(setq x-select-enable-clipboard t)
-
-
 (unless (display-graphic-p) 
   ;; terminal mode
   )
