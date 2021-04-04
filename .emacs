@@ -44,8 +44,8 @@
 ;; key hint : edit 'e' / quit 'q'
 
 ;; https://stackoverflow.com/questions/3674637/enabling-certain-emacs-modes-or-features-almost-always
-;; (add-hook 'text-mode-hook 'view-mode)
-;; (add-hook 'prog-mode-hook 'view-mode)
+(add-hook 'text-mode-hook 'view-mode)
+(add-hook 'prog-mode-hook 'view-mode)
 
 ;; https://stackoverflow.com/questions/15906332/change-emacs-mode-line-color-based-on-major-mode
 ;; (add-hook 'view-mode-hook
@@ -66,17 +66,17 @@
 ;; MODE-off-hook
 
 ;; https://www.reddit.com/r/emacs/comments/knoyz2/need_help_toggling_modes_and_settings_when/
-(defun my-view-mode-hook ()
-  "Custom behaviours for `view-mode'."
-  (if view-mode
-      (face-remap-add-relative 'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))
-    ;; (face-remap-add-relative 'mode-line '((:foreground "black" :background "white") mode-line))
-    ;; (face-remap-add-relative 'mode-line '((:foreground original-foreground :background original-background) mode-line))
-    (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
-    )
-  )
+;; (defun my-view-mode-hook ()
+;;   "Custom behaviours for `view-mode'."
+;;   (if view-mode
+;;       (face-remap-add-relative 'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))
+;;     ;; (face-remap-add-relative 'mode-line '((:foreground "black" :background "white") mode-line))
+;;     ;; (face-remap-add-relative 'mode-line '((:foreground original-foreground :background original-background) mode-line))
+;;     (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
+;;     )
+;;   )
 
-(add-hook 'view-mode-hook #'my-view-mode-hook)
+;; (add-hook 'view-mode-hook #'my-view-mode-hook)
 
 
 ;; winner mode 2021-04-02
@@ -814,6 +814,7 @@
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
       (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light yellow")))
+      (add-hook 'evil-insert-state-entry-hook (lambda () (view-mode 0)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-face-attribute hl-line-face nil :weight 'normal)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color original-foreground)))
@@ -821,7 +822,9 @@
 
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
+      (add-hook 'evil-visual-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light cyan")))
       ;; (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color original-background)))
+      (add-hook 'evil-visual-state-exit-hook (lambda () (hl-line-mode 0)))
 
       ;; (add-hook 'evil-replace-state-entry-hook (lambda () (set-background-color "lightyellow")))
       ;; (add-hook 'evil-replace-state-entry-hook (lambda () (set-foreground-color "black")))
@@ -872,7 +875,7 @@
 ;; http://fnwiya.hatenablog.com/entry/2016/01/12/213149 
 (setq evil-normal-state-cursor '(box "black")
       evil-insert-state-cursor '((bar . 2) "red")
-      evil-visual-state-cursor '(hollow "blue")
+      evil-visual-state-cursor '((hollow . 2) "blue")
       evil-emacs-state-cursor '(box "black"))
 
 ;; https://emacs.stackexchange.com/questions/30582/how-do-i-change-the-mode-indicators-for-evil-mode-in-the-spaceline-mode-line-pac
@@ -1034,7 +1037,7 @@
   :init
   (add-hook 'prog-mode-hook 'olivetti-mode)
   (add-hook 'text-mode-hook 'olivetti-mode)
-  (setq olivetti-body-width 0.98)
+  (setq olivetti-body-width 0.99)
   ;; (setq olivetti-body-width 100)
   ;; (setq olivetti-minimum-body-width 10)
   :config
@@ -1047,7 +1050,7 @@
 
   (defun olivetti-default-width ()
     (interactive)
-    (olivetti-set-width 0.98)
+    (olivetti-set-width 0.99)
     ) 
   (global-set-key (kbd "C-M-'") 'olivetti-default-width)
 )
