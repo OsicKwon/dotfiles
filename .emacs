@@ -45,9 +45,13 @@
   :config (setq view-read-only t) ;; C-x C-q can also toggle view-mode
   :bind (("M-z" . view-mode) ;; remap R-Shift to F 13
 	 :map view-mode-map
+
 	 ;; Default (built-in)
+	 ;; <spc> page down
+	 ;; <del> page up
 	 ;; d . half-page down
 	 ;; u . half-page up
+	 ;; y . scroll up (backward)
 	 ;; < . top
 	 ;; > . bottom
 	 ;; s . I-search
@@ -55,16 +59,18 @@
 	 ;; n / p . next / previous Regex search result
 	 ;; = . line number
 	 ;; e . edit
+	 ;; h . help (use '?')
 	 ;; q . quit
-	 ;; h . help
-	 ;;
+
 	 ;; Emacs style
+	 ;; -----------
 	 ;; ("n" . forward-line)
 	 ;; ("p" . previous-line)
 	 ("f" . right-word)
 	 ("b" . left-word)
-	 ;;
+
          ;; Vim style
+	 ;; ---------
 	 ;; ("j" . forward-line)
 	 ;; ("k" . previous-line)
 	 ("j" . forward-sentence)
@@ -73,6 +79,17 @@
          ;; ("l" . right-char)
 	 ;; ("w" . right-word)
          ("N" . View-search-last-regexp-backward)  ;; Regex previous result
+	 ;; ("i" . View-exit)  ;; like 'e'
+         ("e" . View-scroll-line-forward) ;; scroll down (forward) - opposite to 'y'
+
+	 ;; Unbind-keys
+	 ;; -----------
+	 ("h" . nil)
+
+	 ;; Additional-keys
+	 ("r" . revert-buffer)
+	 ;; ("x" . View-exit)  ;; like 'e'
+	 ("z" . View-exit)  ;; like 'e'
          )
   )
 
@@ -124,6 +141,7 @@
     (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
     )
   (if view-mode
+      ;; https://emacs.stackexchange.com/questions/32123/evil-binding-q-to-view-quit-in-view-mode-instead-of-evil-record-macro
       (evil-emacs-state 1)  ;; always related between evil and view-mode 2021-04-04
   )
 )
