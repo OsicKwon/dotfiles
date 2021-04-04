@@ -110,18 +110,18 @@
 ;; MODE-off-hook
 
 ;; https://www.reddit.com/r/emacs/comments/knoyz2/need_help_toggling_modes_and_settings_when/
-;; (defun my-view-mode-hook ()
-;;   "Custom behaviours for `view-mode'."
-;;   (if view-mode
-;;       ;; (face-remap-add-relative 'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))
-;;       ;; (face-remap-add-relative 'mode-line '((:background "ivory" :foreground "DarkOrange2") mode-line))
-;;       (face-remap-add-relative 'mode-line '((:foreground "red") mode-line))
-;;     ;; (face-remap-add-relative 'mode-line '((:foreground "black" :background "white") mode-line))
-;;     ;; (face-remap-add-relative 'mode-line '((:foreground original-foreground :background original-background) mode-line))
-;;     (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
-;;     )
-;;   )
-;; (add-hook 'view-mode-hook #'my-view-mode-hook)
+(defun my-view-mode-hook ()
+  "Custom behaviours for `view-mode'."
+  (if view-mode
+      (face-remap-add-relative 'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))
+      ;; (face-remap-add-relative 'mode-line '((:background "ivory" :foreground "DarkOrange2") mode-line))
+      ;; (face-remap-add-relative 'mode-line '((:foreground "blue") mode-line))
+    ;; (face-remap-add-relative 'mode-line '((:foreground "black" :background "white") mode-line))
+    ;; (face-remap-add-relative 'mode-line '((:foreground original-foreground :background original-background) mode-line))
+    (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
+    )
+  )
+(add-hook 'view-mode-hook #'my-view-mode-hook)
 
 
 ;; winner mode 2021-04-02
