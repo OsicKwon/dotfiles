@@ -70,6 +70,7 @@
 	 ;; ("h" . left-char)
          ;; ("l" . right-char)
 	 ;; ("w" . right-word)
+         ("N" . View-search-last-regexp-backward)  ;; Regex previous result
          )
   )
 
@@ -846,7 +847,7 @@
       (add-hook 'evil-normal-state-entry-hook (lambda () (view-mode 0)))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "lightgray")))
       (add-hook 'evil-normal-state-exit-hook (lambda () (hl-line-mode 0)))
-      (add-hook 'evil-normal-state-exit-hook (lambda () (view-mode 1)))
+      ;; (add-hook 'evil-normal-state-exit-hook (lambda () (view-mode 1)))  ;; conflicted to scratch buffer
       (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :background original-background)))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightgray")))
       ;; (add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color original-background)))
@@ -866,7 +867,7 @@
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-face-attribute hl-line-face nil :weight 'normal)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color original-foreground)))
       (add-hook 'evil-insert-state-exit-hook (lambda () (hl-line-mode 0)))
-      (add-hook 'evil-insert-state-exit-hook (lambda () (view-mode 1)))
+      ;; (add-hook 'evil-insert-state-exit-hook (lambda () (view-mode 1)))
       ;;
       ;; <VISUAL>
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
@@ -875,7 +876,7 @@
       (add-hook 'evil-visual-state-entry-hook (lambda () (view-mode 0)))
       ;; (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color original-background)))
       (add-hook 'evil-visual-state-exit-hook (lambda () (hl-line-mode 0)))
-      (add-hook 'evil-visual-state-exit-hook (lambda () (view-mode 1)))
+      ;; (add-hook 'evil-visual-state-exit-hook (lambda () (view-mode 1)))
       ;;
       ;; <REPLACE>
       ;; (add-hook 'evil-replace-state-entry-hook (lambda () (set-background-color "lightyellow")))
@@ -891,6 +892,11 @@
     (add-hook 'evil-emacs-state-entry-hook (lambda () (set-background-color original-background)))
     (add-hook 'evil-emacs-state-entry-hook (lambda () (set-foreground-color original-foreground)))
     (add-hook 'evil-emacs-state-entry-hook (lambda () (hl-line-mode 0)))
+    ;; View-Mode
+    (add-hook 'evil-normal-state-entry-hook (lambda () (view-mode 0)))
+    (add-hook 'evil-insert-state-entry-hook (lambda () (view-mode 0)))
+    (add-hook 'evil-visual-state-entry-hook (lambda () (view-mode 0)))
+    (add-hook 'evil-replace-state-entry-hook (lambda () (view-mode 0)))
 )
 
 
