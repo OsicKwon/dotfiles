@@ -1011,9 +1011,9 @@
 ;; however, required intall '(sudo) port install the_silver_searcher' first (the_silver_searcher = ag)
 
 
-helm-projectile package 2021
-----------------------------
-(require 'helm-projectile)
+;; helm-projectile package 2021
+;; ----------------------------
+;; (require 'helm-projectile)
 (use-package helm-projectile
   :ensure t
   :disabled t
