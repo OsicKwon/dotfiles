@@ -43,7 +43,7 @@
 ;; add view mode keybindings 2021-04-04
 (use-package view
   :config (setq view-read-only t) ;; C-x C-q can also toggle view-mode
-  :bind (("<f13>" . view-mode) ;; remap R-Shift to F 13
+  :bind (("M-z" . view-mode) ;; remap R-Shift to F 13
 	 :map view-mode-map
 	 ;; Default (built-in)
 	 ;; d . half-page down
@@ -65,8 +65,10 @@
 	 ("b" . left-word)
 	 ;;
          ;; Vim style
-	 ("j" . forward-line)
-	 ("k" . previous-line)
+	 ;; ("j" . forward-line)
+	 ;; ("k" . previous-line)
+	 ("j" . forward-sentence)
+	 ("k" . backward-sentence)
 	 ;; ("h" . left-char)
          ;; ("l" . right-char)
 	 ;; ("w" . right-word)
@@ -90,6 +92,7 @@
 ;; https://stackoverflow.com/questions/3674637/enabling-certain-emacs-modes-or-features-almost-always
 (add-hook 'text-mode-hook 'view-mode)
 (add-hook 'prog-mode-hook 'view-mode)
+;; (add-hook 'view-mode-hook 'evil-emacs-state)
 
 ;; https://stackoverflow.com/questions/15906332/change-emacs-mode-line-color-based-on-major-mode
 ;; (add-hook 'view-mode-hook
@@ -113,14 +116,17 @@
 (defun my-view-mode-hook ()
   "Custom behaviours for `view-mode'."
   (if view-mode
-      (face-remap-add-relative 'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))
+      (face-remap-add-relative 'mode-line '((:foreground "red" :background "black") mode-line))
       ;; (face-remap-add-relative 'mode-line '((:background "ivory" :foreground "DarkOrange2") mode-line))
       ;; (face-remap-add-relative 'mode-line '((:foreground "blue") mode-line))
     ;; (face-remap-add-relative 'mode-line '((:foreground "black" :background "white") mode-line))
     ;; (face-remap-add-relative 'mode-line '((:foreground original-foreground :background original-background) mode-line))
     (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
     )
+  (if view-mode
+      (evil-emacs-state 1)  ;; always related between evil and view-mode 2021-04-04
   )
+)
 (add-hook 'view-mode-hook #'my-view-mode-hook)
 
 
@@ -837,6 +843,13 @@
 ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color "black")))
 (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color original-foreground)))
 
+;; View-Mode
+(add-hook 'evil-normal-state-entry-hook (lambda () (view-mode 0)))
+(add-hook 'evil-insert-state-entry-hook (lambda () (view-mode 0)))
+(add-hook 'evil-visual-state-entry-hook (lambda () (view-mode 0)))
+(add-hook 'evil-replace-state-entry-hook (lambda () (view-mode 0)))
+;; (add-hook 'evil-normal-state-exit-hook (lambda () (view-mode 1)))  ;; conflicted to scratch buffer
+;; (add-hook 'evil-emacs-state-entry-hook (lambda () (view-mode 1)))
 
 (if (display-graphic-p)
     (progn
@@ -844,10 +857,8 @@
       ;; <NORMAL>
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
       (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light gray")))
-      (add-hook 'evil-normal-state-entry-hook (lambda () (view-mode 0)))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "lightgray")))
       (add-hook 'evil-normal-state-exit-hook (lambda () (hl-line-mode 0)))
-      ;; (add-hook 'evil-normal-state-exit-hook (lambda () (view-mode 1)))  ;; conflicted to scratch buffer
       (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :background original-background)))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightgray")))
       ;; (add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color original-background)))
@@ -862,21 +873,17 @@
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
       (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light yellow")))
-      (add-hook 'evil-insert-state-entry-hook (lambda () (view-mode 0)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-face-attribute hl-line-face nil :weight 'normal)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color original-foreground)))
       (add-hook 'evil-insert-state-exit-hook (lambda () (hl-line-mode 0)))
-      ;; (add-hook 'evil-insert-state-exit-hook (lambda () (view-mode 1)))
       ;;
       ;; <VISUAL>
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
       (add-hook 'evil-visual-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light cyan")))
-      (add-hook 'evil-visual-state-entry-hook (lambda () (view-mode 0)))
       ;; (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color original-background)))
       (add-hook 'evil-visual-state-exit-hook (lambda () (hl-line-mode 0)))
-      ;; (add-hook 'evil-visual-state-exit-hook (lambda () (view-mode 1)))
       ;;
       ;; <REPLACE>
       ;; (add-hook 'evil-replace-state-entry-hook (lambda () (set-background-color "lightyellow")))
@@ -887,16 +894,11 @@
       (add-hook 'evil-emacs-state-entry-hook (lambda () (face-remap-add-relative 'default :foreground original-foreground)))
     )
     ;; else (optional - terminal mode)
-    (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :underline t :background original-background)))
-    (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :underline t :overline 't :background "black")))
-    (add-hook 'evil-emacs-state-entry-hook (lambda () (set-background-color original-background)))
-    (add-hook 'evil-emacs-state-entry-hook (lambda () (set-foreground-color original-foreground)))
-    (add-hook 'evil-emacs-state-entry-hook (lambda () (hl-line-mode 0)))
-    ;; View-Mode
-    (add-hook 'evil-normal-state-entry-hook (lambda () (view-mode 0)))
-    (add-hook 'evil-insert-state-entry-hook (lambda () (view-mode 0)))
-    (add-hook 'evil-visual-state-entry-hook (lambda () (view-mode 0)))
-    (add-hook 'evil-replace-state-entry-hook (lambda () (view-mode 0)))
+      (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :underline t :background original-background)))
+      (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :underline t :overline 't :background "black")))
+      (add-hook 'evil-emacs-state-entry-hook (lambda () (set-background-color original-background)))
+      (add-hook 'evil-emacs-state-entry-hook (lambda () (set-foreground-color original-foreground)))
+      (add-hook 'evil-emacs-state-entry-hook (lambda () (hl-line-mode 0)))
 )
 
 
