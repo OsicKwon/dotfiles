@@ -133,6 +133,7 @@
 ;; (add-hook 'text-mode-hook 'my-view-mode)
 ;; (add-to-list 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c *
 
+(add-hook 'Buffer-menu-mode-hook 'auto-revert-mode)
 
 ;; https://stackoverflow.com/questions/15906332/change-emacs-mode-line-color-based-on-major-mode
 ;; (add-hook 'view-mode-hook
