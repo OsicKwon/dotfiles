@@ -35,6 +35,7 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; (setq blink-cursor-blinks 0)  ;; default 10, to continue 0 or -1 2021-04-05
 
 ;; view mode (bult-in) 2021-04-03
 ;; https://gist.github.com/ivan-krukov/63a586f2121519ca51b201c634402a84
@@ -42,7 +43,7 @@
 
 ;; add view mode keybindings 2021-04-04
 (use-package view
-  :config (setq view-read-only t) ;; C-x C-q can also toggle view-mode
+  :config (setq view-read-only t) ;; enter view-mode for read-only file
   :bind (("M-z" . view-mode) ;; remap R-Shift to F 13
 	 :map view-mode-map
 
@@ -105,14 +106,33 @@
 ;;             (setq cursor-type (if view-mode 'box 'hbar))))
 
 ;; https://karthinks.com/software/batteries-included-with-emacs/
+;; enter view-mode for read-only files
 (setq view-read-only t)
 ;; https://www.emacswiki.org/emacs/ViewMode
 (define-key ctl-x-map "\C-q" 'view-mode)  ;; means C-x C-q
 ;; key hint : edit 'e' / quit 'q'
 
 ;; https://stackoverflow.com/questions/3674637/enabling-certain-emacs-modes-or-features-almost-always
-(add-hook 'text-mode-hook 'view-mode)
-(add-hook 'prog-mode-hook 'view-mode)
+;; (add-hook 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c *
+;; (add-hook 'prog-mode-hook 'view-mode)
+;; https://stackoverflow.com/questions/7899949/is-there-an-emacs-hook-that-runs-after-every-buffer-is-created
+;; (add-hook 'after-change-major-mode-hook 'view-mode)  ;; conflicted with org-mode of C-c *
+
+
+;; (with-eval-after-load 'text-mode (view-mode 1))
+;; (eval-after-load 'text-mode 'view-mode)
+;; (eval-after-load 'org-mode 'view-mode)
+;; (with-eval-after-load 'org (lambda () (view-mode 1)))
+
+;; https://emacs.stackexchange.com/questions/3323/is-there-any-way-to-run-a-hook-function-only-once
+;; (defun my-view-mode ()
+;;   (interactive)
+;;   (view-mode 1)
+;;   (remove-hook 'text-mode-hook 'my-view-mode)
+;;   )
+;; (add-hook 'text-mode-hook 'my-view-mode)
+;; (add-to-list 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c *
+
 
 ;; https://stackoverflow.com/questions/15906332/change-emacs-mode-line-color-based-on-major-mode
 ;; (add-hook 'view-mode-hook
@@ -334,7 +354,6 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
- '(blink-cursor-blinks 0)
  '(confirm-kill-emacs 'yes-or-no-p)
  '(custom-enabled-themes nil)
  '(doc-view-continuous t)
