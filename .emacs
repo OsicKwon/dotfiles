@@ -1,3 +1,4 @@
+;; -*- eval: (view-mode); -*-
 ;; since 2020
 ;;    ___  ____ ___  ____ ___________
 ;;   / _ \/ __ `__ \/ __ `/ ___/ ___/
@@ -43,7 +44,7 @@
 
 ;; add view mode keybindings 2021-04-04
 (use-package view
-  :config (setq view-read-only t) ;; enter view-mode for read-only file
+  ;; :config (setq view-read-only t) ;; enter view-mode for read-only file
   :bind (("M-z" . view-mode) ;; remap R-Shift to F 13
 	 :map view-mode-map
 
@@ -107,16 +108,16 @@
 
 ;; https://karthinks.com/software/batteries-included-with-emacs/
 ;; enter view-mode for read-only files
-(setq view-read-only t)
+;; (setq view-read-only t)
 ;; https://www.emacswiki.org/emacs/ViewMode
-(define-key ctl-x-map "\C-q" 'view-mode)  ;; means C-x C-q
+;; (define-key ctl-x-map "\C-q" 'view-mode)  ;; means C-x C-q
 ;; key hint : edit 'e' / quit 'q'
 
 ;; https://stackoverflow.com/questions/3674637/enabling-certain-emacs-modes-or-features-almost-always
 ;; (add-hook 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c *
 ;; (add-hook 'prog-mode-hook 'view-mode)
 ;; https://stackoverflow.com/questions/7899949/is-there-an-emacs-hook-that-runs-after-every-buffer-is-created
-(add-hook 'after-change-major-mode-hook 'view-mode)  ;; conflicted with org-mode of C-c *
+;; (add-hook 'after-change-major-mode-hook 'view-mode)  ;; conflicted with org-mode of C-c *
 ;; (with-eval-after-load 'text-mode (view-mode 1))
 ;; (eval-after-load 'text-mode 'view-mode)
 ;; (eval-after-load 'org-mode 'view-mode)
@@ -126,14 +127,6 @@
 ;;   ;; (remove-hook 'text-mode-hook 'view-mode))
 ;;   (setq view-read-only nil))
 ;; (eval-after-load 'view '(my-view-mode-after-load-hook))
-
-
-
-
-
-
-
-
 
 ;; https://emacs.stackexchange.com/questions/3323/is-there-any-way-to-run-a-hook-function-only-once
 ;; (defun my-view-mode ()
@@ -187,7 +180,8 @@
 (winner-mode 1)
 ;; ]
 
-;; evil goggles - display visual hint 2021-04-02
+
+;; [ evil goggles - display visual hint 2021-04-02
 ;; https://github.com/edkolev/evil-goggles
 (use-package evil-goggles
   :ensure t
@@ -200,7 +194,7 @@
   ;; some red color (as defined by the color theme)
   ;; other faces such as `diff-added` will be used for other actions
   (evil-goggles-use-diff-faces))
-
+;; ]
 
 ;; pluse (like beacon) bulit-in 2021-04-02
 ;; https://karthinks.com/software/batteries-included-with-emacs/
