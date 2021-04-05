@@ -116,13 +116,24 @@
 ;; (add-hook 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c *
 ;; (add-hook 'prog-mode-hook 'view-mode)
 ;; https://stackoverflow.com/questions/7899949/is-there-an-emacs-hook-that-runs-after-every-buffer-is-created
-;; (add-hook 'after-change-major-mode-hook 'view-mode)  ;; conflicted with org-mode of C-c *
-
-
+(add-hook 'after-change-major-mode-hook 'view-mode)  ;; conflicted with org-mode of C-c *
 ;; (with-eval-after-load 'text-mode (view-mode 1))
 ;; (eval-after-load 'text-mode 'view-mode)
 ;; (eval-after-load 'org-mode 'view-mode)
-;; (with-eval-after-load 'org (lambda () (view-mode 1)))
+
+;; (defun my-view-mode-after-load-hook ()
+;;   "Stuff to run in `view-mode'."
+;;   ;; (remove-hook 'text-mode-hook 'view-mode))
+;;   (setq view-read-only nil))
+;; (eval-after-load 'view '(my-view-mode-after-load-hook))
+
+
+
+
+
+
+
+
 
 ;; https://emacs.stackexchange.com/questions/3323/is-there-any-way-to-run-a-hook-function-only-once
 ;; (defun my-view-mode ()
@@ -133,7 +144,7 @@
 ;; (add-hook 'text-mode-hook 'my-view-mode)
 ;; (add-to-list 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c *
 
-(add-hook 'Buffer-menu-mode-hook 'auto-revert-mode)
+;; (add-hook 'Buffer-menu-mode-hook 'auto-revert-mode)
 
 ;; https://stackoverflow.com/questions/15906332/change-emacs-mode-line-color-based-on-major-mode
 ;; (add-hook 'view-mode-hook
