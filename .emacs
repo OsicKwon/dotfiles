@@ -44,8 +44,8 @@
 ;; key hint : edit 'e' / quit 'q'
 
 ;; https://stackoverflow.com/questions/3674637/enabling-certain-emacs-modes-or-features-almost-always
-;; (add-hook 'text-mode-hook 'view-mode)
-;; (add-hook 'prog-mode-hook 'view-mode)
+(add-hook 'text-mode-hook 'view-mode)
+(add-hook 'prog-mode-hook 'view-mode)
 
 ;; https://stackoverflow.com/questions/15906332/change-emacs-mode-line-color-based-on-major-mode
 ;; (add-hook 'view-mode-hook
