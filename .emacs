@@ -384,7 +384,7 @@
  '(org-agenda-use-time-grid t)
  '(org-babel-python-command "python3")
  '(org-confirm-babel-evaluate nil)
- '(org-export-backends '(ascii beamer html icalendar latex odt))
+ '(org-export-backends '(ascii beamer html latex md odt org))
  '(org-fontify-done-headline t)
  '(org-fontify-quote-and-verse-blocks t)
  '(org-fontify-whole-heading-line t)
