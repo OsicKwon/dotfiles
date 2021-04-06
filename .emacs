@@ -92,13 +92,15 @@
 	 ("c" . nil)
 	 ("o" . nil)
 
-
 	 ;; Additional-keys
 	 ("r" . revert-buffer)
 	 ("a" . end-of-buffer)
 	 ;; ("z" . end-of-buffer)
-	 ("z" . View-exit)  ;; like 'e'
+	 ;; ("z" . View-exit)  ;; like 'e'
+	 ("z" . evil-exit-emacs-state)
 	 ("v" . evil-exit-emacs-state)
+	 ;; ("RET" . evil-exit-emacs-state)
+	 ;; ("SPC" . evil-exit-emacs-state)
 	 ("t" . org-tree-slide-mode)
 	 ("l" . org-tree-slide-move-next-tree)
 	 ("h" . org-tree-slide-move-previous-tree)
@@ -925,8 +927,8 @@
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
       (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light yellow")))
-      ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-face-attribute hl-line-face nil :weight 'normal)))
+      ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color original-foreground)))
       (add-hook 'evil-insert-state-exit-hook (lambda () (hl-line-mode 0)))
       ;;
@@ -1015,8 +1017,11 @@
 (define-key evil-normal-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
-(define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)
+;; (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)
+(define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
+(define-key evil-normal-state-map (kbd "<escape>") 'counsel-M-x)
+;; (define-key evil-normal-state-map (kbd "RET")     'view-mode)
 
 
 ;; forward-sentence is based on the sentence-end variable
@@ -1473,7 +1478,8 @@ T - tag prefix
       ;; ("x" "Big3" plain ()
       ;; "%U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
       ("x" "Big3" plain ()
-       "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
+       "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3} ")
+       ;; "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
      )
   )
 ;; (global-set-key (kbd "C-M-]") (kbd "C-0 M-x org-capture"))  ; just tried, but not worked 2021-04-02

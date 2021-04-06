@@ -28,8 +28,8 @@ set sidescroll=1                      " options: 0, 1, 2, ....
 set modeline
 set modelines=10
 set spell
-" set spelllang=en_ca
-set spelllang=EN_ca
+set spelllang=en_ca
+" set spelllang=EN_ca
 " set colorcolumn=80,120
 set path+=**                  " include sub directories when searching 2021-01-06
 set updatetime=1000           " for gitgutter 2021-01-13
