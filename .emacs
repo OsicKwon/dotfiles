@@ -95,9 +95,9 @@
 	 ("r" . revert-buffer)
 	 ("a" . end-of-buffer)
 	 ;; ("z" . end-of-buffer)
-	 ;; ("z" . View-exit)  ;; like 'e'
-	 ("z" . evil-exit-emacs-state)
-	 ;; ("v" . evil-exit-emacs-state)
+	 ("z" . View-exit)  ;; like 'e'
+	 ;; ("z" . evil-exit-emacs-state)
+	 ("v" . evil-exit-emacs-state)
 	 ;; ("RET" . evil-exit-emacs-state)
 	 ;; ("SPC" . evil-exit-emacs-state)
 	 ("t" . org-tree-slide-mode)
@@ -108,10 +108,10 @@
 
 ;; make sure the cursor is changed visually
 ;; complicted to Evil cursors
-(setq-default cursor-type 'box)
-(add-hook 'view-mode-hook
-	  (defun view-mode-change-cursor-type-hook ()
-            (setq cursor-type (if view-mode '(hbar . 10)))))
+;; (setq-default cursor-type 'box)
+;; (add-hook 'view-mode-hook
+;; 	  (defun view-mode-change-cursor-type-hook ()
+;;             (setq cursor-type (if view-mode '(hbar . 10)))))
 
 ;; https://karthinks.com/software/batteries-included-with-emacs/
 ;; enter view-mode for read-only files
@@ -1018,8 +1018,8 @@
 (define-key evil-normal-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
-;; (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)
-(define-key evil-normal-state-map (kbd "z")     'view-mode)
+(define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)
+;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
 (define-key evil-normal-state-map (kbd "<escape>") 'counsel-M-x)
 ;; (define-key evil-normal-state-map (kbd "RET")     'view-mode)
