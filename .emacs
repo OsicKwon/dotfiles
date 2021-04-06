@@ -1,3 +1,4 @@
+;; -*- eval: (view-mode); -*-
 ;; since 2020
 ;;    ___  ____ ___  ____ ___________
 ;;   / _ \/ __ `__ \/ __ `/ ___/ ___/
@@ -97,6 +98,7 @@
 	 ("a" . end-of-buffer)
 	 ;; ("z" . end-of-buffer)
 	 ("z" . View-exit)  ;; like 'e'
+	 ("v" . evil-exit-emacs-state)
 	 ("t" . org-tree-slide-mode)
 	 ("l" . org-tree-slide-move-next-tree)
 	 ("h" . org-tree-slide-move-previous-tree)
@@ -1013,6 +1015,8 @@
 (define-key evil-normal-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
+(define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)
+(define-key evil-normal-state-map (kbd "m")     'view-mode)
 
 
 ;; forward-sentence is based on the sentence-end variable
