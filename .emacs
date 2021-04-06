@@ -1,4 +1,3 @@
-;; -*- eval: (view-mode); -*-
 ;; since 2020
 ;;    ___  ____ ___  ____ ___________
 ;;   / _ \/ __ `__ \/ __ `/ ___/ ___/
@@ -49,6 +48,7 @@
 	 :map view-mode-map
 
 	 ;; Default (built-in)
+	 ;; ------------------
 	 ;; <spc> page down
 	 ;; <del> page up
 	 ;; d . half-page down
@@ -83,15 +83,19 @@
          ("N" . View-search-last-regexp-backward)  ;; Regex previous result
 	 ;; ("i" . View-exit)  ;; like 'e'
          ("e" . View-scroll-line-forward) ;; scroll down (forward) - opposite to 'y'
-         ("0" . beginning-of-visual-line)
+         ;; ("0" . beginning-of-visual-line)
 	 
 	 ;; Unbind-keys
 	 ;; -----------
 	 ("h" . nil)
+	 ("c" . nil)
+	 ("o" . nil)
+
 
 	 ;; Additional-keys
 	 ("r" . revert-buffer)
-	 ;; ("x" . View-exit)  ;; like 'e'
+	 ("a" . end-of-buffer)
+	 ;; ("z" . end-of-buffer)
 	 ("z" . View-exit)  ;; like 'e'
 	 ("t" . org-tree-slide-mode)
 	 ("l" . org-tree-slide-move-next-tree)
@@ -1146,7 +1150,7 @@
   (add-hook 'text-mode-hook 'olivetti-mode)
   (setq olivetti-body-width 0.99)
   ;; (setq olivetti-body-width 100)
-  ;; (setq olivetti-minimum-body-width 10)
+  (setq olivetti-minimum-body-width 95)
   :config
   ;; functions by width
   (defun olivetti-narrow-width ()
@@ -1455,20 +1459,22 @@ T - tag prefix
        "* EVENT %?\n%U" :empty-lines 1)
       ("E" "Event With Clipboard" entry (file+headline "~/Documents/nvALT/org/Events.org" "Transient")
        "* EVENT %?\n%U\n   %c" :empty-lines 1)
-      ("x" "Big3" plain ()
-       "%U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
+      ;; ----------------------------------------------------------
+      ;; insert at CURRENT POSITION in a buffer 2021-04-02
+      ;; ----------------------------------------------------------
+      ;; tip: When called with a ‘C-0’ (zero) prefix, insert a template at point.
+      ;; >> == C-0 M-x `org-capture` == <<
+      ;; https://emacs.stackexchange.com/questions/30595/how-to-org-capture-at-current-location
+      ;; 
       ;; ("x" "Big3" plain ()
-      ;;  "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
+      ;; "%U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
+      ("x" "Big3" plain ()
+       "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
      )
   )
-
 ;; (global-set-key (kbd "C-M-]") (kbd "C-0 M-x org-capture"))  ; just tried, but not worked 2021-04-02
 
-
-;; insert current position in a buffer 2021-04-02
-;; tip: When called with a ‘C-0’ (zero) prefix, insert a template at point. > == C-0 M-x `org-capture` ==
-;; https://emacs.stackexchange.com/questions/30595/how-to-org-capture-at-current-location
-
+;; ----------------------------------------------------------
 ;; Templage Expansion 2021-04-02
 ;; https://orgmode.org/manual/Template-expansion.html
 ;; ------------------------------------------------------------
