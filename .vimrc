@@ -1146,8 +1146,8 @@ map <F11> :cnext<Return>
 "----------------------
 " PaperColor Filetypes
 "----------------------
-autocmd BufEnter *.py    colorscheme PaperColor
-autocmd BufEnter *.vimrc colorscheme PaperColor
+autocmd BufEnter *.py    colorscheme PaperColor | set background=dark
+autocmd BufEnter *.vimrc colorscheme PaperColor | set background=dark
 
 
 "---------------

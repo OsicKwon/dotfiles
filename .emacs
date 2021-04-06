@@ -94,6 +94,7 @@
 	 ;; Additional-keys
 	 ("r" . revert-buffer)
 	 ("a" . end-of-buffer)
+	 ("c" . cfw:open-org-calendar)
 	 ;; ("z" . end-of-buffer)
 	 ("z" . View-exit)  ;; like 'e'
 	 ;; ("z" . evil-exit-emacs-state)
@@ -121,12 +122,12 @@
 ;; key hint : edit 'e' / quit 'q'
 
 ;; https://stackoverflow.com/questions/3674637/enabling-certain-emacs-modes-or-features-almost-always
-;; (add-hook 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c *
+;; (add-hook 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c *, and 'org export'
 (add-hook 'prog-mode-hook 'view-mode)
 (add-hook 'markdown-mode-hook 'view-mode)
 (add-hook 'org-mode-hook 'view-mode)
 ;; https://stackoverflow.com/questions/7899949/is-there-an-emacs-hook-that-runs-after-every-buffer-is-created
-;; (add-hook 'after-change-major-mode-hook 'view-mode)  ;; conflicted with org-mode of C-c *
+;; (add-hook 'after-change-major-mode-hook 'view-mode)  ;; conflicted with almost org-mode work
 ;; (with-eval-after-load 'text-mode (view-mode 1))
 ;; (eval-after-load 'text-mode 'view-mode)
 ;; (eval-after-load 'org-mode 'view-mode)
@@ -737,8 +738,7 @@
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
- '(org-level-7 ((t (:inherit outline-7 :box (:line-width 2 :color "grey75" :style released-button) :height 1.0))))
- '(pulse-highlight-start-face ((t (:background "gray")))))
+ '(pulse-highlight-start-face ((t (:background "dark gray")))))
 
 ;; white mode-line came from Binder/Olivetti reddit like below:
 ;; https://www.reddit.com/r/emacs/comments/fc8hc2/binder_modes_for_structuring_a_multifile_writing/
@@ -1156,8 +1156,9 @@
 (use-package olivetti
   :ensure t
   :init
-  (add-hook 'prog-mode-hook 'olivetti-mode)
-  (add-hook 'text-mode-hook 'olivetti-mode)
+  ;; (add-hook 'text-mode-hook 'olivetti-mode)
+  ;; (add-hook 'prog-mode-hook 'olivetti-mode)
+  (add-hook 'after-change-major-mode-hook 'olivetti-mode)  ;; cover text-mode and prog-mode
   (setq olivetti-body-width 0.99)
   ;; (setq olivetti-body-width 100)  ;; maximum
   (setq olivetti-minimum-body-width 30)
