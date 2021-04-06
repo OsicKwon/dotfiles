@@ -124,6 +124,7 @@
 ;; (add-hook 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c *
 (add-hook 'prog-mode-hook 'view-mode)
 (add-hook 'markdown-mode-hook 'view-mode)
+(add-hook 'org-mode-hook 'view-mode)
 ;; https://stackoverflow.com/questions/7899949/is-there-an-emacs-hook-that-runs-after-every-buffer-is-created
 ;; (add-hook 'after-change-major-mode-hook 'view-mode)  ;; conflicted with org-mode of C-c *
 ;; (with-eval-after-load 'text-mode (view-mode 1))
