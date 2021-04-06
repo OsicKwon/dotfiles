@@ -84,7 +84,7 @@
          ("N" . View-search-last-regexp-backward)  ;; Regex previous result
 	 ;; ("i" . View-exit)  ;; like 'e'
          ("e" . View-scroll-line-forward) ;; scroll down (forward) - opposite to 'y'
-         ;; ("0" . beginning-of-visual-line)
+         ("0" . beginning-of-visual-line)
 	 
 	 ;; Unbind-keys
 	 ;; -----------
