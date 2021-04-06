@@ -1154,7 +1154,7 @@
   (add-hook 'text-mode-hook 'olivetti-mode)
   (setq olivetti-body-width 0.99)
   ;; (setq olivetti-body-width 100)
-  (setq olivetti-minimum-body-width 95)
+  (setq olivetti-minimum-body-width 30)
   :config
   ;; functions by width
   (defun olivetti-narrow-width ()
