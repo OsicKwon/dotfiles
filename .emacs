@@ -1,4 +1,3 @@
-;; -*- eval: (view-mode); -*-
 ;; since 2020
 ;;    ___  ____ ___  ____ ___________
 ;;   / _ \/ __ `__ \/ __ `/ ___/ ___/
@@ -98,7 +97,7 @@
 	 ;; ("z" . end-of-buffer)
 	 ;; ("z" . View-exit)  ;; like 'e'
 	 ("z" . evil-exit-emacs-state)
-	 ("v" . evil-exit-emacs-state)
+	 ;; ("v" . evil-exit-emacs-state)
 	 ;; ("RET" . evil-exit-emacs-state)
 	 ;; ("SPC" . evil-exit-emacs-state)
 	 ("t" . org-tree-slide-mode)
@@ -109,10 +108,10 @@
 
 ;; make sure the cursor is changed visually
 ;; complicted to Evil cursors
-;; (setq-default cursor-type 'box)
-;; (add-hook 'view-mode-hook
-;; 	  (defun view-mode-change-cursor-type-hook ()
-;;             (setq cursor-type (if view-mode 'box 'hbar))))
+(setq-default cursor-type 'box)
+(add-hook 'view-mode-hook
+	  (defun view-mode-change-cursor-type-hook ()
+            (setq cursor-type (if view-mode '(hbar . 10)))))
 
 ;; https://karthinks.com/software/batteries-included-with-emacs/
 ;; enter view-mode for read-only files
@@ -123,7 +122,8 @@
 
 ;; https://stackoverflow.com/questions/3674637/enabling-certain-emacs-modes-or-features-almost-always
 ;; (add-hook 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c *
-;; (add-hook 'prog-mode-hook 'view-mode)
+(add-hook 'prog-mode-hook 'view-mode)
+(add-hook 'markdown-mode-hook 'view-mode)
 ;; https://stackoverflow.com/questions/7899949/is-there-an-emacs-hook-that-runs-after-every-buffer-is-created
 ;; (add-hook 'after-change-major-mode-hook 'view-mode)  ;; conflicted with org-mode of C-c *
 ;; (with-eval-after-load 'text-mode (view-mode 1))
