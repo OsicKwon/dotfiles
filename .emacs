@@ -17,6 +17,7 @@
 ;; PACKAGES
 ;;===============================================================
 
+
 ;; MELPA 2020-12-08
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -62,7 +63,7 @@
 	 ;; = . line number
 	 ;; e . edit
 	 ;; h . help (use '?')
-	 ;; q . quit
+	 ;; q . quit ,but not close buffer
 
 	 ;; Emacs style
 	 ;; -----------
@@ -70,6 +71,11 @@
 	 ;; ("p" . previous-line)
 	 ("f" . right-word)
 	 ("b" . left-word)
+	 ("0" . delete-window)
+	 ("1" . ace-window)
+	 ("2" . split-window-vertically)
+	 ("3" . split-window-horizontally)
+	 ("RET" . other-window)
 
          ;; Vim style
 	 ;; ---------
@@ -83,7 +89,7 @@
          ("N" . View-search-last-regexp-backward)  ;; Regex previous result
 	 ;; ("i" . View-exit)  ;; like 'e'
          ("e" . View-scroll-line-forward) ;; scroll down (forward) - opposite to 'y'
-         ("0" . beginning-of-visual-line)
+         ;; ("0" . beginning-of-visual-line)
 	 
 	 ;; Unbind-keys
 	 ;; -----------
@@ -98,6 +104,7 @@
 	 ("c" . cfw:open-org-calendar)
 	 ;; ("z" . end-of-buffer)
 	 ("z" . View-exit)  ;; like 'e'
+	 ;; ("x" . View-exit)  ;; like 'e'
 	 ;; ("z" . evil-exit-emacs-state)
 	 ("v" . evil-exit-emacs-state)
 	 ;; ("RET" . evil-exit-emacs-state)
@@ -107,6 +114,7 @@
 	 ("h" . org-tree-slide-move-previous-tree)
 	 ("]" . switch-to-next-buffer)
 	 ("[" . switch-to-prev-buffer)
+	 ("q" . kill-current-buffer)  ;; same as (s-k)
          )
   )
 
@@ -189,6 +197,24 @@
     )
 )
 (add-hook 'view-mode-hook #'my-view-mode-hook)
+
+
+(put 'clone-indirect-buffer-other-window 'disabled "\n Use 'make-indirect-buffer' instead due to view-mode with face issues")
+(put 'org-tree-to-indirect-buffer 'disabled "\n Use 'make-indirect-buffer' instead due to view-mode with face issues")
+;; (setq disabled-command-function 'ignore)
+
+;; My-Indirect-Buffer for view-mode, which made face coloring confusing 2021-04-07
+;; https://www.emacswiki.org/emacs/IndirectBuffers
+(defun my-indirect-buffer ()
+  "Edit stuff in this buffer in an indirect buffer.
+    The indirect buffer can have another major mode."
+  (interactive)
+  (let ((buffer-name (generate-new-buffer-name "*indirect*")))
+    (pop-to-buffer (make-indirect-buffer (current-buffer) buffer-name)))
+  (view-mode)
+  )
+(global-set-key (kbd "C-c C-x i") 'my-indirect-buffer)
+(global-set-key (kbd "C-x 4 i") 'my-indirect-buffer)
 
 
 ;; [ winner mode 2021-04-02
@@ -530,6 +556,7 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (load "mwe-log-commands")
 ;; (load "sticky-windows.el")  ;; more test required 2021-03-27
+
 
 ;; mew-log-commands 2021-03-18
 ;; ---------------------------
@@ -1025,7 +1052,7 @@
 (define-key evil-normal-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
-(define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)
+;; (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
 (define-key evil-normal-state-map (kbd "<escape>") 'counsel-M-x)
