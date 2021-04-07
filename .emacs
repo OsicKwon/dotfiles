@@ -178,7 +178,12 @@
   (if view-mode
       ;; https://emacs.stackexchange.com/questions/32123/evil-binding-q-to-view-quit-in-view-mode-instead-of-evil-record-macro
       (evil-emacs-state 1)  ;; always related between evil and view-mode 2021-04-04
-  )
+    )
+  (if view-mode
+      ;; color-code: https://www.w3schools.com/colors/colors_shades.asp
+      (face-remap-add-relative 'default '((:background "#DCDCDC")))
+    (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
+    )
 )
 (add-hook 'view-mode-hook #'my-view-mode-hook)
 
