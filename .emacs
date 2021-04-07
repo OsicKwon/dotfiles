@@ -90,6 +90,7 @@
 	 ("h" . nil)
 	 ("c" . nil)
 	 ("o" . nil)
+	 ("x" . nil)
 
 	 ;; Additional-keys
 	 ("r" . revert-buffer)
@@ -181,7 +182,7 @@
     )
   (if view-mode
       ;; color-code: https://www.w3schools.com/colors/colors_shades.asp
-      (face-remap-add-relative 'default '((:background "#DCDCDC")))
+      (face-remap-add-relative 'default '((:background "controlHighlightColor")))
     (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
     )
 )
