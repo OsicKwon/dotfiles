@@ -36,6 +36,17 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; org-capture at point 2021-04-07
+;; https://emacs.stackexchange.com/questions/30595/how-to-org-capture-at-current-location
+;; == Insert Org-Capture at Current Postion :: _C-0_ M-x 'org-capture' ==
+(defun org-capture-at-point ()
+  "Insert an org capture template at point."
+  (interactive)
+  (org-capture 0))
+
+;; (global-set-key (kbd "C-c C-c") #'org-capture-at-point)
+
+
 ;; (setq blink-cursor-blinks 0)  ;; default 10, to continue 0 or -1 2021-04-05
 
 ;; view mode (bult-in) 2021-04-03
@@ -74,10 +85,12 @@
 	 ;; window
 	 ("0" . delete-window)
 	 ("x" . delete-window)
-	 ("1" . ace-window)
+	 ;; ("1" . ace-window)
+	 ("1" . delete-other-windows)
 	 ("2" . split-window-vertically)
 	 ("3" . split-window-horizontally)
 	 ("RET" . other-window)
+	 ("SPC" . ace-window)
 	 ("o" . other-window)
 	 ("=" . balance-windows)
 
@@ -973,7 +986,7 @@
       (add-hook 'evil-insert-state-exit-hook (lambda () (hl-line-mode 0)))
       ;;
       ;; <VISUAL>
-      ;; (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
+      ;; (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :background "light cyan")))
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
       (add-hook 'evil-visual-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light cyan")))
       ;; (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color original-background)))
@@ -984,6 +997,8 @@
       ;; (add-hook 'evil-replace-state-entry-hook (lambda () (set-foreground-color "black")))
       ;; (add-hook 'evil-replace-state-exit-hook (lambda () (set-background-color original-background)))
       ;; (add-hook 'evil-replace-state-exit-hook (lambda () (set-foreground-color original-foreground)))
+      ;;
+      ;; <EMACS>
       (add-hook 'evil-emacs-state-entry-hook (lambda () (face-remap-add-relative 'default :background original-background)))
       (add-hook 'evil-emacs-state-entry-hook (lambda () (face-remap-add-relative 'default :foreground original-foreground)))
     )
@@ -1041,12 +1056,12 @@
 
 ;; Color the evil tag - colors taken from spaceline
 ;; https://github.com/Malabarba/smart-mode-line/issues/195
-(setq evil-normal-state-tag   (propertize " NORMAL " 'face '((:background "black"          :foreground "white")))
-;;      evil-emacs-state-tag    (propertize " <E> " 'face '((:background original-background :foreground original-foreground)))
-      evil-insert-state-tag   (propertize " INSERT " 'face '((:background "red"    :foreground "white")))
-      evil-replace-state-tag  (propertize " REPLACE " 'face '((:background "chocolate"     :foreground "black")))
-      evil-motion-state-tag   (propertize " <Motion> " 'face '((:background "plum3"        :foreground "black")))
-      evil-visual-state-tag   (propertize " VISUAL " 'face '((:background "blue"       :foreground "white")))
+(setq evil-normal-state-tag   (propertize " NORMAL "     'face '((:background "black"             :foreground "white")))
+      ;; evil-emacs-state-tag    (propertize " <E> "        'face '((:background original-background :foreground original-foreground)))
+      evil-insert-state-tag   (propertize " INSERT "     'face '((:background "red"               :foreground "white")))
+      evil-replace-state-tag  (propertize " REPLACE "    'face '((:background "chocolate"         :foreground "black")))
+      evil-motion-state-tag   (propertize " <Motion> "   'face '((:background "plum3"             :foreground "black")))
+      evil-visual-state-tag   (propertize " VISUAL "     'face '((:background "blue"              :foreground "white")))
       evil-operator-state-tag (propertize " <Operator> " 'face '((:background "sandy brown"       :foreground "black"))))
 
 ;; evil key binding
@@ -1057,8 +1072,8 @@
 (define-key evil-normal-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
-;; (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)
-(define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
+(define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)  ;; utilize H/M/L instead
+;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
 (define-key evil-normal-state-map (kbd "<escape>") 'counsel-M-x)
