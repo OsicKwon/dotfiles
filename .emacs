@@ -86,7 +86,7 @@
 	 ("0" . delete-window)
 	 ("x" . delete-window)
 	 ;; ("1" . ace-window)
-	 ("1" . delete-other-windows)
+	 ("1" . delete-other-windows)  ;; show only current selected widnow
 	 ("2" . split-window-vertically)
 	 ("3" . split-window-horizontally)
 	 ("RET" . other-window)
@@ -1077,7 +1077,7 @@
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
 (define-key evil-normal-state-map (kbd "<escape>") 'counsel-M-x)
-;; (define-key evil-normal-state-map (kbd "RET")     'view-mode)
+(define-key evil-normal-state-map (kbd "RET")   'other-window)
 
 
 ;; forward-sentence is based on the sentence-end variable
