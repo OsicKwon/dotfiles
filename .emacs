@@ -71,11 +71,15 @@
 	 ;; ("p" . previous-line)
 	 ("f" . right-word)
 	 ("b" . left-word)
+	 ;; window
 	 ("0" . delete-window)
+	 ("x" . delete-window)
 	 ("1" . ace-window)
 	 ("2" . split-window-vertically)
 	 ("3" . split-window-horizontally)
 	 ("RET" . other-window)
+	 ("o" . other-window)
+	 ("=" . balance-windows)
 
          ;; Vim style
 	 ;; ---------
@@ -95,8 +99,8 @@
 	 ;; -----------
 	 ("h" . nil)
 	 ("c" . nil)
-	 ("o" . nil)
-	 ("x" . nil)
+	 ;; ("o" . nil)
+	 ;; ("x" . nil)
 
 	 ;; Additional-keys
 	 ("r" . revert-buffer)
@@ -115,6 +119,7 @@
 	 ("]" . switch-to-next-buffer)
 	 ("[" . switch-to-prev-buffer)
 	 ("q" . kill-current-buffer)  ;; same as (s-k)
+	 ("i" . my-indirect-buffer)
          )
   )
 
