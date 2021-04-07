@@ -123,21 +123,24 @@
 
 ;; https://stackoverflow.com/questions/3674637/enabling-certain-emacs-modes-or-features-almost-always
 ;; (add-hook 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c *, and 'org export'
-(add-hook 'prog-mode-hook 'view-mode)
-(add-hook 'markdown-mode-hook 'view-mode)
-(add-hook 'org-mode-hook 'view-mode)
+;; (add-hook 'prog-mode-hook 'view-mode)
+;; (add-hook 'markdown-mode-hook 'view-mode)
+;; (add-hook 'org-mode-hook 'view-mode)
 ;; https://stackoverflow.com/questions/7899949/is-there-an-emacs-hook-that-runs-after-every-buffer-is-created
 ;; (add-hook 'after-change-major-mode-hook 'view-mode)  ;; conflicted with almost org-mode work
 ;; (with-eval-after-load 'text-mode (view-mode 1))
 ;; (eval-after-load 'text-mode 'view-mode)
 ;; (eval-after-load 'org-mode 'view-mode)
+;; **********************************
+(add-hook 'find-file-hook 'view-mode)  ;; solved all add-hook problem 2021-04-06
+;; **********************************
 
 ;; (defun my-view-mode-after-load-hook ()
 ;;   "Stuff to run in `view-mode'."
 ;;   ;; (remove-hook 'text-mode-hook 'view-mode))
 ;;   (setq view-read-only nil))
 ;; (eval-after-load 'view '(my-view-mode-after-load-hook))
-
+;;
 ;; https://emacs.stackexchange.com/questions/3323/is-there-any-way-to-run-a-hook-function-only-once
 ;; (defun my-view-mode ()
 ;;   (interactive)
@@ -147,14 +150,12 @@
 ;; (add-hook 'text-mode-hook 'my-view-mode)
 ;; (add-to-list 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c *
 
-;; (add-hook 'Buffer-menu-mode-hook 'auto-revert-mode)
-
 ;; https://stackoverflow.com/questions/15906332/change-emacs-mode-line-color-based-on-major-mode
 ;; (add-hook 'view-mode-hook
 ;;           (lambda ()
 ;;             (face-remap-add-relative
 ;;              'mode-line '((:foreground "ivory" :background "DarkOrange2") mode-line))))
-
+;;
 ;; https://emacs.stackexchange.com/questions/32595/is-there-a-hook-that-runs-when-exiting-read-only-mode
 ;; (add-hook 'view-mode-off-hook
 ;;          (lambda ()
@@ -172,10 +173,6 @@
   "Custom behaviours for `view-mode'."
   (if view-mode
       (face-remap-add-relative 'mode-line '((:foreground "red" :background "black") mode-line))
-      ;; (face-remap-add-relative 'mode-line '((:background "ivory" :foreground "DarkOrange2") mode-line))
-      ;; (face-remap-add-relative 'mode-line '((:foreground "blue") mode-line))
-    ;; (face-remap-add-relative 'mode-line '((:foreground "black" :background "white") mode-line))
-    ;; (face-remap-add-relative 'mode-line '((:foreground original-foreground :background original-background) mode-line))
     (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
     )
   (if view-mode
