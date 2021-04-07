@@ -43,7 +43,7 @@
 
 ;; add view mode keybindings 2021-04-04
 (use-package view
-  ;; :config (setq view-read-only t) ;; enter view-mode for read-only file
+  :config (setq view-read-only t) ;; enter view-mode for read-only file
   :bind (("M-z" . view-mode) ;; remap R-Shift to F 13
 	 :map view-mode-map
 
@@ -105,6 +105,8 @@
 	 ("t" . org-tree-slide-mode)
 	 ("l" . org-tree-slide-move-next-tree)
 	 ("h" . org-tree-slide-move-previous-tree)
+	 ("]" . switch-to-next-buffer)
+	 ("[" . switch-to-prev-buffer)
          )
   )
 
@@ -687,6 +689,8 @@
 )
 (global-set-key (kbd "C-x C-b") 'buffer-list-switch)
 
+(global-set-key (kbd "C-M-]") 'switch-to-next-buffer)
+(global-set-key (kbd "C-M-[") 'switch-to-prev-buffer)
 
 ;; indent-guide package 2021-02-24
 (indent-guide-global-mode)
