@@ -90,12 +90,15 @@
 	 ("2" . split-window-vertically)
 	 ("3" . split-window-horizontally)
 	 ("RET" . other-window)
-	 ("SPC" . ace-window)
+	 ;; ("SPC" . ace-window)
+	 ("SPC" . avy-goto-char-2)
+	 ("o" . ace-window)
 	 ;; ("o" . other-window)
 	 ("=" . balance-windows)
 	 ("s" . swiper)
-	 ("." . org-narrow-to-subtree)
-	 ("," . widen)
+	 ;; ("a" . avy-goto-char)
+	 ("," . org-narrow-to-subtree)
+	 ("." . widen)
 
          ;; Vim style
 	 ;; ---------
@@ -136,10 +139,10 @@
 	 ("l" . org-tree-slide-move-next-tree)
 	 ("h" . org-tree-slide-move-previous-tree)
 	 ;;
-	 ;; ("q" . kill-current-buffer)  ;; same as (s-k)
+	 ("q" . kill-current-buffer)  ;; same as (s-k)
 	 ("x" . my-kill-current-buffer-and-window)
 	 ("i" . my-indirect-buffer)
-	 ("o" . my-org-indirect-buffer)
+	 ;; ("o" . my-org-indirect-buffer)
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)
 	 ("'" . olivetti-default-width)
@@ -174,6 +177,7 @@
 (add-hook 'find-file-hook 'view-mode)  ;; solved all add-hook problem 2021-04-06
 ;; some issue when install packages
 ;; autoload-generate-file-autoloads: names-dev.el:0:0: error: buffer-read-only: (names-autoloads.el)
+;; to enable, M: (add-hook 'find-file-hook 'view-mode 0) <- test required
 ;; **********************************
 
 ;; (defun my-view-mode-after-load-hook ()
@@ -1127,7 +1131,7 @@
 (define-key evil-normal-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
-(define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)  ;; utilize H/M/L instead
+;; (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)  ;; utilize H/M/L instead
 ;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
