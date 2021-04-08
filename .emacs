@@ -225,24 +225,43 @@
 (add-hook 'view-mode-hook #'my-view-mode-hook)
 
 
-(put 'clone-indirect-buffer-other-window 'disabled "\n Use 'make-indirect-buffer' instead due to view-mode with face issues")
-(put 'org-tree-to-indirect-buffer 'disabled "\n Use 'make-indirect-buffer' instead due to view-mode with face issues")
+;; (put 'clone-indirect-buffer-other-window 'disabled "\n Use 'make-indirect-buffer' instead due to view-mode with face issues")
+(put 'org-tree-to-indirect-buffer 'disabled "\n Use 'my-indirect-buffer' instead due to view-mode with face issues")
 ;; (setq disabled-command-function 'ignore)
 
 ;; My-Indirect-Buffer for view-mode, which made face coloring confusing 2021-04-07
 ;; https://www.emacswiki.org/emacs/IndirectBuffers
-(defun my-indirect-buffer ()
-  "Edit stuff in this buffer in an indirect buffer.
-    The indirect buffer can have another major mode."
-  (interactive)
-  (let ((buffer-name (generate-new-buffer-name "*indirect*")))
-    (pop-to-buffer (make-indirect-buffer (current-buffer) buffer-name))
-    (org-mode)
-    (view-mode)
-    )
+;; problem: not getting attributes from original file (not inherence)
+;; (defun my-indirect-buffer ()
+;;   "Edit stuff in this buffer in an indirect buffer.
+;;     The indirect buffer can have another major mode."
+;;   (interactive)
+;;   (let ((buffer-name (generate-new-buffer-name "*indirect*"))))
+;;     (pop-to-buffer (make-indirect-buffer (current-buffer) buffer-name))
+;;     (org-mode)
+;;     (view-mode)
+;;     )
+;;   )
+
+;; https://stackoverflow.com/questions/47327066/how-to-open-an-indirect-buffer-in-a-new-frame-in-a-single-call-in-emacs
+(defun my-indirect-buffer (newname display-flag &optional norecord)
+  "Like `clone-indirect-buffer' but display in another window."
+  (interactive
+   (progn
+     (if (get major-mode 'no-clone-indirect)
+     (error "Cannot indirectly clone a buffer in %s mode" mode-name))
+     (list (if current-prefix-arg
+           (read-buffer "Name of indirect buffer: " (current-buffer)))
+       t)))
+  (let ((pop-up-windows t))
+  ;; (let ((pop-up-frames t))
+    (clone-indirect-buffer newname display-flag norecord))
+    (revert-buffer :ignore-auto :noconfirm)
   )
+
 (global-set-key (kbd "C-c C-x i") 'my-indirect-buffer)
 (global-set-key (kbd "C-x 4 i") 'my-indirect-buffer)
+
 
 
 ;; [ winner mode 2021-04-02
