@@ -257,6 +257,8 @@
   ;; (let ((pop-up-frames t))
     (clone-indirect-buffer newname display-flag norecord))
     (revert-buffer :ignore-auto :noconfirm)
+    (read-only-mode 0)
+    (view-mode)
   )
 
 (global-set-key (kbd "C-c C-x i") 'my-indirect-buffer)
