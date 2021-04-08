@@ -93,6 +93,9 @@
 	 ("SPC" . ace-window)
 	 ("o" . other-window)
 	 ("=" . balance-windows)
+	 ("s" . swiper)
+	 ("." . org-narrow-to-subtree)
+	 ("," . widen)
 
          ;; Vim style
 	 ;; ---------
@@ -107,6 +110,8 @@
 	 ;; ("i" . View-exit)  ;; like 'e'
          ("e" . View-scroll-line-forward) ;; scroll down (forward) - opposite to 'y'
          ;; ("0" . beginning-of-visual-line)
+	 ("]" . switch-to-next-buffer)
+	 ("[" . switch-to-prev-buffer)
 	 
 	 ;; Unbind-keys
 	 ;; -----------
@@ -126,13 +131,16 @@
 	 ("v" . evil-exit-emacs-state)
 	 ;; ("RET" . evil-exit-emacs-state)
 	 ;; ("SPC" . evil-exit-emacs-state)
+	 ;; org-tree-slide
 	 ("t" . org-tree-slide-mode)
 	 ("l" . org-tree-slide-move-next-tree)
 	 ("h" . org-tree-slide-move-previous-tree)
-	 ("]" . switch-to-next-buffer)
-	 ("[" . switch-to-prev-buffer)
+	 ;;
 	 ("q" . kill-current-buffer)  ;; same as (s-k)
 	 ("i" . my-indirect-buffer)
+	 ;; olivetti
+	 (";" . olivetti-narrow-width)
+	 ("'" . olivetti-default-width)
          )
   )
 
@@ -228,8 +236,10 @@
     The indirect buffer can have another major mode."
   (interactive)
   (let ((buffer-name (generate-new-buffer-name "*indirect*")))
-    (pop-to-buffer (make-indirect-buffer (current-buffer) buffer-name)))
-  (view-mode)
+    (pop-to-buffer (make-indirect-buffer (current-buffer) buffer-name))
+    (org-mode)
+    (view-mode)
+    )
   )
 (global-set-key (kbd "C-c C-x i") 'my-indirect-buffer)
 (global-set-key (kbd "C-x 4 i") 'my-indirect-buffer)
