@@ -84,7 +84,7 @@
 	 ("b" . left-word)
 	 ;; window
 	 ("0" . delete-window)
-	 ("x" . delete-window)
+	 ;; ("x" . delete-window)
 	 ;; ("1" . ace-window)
 	 ("1" . delete-other-windows)  ;; show only current selected widnow
 	 ("2" . split-window-vertically)
@@ -137,6 +137,7 @@
 	 ("h" . org-tree-slide-move-previous-tree)
 	 ;;
 	 ("q" . kill-current-buffer)  ;; same as (s-k)
+	 ("x" . kill-current-buffer)  ;; same as (s-k)
 	 ("i" . my-indirect-buffer)
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)
@@ -263,6 +264,17 @@
 
 (global-set-key (kbd "C-c C-x i") 'my-indirect-buffer)
 (global-set-key (kbd "C-x 4 i") 'my-indirect-buffer)
+
+
+(defun my-org-indirect-buffer ()
+  (interactive)
+  (org-tree-to-indirect-buffer)
+  (other-window)
+  (revert-buffer :ignore-auto :noconfirm)
+  (read-only-mode 0)
+  (view-mode)
+  )
+
 
 
 
