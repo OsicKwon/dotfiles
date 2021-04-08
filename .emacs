@@ -90,15 +90,17 @@
 	 ("2" . split-window-vertically)
 	 ("3" . split-window-horizontally)
 	 ("RET" . other-window)
-	 ;; ("SPC" . ace-window)
-	 ("SPC" . avy-goto-char-2)
+	 ("SPC" . ace-window)
+	 ;; ("SPC" . avy-goto-char-2)
 	 ("o" . ace-window)
 	 ;; ("o" . other-window)
 	 ("=" . balance-windows)
+	 ("p" . toggle-window-dedicated)
 	 ("s" . swiper)
 	 ;; ("a" . avy-goto-char)
 	 ("," . org-narrow-to-subtree)
 	 ("." . widen)
+	 ("`" . avy-goto-char-2)
 
          ;; Vim style
 	 ;; ---------
@@ -118,8 +120,8 @@
 	 
 	 ;; Unbind-keys
 	 ;; -----------
-	 ("h" . nil)
-	 ("c" . nil)
+	 ;; ("h" . nil)
+	 ;; ("c" . nil)
 	 ;; ("o" . nil)
 	 ;; ("x" . nil)
 
@@ -142,7 +144,7 @@
 	 ("q" . kill-current-buffer)  ;; same as (s-k)
 	 ("x" . my-kill-current-buffer-and-window)
 	 ("i" . my-indirect-buffer)
-	 ;; ("o" . my-org-indirect-buffer)
+	 ("o" . my-org-indirect-buffer)
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)
 	 ("'" . olivetti-default-width)
