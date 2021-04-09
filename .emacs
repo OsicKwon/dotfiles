@@ -84,23 +84,29 @@
 	 ("b" . left-word)
 	 ;; window
 	 ("0" . delete-window)
-	 ;; ("x" . delete-window)
-	 ;; ("1" . ace-window)
 	 ("1" . delete-other-windows)  ;; show only current selected widnow
 	 ("2" . split-window-vertically)
 	 ("3" . split-window-horizontally)
+	 ("4" . ivy-push-view)
+	 ("5" . transpose-frame)
+	 ("6" . window-swap-states)  ;; alternatively ace-swap-window
+	 ("7" . ivy-switch-view)
+	 ("8" . winner-undo)
+	 ("9" . winner-redo)
 	 ("RET" . other-window)
 	 ("SPC" . ace-window)
+	 ;; ("TAB" . recenter-top-bottom)  ;; conflicted with org folding
 	 ;; ("SPC" . avy-goto-char-2)
 	 ("o" . ace-window)
 	 ;; ("o" . other-window)
 	 ("=" . balance-windows)
+	 ("-" . maximize-window)
 	 ("p" . toggle-window-dedicated)
 	 ("s" . swiper)
 	 ;; ("a" . avy-goto-char)
 	 ("," . org-narrow-to-subtree)
 	 ("." . widen)
-	 ;; ("`" . avy-goto-char-2)
+	 ("`" . beacon-blink)
 	 ("w" . avy-goto-char-2)
 
          ;; Vim style
