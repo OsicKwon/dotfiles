@@ -108,7 +108,7 @@
 	 ("," . org-narrow-to-subtree)
 	 ("." . widen)
 	 ;; ("`" . beacon-blink)
-	 ("`" . set-mark-command)
+	 ("`" . counsel-mark-ring)
 	 ("w" . avy-goto-char-2)
 
          ;; Vim style
