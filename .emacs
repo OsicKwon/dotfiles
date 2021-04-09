@@ -65,7 +65,8 @@
 ;; add view mode keybindings 2021-04-04
 (use-package view
   :config (setq view-read-only t) ;; enter view-mode for read-only file
-  :bind (("M-z" . view-mode) ;; remap R-Shift to F 13
+  ;; :bind (("M-z" . view-mode) ;; remap R-Shift to F 13
+  :bind (("M-z" . view-mode) 
 	 :map view-mode-map
 
 	 ;; Default (built-in)
