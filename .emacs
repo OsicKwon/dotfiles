@@ -97,7 +97,8 @@
 	 ("SPC" . ace-window)
 	 ;; ("TAB" . recenter-top-bottom)  ;; conflicted with org folding
 	 ;; ("SPC" . avy-goto-char-2)
-	 ("o" . ace-window)
+	 ("DEL" . beacon-blink)
+	 ;; ("o" . ace-window)
 	 ;; ("o" . other-window)
 	 ("=" . balance-windows)
 	 ("-" . maximize-window)
@@ -106,7 +107,8 @@
 	 ;; ("a" . avy-goto-char)
 	 ("," . org-narrow-to-subtree)
 	 ("." . widen)
-	 ("`" . beacon-blink)
+	 ;; ("`" . beacon-blink)
+	 ("`" . set-mark-command)
 	 ("w" . avy-goto-char-2)
 
          ;; Vim style
