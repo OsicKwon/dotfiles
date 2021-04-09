@@ -100,7 +100,8 @@
 	 ;; ("a" . avy-goto-char)
 	 ("," . org-narrow-to-subtree)
 	 ("." . widen)
-	 ("`" . avy-goto-char-2)
+	 ;; ("`" . avy-goto-char-2)
+	 ("w" . avy-goto-char-2)
 
          ;; Vim style
 	 ;; ---------
