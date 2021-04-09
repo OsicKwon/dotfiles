@@ -405,7 +405,7 @@
     "https://www.onelook.com/?w=%s"
     :keybinding "o")
 
-  (defengine justTheWord
+  (defengine just_the_word
     "http://www.just-the-word.com/main.pl?word=%s"
     :keybinding "j")
 
