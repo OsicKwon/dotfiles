@@ -176,10 +176,21 @@
 ;; (eval-after-load 'text-mode 'view-mode)
 ;; (eval-after-load 'org-mode 'view-mode)
 ;; **********************************
-(add-hook 'find-file-hook 'view-mode)  ;; solved all add-hook problem 2021-04-06
+;; (add-hook 'find-file-hook 'view-mode)  ;; solved all add-hook problem 2021-04-06
 ;; some issue when install packages
 ;; autoload-generate-file-autoloads: names-dev.el:0:0: error: buffer-read-only: (names-autoloads.el)
 ;; **********************************
+
+;; Solved View-mode for all and enable package installation 2021-04-08
+;; https://www.reddit.com/r/emacs/comments/741tx6/how_to_change_default_findfile_action_for/
+(defun do-my-thing ()
+  (view-mode 1)
+  (when (and (stringp buffer-file-name)
+             (string-match "\\.el\\'" buffer-file-name))
+    (view-mode 0)))
+
+(add-hook 'find-file-hook 'do-my-thing) 
+
 
 ;; (defun my-view-mode-after-load-hook ()
 ;;   "Stuff to run in `view-mode'."
@@ -506,7 +517,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
  '(writeroom-restore-window-config t))
