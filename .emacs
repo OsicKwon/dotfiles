@@ -421,6 +421,9 @@
     "https://www.powerthesaurus.org/%s"
     :keybinding "p")
 
+  (defengine forvo
+    "https://forvo.com/search/%s/")
+  
   (defengine wikipedia
     "http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
     :keybinding "w"
