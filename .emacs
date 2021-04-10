@@ -147,7 +147,7 @@
 	 ("RET" . other-window)
 	 ;; ("SPC" . ace-window)
 	 ;; ("TAB" . recenter-top-bottom)  ;; conflicted with org folding
-	 ("SPC" . avy-goto-char)
+	 ;; ("SPC" . avy-goto-char)
 	 ;; ("SPC" . )
 	 ("DEL" . beacon-blink)
 	 ;; ("o" . ace-window)
