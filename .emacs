@@ -45,8 +45,8 @@
   :config (general-define-key
   :states '(normal visual insert emacs)
   ;; :prefix "SPC"
-  ;; :prefix "\\"
-  :prefix "C-SPC"
+  :prefix "\\"
+  ;; :prefix "C-SPC"
   ;; :non-normal-prefix "M-SPC"
   :non-normal-prefix "C-SPC"
   :keymaps 'override
@@ -64,17 +64,25 @@
   ;; "w/"  '(split-window-right :which-key "split right")
   ;; "w-"  '(split-window-below :which-key "split bottom")
   ;; "wx"  '(delete-window :which-key "delete window")
-  ";"  '(evil-ex :which-key "evil command")
+
+  ;; vim leader key binding
+  "b"   '(counsel-recentf :which-key "Recent Files (browse)")
+  "f"   '(counsel-find-file :which-key "Open a File")
+  "t"   '(imenu-list :which-key "imenu like tagbar in vim")
+
   ;; Engine mode
   "gg"  '(engine/search-google :which-key "engine google")
   "yg"  '(engine/search-youglish :which-key "engine youglish")
   "yt"  '(engine/search-youtube :which-key "engine yougtube")
   "jw"  '(engine/search-just_the_word :which-key "engine Just The Word")
+
   ;; dictionary
   "pp"  '(powerthesaurus-lookup-word-at-point :which-key "powerthesaurus")
   "dd"  '(define-word-at-point :which-key "define word")
+
   ;; ;; Others
   "at"  '(ansi-term :which-key "open terminal")
+
 ))
 
 
@@ -291,31 +299,35 @@
 ;; https://www.reddit.com/r/emacs/comments/knoyz2/need_help_toggling_modes_and_settings_when/
 (defun my-view-mode-hook ()
   "Custom behaviours for `view-mode'."
-  ;; (if view-mode
-  ;;     (face-remap-add-relative 'mode-line '((:foreground "red" :background "black") mode-line))
-  ;;   (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
-  ;;   )
-  ;; (if view-mode
-  ;;     ;; https://emacs.stackexchange.com/questions/32123/evil-binding-q-to-view-quit-in-view-mode-instead-of-evil-record-macro
-  ;;     (evil-emacs-state 1)  ;; always related between evil and view-mode 2021-04-04
-  ;;   )
-  ;; (if view-mode
-  ;;     ;; color-code: https://www.w3schools.com/colors/colors_shades.asp
-  ;;     (face-remap-add-relative 'default '((:background "controlHighlightColor")))
-  ;;   (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
-  ;;   )
-
-  (if view-mode 
-      (progn
-	(face-remap-add-relative 'mode-line '((:foreground "red" :background "black") mode-line))
-	(face-remap-add-relative 'default '((:background "controlHighlightColor")))
-	(evil-emacs-state 1)  ;; always related between evil and view-mode 2021-04-04
-	)
-    ;; else
+  (if view-mode
+      (face-remap-add-relative 'mode-line '((:foreground "red" :background "black") mode-line))
     (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
+    )
+  (if view-mode
+      ;; https://emacs.stackexchange.com/questions/32123/evil-binding-q-to-view-quit-in-view-mode-instead-of-evil-record-macro
+      (evil-emacs-state 1)  ;; always related between evil and view-mode 2021-04-04
+    )
+  (if view-mode
+      ;; color-code: https://www.w3schools.com/colors/colors_shades.asp
+      (face-remap-add-relative 'default '((:background "controlHighlightColor")))
     (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
     )
+
+  ;; (if view-mode 
+  ;;     (progn
+  ;; 	(face-remap-add-relative 'mode-line '((:foreground "red" :background "black") mode-line))
+  ;; 	(face-remap-add-relative 'default '((:background "controlHighlightColor")))
+  ;; 	(evil-emacs-state 1)  ;; always related between evil and view-mode 2021-04-04
+  ;; 	)
+  ;;   ;; else
+  ;;   (progn
+  ;;     (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
+  ;;     (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
+  ;;     )
+  ;;   )
+
   )
+
 (add-hook 'view-mode-hook #'my-view-mode-hook)
 
 
