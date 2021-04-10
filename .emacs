@@ -155,7 +155,8 @@
 	 ("RET" . other-window)
 	 ;; ("SPC" . ace-window)
 	 ;; ("TAB" . recenter-top-bottom)  ;; conflicted with org folding
-	 ("SPC" . avy-goto-char)
+	 ;; ("SPC" . avy-goto-char)
+	 ("SPC" . ace-jump-char-mode)
 	 ;; ("SPC" . )
 	 ("DEL" . beacon-blink)
 	 ;; ("o" . ace-window)
@@ -187,6 +188,7 @@
          ;; ("0" . beginning-of-visual-line)
 	 ("]" . switch-to-next-buffer)
 	 ("[" . switch-to-prev-buffer)
+	 ("\\" . imenu-list)
 	 
 	 ;; Unbind-keys
 	 ;; -----------
@@ -1697,6 +1699,8 @@ T - tag prefix
       ("x" "Big3" plain ()
        "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3} ")
        ;; "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
+      ;; ("z" "Big3-v2" plain ()
+      ;;  "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3}\ndddddddddddddddddd ")
      )
   )
 ;; (global-set-key (kbd "C-M-]") (kbd "C-0 M-x org-capture"))  ; just tried, but not worked 2021-04-02
