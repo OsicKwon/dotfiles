@@ -45,8 +45,8 @@
   :config (general-define-key
   :states '(normal visual insert emacs)
   ;; :prefix "SPC"
-  :prefix "\\"
-  ;; :prefix "C-SPC"
+  ;; :prefix "\\"
+  :prefix "C-SPC"
   ;; :non-normal-prefix "M-SPC"
   :non-normal-prefix "C-SPC"
   :keymaps 'override
@@ -147,7 +147,7 @@
 	 ("RET" . other-window)
 	 ;; ("SPC" . ace-window)
 	 ;; ("TAB" . recenter-top-bottom)  ;; conflicted with org folding
-	 ;; ("SPC" . avy-goto-char)
+	 ("SPC" . avy-goto-char)
 	 ;; ("SPC" . )
 	 ("DEL" . beacon-blink)
 	 ;; ("o" . ace-window)
