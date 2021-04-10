@@ -26,7 +26,7 @@
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 ;; -- Unnecessary call -- see Line #6 in this file
 (package-initialize)
-
+ 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -41,11 +41,14 @@
 ;; https://dev.to/huytd/emacs-from-scratch-1cg6
 (use-package general
   :ensure t
-  :disabled t
+  ;; :disabled t
   :config (general-define-key
   :states '(normal visual insert emacs)
-  :prefix "SPC"
-  :non-normal-prefix "M-SPC"
+  ;; :prefix "SPC"
+  ;; :prefix "\\"
+  :prefix "C-SPC"
+  ;; :non-normal-prefix "M-SPC"
+  :non-normal-prefix "C-SPC"
   :keymaps 'override
   ;; ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
   ;; "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
@@ -61,8 +64,15 @@
   ;; "w/"  '(split-window-right :which-key "split right")
   ;; "w-"  '(split-window-below :which-key "split bottom")
   ;; "wx"  '(delete-window :which-key "delete window")
+  ";"  '(evil-ex :which-key "evil command")
   ;; Engine mode
-  "eg"  '(engine/search-google :which-key "engine google")
+  "gg"  '(engine/search-google :which-key "engine google")
+  "yg"  '(engine/search-youglish :which-key "engine youglish")
+  "yt"  '(engine/search-youtube :which-key "engine yougtube")
+  "jw"  '(engine/search-just_the_word :which-key "engine Just The Word")
+  ;; dictionary
+  "pp"  '(powerthesaurus-lookup-word-at-point :which-key "powerthesaurus")
+  "dd"  '(define-word-at-point :which-key "define word")
   ;; ;; Others
   "at"  '(ansi-term :which-key "open terminal")
 ))
@@ -138,6 +148,7 @@
 	 ;; ("SPC" . ace-window)
 	 ;; ("TAB" . recenter-top-bottom)  ;; conflicted with org folding
 	 ("SPC" . avy-goto-char)
+	 ;; ("SPC" . )
 	 ("DEL" . beacon-blink)
 	 ;; ("o" . ace-window)
 	 ;; ("o" . other-window)
@@ -201,6 +212,7 @@
 	 ("'" . olivetti-default-width)
          )
   )
+
 
 ;; make sure the cursor is changed visually
 ;; complicted to Evil cursors
@@ -400,6 +412,7 @@
 ;; (require 'engine-mode)
 (use-package engine-mode
   :ensure t
+  :defer 1 ; do not load right at startup
   :init
   (engine-mode t)
 
