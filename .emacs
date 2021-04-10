@@ -36,13 +36,44 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+ 
+;; general package :: Custom keybinding 2021-04-09
+;; https://dev.to/huytd/emacs-from-scratch-1cg6
+(use-package general
+  :ensure t
+  :disabled t
+  :config (general-define-key
+  :states '(normal visual insert emacs)
+  :prefix "SPC"
+  :non-normal-prefix "M-SPC"
+  :keymaps 'override
+  ;; ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
+  ;; "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
+  ;; "SPC" '(helm-M-x :which-key "M-x")
+  ;; "pf"  '(helm-find-file :which-key "find files")
+  ;; ;; Buffers
+  ;; "bb"  '(helm-buffers-list :which-key "buffers list")
+  ;; ;; Window
+  ;; "wl"  '(windmove-right :which-key "move right")
+  ;; "wh"  '(windmove-left :which-key "move left")
+  ;; "wk"  '(windmove-up :which-key "move up")
+  ;; "wj"  '(windmove-down :which-key "move bottom")
+  ;; "w/"  '(split-window-right :which-key "split right")
+  ;; "w-"  '(split-window-below :which-key "split bottom")
+  ;; "wx"  '(delete-window :which-key "delete window")
+  ;; Engine mode
+  "eg"  '(engine/search-google :which-key "engine google")
+  ;; ;; Others
+  "at"  '(ansi-term :which-key "open terminal")
+))
+
 
 ;; elfeed 2021-04-09
-(use-package elfeed :ensure t)
-(setq elfeed-feeds
-      '(
-	"https://lifehacker.com/rss"
-	))
+;; (use-package elfeed :ensure t)
+;; (setq elfeed-feeds
+;;       '(
+;; 	"https://lifehacker.com/rss"
+;; 	))
 
 
 ;; org-capture at point 2021-04-07
@@ -203,13 +234,13 @@
 
 ;; Solved View-mode for all and enable package installation 2021-04-08
 ;; https://www.reddit.com/r/emacs/comments/741tx6/how_to_change_default_findfile_action_for/
-(defun do-my-thing ()
+(defun my-view-mode ()
   (view-mode 1)
   (when (and (stringp buffer-file-name)
              (string-match "\\.el\\'" buffer-file-name))
     (view-mode 0)))
 
-(add-hook 'find-file-hook 'do-my-thing) 
+(add-hook 'find-file-hook 'my-view-mode) 
 
 
 ;; (defun my-view-mode-after-load-hook ()
@@ -320,7 +351,6 @@
   (kill-current-buffer)
   (delete-window)
   )
-
 
 
 
