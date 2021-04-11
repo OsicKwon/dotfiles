@@ -36,7 +36,30 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; Starting a Function 2021-04-11
+;; https://emacs.stackexchange.com/questions/15097/how-do-i-run-a-function-on-start-up
+
+(defun starting-options ()
+  ;; http://ergoemacs.org/emacs/elisp_idioms_prompting_input.html
+  (if (y-or-n-p "Calendar view?")
+      (progn
+	(interactive)
+	;; code to do something here
+	(cfw:open-org-calendar)
+	;; (sleep-for 1)
+	;; (cfw:refresh-calendar-buffer)
+	)
+    (progn
+      ;; code if user answered no.
+      ;; (counsel-recentf)
+      )
+    )
+)
+
+;; (add-hook 'after-init-hook #'cfw:open-org-calendar)
+(add-hook 'after-init-hook #'starting-options)
  
+
 ;; general package :: Custom keybinding 2021-04-09
 ;; https://dev.to/huytd/emacs-from-scratch-1cg6
 (use-package general
@@ -45,10 +68,10 @@
   :config (general-define-key
   :states '(normal visual insert emacs)
   ;; :prefix "SPC"
-  :prefix "\\"
+  :prefix "\\"  ;; like the leader key in vim
   ;; :prefix "C-SPC"
-  ;; :non-normal-prefix "M-SPC"
-  :non-normal-prefix "C-SPC"
+  :non-normal-prefix "M-SPC"
+  ;; :non-normal-prefix "C-SPC"  ;; conflicted with 'mark set' like 'visual' mode in evil
   :keymaps 'override
   ;; ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
   ;; "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
@@ -211,6 +234,7 @@
 	 ("z" . View-exit)  ;; like 'e'
 	 ;; ("x" . View-exit)  ;; like 'e'
 	 ;; ("z" . evil-exit-emacs-state)
+	 ;; ("z" . kill-current-buffer)  ;; same as (s-k)
 	 ("v" . evil-exit-emacs-state)
 	 ;; ("RET" . evil-exit-emacs-state)
 	 ;; ("SPC" . evil-exit-emacs-state)
@@ -220,6 +244,7 @@
 	 ("h" . org-tree-slide-move-previous-tree)
 	 ;;
 	 ("q" . kill-current-buffer)  ;; same as (s-k)
+	 ;; ("q" . View-exit)
 	 ("x" . my-kill-current-buffer-and-window)
 	 ;; ("i" . my-indirect-buffer)
 	 ("c" . recenter-top-bottom)
@@ -615,7 +640,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
  '(writeroom-restore-window-config t))
@@ -1120,7 +1145,7 @@
 (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color original-foreground)))
 
 ;; View-Mode
-(add-hook 'evil-normal-state-entry-hook (lambda () (view-mode 0)))
+(add-hook 'evil-normal-state-entry-hook (lambda () (view-mode 0) (read-only-mode 0)))
 (add-hook 'evil-insert-state-entry-hook (lambda () (view-mode 0)))
 (add-hook 'evil-visual-state-entry-hook (lambda () (view-mode 0)))
 (add-hook 'evil-replace-state-entry-hook (lambda () (view-mode 0)))
@@ -1242,7 +1267,7 @@
 (define-key evil-visual-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
 ;; (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)  ;; utilize H/M/L instead
-;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
+(define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
 (define-key evil-normal-state-map (kbd "<escape>") 'counsel-M-x)
