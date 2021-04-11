@@ -169,6 +169,8 @@
 	 ;; ("`" . beacon-blink)
 	 ;; ("`" . pop-global-mark)
 	 ;; ("`" . avy-goto-char-2)
+	 ;; ("`" . cfw:open-org-calendar)
+	 ("`" . org-open-at-point-global)
 	 ("w" . avy-goto-char-2)
 	 ;; ("w" . ace-window)
 	 ;; ("w" . other-window)
@@ -566,7 +568,7 @@
   (message
    (if (let (window (get-buffer-window (current-buffer)))
          (set-window-dedicated-p window (not (window-dedicated-p window))))
-       "%s: Can't touch this!"
+       "%s: Can't touch this! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
      "%s is up for grabs.")
    (current-buffer)))
 
