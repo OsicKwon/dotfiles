@@ -81,6 +81,7 @@
   "dd"  '(define-word-at-point :which-key "define word")
 
   ;; ;; Others
+  "c"   '(cfw:open-org-calendar :which-key "Calendar View")
   "at"  '(ansi-term :which-key "open terminal")
 
 ))
@@ -114,7 +115,6 @@
 ;; add view mode keybindings 2021-04-04
 (use-package view
   :config (setq view-read-only t) ;; enter view-mode for read-only file
-  ;; :bind (("M-z" . view-mode) ;; remap R-Shift to F 13
   :bind (("M-z" . view-mode) 
 	 :map view-mode-map
 
@@ -157,9 +157,8 @@
 	 ;; ("TAB" . recenter-top-bottom)  ;; conflicted with org folding
 	 ;; ("SPC" . avy-goto-char)
 	 ("SPC" . ace-jump-char-mode)
-	 ;; ("SPC" . )
 	 ("DEL" . beacon-blink)
-	 ;; ("o" . ace-window)
+	 ("o" . ace-window)
 	 ;; ("o" . other-window)
 	 ("=" . balance-windows)
 	 ("-" . maximize-window)
@@ -171,7 +170,9 @@
 	 ;; ("`" . beacon-blink)
 	 ("`" . pop-global-mark)
 	 ;; ("w" . avy-goto-char-2)
-	 ("w" . ace-window)
+	 ;; ("w" . ace-window)
+	 ("w" . other-window)
+	 ;; ("w" . ace-jump-char-mode)
 
          ;; Vim style
 	 ;; ---------
@@ -188,7 +189,9 @@
          ;; ("0" . beginning-of-visual-line)
 	 ("]" . switch-to-next-buffer)
 	 ("[" . switch-to-prev-buffer)
-	 ("\\" . imenu-list)
+	 ;; ("\\" . imenu-list)
+	 ("m" . imenu-list)
+	 ;; ("m" . counsel-M-x)
 	 
 	 ;; Unbind-keys
 	 ;; -----------
@@ -199,8 +202,9 @@
 
 	 ;; Additional-keys
 	 ("r" . revert-buffer)
-	 ("a" . end-of-buffer)
-	 ("c" . cfw:open-org-calendar)
+	 ;; ("a" . end-of-buffer)
+	 ("a" . counsel-ag)
+	 ;; ("c" . cfw:open-org-calendar)
 	 ;; ("z" . end-of-buffer)
 	 ("z" . View-exit)  ;; like 'e'
 	 ;; ("x" . View-exit)  ;; like 'e'
@@ -215,8 +219,11 @@
 	 ;;
 	 ("q" . kill-current-buffer)  ;; same as (s-k)
 	 ("x" . my-kill-current-buffer-and-window)
-	 ("i" . my-indirect-buffer)
-	 ("o" . my-org-indirect-buffer)
+	 ;; ("i" . my-indirect-buffer)
+	 ;; ("i" . my-indirect-buffer)
+	 ("c" . recenter-top-bottom)
+	 ;; ("c" . my-clone-indirect-buffer)
+	 ("i" . my-org-indirect-buffer)
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)
 	 ("'" . olivetti-default-width)
@@ -352,7 +359,7 @@
 ;;   )
 
 ;; https://stackoverflow.com/questions/47327066/how-to-open-an-indirect-buffer-in-a-new-frame-in-a-single-call-in-emacs
-(defun my-indirect-buffer (newname display-flag &optional norecord)
+(defun my-clone-indirect-buffer (newname display-flag &optional norecord)
   "Like `clone-indirect-buffer' but display in another window."
   (interactive
    (progn
@@ -426,7 +433,6 @@
                    org-backward-element
 		   forward-paragraph
                    backward-paragraph
-		   recenter-top-bottom
 		   swiper
 		   ))
   (advice-add command :after #'pulse-line)
@@ -1301,7 +1307,7 @@
 ;;   "ace-jump-mode"
 ;;   "Emacs quick move minor mode"
 ;;   t)
-
+(use-package ace-jump-mode :ensure t)
 ;; you can select the key you prefer to
 ;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 ;; (define-key global-map (kbd "C-c SPC") 'ace-jump-char-mode)
