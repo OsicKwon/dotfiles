@@ -153,12 +153,11 @@
 	 ("8" . winner-undo)
 	 ("9" . winner-redo)
 	 ("RET" . other-window)
-	 ;; ("SPC" . ace-window)
-	 ;; ("TAB" . recenter-top-bottom)  ;; conflicted with org folding
+	 ("SPC" . ace-window)
 	 ;; ("SPC" . avy-goto-char)
-	 ("SPC" . ace-jump-char-mode)
+	 ;; ("SPC" . ace-jump-char-mode)
 	 ("DEL" . beacon-blink)
-	 ("o" . ace-window)
+	 ;; ("o" . ace-window)
 	 ;; ("o" . other-window)
 	 ("=" . balance-windows)
 	 ("-" . maximize-window)
@@ -168,10 +167,11 @@
 	 ("," . org-narrow-to-subtree)
 	 ("." . widen)
 	 ;; ("`" . beacon-blink)
-	 ("`" . pop-global-mark)
-	 ;; ("w" . avy-goto-char-2)
+	 ;; ("`" . pop-global-mark)
+	 ;; ("`" . avy-goto-char-2)
+	 ("w" . avy-goto-char-2)
 	 ;; ("w" . ace-window)
-	 ("w" . other-window)
+	 ;; ("w" . other-window)
 	 ;; ("w" . ace-jump-char-mode)
 
          ;; Vim style
@@ -202,8 +202,8 @@
 
 	 ;; Additional-keys
 	 ("r" . revert-buffer)
-	 ;; ("a" . end-of-buffer)
-	 ("a" . counsel-ag)
+	 ("a" . end-of-buffer)
+	 ;; ("a" . counsel-ag)
 	 ;; ("c" . cfw:open-org-calendar)
 	 ;; ("z" . end-of-buffer)
 	 ("z" . View-exit)  ;; like 'e'
@@ -220,10 +220,9 @@
 	 ("q" . kill-current-buffer)  ;; same as (s-k)
 	 ("x" . my-kill-current-buffer-and-window)
 	 ;; ("i" . my-indirect-buffer)
-	 ;; ("i" . my-indirect-buffer)
 	 ("c" . recenter-top-bottom)
-	 ;; ("c" . my-clone-indirect-buffer)
-	 ("i" . my-org-indirect-buffer)
+	 ("i" . my-clone-indirect-buffer)
+	 ("o" . my-org-indirect-buffer)
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)
 	 ("'" . olivetti-default-width)
