@@ -41,6 +41,7 @@
 ;; https://github.com/atykhonov/google-translate/issues/137
 (use-package google-translate
   :demand t
+  :ensure t
   :init
   (require 'google-translate)
 
