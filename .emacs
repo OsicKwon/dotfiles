@@ -196,8 +196,8 @@
 	 ("1" . delete-other-windows)  ;; show only current selected widnow
 	 ("2" . split-window-vertically)
 	 ("3" . split-window-horizontally)
-	 ("4" . transpose-frame)
-	 ("5" . window-swap-states)  ;; alternatively ace-swap-window
+	 ("4" . window-swap-states)  ;; alternatively ace-swap-window
+	 ("5" . transpose-frame)
 	 ("6" . ivy-push-view)
 	 ("7" . ivy-switch-view)
 	 ("8" . winner-undo)
