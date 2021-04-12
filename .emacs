@@ -36,6 +36,25 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; 2021-04-12
+;; https://emacs.stackexchange.com/questions/28/safe-way-to-enable-local-variables
+;; DO NOT set this variable to :all, and do look at the values of variables first
+(setq enable-local-variables :safe)
+
+;; https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Local-Variables.html
+;; -----------------------------------------------------
+;; t (the default)
+;;     Set the safe variables, and query (once) about any unsafe variables. 
+;; :safe
+;;     Set only the safe variables and do not query. 
+;; :all
+;;     Set all the variables and do not query. 
+;; :none <- "I guess it works, but I am not sure." 2021-04-12
+;; nil
+;;     Don’t set any variables. 
+;; -----------------------------------------------------
+
+
 
 ;; dired-narrow 2021-04-11
 ;; http://pragmaticemacs.com/emacs/dynamically-filter-directory-listing-with-dired-narrow/
