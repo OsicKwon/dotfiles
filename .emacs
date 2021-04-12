@@ -201,8 +201,8 @@
 	 ("1" . delete-other-windows)  ;; show only current selected widnow
 	 ("2" . split-window-vertically)
 	 ("3" . split-window-horizontally)
-	 ("4" . window-swap-states)  ;; alternatively ace-swap-window
-	 ("5" . transpose-frame)
+	 ("4" . transpose-frame)
+	 ("5" . window-swap-states)  ;; alternatively ace-swap-window
 	 ("6" . ivy-push-view)
 	 ("7" . ivy-switch-view)
 	 ("8" . winner-undo)
@@ -441,7 +441,7 @@
 (defun my-org-indirect-buffer ()
   (interactive)
   (org-tree-to-indirect-buffer)
-  (revert-buffer :ignore-auto :noconfirm)
+  ;; (revert-buffer :ignore-auto :noconfirm)
   (other-window 1)
   (read-only-mode 0)
   (view-mode)
