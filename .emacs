@@ -36,10 +36,11 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
-;; 2021-04-12
+;; Local Variables Auto-Load without Confirmation 2021-04-12
 ;; https://emacs.stackexchange.com/questions/28/safe-way-to-enable-local-variables
 ;; DO NOT set this variable to :all, and do look at the values of variables first
-(setq enable-local-variables :safe)
+;; (setq enable-local-variables :safe)  ;; not applied font size
+;; (setq enable-local-variables :all)   ;; unsafe way
 
 ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Local-Variables.html
 ;; -----------------------------------------------------
