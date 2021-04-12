@@ -430,27 +430,33 @@
   (let ((pop-up-windows t))
   ;; (let ((pop-up-frames t))
     (setq-default buffer-save-without-query t)
-    (save-buffer)
+    (setq enable-local-variables :all)
+    (save-buffer t)
     (clone-indirect-buffer newname display-flag norecord))
     (revert-buffer :ignore-auto :noconfirm)
     (read-only-mode 0)
     (view-mode)
+    (setq enable-local-variables :none)
     (setq-default buffer-save-without-query nil)
   )
 
 (global-set-key (kbd "C-c C-x i") 'my-indirect-buffer)
 (global-set-key (kbd "C-x 4 i") 'my-indirect-buffer)
 
-
 (defun my-org-indirect-buffer ()
   (interactive)
+  ;; https://emacs.stackexchange.com/questions/51828/disaable-the-prompts-to-save-files
   (setq-default buffer-save-without-query t)
-  (save-buffer)
+  ;; https://emacs.stackexchange.com/questions/28/safe-way-to-enable-local-variables
+  (setq enable-local-variables :all)
+  (save-buffer t)
   (org-tree-to-indirect-buffer)
   (revert-buffer :ignore-auto :noconfirm)
+  (put 'eval 'safe-local-variable #'stringp)
   (other-window 1)
   (read-only-mode 0)
   (view-mode)
+  (setq enable-local-variables :none)
   (setq-default buffer-save-without-query nil)
   )
 
