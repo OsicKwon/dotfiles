@@ -134,6 +134,7 @@
   ;; dictionary
   "pp"  '(powerthesaurus-lookup-word-at-point :which-key "powerthesaurus")
   "dd"  '(define-word-at-point :which-key "define word")
+  "gt"  '(google-translate-at-point :which-key "google translate at point")
 
   ;; ;; Others
   "c"   '(cfw:open-org-calendar :which-key "Calendar View")
@@ -428,10 +429,13 @@
        t)))
   (let ((pop-up-windows t))
   ;; (let ((pop-up-frames t))
+    (setq-default buffer-save-without-query t)
+    (save-buffer)
     (clone-indirect-buffer newname display-flag norecord))
     (revert-buffer :ignore-auto :noconfirm)
     (read-only-mode 0)
     (view-mode)
+    (setq-default buffer-save-without-query nil)
   )
 
 (global-set-key (kbd "C-c C-x i") 'my-indirect-buffer)
@@ -440,11 +444,14 @@
 
 (defun my-org-indirect-buffer ()
   (interactive)
+  (setq-default buffer-save-without-query t)
+  (save-buffer)
   (org-tree-to-indirect-buffer)
-  ;; (revert-buffer :ignore-auto :noconfirm)
+  (revert-buffer :ignore-auto :noconfirm)
   (other-window 1)
   (read-only-mode 0)
   (view-mode)
+  (setq-default buffer-save-without-query nil)
   )
 
 
