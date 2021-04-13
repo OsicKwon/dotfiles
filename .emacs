@@ -45,9 +45,10 @@
 
 (defun my-minimap-mode ()
   (interactive)
-  (if minimap-mode
-      (minimap-mode 0)
-    (minimap-mode 1))
+  (olivetti-set-width 0.99)
+  ;; (if minimap-mode
+  ;;     (minimap-mode 0)
+  ;;   (minimap-mode 1))
   (if sublimity-mode
       (sublimity-mode 0)
     (sublimity-mode 1))
@@ -821,7 +822,8 @@
   ;; (sublimity-map-set-delay 5)
   ;; (sublimity-map-set-delay nil)  ;; always show, different from 0 value
 
-  (setq sublimity-map-size 30)
+  (setq sublimity-map-size 35)
+  ;; (setq sublimity-map-fraction 0.3)  ;; maximum fraction of width
   (setq sublimity-map-text-scale -6)
   (setq sublimity-map-active-region 'nil)
   
