@@ -36,6 +36,25 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; minimap mode 2021-04-13
+(use-package minimap :ensure t)
+;; for org-mode
+;; https://github.com/dengste/minimap/issues/22
+(setq minimap-major-modes '(prog-mode text-mode))
+;; (add-hook 'minimap-mode-hook 'sublimity-mode)
+
+(defun my-minimap-mode ()
+  (interactive)
+  (if minimap-mode
+      (minimap-mode 0)
+    (minimap-mode 1))
+  (if sublimity-mode
+      (sublimity-mode 0)
+    (sublimity-mode 1))
+  )
+
+
+
 ;; imenu-list resize 2021-04-13
 ;; https://github.com/bmag/imenu-list
 (setq imenu-list-auto-resize t)
@@ -116,7 +135,6 @@
 
 ;; (add-hook 'after-init-hook #'cfw:open-org-calendar)
 (add-hook 'after-init-hook #'starting-options)
-;; (add-hook 'staring-options-hook #'cfw:refresh-calendar-buffer)
 
 
 ;; general package :: Custom keybinding 2021-04-09
@@ -151,7 +169,7 @@
   "f"   '(counsel-find-file :which-key "Open a File")
   "t"   '(imenu-list :which-key "imenu like tagbar in vim")
 
-  ;; Engine mode
+  ;; engine mode
   "gg"  '(engine/search-google :which-key "engine google")
   "yg"  '(engine/search-youglish :which-key "engine youglish")
   "yt"  '(engine/search-youtube :which-key "engine yougtube")
@@ -164,6 +182,7 @@
 
   ;; ;; Others
   "c"   '(cfw:open-org-calendar :which-key "Calendar View")
+  ;; "mi"   '(minimap-mode :which-key "Minimap mode")
   "at"  '(ansi-term :which-key "open terminal")
 
 ))
@@ -253,7 +272,8 @@
 	 ;; ("`" . avy-goto-char-2)
 	 ;; ("`" . cfw:open-org-calendar)
 	 ("`" . org-open-at-point-global)
-	 ("w" . sublimity-mode)
+	 ("w" . my-minimap-mode)
+	 ;; ("w" . sublimity-mode)
 	 ;; ("w" . avy-goto-char-2)
 	 ;; ("w" . ace-window)
 	 ;; ("w" . other-window)
@@ -696,7 +716,7 @@
  '(google-translate-backend-method 'curl t nil "Customized with use-package google-translate")
  '(latex-run-command "pdflatex")
  '(minimap-automatically-delete-window 'visible)
- '(minimap-mode t)
+ '(minimap-mode nil)
  '(org-agenda-files
    '("~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-time-grid
@@ -802,9 +822,9 @@
   ;; (sublimity-map-set-delay 5)
   ;; (sublimity-map-set-delay nil)  ;; always show, different from 0 value
 
-  (setq sublimity-map-size 25)
+  (setq sublimity-map-size 30)
   (setq sublimity-map-text-scale -6)
-  ;; (setq sublimity-map-active-region 'nil)
+  (setq sublimity-map-active-region 'nil)
   
   ;; (sublimity-mode 1)
 )
