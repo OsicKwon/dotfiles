@@ -36,11 +36,13 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+
 ;; Local Variables Auto-Load without Confirmation 2021-04-12
 ;; https://emacs.stackexchange.com/questions/28/safe-way-to-enable-local-variables
 ;; DO NOT set this variable to :all, and do look at the values of variables first
+;; -----
 ;; (setq enable-local-variables :safe)  ;; not applied font size
-;; (setq enable-local-variables :all)   ;; unsafe way
+(setq enable-local-variables :all)   ;; unsafe way
 
 ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Local-Variables.html
 ;; -----------------------------------------------------
@@ -66,6 +68,7 @@
 ;; https://github.com/atykhonov/google-translate/issues/137
 (use-package google-translate
   :demand t
+  :disabled t  ;; too powerful 2021-04-12
   :ensure t
   :init
   (require 'google-translate)
@@ -93,13 +96,10 @@
   (if (y-or-n-p "Calendar view?")
       (progn
 	(interactive)
-	;; code to do something here
-	(cfw:open-org-calendar)
-	;; (sleep-for 1)
-	;; TODO :: full width
-	;; (cfw:refresh-calendar-buffer)
-	;; (cfw:component-update-hooks)
-	;; (cfw:dest-width "100%")
+	;; https://github.com/kiwanami/emacs-calfw/issues/45
+	(select-frame (make-frame '((name . "calendar")))) ; makes a new frame and selects it
+	(set-face-attribute 'default (selected-frame) :height 135) ; reduces the font size of the new frame
+	(cfw:open-org-calendar) ; opens the calendar there
 	)
     (progn
       ;; code if user answered no.
@@ -110,7 +110,8 @@
 
 ;; (add-hook 'after-init-hook #'cfw:open-org-calendar)
 (add-hook 'after-init-hook #'starting-options)
- 
+;; (add-hook 'staring-options-hook #'cfw:refresh-calendar-buffer)
+
 
 ;; general package :: Custom keybinding 2021-04-09
 ;; https://dev.to/huytd/emacs-from-scratch-1cg6
@@ -121,7 +122,6 @@
   :states '(normal visual insert emacs)
   ;; :prefix "SPC"
   :prefix "\\"  ;; like the leader key in vim
-  ;; :prefix "C-SPC"
   :non-normal-prefix "M-SPC"
   ;; :non-normal-prefix "C-SPC"  ;; conflicted with 'mark set' like 'visual' mode in evil
   :keymaps 'override
@@ -154,7 +154,7 @@
   ;; dictionary
   "pp"  '(powerthesaurus-lookup-word-at-point :which-key "powerthesaurus")
   "dd"  '(define-word-at-point :which-key "define word")
-  "gt"  '(google-translate-at-point :which-key "google translate at point")
+  ;; "gt"  '(google-translate-at-point :which-key "google translate at point")  ;; prevent over-useage
 
   ;; ;; Others
   "c"   '(cfw:open-org-calendar :which-key "Calendar View")
@@ -222,8 +222,8 @@
 	 ("1" . delete-other-windows)  ;; show only current selected widnow
 	 ("2" . split-window-vertically)
 	 ("3" . split-window-horizontally)
-	 ("4" . transpose-frame)
-	 ("5" . window-swap-states)  ;; alternatively ace-swap-window
+	 ("4" . window-swap-states)  ;; alternatively ace-swap-window
+	 ("5" . transpose-frame)
 	 ("6" . ivy-push-view)
 	 ("7" . ivy-switch-view)
 	 ("8" . winner-undo)
@@ -261,12 +261,16 @@
 	 ;; ("h" . left-char)
          ;; ("l" . right-char)
 	 ;; ("w" . right-word)
-         ("N" . View-search-last-regexp-backward)  ;; Regex previous result
+         ;; ("N" . View-search-last-regexp-backward)  ;; Regex previous result
+	 ("/" . evil-search-forward)
+	 ("n" . evil-search-next)
+	 ("N" . evil-search-previous)
 	 ;; ("i" . View-exit)  ;; like 'e'
          ("e" . View-scroll-line-forward) ;; scroll down (forward) - opposite to 'y'
          ;; ("0" . beginning-of-visual-line)
 	 ("]" . switch-to-next-buffer)
 	 ("[" . switch-to-prev-buffer)
+	 ("\\" . counsel-buffer-or-recentf)
 	 ;; ("\\" . imenu-list)
 	 ("m" . imenu-list)
 	 ;; ("m" . counsel-M-x)
@@ -707,7 +711,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writeroom-mode writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
  '(writeroom-restore-window-config t))
@@ -1007,7 +1011,7 @@
 (setq inhibit-startup-screen t)                              ;; No welcome startup screen
 (setq initial-scratch-message "")                            ;; No scratch message 2020-10-10
 (add-to-list 'default-frame-alist '(fullscreen . maximized)) ;; Maximize GUI window
-
+(add-to-list 'initial-frame-alist '(fullscreen . maximized)) ;; Maximize GUI window
 
 ;; Interupted Working Process 2021-02-15
 ;; (setq auto-save-visited-mode t)                              ;; Auto Save   
@@ -1693,7 +1697,9 @@ T - tag prefix
 
 ;; For iCal(Google Calendar) Users: (https://github.com/kiwanami/emacs-calfw#for-ical-google-calendar-users)
 (require 'calfw-ical)
+;; not working for now 2021-04-12
 ;; (cfw:open-ical-calendar "https://calendar.google.com/calendar/ical/osic.kwon%40gmail.com/public/basic.ics")
+
 
 
 
@@ -2131,4 +2137,4 @@ T - tag prefix
 (setq python-shell-completion-native-enable nil)
 
 
-
+;; EOF
