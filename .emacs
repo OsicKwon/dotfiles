@@ -54,7 +54,6 @@
   )
 
 
-
 ;; imenu-list resize 2021-04-13
 ;; https://github.com/bmag/imenu-list
 (setq imenu-list-auto-resize t)
@@ -1822,6 +1821,8 @@ T - tag prefix
        "* EVENT %?\n%U" :empty-lines 1)
       ("E" "Event With Clipboard" entry (file+headline "~/Documents/nvALT/org/Events.org" "Transient")
        "* EVENT %?\n%U\n   %c" :empty-lines 1)
+      ("z" "Note with Clipboard" entry (file "~/Documents/nvALT/org_capture_note.txt")
+       "* NOTE %?\n%U\n   %c" :empty-lines 1)
       ;; ----------------------------------------------------------
       ;; insert at CURRENT POSITION in a buffer 2021-04-02
       ;; ----------------------------------------------------------
