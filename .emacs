@@ -36,9 +36,11 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
-;; imenu-list auto resize 2021-04-13
+;; imenu-list resize 2021-04-13
 ;; https://github.com/bmag/imenu-list
 (setq imenu-list-auto-resize t)
+;; https://github.com/bmag/imenu-list/blob/1447cdc8c0268e332fb4adc0c643702245d31bde/imenu-list.el#L431
+(setq imenu-list-size 0.20)
 
 
 ;; Local Variables Auto-Load without Confirmation 2021-04-12
