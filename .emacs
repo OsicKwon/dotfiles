@@ -36,6 +36,10 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; imenu-list auto resize 2021-04-13
+;; https://github.com/bmag/imenu-list
+(setq imenu-list-auto-resize t)
+
 
 ;; Local Variables Auto-Load without Confirmation 2021-04-12
 ;; https://emacs.stackexchange.com/questions/28/safe-way-to-enable-local-variables
@@ -247,7 +251,8 @@
 	 ;; ("`" . avy-goto-char-2)
 	 ;; ("`" . cfw:open-org-calendar)
 	 ("`" . org-open-at-point-global)
-	 ("w" . avy-goto-char-2)
+	 ("w" . sublimity-mode)
+	 ;; ("w" . avy-goto-char-2)
 	 ;; ("w" . ace-window)
 	 ;; ("w" . other-window)
 	 ;; ("w" . ace-jump-char-mode)
@@ -711,7 +716,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
  '(writeroom-restore-window-config t))
@@ -796,7 +801,7 @@
   ;; (sublimity-map-set-delay nil)  ;; always show, different from 0 value
 
   (setq sublimity-map-size 25)
-  (setq sublimity-map-text-scale -7)
+  (setq sublimity-map-text-scale -6)
   ;; (setq sublimity-map-active-region 'nil)
   
   ;; (sublimity-mode 1)
@@ -1001,6 +1006,9 @@
 
 (global-set-key (kbd "C-M-]") 'switch-to-next-buffer)
 (global-set-key (kbd "C-M-[") 'switch-to-prev-buffer)
+
+(global-set-key (kbd "C-<return>") 'other-window)
+
 
 ;; indent-guide package 2021-02-24
 (indent-guide-global-mode)
