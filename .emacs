@@ -132,8 +132,16 @@
     )
 )
 
+(defun starting-functions ()
+  (interactive)
+  (select-frame (make-frame '((name . "calendar")))) ; makes a new frame and selects it
+  (set-face-attribute 'default (selected-frame) :height 135) ; reduces the font size of the new frame
+  (cfw:open-org-calendar) ; opens the calendar there
+  )
+
 ;; (add-hook 'after-init-hook #'cfw:open-org-calendar)
 ;; (add-hook 'after-init-hook #'starting-options)  ;; hold for a while 2021-04-13
+(add-hook 'after-init-hook 'starting-functions)
 
 
 ;; general package :: Custom keybinding 2021-04-09
@@ -175,8 +183,8 @@
   "jw"  '(engine/search-just_the_word :which-key "engine Just The Word")
 
   ;; dictionary
-  "pp"  '(powerthesaurus-lookup-word-at-point :which-key "powerthesaurus")
-  "dd"  '(define-word-at-point :which-key "define word")
+  "p"  '(powerthesaurus-lookup-word-at-point :which-key "powerthesaurus")
+  "d"  '(define-word-at-point :which-key "define word")
   ;; "gt"  '(google-translate-at-point :which-key "google translate at point")  ;; prevent over-useage
 
   ;; ;; Others
@@ -273,7 +281,7 @@
 	 ("`" . org-open-at-point-global)
 	 ;; ("w" . my-minimap-mode)
 	 ;; ("w" . sublimity-mode)
-	 ;; ("w" . avy-goto-char-2)
+	 ("w" . avy-goto-char-2)
 	 ;; ("w" . ace-window)
 	 ;; ("w" . other-window)
 	 ;; ("w" . ace-jump-char-mode)
@@ -379,6 +387,13 @@
     (view-mode 0)))
 
 (add-hook 'find-file-hook 'my-view-mode) 
+
+;; (add-hook 'kill-buffer-hook (lambda () (read-only-mode -1)))
+;; (add-hook 'kill-buffer-hook (lambda () (view-mode -1)))
+
+;; (add-hook 'kill-buffer-enter-hook (lambda () (read-only-mode -1)))
+;; (add-hook 'kill-buffer-enter-hook (lambda () (view-mode -1)))
+
 
 
 ;; (defun my-view-mode-after-load-hook ()
