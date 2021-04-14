@@ -298,6 +298,7 @@
 	 ;; ("w" . right-word)
          ;; ("N" . View-search-last-regexp-backward)  ;; Regex previous result
 	 ("/" . evil-search-forward)
+	 ("?" . evil-search-backward)
 	 ("n" . evil-search-next)
 	 ("N" . evil-search-previous)
 	 ;; ("i" . View-exit)  ;; like 'e'
