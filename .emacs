@@ -363,7 +363,7 @@
 ;; key hint : edit 'e' / quit 'q'
 
 ;; https://stackoverflow.com/questions/3674637/enabling-certain-emacs-modes-or-features-almost-always
-;; (add-hook 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c *, and 'org export'
+;; (add-hook 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c * (converting), and 'org export'
 ;; (add-hook 'prog-mode-hook 'view-mode)
 ;; (add-hook 'markdown-mode-hook 'view-mode)
 ;; (add-hook 'org-mode-hook 'view-mode)
@@ -386,7 +386,7 @@
              (string-match "\\.el\\'" buffer-file-name))
     (view-mode 0)))
 
-(add-hook 'find-file-hook 'my-view-mode) 
+;; (add-hook 'find-file-hook 'my-view-mode) 
 
 ;; (add-hook 'kill-buffer-hook (lambda () (read-only-mode -1)))
 ;; (add-hook 'kill-buffer-hook (lambda () (view-mode -1)))
@@ -1248,6 +1248,8 @@
 )
 
 (setq-default evil-default-state 'emacs)
+;; (setq-default evil-default-state 'normal)
+
 ;; Change color of which-func when entering and leaving Evil visual state
 ;;  - Resolves the "white on white" issue :: 2021-01-17
 ;; https://www.reddit.com/r/emacs/comments/6tdqt0/how_can_i_change_the_background_color_when/
