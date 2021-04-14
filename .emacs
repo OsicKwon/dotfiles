@@ -45,10 +45,9 @@
 
 (defun my-minimap-mode ()
   (interactive)
-  (olivetti-set-width 0.99)
-  ;; (if minimap-mode
-  ;;     (minimap-mode 0)
-  ;;   (minimap-mode 1))
+  (if minimap-mode
+      (minimap-mode 0)
+    (minimap-mode 1))
   (if sublimity-mode
       (sublimity-mode 0)
     (sublimity-mode 1))
@@ -134,7 +133,7 @@
 )
 
 ;; (add-hook 'after-init-hook #'cfw:open-org-calendar)
-(add-hook 'after-init-hook #'starting-options)
+;; (add-hook 'after-init-hook #'starting-options)  ;; hold for a while 2021-04-13
 
 
 ;; general package :: Custom keybinding 2021-04-09
@@ -272,7 +271,7 @@
 	 ;; ("`" . avy-goto-char-2)
 	 ;; ("`" . cfw:open-org-calendar)
 	 ("`" . org-open-at-point-global)
-	 ("w" . my-minimap-mode)
+	 ;; ("w" . my-minimap-mode)
 	 ;; ("w" . sublimity-mode)
 	 ;; ("w" . avy-goto-char-2)
 	 ;; ("w" . ace-window)
@@ -738,7 +737,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
  '(writeroom-restore-window-config t))
