@@ -141,7 +141,7 @@
 
 ;; (add-hook 'after-init-hook #'cfw:open-org-calendar)
 ;; (add-hook 'after-init-hook #'starting-options)  ;; hold for a while 2021-04-13
-(add-hook 'after-init-hook 'starting-functions)
+;; (add-hook 'after-init-hook 'starting-functions)
 
 
 ;; general package :: Custom keybinding 2021-04-09
