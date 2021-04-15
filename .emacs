@@ -1831,18 +1831,34 @@ T - tag prefix
 (setq org-capture-templates
     '(("t" "Todo" entry (file "~/Documents/nvALT/org/Refile.org")
        "* TODO %?\n%U" :empty-lines 1)
+
       ("T" "Todo with Clipboard" entry (file "~/Documents/nvALT/org/Refile.org")
        "* TODO %?\n%U\n   %c" :empty-lines 1)
+
       ("n" "Note" entry (file "~/Documents/nvALT/org/Refile.org")
        "* NOTE %?\n%U" :empty-lines 1)
+
       ("N" "Note with Clipboard" entry (file "~/Documents/nvALT/org/Refile.org")
        "* NOTE %?\n%U\n   %c" :empty-lines 1)
+
       ("e" "Event" entry (file+headline "~/Documents/nvALT/org/Events.org" "Transient")
        "* EVENT %?\n%U" :empty-lines 1)
+
       ("E" "Event With Clipboard" entry (file+headline "~/Documents/nvALT/org/Events.org" "Transient")
        "* EVENT %?\n%U\n   %c" :empty-lines 1)
-      ("z" "Note with Clipboard" entry (file "~/Documents/nvALT/org_capture_note.txt")
+
+      ("y" "Note with Clipboard" entry (file "~/Documents/nvALT/org_capture_note.txt")
        "* NOTE %?\n%U\n   %c" :empty-lines 1)
+
+      ("c" "Capture Contents")
+      ("cc" "Contents in Clipboard")      
+      ("cs" "Contents in Selected Area")
+
+      ("w" "Working Inbox")
+      ("wc" "with Clipboard")
+      ("ws" "with Selected")
+      ("wh" "with Scheduled")
+
       ;; ----------------------------------------------------------
       ;; insert at CURRENT POSITION in a buffer 2021-04-02
       ;; ----------------------------------------------------------
@@ -1852,11 +1868,20 @@ T - tag prefix
       ;; 
       ;; ("x" "Big3" plain ()
       ;; "%U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
+
       ("x" "Big3" plain ()
        "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3} ")
        ;; "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
-      ;; ("z" "Big3-v2" plain ()
-      ;;  "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3}\ndddddddddddddddddd ")
+
+      ;; https://www.youtube.com/watch?v=qCdScs4YO8k
+      ("d" "Demo")
+      ("da" "A option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Header A")
+       "* %^{Initial Text} %?")
+      ("db" "B option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Header B")
+       "* %^{Initial Text|Opt1|Opt2|Opt3} %?")
+      ("dc" "C option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Header C")
+       "* %^{Initial Text|Opt1|Opt2|Opt3} \n SCEHDULED: %^t \n Some test heare %?")
+
      )
   )
 ;; (global-set-key (kbd "C-M-]") (kbd "C-0 M-x org-capture"))  ; just tried, but not worked 2021-04-02
@@ -1865,10 +1890,13 @@ T - tag prefix
 ;; Templage Expansion 2021-04-02
 ;; https://orgmode.org/manual/Template-expansion.html
 ;; ------------------------------------------------------------
-;; ‘%?’        > After completing the template, position point here. 
-;; ‘%t’        > Timestamp, date only.
-;; ‘%T’        > Timestamp, with date and time.
-;; ‘%u’, ‘%U’  > Like ‘%t’, ‘%T’ above, but inactive timestamps.
+;; '%?'        > After completing the template, position point here. 
+;; '%t'        > Timestamp, date only.
+;; '%^t'       > Select Timestamp, date only.
+;; '%T'        > Timestamp, with date and time.
+;; '%u', '%U'  > Like ‘%t’, ‘%T’ above, but inactive timestamps.
+;; '%i'        > Selected Area Contents
+;; '%c'        > Clipboard Contents
 ;; ------------------------------------------------------------
 
 ;; type 2021-04-02
