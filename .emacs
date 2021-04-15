@@ -501,8 +501,13 @@
     (save-buffer t)
     (clone-indirect-buffer newname display-flag norecord))
     (revert-buffer :ignore-auto :noconfirm)
+    (view-mode)
+    ;; (other-window 1)
+    (previous-window-any-frame)
     (read-only-mode 0)
     (view-mode)
+    ;; (other-window 1)
+    (previous-window-any-frame)
     (setq enable-local-variables :none)
     (setq-default buffer-save-without-query nil)
   )
@@ -520,7 +525,9 @@
   (org-tree-to-indirect-buffer)
   (revert-buffer :ignore-auto :noconfirm)
   (put 'eval 'safe-local-variable #'stringp)
-  (other-window 1)
+  (view-mode)
+  ;; (other-window 1)
+  (previous-window-any-frame)
   (read-only-mode 0)
   (view-mode)
   (setq enable-local-variables :none)
@@ -572,6 +579,7 @@
 		   forward-paragraph
                    backward-paragraph
 		   swiper
+		   ;; org-cycle      ; delay ??
 		   ))
   (advice-add command :after #'pulse-line)
 )
@@ -839,7 +847,7 @@
   ;; (sublimity-map-set-delay nil)  ;; always show, different from 0 value
 
   (setq sublimity-map-size 35)
-  ;; (setq sublimity-map-fraction 0.3)  ;; maximum fraction of width
+  (setq sublimity-map-fraction 0.3)  ;; maximum fraction of width
   (setq sublimity-map-text-scale -6)
   (setq sublimity-map-active-region 'nil)
   
@@ -1264,7 +1272,7 @@
 ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color "black")))
 (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color original-foreground)))
 
-;; View-Mode
+;; View-Mode (Terminal)
 (add-hook 'evil-normal-state-entry-hook (lambda () (view-mode 0) (read-only-mode 0)))
 (add-hook 'evil-insert-state-entry-hook (lambda () (view-mode 0)))
 (add-hook 'evil-visual-state-entry-hook (lambda () (view-mode 0)))
@@ -1276,7 +1284,8 @@
     (progn
       ;; if graphic (GUI)
       ;; <NORMAL>
-      ;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
+      ;; (add-hook 'evil-normal-state-entry-hook (lambda () (view-mode 0) (read-only-mode 0) (face-remap-add-relative 'default :background "light gray")))
+      ;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "light gray")))
       (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light gray")))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "lightgray")))
       (add-hook 'evil-normal-state-exit-hook (lambda () (hl-line-mode 0)))
@@ -1290,6 +1299,7 @@
       ;; (add-hook 'evil-operator-state-entry-hook (lambda () (set-background-color "gray")))
       ;;
       ;; <INSERT>
+      ;; (add-hook 'evil-insert-state-entry-hook (lambda () (view-mode 0) (face-remap-add-relative 'default :background "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
@@ -1300,6 +1310,7 @@
       (add-hook 'evil-insert-state-exit-hook (lambda () (hl-line-mode 0)))
       ;;
       ;; <VISUAL>
+      ;; (add-hook 'evil-visual-state-entry-hook (lambda () (view-mode 0) (face-remap-add-relative 'default :background "light cyan")))
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :background "light cyan")))
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
       (add-hook 'evil-visual-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light cyan")))
@@ -1840,6 +1851,11 @@ T - tag prefix
       ("is" "with Selected")
       ("ih" "with Scheduled")
 
+      ("e" "English")
+      ("es" "with Selected Area")
+      ("esi" "with Selected Area & Location")
+      ("ec" "with Clipboard")      
+
       ("s" "Scrap")
       ("ss" "with Selected Area")
       ("sc" "with Clipboard")      
@@ -1861,7 +1877,7 @@ T - tag prefix
       ;; https://www.youtube.com/watch?v=qCdScs4YO8k
       ("d" "Demo")
       ("da" "A option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Header A")
-       "* %^{Initial Text} %?")
+       "* %^{Initial Text} src: %a  %?")
       ("db" "B option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Header B")
        "* %^{Initial Text|Opt1|Opt2|Opt3} %?")
       ("dc" "C option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Header C")
@@ -1882,6 +1898,7 @@ T - tag prefix
 ;; '%u', '%U'  > Like ‘%t’, ‘%T’ above, but inactive timestamps.
 ;; '%i'        > Selected Area Contents
 ;; '%c'        > Clipboard Contents
+;; '%a'        > Source location (Annotation (org-store-link)
 ;; ------------------------------------------------------------
 
 ;; type 2021-04-02
