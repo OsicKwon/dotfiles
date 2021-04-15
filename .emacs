@@ -213,7 +213,7 @@
   (org-capture 0))
 
 ;; (global-set-key (kbd "C-c C-c") #'org-capture-at-point)
-
+(global-set-key (kbd "C-c c") 'org-capture)
 
 ;; (setq blink-cursor-blinks 0)  ;; default 10, to continue 0 or -1 2021-04-05
 
@@ -1832,32 +1832,17 @@ T - tag prefix
     '(("t" "Todo" entry (file "~/Documents/nvALT/org/Refile.org")
        "* TODO %?\n%U" :empty-lines 1)
 
-      ("T" "Todo with Clipboard" entry (file "~/Documents/nvALT/org/Refile.org")
-       "* TODO %?\n%U\n   %c" :empty-lines 1)
+      ("i" "Inbox")
+      ("in" "in Normal")
+      ("iw" "on Working" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Inbox on Working")
+       "- [ ] %U -  %^{Initial Text} ::  %?")
+      ("ic" "with Clipboard")
+      ("is" "with Selected")
+      ("ih" "with Scheduled")
 
-      ("n" "Note" entry (file "~/Documents/nvALT/org/Refile.org")
-       "* NOTE %?\n%U" :empty-lines 1)
-
-      ("N" "Note with Clipboard" entry (file "~/Documents/nvALT/org/Refile.org")
-       "* NOTE %?\n%U\n   %c" :empty-lines 1)
-
-      ("e" "Event" entry (file+headline "~/Documents/nvALT/org/Events.org" "Transient")
-       "* EVENT %?\n%U" :empty-lines 1)
-
-      ("E" "Event With Clipboard" entry (file+headline "~/Documents/nvALT/org/Events.org" "Transient")
-       "* EVENT %?\n%U\n   %c" :empty-lines 1)
-
-      ("y" "Note with Clipboard" entry (file "~/Documents/nvALT/org_capture_note.txt")
-       "* NOTE %?\n%U\n   %c" :empty-lines 1)
-
-      ("c" "Capture Contents")
-      ("cc" "Contents in Clipboard")      
-      ("cs" "Contents in Selected Area")
-
-      ("w" "Working Inbox")
-      ("wc" "with Clipboard")
-      ("ws" "with Selected")
-      ("wh" "with Scheduled")
+      ("s" "Scrap")
+      ("ss" "with Selected Area")
+      ("sc" "with Clipboard")      
 
       ;; ----------------------------------------------------------
       ;; insert at CURRENT POSITION in a buffer 2021-04-02
