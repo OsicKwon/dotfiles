@@ -447,8 +447,9 @@
     (if view-mode
 	;; color-code: https://www.w3schools.com/colors/colors_shades.asp
 	;; (face-remap-add-relative 'default '((:background "controlHighlightColor")))
-	(face-remap-add-relative 'default '((:background "#fdf6e3")))
-      ;; (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
+	(face-remap-add-relative 'default '((:background "gray90")))
+	;; (face-remap-add-relative 'default '((:background "#fdf6e3")))
+      (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
       )
   )
 
@@ -1288,8 +1289,8 @@
     (progn
       ;; if graphic (GUI)
       ;; <NORMAL>
-      (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "light gray")))
-      (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "gray")))
+      ;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "light gray")))
+      (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light gray")))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "lightgray")))
       (add-hook 'evil-normal-state-exit-hook (lambda () (hl-line-mode 0)))
       (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :background original-background)))
