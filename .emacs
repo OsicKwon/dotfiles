@@ -306,7 +306,7 @@
          ;; ("0" . beginning-of-visual-line)
 	 ("]" . switch-to-next-buffer)
 	 ("[" . switch-to-prev-buffer)
-	 ("\\" . counsel-buffer-or-recentf)
+	 ;; ("\\" . counsel-buffer-or-recentf)
 	 ;; ("\\" . imenu-list)
 	 ("m" . imenu-list)
 	 ;; ("m" . counsel-M-x)
@@ -447,7 +447,7 @@
     (if view-mode
 	;; color-code: https://www.w3schools.com/colors/colors_shades.asp
 	;; (face-remap-add-relative 'default '((:background "controlHighlightColor")))
-	(face-remap-add-relative 'default '((:background "gray90")))
+	(face-remap-add-relative 'default '((:background "gray95")))
 	;; (face-remap-add-relative 'default '((:background "#fdf6e3")))
       (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
       )
