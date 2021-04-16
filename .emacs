@@ -444,7 +444,8 @@
     )
   (if view-mode
       ;; color-code: https://www.w3schools.com/colors/colors_shades.asp
-      (face-remap-add-relative 'default '((:background "controlHighlightColor")))
+      ;; (face-remap-add-relative 'default '((:background "controlHighlightColor")))
+      (face-remap-add-relative 'default '((:background "#fdf6e3")))
     (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
     )
 
@@ -1273,7 +1274,7 @@
 (add-hook 'evil-normal-state-entry-hook (lambda () (set-foreground-color original-foreground)))
 
 ;; View-Mode (Terminal)
-(add-hook 'evil-normal-state-entry-hook (lambda () (view-mode 0) (read-only-mode 0)))
+;; (add-hook 'evil-normal-state-entry-hook (lambda () (view-mode 0) (read-only-mode 0)))
 (add-hook 'evil-insert-state-entry-hook (lambda () (view-mode 0)))
 (add-hook 'evil-visual-state-entry-hook (lambda () (view-mode 0)))
 (add-hook 'evil-replace-state-entry-hook (lambda () (view-mode 0)))
@@ -1284,9 +1285,8 @@
     (progn
       ;; if graphic (GUI)
       ;; <NORMAL>
-      ;; (add-hook 'evil-normal-state-entry-hook (lambda () (view-mode 0) (read-only-mode 0) (face-remap-add-relative 'default :background "light gray")))
-      ;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "light gray")))
-      (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light gray")))
+      (add-hook 'evil-normal-state-entry-hook (lambda () (view-mode 0) (read-only-mode 0) (face-remap-add-relative 'default :background "light gray")))
+      (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "gray")))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "lightgray")))
       (add-hook 'evil-normal-state-exit-hook (lambda () (hl-line-mode 0)))
       (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :background original-background)))
@@ -1300,7 +1300,6 @@
       ;;
       ;; <INSERT>
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (view-mode 0) (face-remap-add-relative 'default :background "lightyellow")))
-      ;; (add-hook 'evil-insert-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
       (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light yellow")))
