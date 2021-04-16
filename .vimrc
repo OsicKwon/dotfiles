@@ -184,6 +184,7 @@ Plugin 'ervandew/supertab'
 Plugin 'machakann/vim-highlightedyank'  " 2021-02-26
 " Plugin 'justinmk/vim-dirvish'
 Plugin 'rking/ag.vim'                   " Silver Searcher (ag) 2021-03-28
+" Plugin 'liuchengxu/vim-which-key'       " 2021-04-16
 
 "----------Python-----------
 Plugin 'nvie/vim-flake8'
@@ -1148,6 +1149,9 @@ map <F11> :cnext<Return>
 "----------------------
 autocmd BufEnter *.py    colorscheme PaperColor | set background=dark
 autocmd BufEnter *.vimrc colorscheme PaperColor | set background=dark
+autocmd BufEnter *.php colorscheme Pencil | set background=dark
+autocmd BufEnter *.html colorscheme Pencil | set background=dark
+autocmd BufEnter *.phtml colorscheme Pencil | set background=dark
 
 
 "---------------
