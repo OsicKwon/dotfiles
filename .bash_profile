@@ -49,6 +49,7 @@ clear && date +%F && curl wttr.in/?format=3;
 echo "-------------------------------------------------------------";
 echo " Tips" ;
 echo " ---------- ";
+echo " 0) wttr    :: curl wttr.in/";
 echo " 1) wn      :: wn 'word' -over";
 echo " 2) trans   :: trans 'word' :ko";
 echo " 3) dict    :: curl dict://dict.org/d:word:wn";

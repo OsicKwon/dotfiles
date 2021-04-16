@@ -184,7 +184,8 @@ Plugin 'ervandew/supertab'
 Plugin 'machakann/vim-highlightedyank'  " 2021-02-26
 " Plugin 'justinmk/vim-dirvish'
 Plugin 'rking/ag.vim'                   " Silver Searcher (ag) 2021-03-28
-" Plugin 'liuchengxu/vim-which-key'       " 2021-04-16
+Plugin 'liuchengxu/vim-which-key'       " 2021-04-16
+Plugin 'itchyny/vim-cursorword'         " 2021-04-16
 
 "----------Python-----------
 Plugin 'nvie/vim-flake8'
@@ -1121,6 +1122,8 @@ command HA call HardMode() | echo "HardMode Activated"
 " --- very magic mode -> \v
 " --- lazy mode(non-greedy) -> .{-}
 " after -> :put A or (insert mode)"AP
+ab xorg -*- mode: org; -*-
+ab xftp ftp://osickwon@ftp.osickwon.heliohost.org/public_html
 
 
 "-----------
