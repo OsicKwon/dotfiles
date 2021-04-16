@@ -37,6 +37,11 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+(defun my-org-next-link-open ()
+  (interactive)
+  (org-next-link)
+  (org-open-at-point-global)
+  )
 
 ;; pdfgrep 2021-04-16
 (require 'pdfgrep)
@@ -286,7 +291,8 @@
 	 ;; ("`" . pop-global-mark)
 	 ;; ("`" . avy-goto-char-2)
 	 ;; ("`" . cfw:open-org-calendar)
-	 ("`" . org-open-at-point-global)
+	 ;; ("`" . org-open-at-point-global)
+	 ("`" . my-org-next-link-open)
 	 ;; ("w" . my-minimap-mode)
 	 ;; ("w" . sublimity-mode)
 	 ("w" . avy-goto-char-2)
