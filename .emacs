@@ -37,6 +37,18 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+
+;; (use-package focus :ensure t)
+;; (add-hook 'evil-normal-state-entry-hook 'focus-mode)
+;; (add-hook 'evil-normal-state-exit-hook (lambda () (focus-mode -1)))
+
+;; (require 'dimmer)
+;; (use-package dimmer :ensure t)
+;;  (dimmer-configure-which-key)
+;;  (dimmer-configure-helm)
+;;  (dimmer-mode t)
+
+;; open nearest link 2021-04-16
 (defun my-org-next-link-open ()
   (interactive)
   (org-next-link)
@@ -458,12 +470,14 @@
 
   (when (display-graphic-p) 
     (if view-mode
-	;; color-code: https://www.w3schools.com/colors/colors_shades.asp
 	;; (face-remap-add-relative 'default '((:background "controlHighlightColor")))
 	(face-remap-add-relative 'default '((:background "gray95")))
 	;; (face-remap-add-relative 'default '((:background "#fdf6e3")))
       (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
       )
+    ;; (if (evil-emacs-state-p)
+    ;;   (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
+    ;; )
   )
 
   ;; (if view-mode 
@@ -780,7 +794,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
  '(writeroom-restore-window-config t))
@@ -1302,6 +1316,8 @@
     (progn
       ;; if graphic (GUI)
       ;; <NORMAL>
+      (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :underline "light gray")))
+      (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :underline nil)))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "light gray")))
       (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light gray")))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "lightgray")))
