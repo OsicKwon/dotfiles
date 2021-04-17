@@ -56,9 +56,9 @@
   )
 
 ;; pdfgrep 2021-04-16
-(require 'pdfgrep)
-(use-package pdfgrep :ensure t)
-(pdfgrep-mode)
+;; (require 'pdfgrep)
+;; (use-package pdfgrep :ensure t)
+;; (pdfgrep-mode)
 
 
 ;; minimap mode 2021-04-13
@@ -1476,6 +1476,16 @@
 
 ;; evil-commentary mode package 2021-03-03
 (evil-commentary-mode)
+
+
+;; Exit insert mode by pressing j and then j quickly 2021-04-17
+;; https://stackoverflow.com/questions/10569165/how-to-map-jj-to-esc-in-emacs-evil-mode
+(use-package key-chord :ensure t)
+(setq key-chord-two-keys-delay 0.5)
+(key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
+(key-chord-define evil-insert-state-map "kk" 'evil-normal-state)
+(key-chord-mode 1)
+
 
 ;; avy (like ace-jump and easy-motion in vim) 2021-03-04
 ;; (global-set-key (kbd "C-M-s") 'avy-goto-char)

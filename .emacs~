@@ -37,6 +37,30 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+
+;; (use-package focus :ensure t)
+;; (add-hook 'evil-normal-state-entry-hook 'focus-mode)
+;; (add-hook 'evil-normal-state-exit-hook (lambda () (focus-mode -1)))
+
+;; (require 'dimmer)
+;; (use-package dimmer :ensure t)
+;;  (dimmer-configure-which-key)
+;;  (dimmer-configure-helm)
+;;  (dimmer-mode t)
+
+;; open nearest link 2021-04-16
+(defun my-org-next-link-open ()
+  (interactive)
+  (org-next-link)
+  (org-open-at-point-global)
+  )
+
+;; pdfgrep 2021-04-16
+(require 'pdfgrep)
+(use-package pdfgrep :ensure t)
+(pdfgrep-mode)
+
+
 ;; minimap mode 2021-04-13
 (use-package minimap :ensure t)
 ;; for org-mode
@@ -279,7 +303,8 @@
 	 ;; ("`" . pop-global-mark)
 	 ;; ("`" . avy-goto-char-2)
 	 ;; ("`" . cfw:open-org-calendar)
-	 ("`" . org-open-at-point-global)
+	 ;; ("`" . org-open-at-point-global)
+	 ("`" . my-org-next-link-open)
 	 ;; ("w" . my-minimap-mode)
 	 ;; ("w" . sublimity-mode)
 	 ("w" . avy-goto-char-2)
@@ -306,7 +331,7 @@
          ;; ("0" . beginning-of-visual-line)
 	 ("]" . switch-to-next-buffer)
 	 ("[" . switch-to-prev-buffer)
-	 ("\\" . counsel-buffer-or-recentf)
+	 ;; ("\\" . counsel-buffer-or-recentf)
 	 ;; ("\\" . imenu-list)
 	 ("m" . imenu-list)
 	 ;; ("m" . counsel-M-x)
@@ -444,12 +469,16 @@
     )
 
   (when (display-graphic-p) 
-  (if view-mode
-      ;; color-code: https://www.w3schools.com/colors/colors_shades.asp
-      ;; (face-remap-add-relative 'default '((:background "controlHighlightColor")))
-	(face-remap-add-relative 'default '((:background "#fdf6e3")))
-    (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
-    )))
+    (if view-mode
+	;; (face-remap-add-relative 'default '((:background "controlHighlightColor")))
+	(face-remap-add-relative 'default '((:background "gray95")))
+	;; (face-remap-add-relative 'default '((:background "#fdf6e3")))
+      (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
+      )
+    ;; (if (evil-emacs-state-p)
+    ;;   (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
+    ;; )
+  )
 
   ;; (if view-mode 
   ;;     (progn
@@ -765,7 +794,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
  '(writeroom-restore-window-config t))
@@ -1287,8 +1316,10 @@
     (progn
       ;; if graphic (GUI)
       ;; <NORMAL>
-      (add-hook 'evil-normal-state-entry-hook (lambda () (view-mode 0) (read-only-mode 0) (face-remap-add-relative 'default :background "light gray")))
-      (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "gray")))
+      (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :underline "light gray")))
+      (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :underline nil)))
+      ;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "light gray")))
+      (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light gray")))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "lightgray")))
       (add-hook 'evil-normal-state-exit-hook (lambda () (hl-line-mode 0)))
       (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :background original-background)))
@@ -1301,7 +1332,7 @@
       ;; (add-hook 'evil-operator-state-entry-hook (lambda () (set-background-color "gray")))
       ;;
       ;; <INSERT>
-      ;; (add-hook 'evil-insert-state-entry-hook (lambda () (view-mode 0) (face-remap-add-relative 'default :background "lightyellow")))
+      ;; (add-hook 'evil-insert-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
       (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light yellow")))
@@ -1311,7 +1342,6 @@
       (add-hook 'evil-insert-state-exit-hook (lambda () (hl-line-mode 0)))
       ;;
       ;; <VISUAL>
-      ;; (add-hook 'evil-visual-state-entry-hook (lambda () (view-mode 0) (face-remap-add-relative 'default :background "light cyan")))
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :background "light cyan")))
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
       (add-hook 'evil-visual-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light cyan")))
@@ -1847,7 +1877,7 @@ T - tag prefix
       ("i" "Inbox")
       ("in" "in Normal")
       ("iw" "on Working" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Inbox on Working")
-       "- [ ] %U -  %^{Initial Text} ::  %?")
+       "- [ ] %U -  %^{Initial Text} :: %?")
       ("ic" "with Clipboard")
       ("is" "with Selected")
       ("ih" "with Scheduled")

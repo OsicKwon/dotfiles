@@ -1123,7 +1123,7 @@ command HA call HardMode() | echo "HardMode Activated"
 " --- lazy mode(non-greedy) -> .{-}
 " after -> :put A or (insert mode)"AP
 ab xorg -*- mode: org; -*-
-ab xftp ftp://osickwon@ftp.osickwon.heliohost.org/public_html
+ab xftp ftp://osickwon@ftp.osickwon.heliohost.org/public_html/
 
 
 "-----------
