@@ -250,7 +250,7 @@
   :config
   (setq view-read-only t) ;; enter view-mode for read-only file
   ;; https://github.com/jwiegley/use-package/issues/455#issuecomment-347750540
-  (define-key key-translation-map (kbd "\\") (kbd "M-SPC"))  ; for general package key-binding
+  (define-key key-translation-map (kbd "\\") (kbd "M-SPC"))  ; for general package key-binding like a leader key
   :bind (("M-z" . view-mode) 
 	 :map view-mode-map
 
