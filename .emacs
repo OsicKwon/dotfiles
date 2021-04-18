@@ -874,7 +874,7 @@
 (setq-default abbrev-mode t)
 (setq abbrev-file-name "~/Documents/nvALT/cfg/abbrev_defs.txt")
 ;; (read-abbrev-file "~/.abbrev_defs")
-(setq save-abbrevs t)
+(setq save-abbrevs 'silent)
 
 
 ;; sublimity - sublime style minimap
