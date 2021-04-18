@@ -38,6 +38,13 @@
 ;; --------------------
 
 
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+  )
+
+
 ;; (use-package focus :ensure t)
 ;; (add-hook 'evil-normal-state-entry-hook 'focus-mode)
 ;; (add-hook 'evil-normal-state-exit-hook (lambda () (focus-mode -1)))
@@ -173,7 +180,7 @@
 ;; https://dev.to/huytd/emacs-from-scratch-1cg6
 (use-package general
   :ensure t
-  ;; :disabled t
+  :disabled t
   :config (general-define-key
   :states '(normal visual insert emacs)
   ;; :prefix "SPC"
@@ -245,12 +252,13 @@
 ;; https://gist.github.com/ivan-krukov/63a586f2121519ca51b201c634402a84
 ;; https://www.youtube.com/watch?v=kZARKLxTeYQ
 
+
 ;; add view mode keybindings 2021-04-04
 (use-package view
   :config
   (setq view-read-only t) ;; enter view-mode for read-only file
   ;; https://github.com/jwiegley/use-package/issues/455#issuecomment-347750540
-  (define-key key-translation-map (kbd "\\") (kbd "M-SPC"))  ; for general package key-binding like a leader key
+  ;; (define-key key-translation-map (kbd "\\") (kbd "M-SPC"))  ; for general package key-binding like a leader key
   :bind (("M-z" . view-mode) 
 	 :map view-mode-map
 
@@ -307,7 +315,8 @@
 	 ;; ("`" . avy-goto-char-2)
 	 ;; ("`" . cfw:open-org-calendar)
 	 ;; ("`" . org-open-at-point-global)
-	 ("`" . my-org-next-link-open)
+	 ;; ("`" . my-org-next-link-open)
+	 ("`" . ace-link)
 	 ;; ("w" . my-minimap-mode)
 	 ;; ("w" . sublimity-mode)
 	 ("w" . avy-goto-char-2)
@@ -377,6 +386,9 @@
          )
   )
 
+
+;; (with-eval-after-load "view-mode"
+;;   (define-key view-mode-map (kbd "\\") (kbd "M-SPC")))
 
 ;; make sure the cursor is changed visually
 ;; complicted to Evil cursors
@@ -797,7 +809,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(key-chord dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
  '(writeroom-restore-window-config t))
