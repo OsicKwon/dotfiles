@@ -38,6 +38,18 @@
 ;; --------------------
 
 
+;; org-appear 2021-04-18
+(setq org-hide-emphasis-markers t)
+(use-package org-appear :ensure t)
+(add-hook 'org-mode-hook 'org-appear-mode)
+
+
+;; (require 'org-bullets)
+(use-package org-bullets :ensure t)
+(setq org-bullets-bullet-list '("■" "○" "▪" "•" "⁃" "◦" "·" "□" "○" "■" "●" "◆" "◔" "◕" "❑" "⚀" "𝇇" "☺"))
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+
 (use-package rainbow-delimiters
   :ensure t
   :config
@@ -1839,8 +1851,8 @@ T - tag prefix
 
 
 (add-to-list 'org-emphasis-alist
-             '("~" (:foreground "red3")
-               ))
+	     '("~" (:foreground "red3"))
+	     )
 
 ;; === ORG-BABEL ===
 
