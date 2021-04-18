@@ -872,7 +872,7 @@
 ;; https://www.oreilly.com/library/view/learning-gnu-emacs/1565921526/ch04s04.html
 ;; http://ergoemacs.org/emacs/emacs_abbrev_mode_tutorial.html
 (setq-default abbrev-mode t)
-(setq abbrev-file-name "~/Documents/nvALT/abbrev_defs.txt")
+(setq abbrev-file-name "~/Documents/nvALT/cfg/abbrev_defs.txt")
 ;; (read-abbrev-file "~/.abbrev_defs")
 (setq save-abbrevs t)
 
