@@ -812,7 +812,6 @@
    '(key-chord dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
- '(save-abbrevs 'silently)
  '(writeroom-restore-window-config t))
 
 
@@ -872,33 +871,30 @@
 ;; abbrev-mode 2021-03-20
 ;; https://www.oreilly.com/library/view/learning-gnu-emacs/1565921526/ch04s04.html
 ;; http://ergoemacs.org/emacs/emacs_abbrev_mode_tutorial.html
-;; (setq-default abbrev-mode t)
-;; (setq abbrev-file-name "~/Documents/nvALT/cfg/abbrev_defs.txt")
+(setq-default abbrev-mode t)
+(setq abbrev-file-name "~/Documents/nvALT/abbrev_defs.txt")
 ;; (read-abbrev-file "~/.abbrev_defs")
+(setq save-abbrevs t)
 ;; (setq save-abbrevs 'silent)
+;; (setq save-abbrevs 'silently)
+;; (setq save-abbrevs nil)
 
 
 ;; sublimity - sublime style minimap
-
 (when (display-graphic-p)
-
   (require 'sublimity)
   ;; (require 'sublimity-scroll)
   (require 'sublimity-map) ;; experimental
   ;; (require 'sublimity-attractive)
-
   ;; (setq sublimity-scroll-weight 10
   ;;       sublimity-scroll-drift-length 5)
-
   ;; no `setq`
   ;; (sublimity-map-set-delay 5)
   ;; (sublimity-map-set-delay nil)  ;; always show, different from 0 value
-
   (setq sublimity-map-size 35)
   (setq sublimity-map-fraction 0.3)  ;; maximum fraction of width
   (setq sublimity-map-text-scale -6)
   (setq sublimity-map-active-region 'nil)
-  
   ;; (sublimity-mode 1)
 )
 
