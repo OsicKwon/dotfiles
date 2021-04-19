@@ -37,6 +37,11 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; crux  2021-04-18
+;; Collection of Ridiculously Useful eXtensions for Emacs
+;; https://github.com/bbatsov/crux
+(use-package crux :ensure t)
+
 
 ;; highlight under cursor 2021-04-18
 ;; https://xenodium.com/ <- Powerful Emacs Contents
@@ -765,8 +770,17 @@
 ;; pdf-tools 2021-03-31
 ;; https://github.com/politza/pdf-tools/issues/206
 ;; (require 'pdf-tools)
-(use-package pdf-tools :ensure t)
-(pdf-tools-install)
+;; (use-package pdf-tools :ensure t)
+;; (pdf-tools-install)
+;; 
+;; https://xenodium.com/trying-out-emacs-pdf-tools/
+(use-package pdf-tools
+  :ensure t
+  :mode ("\\.pdf\\'" . pdf-view-mode)
+  :config
+  (pdf-tools-install)
+  (setq-default pdf-view-display-size 'fit-page)
+  (setq pdf-annot-activate-created-annotations t))
 
 
 ;; remove warning of cl is depreciated 2021-03-29
