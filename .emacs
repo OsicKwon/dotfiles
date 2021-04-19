@@ -37,6 +37,11 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; == top margin 2021-04-19 ==
+;; https://stackoverflow.com/questions/12632399/how-to-get-top-and-bottom-margins-in-emacs
+(set-frame-parameter nil 'internal-border-width 10)
+
+
 ;; == encrypt 2021-04-19 ==
 ;; https://media.ccc.de/v/glt21-251-emacs-org-mode-features-you-may-not-know#t=1289
 ;; https://orgmode.org/worg/org-tutorials/encrypting-files.html
