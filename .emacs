@@ -39,6 +39,7 @@
 
 ;; crux  2021-04-18
 ;; Collection of Ridiculously Useful eXtensions for Emacs
+;; https://emacsredux.com/blog/2020/12/08/favorite-emacs-packages/ 
 ;; https://github.com/bbatsov/crux
 (use-package crux :ensure t)
 
