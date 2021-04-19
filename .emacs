@@ -37,6 +37,11 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; == centered cursor mode for view-mode 2021-04-19 ==
+;; https://github.com/andre-r/centered-cursor-mode.el
+(use-package centered-cursor-mode :ensure t)
+
+
 ;; == company mode enhancement 2021-04-19 ==
 ;; https://github.com/sebastiencs/company-box
 (use-package company-box
@@ -568,7 +573,10 @@
       ;; https://emacs.stackexchange.com/questions/32123/evil-binding-q-to-view-quit-in-view-mode-instead-of-evil-record-macro
       (evil-emacs-state 1)  ;; always related between evil and view-mode 2021-04-04
     )
-
+  (if view-mode
+      (centered-cursor-mode 1)
+    (centered-cursor-mode 0)
+    )
   (when (display-graphic-p) 
     (if view-mode
 	;; (face-remap-add-relative 'default '((:background "controlHighlightColor")))
