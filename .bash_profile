@@ -28,7 +28,9 @@ alias vi=vim
 export VISUAL=vim
 export EDITOR=$VISUAL
 
-
+# mvim : macvim
+# https://stackoverflow.com/questions/2056137/how-to-run-mvim-macvim-from-terminal/2057486
+alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
 
 # Java 11
 export JAVA_HOME_11=$(/usr/libexec/java_home -v11)

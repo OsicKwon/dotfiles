@@ -37,6 +37,37 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+
+;; == Paredit 2021-04-19 ==
+;; https://wikemacs.org/wiki/Paredit-mode
+;; http://danmidwood.com/content/2014/11/21/animated-paredit.html
+(autoload 'enable-paredit-mode "paredit"
+  "Turn on pseudo-structural editing of Lisp code."
+  t)
+(add-hook 'emacs-lisp-mode-hook       'enable-paredit-mode)
+(add-hook 'lisp-mode-hook             'enable-paredit-mode)
+(add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
+(add-hook 'scheme-mode-hook           'enable-paredit-mode)
+
+
+;; == esup :: Emacs Start Up Profiler 2021-04-19 ==
+;; https://github.com/jschaf/esup
+(use-package esup
+  :ensure t
+  ;; https://blog.d46.us/advanced-emacs-startup/
+  :init   ; Code to run immediately
+  :config ; Code to run after the package is loaded
+  ;; https://github.com/jschaf/esup/issues/60#issuecomment-461217431
+  (setq esup-user-init-file (file-truename "~/dotfiles/.emacs"))
+  ;; Work around a bug where esup tries to step into the byte-compiled
+  ;; version of `cl-lib', and fails horribly.
+  ;; https://github.com/jschaf/esup/issues/54#issuecomment-651247749
+  (setq esup-depth 0)
+  ;; To use MELPA Stable use ":pin melpa-stable",
+  :pin melpa
+  )
+
+
 ;; crux  2021-04-18
 ;; Collection of Ridiculously Useful eXtensions for Emacs
 ;; https://emacsredux.com/blog/2020/12/08/favorite-emacs-packages/ 
@@ -161,7 +192,7 @@
 ;; https://github.com/atykhonov/google-translate/issues/137
 (use-package google-translate
   :demand t
-  :disabled t  ;; too powerful 2021-04-12
+  :disabled  ;; too powerful 2021-04-12
   :ensure t
   :init
   (require 'google-translate)
@@ -217,7 +248,7 @@
 ;; https://dev.to/huytd/emacs-from-scratch-1cg6
 (use-package general
   :ensure t
-  :disabled t
+  :disabled
   :config (general-define-key
   :states '(normal visual insert emacs)
   ;; :prefix "SPC"
@@ -264,12 +295,21 @@
 ))
 
 
-;; elfeed 2021-04-09
-;; (use-package elfeed :ensure t)
-;; (setq elfeed-feeds
-;;       '(
-;; 	"https://lifehacker.com/rss"
-;; 	))
+;; == elfeed 2021-04-09 ==
+(use-package elfeed :ensure t)
+(setq elfeed-feeds
+      '(
+	"https://lifehacker.com/rss"
+	"https://ca.indeed.com/rss?q=financial+analyst&l=Toronto%2C+ON&sort=date&radius=50"
+	"https://ca.indeed.com/rss?q=financial+accounting&l=Toronto%2C+ON&sort=date&radius=50"
+	"https://ca.indeed.com/rss?q=financial+system&l=Toronto%2C+ON&sort=date&radius=50"
+	"https://ca.indeed.com/rss?q=cost+accounting&l=Toronto%2C+ON&sort=date&radius=50"
+	("https://ca.indeed.com/rss?q=data+analayst&l=Toronto%2C+ON&sort=date&radius=50" Data Analyst)
+	"https://ca.indeed.com/rss?q=Hyperion&l=Toronto%2C+ON&sort=date&radius=50"
+	"https://ca.indeed.com/rss?q=advanced+excel&l=Toronto%2C+ON&sort=date&radius=50"
+	"https://ca.indeed.com/rss?q=vba&l=Toronto%2C+ON&sort=date&radius=50"
+	("https://ca.indeed.com/rss?q=Korean&l=Toronto%2C+ON&sort=date&radius=50" Korean)
+	))
 
 
 ;; org-capture at point 2021-04-07
@@ -636,7 +676,7 @@
 ;; https://github.com/edkolev/evil-goggles
 (use-package evil-goggles
   :ensure t
-  :disabled t
+  :disabled
   :config
   (evil-goggles-mode)
 
@@ -1061,7 +1101,7 @@
 ;; Or if you use use-package
 (use-package dashboard
   :ensure t
-  :disabled t
+  :disabled
   :config
   (dashboard-setup-startup-hook)
 
@@ -1619,7 +1659,7 @@
 ;; (require 'helm-projectile)
 (use-package helm-projectile
   :ensure t
-  :disabled t
+  :disabled
   :init
   ;; (setq helm-projectile-fuzzy-match nil)
   ;; (helm-projectile-on)
@@ -1884,9 +1924,17 @@ T - tag prefix
 (global-set-key (kbd "C-M-<return>") 'org-insert-subheading)  ;; Org Insert Sub-Heading 2021-03-31
 
 
-(add-to-list 'org-emphasis-alist
-	     '("~" (:foreground "red3"))
-	     )
+;; (add-to-list 'org-emphasis-alist
+;; 	     '("~" (:foreground "red3"))
+;; 	     )
+
+(setq org-emphasis-alist
+      '(
+	("~" (:foreground "red3"))
+        ("/" (italic (:foreground "dark blue")))
+	)
+      )
+
 
 ;; === ORG-BABEL ===
 
