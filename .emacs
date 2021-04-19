@@ -38,6 +38,24 @@
 ;; --------------------
 
 
+;; highlight under cursor 2021-04-18
+;; https://xenodium.com/emacs-highlight-symbol-mode/
+(use-package highlight-symbol :ensure t
+  :config
+  (set-face-attribute 'highlight-symbol-face nil
+                      ;; :background "default"
+                      :background "light yellow"
+                      :foreground "#FA009A")
+  (setq highlight-symbol-idle-delay 0)
+  (setq highlight-symbol-on-navigation-p t)
+  ;; (add-hook 'prog-mode-hook #'highlight-symbol-mode)
+  ;; (add-hook 'prog-mode-hook #'highlight-symbol-nav-mode))
+  (add-hook 'evil-normal-state-entry-hook #'highlight-symbol-mode)
+  (add-hook 'evil-normal-state-entry-hook #'highlight-symbol-nav-mode))
+  (add-hook 'evil-normal-state-exit-hook (lambda () (highlight-symbol-mode -1)))
+  (add-hook 'evil-normal-state-exit-hook (lambda () (highlight-symbol-nav-mode -1)))
+
+
 ;; org-appear 2021-04-18
 (setq org-hide-emphasis-markers t)
 (use-package org-appear :ensure t)
