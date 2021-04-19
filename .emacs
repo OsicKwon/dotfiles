@@ -41,13 +41,13 @@
 ;; == Paredit 2021-04-19 ==
 ;; https://wikemacs.org/wiki/Paredit-mode
 ;; http://danmidwood.com/content/2014/11/21/animated-paredit.html
-(autoload 'enable-paredit-mode "paredit"
-  "Turn on pseudo-structural editing of Lisp code."
-  t)
-(add-hook 'emacs-lisp-mode-hook       'enable-paredit-mode)
-(add-hook 'lisp-mode-hook             'enable-paredit-mode)
-(add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
-(add-hook 'scheme-mode-hook           'enable-paredit-mode)
+; (autoload 'enable-paredit-mode "paredit"
+;   "Turn on pseudo-structural editing of Lisp code."
+;   t)
+; (add-hook 'emacs-lisp-mode-hook       'enable-paredit-mode)
+; (add-hook 'lisp-mode-hook             'enable-paredit-mode)
+; (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
+; (add-hook 'scheme-mode-hook           'enable-paredit-mode)
 
 
 ;; == esup :: Emacs Start Up Profiler 2021-04-19 ==
