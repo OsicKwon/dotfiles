@@ -558,7 +558,7 @@
 ;; MODE-off-hook
 
 ;; https://www.reddit.com/r/emacs/comments/knoyz2/need_help_toggling_modes_and_settings_when/
-(defun my-view-mode-hook ()
+(defun my-view-mode ()
   "Custom behaviours for `view-mode'."
   (if view-mode
       (face-remap-add-relative 'mode-line '((:foreground "red" :background "black") mode-line))
@@ -596,7 +596,7 @@
 
   )
 
-(add-hook 'view-mode-hook #'my-view-mode-hook)
+(add-hook 'view-mode-hook #'my-view-mode)
 
 
 ;; (put 'clone-indirect-buffer-other-window 'disabled "\n Use 'make-indirect-buffer' instead due to view-mode with face issues")
