@@ -976,9 +976,9 @@
 
 
 ;; minibuffer margin 2021-03-22
-(setq-default left-margin-width 1 right-margin-width 1)
-(set-window-buffer nil (current-buffer))
-
+;; (setq-default left-margin-width 1 right-margin-width 1)
+;; (set-window-buffer nil (current-buffer))
+;; replace to (set-frame-parameter nil 'internal-border-width 10)
 
 ;; writegood-mode 2021-03-21
 ;; (require 'writegood-mode)
