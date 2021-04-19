@@ -37,6 +37,12 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; == company mode enhancement 2021-04-19 ==
+;; https://github.com/sebastiencs/company-box
+(use-package company-box
+  :ensure t
+  :hook (company-mode . company-box-mode))
+
 
 ;; == Paredit 2021-04-19 ==
 ;; https://wikemacs.org/wiki/Paredit-mode
@@ -75,7 +81,7 @@
 (use-package crux :ensure t)
 
 
-;; highlight under cursor 2021-04-18
+;; == highlight under cursor 2021-04-18 ==
 ;; https://xenodium.com/ <- Powerful Emacs Contents
 ;; https://xenodium.com/emacs-highlight-symbol-mode/
 (use-package highlight-symbol :ensure t
@@ -83,6 +89,8 @@
   (set-face-attribute 'highlight-symbol-face nil
                       ;; :background "default"
                       :background "light yellow"
+                      ;; :background "light gray"
+		      ;; :box '(:line-width -1 :color "light gray" :style nil)  ;; interupting line width 2021-04-19
                       :foreground "#FA009A")
   (setq highlight-symbol-idle-delay 0)
   (setq highlight-symbol-on-navigation-p t)
@@ -94,12 +102,13 @@
   (add-hook 'evil-normal-state-exit-hook (lambda () (highlight-symbol-nav-mode -1)))
 
 
-;; org-appear 2021-04-18
+;; == org-appear 2021-04-18 ==
 (setq org-hide-emphasis-markers t)
 (use-package org-appear :ensure t)
 (add-hook 'org-mode-hook 'org-appear-mode)
 
 
+;; == org-bullets ==
 ;; (require 'org-bullets)
 (use-package org-bullets :ensure t)
 (setq org-bullets-bullet-list '("■" "⚬" "▪" "•" "▭" "◦" "·" "□" "○" "■" "●" "◆" "◔" "▣" "❑" "⚀" "𝇇" "✗" "✓" "☺"))
@@ -1022,6 +1031,11 @@
 (load "mwe-log-commands")
 ;; (load "sticky-windows.el")  ;; more test required 2021-03-27
 
+;; == annotate.el 2021-04-19 ==
+;; https://github.com/bastibe/annotate.el
+(load "annotate")
+(require 'annotate)
+
 
 ;; mew-log-commands 2021-03-18
 ;; ---------------------------
@@ -1923,17 +1937,15 @@ T - tag prefix
 (global-set-key "\C-ca" 'org-agenda)                       ;; Org Agenda View shortcut
 (global-set-key (kbd "C-M-<return>") 'org-insert-subheading)  ;; Org Insert Sub-Heading 2021-03-31
 
+(add-to-list 'org-emphasis-alist '("~" (:foreground "red3")))
+(add-to-list 'org-emphasis-alist '("/" (:foreground "dark blue" :slant italic)))
 
-;; (add-to-list 'org-emphasis-alist
-;; 	     '("~" (:foreground "red3"))
-;; 	     )
-
-(setq org-emphasis-alist
-      '(
-	("~" (:foreground "red3"))
-        ("/" (italic (:foreground "dark blue")))
-	)
-      )
+;; (setq org-emphasis-alist
+;;       '(
+;; 	("~" (:foreground "red3"))
+;;         ("/" (italic (:foreground "dark blue")))
+;; 	)
+;;       )
 
 
 ;; === ORG-BABEL ===
