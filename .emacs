@@ -39,6 +39,7 @@
 
 
 ;; highlight under cursor 2021-04-18
+;; https://xenodium.com/ <- Powerful Emacs Contents
 ;; https://xenodium.com/emacs-highlight-symbol-mode/
 (use-package highlight-symbol :ensure t
   :config
