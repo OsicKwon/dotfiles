@@ -37,6 +37,17 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+
+;; == Tufte : org html export theme 2021-04-19 ==
+;; #+HTML_HEAD: <link rel="stylesheet" href="/css/tufte.css" type="text/css" />
+;; example :: https://two-wrongs.com/essay-recommendation-on-having-enough-socks.html
+;; (require 'ox-tufte)
+(use-package ox-tufte :ensure t)
+;; FYI > other recommendation for export HTML css
+;; https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+;; https://github.com/thi-ng/org-spec 
+
+
 ;; == centered cursor mode for view-mode 2021-04-19 ==
 ;; https://github.com/andre-r/centered-cursor-mode.el
 (use-package centered-cursor-mode :ensure t)
