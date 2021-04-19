@@ -37,6 +37,17 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; == encrypt 2021-04-19 ==
+;; https://media.ccc.de/v/glt21-251-emacs-org-mode-features-you-may-not-know#t=1289
+;; https://orgmode.org/worg/org-tutorials/encrypting-files.html
+;; (require 'org-crypt)
+(use-package org-crypt)
+(org-crypt-use-before-save-magic)
+(setq org-tags-exclude-from-inheritance (quote ("crypt")))
+;; GPG key to use for encryption
+;; Either the Key ID or set to nil to use symmetric encryption.
+(setq org-crypt-key nil)
+
 
 ;; == Tufte : org html export theme 2021-04-19 ==
 ;; #+HTML_HEAD: <link rel="stylesheet" href="/css/tufte.css" type="text/css" />
@@ -1447,7 +1458,7 @@
     (progn
       ;; if graphic (GUI)
       ;; <NORMAL>
-      (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :underline "light gray")))
+      (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :underline "gray85")))
       (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :underline nil)))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "light gray")))
       (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light gray")))
