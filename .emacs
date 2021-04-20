@@ -117,9 +117,11 @@
 
 
 ;; == company mode enhancement 2021-04-19 ==
+;; ~~ Interupted file path auto-completion ~~
 ;; https://github.com/sebastiencs/company-box
 (use-package company-box
   :ensure t
+  :disabled
   :hook (company-mode . company-box-mode))
 
 
@@ -387,7 +389,7 @@
 (use-package elfeed :ensure t)
 (setq elfeed-feeds
       '(
-	"https://lifehacker.com/rss"
+	;; "https://lifehacker.com/rss"
 	"https://ca.indeed.com/rss?q=financial+analyst&l=Toronto%2C+ON&sort=date&radius=50"
 	"https://ca.indeed.com/rss?q=financial+accounting&l=Toronto%2C+ON&sort=date&radius=50"
 	"https://ca.indeed.com/rss?q=financial+system&l=Toronto%2C+ON&sort=date&radius=50"
@@ -760,6 +762,16 @@
 
 ;; [ winner mode 2021-04-02
 (winner-mode 1)
+;; Not Working with Capital: Left / Right
+;; (global-set-key (kbd "C-c C-<Left>") 'winner-undo)
+;; (global-set-key (kbd "C-c C-<Right>") 'winner-redo)
+;; (global-set-key (kbd "C-c <C-Left>") 'winner-undo)
+;; (global-set-key (kbd "C-c <C-Right>") 'winner-redo)
+;; Both OK with: inside <C-left> and outside C-<left>
+;; (global-set-key (kbd "C-c <C-left>") 'winner-undo)
+;; (global-set-key (kbd "C-c <C-right>") 'winner-redo)
+(global-set-key (kbd "C-c C-<left>") 'winner-undo)
+(global-set-key (kbd "C-c C-<right>") 'winner-redo)
 ;; ]
 
 
@@ -787,8 +799,8 @@
 (dolist (command '(scroll-up-command
 		   scroll-down-command
                    recenter-top-bottom
-		   ;; other-window   ; beacon is better in same buffer with different window
-		   ;; ace-window     ; beacon is better in same buffer with differnet window
+		   other-window   ; beacon is better in same buffer with different window
+		   ace-window     ; beacon is better in same buffer with differnet window
 		   org-forward-element
                    org-backward-element
 		   forward-paragraph
