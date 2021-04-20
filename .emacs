@@ -37,9 +37,56 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+
+;; == Link Abbreviation 2021-04-19 ==
+;; format: [[engine:keyword][description]]
+;; example: [[google:emacs][emacs search]]
+;; https://yiufung.net/post/org-mode-hidden-gems-pt3/
+;; https://orgmode.org/manual/Link-Abbreviations.html
+(setq org-link-abbrev-alist
+      '(
+	("google" . "https://www.google.com/search?q=")
+	)
+      )
+
+
+;; Demote sequence for list bullets 2021-04-19
+;; https://yiufung.net/post/org-mode-hidden-gems-pt1/
+;; (setq org-list-demote-modify-bullet '(("-" . "+") ("+" . "*") ("*" . "-")))
+
+
+;; == org: Avoid inadvertent text edit in invisible area 2021-04-19 ==
+;; https://yiufung.net/post/org-mode-hidden-gems-pt1/
+(setq org-catch-invisible-edits 'show-and-error)
+
+
+;; == org heading blank line exactly work 2021-04-19 ==
+;; https://stackoverflow.com/questions/40332479/org-mode-folding-considers-whitespace-as-content
+;; --------------------------------------------------------------------------
+;; Documentation:
+;; Number of empty lines needed to keep an empty line between collapsed trees.
+;; If you leave an empty line between the end of a subtree and the following
+;; headline, this empty line is hidden when the subtree is folded.
+;; Org mode will leave (exactly) one empty line visible if the number of
+;; empty lines is equal or larger to the number given in this variable.
+;; So the default 2 means at least 2 empty lines after the end of a subtree
+;; are needed to produce free space between a collapsed subtree and the
+;; following headline.
+;; If the number is negative, and the number of empty lines is at least -N,
+;; all empty lines are shown.
+;; --------------------------------------------------------------------------
+;; but, not wokring properly on evil-mode 
+;; in evil-mode, it seems to be (setq org-cycle-separator-lines 0), which is no blank line
+;; https://yiufung.net/post/org-mode-hidden-gems-pt1/
+;; --------------------------------------------------------------------------
+;; (setq org-cycle-separator-lines 2)  ;; default: 2 lines -> 1 blank between heading
+;; (setq org-cycle-separator-lines 0)  ;; not allow blank line like evil-mode
+(setq org-cycle-separator-lines -1)  ;; 1 line == 1 blank
+
+
 ;; == top margin 2021-04-19 ==
 ;; https://stackoverflow.com/questions/12632399/how-to-get-top-and-bottom-margins-in-emacs
-(set-frame-parameter nil 'internal-border-width 10)
+;; (set-frame-parameter nil 'internal-border-width 10)
 
 
 ;; == encrypt 2021-04-19 ==
@@ -1068,8 +1115,8 @@
 
 ;; == annotate.el 2021-04-19 ==
 ;; https://github.com/bastibe/annotate.el
-(load "annotate")
-(require 'annotate)
+;; (load "annotate")
+;; (require 'annotate)
 
 
 ;; mew-log-commands 2021-03-18
