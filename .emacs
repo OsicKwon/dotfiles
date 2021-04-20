@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 ;; -*- find-file-hook: view-mode; -*-
 ;; since 2020
 ;;    ___  ____ ___  ____ ___________
@@ -2462,4 +2460,3 @@ T - tag prefix
 
 
 ;; EOF
->>>>>>> de8c887f17862af8f5c6ffad41ab8d82d77a22a9
