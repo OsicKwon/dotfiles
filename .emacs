@@ -80,8 +80,8 @@
 ;; https://yiufung.net/post/org-mode-hidden-gems-pt1/
 ;; --------------------------------------------------------------------------
 ;; (setq org-cycle-separator-lines 2)  ;; default: 2 lines -> 1 blank between heading
-;; (setq org-cycle-separator-lines 0)  ;; not allow blank line like evil-mode
-(setq org-cycle-separator-lines -1)  ;; 1 line == 1 blank
+(setq org-cycle-separator-lines 0)  ;; not allow blank line like evil-mode
+;; (setq org-cycle-separator-lines -1)  ;; 1 line == 1 blank
 
 
 ;; == top margin 2021-04-19 ==
@@ -647,10 +647,10 @@
       ;; https://emacs.stackexchange.com/questions/32123/evil-binding-q-to-view-quit-in-view-mode-instead-of-evil-record-macro
       (evil-emacs-state 1)  ;; always related between evil and view-mode 2021-04-04
     )
-  (if view-mode
-      (centered-cursor-mode 1)
-    (centered-cursor-mode 0)
-    )
+  ;; (if view-mode
+  ;;     (centered-cursor-mode 1)
+  ;;   (centered-cursor-mode 0)
+  ;;   )
   (when (display-graphic-p) 
     (if view-mode
 	;; (face-remap-add-relative 'default '((:background "controlHighlightColor")))
