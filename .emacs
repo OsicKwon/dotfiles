@@ -2144,6 +2144,7 @@ T - tag prefix
       ("ih" "with Scheduled")
 
       ("e" "English")
+      ("ei" "Just Input")
       ("es" "with Selected Area")
       ("esi" "with Selected Area & Location")
       ("ec" "with Clipboard")      
