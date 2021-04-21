@@ -59,7 +59,7 @@
 ;; (run-with-idle-timer 2 nil #'message "Function 1")
 (run-with-idle-timer 300 nil #'my-default-screen)
 ;; https://emacs.stackexchange.com/questions/6029/is-it-possible-to-execute-a-function-or-command-at-a-specific-time
-(run-at-time "09:00" nil 'cfw:open-org-calendar)
+;; (run-at-time "09:00" nil 'cfw:open-org-calendar)
 
 
 ;; == Link Abbreviation 2021-04-19 ==
@@ -306,7 +306,7 @@
 ;; https://github.com/atykhonov/google-translate/issues/137
 (use-package google-translate
   :demand t
-  :disabled  ;; too powerful 2021-04-12
+  ;; :disabled  ;; too powerful 2021-04-12
   :ensure t
   :init
   (require 'google-translate)
@@ -362,11 +362,12 @@
 ;; https://dev.to/huytd/emacs-from-scratch-1cg6
 (use-package general
   :ensure t
-  :disabled
+  ;; :disabled
   :config (general-define-key
   :states '(normal visual insert emacs)
   ;; :prefix "SPC"
-  :prefix "\\"  ;; like the leader key in vim
+  ;; :prefix "\\"  ;; like the leader key in vim
+  :prefix "M-SPC"
   :non-normal-prefix "M-SPC"
   ;; :non-normal-prefix "C-SPC"  ;; conflicted with 'mark set' like 'visual' mode in evil
   :keymaps 'override
@@ -443,6 +444,17 @@
 ;; https://gist.github.com/ivan-krukov/63a586f2121519ca51b201c634402a84
 ;; https://www.youtube.com/watch?v=kZARKLxTeYQ
 
+;; TEST but does not work
+;; (defun my-view-general-prefix ()
+;;   (lambda ()
+;;     (interactive)
+;;     (funcall (key-binding (kbd "M-SPC")))
+;;     ;; (call-interactively (key-binding (kbd "M-SPC")))
+;;     )
+;;   )
+
+;; (define-key view-mode-map (kbd "\\") (kbd "M-spc"))
+
 
 ;; add view mode keybindings 2021-04-04
 (use-package view
@@ -450,6 +462,15 @@
   (setq view-read-only t) ;; enter view-mode for read-only file
   ;; https://github.com/jwiegley/use-package/issues/455#issuecomment-347750540
   ;; (define-key key-translation-map (kbd "\\") (kbd "M-SPC"))  ; for general package key-binding like a leader key
+
+  :general (
+    :states '(normal)
+    :prefix "\\"
+    "m"    '(:ignore t :which-key "markdown")
+    "ms"   '(:keymap markdown-mode-style-map :which-key "style")
+    "mc"   '(:keymap markdown-mode-command-map :which-key "command")
+    )
+
   :bind (("M-z" . view-mode) 
 	 :map view-mode-map
 
@@ -536,6 +557,7 @@
 	 ("[" . switch-to-prev-buffer)
 	 ;; ("\\" . counsel-buffer-or-recentf)
 	 ;; ("\\" . imenu-list)
+	 ;; ("\\" . my-view-general-prefix)
 	 ("m" . imenu-list)
 	 ;; ("m" . counsel-M-x)
 	 
