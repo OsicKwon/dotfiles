@@ -142,15 +142,6 @@
 (use-package centered-cursor-mode :ensure t)
 
 
-;; == company mode enhancement 2021-04-19 ==
-;; ~~ Interupted file path auto-completion ~~
-;; https://github.com/sebastiencs/company-box
-(use-package company-box
-  :ensure t
-  :disabled
-  :hook (company-mode . company-box-mode))
-
-
 ;; == Paredit 2021-04-19 ==
 ;; https://wikemacs.org/wiki/Paredit-mode
 ;; http://danmidwood.com/content/2014/11/21/animated-paredit.html
@@ -185,7 +176,7 @@
 ;; Collection of Ridiculously Useful eXtensions for Emacs
 ;; https://emacsredux.com/blog/2020/12/08/favorite-emacs-packages/ 
 ;; https://github.com/bbatsov/crux
-(use-package crux :ensure t)
+;; (use-package crux :ensure t)
 
 
 ;; == highlight under cursor 2021-04-18 ==
@@ -222,6 +213,7 @@
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 
+;; == rainbow-delimiters ==
 (use-package rainbow-delimiters
   :ensure t
   :config
@@ -229,15 +221,19 @@
   )
 
 
+;; == focus package (too slow) ==
 ;; (use-package focus :ensure t)
 ;; (add-hook 'evil-normal-state-entry-hook 'focus-mode)
 ;; (add-hook 'evil-normal-state-exit-hook (lambda () (focus-mode -1)))
 
+
+;; == dimmer (not needed) ==
 ;; (require 'dimmer)
 ;; (use-package dimmer :ensure t)
 ;;  (dimmer-configure-which-key)
 ;;  (dimmer-configure-helm)
 ;;  (dimmer-mode t)
+
 
 ;; open nearest link 2021-04-16
 (defun my-org-next-link-open ()
@@ -246,7 +242,8 @@
   (org-open-at-point-global)
   )
 
-;; pdfgrep 2021-04-16
+;; == pdfgrep 2021-04-16 ==
+;; not useful / some confused
 ;; (require 'pdfgrep)
 ;; (use-package pdfgrep :ensure t)
 ;; (pdfgrep-mode)
@@ -296,7 +293,6 @@
 ;; nil
 ;;     Don’t set any variables. 
 ;; -----------------------------------------------------
-
 
 
 ;; dired-narrow 2021-04-11
@@ -364,7 +360,6 @@
 ;; https://dev.to/huytd/emacs-from-scratch-1cg6
 (use-package general
   :ensure t
-  ;; :disabled
   :config (general-define-key
   :states '(normal visual insert emacs)
   ;; :prefix "SPC"
@@ -373,20 +368,6 @@
   :non-normal-prefix "M-SPC"
   ;; :non-normal-prefix "C-SPC"  ;; conflicted with 'mark set' like 'visual' mode in evil
   :keymaps 'override
-  ;; ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
-  ;; "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
-  ;; "SPC" '(helm-M-x :which-key "M-x")
-  ;; "pf"  '(helm-find-file :which-key "find files")
-  ;; ;; Buffers
-  ;; "bb"  '(helm-buffers-list :which-key "buffers list")
-  ;; ;; Window
-  ;; "wl"  '(windmove-right :which-key "move right")
-  ;; "wh"  '(windmove-left :which-key "move left")
-  ;; "wk"  '(windmove-up :which-key "move up")
-  ;; "wj"  '(windmove-down :which-key "move bottom")
-  ;; "w/"  '(split-window-right :which-key "split right")
-  ;; "w-"  '(split-window-below :which-key "split bottom")
-  ;; "wx"  '(delete-window :which-key "delete window")
 
   ;; vim leader key binding
   "b"   '(counsel-recentf :which-key "Recent Files (browse)")
@@ -407,7 +388,6 @@
   ;; ;; Others
   "c"   '(cfw:open-org-calendar :which-key "Calendar View")
   ;; "mi"   '(minimap-mode :which-key "Minimap mode")
-  "at"  '(ansi-term :which-key "open terminal")
 
 ))
 
