@@ -44,7 +44,9 @@
 ;; == StartUp Function 2021-04-20 ==
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
 (defun my-default-screen ()
-  (find-file "~/Documents/nvALT/org_capture_note.txt")
+  (when (display-graphic-p)
+    (find-file "~/Documents/nvALT/org_capture_note.txt")
+    )
   )
 
 (add-hook 'emacs-startup-hook #'my-default-screen)
@@ -1737,6 +1739,7 @@
 (setq key-chord-two-keys-delay 0.5)
 (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
 (key-chord-define evil-insert-state-map "kk" 'evil-normal-state)
+(key-chord-define evil-insert-state-map "ii" 'evil-normal-state)
 (key-chord-mode 1)
 
 
