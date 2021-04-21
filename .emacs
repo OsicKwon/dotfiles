@@ -346,7 +346,7 @@
 (defun starting-functions ()
   (interactive)
   (select-frame (make-frame '((name . "calendar")))) ; makes a new frame and selects it
-  (set-face-attribute 'default (selected-frame) :height 135) ; reduces the font size of the new frame
+  (set-face-attribute 'default (selected-frame) :height 134) ; reduces the font size of the new frame
   (cfw:open-org-calendar) ; opens the calendar there
   )
 
