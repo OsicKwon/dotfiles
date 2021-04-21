@@ -1584,6 +1584,8 @@
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :background "light cyan")))
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
       (add-hook 'evil-visual-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light cyan")))
+      (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :underline "gray85")))
+      (add-hook 'evil-visual-state-exit-hook (lambda () (face-remap-add-relative 'default :underline nil)))
       ;; (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color original-background)))
       (add-hook 'evil-visual-state-exit-hook (lambda () (hl-line-mode 0)))
       ;;
