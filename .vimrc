@@ -646,7 +646,6 @@ inoremap <C-e> <End>
 " Escape in many ways in Insert mode"
 inoremap <silent>jj <Esc>
 inoremap <silent>kk <Esc>
-inoremap <silent>ii <Esc>
 " inoremap kj <Esc>
 " inoremap jk <Esc>
 

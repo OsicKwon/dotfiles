@@ -1739,7 +1739,6 @@
 (setq key-chord-two-keys-delay 0.5)
 (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
 (key-chord-define evil-insert-state-map "kk" 'evil-normal-state)
-(key-chord-define evil-insert-state-map "ii" 'evil-normal-state)
 (key-chord-mode 1)
 
 
