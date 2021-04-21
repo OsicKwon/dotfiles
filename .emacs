@@ -553,6 +553,7 @@
 	 ;; ("x" . nil)
 
 	 ;; Additional-keys
+	 ;; -----------
 	 ("r" . revert-buffer)
 	 ("a" . end-of-buffer)
 	 ;; ("a" . counsel-ag)
@@ -580,6 +581,8 @@
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)
 	 ("'" . olivetti-default-width)
+	 ;;
+	 ("<escape>" . counsel-M-x)
          )
   )
 
@@ -2322,7 +2325,7 @@ T - tag prefix
 ;; (global-set-key (kbd "C-c k") 'counsel-ack)  ;; ignore git status 2021-03-28
 (global-set-key (kbd "C-c t") 'counsel-outline)
 ;; (global-set-key (kbd "C-x b") 'counsel-buffer-or-recentf)
-(global-set-key (kbd "C-x b") 'counsel-ibuffer)
+;; (global-set-key (kbd "C-x b") 'counsel-ibuffer)  ;; can't create new buffer typing a new name
 (global-set-key (kbd "C-x f") 'counsel-recentf)
 ;; (global-set-key (kbd "C-x l") 'counsel-locate)
 ;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
