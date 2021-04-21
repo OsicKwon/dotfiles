@@ -368,6 +368,9 @@
   ;; :non-normal-prefix "C-SPC"  ;; conflicted with 'mark set' like 'visual' mode in evil
   :keymaps 'override
 
+  ;; recent key bindings
+  "`"   '(my-org-next-link-open :which-key "Open Next Link")
+
   ;; vim leader key binding
   "b"   '(counsel-recentf :which-key "Recent Files (browse)")
   "f"   '(counsel-find-file :which-key "Open a File")
