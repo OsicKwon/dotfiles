@@ -31,11 +31,200 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+;; 2021-04-20
+;; https://blog.sumtypeofway.com/posts/emacs-config.html
+(setq use-package-always-ensure t)
 
 
 ;; --------------------
 ;; == RECENT SETTING ==
 ;; --------------------
+
+
+;; == StartUp Function 2021-04-20 ==
+;; https://blog.sumtypeofway.com/posts/emacs-config.html
+(defun my-default-screen ()
+  (find-file "~/Documents/nvALT/org_capture_note.txt")
+  )
+
+(add-hook 'emacs-startup-hook #'my-default-screen)
+
+
+
+;; == Timers 2021-04-20 ==
+;; https://emacs.stackexchange.com/questions/7534/run-with-timer-error-invalid-or-unitialized-timer
+;; Open my calendar every 1 hour
+(run-with-timer 15 3600 #'my-default-screen) 
+;; https://emacs.stackexchange.com/questions/22692/effect-of-multiple-idle-timers
+;; (run-with-idle-timer 2 nil #'message "Function 1")
+(run-with-idle-timer 300 nil #'my-default-screen)
+;; https://emacs.stackexchange.com/questions/6029/is-it-possible-to-execute-a-function-or-command-at-a-specific-time
+(run-at-time ("09:00" "12:00" "15:00" "18:00") nil 'cfw:open-org-calendar)
+
+
+;; == Link Abbreviation 2021-04-19 ==
+;; format: [[engine:keyword][description]]
+;; example: [[google:emacs][emacs search]]
+;; https://yiufung.net/post/org-mode-hidden-gems-pt3/
+;; https://orgmode.org/manual/Link-Abbreviations.html
+(setq org-link-abbrev-alist
+      '(
+	("google" . "https://www.google.com/search?q=")
+	)
+      )
+
+
+;; Demote sequence for list bullets 2021-04-19
+;; https://yiufung.net/post/org-mode-hidden-gems-pt1/
+;; (setq org-list-demote-modify-bullet '(("-" . "+") ("+" . "*") ("*" . "-")))
+
+
+;; == org: Avoid inadvertent text edit in invisible area 2021-04-19 ==
+;; https://yiufung.net/post/org-mode-hidden-gems-pt1/
+(setq org-catch-invisible-edits 'show-and-error)
+
+
+;; == org heading blank line exactly work 2021-04-19 ==
+;; https://stackoverflow.com/questions/40332479/org-mode-folding-considers-whitespace-as-content
+;; --------------------------------------------------------------------------
+;; Documentation:
+;; Number of empty lines needed to keep an empty line between collapsed trees.
+;; If you leave an empty line between the end of a subtree and the following
+;; headline, this empty line is hidden when the subtree is folded.
+;; Org mode will leave (exactly) one empty line visible if the number of
+;; empty lines is equal or larger to the number given in this variable.
+;; So the default 2 means at least 2 empty lines after the end of a subtree
+;; are needed to produce free space between a collapsed subtree and the
+;; following headline.
+;; If the number is negative, and the number of empty lines is at least -N,
+;; all empty lines are shown.
+;; --------------------------------------------------------------------------
+;; but, not wokring properly on evil-mode 
+;; in evil-mode, it seems to be (setq org-cycle-separator-lines 0), which is no blank line
+;; https://yiufung.net/post/org-mode-hidden-gems-pt1/
+;; --------------------------------------------------------------------------
+;; (setq org-cycle-separator-lines 2)  ;; default: 2 lines -> 1 blank between heading
+(setq org-cycle-separator-lines 0)  ;; not allow blank line like evil-mode
+;; (setq org-cycle-separator-lines -1)  ;; 1 line == 1 blank
+
+
+;; == top margin 2021-04-19 ==
+;; https://stackoverflow.com/questions/12632399/how-to-get-top-and-bottom-margins-in-emacs
+;; (set-frame-parameter nil 'internal-border-width 10)
+
+
+;; == encrypt 2021-04-19 ==
+;; https://media.ccc.de/v/glt21-251-emacs-org-mode-features-you-may-not-know#t=1289
+;; https://orgmode.org/worg/org-tutorials/encrypting-files.html
+;; (require 'org-crypt)
+(use-package org-crypt)
+(org-crypt-use-before-save-magic)
+(setq org-tags-exclude-from-inheritance (quote ("crypt")))
+;; GPG key to use for encryption
+;; Either the Key ID or set to nil to use symmetric encryption.
+(setq org-crypt-key nil)
+
+
+;; == Tufte : org html export theme 2021-04-19 ==
+;; #+HTML_HEAD: <link rel="stylesheet" href="/css/tufte.css" type="text/css" />
+;; example :: https://two-wrongs.com/essay-recommendation-on-having-enough-socks.html
+;; (require 'ox-tufte)
+(use-package ox-tufte :ensure t)
+;; FYI > other recommendation for export HTML css
+;; https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+;; https://github.com/thi-ng/org-spec 
+
+
+;; == centered cursor mode for view-mode 2021-04-19 ==
+;; https://github.com/andre-r/centered-cursor-mode.el
+(use-package centered-cursor-mode :ensure t)
+
+
+;; == company mode enhancement 2021-04-19 ==
+;; ~~ Interupted file path auto-completion ~~
+;; https://github.com/sebastiencs/company-box
+(use-package company-box
+  :ensure t
+  :disabled
+  :hook (company-mode . company-box-mode))
+
+
+;; == Paredit 2021-04-19 ==
+;; https://wikemacs.org/wiki/Paredit-mode
+;; http://danmidwood.com/content/2014/11/21/animated-paredit.html
+; (autoload 'enable-paredit-mode "paredit"
+;   "Turn on pseudo-structural editing of Lisp code."
+;   t)
+; (add-hook 'emacs-lisp-mode-hook       'enable-paredit-mode)
+; (add-hook 'lisp-mode-hook             'enable-paredit-mode)
+; (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
+; (add-hook 'scheme-mode-hook           'enable-paredit-mode)
+
+
+;; == esup :: Emacs Start Up Profiler 2021-04-19 ==
+;; https://github.com/jschaf/esup
+(use-package esup
+  :ensure t
+  ;; https://blog.d46.us/advanced-emacs-startup/
+  :init   ; Code to run immediately
+  :config ; Code to run after the package is loaded
+  ;; https://github.com/jschaf/esup/issues/60#issuecomment-461217431
+  (setq esup-user-init-file (file-truename "~/dotfiles/.emacs"))
+  ;; Work around a bug where esup tries to step into the byte-compiled
+  ;; version of `cl-lib', and fails horribly.
+  ;; https://github.com/jschaf/esup/issues/54#issuecomment-651247749
+  (setq esup-depth 0)
+  ;; To use MELPA Stable use ":pin melpa-stable",
+  :pin melpa
+  )
+
+
+;; crux  2021-04-18
+;; Collection of Ridiculously Useful eXtensions for Emacs
+;; https://emacsredux.com/blog/2020/12/08/favorite-emacs-packages/ 
+;; https://github.com/bbatsov/crux
+(use-package crux :ensure t)
+
+
+;; == highlight under cursor 2021-04-18 ==
+;; https://xenodium.com/ <- Powerful Emacs Contents
+;; https://xenodium.com/emacs-highlight-symbol-mode/
+(use-package highlight-symbol :ensure t
+  :config
+  (set-face-attribute 'highlight-symbol-face nil
+                      ;; :background "default"
+                      :background "light yellow"
+                      ;; :background "light gray"
+		      ;; :box '(:line-width -1 :color "light gray" :style nil)  ;; interupting line width 2021-04-19
+                      :foreground "#FA009A")
+  (setq highlight-symbol-idle-delay 0)
+  (setq highlight-symbol-on-navigation-p t)
+  ;; (add-hook 'prog-mode-hook #'highlight-symbol-mode)
+  ;; (add-hook 'prog-mode-hook #'highlight-symbol-nav-mode))
+  (add-hook 'evil-normal-state-entry-hook #'highlight-symbol-mode)
+  (add-hook 'evil-normal-state-entry-hook #'highlight-symbol-nav-mode))
+  (add-hook 'evil-normal-state-exit-hook (lambda () (highlight-symbol-mode -1)))
+  (add-hook 'evil-normal-state-exit-hook (lambda () (highlight-symbol-nav-mode -1)))
+
+
+;; == org-appear 2021-04-18 ==
+(setq org-hide-emphasis-markers t)
+(use-package org-appear :ensure t)
+(add-hook 'org-mode-hook 'org-appear-mode)
+
+
+;; == org-bullets ==
+;; (require 'org-bullets)
+(use-package org-bullets :ensure t)
+(setq org-bullets-bullet-list '("■" "⚬" "▪" "•" "▭" "◦" "·" "□" "○" "■" "●" "◆" "◔" "▣" "❑" "⚀" "𝇇" "✗" "✓" "☺"))
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+  )
 
 
 ;; (use-package focus :ensure t)
@@ -56,9 +245,9 @@
   )
 
 ;; pdfgrep 2021-04-16
-(require 'pdfgrep)
-(use-package pdfgrep :ensure t)
-(pdfgrep-mode)
+;; (require 'pdfgrep)
+;; (use-package pdfgrep :ensure t)
+;; (pdfgrep-mode)
 
 
 ;; minimap mode 2021-04-13
@@ -117,7 +306,7 @@
 ;; https://github.com/atykhonov/google-translate/issues/137
 (use-package google-translate
   :demand t
-  :disabled t  ;; too powerful 2021-04-12
+  :disabled  ;; too powerful 2021-04-12
   :ensure t
   :init
   (require 'google-translate)
@@ -173,7 +362,7 @@
 ;; https://dev.to/huytd/emacs-from-scratch-1cg6
 (use-package general
   :ensure t
-  ;; :disabled t
+  :disabled
   :config (general-define-key
   :states '(normal visual insert emacs)
   ;; :prefix "SPC"
@@ -220,12 +409,21 @@
 ))
 
 
-;; elfeed 2021-04-09
-;; (use-package elfeed :ensure t)
-;; (setq elfeed-feeds
-;;       '(
-;; 	"https://lifehacker.com/rss"
-;; 	))
+;; == elfeed 2021-04-09 ==
+(use-package elfeed :ensure t)
+(setq elfeed-feeds
+      '(
+	;; "https://lifehacker.com/rss"
+	"https://ca.indeed.com/rss?q=financial+analyst&l=Toronto%2C+ON&sort=date&radius=50"
+	"https://ca.indeed.com/rss?q=financial+accounting&l=Toronto%2C+ON&sort=date&radius=50"
+	"https://ca.indeed.com/rss?q=financial+system&l=Toronto%2C+ON&sort=date&radius=50"
+	"https://ca.indeed.com/rss?q=cost+accounting&l=Toronto%2C+ON&sort=date&radius=50"
+	("https://ca.indeed.com/rss?q=data+analayst&l=Toronto%2C+ON&sort=date&radius=50" Data Analyst)
+	"https://ca.indeed.com/rss?q=Hyperion&l=Toronto%2C+ON&sort=date&radius=50"
+	"https://ca.indeed.com/rss?q=advanced+excel&l=Toronto%2C+ON&sort=date&radius=50"
+	"https://ca.indeed.com/rss?q=vba&l=Toronto%2C+ON&sort=date&radius=50"
+	("https://ca.indeed.com/rss?q=Korean&l=Toronto%2C+ON&sort=date&radius=50" Korean)
+	))
 
 
 ;; org-capture at point 2021-04-07
@@ -245,9 +443,13 @@
 ;; https://gist.github.com/ivan-krukov/63a586f2121519ca51b201c634402a84
 ;; https://www.youtube.com/watch?v=kZARKLxTeYQ
 
+
 ;; add view mode keybindings 2021-04-04
 (use-package view
-  :config (setq view-read-only t) ;; enter view-mode for read-only file
+  :config
+  (setq view-read-only t) ;; enter view-mode for read-only file
+  ;; https://github.com/jwiegley/use-package/issues/455#issuecomment-347750540
+  ;; (define-key key-translation-map (kbd "\\") (kbd "M-SPC"))  ; for general package key-binding like a leader key
   :bind (("M-z" . view-mode) 
 	 :map view-mode-map
 
@@ -305,6 +507,7 @@
 	 ;; ("`" . cfw:open-org-calendar)
 	 ;; ("`" . org-open-at-point-global)
 	 ("`" . my-org-next-link-open)
+	 ;; ("`" . ace-link)
 	 ;; ("w" . my-minimap-mode)
 	 ;; ("w" . sublimity-mode)
 	 ("w" . avy-goto-char-2)
@@ -374,6 +577,9 @@
          )
   )
 
+
+;; (with-eval-after-load "view-mode"
+;;   (define-key view-mode-map (kbd "\\") (kbd "M-SPC")))
 
 ;; make sure the cursor is changed visually
 ;; complicted to Evil cursors
@@ -457,7 +663,7 @@
 ;; MODE-off-hook
 
 ;; https://www.reddit.com/r/emacs/comments/knoyz2/need_help_toggling_modes_and_settings_when/
-(defun my-view-mode-hook ()
+(defun my-view-mode ()
   "Custom behaviours for `view-mode'."
   (if view-mode
       (face-remap-add-relative 'mode-line '((:foreground "red" :background "black") mode-line))
@@ -467,7 +673,10 @@
       ;; https://emacs.stackexchange.com/questions/32123/evil-binding-q-to-view-quit-in-view-mode-instead-of-evil-record-macro
       (evil-emacs-state 1)  ;; always related between evil and view-mode 2021-04-04
     )
-
+  ;; (if view-mode
+  ;;     (centered-cursor-mode 1)
+  ;;   (centered-cursor-mode 0)
+  ;;   )
   (when (display-graphic-p) 
     (if view-mode
 	;; (face-remap-add-relative 'default '((:background "controlHighlightColor")))
@@ -495,7 +704,7 @@
 
   )
 
-(add-hook 'view-mode-hook #'my-view-mode-hook)
+(add-hook 'view-mode-hook #'my-view-mode)
 
 
 ;; (put 'clone-indirect-buffer-other-window 'disabled "\n Use 'make-indirect-buffer' instead due to view-mode with face issues")
@@ -577,6 +786,16 @@
 
 ;; [ winner mode 2021-04-02
 (winner-mode 1)
+;; Not Working with Capital: Left / Right
+;; (global-set-key (kbd "C-c C-<Left>") 'winner-undo)
+;; (global-set-key (kbd "C-c C-<Right>") 'winner-redo)
+;; (global-set-key (kbd "C-c <C-Left>") 'winner-undo)
+;; (global-set-key (kbd "C-c <C-Right>") 'winner-redo)
+;; Both OK with: inside <C-left> and outside C-<left>
+;; (global-set-key (kbd "C-c <C-left>") 'winner-undo)
+;; (global-set-key (kbd "C-c <C-right>") 'winner-redo)
+(global-set-key (kbd "C-c C-<left>") 'winner-undo)
+(global-set-key (kbd "C-c C-<right>") 'winner-redo)
 ;; ]
 
 
@@ -584,7 +803,7 @@
 ;; https://github.com/edkolev/evil-goggles
 (use-package evil-goggles
   :ensure t
-  :disabled t
+  :disabled
   :config
   (evil-goggles-mode)
 
@@ -604,8 +823,8 @@
 (dolist (command '(scroll-up-command
 		   scroll-down-command
                    recenter-top-bottom
-		   ;; other-window   ; beacon is better in same buffer with different window
-		   ;; ace-window     ; beacon is better in same buffer with differnet window
+		   other-window   ; beacon is better in same buffer with different window
+		   ace-window     ; beacon is better in same buffer with differnet window
 		   org-forward-element
                    org-backward-element
 		   forward-paragraph
@@ -719,8 +938,17 @@
 ;; pdf-tools 2021-03-31
 ;; https://github.com/politza/pdf-tools/issues/206
 ;; (require 'pdf-tools)
-(use-package pdf-tools :ensure t)
-(pdf-tools-install)
+;; (use-package pdf-tools :ensure t)
+;; (pdf-tools-install)
+;; 
+;; https://xenodium.com/trying-out-emacs-pdf-tools/
+(use-package pdf-tools
+  :ensure t
+  :mode ("\\.pdf\\'" . pdf-view-mode)
+  :config
+  (pdf-tools-install)
+  (setq-default pdf-view-display-size 'fit-page)
+  (setq pdf-annot-activate-created-annotations t))
 
 
 ;; remove warning of cl is depreciated 2021-03-29
@@ -782,6 +1010,7 @@
  '(org-agenda-use-time-grid t)
  '(org-babel-python-command "python3")
  '(org-confirm-babel-evaluate nil)
+ '(org-cycle-include-plain-lists 'integrate)
  '(org-export-backends '(ascii beamer html latex md odt org))
  '(org-fontify-done-headline t)
  '(org-fontify-quote-and-verse-blocks t)
@@ -794,7 +1023,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(key-chord dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
  '(writeroom-restore-window-config t))
@@ -831,9 +1060,9 @@
 
 
 ;; minibuffer margin 2021-03-22
-(setq-default left-margin-width 1 right-margin-width 1)
-(set-window-buffer nil (current-buffer))
-
+;; (setq-default left-margin-width 1 right-margin-width 1)
+;; (set-window-buffer nil (current-buffer))
+;; replace to (set-frame-parameter nil 'internal-border-width 10)
 
 ;; writegood-mode 2021-03-21
 ;; (require 'writegood-mode)
@@ -860,29 +1089,26 @@
 (setq abbrev-file-name "~/Documents/nvALT/abbrev_defs.txt")
 ;; (read-abbrev-file "~/.abbrev_defs")
 (setq save-abbrevs t)
+;; (setq save-abbrevs 'silent)
+;; (setq save-abbrevs 'silently)
+;; (setq save-abbrevs nil)
 
 
 ;; sublimity - sublime style minimap
-
 (when (display-graphic-p)
-
   (require 'sublimity)
   ;; (require 'sublimity-scroll)
   (require 'sublimity-map) ;; experimental
   ;; (require 'sublimity-attractive)
-
   ;; (setq sublimity-scroll-weight 10
   ;;       sublimity-scroll-drift-length 5)
-
   ;; no `setq`
   ;; (sublimity-map-set-delay 5)
   ;; (sublimity-map-set-delay nil)  ;; always show, different from 0 value
-
   (setq sublimity-map-size 35)
   (setq sublimity-map-fraction 0.3)  ;; maximum fraction of width
   (setq sublimity-map-text-scale -6)
   (setq sublimity-map-active-region 'nil)
-  
   ;; (sublimity-mode 1)
 )
 
@@ -923,6 +1149,11 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (load "mwe-log-commands")
 ;; (load "sticky-windows.el")  ;; more test required 2021-03-27
+
+;; == annotate.el 2021-04-19 ==
+;; https://github.com/bastibe/annotate.el
+;; (load "annotate")
+;; (require 'annotate)
 
 
 ;; mew-log-commands 2021-03-18
@@ -1003,7 +1234,7 @@
 ;; Or if you use use-package
 (use-package dashboard
   :ensure t
-  :disabled t
+  :disabled
   :config
   (dashboard-setup-startup-hook)
 
@@ -1316,7 +1547,7 @@
     (progn
       ;; if graphic (GUI)
       ;; <NORMAL>
-      (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :underline "light gray")))
+      (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :underline "gray85")))
       (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :underline nil)))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "light gray")))
       (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light gray")))
@@ -1477,6 +1708,16 @@
 ;; evil-commentary mode package 2021-03-03
 (evil-commentary-mode)
 
+
+;; Exit insert mode by pressing j and then j quickly 2021-04-17
+;; https://stackoverflow.com/questions/10569165/how-to-map-jj-to-esc-in-emacs-evil-mode
+(use-package key-chord :ensure t)
+(setq key-chord-two-keys-delay 0.5)
+(key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
+(key-chord-define evil-insert-state-map "kk" 'evil-normal-state)
+(key-chord-mode 1)
+
+
 ;; avy (like ace-jump and easy-motion in vim) 2021-03-04
 ;; (global-set-key (kbd "C-M-s") 'avy-goto-char)
 (global-set-key (kbd "C-:") 'avy-goto-char)
@@ -1551,7 +1792,7 @@
 ;; (require 'helm-projectile)
 (use-package helm-projectile
   :ensure t
-  :disabled t
+  :disabled
   :init
   ;; (setq helm-projectile-fuzzy-match nil)
   ;; (helm-projectile-on)
@@ -1815,10 +2056,16 @@ T - tag prefix
 (global-set-key "\C-ca" 'org-agenda)                       ;; Org Agenda View shortcut
 (global-set-key (kbd "C-M-<return>") 'org-insert-subheading)  ;; Org Insert Sub-Heading 2021-03-31
 
+(add-to-list 'org-emphasis-alist '("~" (:foreground "red3")))
+(add-to-list 'org-emphasis-alist '("/" (:foreground "dark blue" :slant italic)))
 
-(add-to-list 'org-emphasis-alist
-             '("~" (:foreground "red3")
-               ))
+;; (setq org-emphasis-alist
+;;       '(
+;; 	("~" (:foreground "red3"))
+;;         ("/" (italic (:foreground "dark blue")))
+;; 	)
+;;       )
+
 
 ;; === ORG-BABEL ===
 
