@@ -1573,6 +1573,8 @@
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
       (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light yellow")))
+      (add-hook 'evil-insert-state-entry-hook (lambda () (face-remap-add-relative 'default :underline "gray85")))
+      (add-hook 'evil-insert-state-exit-hook (lambda () (face-remap-add-relative 'default :underline nil)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-face-attribute hl-line-face nil :weight 'normal)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-foreground-color original-foreground)))
