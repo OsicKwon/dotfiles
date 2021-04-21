@@ -551,12 +551,13 @@
 	 ;; ("c" . nil)
 	 ;; ("o" . nil)
 	 ;; ("x" . nil)
+	 ("g" . nil)  ;; interupting 'gcc' comment key binding 2021-04-21
 
 	 ;; Additional-keys
 	 ;; -----------
 	 ("r" . revert-buffer)
-	 ("a" . end-of-buffer)
-	 ;; ("a" . counsel-ag)
+	 ;; ("a" . end-of-buffer)
+	 ("a" . counsel-ag)
 	 ;; ("c" . cfw:open-org-calendar)
 	 ;; ("z" . end-of-buffer)
 	 ("z" . View-exit)  ;; like 'e'
@@ -1672,7 +1673,7 @@
 (define-key evil-normal-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
-;; (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)  ;; utilize H/M/L instead
+(define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)  ;; use H/M/L instead
 ;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
