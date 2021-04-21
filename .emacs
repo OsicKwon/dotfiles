@@ -44,7 +44,7 @@
 ;; == StartUp Function 2021-04-20 ==
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
 (defun my-default-screen ()
-  (when (display-graphic-p)
+  (if (display-graphic-p)
     (find-file "~/Documents/nvALT/org_capture_note.txt")
     )
   )
@@ -52,14 +52,13 @@
 (add-hook 'emacs-startup-hook #'my-default-screen)
 
 
-
 ;; == Timers 2021-04-20 ==
 ;; https://emacs.stackexchange.com/questions/7534/run-with-timer-error-invalid-or-unitialized-timer
 ;; Open my calendar every 1 hour
-(run-with-timer 15 3600 #'my-default-screen) 
+;; (run-with-timer 0 3600 #'my-default-screen) 
 ;; https://emacs.stackexchange.com/questions/22692/effect-of-multiple-idle-timers
 ;; (run-with-idle-timer 2 nil #'message "Function 1")
-(run-with-idle-timer 300 nil #'my-default-screen)
+;; (run-with-idle-timer 300 nil #'my-default-screen)
 ;; https://emacs.stackexchange.com/questions/6029/is-it-possible-to-execute-a-function-or-command-at-a-specific-time
 ;; (run-at-time "09:00" nil 'cfw:open-org-calendar)
 
