@@ -45,7 +45,8 @@
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
 (defun my-default-screen ()
   (if (display-graphic-p)
-    (find-file "~/Documents/nvALT/org_capture_note.txt")
+    ;; (find-file "~/Documents/nvALT/org_capture_note.txt")
+    (find-file "~/Documents/nvALT/Quick Note.txt")
     )
   )
 
@@ -200,9 +201,10 @@
 
 
 ;; == org-appear 2021-04-18 ==
-(setq org-hide-emphasis-markers t)
-(use-package org-appear :ensure t)
-(add-hook 'org-mode-hook 'org-appear-mode)
+;; Interupting column align such as :tag
+;; (setq org-hide-emphasis-markers t)
+;; (use-package org-appear :ensure t)
+;; (add-hook 'org-mode-hook 'org-appear-mode)
 
 
 ;; == org-bullets ==
