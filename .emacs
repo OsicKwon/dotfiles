@@ -1120,10 +1120,9 @@
     ;; (define-key web-mode-map (kbd "Tab") 'web-mode-fold-or-unfold)
 )
 
-;; (setq org-ellipsis "  ")  ;; nerd font `v` nf-oct-chevron_down, hex: f47c
+;; (setq org-ellipsis "  ")  ;; nerd font `v` nf-oct-chevron_down, hex: f47
 ;; (setq org-ellipsis " ∞ ")
 (setq org-ellipsis " ↩ ")
-
 
 ;; manual install packages
 (add-to-list 'load-path "~/.emacs.d/lisp/")
