@@ -201,10 +201,11 @@
 
 
 ;; == org-appear 2021-04-18 ==
-;; Interupting column align such as :tag
-;; (setq org-hide-emphasis-markers t)
-;; (use-package org-appear :ensure t)
-;; (add-hook 'org-mode-hook 'org-appear-mode)
+;; pros :: Nice-looking
+;; cons :: Interupting column align such as ':tag'
+(setq org-hide-emphasis-markers t)
+(use-package org-appear :ensure t)
+(add-hook 'org-mode-hook 'org-appear-mode)
 
 
 ;; == org-bullets ==
