@@ -110,8 +110,8 @@
 ;; in evil-mode, it seems to be (setq org-cycle-separator-lines 0), which is no blank line
 ;; https://yiufung.net/post/org-mode-hidden-gems-pt1/
 ;; --------------------------------------------------------------------------
-;; (setq org-cycle-separator-lines 2)  ;; default: 2 lines -> 1 blank between heading
-;; (setq org-cycle-separator-lines 0)  ;; not allow blank line like evil-mode
+;; (setq org-cycle-separator-lines 2)   ;; default: 2 lines -> 1 blank between heading
+;; (setq org-cycle-separator-lines 0)   ;; not allow blank line like 'evil-toggle-fold'
 ;; (setq org-cycle-separator-lines -1)  ;; 1 line == 1 blank
 
 
@@ -370,7 +370,6 @@
   )
 
 
-
 ;; general package :: Custom keybinding 2021-04-09
 ;; https://dev.to/huytd/emacs-from-scratch-1cg6
 (use-package general
@@ -388,9 +387,9 @@
   "`"   '(my-org-next-link-open :which-key "Open Next Link")
 
   ;; vim leader key binding
-  "b"   '(counsel-recentf :which-key "Recent Files (browse)")
-  "f"   '(counsel-find-file :which-key "Open a File")
-  "t"   '(imenu-list :which-key "imenu like tagbar in vim")
+  ;; "b"   '(counsel-recentf :which-key "Recent Files (browse)")
+  ;; "f"   '(counsel-find-file :which-key "Open a File")
+  ;; "t"   '(imenu-list :which-key "imenu like tagbar in vim")
 
   ;; engine mode
   "gg"  '(engine/search-google :which-key "engine google")
@@ -463,15 +462,6 @@
   (setq view-read-only t) ;; enter view-mode for read-only file
   ;; https://github.com/jwiegley/use-package/issues/455#issuecomment-347750540
   ;; (define-key key-translation-map (kbd "\\") (kbd "M-SPC"))  ; for general package key-binding like a leader key
-
-  :general (
-    :states '(normal)
-    :prefix "\\"
-    "m"    '(:ignore t :which-key "markdown")
-    "ms"   '(:keymap markdown-mode-style-map :which-key "style")
-    "mc"   '(:keymap markdown-mode-command-map :which-key "command")
-    )
-
   :bind (("M-z" . view-mode) 
 	 :map view-mode-map
 
@@ -1693,7 +1683,7 @@
 ;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
-(define-key evil-normal-state-map (kbd "<escape>") 'counsel-M-x)
+(define-key evil-normal-state-map (kbd "<escape>") 'counsel-M-x)  ;; reventing error that esc-x to call M-x
 (define-key evil-normal-state-map (kbd "RET")   'other-window)
 
 
