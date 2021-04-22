@@ -453,7 +453,10 @@
 ;;     )
 ;;   )
 
+;; TESTING
 ;; (define-key view-mode-map (kbd "\\") (kbd "M-spc"))
+;; (global-set-key (kbd "C-c I") (lambda() (interactive)(find-file "~/.emacs.d/init.el")))
+;; (add-hook 'view-mode-hook (kbd "\\") (kbd "M-x"))
 
 
 ;; add view mode keybindings 2021-04-04
@@ -1679,7 +1682,8 @@
 (define-key evil-normal-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u")   'evil-scroll-up)
 ;; (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)  ;; useless -> interfere org-cycle-separator spacing 2021-04-22
-(define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)  ;; use H/M/L instead
+;; (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)  ;; use H/M/L instead
+(define-key evil-normal-state-map (kbd "ZQ")     'evil-emacs-state)  ;; Same as Original Vim
 ;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
