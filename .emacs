@@ -279,6 +279,7 @@
 (setq imenu-list-auto-resize t)
 ;; https://github.com/bmag/imenu-list/blob/1447cdc8c0268e332fb4adc0c643702245d31bde/imenu-list.el#L431
 (setq imenu-list-size 0.20)
+(setq org-imenu-depth 3)
 
 
 ;; Local Variables Auto-Load without Confirmation 2021-04-12
@@ -370,6 +371,48 @@
   )
 
 
+;; general package :: Custom keybinding 2021-04-09
+;; https://dev.to/huytd/emacs-from-scratch-1cg6
+(use-package general
+  :ensure t
+  :config (general-define-key
+  :states '(normal visual insert emacs)
+  ;; :prefix "SPC"
+  ;; :prefix "\\"  ;; like the leader key in vim
+  :prefix "M-SPC"
+  :non-normal-prefix "M-SPC"
+  ;; :non-normal-prefix "C-SPC"  ;; conflicted with 'mark set' like 'visual' mode in evil
+  :keymaps 'override
+
+  ;; vim leader key binding
+  ;; "b"   '(counsel-recentf :which-key "Recent Files (browse)")
+  ;; "f"   '(counsel-find-file :which-key "Open a File")
+  ;; "t"   '(imenu-list :which-key "imenu like tagbar in vim")
+
+  ;; view-mode key bindings
+  "`"   '(my-org-next-link-open :which-key "Open Next Link")
+  "a"   '(ace-link :which-key "ace-link")
+  "x"   '(my-kill-current-buffer-and-window :which-key "Kill buffer and close window")
+
+  ;; engine mode
+  "gg"  '(engine/search-google :which-key "engine google")
+  "yg"  '(engine/search-youglish :which-key "engine youglish")
+  "yt"  '(engine/search-youtube :which-key "engine yougtube")
+  "jw"  '(engine/search-just_the_word :which-key "engine Just The Word")
+
+  ;; dictionary
+  "p"  '(powerthesaurus-lookup-word-at-point :which-key "powerthesaurus")
+  "d"  '(define-word-at-point :which-key "define word")
+  ;; "gt"  '(google-translate-at-point :which-key "google translate at point")  ;; prevent over-useage
+
+  ;; ;; Others
+  "c"   '(cfw:open-org-calendar :which-key "Calendar View")
+  ;; "c"   '(my-cfw-refresh-calendar :which-key "Calendar View")
+  ;; "mi"   '(minimap-mode :which-key "Minimap mode")
+
+))
+
+
 ;; == elfeed 2021-04-09 ==
 (use-package elfeed :ensure t)
 (setq elfeed-feeds
@@ -379,11 +422,11 @@
 	"https://ca.indeed.com/rss?q=financial+accounting&l=Toronto%2C+ON&sort=date&radius=50"
 	"https://ca.indeed.com/rss?q=financial+system&l=Toronto%2C+ON&sort=date&radius=50"
 	"https://ca.indeed.com/rss?q=cost+accounting&l=Toronto%2C+ON&sort=date&radius=50"
-	("https://ca.indeed.com/rss?q=data+analayst&l=Toronto%2C+ON&sort=date&radius=50" Data Analyst)
+	("https://ca.indeed.com/rss?q=data+analayst&l=Toronto%2C+ON&sort=date&radius=50")
 	"https://ca.indeed.com/rss?q=Hyperion&l=Toronto%2C+ON&sort=date&radius=50"
 	"https://ca.indeed.com/rss?q=advanced+excel&l=Toronto%2C+ON&sort=date&radius=50"
 	"https://ca.indeed.com/rss?q=vba&l=Toronto%2C+ON&sort=date&radius=50"
-	("https://ca.indeed.com/rss?q=Korean&l=Toronto%2C+ON&sort=date&radius=50" Korean)
+	("https://ca.indeed.com/rss?q=Korean&l=Toronto%2C+ON&sort=date&radius=50")
 	))
 
 
@@ -995,7 +1038,6 @@
  '(org-fontify-done-headline t)
  '(org-fontify-quote-and-verse-blocks t)
  '(org-fontify-whole-heading-line t)
- '(org-imenu-depth 3)
  '(org-link-frame-setup
    '((vm . vm-visit-folder-other-frame)
      (vm-imap . vm-visit-imap-folder-other-frame)
