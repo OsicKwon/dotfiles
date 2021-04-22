@@ -189,12 +189,9 @@
 ;; https://xenodium.com/emacs-highlight-symbol-mode/
 (use-package highlight-symbol :ensure t
   :config
-  (set-face-attribute 'highlight-symbol-face nil
-                      ;; :background "default"
-                      :background "light yellow"
-                      ;; :background "light gray"
-		      ;; :box '(:line-width -1 :color "light gray" :style nil)  ;; interupting line width 2021-04-19
-                      :foreground "#FA009A")
+  (if (display-graphic-p)
+      (set-face-attribute 'highlight-symbol-face nil :background "light yellow" :foreground "#FA009A")
+    (set-face-attribute 'highlight-symbol-face nil :background "black" :foreground "#FA009A"))
   (setq highlight-symbol-idle-delay 0)
   (setq highlight-symbol-on-navigation-p t)
   ;; (add-hook 'prog-mode-hook #'highlight-symbol-mode)
@@ -375,6 +372,7 @@
 ;; https://dev.to/huytd/emacs-from-scratch-1cg6
 (use-package general
   :ensure t
+  :disabled
   :config (general-define-key
   :states '(normal visual insert emacs)
   ;; :prefix "SPC"
