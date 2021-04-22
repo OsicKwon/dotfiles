@@ -370,46 +370,6 @@
   )
 
 
-;; general package :: Custom keybinding 2021-04-09
-;; https://dev.to/huytd/emacs-from-scratch-1cg6
-(use-package general
-  :ensure t
-  :config (general-define-key
-  :states '(normal visual insert emacs)
-  ;; :prefix "SPC"
-  ;; :prefix "\\"  ;; like the leader key in vim
-  :prefix "M-SPC"
-  :non-normal-prefix "M-SPC"
-  ;; :non-normal-prefix "C-SPC"  ;; conflicted with 'mark set' like 'visual' mode in evil
-  :keymaps 'override
-
-  ;; recent key bindings
-  "`"   '(my-org-next-link-open :which-key "Open Next Link")
-
-  ;; vim leader key binding
-  ;; "b"   '(counsel-recentf :which-key "Recent Files (browse)")
-  ;; "f"   '(counsel-find-file :which-key "Open a File")
-  ;; "t"   '(imenu-list :which-key "imenu like tagbar in vim")
-
-  ;; engine mode
-  "gg"  '(engine/search-google :which-key "engine google")
-  "yg"  '(engine/search-youglish :which-key "engine youglish")
-  "yt"  '(engine/search-youtube :which-key "engine yougtube")
-  "jw"  '(engine/search-just_the_word :which-key "engine Just The Word")
-
-  ;; dictionary
-  "p"  '(powerthesaurus-lookup-word-at-point :which-key "powerthesaurus")
-  "d"  '(define-word-at-point :which-key "define word")
-  ;; "gt"  '(google-translate-at-point :which-key "google translate at point")  ;; prevent over-useage
-
-  ;; ;; Others
-  "c"   '(cfw:open-org-calendar :which-key "Calendar View")
-  ;; "c"   '(my-cfw-refresh-calendar :which-key "Calendar View")
-  ;; "mi"   '(minimap-mode :which-key "Minimap mode")
-
-))
-
-
 ;; == elfeed 2021-04-09 ==
 (use-package elfeed :ensure t)
 (setq elfeed-feeds
@@ -567,7 +527,8 @@
 	 ;; -----------
 	 ("r" . revert-buffer)
 	 ;; ("a" . end-of-buffer)
-	 ("a" . counsel-ag)
+	 ;; ("a" . counsel-ag)
+	 ("a" . ace-link)
 	 ;; ("c" . cfw:open-org-calendar)
 	 ;; ("z" . end-of-buffer)
 	 ("z" . View-exit)  ;; like 'e'
@@ -1042,7 +1003,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(key-chord dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(org-crypt key-chord dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
  '(writeroom-restore-window-config t))
