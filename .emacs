@@ -388,7 +388,8 @@
   ;; "gt"  '(google-translate-at-point :which-key "google translate at point")  ;; prevent over-useage
 
   ;; ;; Others
-  "c"   '(cfw:open-org-calendar :which-key "Calendar View")
+  ;; "c"   '(cfw:open-org-calendar :which-key "Calendar View")
+  "c"   '(starting-functions :which-key "Calendar View")
   ;; "mi"   '(minimap-mode :which-key "Minimap mode")
 
 ))
