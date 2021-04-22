@@ -41,6 +41,11 @@
 ;; --------------------
 
 
+;; == Insert org-heading without breaking line 2021-04-22 ==
+;; https://emacs.stackexchange.com/questions/43845/org-mode-evil-insert-heading-set-cursor-to-line-ending-and-change-to-insert
+(setq org-M-RET-may-split-line nil)
+
+
 ;; == StartUp Function 2021-04-20 ==
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
 (defun my-default-screen ()
@@ -106,7 +111,7 @@
 ;; https://yiufung.net/post/org-mode-hidden-gems-pt1/
 ;; --------------------------------------------------------------------------
 ;; (setq org-cycle-separator-lines 2)  ;; default: 2 lines -> 1 blank between heading
-(setq org-cycle-separator-lines 0)  ;; not allow blank line like evil-mode
+;; (setq org-cycle-separator-lines 0)  ;; not allow blank line like evil-mode
 ;; (setq org-cycle-separator-lines -1)  ;; 1 line == 1 blank
 
 
@@ -358,6 +363,14 @@
 ;; (add-hook 'after-init-hook 'starting-functions)
 
 
+(defun my-cfw-refresh-calendar ()
+  (interactive)
+  (cfw:open-org-calendar)
+  (cfw:refresh-calendar-buffer)
+  )
+
+
+
 ;; general package :: Custom keybinding 2021-04-09
 ;; https://dev.to/huytd/emacs-from-scratch-1cg6
 (use-package general
@@ -391,8 +404,8 @@
   ;; "gt"  '(google-translate-at-point :which-key "google translate at point")  ;; prevent over-useage
 
   ;; ;; Others
-  ;; "c"   '(cfw:open-org-calendar :which-key "Calendar View")
-  "c"   '(starting-functions :which-key "Calendar View")
+  "c"   '(cfw:open-org-calendar :which-key "Calendar View")
+  ;; "c"   '(my-cfw-refresh-calendar :which-key "Calendar View")
   ;; "mi"   '(minimap-mode :which-key "Minimap mode")
 
 ))
@@ -1024,7 +1037,6 @@
  '(org-agenda-use-time-grid t)
  '(org-babel-python-command "python3")
  '(org-confirm-babel-evaluate nil)
- '(org-cycle-separator-lines 0)
  '(org-export-backends '(ascii beamer html latex md odt org))
  '(org-fontify-done-headline t)
  '(org-fontify-quote-and-verse-blocks t)
@@ -1676,7 +1688,7 @@
 (define-key evil-normal-state-map (kbd "k")     'evil-previous-visual-line)
 (define-key evil-normal-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u")   'evil-scroll-up)
-(define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
+;; (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)  ;; useless -> interfere org-cycle-separator spacing 2021-04-22
 (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)  ;; use H/M/L instead
 ;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
@@ -2142,6 +2154,8 @@ T - tag prefix
       ("i" "Inbox")
       ("in" "in Normal")
       ("iw" "on Working" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Inbox on Working")
+       "- [ ] %U -  %^{Initial Text} :: %?")
+      ("ie" "for Emacs" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Emacs Configuration")
        "- [ ] %U -  %^{Initial Text} :: %?")
       ("ic" "with Clipboard")
       ("is" "with Selected")
