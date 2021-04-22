@@ -50,8 +50,8 @@
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
 (defun my-default-screen ()
   (if (display-graphic-p)
-    ;; (find-file "~/Documents/nvALT/org_capture_note.txt")
-    (find-file "~/Documents/nvALT/Quick Note.txt")
+    (find-file "~/Documents/nvALT/org_capture_note.txt")
+    ;; (find-file "~/Documents/nvALT/Quick Note.txt")
     )
   )
 
