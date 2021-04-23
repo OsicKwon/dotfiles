@@ -588,8 +588,8 @@
 	 ("x" . my-kill-current-buffer-and-window)
 	 ("c" . recenter-top-bottom)
 	 ;; ("i" . my-indirect-buffer)
-	 ;; ("i" . my-clone-indirect-buffer)
-	 ("i" . evil-insert-state)
+	 ("i" . my-clone-indirect-buffer)
+	 ;; ("i" . evil-insert-state)
 	 ("o" . my-org-indirect-buffer)
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)
@@ -1229,6 +1229,7 @@
     (local-set-key (kbd "M-<down>")  'markdown-move-down)
     (local-set-key (kbd "M-<left>")  'markdown-promote)
     (local-set-key (kbd "M-<right>") 'markdown-demote)
+    (local-set-key (kbd "<tab>")     'evil-toggle-fold)
   )
 )
 
@@ -1434,8 +1435,12 @@
 ;; display date in modeline 2020-12-07
 ;; (setq display-time-day-and-date t)
 ;; (display-time)
-(setq display-time-format "[%Y-%m-%d %H:%M]")
+;; (setq display-time-format "[%Y-%m-%d %H:%M]")
+(setq display-time-format "[%H:%M %m/%d(%a),%Y]")
 (display-time-mode 1)
+;; http://emacs.1067599.n8.nabble.com/Day-of-week-time-in-mode-line-td382473.html
+;; (setq display-time-string-forms
+;;       '((propertize (format-time-string "%A %F %R" now) 'face 'bold)))
 
 
 ;; display file size in modeline 2021-01-05
@@ -1684,7 +1689,11 @@
 (define-key evil-normal-state-map (kbd "k")     'evil-previous-visual-line)
 (define-key evil-normal-state-map (kbd "C-u")   'evil-scroll-up)
 (define-key evil-visual-state-map (kbd "C-u")   'evil-scroll-up)
-;; (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)  ;; useless -> interfere org-cycle-separator spacing 2021-04-22
+
+;; useless -> interfere org-cycle-separator spacing 2021-04-22
+;; but, works in markdown folding -> use in markdown keybinding
+;; (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
+
 ;; (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)  ;; use H/M/L instead
 (define-key evil-normal-state-map (kbd "ZQ")     'evil-emacs-state)  ;; Same as Original Vim
 ;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
