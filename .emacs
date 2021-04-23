@@ -1167,10 +1167,19 @@
 ;; (setq org-ellipsis " ∞ ")
 (setq org-ellipsis " ↩ ")
 
-;; manual install packages
+;; -----------------------
+;; MANUAL INSTALL PACKAGES
+;; -----------------------
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (load "mwe-log-commands")
 ;; (load "sticky-windows.el")  ;; more test required 2021-03-27
+
+
+;; == indirect edit in selecgted area 2021-04-23 ==
+;; so powerful !!
+;; https://github.com/Fanael/edit-indirect
+(load "edit-indirect.el")
+
 
 ;; == annotate.el 2021-04-19 ==
 ;; https://github.com/bastibe/annotate.el
