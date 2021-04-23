@@ -31,6 +31,12 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
+
+;; == Use-Package Ref. ==
+;; https://jwiegley.github.io/use-package/keywords/
+
+
 ;; 2021-04-20
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
 ;; not working 2021-04-22
@@ -44,11 +50,20 @@
 
 
 ;; == ranger 2021-04-22 ==
-(use-package ranger :ensure t)
+(use-package ranger
+  :ensure t
+  :init   (progn (message "### ranger loaded in :init option"))
+  :config (progn (message "### ranger loaded in :config option"))
+  :preface (progn (message "### ranger loaded in :preface option"))
+
+  )
 ;; (setq ranger-parent-depth 3)  ;; z- / z+ -> increase / decrease
 ;; (setq ranger-width-parents 0.12)
 ;; (setq ranger-width-preview 0.55)
-(setq ranger-show-literal t)  ;; by pressing: zi
+(setq ranger-show-literal nil)  ;; by pressing: zi
+(setq ranger-excluded-extensions '("mkv" "iso" "mp4"))
+(setq ranger-max-preview-size 10)
+(setq ranger-dont-show-binary t)
 ;; (setq ranger-show-hidden t)
 
 
