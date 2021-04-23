@@ -49,6 +49,12 @@
 ;; --------------------
 
 
+;; == indirect edit in selection 2021-04-23 ==
+;; so powerful !!
+;; https://github.com/Fanael/edit-indirect
+(use-package edit-indirect :ensure t)
+(global-set-key (kbd "C-t") 'edit-indirect-region)
+
 ;; == ranger 2021-04-22 ==
 (use-package ranger
   :ensure t
@@ -366,7 +372,8 @@
 	(google-translate-at-point)
       (google-translate-at-point-reverse)))
   :bind
-  ("C-t". my-google-translate-at-point))
+  ;; ("C-t". my-google-translate-at-point)
+  )
 
 
 ;; Starting a Function 2021-04-11
@@ -1175,12 +1182,6 @@
 ;; (load "sticky-windows.el")  ;; more test required 2021-03-27
 
 
-;; == indirect edit in selecgted area 2021-04-23 ==
-;; so powerful !!
-;; https://github.com/Fanael/edit-indirect
-(load "edit-indirect.el")
-
-
 ;; == annotate.el 2021-04-19 ==
 ;; https://github.com/bastibe/annotate.el
 ;; (load "annotate")
@@ -1710,6 +1711,8 @@
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
 (define-key evil-normal-state-map (kbd "<escape>") 'counsel-M-x)  ;; reventing error that esc-x to call M-x
 (define-key evil-normal-state-map (kbd "RET")   'other-window)
+
+(define-key evil-visual-state-map (kbd "C-t")     'edit-indirect-region)  ;; in Emacs mode, "C-t" binded as well
 
 
 ;; forward-sentence is based on the sentence-end variable
