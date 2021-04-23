@@ -540,8 +540,9 @@
          ;; ("N" . View-search-last-regexp-backward)  ;; Regex previous result
 	 ("/" . evil-search-forward)
 	 ("?" . evil-search-backward)
-	 ("n" . evil-search-next)
-	 ("N" . evil-search-previous)
+	 ;; ("n" . evil-search-next)
+	 ;; ("N" . evil-search-previous)
+	 ("n" . evil-normal-state)
 	 ;; ("i" . View-exit)  ;; like 'e'
          ("e" . View-scroll-line-forward) ;; scroll down (forward) - opposite to 'y'
          ;; ("0" . beginning-of-visual-line)
@@ -573,7 +574,8 @@
 	 ;; ("x" . View-exit)  ;; like 'e'
 	 ;; ("z" . evil-exit-emacs-state)
 	 ;; ("z" . kill-current-buffer)  ;; same as (s-k)
-	 ("v" . evil-exit-emacs-state)
+	 ;; ("v" . evil-exit-emacs-state)
+	 ("v" . evil-visual-state)
 	 ;; ("RET" . evil-exit-emacs-state)
 	 ;; ("SPC" . evil-exit-emacs-state)
 	 ;; org-tree-slide
@@ -584,9 +586,10 @@
 	 ("q" . kill-current-buffer)  ;; same as (s-k)
 	 ;; ("q" . View-exit)
 	 ("x" . my-kill-current-buffer-and-window)
-	 ;; ("i" . my-indirect-buffer)
 	 ("c" . recenter-top-bottom)
-	 ("i" . my-clone-indirect-buffer)
+	 ;; ("i" . my-indirect-buffer)
+	 ;; ("i" . my-clone-indirect-buffer)
+	 ("i" . evil-insert-state)
 	 ("o" . my-org-indirect-buffer)
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)
@@ -917,6 +920,9 @@
   (defengine just_the_word
     "http://www.just-the-word.com/main.pl?word=%s"
     :keybinding "j")
+
+  (defengine American_Heritage_Dic
+    "https://www.ahdictionary.com/word/search.html?q=%s")
 
   (defengine ngram
     "https://books.google.com/ngrams/graph?content=%s"
