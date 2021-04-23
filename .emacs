@@ -540,9 +540,9 @@
          ;; ("N" . View-search-last-regexp-backward)  ;; Regex previous result
 	 ("/" . evil-search-forward)
 	 ("?" . evil-search-backward)
-	 ;; ("n" . evil-search-next)
-	 ;; ("N" . evil-search-previous)
-	 ("n" . evil-normal-state)
+	 ("n" . evil-search-next)
+	 ("N" . evil-search-previous)
+	 ;; ("n" . evil-normal-state)
 	 ;; ("i" . View-exit)  ;; like 'e'
          ("e" . View-scroll-line-forward) ;; scroll down (forward) - opposite to 'y'
          ;; ("0" . beginning-of-visual-line)
@@ -574,8 +574,8 @@
 	 ;; ("x" . View-exit)  ;; like 'e'
 	 ;; ("z" . evil-exit-emacs-state)
 	 ;; ("z" . kill-current-buffer)  ;; same as (s-k)
-	 ;; ("v" . evil-exit-emacs-state)
-	 ("v" . evil-visual-state)
+	 ("v" . evil-exit-emacs-state)
+	 ;; ("v" . evil-visual-state)
 	 ;; ("RET" . evil-exit-emacs-state)
 	 ;; ("SPC" . evil-exit-emacs-state)
 	 ;; org-tree-slide
@@ -2147,6 +2147,9 @@ T - tag prefix
 (setq org-capture-templates
     '(("t" "Todo" entry (file "~/Documents/nvALT/org/Refile.org")
        "* TODO %?\n%U" :empty-lines 1)
+
+      ("r" "Remind" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Remind")
+       "- [ ] %U - %^{Title} :: %?")
 
       ("i" "Inbox")
       ("in" "in Normal")
