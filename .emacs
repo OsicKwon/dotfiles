@@ -230,8 +230,8 @@
 (use-package highlight-symbol :ensure t
   :config
   (if (display-graphic-p)
-      (set-face-attribute 'highlight-symbol-face nil :background "light yellow" :foreground "#FA009A")
-    (set-face-attribute 'highlight-symbol-face nil :background "black" :foreground "#FA009A"))
+      (set-face-attribute 'highlight-symbol-face nil :background "light yellow" :foreground "#FA009A" :underline t)
+    (set-face-attribute 'highlight-symbol-face nil :background "black" :foreground "#FA009A" :underline t))
   (setq highlight-symbol-idle-delay 0)
   (setq highlight-symbol-on-navigation-p t)
   ;; (add-hook 'prog-mode-hook #'highlight-symbol-mode)
