@@ -33,12 +33,37 @@
   (package-install 'use-package))
 ;; 2021-04-20
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
-(setq use-package-always-ensure t)
+;; not working 2021-04-22
+;; -> maybe, some internal built-in package is not required ensure option
+;; (setq use-package-always-ensure t)
 
 
 ;; --------------------
 ;; == RECENT SETTING ==
 ;; --------------------
+
+
+;; == ranger 2021-04-22 ==
+(use-package ranger :ensure t)
+;; (setq ranger-parent-depth 3)  ;; z- / z+ -> increase / decrease
+;; (setq ranger-width-parents 0.12)
+;; (setq ranger-width-preview 0.55)
+(setq ranger-show-literal t)  ;; by pressing: zi
+;; (setq ranger-show-hidden t)
+
+
+;; == neotree with all-the-icons 2021-04-22 ==
+;; https://github.com/domtronn/all-the-icons.el
+(use-package all-the-icons :ensure t)
+;; Required :: M-x all-the-icons-install-fonts
+(use-package neotree 
+  :ensure t
+  :config
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq neo-reset-size-on-open t)
+  (setq neo-window-fixed-size nil)
+  (setq neo-window-width 70)
+  )
 
 
 ;; == Insert org-heading without breaking line 2021-04-22 ==
@@ -123,8 +148,8 @@
 ;; == encrypt 2021-04-19 ==
 ;; https://media.ccc.de/v/glt21-251-emacs-org-mode-features-you-may-not-know#t=1289
 ;; https://orgmode.org/worg/org-tutorials/encrypting-files.html
-;; (require 'org-crypt)
-(use-package org-crypt)
+(require 'org-crypt)
+;; (use-package org-crypt)  ;; built-in ???
 (org-crypt-use-before-save-magic)
 (setq org-tags-exclude-from-inheritance (quote ("crypt")))
 ;; GPG key to use for encryption
@@ -1000,7 +1025,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(org-crypt key-chord dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(all-the-icons neotree ranger org-crypt key-chord dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
  '(writeroom-restore-window-config t))
