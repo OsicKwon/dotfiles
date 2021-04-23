@@ -1229,7 +1229,7 @@
     (local-set-key (kbd "M-<down>")  'markdown-move-down)
     (local-set-key (kbd "M-<left>")  'markdown-promote)
     (local-set-key (kbd "M-<right>") 'markdown-demote)
-    (local-set-key (kbd "<tab>")     'evil-toggle-fold)
+    (local-set-key (kbd "<tab>")     'evil-toggle-fold)  ;; interfere org cycling spaces, only use in Markdown mode 2021-04-23
   )
 )
 
