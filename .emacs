@@ -2144,6 +2144,8 @@ T - tag prefix
       ("ec" "with Clipboard")      
 
       ("s" "Scrap")
+      ("se" "regarding Emacs" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Emacs Scrap")
+       "** %^{Header Title}\n%U\n\n%?" :empty-lines 2)
       ("ss" "with Selected Area")
       ("sc" "with Clipboard")      
 
@@ -2163,13 +2165,14 @@ T - tag prefix
 
       ;; https://www.youtube.com/watch?v=qCdScs4YO8k
       ("d" "Demo")
-      ("da" "A option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Header A")
+      ("da" "A option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
        "* %^{Initial Text} src: %a  %?")
-      ("db" "B option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Header B")
+      ("db" "B option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
        "* %^{Initial Text|Opt1|Opt2|Opt3} %?")
-      ("dc" "C option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Header C")
+      ("dc" "C option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
        "* %^{Initial Text|Opt1|Opt2|Opt3} \n SCEHDULED: %^t \n Some test heare %?")
-
+      ("dd" "D option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
+       "** %? " :empty-lines 2)
      )
   )
 ;; (global-set-key (kbd "C-M-]") (kbd "C-0 M-x org-capture"))  ; just tried, but not worked 2021-04-02
@@ -2178,14 +2181,16 @@ T - tag prefix
 ;; Templage Expansion 2021-04-02
 ;; https://orgmode.org/manual/Template-expansion.html
 ;; ------------------------------------------------------------
-;; '%?'        > After completing the template, position point here. 
+;; '%?'        > position point here. 
+;;
 ;; '%t'        > Timestamp, date only.
 ;; '%^t'       > Select Timestamp, date only.
 ;; '%T'        > Timestamp, with date and time.
 ;; '%u', '%U'  > Like ‘%t’, ‘%T’ above, but inactive timestamps.
+;;
 ;; '%i'        > Selected Area Contents
-;; '%c'        > Clipboard Contents
-;; '%a'        > Source location (Annotation (org-store-link)
+;; '%c'        > Clipboard Contents (to select %^C)
+;; '%a'        > with Source location : Annotation (org-store-link)
 ;; ------------------------------------------------------------
 
 ;; type 2021-04-02
