@@ -2095,7 +2095,8 @@ T - tag prefix
 ;; (require 'calfw)
 (use-package calfw :ensure t)
 ;; For Org User (https://github.com/kiwanami/emacs-calfw#for-org-users)
-(require 'calfw-org)
+;; (require 'calfw-org)
+(use-package calfw-org :ensure t)
 ;; Then, M-x cfw:open-org-calendar
 
 ;; For iCal(Google Calendar) Users: (https://github.com/kiwanami/emacs-calfw#for-ical-google-calendar-users)
@@ -2500,7 +2501,8 @@ T - tag prefix
 
 ;; smex with ido for M-x :: consider helm or counsel alternatively
 ;; 2021-01-07
-(require 'smex)
+;; (require 'smex)
+(use-package smex :ensure t)
 (smex-initialize)
 ;; (global-set-key (kbd "M-x") 'smex)
 ;; (global-set-key (kbd "M-X") 'smex-major-mode-commands)
@@ -2514,7 +2516,8 @@ T - tag prefix
 
 
 ;; Multiple-Cursors(mc/) Package 2020-12-19
-(require 'multiple-cursors)
+;; (require 'multiple-cursors)
+(use-package multiple-cursors :ensure t)
 ; for multiple-line
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 ; for keyword
