@@ -1728,7 +1728,9 @@
 (define-key evil-normal-state-map (kbd "RET")   'other-window)
 
 (define-key evil-visual-state-map (kbd "C-t")     'edit-indirect-region)  ;; in Emacs mode, "C-t" binded as well
-;; (define-key evil-normal-state-map (kbd "gciw")     'capitalize-word)   ;; confilicted with evil-commentary
+;; https://vim.fandom.com/wiki/Capitalize_words_and_regions_easily
+(define-key evil-normal-state-map (kbd "gCiw") (kbd "guiw~l"))   ;; gciw :: confilicted with evil-commentary
+(define-key evil-normal-state-map (kbd "gCC") (kbd "guu~l"))
 
 
 ;; forward-sentence is based on the sentence-end variable

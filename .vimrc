@@ -701,27 +701,27 @@ cnoremap <C-g> <C-c>
 " gcgc       - capitalize whole line (from start to end)
 " gcc        - capitalize whole line
 " {Visual}gc - capitalize highlighted text
-" if (&tildeop)
-"   nmap gcw guw~l
-"   nmap gcW guW~l
-"   nmap gciw guiw~l
-"   nmap gciW guiW~l
-"   nmap gcis guis~l
-"   nmap gc$ gu$~l
-"   nmap gcgc guu~l
-"   nmap gcc guu~l
-"   vmap gc gu~l
-" else
-"   nmap gcw guw~h
-"   nmap gcW guW~h
-"   nmap gciw guiw~h
-"   nmap gciW guiW~h
-"   nmap gcis guis~h
-"   nmap gc$ gu$~h
-"   nmap gcgc guu~h
-"   nmap gcc guu~h
-"   vmap gc gu~h
-" endif
+if (&tildeop)
+  nmap gCw guw~l
+  nmap gCW guW~l
+  nmap gCiw guiw~l
+  nmap gCiW guiW~l
+  nmap gCis guis~l
+  nmap gC$ gu$~l
+  nmap gCgc guu~l
+  nmap gCC guu~l
+  vmap gC gu~l
+else
+  nmap gCw guw~h
+  nmap gCW guW~h
+  nmap gCiw guiw~h
+  nmap gCiW guiW~h
+  nmap gCis guis~h
+  nmap gC$ gu$~h
+  nmap gCgc guu~h
+  nmap gCC guu~h
+  vmap gC gu~h
+endif
 
 
 "===========
