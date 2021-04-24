@@ -1728,6 +1728,7 @@
 (define-key evil-normal-state-map (kbd "RET")   'other-window)
 
 (define-key evil-visual-state-map (kbd "C-t")     'edit-indirect-region)  ;; in Emacs mode, "C-t" binded as well
+;; (define-key evil-normal-state-map (kbd "gciw")     'capitalize-word)   ;; confilicted with evil-commentary
 
 
 ;; forward-sentence is based on the sentence-end variable
