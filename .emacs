@@ -558,13 +558,28 @@
 	 ("m" . imenu-list)
 	 ;; ("m" . counsel-M-x)
 	 
+	 ;; Vim :: Super G
+         ;; ---------------
+	 ("g" . nil)  ;; interupting 'gcc' comment key binding 2021-04-21
+	 ("gg" . beginning-of-buffer)
+
+	 ;; Org binding
+         ;; ------------
+	 ("o" . nil)
+	 ;; ("ots" . org-tree-slide-mode)
+	 ("os" . org-tree-slide-mode)
+
+	 ;; spare key :: h
+         ;; ------------
+	 ("h" . nil)
+
+	 ;; spare key :: t
+         ;; ------------
+	 ("t" . nil)
+	 
 	 ;; Unbind-keys
 	 ;; -----------
 	 ;; ("h" . nil)
-	 ;; ("c" . nil)
-	 ;; ("o" . nil)
-	 ;; ("x" . nil)
-	 ("g" . nil)  ;; interupting 'gcc' comment key binding 2021-04-21
 
 	 ;; Additional-keys
 	 ;; -----------
@@ -582,8 +597,6 @@
 	 ;; ("v" . evil-visual-state)
 	 ;; ("RET" . evil-exit-emacs-state)
 	 ;; ("SPC" . evil-exit-emacs-state)
-	 ;; org-tree-slide
-	 ("t" . org-tree-slide-mode)
 	 ("l" . org-tree-slide-move-next-tree)
 	 ("h" . org-tree-slide-move-previous-tree)
 	 ;;
@@ -592,9 +605,13 @@
 	 ("x" . my-kill-current-buffer-and-window)
 	 ("c" . recenter-top-bottom)
 	 ;; ("i" . my-indirect-buffer)
-	 ("i" . my-clone-indirect-buffer)
+	 ;; ("i" . my-clone-indirect-buffer)
 	 ;; ("i" . evil-insert-state)
-	 ("o" . my-org-indirect-buffer)
+	 ;; ("o" . my-org-indirect-buffer)
+
+	 ("ic" . my-clone-indirect-buffer)
+	 ("io" . my-org-indirect-buffer)
+
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)
 	 ("'" . olivetti-default-width)
