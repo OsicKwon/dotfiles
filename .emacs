@@ -440,17 +440,6 @@
 	))
 
 
-;; org-capture at point 2021-04-07
-;; https://emacs.stackexchange.com/questions/30595/how-to-org-capture-at-current-location
-;; == Insert Org-Capture at Current Postion :: _C-0_ M-x 'org-capture' ==
-(defun org-capture-at-point ()
-  "Insert an org capture template at point."
-  (interactive)
-  (org-capture 0))
-
-;; (global-set-key (kbd "C-c C-c") #'org-capture-at-point)
-(global-set-key (kbd "C-c c") 'org-capture)
-
 ;; (setq blink-cursor-blinks 0)  ;; default 10, to continue 0 or -1 2021-04-05
 
 ;; view mode (bult-in) 2021-04-03
@@ -2189,23 +2178,21 @@ T - tag prefix
 
 
 ;; === org caputre === 2021-04-02
+(global-set-key (kbd "C-c c") 'org-capture)
 ;; https://www.reddit.com/r/emacs/comments/7zqc7b/share_your_org_capture_templates/
 (setq org-capture-templates
     '(("t" "Todo" entry (file "~/Documents/nvALT/org/Refile.org")
        "* TODO %?\n%U" :empty-lines 1)
 
-      ("r" "Remind" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Remind")
-       "- [ ] %U - %^{Title} :: %?")
-
       ("i" "Inbox")
-      ("in" "in Normal")
       ("iw" "on Working" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Inbox on Working")
-       "- [ ] %U - %^{Initial Text} :: %?")
-      ("ie" "for Emacs" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Emacs Configuration")
        "- [ ] %U - %^{Initial Text} :: %?")
       ("ic" "with Clipboard")
       ("is" "with Selected")
       ("ih" "with Scheduled")
+
+      ("r" "Remind" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Remind")
+       "- [ ] %U - %^{Title} :: %?")
 
       ("e" "English")
       ("ei" "Just Input")
@@ -2213,11 +2200,12 @@ T - tag prefix
       ("esi" "with Selected Area & Location")
       ("ec" "with Clipboard")      
 
-      ("s" "Scrap")
-      ("se" "regarding Emacs" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Emacs Scrap")
+      ("x" "Emacs")
+      ("xi" "Inbox Emacs" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Emacs Config")
+       "- [ ] %U - %^{Initial Text} :: %?")
+      ("xs" "Scrap Emacs" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Emacs Scrap")
        "** %^{Header Title}\n%U\n\n%?" :empty-lines 2)
-      ("ss" "with Selected Area")
-      ("sc" "with Clipboard")      
+
 
       ;; ----------------------------------------------------------
       ;; insert at CURRENT POSITION in a buffer 2021-04-02
@@ -2274,7 +2262,18 @@ T - tag prefix
 ;; -------
 
 
-;; Org-Roam 2021-02-22
+;; org-capture at point 2021-04-07
+;; https://emacs.stackexchange.com/questions/30595/how-to-org-capture-at-current-location
+;; == Insert Org-Capture at Current Postion :: _C-0_ M-x 'org-capture' ==
+(defun org-capture-at-point ()
+  "Insert an org capture template at point."
+  (interactive)
+  (org-capture 0))
+
+;; (global-set-key (kbd "C-c C-c") #'org-capture-at-point)
+
+
+;; == Org-Roam 2021-02-22 ==
 (setq org-roam-directory  "~/Documents/nvALT")  ;; multi-directory ???
 ;; (setq org-roam-directory "~/Desktop/MyCloudSync/1. Next Actions/ELT/4. Sector in Finance/Presentation")
 (setq org-roam-file-extensions '("org" "txt"))  ;; https://github.com/org-roam/org-roam/issues/461
