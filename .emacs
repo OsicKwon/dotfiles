@@ -1733,6 +1733,11 @@
 (define-key evil-normal-state-map (kbd "gCC") (kbd "guu~l"))
 
 
+
+;; to enable cgn dgn like vim 2021-04-24
+;; https://stackoverflow.com/questions/42348794/search-text-in-emacs-evil-mode
+(evil-select-search-module 'evil-search-module 'evil-search)
+
 ;; forward-sentence is based on the sentence-end variable
 ;; https://stackoverflow.com/questions/20257022/evil-emacs-mode-sentence-motions-and-other-questions
 (setq sentence-end "[\\.\\?\\!] +") ;; . or ? or ! followed by spaces.
