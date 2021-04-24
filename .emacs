@@ -1053,7 +1053,7 @@
      (file . find-file-other-window)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(all-the-icons neotree ranger org-crypt key-chord dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
+   '(cm-mode all-the-icons neotree ranger org-crypt key-chord dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
  '(writeroom-restore-window-config t))
@@ -1418,28 +1418,35 @@
 ;; WINDOW
 ;;==========
 
-;; `buffer-move` package 2020-12-22
-;; (global-set-key (kbd "<C-S-up>")     'buf-move-up)
-;; (global-set-key (kbd "<C-S-down>")   'buf-move-down)
-;; (global-set-key (kbd "<C-S-left>")   'buf-move-left)
-;; (global-set-key (kbd "<C-S-right>")  'buf-move-right)
+;; == Window Navigating ==
+(global-set-key (kbd "<C-M-up>")     'windmove-up)
+(global-set-key (kbd "<C-M-down>")   'windmove-down)
+(global-set-key (kbd "<C-M-left>")   'windmove-left)
+(global-set-key (kbd "<C-M-right>")  'windmove-right)
 
-;; resizing windows (SHIFT+CONTRL) - conflicted to org-mode 2021-02-28
-;; (global-set-key (kbd "S-C-<left>")  'shrink-window-horizontally)
-;; (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
-;; (global-set-key (kbd "S-C-<down>")  'shrink-window)
-;; (global-set-key (kbd "S-C-<up>")    'enlarge-window)
 
+;; == Window Resizing ==
 ;; Remove SHIFT to avoid confilct with Org-Mode
-(global-set-key (kbd "M-C-<left>")  'shrink-window-horizontally)
-(global-set-key (kbd "M-C-<right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "M-C-<down>")  'shrink-window)
-(global-set-key (kbd "M-C-<up>")    'enlarge-window)
+(global-set-key (kbd "M-s-<left>")  'shrink-window-horizontally)
+(global-set-key (kbd "M-s-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "M-s-<down>")  'shrink-window)
+(global-set-key (kbd "M-s-<up>")    'enlarge-window)
 
 
-;; ace-window 2021-02-23
+;; == buffer-move == package 2020-12-22
+(setq buffer-move-behavior 'move)  ;; no swaping, move liternally 2021-04-23
+;; s(Super) + S(Shift)
+(global-set-key (kbd "<s-S-up>")     'buf-move-up)
+(global-set-key (kbd "<s-S-down>")   'buf-move-down)
+(global-set-key (kbd "<s-S-left>")   'buf-move-left)
+(global-set-key (kbd "<s-S-right>")  'buf-move-right)
+
+;; Conflicted to ORG-MODE (kbd "S-C- ... ")(SHIFT+CONTRL) / (kbd "M-S- ... ")(Meta+SHIFT)  2021-02-28
+
+
+;; == ace-window 2021-02-23 ==
 (global-set-key (kbd "M-o") 'ace-window)
-;; (global-set-key (kbd "M-o") 'other-window)
+(global-set-key (kbd "M-w") 'ace-swap-window)
 
 
 ;; display date in modeline 2020-12-07
