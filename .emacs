@@ -53,6 +53,7 @@
 ;; https://github.com/seagle0128/all-the-icons-ivy-rich
 (use-package all-the-icons-ivy-rich
   :ensure t
+  :disabled
   :init (all-the-icons-ivy-rich-mode 1))
 
 
