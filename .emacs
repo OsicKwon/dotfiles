@@ -1307,7 +1307,8 @@
 ;; Initial Setting
 ;; ---------------
 
-;; (show-paren-mode)               ;; little intered 
+;; parenthesis highlight
+(show-paren-mode)               ;; little interupted but useful
 
 (setq ns-pop-up-frames nil)        ;; only one frame use when openning a file 2021-01-28
 
