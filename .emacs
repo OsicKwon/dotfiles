@@ -49,6 +49,13 @@
 ;; --------------------
 
 
+;; == all-the-icons-ivy-rich 2021-04-23 ==
+;; https://github.com/seagle0128/all-the-icons-ivy-rich
+(use-package all-the-icons-ivy-rich
+  :ensure t
+  :init (all-the-icons-ivy-rich-mode 1))
+
+
 ;; == indirect edit in selection 2021-04-23 ==
 ;; so powerful !!
 ;; https://github.com/Fanael/edit-indirect
@@ -2357,7 +2364,7 @@ T - tag prefix
 ;; ---------------------------------------
 ;; https://github.com/abo-abo/swiper
 ;; (ivy-mode 1)  " replaced Helm search - think about this more 2021-03-05
-;; (setq ivy-use-virtual-buffers t)
+(setq ivy-use-virtual-buffers t)
 ;; (setq enable-recursive-minibuffers t)
 ;; enable this if you want `swiper' to use it
 ;; (setq search-default-mode #'char-fold-to-regexp)
@@ -2380,6 +2387,7 @@ T - tag prefix
 (global-set-key (kbd "C-c t") 'counsel-outline)
 ;; (global-set-key (kbd "C-x b") 'counsel-buffer-or-recentf)
 ;; (global-set-key (kbd "C-x b") 'counsel-ibuffer)  ;; can't create new buffer typing a new name
+(global-set-key (kbd "C-x b") 'counsel-switch-buffer)
 (global-set-key (kbd "C-x f") 'counsel-recentf)
 ;; (global-set-key (kbd "C-x l") 'counsel-locate)
 ;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
