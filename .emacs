@@ -505,10 +505,6 @@
 	 ("8" . winner-undo)
 	 ("9" . winner-redo)
 	 ("RET" . other-window)
-	 ("SPC" . evil-exit-emacs-state)
-	 ;; ("SPC" . ace-window)
-	 ;; ("SPC" . avy-goto-char)
-	 ;; ("SPC" . ace-jump-char-mode)
 	 ("DEL" . beacon-blink)
 	 ;; ("o" . ace-window)
 	 ;; ("o" . other-window)
@@ -559,6 +555,19 @@
 	 ("m" . imenu-list)
 	 ;; ("m" . counsel-M-x)
 	 
+	 ;; <SPACE> binidng 
+         ;; ---------------
+	 ("SPC" . nil)
+	 ;; ("SPC o" . ace-window)
+	 ("SPC p" . powerthesaurus-lookup-word-at-point)
+	 ("SPC d" . define-word-at-point)
+	 ("SPC g" . google-translate-at-point)
+	 ("SPC a" . counsel-ag-thing-at-point)
+	 ;; ("SPC" . evil-exit-emacs-state)
+	 ;; ("SPC" . ace-window)
+	 ;; ("SPC" . avy-goto-char)
+	 ;; ("SPC" . ace-jump-char-mode)
+
 	 ;; Vim :: Super G
          ;; ---------------
 	 ("g" . nil)  ;; interupting 'gcc' comment key binding 2021-04-21
@@ -578,6 +587,13 @@
 	 ("t" . nil)
 	 ("tp" . powerthesaurus-lookup-word-at-point)
 	 ("td" . define-word-at-point)
+
+	 ;; <ESCAPE> binidng 
+         ;; ---------------
+	 ("<escape> x" . counsel-M-x)
+	 ("<escape> f" . counsel-find-file)
+	 ("<escape> r" . ranger)
+	 ("<escape> RET" . ace-windowcon-blink)
 	 
 	 ;; Unbind-keys
 	 ;; -----------
@@ -595,8 +611,8 @@
 	 ;; ("x" . View-exit)  ;; like 'e'
 	 ;; ("z" . evil-exit-emacs-state)
 	 ;; ("z" . kill-current-buffer)  ;; same as (s-k)
-	 ("v" . ace-window)
-	 ;; ("v" . evil-exit-emacs-state)
+	 ;; ("v" . ace-window)
+	 ("v" . evil-exit-emacs-state)
 	 ;; ("v" . evil-visual-state)
 	 ;; ("RET" . evil-exit-emacs-state)
 	 ;; ("SPC" . evil-exit-emacs-state)
@@ -618,10 +634,6 @@
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)
 	 ("'" . olivetti-default-width)
-	 ;;
-	 ("<escape> x" . counsel-M-x)
-	 ("<escape> f" . counsel-find-file)
-	 ("<escape> r" . ranger)
          )
   )
 
@@ -1745,6 +1757,7 @@
 (define-key evil-normal-state-map (kbd "gCiw") (kbd "guiw~l"))   ;; gciw :: confilicted with evil-commentary
 (define-key evil-normal-state-map (kbd "gCC") (kbd "guu~l"))
 
+(define-key evil-normal-state-map (kbd "DEL") (kbd "beacon-blink"))
 
 
 ;; to enable cgn dgn like vim 2021-04-24
@@ -2470,6 +2483,27 @@ T - tag prefix
 ;; https://github.com/abo-abo/swiper/issues/1641
 ;; https://oremacs.com/swiper/Changelog
 (setq counsel-ag-base-command "ag --nocolor --nogroup --skip-vcs-ignores %s -- .")
+
+
+;; counsel-ag at point 2021-04-25
+;; https://www.reddit.com/r/emacs/comments/b78e6u/tips_ivy_search_thing_at_point_with_swiper/
+;; https://github.com/abo-abo/swiper/issues/1068
+(defun ivy-with-thing-at-point (cmd)
+ (let ((ivy-initial-inputs-alist
+         (list
+          (cons cmd (thing-at-point 'symbol)))))
+    (funcall cmd)))
+
+;; Example 1
+(defun counsel-ag-thing-at-point ()
+  (interactive)
+  (ivy-with-thing-at-point 'counsel-ag))
+
+;; Example 2
+;; (defun swiper-thing-at-point ()
+;;   (interactive)
+;;   (ivy-with-thing-at-point 'swiper))
+
 
 ;; ivy-view mode 2021-03-29
 ;; save layouts
