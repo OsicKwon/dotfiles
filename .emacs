@@ -48,6 +48,11 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; == split window and then select other window 2021-04-25 ==
+;; https://stackoverflow.com/questions/6464738/how-can-i-switch-focus-after-buffer-split-in-emacs
+(global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
+(global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
+
 
 ;; == all-the-icons-ivy-rich 2021-04-23 ==
 ;; https://github.com/seagle0128/all-the-icons-ivy-rich
@@ -605,7 +610,7 @@
 	 ("<escape> x" . counsel-M-x)
 	 ("<escape> f" . counsel-find-file)
 	 ("<escape> r" . ranger)
-	 ("<escape> RET" . ace-windowcon-blink)
+	 ("<escape> RET" . ace-window)
 	 
 	 ;; Unbind-keys
 	 ;; -----------
@@ -1458,11 +1463,6 @@
 ;; pdflatex -> path "/Library/Tex/texbin" 2020-12-07
 (setq latex-run-command "pdflatex")
 
-
-;; (use-package elpy
-;;   :ensure t
-;;   :init
-;;   (elpy-enable))
 
 ;; ignore byte-compile warnings
 ;; 2021-01-16
@@ -2568,8 +2568,14 @@ T - tag prefix
 ;; src1: https://realpython.com/emacs-the-best-python-editor/#integration-with-jupyter-and-ipython
 
 ;; === ELPI ===
-;; ;Enable elpy
-(elpy-enable)
+(use-package elpy
+  :ensure t
+  :after python
+  :defer t
+  :init
+  ;; (elpy-enable)
+  (add-hook 'python-mode-hook #'elpy-enable)
+  )
 
 ;; === JEDI ===
 ;; jedi 2021-01-16
