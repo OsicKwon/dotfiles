@@ -571,7 +571,7 @@
 	 ;; engines
 	 ("SPC ej" . engine/search-just_the_word)
 	 ("SPC eo" . engine/search-onelook)
-	 ("SPC ee" . engine/search-)
+	 ("SPC ee" . engine/search-etymology-dictionary)
 	 ("SPC ey" . engine/search-youglish)
 	 ;; others
 	 ("SPC a"  . counsel-ag-thing-at-point)
@@ -938,7 +938,7 @@
   (defengine just_the_word "http://www.just-the-word.com/main.pl?word=%s" :keybinding "j")
   (defengine American_Heritage_Dic "https://www.ahdictionary.com/word/search.html?q=%s")
   (defengine FreeDicitionary " https://www.thefreedictionary.com/%s")
-  (defengine Etymology Dictionary "https://www.etymonline.com/search?q=%s")
+  (defengine Etymology-Dictionary "https://www.etymonline.com/search?q=%s")
   (defengine ngram "https://books.google.com/ngrams/graph?content=%s" :keybinding "r")
   (defengine longman "https://www.ldoceonline.com/dictionary/%s" :keybinding "l")
 
@@ -1716,7 +1716,7 @@
 (define-key evil-normal-state-map (kbd "gCiw") (kbd "guiw~l"))   ;; gciw :: confilicted with evil-commentary
 (define-key evil-normal-state-map (kbd "gCC") (kbd "guu~l"))
 
-(define-key evil-normal-state-map (kbd "DEL") (kbd "beacon-blink"))
+(define-key evil-normal-state-map (kbd "DEL") 'beacon-blink)
 
 
 ;; to enable cgn dgn like vim 2021-04-24
