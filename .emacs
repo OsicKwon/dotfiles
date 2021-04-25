@@ -505,7 +505,8 @@
 	 ("8" . winner-undo)
 	 ("9" . winner-redo)
 	 ("RET" . other-window)
-	 ("SPC" . ace-window)
+	 ("SPC" . evil-exit-emacs-state)
+	 ;; ("SPC" . ace-window)
 	 ;; ("SPC" . avy-goto-char)
 	 ;; ("SPC" . ace-jump-char-mode)
 	 ("DEL" . beacon-blink)
@@ -516,8 +517,8 @@
 	 ("p" . toggle-window-dedicated)
 	 ("s" . swiper)
 	 ;; ("a" . avy-goto-char)
-	 ("," . org-narrow-to-subtree)
-	 ("." . widen)
+	 ;; ("," . org-narrow-to-subtree)
+	 ;; ("." . widen)
 	 ;; ("`" . beacon-blink)
 	 ;; ("`" . pop-global-mark)
 	 ;; ("`" . avy-goto-char-2)
@@ -562,20 +563,21 @@
          ;; ---------------
 	 ("g" . nil)  ;; interupting 'gcc' comment key binding 2021-04-21
 	 ("gg" . beginning-of-buffer)
+	 ("G" . end-of-buffer)
 
 	 ;; Org binding
          ;; ------------
 	 ("o" . nil)
 	 ;; ("ots" . org-tree-slide-mode)
 	 ("os" . org-tree-slide-mode)
+	 ("or" . org-narrow-to-subtree)
+	 ("ow" . widen)
 
-	 ;; spare key :: h
-         ;; ------------
-	 ("h" . nil)
-
-	 ;; spare key :: t
+	 ;; Trans Functions
          ;; ------------
 	 ("t" . nil)
+	 ("tp" . powerthesaurus-lookup-word-at-point)
+	 ("td" . define-word-at-point)
 	 
 	 ;; Unbind-keys
 	 ;; -----------
@@ -593,7 +595,8 @@
 	 ;; ("x" . View-exit)  ;; like 'e'
 	 ;; ("z" . evil-exit-emacs-state)
 	 ;; ("z" . kill-current-buffer)  ;; same as (s-k)
-	 ("v" . evil-exit-emacs-state)
+	 ("v" . ace-window)
+	 ;; ("v" . evil-exit-emacs-state)
 	 ;; ("v" . evil-visual-state)
 	 ;; ("RET" . evil-exit-emacs-state)
 	 ;; ("SPC" . evil-exit-emacs-state)
@@ -616,7 +619,9 @@
 	 (";" . olivetti-narrow-width)
 	 ("'" . olivetti-default-width)
 	 ;;
-	 ("<escape>" . counsel-M-x)
+	 ("<escape> x" . counsel-M-x)
+	 ("<escape> f" . counsel-find-file)
+	 ("<escape> r" . ranger)
          )
   )
 
@@ -1461,7 +1466,7 @@
 
 ;; == ace-window 2021-02-23 ==
 (global-set-key (kbd "M-o") 'ace-window)
-(global-set-key (kbd "M-w") 'ace-swap-window)
+;; (global-set-key (kbd "M-w") 'ace-swap-window)
 
 
 ;; display date in modeline 2020-12-07
@@ -1731,7 +1736,8 @@
 ;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
-(define-key evil-normal-state-map (kbd "<escape>") 'counsel-M-x)  ;; reventing error that esc-x to call M-x
+(define-key evil-normal-state-map (kbd "<escape>") nil)
+(define-key evil-normal-state-map (kbd "<escape> x") 'counsel-M-x)  ;; reventing error that esc-x to call M-x
 (define-key evil-normal-state-map (kbd "RET")   'other-window)
 
 (define-key evil-visual-state-map (kbd "C-t")     'edit-indirect-region)  ;; in Emacs mode, "C-t" binded as well
