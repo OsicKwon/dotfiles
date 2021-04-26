@@ -49,6 +49,9 @@
 ;; --------------------
 
 
+;; Save and Restore Sessions :: Failed
+;; https://www.reddit.com/r/emacs/comments/171me2/auto_save_and_restore_sessions/
+
 ;; ;; == desktop save mode 2021-04-25 == << unstable
 
 ;; ;; https://bmag.github.io/2015/12/26/desktop.html
