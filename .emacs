@@ -1791,11 +1791,21 @@
 
 ;; Exit insert mode by pressing j and then j quickly 2021-04-17
 ;; https://stackoverflow.com/questions/10569165/how-to-map-jj-to-esc-in-emacs-evil-mode
-(use-package key-chord :ensure t)
-(setq key-chord-two-keys-delay 0.5)
-(key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
-(key-chord-define evil-insert-state-map "kk" 'evil-normal-state)
-(key-chord-mode 1)
+(use-package key-chord
+  :ensure t
+  :defer 2
+  :init
+  ;; https://www.emacswiki.org/emacs/KeyChord
+  ;; Max time delay between two key presses to be considered a key chord
+  (setq key-chord-two-keys-delay 0.8) ; default 0.1
+  ;; Max time delay between two presses of the same key to be considered a key chord.
+  ;; Should normally be a little longer than `key-chord-two-keys-delay'.
+  (setq key-chord-one-key-delay 3.9) ; default 0.2
+  (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
+  (key-chord-define evil-insert-state-map "kk" 'evil-normal-state)
+  :config
+  (key-chord-mode 1)
+  )
 
 
 ;; avy (like ace-jump and easy-motion in vim) 2021-03-04
