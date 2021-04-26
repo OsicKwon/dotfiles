@@ -2415,7 +2415,10 @@ T - tag prefix
 (global-set-key (kbd "C-c t") 'counsel-outline)
 ;; (global-set-key (kbd "C-x b") 'counsel-buffer-or-recentf)
 ;; (global-set-key (kbd "C-x b") 'counsel-ibuffer)  ;; can't create new buffer typing a new name
-(global-set-key (kbd "C-x b") 'counsel-switch-buffer)
+;; https://www.reddit.com/r/emacs/comments/i22z8f/question_regarding_counselswitchbuffer/
+;; (global-set-key (kbd "C-x b") 'counsel-switch-buffer)  ;; nice, but preview function is too slow for me
+;; https://oremacs.com/swiper/#global-key-bindings
+(global-set-key (kbd "C-x b") 'ivy-switch-buffer)
 (global-set-key (kbd "C-x f") 'counsel-recentf)
 ;; (global-set-key (kbd "C-x l") 'counsel-locate)
 ;; (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
