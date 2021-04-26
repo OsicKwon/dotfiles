@@ -48,10 +48,52 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+
+;; ;; == desktop save mode 2021-04-25 == << unstable
+
+;; ;; https://bmag.github.io/2015/12/26/desktop.html
+
+;; (require 'desktop)
+
+;; (defun sy-save-shell-buffer (desktop-dirname)
+;;   ;; we only need to save the current working directory
+;;   default-directory)
+
+;; (defun sy-create-shell-buffer (_file-name buffer-name misc)
+;;   "MISC is the value returned by `sy-save-shell-buffer'.
+;; _FILE-NAME is nil."
+;;   (let ((default-directory misc))
+;;     ;; create a shell buffer named BUFFER-NAME in directory MISC
+;;     (shell buffer-name)))
+
+;; ;; save all shell-mode buffers
+;; (add-hook 'shell-mode-hook (lambda () (setq-local desktop-save-buffer #'sy-save-shell-buffer)))
+;; ;; restore all shell-mode buffers
+;; (add-to-list 'desktop-buffer-mode-handlers '(shell-mode . sy-create-shell-buffer))
+
+;; (setq desktop-path '("~/.emacs.d/.cache/"))
+;; (desktop-save-mode)
+;; ;; (desktop-read)
+
+;; ;; to keep window layouts
+;; ;; https://emacs.stackexchange.com/questions/19190/desktop-save-mode-fails-to-save-window-layout 
+;; (setq desktop-restore-forces-onscreen nil)
+;; (add-hook 'desktop-after-read-hook
+;;  (lambda ()
+;;    (frameset-restore
+;;     desktop-saved-frameset
+;;     :reuse-frames (eq desktop-restore-reuses-frames t)
+;;     :cleanup-frames (not (eq desktop-restore-reuses-frames 'keep))
+;;     :force-display desktop-restore-in-current-display
+;;     :force-onscreen desktop-restore-forces-onscreen)))
+
+;; ;; TODO save ivy-views which relates ivy-push-view functions
+
+
 ;; == split window and then select other window 2021-04-25 ==
 ;; https://stackoverflow.com/questions/6464738/how-can-i-switch-focus-after-buffer-split-in-emacs
-(global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
-(global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
+;; (global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
+;; (global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
 
 
 ;; == all-the-icons-ivy-rich 2021-04-23 ==
@@ -76,9 +118,15 @@
   :preface (progn (message "### ranger loaded in :preface option"))
 
   )
+
+;; buffer management (delete opened buffer after closing)
+(setq ranger-cleanup-on-disable t)
+(setq ranger-cleanup-eagerly t)
+
 ;; (setq ranger-parent-depth 3)  ;; z- / z+ -> increase / decrease
 ;; (setq ranger-width-parents 0.12)
 ;; (setq ranger-width-preview 0.55)
+
 (setq ranger-show-literal nil)  ;; by pressing: zi
 (setq ranger-excluded-extensions '("mkv" "iso" "mp4"))
 (setq ranger-max-preview-size 10)
@@ -567,25 +615,26 @@
          ;; ---------------
 	 ("SPC" . nil)
 	 ;; ("SPC o" . ace-window)
-	 ("SPC p"  . powerthesaurus-lookup-word-at-point)
-	 ("SPC d"  . define-word-at-point)
-	 ;; googles
-	 ("SPC gt" . google-translate-at-point)
-	 ("SPC gs" . engine/search-google-trans)
+	 ;; power search
+	 ("SPC p" . powerthesaurus-lookup-word-at-point)
+	 ("SPC d" . define-word-at-point)
+	 ("SPC t" . google-translate-at-point)
+	 ("SPC a" . counsel-ag-thing-at-point)
+	 ;; engines - googles
+	 ("SPC gt" . engine/search-google-trans)
 	 ("SPC gn" . engine/search-google-news)
-	 ;; engines
-	 ("SPC ej" . engine/search-just_the_word)
-	 ("SPC eo" . engine/search-onelook)
-	 ("SPC ee" . engine/search-etymology-dictionary)
-	 ("SPC ey" . engine/search-youglish)
+	 ;; engines - others
+	 ("SPC ej" . engine/search-just_the_word)         ;; C-x / j
+	 ("SPC eo" . engine/search-onelook)               ;; C-x / o
+	 ("SPC ee" . engine/search-etymology-dictionary)  ;; C-x / e
+	 ("SPC ey" . engine/search-youglish)              ;; C-x / y
 	 ;; others
-	 ("SPC a"  . counsel-ag-thing-at-point)
 	 ;; ("SPC" . evil-exit-emacs-state)
 	 ;; ("SPC" . ace-window)
 	 ;; ("SPC" . avy-goto-char)
 	 ;; ("SPC" . ace-jump-char-mode)
 
-	 ;; Vim :: Super G
+	 ;; Vim :: Super g
          ;; ---------------
 	 ("g" . nil)  ;; interupting 'gcc' comment key binding 2021-04-21
 	 ("gg" . beginning-of-buffer)
@@ -595,9 +644,12 @@
          ;; ------------
 	 ("o" . nil)
 	 ;; ("ots" . org-tree-slide-mode)
-	 ("os" . org-tree-slide-mode)
+	 ("ot" . org-tree-slide-mode)
+	 ;; ("os" . org-tree-slide-mode)
 	 ("or" . org-narrow-to-subtree)
 	 ("ow" . widen)
+	 ("oa" . org-agenda)
+	 ("oc" . org-capture)
 
 	 ;; Trans Functions
          ;; ------------
@@ -611,6 +663,7 @@
 	 ("<escape> f" . counsel-find-file)
 	 ("<escape> r" . ranger)
 	 ("<escape> RET" . ace-window)
+	 ("<escape> a" . ace-window)
 	 
 	 ;; Unbind-keys
 	 ;; -----------
@@ -942,9 +995,9 @@
   (defengine onelook "https://www.onelook.com/?w=%s" :keybinding "o")
   (defengine just_the_word "http://www.just-the-word.com/main.pl?word=%s" :keybinding "j")
   (defengine American_Heritage_Dic "https://www.ahdictionary.com/word/search.html?q=%s")
-  (defengine FreeDicitionary " https://www.thefreedictionary.com/%s")
-  (defengine Etymology-Dictionary "https://www.etymonline.com/search?q=%s")
-  (defengine ngram "https://books.google.com/ngrams/graph?content=%s" :keybinding "r")
+  (defengine FreeDicitionary "https://www.thefreedictionary.com/%s")
+  (defengine Etymology-Dictionary "https://www.etymonline.com/search?q=%s" :keybinding "e")
+  (defengine ngram "https://books.google.com/ngrams/graph?content=%s")
   (defengine longman "https://www.ldoceonline.com/dictionary/%s" :keybinding "l")
 
   (defengine powerthesaurus "https://www.powerthesaurus.org/%s" :keybinding "p")
