@@ -49,16 +49,42 @@
 ;; --------------------
 
 
-;; == Burly :: save window configuration in bookmark 2021-04-26 ==
+;; == Workgroup2 2021-04-26 ==
+;; Save and Restore Sessions
+;; https://www.reddit.com/r/emacs/comments/7au3hj/how_do_you_manage_your_emacs_windows_and_stay_sane/
+(require 'workgroups2)
+(use-package workgroups2 :ensure t)
+;; Change prefix key (before activating WG)
+(setq wg-prefix-key (kbd "C-c z"))  ;; not work for me
+;; Change workgroups session file
+(setq wg-session-file "~/.emacs.d/.emacs_workgroups")
+
+
+;; [Replace to] Workgroup2 >> == Purpose 2021-04-26 ==
+;; https://github.com/bmag/emacs-purpose
+;; (require 'window-purpose)
+;; (use-package window-purpose :ensure t)
+;; (purpose-mode)
+;; (define-key purpose-mode-map (kbd "C-x b") nil)  ;; conflicted with ivy-switch-view
+;; (add-to-list 'purpose-user-mode-purposes '(<major-mode> . <purpose>))
+;; (add-to-list 'purpose-user-name-purposes '(<name> . <purpose>))
+;; (add-to-list 'purpose-user-regexp-purposes '(<pattern> . <purpose>))
+;; (setq purpose-use-default-configuration t) ; not really necessary, default is t
+;; (purpose-compile-user-configuration) ; activates your changes
+
+;; [Replace to] Workgroup2 >> == Burly :: save window configuration in bookmark 2021-04-26 ==
 ;; https://www.reddit.com/r/emacs/comments/jf9kqn/wip_burlyel_save_and_restore_buffers_and_window/
 ;; https://github.com/alphapapa/burly.el
-(use-package burly :ensure t)
+;; (use-package burly :ensure t)
 
-;; altrnatives :: desktop-save-mode, bookmark+
+;; [Replace to] Workgroup2 >> altrnatives :: desktop-save-mode, bookmark+
 ;; instead of desktop-save-mode belows:
 ;; https://www.reddit.com/r/emacs/comments/171me2/auto_save_and_restore_sessions/
 ;; https://bmag.github.io/2015/12/26/desktop.html
+;; (setq desktop-path '("~/.emacs.d/.cache/"))
 ;; https://emacs.stackexchange.com/questions/19190/desktop-save-mode-fails-to-save-window-layout 
+;; https://jloubert.com/blog/simple-views/
+;; (add-to-list 'desktop-globals-to-save 'ivy-views)
 
 
 ;; == split window and then select other window 2021-04-25 ==
@@ -1439,18 +1465,18 @@
 ;;==========
 
 ;; == Window Navigating ==
-(global-set-key (kbd "<C-M-up>")     'windmove-up)
-(global-set-key (kbd "<C-M-down>")   'windmove-down)
-(global-set-key (kbd "<C-M-left>")   'windmove-left)
-(global-set-key (kbd "<C-M-right>")  'windmove-right)
+(global-set-key (kbd "<s-M-up>")     'windmove-up)
+(global-set-key (kbd "<s-M-down>")   'windmove-down)
+(global-set-key (kbd "<s-M-left>")   'windmove-left)
+(global-set-key (kbd "<s-M-right>")  'windmove-right)
 
 
 ;; == Window Resizing ==
 ;; Remove SHIFT to avoid confilct with Org-Mode
-(global-set-key (kbd "M-s-<left>")  'shrink-window-horizontally)
-(global-set-key (kbd "M-s-<right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "M-s-<down>")  'shrink-window)
-(global-set-key (kbd "M-s-<up>")    'enlarge-window)
+(global-set-key (kbd "C-M-<up>")    'enlarge-window)
+(global-set-key (kbd "C-M-<down>")  'shrink-window)
+(global-set-key (kbd "C-M-<left>")  'shrink-window-horizontally)
+(global-set-key (kbd "C-M-<right>") 'enlarge-window-horizontally)
 
 
 ;; == buffer-move == package 2020-12-22
@@ -1793,14 +1819,14 @@
 ;; https://stackoverflow.com/questions/10569165/how-to-map-jj-to-esc-in-emacs-evil-mode
 (use-package key-chord
   :ensure t
-  :defer 2
+  :defer 1
   :init
   ;; https://www.emacswiki.org/emacs/KeyChord
   ;; Max time delay between two key presses to be considered a key chord
-  (setq key-chord-two-keys-delay 0.8) ; default 0.1
+  (setq key-chord-two-keys-delay 0.6) ; default 0.1
   ;; Max time delay between two presses of the same key to be considered a key chord.
   ;; Should normally be a little longer than `key-chord-two-keys-delay'.
-  (setq key-chord-one-key-delay 3.9) ; default 0.2
+  (setq key-chord-one-key-delay 0.7) ; default 0.2
   (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kk" 'evil-normal-state)
   :config
@@ -2641,4 +2667,8 @@ T - tag prefix
 (setq python-shell-completion-native-enable nil)
 
 
+
+;; Optional :: Put below line at the bottom of .emacs
+;; (workgroups-mode 1)  ;; confiliced with its key-binding C-c, which I don't want to use
+;; (workgroups-mode 1)   ; put this one at the bottom of .emacs
 ;; EOF
