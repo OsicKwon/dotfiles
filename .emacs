@@ -48,6 +48,7 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+(global-set-key (kbd "<s-return>") 'other-window)
 
 ;; == Workgroup2 2021-04-26 ==
 ;; Save and Restore Sessions
@@ -61,6 +62,8 @@
   ;; Change workgroups session file
   (setq wg-session-file "~/.emacs.d/.emacs_workgroups")
   ;; (workgroups-mode 1)   ; put this one at the bottom of .emacs
+  (global-set-key (kbd "C-c w c") 'wg-create-workgroup)
+  (global-set-key (kbd "C-c w o") 'wg-open-workgroup)
   )
 
 
@@ -163,7 +166,7 @@
     )
   )
 
-(add-hook 'emacs-startup-hook #'my-default-screen)
+;; (add-hook 'emacs-startup-hook #'my-default-screen)
 
 
 ;; == Timers 2021-04-20 ==
@@ -1464,23 +1467,23 @@
 ;; https://github.com/rnkn/dotfiles/blob/74dff2b1eadf3134c01e376cf8f42b24a0d1cc05/emacs/settings.el#L416-L417
 
 
-;;==========
-;; WINDOW
-;;==========
+;;================
+;; WINDOW Control
+;;================
 
 ;; == Window Navigating ==
-(global-set-key (kbd "<s-M-up>")     'windmove-up)
-(global-set-key (kbd "<s-M-down>")   'windmove-down)
-(global-set-key (kbd "<s-M-left>")   'windmove-left)
-(global-set-key (kbd "<s-M-right>")  'windmove-right)
+(global-set-key (kbd "<C-M-up>")     'windmove-up)
+(global-set-key (kbd "<C-M-down>")   'windmove-down)
+(global-set-key (kbd "<C-M-left>")   'windmove-left)
+(global-set-key (kbd "<C-M-right>")  'windmove-right)
 
 
 ;; == Window Resizing ==
 ;; Remove SHIFT to avoid confilct with Org-Mode
-(global-set-key (kbd "C-M-<up>")    'enlarge-window)
-(global-set-key (kbd "C-M-<down>")  'shrink-window)
-(global-set-key (kbd "C-M-<left>")  'shrink-window-horizontally)
-(global-set-key (kbd "C-M-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "s-M-<up>")    'enlarge-window)
+(global-set-key (kbd "s-M-<down>")  'shrink-window)
+(global-set-key (kbd "s-M-<left>")  'shrink-window-horizontally)
+(global-set-key (kbd "s-M-<right>") 'enlarge-window-horizontally)
 
 
 ;; == buffer-move == package 2020-12-22
