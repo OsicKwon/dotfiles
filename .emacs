@@ -60,6 +60,7 @@
   (setq wg-prefix-key (kbd "C-c z"))  ;; not work for me
   ;; Change workgroups session file
   (setq wg-session-file "~/.emacs.d/.emacs_workgroups")
+  ;; (workgroups-mode 1)   ; put this one at the bottom of .emacs
   )
 
 
@@ -2673,5 +2674,4 @@ T - tag prefix
 
 ;; Optional :: Put below line at the bottom of .emacs
 ;; (workgroups-mode 1)  ;; confiliced with its key-binding C-c, which I don't want to use
-;; (workgroups-mode 1)   ; put this one at the bottom of .emacs
 ;; EOF
