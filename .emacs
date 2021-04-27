@@ -52,12 +52,15 @@
 ;; == Workgroup2 2021-04-26 ==
 ;; Save and Restore Sessions
 ;; https://www.reddit.com/r/emacs/comments/7au3hj/how_do_you_manage_your_emacs_windows_and_stay_sane/
-(require 'workgroups2)
-(use-package workgroups2 :ensure t)
-;; Change prefix key (before activating WG)
-(setq wg-prefix-key (kbd "C-c z"))  ;; not work for me
-;; Change workgroups session file
-(setq wg-session-file "~/.emacs.d/.emacs_workgroups")
+;; (require 'workgroups2)
+(use-package workgroups2
+  :ensure t
+  :init
+  ;; Change prefix key (before activating WG)
+  (setq wg-prefix-key (kbd "C-c z"))  ;; not work for me
+  ;; Change workgroups session file
+  (setq wg-session-file "~/.emacs.d/.emacs_workgroups")
+  )
 
 
 ;; [Replace to] Workgroup2 >> == Purpose 2021-04-26 ==
