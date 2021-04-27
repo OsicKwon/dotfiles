@@ -52,12 +52,16 @@
 ;; == Workgroup2 2021-04-26 ==
 ;; Save and Restore Sessions
 ;; https://www.reddit.com/r/emacs/comments/7au3hj/how_do_you_manage_your_emacs_windows_and_stay_sane/
-(require 'workgroups2)
-(use-package workgroups2 :ensure t)
-;; Change prefix key (before activating WG)
-(setq wg-prefix-key (kbd "C-c z"))  ;; not work for me
-;; Change workgroups session file
-(setq wg-session-file "~/.emacs.d/.emacs_workgroups")
+;; (require 'workgroups2)
+(use-package workgroups2
+  :ensure t
+  :init
+  ;; Change prefix key (before activating WG)
+  (setq wg-prefix-key (kbd "C-c z"))  ;; not work for me
+  ;; Change workgroups session file
+  (setq wg-session-file "~/.emacs.d/.emacs_workgroups")
+  ;; (workgroups-mode 1)   ; put this one at the bottom of .emacs
+  )
 
 
 ;; [Replace to] Workgroup2 >> == Purpose 2021-04-26 ==
@@ -2670,5 +2674,4 @@ T - tag prefix
 
 ;; Optional :: Put below line at the bottom of .emacs
 ;; (workgroups-mode 1)  ;; confiliced with its key-binding C-c, which I don't want to use
-;; (workgroups-mode 1)   ; put this one at the bottom of .emacs
 ;; EOF
