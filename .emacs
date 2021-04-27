@@ -48,6 +48,24 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+
+
+;; == eww config ==
+;; = 2021-04-27 ==
+;; https://www.gnu.org/software/emacs/manual/html_mono/eww.html
+;; (add-hook 'eww-after-render-hook 'view-mode)
+;; (add-hook 'eww-after-render-hook 'evil-normal-state)
+;; https://gitea.polonkai.eu/gergely/my-emacs-d/commit/0c381769c1987fd21fe4af3e111bbe6ec3e9f8c8
+(setq eww-search-prefix "https://www.google.com/?q=")
+
+
+;; at-point things key bindings 2021-04-27
+(global-set-key (kbd "C-c x p") 'powerthesaurus-lookup-word-at-point)
+(global-set-key (kbd "C-c x d") 'define-word-at-point)
+(global-set-key (kbd "C-c x t") 'google-translate-at-point)
+(global-set-key (kbd "C-c x a") 'counsel-ag-thing-at-point)
+
+
 (global-set-key (kbd "<s-return>") 'other-window)
 
 ;; == Workgroup2 2021-04-26 ==
@@ -1830,10 +1848,10 @@
   :init
   ;; https://www.emacswiki.org/emacs/KeyChord
   ;; Max time delay between two key presses to be considered a key chord
-  (setq key-chord-two-keys-delay 0.6) ; default 0.1
+  (setq key-chord-two-keys-delay 0.4) ; default 0.1
   ;; Max time delay between two presses of the same key to be considered a key chord.
   ;; Should normally be a little longer than `key-chord-two-keys-delay'.
-  (setq key-chord-one-key-delay 0.7) ; default 0.2
+  (setq key-chord-one-key-delay 0.5) ; default 0.2
   (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kk" 'evil-normal-state)
   :config
