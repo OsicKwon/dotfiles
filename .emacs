@@ -72,8 +72,6 @@
 (global-set-key (kbd "C-c x a") 'counsel-ag-thing-at-point)
 
 
-(global-set-key (kbd "<s-return>") 'other-window)
-
 ;; == Workgroup2 2021-04-26 ==
 ;; Save and Restore Sessions
 ;; https://www.reddit.com/r/emacs/comments/7au3hj/how_do_you_manage_your_emacs_windows_and_stay_sane/
@@ -1866,6 +1864,22 @@
 (evil-commentary-mode)
 
 
+;; == evil-leader 2021-04-28 ==
+(use-package evil-leader
+  :ensure t
+  :init
+  (require 'evil-leader)
+  (evil-leader/set-key
+    "p" 'powerthesaurus-lookup-word-at-point
+    "d" 'define-word-at-point
+    "t" 'google-translate-at-point
+    "a" 'counsel-ag-thing-at-point
+   )
+  :config
+  (global-evil-leader-mode)
+)
+
+
 ;; Exit insert mode by pressing j and then j quickly 2021-04-17
 ;; https://stackoverflow.com/questions/10569165/how-to-map-jj-to-esc-in-emacs-evil-mode
 (use-package key-chord
@@ -1874,12 +1888,14 @@
   :init
   ;; https://www.emacswiki.org/emacs/KeyChord
   ;; Max time delay between two key presses to be considered a key chord
-  (setq key-chord-two-keys-delay 0.4) ; default 0.1
+  (setq key-chord-two-keys-delay 0.1) ; default 0.1
   ;; Max time delay between two presses of the same key to be considered a key chord.
   ;; Should normally be a little longer than `key-chord-two-keys-delay'.
-  (setq key-chord-one-key-delay 0.5) ; default 0.2
+  (setq key-chord-one-key-delay 0.2) ; default 0.2
   (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kk" 'evil-normal-state)
+  (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)  ;; preventing from navigating accedently, immediately or unconsciousely
+  (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)  ;; preventing from navigating accedently, immediately or unconsciousely
   :config
   (key-chord-mode 1)
   )
