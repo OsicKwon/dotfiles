@@ -59,6 +59,12 @@
 (setq eww-search-prefix "https://www.google.com/?q=")
 
 
+;; at-point things - alternating test
+(global-set-key (kbd "C-x x p") 'powerthesaurus-lookup-word-at-point)
+(global-set-key (kbd "C-x x d") 'define-word-at-point)
+(global-set-key (kbd "C-x x t") 'google-translate-at-point)
+(global-set-key (kbd "C-x x a") 'counsel-ag-thing-at-point)
+
 ;; at-point things key bindings 2021-04-27
 (global-set-key (kbd "C-c x p") 'powerthesaurus-lookup-word-at-point)
 (global-set-key (kbd "C-c x d") 'define-word-at-point)
@@ -82,6 +88,9 @@
   ;; (workgroups-mode 1)   ; put this one at the bottom of .emacs
   (global-set-key (kbd "C-c w c") 'wg-create-workgroup)
   (global-set-key (kbd "C-c w o") 'wg-open-workgroup)
+  ;; alternating key-binding with C-x
+  (global-set-key (kbd "C-x w c") 'wg-create-workgroup)
+  (global-set-key (kbd "C-x w o") 'wg-open-workgroup)
   )
 
 
@@ -444,6 +453,8 @@
   (require 'google-translate)
   (setq google-translate-default-source-language "en")
   (setq google-translate-default-target-language "ko")
+  (setq google-translate-output-destination 'echo-area)
+  (setq google-translate-show-phonetic t)
 
   :functions (my-google-translate-at-point google-translate--search-tkk)
   :custom
@@ -591,8 +602,8 @@
 	 ("p" . toggle-window-dedicated)
 	 ("s" . swiper)
 	 ;; ("a" . avy-goto-char)
-	 ;; ("," . org-narrow-to-subtree)
-	 ;; ("." . widen)
+	 ("," . org-narrow-to-subtree)
+	 ("." . widen)
 	 ;; ("`" . beacon-blink)
 	 ;; ("`" . pop-global-mark)
 	 ;; ("`" . avy-goto-char-2)
@@ -666,20 +677,20 @@
 
 	 ;; Org binding
          ;; ------------
-	 ("o" . nil)
+	 ;; ("o" . nil)
 	 ;; ("ots" . org-tree-slide-mode)
-	 ("ot" . org-tree-slide-mode)
+	 ;; ("ot" . org-tree-slide-mode)
 	 ;; ("os" . org-tree-slide-mode)
-	 ("or" . org-narrow-to-subtree)
-	 ("ow" . widen)
-	 ("oa" . org-agenda)
-	 ("oc" . org-capture)
+	 ;; ("or" . org-narrow-to-subtree)
+	 ;; ("ow" . widen)
+	 ;; ("oa" . org-agenda)
+	 ;; ("oc" . org-capture)
 
 	 ;; Trans Functions
          ;; ------------
-	 ("t" . nil)
-	 ("tp" . powerthesaurus-lookup-word-at-point)
-	 ("td" . define-word-at-point)
+	 ;; ("t" . nil)
+	 ;; ("tp" . powerthesaurus-lookup-word-at-point)
+	 ;; ("td" . define-word-at-point)
 
 	 ;; <ESCAPE> binidng 
          ;; ---------------
@@ -705,6 +716,7 @@
 	 ;; ("x" . View-exit)  ;; like 'e'
 	 ;; ("z" . evil-exit-emacs-state)
 	 ;; ("z" . kill-current-buffer)  ;; same as (s-k)
+	 ("t" . org-tree-slide-mode)
 	 ;; ("v" . ace-window)
 	 ("v" . evil-exit-emacs-state)
 	 ;; ("v" . evil-visual-state)
@@ -718,12 +730,11 @@
 	 ("x" . my-kill-current-buffer-and-window)
 	 ("c" . recenter-top-bottom)
 	 ;; ("i" . my-indirect-buffer)
-	 ;; ("i" . my-clone-indirect-buffer)
+	 ("i" . my-clone-indirect-buffer)
 	 ;; ("i" . evil-insert-state)
-	 ;; ("o" . my-org-indirect-buffer)
-
-	 ("ic" . my-clone-indirect-buffer)
-	 ("io" . my-org-indirect-buffer)
+	 ("o" . my-org-indirect-buffer)
+	 ;; ("ic" . my-clone-indirect-buffer)
+	 ;; ("io" . my-org-indirect-buffer)
 
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)
@@ -1382,7 +1393,16 @@
 
 ;; parenthesis highlight
 ;; to change color :: face color -> (show-paren-match)
+;; '(show-paren-match ((t (:background "Green"))))
 (show-paren-mode)               ;; little interupted but useful
+(unless (display-graphic-p)
+  ;; https://www.emacswiki.org/emacs/ShowParenMode
+  ;; (require 'paren) (set-face-background 'show-paren-match (face-background 'default))
+  ;; (set-face-foreground 'show-paren-match "#def")
+  ;; (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+  (set-face-background 'show-paren-match "black")
+)
+
 
 (setq ns-pop-up-frames nil)        ;; only one frame use when openning a file 2021-01-28
 
@@ -1482,7 +1502,8 @@
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
  '(pulse-highlight-start-face ((t (:background "dark gray"))))
- '(show-paren-match ((t (:background "Green")))))
+ )
+
 
 ;; white mode-line came from Binder/Olivetti reddit like below:
 ;; https://www.reddit.com/r/emacs/comments/fc8hc2/binder_modes_for_structuring_a_multifile_writing/
@@ -1789,7 +1810,7 @@
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
 (define-key evil-normal-state-map (kbd "<escape>") nil)
 (define-key evil-normal-state-map (kbd "<escape> x") 'counsel-M-x)  ;; reventing error that esc-x to call M-x
-(define-key evil-normal-state-map (kbd "RET")   'other-window)
+;; (define-key evil-normal-state-map (kbd "RET")   'other-window)
 
 (define-key evil-visual-state-map (kbd "C-t")     'edit-indirect-region)  ;; in Emacs mode, "C-t" binded as well
 ;; https://vim.fandom.com/wiki/Capitalize_words_and_regions_easily
@@ -2706,27 +2727,44 @@ T - tag prefix
 ;; https://stackoverflow.com/questions/19085514/how-can-i-start-emacs-with-predefined-window
 ;; https://stackoverflow.com/questions/6578373/sleep-in-emacs-lisp
 ;; https://emacs.stackexchange.com/questions/17188/open-org-agenda-weekly-view-window-when-emacs-is-loaded
-(org-agenda nil "a")
-;; (org-agenda-day-view)
-(split-window-horizontally)
-(find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
-(other-window 1)
-(split-window-vertically)
-(find-file "~/Documents/nvALT/org_capture_note.txt")
-(other-window 1)
-(other-window 1)
-(delete-window)
-(other-window 1)
-;; (cfw:open-org-calendar)
-;; (sleep-for 12)
-;; (lambda () (execute-kbd-macro (kbd "r")))
-;; (lambda () (cfw:refresh-calendar-buffer))
-;; (split-window-vertically)
-;; (other-window 1)
-;; (starting-calendar)
-;; (calendar)
-;; (split-window-vertically)
-;; (other-window 1)
+(if (display-graphic-p)
+  (progn
+
+    ;; option 1 > full information
+    ;; (org-agenda nil "a")
+    ;; (split-window-horizontally)
+    ;; (find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
+    ;; (other-window 1)
+    (split-window-horizontally)
+    ;; (split-window-vertically)
+    ;; (find-file "~/Documents/nvALT/org_capture_note.txt")
+    ;; (other-window 1)
+    ;; (other-window 1)
+    ;; (delete-window)
+    ;; (other-window 1)
+    
+    ;; option 2 > calendar view
+    ;; https://stackoverflow.com/questions/27758800/why-does-emacs-leave-a-gap-when-trying-to-maximize-the-frame
+    (setq frame-resize-pixelwise t)  ;; real miximize window
+    (dotimes (n 1)
+      (toggle-frame-maximized))
+    (cfw:open-org-calendar)
+    (lambda () (execute-kbd-macro (kbd "q")))  ;; quit first and run again
+    (message "waiting 0.5 sec")
+    (sleep-for 0.5)
+    (cfw:open-org-calendar)
+
+    ;; option 3 > add more information
+    ;; (split-window-horizontally)
+    (other-window 1)
+    (split-window-vertically)
+    (find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
+    ;; (find-file "~/Documents/nvALT/org_capture_note.txt")
+    (other-window 1)
+    (find-file "~/Documents/nvALT/org_capture_note.txt")
+    (other-window 1)
+
+    ))
 ;; ===
 ;; EOF
 ;; ===
