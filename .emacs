@@ -482,7 +482,7 @@
     )
 )
 
-(defun starting-functions ()
+(defun starting-calendar ()
   (interactive)
   (select-frame (make-frame '((name . "calendar")))) ; makes a new frame and selects it
   (set-face-attribute 'default (selected-frame) :height 134) ; reduces the font size of the new frame
@@ -2700,4 +2700,33 @@ T - tag prefix
 
 ;; Optional :: Put below line at the bottom of .emacs
 ;; (workgroups-mode 1)  ;; confiliced with its key-binding C-c, which I don't want to use
+
+
+;; == Star-Up ==
+;; https://stackoverflow.com/questions/19085514/how-can-i-start-emacs-with-predefined-window
+;; https://stackoverflow.com/questions/6578373/sleep-in-emacs-lisp
+;; https://emacs.stackexchange.com/questions/17188/open-org-agenda-weekly-view-window-when-emacs-is-loaded
+(org-agenda nil "a")
+;; (org-agenda-day-view)
+(split-window-horizontally)
+(find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
+(other-window 1)
+(split-window-vertically)
+(find-file "~/Documents/nvALT/org_capture_note.txt")
+(other-window 1)
+(other-window 1)
+(delete-window)
+(other-window 1)
+;; (cfw:open-org-calendar)
+;; (sleep-for 12)
+;; (lambda () (execute-kbd-macro (kbd "r")))
+;; (lambda () (cfw:refresh-calendar-buffer))
+;; (split-window-vertically)
+;; (other-window 1)
+;; (starting-calendar)
+;; (calendar)
+;; (split-window-vertically)
+;; (other-window 1)
+;; ===
 ;; EOF
+;; ===
