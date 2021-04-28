@@ -49,6 +49,29 @@
 ;; --------------------
 
 
+
+;; == eww config ==
+;; = 2021-04-27 ==
+;; https://www.gnu.org/software/emacs/manual/html_mono/eww.html
+;; (add-hook 'eww-after-render-hook 'view-mode)
+;; (add-hook 'eww-after-render-hook 'evil-normal-state)
+;; https://gitea.polonkai.eu/gergely/my-emacs-d/commit/0c381769c1987fd21fe4af3e111bbe6ec3e9f8c8
+(setq eww-search-prefix "https://www.google.com/?q=")
+
+
+;; at-point things - alternating test
+(global-set-key (kbd "C-x x p") 'powerthesaurus-lookup-word-at-point)
+(global-set-key (kbd "C-x x d") 'define-word-at-point)
+(global-set-key (kbd "C-x x t") 'google-translate-at-point)
+(global-set-key (kbd "C-x x a") 'counsel-ag-thing-at-point)
+
+;; at-point things key bindings 2021-04-27
+(global-set-key (kbd "C-c x p") 'powerthesaurus-lookup-word-at-point)
+(global-set-key (kbd "C-c x d") 'define-word-at-point)
+(global-set-key (kbd "C-c x t") 'google-translate-at-point)
+(global-set-key (kbd "C-c x a") 'counsel-ag-thing-at-point)
+
+
 ;; == Workgroup2 2021-04-26 ==
 ;; Save and Restore Sessions
 ;; https://www.reddit.com/r/emacs/comments/7au3hj/how_do_you_manage_your_emacs_windows_and_stay_sane/
@@ -61,6 +84,11 @@
   ;; Change workgroups session file
   (setq wg-session-file "~/.emacs.d/.emacs_workgroups")
   ;; (workgroups-mode 1)   ; put this one at the bottom of .emacs
+  (global-set-key (kbd "C-c w c") 'wg-create-workgroup)
+  (global-set-key (kbd "C-c w o") 'wg-open-workgroup)
+  ;; alternating key-binding with C-x
+  (global-set-key (kbd "C-x w c") 'wg-create-workgroup)
+  (global-set-key (kbd "C-x w o") 'wg-open-workgroup)
   )
 
 
@@ -163,7 +191,7 @@
     )
   )
 
-(add-hook 'emacs-startup-hook #'my-default-screen)
+;; (add-hook 'emacs-startup-hook #'my-default-screen)
 
 
 ;; == Timers 2021-04-20 ==
@@ -423,6 +451,8 @@
   (require 'google-translate)
   (setq google-translate-default-source-language "en")
   (setq google-translate-default-target-language "ko")
+  (setq google-translate-output-destination 'echo-area)
+  (setq google-translate-show-phonetic t)
 
   :functions (my-google-translate-at-point google-translate--search-tkk)
   :custom
@@ -461,7 +491,7 @@
     )
 )
 
-(defun starting-functions ()
+(defun starting-calendar ()
   (interactive)
   (select-frame (make-frame '((name . "calendar")))) ; makes a new frame and selects it
   (set-face-attribute 'default (selected-frame) :height 134) ; reduces the font size of the new frame
@@ -561,7 +591,7 @@
 	 ("7" . ivy-switch-view)
 	 ("8" . winner-undo)
 	 ("9" . winner-redo)
-	 ("RET" . other-window)
+	 ;; ("RET" . other-window)
 	 ("DEL" . beacon-blink)
 	 ;; ("o" . ace-window)
 	 ;; ("o" . other-window)
@@ -570,8 +600,8 @@
 	 ("p" . toggle-window-dedicated)
 	 ("s" . swiper)
 	 ;; ("a" . avy-goto-char)
-	 ;; ("," . org-narrow-to-subtree)
-	 ;; ("." . widen)
+	 ("," . org-narrow-to-subtree)
+	 ("." . widen)
 	 ;; ("`" . beacon-blink)
 	 ;; ("`" . pop-global-mark)
 	 ;; ("`" . avy-goto-char-2)
@@ -592,8 +622,8 @@
 	 ;; ("k" . previous-line)
 	 ("j" . forward-paragraph)
 	 ("k" . backward-paragraph)
-	 ;; ("h" . left-char)
-         ;; ("l" . right-char)
+	 ("h" . backward-sentence)
+         ("l" . forward-sentence)
 	 ;; ("w" . right-word)
          ;; ("N" . View-search-last-regexp-backward)  ;; Regex previous result
 	 ("/" . evil-search-forward)
@@ -604,8 +634,10 @@
 	 ;; ("i" . View-exit)  ;; like 'e'
          ("e" . View-scroll-line-forward) ;; scroll down (forward) - opposite to 'y'
          ;; ("0" . beginning-of-visual-line)
-	 ("]" . switch-to-next-buffer)
-	 ("[" . switch-to-prev-buffer)
+	 ;; ("]" . switch-to-next-buffer)
+	 ;; ("[" . switch-to-prev-buffer)
+	 ("]" . org-tree-slide-move-next-tree)
+	 ("[" . org-tree-slide-move-previous-tree)
 	 ;; ("\\" . counsel-buffer-or-recentf)
 	 ;; ("\\" . imenu-list)
 	 ;; ("\\" . my-view-general-prefix)
@@ -643,20 +675,20 @@
 
 	 ;; Org binding
          ;; ------------
-	 ("o" . nil)
+	 ;; ("o" . nil)
 	 ;; ("ots" . org-tree-slide-mode)
-	 ("ot" . org-tree-slide-mode)
+	 ;; ("ot" . org-tree-slide-mode)
 	 ;; ("os" . org-tree-slide-mode)
-	 ("or" . org-narrow-to-subtree)
-	 ("ow" . widen)
-	 ("oa" . org-agenda)
-	 ("oc" . org-capture)
+	 ;; ("or" . org-narrow-to-subtree)
+	 ;; ("ow" . widen)
+	 ;; ("oa" . org-agenda)
+	 ;; ("oc" . org-capture)
 
 	 ;; Trans Functions
          ;; ------------
-	 ("t" . nil)
-	 ("tp" . powerthesaurus-lookup-word-at-point)
-	 ("td" . define-word-at-point)
+	 ;; ("t" . nil)
+	 ;; ("tp" . powerthesaurus-lookup-word-at-point)
+	 ;; ("td" . define-word-at-point)
 
 	 ;; <ESCAPE> binidng 
          ;; ---------------
@@ -682,25 +714,25 @@
 	 ;; ("x" . View-exit)  ;; like 'e'
 	 ;; ("z" . evil-exit-emacs-state)
 	 ;; ("z" . kill-current-buffer)  ;; same as (s-k)
+	 ("t" . org-tree-slide-mode)
 	 ;; ("v" . ace-window)
 	 ("v" . evil-exit-emacs-state)
 	 ;; ("v" . evil-visual-state)
 	 ;; ("RET" . evil-exit-emacs-state)
 	 ;; ("SPC" . evil-exit-emacs-state)
-	 ("l" . org-tree-slide-move-next-tree)
-	 ("h" . org-tree-slide-move-previous-tree)
+	 ;; ("l" . org-tree-slide-move-next-tree)
+	 ;; ("h" . org-tree-slide-move-previous-tree)
 	 ;;
 	 ("q" . kill-current-buffer)  ;; same as (s-k)
 	 ;; ("q" . View-exit)
 	 ("x" . my-kill-current-buffer-and-window)
 	 ("c" . recenter-top-bottom)
 	 ;; ("i" . my-indirect-buffer)
-	 ;; ("i" . my-clone-indirect-buffer)
+	 ("i" . my-clone-indirect-buffer)
 	 ;; ("i" . evil-insert-state)
-	 ;; ("o" . my-org-indirect-buffer)
-
-	 ("ic" . my-clone-indirect-buffer)
-	 ("io" . my-org-indirect-buffer)
+	 ("o" . my-org-indirect-buffer)
+	 ;; ("ic" . my-clone-indirect-buffer)
+	 ;; ("io" . my-org-indirect-buffer)
 
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)
@@ -1105,6 +1137,7 @@
    '(workgroups2 workgroups cm-mode all-the-icons neotree ranger org-crypt key-chord dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
+ '(show-paren-mode t)
  '(writeroom-restore-window-config t))
 
 
@@ -1357,7 +1390,17 @@
 ;; ---------------
 
 ;; parenthesis highlight
+;; to change color :: face color -> (show-paren-match)
+;; '(show-paren-match ((t (:background "Green"))))
 (show-paren-mode)               ;; little interupted but useful
+(unless (display-graphic-p)
+  ;; https://www.emacswiki.org/emacs/ShowParenMode
+  ;; (require 'paren) (set-face-background 'show-paren-match (face-background 'default))
+  ;; (set-face-foreground 'show-paren-match "#def")
+  ;; (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+  (set-face-background 'show-paren-match "black")
+)
+
 
 (setq ns-pop-up-frames nil)        ;; only one frame use when openning a file 2021-01-28
 
@@ -1400,7 +1443,7 @@
 (global-set-key (kbd "C-M-]") 'switch-to-next-buffer)
 (global-set-key (kbd "C-M-[") 'switch-to-prev-buffer)
 
-(global-set-key (kbd "C-<return>") 'other-window)
+(global-set-key (kbd "s-<return>") 'other-window)
 
 
 ;; indent-guide package 2021-02-24
@@ -1456,7 +1499,9 @@
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
- '(pulse-highlight-start-face ((t (:background "dark gray")))))
+ '(pulse-highlight-start-face ((t (:background "dark gray"))))
+ )
+
 
 ;; white mode-line came from Binder/Olivetti reddit like below:
 ;; https://www.reddit.com/r/emacs/comments/fc8hc2/binder_modes_for_structuring_a_multifile_writing/
@@ -1464,23 +1509,23 @@
 ;; https://github.com/rnkn/dotfiles/blob/74dff2b1eadf3134c01e376cf8f42b24a0d1cc05/emacs/settings.el#L416-L417
 
 
-;;==========
-;; WINDOW
-;;==========
+;;================
+;; WINDOW Control
+;;================
 
 ;; == Window Navigating ==
-(global-set-key (kbd "<s-M-up>")     'windmove-up)
-(global-set-key (kbd "<s-M-down>")   'windmove-down)
-(global-set-key (kbd "<s-M-left>")   'windmove-left)
-(global-set-key (kbd "<s-M-right>")  'windmove-right)
+(global-set-key (kbd "<C-M-up>")     'windmove-up)
+(global-set-key (kbd "<C-M-down>")   'windmove-down)
+(global-set-key (kbd "<C-M-left>")   'windmove-left)
+(global-set-key (kbd "<C-M-right>")  'windmove-right)
 
 
 ;; == Window Resizing ==
 ;; Remove SHIFT to avoid confilct with Org-Mode
-(global-set-key (kbd "C-M-<up>")    'enlarge-window)
-(global-set-key (kbd "C-M-<down>")  'shrink-window)
-(global-set-key (kbd "C-M-<left>")  'shrink-window-horizontally)
-(global-set-key (kbd "C-M-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "s-M-<up>")    'enlarge-window)
+(global-set-key (kbd "s-M-<down>")  'shrink-window)
+(global-set-key (kbd "s-M-<left>")  'shrink-window-horizontally)
+(global-set-key (kbd "s-M-<right>") 'enlarge-window-horizontally)
 
 
 ;; == buffer-move == package 2020-12-22
@@ -1763,7 +1808,7 @@
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
 (define-key evil-normal-state-map (kbd "<escape>") nil)
 (define-key evil-normal-state-map (kbd "<escape> x") 'counsel-M-x)  ;; reventing error that esc-x to call M-x
-(define-key evil-normal-state-map (kbd "RET")   'other-window)
+;; (define-key evil-normal-state-map (kbd "RET")   'other-window)
 
 (define-key evil-visual-state-map (kbd "C-t")     'edit-indirect-region)  ;; in Emacs mode, "C-t" binded as well
 ;; https://vim.fandom.com/wiki/Capitalize_words_and_regions_easily
@@ -1819,6 +1864,22 @@
 (evil-commentary-mode)
 
 
+;; == evil-leader 2021-04-28 ==
+(use-package evil-leader
+  :ensure t
+  :init
+  (require 'evil-leader)
+  (evil-leader/set-key
+    "p" 'powerthesaurus-lookup-word-at-point
+    "d" 'define-word-at-point
+    "t" 'google-translate-at-point
+    "a" 'counsel-ag-thing-at-point
+   )
+  :config
+  (global-evil-leader-mode)
+)
+
+
 ;; Exit insert mode by pressing j and then j quickly 2021-04-17
 ;; https://stackoverflow.com/questions/10569165/how-to-map-jj-to-esc-in-emacs-evil-mode
 (use-package key-chord
@@ -1827,12 +1888,14 @@
   :init
   ;; https://www.emacswiki.org/emacs/KeyChord
   ;; Max time delay between two key presses to be considered a key chord
-  (setq key-chord-two-keys-delay 0.6) ; default 0.1
+  (setq key-chord-two-keys-delay 0.1) ; default 0.1
   ;; Max time delay between two presses of the same key to be considered a key chord.
   ;; Should normally be a little longer than `key-chord-two-keys-delay'.
-  (setq key-chord-one-key-delay 0.7) ; default 0.2
+  (setq key-chord-one-key-delay 0.2) ; default 0.2
   (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kk" 'evil-normal-state)
+  (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)  ;; preventing from navigating accedently, immediately or unconsciousely
+  (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)  ;; preventing from navigating accedently, immediately or unconsciousely
   :config
   (key-chord-mode 1)
   )
@@ -2674,4 +2737,50 @@ T - tag prefix
 
 ;; Optional :: Put below line at the bottom of .emacs
 ;; (workgroups-mode 1)  ;; confiliced with its key-binding C-c, which I don't want to use
+
+
+;; == Star-Up ==
+;; https://stackoverflow.com/questions/19085514/how-can-i-start-emacs-with-predefined-window
+;; https://stackoverflow.com/questions/6578373/sleep-in-emacs-lisp
+;; https://emacs.stackexchange.com/questions/17188/open-org-agenda-weekly-view-window-when-emacs-is-loaded
+(if (display-graphic-p)
+  (progn
+
+    ;; option 1 > full information
+    ;; (org-agenda nil "a")
+    ;; (split-window-horizontally)
+    ;; (find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
+    ;; (other-window 1)
+    (split-window-horizontally)
+    ;; (split-window-vertically)
+    ;; (find-file "~/Documents/nvALT/org_capture_note.txt")
+    ;; (other-window 1)
+    ;; (other-window 1)
+    ;; (delete-window)
+    ;; (other-window 1)
+    
+    ;; option 2 > calendar view
+    ;; https://stackoverflow.com/questions/27758800/why-does-emacs-leave-a-gap-when-trying-to-maximize-the-frame
+    (setq frame-resize-pixelwise t)  ;; real miximize window
+    (dotimes (n 1)
+      (toggle-frame-maximized))
+    (cfw:open-org-calendar)
+    (lambda () (execute-kbd-macro (kbd "q")))  ;; quit first and run again
+    (message "waiting 0.5 sec")
+    (sleep-for 0.5)
+    (cfw:open-org-calendar)
+
+    ;; option 3 > add more information
+    ;; (split-window-horizontally)
+    (other-window 1)
+    (split-window-vertically)
+    (find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
+    ;; (find-file "~/Documents/nvALT/org_capture_note.txt")
+    (other-window 1)
+    (find-file "~/Documents/nvALT/org_capture_note.txt")
+    (other-window 1)
+
+    ))
+;; ===
 ;; EOF
+;; ===

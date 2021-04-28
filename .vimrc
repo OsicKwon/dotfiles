@@ -132,7 +132,7 @@ Plugin 'tpope/vim-repeat'
 " Plugin 'davidhalter/jedi-vim'          " not working - hard to solve 2020-11-20
 " Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
 Plugin 'severin-lemaignan/vim-minimap'
-" Plugin 'terryma/vim-expand-region'
+Plugin 'terryma/vim-expand-region'
 " Plugin 'w0rp/ale'                      " Asynchronous Lint Engine ??
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
 " Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
