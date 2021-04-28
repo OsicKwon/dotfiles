@@ -582,7 +582,7 @@
 	 ("7" . ivy-switch-view)
 	 ("8" . winner-undo)
 	 ("9" . winner-redo)
-	 ("RET" . other-window)
+	 ;; ("RET" . other-window)
 	 ("DEL" . beacon-blink)
 	 ;; ("o" . ace-window)
 	 ;; ("o" . other-window)
@@ -613,8 +613,8 @@
 	 ;; ("k" . previous-line)
 	 ("j" . forward-paragraph)
 	 ("k" . backward-paragraph)
-	 ;; ("h" . left-char)
-         ;; ("l" . right-char)
+	 ("h" . backward-sentence)
+         ("l" . forward-sentence)
 	 ;; ("w" . right-word)
          ;; ("N" . View-search-last-regexp-backward)  ;; Regex previous result
 	 ("/" . evil-search-forward)
@@ -625,8 +625,10 @@
 	 ;; ("i" . View-exit)  ;; like 'e'
          ("e" . View-scroll-line-forward) ;; scroll down (forward) - opposite to 'y'
          ;; ("0" . beginning-of-visual-line)
-	 ("]" . switch-to-next-buffer)
-	 ("[" . switch-to-prev-buffer)
+	 ;; ("]" . switch-to-next-buffer)
+	 ;; ("[" . switch-to-prev-buffer)
+	 ("]" . org-tree-slide-move-next-tree)
+	 ("[" . org-tree-slide-move-previous-tree)
 	 ;; ("\\" . counsel-buffer-or-recentf)
 	 ;; ("\\" . imenu-list)
 	 ;; ("\\" . my-view-general-prefix)
@@ -708,8 +710,8 @@
 	 ;; ("v" . evil-visual-state)
 	 ;; ("RET" . evil-exit-emacs-state)
 	 ;; ("SPC" . evil-exit-emacs-state)
-	 ("l" . org-tree-slide-move-next-tree)
-	 ("h" . org-tree-slide-move-previous-tree)
+	 ;; ("l" . org-tree-slide-move-next-tree)
+	 ;; ("h" . org-tree-slide-move-previous-tree)
 	 ;;
 	 ("q" . kill-current-buffer)  ;; same as (s-k)
 	 ;; ("q" . View-exit)
@@ -1126,6 +1128,7 @@
    '(cm-mode all-the-icons neotree ranger org-crypt key-chord dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
+ '(show-paren-mode t)
  '(writeroom-restore-window-config t))
 
 
@@ -1378,6 +1381,7 @@
 ;; ---------------
 
 ;; parenthesis highlight
+;; to change color :: face color -> (show-paren-match)
 (show-paren-mode)               ;; little interupted but useful
 
 (setq ns-pop-up-frames nil)        ;; only one frame use when openning a file 2021-01-28
@@ -1421,7 +1425,7 @@
 (global-set-key (kbd "C-M-]") 'switch-to-next-buffer)
 (global-set-key (kbd "C-M-[") 'switch-to-prev-buffer)
 
-(global-set-key (kbd "C-<return>") 'other-window)
+(global-set-key (kbd "s-<return>") 'other-window)
 
 
 ;; indent-guide package 2021-02-24
@@ -1477,7 +1481,8 @@
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
- '(pulse-highlight-start-face ((t (:background "dark gray")))))
+ '(pulse-highlight-start-face ((t (:background "dark gray"))))
+ '(show-paren-match ((t (:background "Green")))))
 
 ;; white mode-line came from Binder/Olivetti reddit like below:
 ;; https://www.reddit.com/r/emacs/comments/fc8hc2/binder_modes_for_structuring_a_multifile_writing/
