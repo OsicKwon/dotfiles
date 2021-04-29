@@ -32,6 +32,8 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+;; http://ohyecloudy.com/emacsian/2019/12/15/package-use-package-ensure-imenu/
+(setq use-package-enable-imenu-support t)
 
 ;; == Use-Package Ref. ==
 ;; https://jwiegley.github.io/use-package/keywords/
@@ -49,9 +51,27 @@
 ;; --------------------
 
 
+;; org-clock 2021-04-29
+;; http://ohyecloudy.com/emacsian/2017/10/14/org-clock-persistence/
+(org-clock-persistence-insinuate)
+(setq org-clock-persist t)
+(setq org-clock-in-resume t)
+(setq org-clock-persist-query-resume nil)
+
+
+;; for org-clock preventing from forgeting stopping clock in washroom!
+;; http://ohyecloudy.com/emacsian/2017/11/04/org-dealing-with-idle-time/
+;;
+;; walk away from your computer
+;; https://orgmode.org/manual/Resolving-idle-time.html
+;;
+;; dealing with idle time
+;; https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html#dealing-with-idle
+(setq org-clock-idle-time 15)
+
 
 ;; == eww config ==
-;; = 2021-04-27 ==
+;; == 2021-04-27 ==
 ;; https://www.gnu.org/software/emacs/manual/html_mono/eww.html
 ;; (add-hook 'eww-after-render-hook 'view-mode)
 ;; (add-hook 'eww-after-render-hook 'evil-normal-state)
