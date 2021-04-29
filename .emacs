@@ -32,6 +32,8 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+;; http://ohyecloudy.com/emacsian/2019/12/15/package-use-package-ensure-imenu/
+(setq use-package-enable-imenu-support t)
 
 ;; == Use-Package Ref. ==
 ;; https://jwiegley.github.io/use-package/keywords/
@@ -49,21 +51,32 @@
 ;; --------------------
 
 
+;; org-clock 2021-04-29
+;; http://ohyecloudy.com/emacsian/2017/10/14/org-clock-persistence/
+(org-clock-persistence-insinuate)
+(setq org-clock-persist t)
+(setq org-clock-in-resume t)
+(setq org-clock-persist-query-resume nil)
+
+
+;; for org-clock preventing from forgeting stopping clock in washroom!
+;; http://ohyecloudy.com/emacsian/2017/11/04/org-dealing-with-idle-time/
+;;
+;; walk away from your computer
+;; https://orgmode.org/manual/Resolving-idle-time.html
+;;
+;; dealing with idle time
+;; https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html#dealing-with-idle
+(setq org-clock-idle-time 15)
+
 
 ;; == eww config ==
-;; = 2021-04-27 ==
+;; == 2021-04-27 ==
 ;; https://www.gnu.org/software/emacs/manual/html_mono/eww.html
 ;; (add-hook 'eww-after-render-hook 'view-mode)
 ;; (add-hook 'eww-after-render-hook 'evil-normal-state)
 ;; https://gitea.polonkai.eu/gergely/my-emacs-d/commit/0c381769c1987fd21fe4af3e111bbe6ec3e9f8c8
 (setq eww-search-prefix "https://www.google.com/?q=")
-
-
-;; at-point things - alternating test
-(global-set-key (kbd "C-x x p") 'powerthesaurus-lookup-word-at-point)
-(global-set-key (kbd "C-x x d") 'define-word-at-point)
-(global-set-key (kbd "C-x x t") 'google-translate-at-point)
-(global-set-key (kbd "C-x x a") 'counsel-ag-thing-at-point)
 
 ;; at-point things key bindings 2021-04-27
 (global-set-key (kbd "C-c x p") 'powerthesaurus-lookup-word-at-point)
@@ -71,14 +84,27 @@
 (global-set-key (kbd "C-c x t") 'google-translate-at-point)
 (global-set-key (kbd "C-c x a") 'counsel-ag-thing-at-point)
 
+;; an alternatvie with SPC prefix
+(global-set-key (kbd "C-c SPC p") 'powerthesaurus-lookup-word-at-point)
+(global-set-key (kbd "C-c SPC d") 'define-word-at-point)
+(global-set-key (kbd "C-c SPC t") 'google-translate-at-point)
+(global-set-key (kbd "C-c SPC a") 'counsel-ag-thing-at-point)
+
+;; ;; an alternatvie with <escape> prefix
+;; (global-set-key (kbd "<escape> c p") 'powerthesaurus-lookup-word-at-point)
+;; (global-set-key (kbd "<escape> c d") 'define-word-at-point)
+;; (global-set-key (kbd "<escape> c t") 'google-translate-at-point)
+;; (global-set-key (kbd "<escape> c a") 'counsel-ag-thing-at-point)
+
+(global-set-key (kbd "C-c r") 'ranger)
 
 ;; == Workgroup2 2021-04-26 ==
 ;; Save and Restore Sessions
 ;; https://www.reddit.com/r/emacs/comments/7au3hj/how_do_you_manage_your_emacs_windows_and_stay_sane/
-;; (require 'workgroups2)
 (use-package workgroups2
   :ensure t
   :init
+  (require 'workgroups2)
   ;; Change prefix key (before activating WG)
   (setq wg-prefix-key (kbd "C-c z"))  ;; not work for me
   ;; Change workgroups session file
@@ -248,7 +274,7 @@
 ;; --------------------------------------------------------------------------
 ;; (setq org-cycle-separator-lines 2)   ;; default: 2 lines -> 1 blank between heading
 ;; (setq org-cycle-separator-lines 0)   ;; not allow blank line like 'evil-toggle-fold'
-;; (setq org-cycle-separator-lines -1)  ;; 1 line == 1 blank
+(setq org-cycle-separator-lines -1)  ;; 1 line == 1 blank
 
 
 ;; == top margin 2021-04-19 ==
@@ -347,10 +373,15 @@
 
 
 ;; == org-bullets ==
-;; (require 'org-bullets)
-(use-package org-bullets :ensure t)
-(setq org-bullets-bullet-list '("■" "⚬" "▪" "•" "▭" "◦" "·" "□" "○" "■" "●" "◆" "◔" "▣" "❑" "⚀" "𝇇" "✗" "✓" "☺"))
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(use-package org-bullets
+  :ensure t
+  :after org
+  :init
+  (require 'org-bullets)
+  (setq org-bullets-bullet-list '("■" "⚬" "▪" "•" "▭" "◦" "·" "□" "○" "■" "●" "◆" "◔" "▣" "❑" "⚀" "𝇇" "✗" "✓" "☺"))
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+  )
 
 
 ;; == rainbow-delimiters ==
@@ -829,7 +860,7 @@
 (defun my-view-mode ()
   "Custom behaviours for `view-mode'."
   (if view-mode
-      (face-remap-add-relative 'mode-line '((:foreground "red" :background "black") mode-line))
+      (face-remap-add-relative 'mode-line '((:foreground "white" :background "black") mode-line))
     (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
     )
   (if view-mode
@@ -1116,6 +1147,7 @@
  '(minimap-mode nil)
  '(org-agenda-files
    '("~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+ '(org-agenda-start-on-weekday 0)
  '(org-agenda-time-grid
    '((daily today require-timed)
      (800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000)
@@ -2771,13 +2803,8 @@ T - tag prefix
 
     ;; option 3 > add more information
     ;; (split-window-horizontally)
-    (other-window 1)
-    (split-window-vertically)
-    (find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
-    ;; (find-file "~/Documents/nvALT/org_capture_note.txt")
-    (other-window 1)
-    (find-file "~/Documents/nvALT/org_capture_note.txt")
-    (other-window 1)
+    (other-window 1) (find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
+    ;; (split-window-vertically) (other-window 1) (find-file "~/Documents/nvALT/org_capture_note.txt")
 
     ))
 ;; ===
