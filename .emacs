@@ -58,28 +58,33 @@
 ;; https://gitea.polonkai.eu/gergely/my-emacs-d/commit/0c381769c1987fd21fe4af3e111bbe6ec3e9f8c8
 (setq eww-search-prefix "https://www.google.com/?q=")
 
-
-;; at-point things - alternating test
-(global-set-key (kbd "C-x x p") 'powerthesaurus-lookup-word-at-point)
-(global-set-key (kbd "C-x x d") 'define-word-at-point)
-(global-set-key (kbd "C-x x t") 'google-translate-at-point)
-(global-set-key (kbd "C-x x a") 'counsel-ag-thing-at-point)
-
 ;; at-point things key bindings 2021-04-27
 (global-set-key (kbd "C-c x p") 'powerthesaurus-lookup-word-at-point)
 (global-set-key (kbd "C-c x d") 'define-word-at-point)
 (global-set-key (kbd "C-c x t") 'google-translate-at-point)
 (global-set-key (kbd "C-c x a") 'counsel-ag-thing-at-point)
 
+;; an alternatvie with SPC prefix
+(global-set-key (kbd "C-c SPC p") 'powerthesaurus-lookup-word-at-point)
+(global-set-key (kbd "C-c SPC d") 'define-word-at-point)
+(global-set-key (kbd "C-c SPC t") 'google-translate-at-point)
+(global-set-key (kbd "C-c SPC a") 'counsel-ag-thing-at-point)
+
+;; ;; an alternatvie with <escape> prefix
+;; (global-set-key (kbd "<escape> c p") 'powerthesaurus-lookup-word-at-point)
+;; (global-set-key (kbd "<escape> c d") 'define-word-at-point)
+;; (global-set-key (kbd "<escape> c t") 'google-translate-at-point)
+;; (global-set-key (kbd "<escape> c a") 'counsel-ag-thing-at-point)
+
 (global-set-key (kbd "C-c r") 'ranger)
 
 ;; == Workgroup2 2021-04-26 ==
 ;; Save and Restore Sessions
 ;; https://www.reddit.com/r/emacs/comments/7au3hj/how_do_you_manage_your_emacs_windows_and_stay_sane/
-;; (require 'workgroups2)
 (use-package workgroups2
   :ensure t
   :init
+  (require 'workgroups2)
   ;; Change prefix key (before activating WG)
   (setq wg-prefix-key (kbd "C-c z"))  ;; not work for me
   ;; Change workgroups session file
@@ -348,10 +353,15 @@
 
 
 ;; == org-bullets ==
-;; (require 'org-bullets)
-(use-package org-bullets :ensure t)
-(setq org-bullets-bullet-list '("■" "⚬" "▪" "•" "▭" "◦" "·" "□" "○" "■" "●" "◆" "◔" "▣" "❑" "⚀" "𝇇" "✗" "✓" "☺"))
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(use-package org-bullets
+  :ensure t
+  :after org
+  :init
+  (require 'org-bullets)
+  (setq org-bullets-bullet-list '("■" "⚬" "▪" "•" "▭" "◦" "·" "□" "○" "■" "●" "◆" "◔" "▣" "❑" "⚀" "𝇇" "✗" "✓" "☺"))
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+  )
 
 
 ;; == rainbow-delimiters ==
@@ -1117,6 +1127,7 @@
  '(minimap-mode nil)
  '(org-agenda-files
    '("~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+ '(org-agenda-start-on-weekday 0)
  '(org-agenda-time-grid
    '((daily today require-timed)
      (800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000)
@@ -1500,8 +1511,7 @@
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
- '(pulse-highlight-start-face ((t (:background "dark gray"))))
- )
+ '(pulse-highlight-start-face ((t (:background "dark gray")))))
 
 
 ;; white mode-line came from Binder/Olivetti reddit like below:
@@ -2773,13 +2783,8 @@ T - tag prefix
 
     ;; option 3 > add more information
     ;; (split-window-horizontally)
-    (other-window 1)
-    (split-window-vertically)
-    (find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
-    ;; (find-file "~/Documents/nvALT/org_capture_note.txt")
-    (other-window 1)
-    (find-file "~/Documents/nvALT/org_capture_note.txt")
-    (other-window 1)
+    (other-window 1) (find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
+    ;; (split-window-vertically) (other-window 1) (find-file "~/Documents/nvALT/org_capture_note.txt")
 
     ))
 ;; ===
