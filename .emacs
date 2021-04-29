@@ -71,6 +71,7 @@
 (global-set-key (kbd "C-c x t") 'google-translate-at-point)
 (global-set-key (kbd "C-c x a") 'counsel-ag-thing-at-point)
 
+(global-set-key (kbd "C-c r") 'ranger)
 
 ;; == Workgroup2 2021-04-26 ==
 ;; Save and Restore Sessions
@@ -248,7 +249,7 @@
 ;; --------------------------------------------------------------------------
 ;; (setq org-cycle-separator-lines 2)   ;; default: 2 lines -> 1 blank between heading
 ;; (setq org-cycle-separator-lines 0)   ;; not allow blank line like 'evil-toggle-fold'
-;; (setq org-cycle-separator-lines -1)  ;; 1 line == 1 blank
+(setq org-cycle-separator-lines -1)  ;; 1 line == 1 blank
 
 
 ;; == top margin 2021-04-19 ==
@@ -829,7 +830,7 @@
 (defun my-view-mode ()
   "Custom behaviours for `view-mode'."
   (if view-mode
-      (face-remap-add-relative 'mode-line '((:foreground "red" :background "black") mode-line))
+      (face-remap-add-relative 'mode-line '((:foreground "white" :background "black") mode-line))
     (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
     )
   (if view-mode
