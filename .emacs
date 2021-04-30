@@ -51,6 +51,12 @@
 ;; --------------------
 
 
+;; vi-like line insertion
+;; https://stackoverflow.com/questions/5898448/how-to-add-a-new-line-without-breaking-the-current-line
+;; (global-set-key (kbd "C-o") (lambda () (interactive)(beginning-of-line)(open-line 1)))
+;; (global-set-key (kbd "M-o") (lambda () (interactive)(end-of-line)(newline)))  ; binded to ace-window
+(global-set-key (kbd "C-o") (lambda () (interactive)(end-of-line)(newline)))
+
 
 ;; Korean Hangul 2021-04-29
 ;; (setq default-korean-keyboard 'korean-hangul2)
@@ -563,6 +569,13 @@
 	("https://ca.indeed.com/rss?q=Korean&l=Toronto%2C+ON&sort=date&radius=50")
 	))
 
+;; https://github.com/skeeto/elfeed
+;; (add-hook 'elfeed-new-entry-hook
+;;           (elfeed-make-tagger :before "2 weeks ago"
+;;                               :remove 'unread))
+
+(add-hook 'elfeed-new-entry-hook (elfeed-make-tagger :remove 'unread))
+
 
 ;; (setq blink-cursor-blinks 0)  ; default 10, to continue 0 or -1 2021-04-05
 
@@ -628,7 +641,7 @@
 	 ("7" . ivy-switch-view)
 	 ("8" . winner-undo)
 	 ("9" . winner-redo)
-	 ;; ("RET" . other-window)
+	 ("RET" . other-window)
 	 ("DEL" . beacon-blink)
 	 ;; ("o" . ace-window)
 	 ;; ("o" . other-window)
@@ -644,8 +657,10 @@
 	 ;; ("`" . avy-goto-char-2)
 	 ;; ("`" . cfw:open-org-calendar)
 	 ;; ("`" . org-open-at-point-global)
-	 ("`" . my-org-next-link-open)
-	 ;; ("`" . ace-link)
+	 ("`" . evil-goto-mark)
+	 ;; ("`" . my-org-next-link-open)
+	 ;; ("~" . ace-link)
+	 ("F" . ace-link)
 	 ;; ("w" . my-minimap-mode)
 	 ;; ("w" . sublimity-mode)
 	 ("w" . avy-goto-char-2)
@@ -706,9 +721,12 @@
 
 	 ;; Vim :: Super g
          ;; ---------------
-	 ("g" . nil)  ;; interupting 'gcc' comment key binding 2021-04-21
-	 ("gg" . beginning-of-buffer)
-	 ("G" . end-of-buffer)
+	 ;; ("g" . nil)  ;; interupting 'gcc' comment key binding 2021-04-21
+	 ;; ("gg" . beginning-of-buffer)
+	 ;; ("g" . beginning-of-buffer)
+	 ("g" . evil-goto-first-line)
+	 ;; ("G" . end-of-buffer)
+	 ("G" . evil-goto-line)
 
 	 ;; Org binding
          ;; ------------
@@ -743,8 +761,9 @@
 	 ;; -----------
 	 ("r" . revert-buffer)
 	 ;; ("a" . end-of-buffer)
+	 ("a" . evil-goto-line)
 	 ;; ("a" . counsel-ag)
-	 ("a" . ace-link)
+	 ;; ("a" . ace-link)
 	 ;; ("c" . cfw:open-org-calendar)
 	 ;; ("z" . end-of-buffer)
 	 ("z" . View-exit)  ;; like 'e'
@@ -880,7 +899,10 @@
   (when (display-graphic-p) 
     (if view-mode
 	;; (face-remap-add-relative 'default '((:background "controlHighlightColor")))
-	(face-remap-add-relative 'default '((:background "gray95")))
+	;; (face-remap-add-relative 'default '((:background "gray95")))
+	(face-remap-add-relative 'default '((:background "gray90")))
+	;; (face-remap-add-relative 'default '((:background "gray")))
+	;; (face-remap-add-relative 'default '((:background "light gray")))
 	;; (face-remap-add-relative 'default '((:background "#fdf6e3")))
       (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
       )
@@ -1845,7 +1867,7 @@
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
 (define-key evil-normal-state-map (kbd "<escape>") nil)
 (define-key evil-normal-state-map (kbd "<escape> x") 'counsel-M-x)  ; reventing error that esc-x to call M-x
-;; (define-key evil-normal-state-map (kbd "RET")   'other-window)
+(define-key evil-normal-state-map (kbd "RET")   'other-window)
 
 (define-key evil-visual-state-map (kbd "C-t")     'edit-indirect-region)  ; in Emacs mode, "C-t" binded as well
 ;; https://vim.fandom.com/wiki/Capitalize_words_and_regions_easily
