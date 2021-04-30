@@ -51,6 +51,12 @@
 ;; --------------------
 
 
+
+;; Korean Hangul 2021-04-29
+;; (setq default-korean-keyboard 'korean-hangul2)
+;; (global-set-key (kbd "S-SPC") 'toggle-input-method)  ; may conflict with osx korean key
+
+
 ;; org-clock 2021-04-29
 ;; http://ohyecloudy.com/emacsian/2017/10/14/org-clock-persistence/
 (org-clock-persistence-insinuate)
@@ -106,7 +112,7 @@
   :init
   (require 'workgroups2)
   ;; Change prefix key (before activating WG)
-  (setq wg-prefix-key (kbd "C-c z"))  ;; not work for me
+  (setq wg-prefix-key (kbd "C-c z"))  ; not work for me
   ;; Change workgroups session file
   (setq wg-session-file "~/.emacs.d/.emacs_workgroups")
   ;; (workgroups-mode 1)   ; put this one at the bottom of .emacs
@@ -178,11 +184,11 @@
 (setq ranger-cleanup-on-disable t)
 (setq ranger-cleanup-eagerly t)
 
-;; (setq ranger-parent-depth 3)  ;; z- / z+ -> increase / decrease
+;; (setq ranger-parent-depth 3)  ; z- / z+ -> increase / decrease
 ;; (setq ranger-width-parents 0.12)
 ;; (setq ranger-width-preview 0.55)
 
-(setq ranger-show-literal nil)  ;; by pressing: zi
+(setq ranger-show-literal nil)  ; by pressing: zi
 (setq ranger-excluded-extensions '("mkv" "iso" "mp4"))
 (setq ranger-max-preview-size 10)
 (setq ranger-dont-show-binary t)
@@ -511,7 +517,7 @@
       (progn
 	(interactive)
 	;; https://github.com/kiwanami/emacs-calfw/issues/45
-	(select-frame (make-frame '((name . "calendar")))) ; makes a new frame and selects it
+	(select-frame (make-frame '((name . "calendar"))))         ; makes a new frame and selects it
 	(set-face-attribute 'default (selected-frame) :height 135) ; reduces the font size of the new frame
 	(cfw:open-org-calendar) ; opens the calendar there
 	)
@@ -524,13 +530,13 @@
 
 (defun starting-calendar ()
   (interactive)
-  (select-frame (make-frame '((name . "calendar")))) ; makes a new frame and selects it
+  (select-frame (make-frame '((name . "calendar"))))         ; makes a new frame and selects it
   (set-face-attribute 'default (selected-frame) :height 134) ; reduces the font size of the new frame
   (cfw:open-org-calendar) ; opens the calendar there
   )
 
 ;; (add-hook 'after-init-hook #'cfw:open-org-calendar)
-;; (add-hook 'after-init-hook #'starting-options)  ;; hold for a while 2021-04-13
+;; (add-hook 'after-init-hook #'starting-options)  ; hold for a while 2021-04-13
 ;; (add-hook 'after-init-hook 'starting-functions)
 
 
@@ -558,7 +564,7 @@
 	))
 
 
-;; (setq blink-cursor-blinks 0)  ;; default 10, to continue 0 or -1 2021-04-05
+;; (setq blink-cursor-blinks 0)  ; default 10, to continue 0 or -1 2021-04-05
 
 ;; view mode (bult-in) 2021-04-03
 ;; https://gist.github.com/ivan-krukov/63a586f2121519ca51b201c634402a84
@@ -613,10 +619,10 @@
 	 ("b" . left-word)
 	 ;; window
 	 ("0" . delete-window)
-	 ("1" . delete-other-windows)  ;; show only current selected widnow
+	 ("1" . delete-other-windows)      ; show only current selected widnow
 	 ("2" . split-window-vertically)
 	 ("3" . split-window-horizontally)
-	 ("4" . window-swap-states)  ;; alternatively ace-swap-window
+	 ("4" . window-swap-states)        ; alternatively ace-swap-window
 	 ("5" . transpose-frame)
 	 ("6" . ivy-push-view)
 	 ("7" . ivy-switch-view)
@@ -656,14 +662,14 @@
 	 ("h" . backward-sentence)
          ("l" . forward-sentence)
 	 ;; ("w" . right-word)
-         ;; ("N" . View-search-last-regexp-backward)  ;; Regex previous result
+         ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
 	 ("/" . evil-search-forward)
 	 ("?" . evil-search-backward)
 	 ("n" . evil-search-next)
 	 ("N" . evil-search-previous)
 	 ;; ("n" . evil-normal-state)
 	 ;; ("i" . View-exit)  ;; like 'e'
-         ("e" . View-scroll-line-forward) ;; scroll down (forward) - opposite to 'y'
+         ("e" . View-scroll-line-forward)             ; scroll down (forward) - opposite to 'y'
          ;; ("0" . beginning-of-visual-line)
 	 ;; ("]" . switch-to-next-buffer)
 	 ;; ("[" . switch-to-prev-buffer)
@@ -688,10 +694,10 @@
 	 ("SPC gt" . engine/search-google-trans)
 	 ("SPC gn" . engine/search-google-news)
 	 ;; engines - others
-	 ("SPC ej" . engine/search-just_the_word)         ;; C-x / j
-	 ("SPC eo" . engine/search-onelook)               ;; C-x / o
-	 ("SPC ee" . engine/search-etymology-dictionary)  ;; C-x / e
-	 ("SPC ey" . engine/search-youglish)              ;; C-x / y
+	 ("SPC ej" . engine/search-just_the_word)         ; C-x / j
+	 ("SPC eo" . engine/search-onelook)               ; C-x / o
+	 ("SPC ee" . engine/search-etymology-dictionary)  ; C-x / e
+	 ("SPC ey" . engine/search-youglish)              ; C-x / y
 	 ;; others
 	 ;; ("SPC" . evil-exit-emacs-state)
 	 ;; ("SPC" . ace-window)
@@ -744,7 +750,7 @@
 	 ("z" . View-exit)  ;; like 'e'
 	 ;; ("x" . View-exit)  ;; like 'e'
 	 ;; ("z" . evil-exit-emacs-state)
-	 ;; ("z" . kill-current-buffer)  ;; same as (s-k)
+	 ;; ("z" . kill-current-buffer)  ; same as (s-k)
 	 ("t" . org-tree-slide-mode)
 	 ;; ("v" . ace-window)
 	 ("v" . evil-exit-emacs-state)
@@ -754,7 +760,7 @@
 	 ;; ("l" . org-tree-slide-move-next-tree)
 	 ;; ("h" . org-tree-slide-move-previous-tree)
 	 ;;
-	 ("q" . kill-current-buffer)  ;; same as (s-k)
+	 ("q" . kill-current-buffer)    ; same as (s-k)
 	 ;; ("q" . View-exit)
 	 ("x" . my-kill-current-buffer-and-window)
 	 ("c" . recenter-top-bottom)
@@ -790,12 +796,12 @@
 ;; key hint : edit 'e' / quit 'q'
 
 ;; https://stackoverflow.com/questions/3674637/enabling-certain-emacs-modes-or-features-almost-always
-;; (add-hook 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c * (converting), and 'org export'
+;; (add-hook 'text-mode-hook 'view-mode)                ; conflicted with org-mode of C-c * (converting), and 'org export'
 ;; (add-hook 'prog-mode-hook 'view-mode)
 ;; (add-hook 'markdown-mode-hook 'view-mode)
 ;; (add-hook 'org-mode-hook 'view-mode)
 ;; https://stackoverflow.com/questions/7899949/is-there-an-emacs-hook-that-runs-after-every-buffer-is-created
-;; (add-hook 'after-change-major-mode-hook 'view-mode)  ;; conflicted with almost org-mode work
+;; (add-hook 'after-change-major-mode-hook 'view-mode)  ; conflicted with almost org-mode work
 ;; (with-eval-after-load 'text-mode (view-mode 1))
 ;; (eval-after-load 'text-mode 'view-mode)
 ;; (eval-after-load 'org-mode 'view-mode)
@@ -836,7 +842,7 @@
 ;;   (remove-hook 'text-mode-hook 'my-view-mode)
 ;;   )
 ;; (add-hook 'text-mode-hook 'my-view-mode)
-;; (add-to-list 'text-mode-hook 'view-mode)                ;; conflicted with org-mode of C-c *
+;; (add-to-list 'text-mode-hook 'view-mode)                ; conflicted with org-mode of C-c *
 
 ;; https://stackoverflow.com/questions/15906332/change-emacs-mode-line-color-based-on-major-mode
 ;; (add-hook 'view-mode-hook
@@ -1217,7 +1223,7 @@
     (add-hook 'org-mode-hook 'writegood-mode)
     (add-hook 'markdown-mode-hook 'writegood-mode)
     (add-hook 'latex-mode-hook 'writegood-mode)
-    (add-hook 'Latex-mode-hook 'writegood-mode)  ;; AUCTeX
+    (add-hook 'Latex-mode-hook 'writegood-mode)  ; AUCTeX
 )
 
 ;; Preventing to create Lock Files liks `#filename.ext#` 2021-03-21
@@ -1248,9 +1254,9 @@
   ;;       sublimity-scroll-drift-length 5)
   ;; no `setq`
   ;; (sublimity-map-set-delay 5)
-  ;; (sublimity-map-set-delay nil)  ;; always show, different from 0 value
+  ;; (sublimity-map-set-delay nil)   ; always show, different from 0 value
   (setq sublimity-map-size 35)
-  (setq sublimity-map-fraction 0.3)  ;; maximum fraction of width
+  (setq sublimity-map-fraction 0.3)  ; maximum fraction of width
   (setq sublimity-map-text-scale -6)
   (setq sublimity-map-active-region 'nil)
   ;; (sublimity-mode 1)
@@ -1284,7 +1290,7 @@
     ;; (define-key web-mode-map (kbd "Tab") 'web-mode-fold-or-unfold)
 )
 
-;; (setq org-ellipsis "  ")  ;; nerd font `v` nf-oct-chevron_down, hex: f47
+;; (setq org-ellipsis "  ")  ; nerd font `v` nf-oct-chevron_down, hex: f47
 ;; (setq org-ellipsis " ∞ ")
 (setq org-ellipsis " ↩ ")
 
@@ -1293,7 +1299,7 @@
 ;; -----------------------
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (load "mwe-log-commands")
-;; (load "sticky-windows.el")  ;; more test required 2021-03-27
+;; (load "sticky-windows.el")  ; more test required 2021-03-27
 
 
 ;; == annotate.el 2021-04-19 ==
@@ -1324,7 +1330,7 @@
   (mwe:log-keyboard-commands)
   (mwe:open-command-log-buffer)
   (evil-window-set-width 40)
-  (toggle-window-dedicated)  ;; do not allow buffer to change by others
+  (toggle-window-dedicated)  ; do not allow buffer to change by others
   (other-window 1)
   (message "mwe-log-commands is activated now")
 )
@@ -1353,7 +1359,7 @@
     (local-set-key (kbd "M-<down>")  'markdown-move-down)
     (local-set-key (kbd "M-<left>")  'markdown-promote)
     (local-set-key (kbd "M-<right>") 'markdown-demote)
-    (local-set-key (kbd "<tab>")     'evil-toggle-fold)  ;; interfere org cycling spaces, only use in Markdown mode 2021-04-23
+    (local-set-key (kbd "<tab>")     'evil-toggle-fold)  ; interfere org cycling spaces, only use in Markdown mode 2021-04-23
   )
 )
 
@@ -1434,7 +1440,7 @@
 )
 
 
-(setq ns-pop-up-frames nil)        ;; only one frame use when openning a file 2021-01-28
+(setq ns-pop-up-frames nil)        ; only one frame use when openning a file 2021-01-28
 
 (if (display-graphic-p)
     (progn
@@ -1453,7 +1459,7 @@
         (add-hook 'org-mode-hook 'turn-on-flyspell)
         (add-hook 'markdown-mode-hook 'turn-on-flyspell)
         (add-hook 'latex-mode-hook 'turn-on-flyspell)
-        (add-hook 'LaTeX-mode-hook 'turn-on-flyspell)  ;; for AUCTeX
+        (add-hook 'LaTeX-mode-hook 'turn-on-flyspell)  ; for AUCTeX
       )
 )
 
@@ -1483,21 +1489,21 @@
 
 
 ;; Others
-(setq backup-directory-alist `(("." . "~/.saves/")))         ;; Backup files relocated 2020-10-09
-(setq inhibit-startup-screen t)                              ;; No welcome startup screen
-(setq initial-scratch-message "")                            ;; No scratch message 2020-10-10
-(add-to-list 'default-frame-alist '(fullscreen . maximized)) ;; Maximize GUI window
-(add-to-list 'initial-frame-alist '(fullscreen . maximized)) ;; Maximize GUI window
+(setq backup-directory-alist `(("." . "~/.saves/")))         ; Backup files relocated 2020-10-09
+(setq inhibit-startup-screen t)                              ; No welcome startup screen
+(setq initial-scratch-message "")                            ; No scratch message 2020-10-10
+(add-to-list 'default-frame-alist '(fullscreen . maximized)) ; Maximize GUI window
+(add-to-list 'initial-frame-alist '(fullscreen . maximized)) ; Maximize GUI window
 
 ;; Interupted Working Process 2021-02-15
-;; (setq auto-save-visited-mode t)                              ;; Auto Save   
-;; (setq auto-save-visited-interval 1)                          ;; Auto Save - Interval
-(setq auto-save-default nil)           ;; Preventing auto saved files like `#filename.ext#`
+;; (setq auto-save-visited-mode t)                           ; Auto Save   
+;; (setq auto-save-visited-interval 1)                       ; Auto Save - Interval
+(setq auto-save-default nil)                                 ; Preventing auto saved files like `#filename.ext#`
 ;; (setq auto-save-visited-file-name t)
-;; (global-auto-revert-mode t)                                  ;; Auto Refresh
+;; (global-auto-revert-mode t)                               ; Auto Refresh
 
-(global-visual-line-mode 1)                                  ;; Visual Line Mode On
-;; (global-display-line-numbers-mode)                           ;; Display Line Numbers On
+(global-visual-line-mode 1)                                  ; Visual Line Mode On
+;; (global-display-line-numbers-mode)                        ; Display Line Numbers On
 
 ;; Bettery mode 2021-01-03
 (display-battery-mode 1)
@@ -1832,18 +1838,18 @@
 ;; but, works in markdown folding -> use in markdown keybinding
 ;; (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
 
-;; (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)  ;; use H/M/L instead
-(define-key evil-normal-state-map (kbd "ZQ")     'evil-emacs-state)  ;; Same as Original Vim
+;; (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)  ; use H/M/L instead
+(define-key evil-normal-state-map (kbd "ZQ")     'evil-emacs-state)  ; Same as Original Vim
 ;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
 (define-key evil-normal-state-map (kbd "<escape>") nil)
-(define-key evil-normal-state-map (kbd "<escape> x") 'counsel-M-x)  ;; reventing error that esc-x to call M-x
+(define-key evil-normal-state-map (kbd "<escape> x") 'counsel-M-x)  ; reventing error that esc-x to call M-x
 ;; (define-key evil-normal-state-map (kbd "RET")   'other-window)
 
-(define-key evil-visual-state-map (kbd "C-t")     'edit-indirect-region)  ;; in Emacs mode, "C-t" binded as well
+(define-key evil-visual-state-map (kbd "C-t")     'edit-indirect-region)  ; in Emacs mode, "C-t" binded as well
 ;; https://vim.fandom.com/wiki/Capitalize_words_and_regions_easily
-(define-key evil-normal-state-map (kbd "gCiw") (kbd "guiw~l"))   ;; gciw :: confilicted with evil-commentary
+(define-key evil-normal-state-map (kbd "gCiw") (kbd "guiw~l"))   ; gciw :: confilicted with evil-commentary
 (define-key evil-normal-state-map (kbd "gCC") (kbd "guu~l"))
 
 (define-key evil-normal-state-map (kbd "DEL") 'beacon-blink)
@@ -1863,7 +1869,7 @@
 ;; https://emacs.stackexchange.com/questions/3358/how-can-i-get-undo-behavior-in-evil-similar-to-vims
 (setq evil-want-fine-undo 't)
 (setq evil-want-fine-undo 'fine)
-;; (setq evil-undo-system 'undo-tree) ;; not working tested 2021-02-07
+;; (setq evil-undo-system 'undo-tree) ; not working tested 2021-02-07
 
 ;; evil-surround package 2021-01-29
 (global-evil-surround-mode 1)
@@ -1889,7 +1895,7 @@
 (define-and-bind-quoted-text-object "verbatim" "=" "=" "=")
 (define-and-bind-quoted-text-object "strike_through" "+" "+" "+")
 (define-and-bind-quoted-text-object "asterisk" "*" "*" "*")
-(define-and-bind-quoted-text-object "dollar" "$" "\\$" "\\$") ;; sometimes your have to escape the regex
+(define-and-bind-quoted-text-object "dollar" "$" "\\$" "\\$") ; sometimes your have to escape the regex
 
 ;; evil-commentary mode package 2021-03-03
 (evil-commentary-mode)
@@ -1925,8 +1931,8 @@
   (setq key-chord-one-key-delay 0.2) ; default 0.2
   (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kk" 'evil-normal-state)
-  (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)  ;; preventing from navigating accedently, immediately or unconsciousely
-  (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)  ;; preventing from navigating accedently, immediately or unconsciousely
+  (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)  ; preventing from navigating accedently, immediately or unconsciousely
+  (key-chord-define evil-insert-state-map "kj" 'evil-normal-state)  ; preventing from navigating accedently, immediately or unconsciousely
   :config
   (key-chord-mode 1)
   )
@@ -2024,7 +2030,7 @@
   :init
   ;; (add-hook 'text-mode-hook 'olivetti-mode)
   ;; (add-hook 'prog-mode-hook 'olivetti-mode)
-  (add-hook 'after-change-major-mode-hook 'olivetti-mode)  ;; cover text-mode and prog-mode
+  (add-hook 'after-change-major-mode-hook 'olivetti-mode)  ; cover text-mode and prog-mode
   (setq olivetti-body-width 0.99)
   ;; (setq olivetti-body-width 100)  ;; maximum
   (setq olivetti-minimum-body-width 30)
@@ -2149,24 +2155,24 @@ _Z_ compress       _Q_ repl regexp
 
 T - tag prefix
 "
-  (">" dired-next-dirline)   ;; added 2021-03-19
+  (">" dired-next-dirline)   ; added 2021-03-19
   ("\\" dired-do-ispell)
   ("(" dired-hide-details-mode)
   (")" dired-omit-mode)
   ("+" dired-create-directory)
-  ("=" diredp-ediff)         ;; smart diff
+  ("=" diredp-ediff)         ; smart diff
   ("?" dired-summary)
   ("$" diredp-hide-subdir-nomove)
   ("A" dired-do-find-regexp)
-  ("C" dired-do-copy)        ;; Copy all marked files
+  ("C" dired-do-copy)        ; Copy all marked files
   ("D" dired-do-delete)
   ("E" dired-mark-extension)
   ("e" dired-ediff-files)
   ("F" dired-do-find-marked-files)
   ("G" dired-do-chgrp)
-  ("g" revert-buffer)        ;; read all directories again (refresh)
+  ("g" revert-buffer)        ; read all directories again (refresh)
   ("i" dired-maybe-insert-subdir)
-  ("l" dired-do-redisplay)   ;; relist the marked or singel directory
+  ("l" dired-do-redisplay)   ; relist the marked or singel directory
   ("M" dired-do-chmod)
   ("m" dired-mark)
   ("O" dired-display-file)
@@ -2179,7 +2185,7 @@ T - tag prefix
   ("t" dired-toggle-marks)
   ("U" dired-unmark-all-marks)
   ("u" dired-unmark)
-  ("v" dired-view-file)      ;; q to exit, s to search, = gets line #
+  ("v" dired-view-file)      ; q to exit, s to search, = gets line #
   ("w" dired-kill-subdir)
   ("Y" dired-do-relsymlink)
   ("z" diredp-compress-this-file)
@@ -2200,10 +2206,10 @@ T - tag prefix
 ;; Pros compared to pulse.el :
 ;; 1. show beacon without text when `other-window`
 ;; 2. show exact position(column) in a line
-(beacon-mode 1)                             ;; Interupted `org-tree-slide-mode`
+(beacon-mode 1)                             ; Interupted `org-tree-slide-mode`
 (setq beacon-size 5)
 (setq beacon-color "black")
-(setq beacon-blink-when-window-scrolls nil) ;; Solved 'org-tree-slide-mode` issue 2021-03-29
+(setq beacon-blink-when-window-scrolls nil) ; Solved 'org-tree-slide-mode` issue 2021-03-29
 (setq beacon-blink-when-focused t)
 
 ;; command-log-mode 2021-03-09
@@ -2267,9 +2273,9 @@ T - tag prefix
 (require `org-mouse)
 ;; (use-package org-mouse :ensure t)
 
-(setq org-log-done 'time)                                  ;; Show Closed(DONE) date in ORG-mode
-(global-set-key "\C-ca" 'org-agenda)                       ;; Org Agenda View shortcut
-(global-set-key (kbd "C-M-<return>") 'org-insert-subheading)  ;; Org Insert Sub-Heading 2021-03-31
+(setq org-log-done 'time)                                     ; Show Closed(DONE) date in ORG-mode
+(global-set-key "\C-ca" 'org-agenda)                          ; Org Agenda View shortcut
+(global-set-key (kbd "C-M-<return>") 'org-insert-subheading)  ; Org Insert Sub-Heading 2021-03-31
 
 (add-to-list 'org-emphasis-alist '("~" (:foreground "red3")))
 (add-to-list 'org-emphasis-alist '("/" (:foreground "dark blue" :slant italic)))
@@ -2792,11 +2798,11 @@ T - tag prefix
     
     ;; option 2 > calendar view
     ;; https://stackoverflow.com/questions/27758800/why-does-emacs-leave-a-gap-when-trying-to-maximize-the-frame
-    (setq frame-resize-pixelwise t)  ;; real miximize window
+    (setq frame-resize-pixelwise t)  ; real miximize window
     (dotimes (n 1)
       (toggle-frame-maximized))
     (cfw:open-org-calendar)
-    (lambda () (execute-kbd-macro (kbd "q")))  ;; quit first and run again
+    (lambda () (execute-kbd-macro (kbd "q")))  ; quit first and run again
     (message "waiting 0.5 sec")
     (sleep-for 0.5)
     (cfw:open-org-calendar)
@@ -2804,8 +2810,10 @@ T - tag prefix
     ;; option 3 > add more information
     ;; (split-window-horizontally)
     (other-window 1) (find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
-    ;; (split-window-vertically) (other-window 1) (find-file "~/Documents/nvALT/org_capture_note.txt")
-
+    (split-window-vertically) (other-window 1) (find-file "~/Documents/nvALT/org_capture_note.txt")
+    ;; https://emacs.stackexchange.com/questions/63697/how-to-run-shrink-window-horizontally-multiple-times-or-how-to-repeat-a-functio
+    (shrink-window 7)  ; seven times
+    (other-window 1)
     ))
 ;; ===
 ;; EOF
