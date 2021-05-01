@@ -35,6 +35,26 @@
 ;; http://ohyecloudy.com/emacsian/2019/12/15/package-use-package-ensure-imenu/
 (setq use-package-enable-imenu-support t)
 
+
+;; == straight.el 2021-05-01 ==
+;; https://github.com/raxod502/straight.el#getting-started
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; Users of Emacs versions >= 27 will want to add:
+(setq package-enable-at-startup nil)
+
+
 ;; == Use-Package Ref. ==
 ;; https://jwiegley.github.io/use-package/keywords/
 
@@ -2783,6 +2803,20 @@ T - tag prefix
 ;; (setq python-shell-completion-toggle t)
 
 (setq python-shell-completion-native-enable nil)
+
+
+
+(use-package jupyter
+  :ensure t
+  :straight t
+  )
+
+
+;; https://sqrtminusone.xyz/posts/2021-05-01-org-python/
+(use-package ox-ipynb
+  :straight (:host github :repo "jkitchin/ox-ipynb")
+  :disabled
+  :after ox)
 
 
 
