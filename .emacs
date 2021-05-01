@@ -130,7 +130,7 @@
   )
 
 
-;; [Replace to] Workgroup2 >> == Purpose 2021-04-26 ==
+;; [Replace to] Workgroup2 << == Purpose 2021-04-26 ==
 ;; https://github.com/bmag/emacs-purpose
 ;; (require 'window-purpose)
 ;; (use-package window-purpose :ensure t)
@@ -142,12 +142,12 @@
 ;; (setq purpose-use-default-configuration t) ; not really necessary, default is t
 ;; (purpose-compile-user-configuration) ; activates your changes
 
-;; [Replace to] Workgroup2 >> == Burly :: save window configuration in bookmark 2021-04-26 ==
+;; [Replace to] Workgroup2 << == Burly :: save window configuration in bookmark 2021-04-26 ==
 ;; https://www.reddit.com/r/emacs/comments/jf9kqn/wip_burlyel_save_and_restore_buffers_and_window/
 ;; https://github.com/alphapapa/burly.el
 ;; (use-package burly :ensure t)
 
-;; [Replace to] Workgroup2 >> altrnatives :: desktop-save-mode, bookmark+
+;; [Replace to] Workgroup2 << altrnatives :: desktop-save-mode, register, ivy-view, bookmark+
 ;; instead of desktop-save-mode belows:
 ;; https://www.reddit.com/r/emacs/comments/171me2/auto_save_and_restore_sessions/
 ;; https://bmag.github.io/2015/12/26/desktop.html
@@ -558,23 +558,15 @@
 (setq elfeed-feeds
       '(
 	;; "https://lifehacker.com/rss"
-	"https://ca.indeed.com/rss?q=financial+analyst&l=Toronto%2C+ON&sort=date&radius=50"
-	"https://ca.indeed.com/rss?q=financial+accounting&l=Toronto%2C+ON&sort=date&radius=50"
-	"https://ca.indeed.com/rss?q=financial+system&l=Toronto%2C+ON&sort=date&radius=50"
-	"https://ca.indeed.com/rss?q=cost+accounting&l=Toronto%2C+ON&sort=date&radius=50"
-	("https://ca.indeed.com/rss?q=data+analayst&l=Toronto%2C+ON&sort=date&radius=50")
-	"https://ca.indeed.com/rss?q=Hyperion&l=Toronto%2C+ON&sort=date&radius=50"
-	"https://ca.indeed.com/rss?q=advanced+excel&l=Toronto%2C+ON&sort=date&radius=50"
-	"https://ca.indeed.com/rss?q=vba&l=Toronto%2C+ON&sort=date&radius=50"
-	("https://ca.indeed.com/rss?q=Korean&l=Toronto%2C+ON&sort=date&radius=50")
 	))
 
-;; https://github.com/skeeto/elfeed
-;; (add-hook 'elfeed-new-entry-hook
-;;           (elfeed-make-tagger :before "2 weeks ago"
-;;                               :remove 'unread))
-
-(add-hook 'elfeed-new-entry-hook (elfeed-make-tagger :remove 'unread))
+;; use an org file to organise feeds
+;; http://pragmaticemacs.com/emacs/read-your-rss-feeds-in-emacs-with-elfeed/
+(use-package elfeed-org
+  :ensure t
+  :config
+  (elfeed-org)
+  (setq rmh-elfeed-org-files (list "~/Documents/nvALT/setx-elfeed.txt")))
 
 
 ;; (setq blink-cursor-blinks 0)  ; default 10, to continue 0 or -1 2021-04-05
@@ -2802,41 +2794,41 @@ T - tag prefix
 ;; https://stackoverflow.com/questions/19085514/how-can-i-start-emacs-with-predefined-window
 ;; https://stackoverflow.com/questions/6578373/sleep-in-emacs-lisp
 ;; https://emacs.stackexchange.com/questions/17188/open-org-agenda-weekly-view-window-when-emacs-is-loaded
-(if (display-graphic-p)
-  (progn
+;; (if (display-graphic-p)
+;;   (progn
 
-    ;; option 1 > full information
-    ;; (org-agenda nil "a")
-    ;; (split-window-horizontally)
-    ;; (find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
-    ;; (other-window 1)
-    (split-window-horizontally)
-    ;; (split-window-vertically)
-    ;; (find-file "~/Documents/nvALT/org_capture_note.txt")
-    ;; (other-window 1)
-    ;; (other-window 1)
-    ;; (delete-window)
-    ;; (other-window 1)
+;;     ;; option 1 > full information
+;;     ;; (org-agenda nil "a")
+;;     ;; (split-window-horizontally)
+;;     ;; (find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
+;;     ;; (other-window 1)
+;;     (split-window-horizontally)
+;;     ;; (split-window-vertically)
+;;     ;; (find-file "~/Documents/nvALT/org_capture_note.txt")
+;;     ;; (other-window 1)
+;;     ;; (other-window 1)
+;;     ;; (delete-window)
+;;     ;; (other-window 1)
     
-    ;; option 2 > calendar view
-    ;; https://stackoverflow.com/questions/27758800/why-does-emacs-leave-a-gap-when-trying-to-maximize-the-frame
-    (setq frame-resize-pixelwise t)  ; real miximize window
-    (dotimes (n 1)
-      (toggle-frame-maximized))
-    (cfw:open-org-calendar)
-    (lambda () (execute-kbd-macro (kbd "q")))  ; quit first and run again
-    (message "waiting 0.5 sec")
-    (sleep-for 0.5)
-    (cfw:open-org-calendar)
+;;     ;; option 2 > calendar view
+;;     ;; https://stackoverflow.com/questions/27758800/why-does-emacs-leave-a-gap-when-trying-to-maximize-the-frame
+;;     (setq frame-resize-pixelwise t)  ; real miximize window
+;;     (dotimes (n 1)
+;;       (toggle-frame-maximized))
+;;     (cfw:open-org-calendar)
+;;     (lambda () (execute-kbd-macro (kbd "q")))  ; quit first and run again
+;;     (message "waiting 0.5 sec")
+;;     (sleep-for 0.5)
+;;     (cfw:open-org-calendar)
 
-    ;; option 3 > add more information
-    ;; (split-window-horizontally)
-    (other-window 1) (find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
-    (split-window-vertically) (other-window 1) (find-file "~/Documents/nvALT/org_capture_note.txt")
-    ;; https://emacs.stackexchange.com/questions/63697/how-to-run-shrink-window-horizontally-multiple-times-or-how-to-repeat-a-functio
-    (shrink-window 7)  ; seven times
-    (other-window 1)
-    ))
+;;     ;; option 3 > add more information
+;;     ;; (split-window-horizontally)
+;;     (other-window 1) (find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
+;;     (split-window-vertically) (other-window 1) (find-file "~/Documents/nvALT/org_capture_note.txt")
+;;     ;; https://emacs.stackexchange.com/questions/63697/how-to-run-shrink-window-horizontally-multiple-times-or-how-to-repeat-a-functio
+;;     (shrink-window 7)  ; seven times
+;;     (other-window 1)
+;;     ))
 ;; ===
 ;; EOF
 ;; ===
