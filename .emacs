@@ -260,7 +260,10 @@
 ;; (run-with-idle-timer 2 nil #'message "Function 1")
 ;; (run-with-idle-timer 300 nil #'my-default-screen)
 ;; https://emacs.stackexchange.com/questions/6029/is-it-possible-to-execute-a-function-or-command-at-a-specific-time
-;; (run-at-time "09:00" nil 'cfw:open-org-calendar)
+(run-at-time "09:00" nil 'cfw:open-org-calendar)
+(run-at-time "12:00" nil 'cfw:open-org-calendar)
+(run-at-time "15:00" nil 'cfw:open-org-calendar)
+(run-at-time "18:00" nil 'cfw:open-org-calendar)
 ;; (run-with-timer 15 3 (lambda () (insert "success ")))
 ;; The third arg must be a function, -> lambda
 ;; https://emacs.stackexchange.com/questions/7534/run-with-timer-error-invalid-or-unitialized-timer
