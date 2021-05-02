@@ -580,6 +580,17 @@
 	;; "https://lifehacker.com/rss"
 	))
 
+;; https://emacs.stackexchange.com/questions/2440/elfeed-mark-all-messages-as-read
+(defun elfeed-mark-all-as-read ()
+      (interactive)
+      (mark-whole-buffer)
+      (elfeed-search-untag-all-unread))
+
+(define-key elfeed-search-mode-map (kbd "R") 'elfeed-mark-all-as-read)
+
+;; https://www.reddit.com/r/emacs/comments/bvbp92/is_there_a_simple_way_to_get_elfeed_to_update/
+(add-hook 'emacs-startup-hook (lambda () (run-at-time 5 5 'elfeed-update)))
+
 ;; use an org file to organise feeds
 ;; http://pragmaticemacs.com/emacs/read-your-rss-feeds-in-emacs-with-elfeed/
 (use-package elfeed-org
