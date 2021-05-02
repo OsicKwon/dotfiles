@@ -640,8 +640,8 @@
 	 ;; -----------
 	 ;; ("n" . forward-line)
 	 ;; ("p" . previous-line)
-	 ;; ("f" . right-word)
-	 ;; ("b" . left-word)
+	 ("f" . right-word)
+	 ("b" . left-word)
 	 ;; window
 	 ("0" . delete-window)
 	 ("1" . delete-other-windows)      ; show only current selected widnow
@@ -686,8 +686,10 @@
 	 ;; ("k" . previous-line)
 	 ("j" . forward-paragraph)
 	 ("k" . backward-paragraph)
-	 ("h" . backward-sentence)
-         ("l" . forward-sentence)
+	 ;; ("h" . backward-sentence)
+         ;; ("l" . forward-sentence)
+	 ("h" . beginning-of-visual-line)
+         ("l" . end-of-visual-line)
 	 ;; ("w" . right-word)
          ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
 	 ("/" . evil-search-forward)
@@ -697,13 +699,13 @@
 	 ;; ("n" . evil-normal-state)
 	 ;; ("i" . View-exit)  ;; like 'e'
          ("e" . View-scroll-line-forward)             ; scroll down (forward) - opposite to 'y'
-	 ("f" . evil-scroll-page-down)
-	 ("b" . evil-scroll-page-up)
+	 ;; ("f" . evil-scroll-page-down)
+	 ;; ("b" . evil-scroll-page-up)
          ;; ("0" . beginning-of-visual-line)
-	 ("]" . switch-to-next-buffer)
-	 ("[" . switch-to-prev-buffer)
-	 ;; ("]" . org-tree-slide-move-next-tree)
-	 ;; ("[" . org-tree-slide-move-previous-tree)
+	 ;; ("]" . switch-to-next-buffer)
+	 ;; ("[" . switch-to-prev-buffer)
+	 ("]" . org-tree-slide-move-next-tree)
+	 ("[" . org-tree-slide-move-previous-tree)
 	 ;; ("\\" . counsel-buffer-or-recentf)
 	 ;; ("\\" . imenu-list)
 	 ;; ("\\" . my-view-general-prefix)
@@ -790,8 +792,8 @@
 	 ;; ("v" . evil-visual-state)
 	 ;; ("RET" . evil-exit-emacs-state)
 	 ;; ("SPC" . evil-exit-emacs-state)
-	 ("l" . org-tree-slide-move-next-tree)
-	 ("h" . org-tree-slide-move-previous-tree)
+	 ;; ("l" . org-tree-slide-move-next-tree)
+	 ;; ("h" . org-tree-slide-move-previous-tree)
 	 ;;
 	 ("q" . kill-current-buffer)    ; same as (s-k)
 	 ;; ("q" . View-exit)
