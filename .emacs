@@ -70,6 +70,20 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; == writeroom 2021-05-02 ==
+;; example :: https://github.com/Jassob/.emacs.d
+(use-package writeroom-mode :ensure t
+  :init (setq writeroom-width 120)
+  (add-hook 'writeroom-mode-hook (lambda () (display-line-numbers-mode -1)))
+  :bind (:map writeroom-mode-map
+              ("C-c C-w <" . #'writeroom-decrease-width)
+              ("C-c C-w >" . #'writeroom-increase-width)
+              ("C-c C-w =" . #'writeroom-adjust-width)
+              ("s-?" . nil)
+              ("C-c C-w SPC" . #'writeroom-toggle-mode-line))
+        (:map global-map
+              ("C-c r" . #'writeroom-mode)))
+
 
 ;; vi-like line insertion
 ;; https://stackoverflow.com/questions/5898448/how-to-add-a-new-line-without-breaking-the-current-line
@@ -85,10 +99,10 @@
 
 ;; org-clock 2021-04-29
 ;; http://ohyecloudy.com/emacsian/2017/10/14/org-clock-persistence/
-(org-clock-persistence-insinuate)
-(setq org-clock-persist t)
-(setq org-clock-in-resume t)
-(setq org-clock-persist-query-resume nil)
+;; (org-clock-persistence-insinuate)
+;; (setq org-clock-persist t)
+;; (setq org-clock-in-resume t)
+;; (setq org-clock-persist-query-resume nil)
 
 
 ;; for org-clock preventing from forgeting stopping clock in washroom!
@@ -128,7 +142,6 @@
 ;; (global-set-key (kbd "<escape> c t") 'google-translate-at-point)
 ;; (global-set-key (kbd "<escape> c a") 'counsel-ag-thing-at-point)
 
-(global-set-key (kbd "C-c r") 'ranger)
 
 ;; == Workgroup2 2021-04-26 ==
 ;; Save and Restore Sessions
@@ -206,6 +219,8 @@
 
   )
 
+;; (global-set-key (kbd "C-c r") 'ranger)
+
 ;; buffer management (delete opened buffer after closing)
 (setq ranger-cleanup-on-disable t)
 (setq ranger-cleanup-eagerly t)
@@ -260,10 +275,13 @@
 ;; (run-with-idle-timer 2 nil #'message "Function 1")
 ;; (run-with-idle-timer 300 nil #'my-default-screen)
 ;; https://emacs.stackexchange.com/questions/6029/is-it-possible-to-execute-a-function-or-command-at-a-specific-time
-(run-at-time "09:00" nil 'cfw:open-org-calendar)
-(run-at-time "12:00" nil 'cfw:open-org-calendar)
-(run-at-time "15:00" nil 'cfw:open-org-calendar)
-(run-at-time "18:00" nil 'cfw:open-org-calendar)
+(when (display-graphic-p)
+  (progn
+    (run-at-time "09:00" nil 'cfw:open-org-calendar)
+    (run-at-time "12:00" nil 'cfw:open-org-calendar)
+    (run-at-time "15:00" nil 'cfw:open-org-calendar)
+    (run-at-time "18:00" nil 'cfw:open-org-calendar)
+))
 ;; (run-with-timer 15 3 (lambda () (insert "success ")))
 ;; The third arg must be a function, -> lambda
 ;; https://emacs.stackexchange.com/questions/7534/run-with-timer-error-invalid-or-unitialized-timer
@@ -338,7 +356,10 @@
 ;; #+HTML_HEAD: <link rel="stylesheet" href="/css/tufte.css" type="text/css" />
 ;; example :: https://two-wrongs.com/essay-recommendation-on-having-enough-socks.html
 ;; (require 'ox-tufte)
-(use-package ox-tufte :ensure t)
+(use-package ox-tufte
+  :ensure t
+  :disabled
+  )
 ;; FYI > other recommendation for export HTML css
 ;; https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 ;; https://github.com/thi-ng/org-spec 
@@ -802,7 +823,8 @@
 
 	 ;; Additional-keys
 	 ;; -----------
-	 ("r" . revert-buffer)
+	 ;; ("r" . revert-buffer)
+	 ("r" . writeroom-mode)
 	 ;; ("a" . end-of-buffer)
 	 ("a" . evil-goto-line)
 	 ;; ("a" . counsel-ag)
