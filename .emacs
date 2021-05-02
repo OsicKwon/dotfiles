@@ -677,13 +677,6 @@
 (define-key elfeed-search-mode-map (kbd "e") 'elfeed-eww-open)
 ;; (define-key elfeed-search-mode-map (kbd "f") 'elfeed-firefox-open)
 
-
-
-
-
-
-
-
 ;; Update when it's starting
 ;; https://www.reddit.com/r/emacs/comments/bvbp92/is_there_a_simple_way_to_get_elfeed_to_update/
 ;; (add-hook 'emacs-startup-hook (lambda () (run-at-time 0 500 'elfeed-update)))
