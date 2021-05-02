@@ -713,6 +713,8 @@
 
 ;; == view-mode 2021 ==
 ;; add view mode keybindings 2021-04-04
+;; https://www.youtube.com/watch?v=kZARKLxTeYQ
+;; https://gist.github.com/ivan-krukov/63a586f2121519ca51b201c634402a84
 (use-package view
   :config
   (setq view-read-only t) ;; enter view-mode for read-only file
@@ -788,10 +790,10 @@
 	 ;; ("k" . previous-line)
 	 ("j" . forward-paragraph)
 	 ("k" . backward-paragraph)
-	 ;; ("h" . backward-sentence)
-         ;; ("l" . forward-sentence)
-	 ("h" . beginning-of-visual-line)
-         ("l" . end-of-visual-line)
+	 ("h" . backward-sentence)
+         ("l" . forward-sentence)
+	 ;; ("h" . beginning-of-visual-line)
+         ;; ("l" . end-of-visual-line)
 	 ;; ("w" . right-word)
          ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
 	 ("/" . evil-search-forward)
