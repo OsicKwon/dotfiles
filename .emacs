@@ -82,7 +82,8 @@
               ("s-?" . nil)
               ("C-c C-w SPC" . #'writeroom-toggle-mode-line))
         (:map global-map
-              ("C-c r" . #'writeroom-mode)))
+              ;; ("C-c r" . #'writeroom-mode)))
+              ("C-r" . #'writeroom-mode)))
 
 
 ;; vi-like line insertion
@@ -119,7 +120,8 @@
 ;; == eww config ==
 ;; == 2021-04-27 ==
 ;; https://www.gnu.org/software/emacs/manual/html_mono/eww.html
-;; (add-hook 'eww-after-render-hook 'view-mode)
+(add-hook 'eww-after-render-hook 'view-mode)
+(add-hook 'eww-after-render-hook 'olivetti-narrow-width)
 ;; (add-hook 'eww-after-render-hook 'evil-normal-state)
 ;; https://gitea.polonkai.eu/gergely/my-emacs-d/commit/0c381769c1987fd21fe4af3e111bbe6ec3e9f8c8
 (setq eww-search-prefix "https://www.google.com/?q=")
@@ -332,7 +334,7 @@
 ;; --------------------------------------------------------------------------
 ;; (setq org-cycle-separator-lines 2)   ;; default: 2 lines -> 1 blank between heading
 ;; (setq org-cycle-separator-lines 0)   ;; not allow blank line like 'evil-toggle-fold'
-(setq org-cycle-separator-lines -1)  ;; 1 line == 1 blank
+(setq org-cycle-separator-lines -1)  ;; 1 line = 1 blank
 
 
 ;; == top margin 2021-04-19 ==
@@ -365,7 +367,7 @@
 ;; https://github.com/thi-ng/org-spec 
 
 
-;; == centered cursor mode for view-mode 2021-04-19 ==
+;; == centered cursor mode 2021-04-19 ==
 ;; https://github.com/andre-r/centered-cursor-mode.el
 (use-package centered-cursor-mode :ensure t)
 
@@ -499,12 +501,20 @@
   )
 
 
-;; imenu-list resize 2021-04-13
-;; https://github.com/bmag/imenu-list
-(setq imenu-list-auto-resize t)
-;; https://github.com/bmag/imenu-list/blob/1447cdc8c0268e332fb4adc0c643702245d31bde/imenu-list.el#L431
-(setq imenu-list-size 0.20)
-(setq org-imenu-depth 3)
+;; == imenu 2021-05-02 ==
+(use-package imenu
+  :ensure t
+  :bind ("C-." . imenu-list-minor-mode)
+  :config
+  ;; https://github.com/bmag/imenu-list
+  (setq imenu-list-focus-after-activation t)
+  ;; imenu-list resize 2021-04-13
+  ;; https://github.com/bmag/imenu-list
+  (setq imenu-list-auto-resize t)
+  ;; https://github.com/bmag/imenu-list/blob/1447cdc8c0268e332fb4adc0c643702245d31bde/imenu-list.el#L431
+  (setq imenu-list-size 0.20)
+  (setq org-imenu-depth 2)
+  )
 
 
 ;; Local Variables Auto-Load without Confirmation 2021-04-12
@@ -624,6 +634,56 @@
 
 (define-key elfeed-search-mode-map (kbd "R") 'elfeed-mark-all-as-read)
 
+;; get idea from https://noonker.github.io/posts/2020-04-22-elfeed/
+(define-key elfeed-search-mode-map (kbd "j") 'next-line)
+(define-key elfeed-search-mode-map (kbd "k") 'previous-line)
+
+;; https://noonker.github.io/posts/2020-04-22-elfeed/
+(defun elfeed-eww-open (&optional use-generic-p)
+  "open with eww"
+  (interactive "P")
+  (let ((entries (elfeed-search-selected)))
+    (cl-loop for entry in entries
+             do (elfeed-untag entry 'unread)
+             when (elfeed-entry-link entry)
+             do (eww-browse-url it))
+    (mapc #'elfeed-search-update-entry entries)
+    (unless (use-region-p) (forward-line))))
+
+;; (defun elfeed-firefox-open (&optional use-generic-p)
+;;   "open with firefox"
+;;   (interactive "P")
+;;   (let ((entries (elfeed-search-selected)))
+;;     (cl-loop for entry in entries
+;;              do (elfeed-untag entry 'unread)
+;;              when (elfeed-entry-link entry)
+;;              do (browse-url-firefox it))
+;;     (mapc #'elfeed-search-update-entry entries)
+;;     (unless (use-region-p) (forward-line))))
+
+;; (defun elfeed-w3m-open (&optional use-generic-p)
+;;   "open with w3m"
+;;   (interactive "P")
+;;   (let ((entries (elfeed-search-selected)))
+;;     (cl-loop for entry in entries
+;;              do (elfeed-untag entry 'unread)
+;;              when (elfeed-entry-link entry)
+;;              do (ffap-w3m-other-window it))
+;;     (mapc #'elfeed-search-update-entry entries)
+;;     (unless (use-region-p) (forward-line))))
+
+;; (define-key elfeed-search-mode-map (kbd "t") 'elfeed-w3m-open)
+;; (define-key elfeed-search-mode-map (kbd "w") 'elfeed-eww-open)
+(define-key elfeed-search-mode-map (kbd "e") 'elfeed-eww-open)
+;; (define-key elfeed-search-mode-map (kbd "f") 'elfeed-firefox-open)
+
+
+
+
+
+
+
+
 ;; Update when it's starting
 ;; https://www.reddit.com/r/emacs/comments/bvbp92/is_there_a_simple_way_to_get_elfeed_to_update/
 ;; (add-hook 'emacs-startup-hook (lambda () (run-at-time 0 500 'elfeed-update)))
@@ -658,6 +718,7 @@
 ;; (add-hook 'view-mode-hook (kbd "\\") (kbd "M-x"))
 
 
+;; == view-mode 2021 ==
 ;; add view mode keybindings 2021-04-04
 (use-package view
   :config
