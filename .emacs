@@ -582,7 +582,14 @@
 
 
 ;; == elfeed 2021-04-09 ==
-(use-package elfeed :ensure t)
+(use-package elfeed
+  :ensure t
+  :bind (
+	 ;; ("j" . next-line)      ; interfered minibuffer
+	 ;; ("k" . previous-line)  ; interfered minibuffer
+	 ;; ("R" . elfeed-mark-all-as-read)
+	 )
+  )
 (setq elfeed-feeds
       '(
 	;; "https://lifehacker.com/rss"
