@@ -261,6 +261,11 @@
 ;; (run-with-idle-timer 300 nil #'my-default-screen)
 ;; https://emacs.stackexchange.com/questions/6029/is-it-possible-to-execute-a-function-or-command-at-a-specific-time
 ;; (run-at-time "09:00" nil 'cfw:open-org-calendar)
+;; (run-with-timer 15 3 (lambda () (insert "success ")))
+;; The third arg must be a function, -> lambda
+;; https://emacs.stackexchange.com/questions/7534/run-with-timer-error-invalid-or-unitialized-timer
+(run-with-timer 150 30 (lambda () (message "run-with-timer: Just Do It, Keep It Simple ")))
+(run-at-time 50 50 (lambda () (message "run-at-time: Think Big, Start Small ")))
 
 
 ;; == Link Abbreviation 2021-04-19 ==
@@ -588,8 +593,9 @@
 
 (define-key elfeed-search-mode-map (kbd "R") 'elfeed-mark-all-as-read)
 
+;; Update when it's starting
 ;; https://www.reddit.com/r/emacs/comments/bvbp92/is_there_a_simple_way_to_get_elfeed_to_update/
-(add-hook 'emacs-startup-hook (lambda () (run-at-time 5 5 'elfeed-update)))
+;; (add-hook 'emacs-startup-hook (lambda () (run-at-time 0 500 'elfeed-update)))
 
 ;; use an org file to organise feeds
 ;; http://pragmaticemacs.com/emacs/read-your-rss-feeds-in-emacs-with-elfeed/
