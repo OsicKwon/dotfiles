@@ -287,8 +287,8 @@
 ;; (run-with-timer 15 3 (lambda () (insert "success ")))
 ;; The third arg must be a function, -> lambda
 ;; https://emacs.stackexchange.com/questions/7534/run-with-timer-error-invalid-or-unitialized-timer
-(run-with-timer 150 30 (lambda () (message "run-with-timer: Just Do It, Keep It Simple, Get It Done ")))
-(run-at-time 50 50 (lambda () (message "run-at-time: Think Big, Start Small, Move Fast ")))
+(run-with-timer 1500 300 (lambda () (message "run-with-timer: Just Do It, Keep It Simple, Get It Done ")))
+(run-at-time 500 500 (lambda () (message "run-at-time: Think Big, Start Small, Move Fast ")))
 
 
 ;; == Link Abbreviation 2021-04-19 ==
@@ -510,7 +510,7 @@
   (setq imenu-list-focus-after-activation t)
   ;; imenu-list resize 2021-04-13
   ;; https://github.com/bmag/imenu-list
-  (setq imenu-list-auto-resize t)
+  ;; (setq imenu-list-auto-resize t)
   ;; https://github.com/bmag/imenu-list/blob/1447cdc8c0268e332fb4adc0c643702245d31bde/imenu-list.el#L431
   (setq imenu-list-size 0.20)
   (setq org-imenu-depth 2)
@@ -637,6 +637,8 @@
 ;; get idea from https://noonker.github.io/posts/2020-04-22-elfeed/
 (define-key elfeed-search-mode-map (kbd "j") 'next-line)
 (define-key elfeed-search-mode-map (kbd "k") 'previous-line)
+(define-key elfeed-search-mode-map (kbd "T") 'elfeed-search-first-entry)
+(define-key elfeed-search-mode-map (kbd "B") 'elfeed-search-last-entry)
 
 ;; https://noonker.github.io/posts/2020-04-22-elfeed/
 (defun elfeed-eww-open (&optional use-generic-p)
@@ -673,7 +675,7 @@
 ;;     (unless (use-region-p) (forward-line))))
 
 ;; (define-key elfeed-search-mode-map (kbd "t") 'elfeed-w3m-open)
-;; (define-key elfeed-search-mode-map (kbd "w") 'elfeed-eww-open)
+(define-key elfeed-search-mode-map (kbd "w") 'elfeed-eww-open)
 (define-key elfeed-search-mode-map (kbd "e") 'elfeed-eww-open)
 ;; (define-key elfeed-search-mode-map (kbd "f") 'elfeed-firefox-open)
 
@@ -794,10 +796,10 @@
 	 ;; ("k" . previous-line)
 	 ("j" . forward-paragraph)
 	 ("k" . backward-paragraph)
-	 ;; ("h" . backward-sentence)
-         ;; ("l" . forward-sentence)
-	 ("h" . beginning-of-visual-line)
-         ("l" . end-of-visual-line)
+	 ("h" . backward-sentence)
+         ("l" . forward-sentence)
+	 ;; ("h" . beginning-of-visual-line)
+         ;; ("l" . end-of-visual-line)
 	 ;; ("h" . left-word)
          ;; ("l" . right-word)
 	 ;; ("h" . evil-backward-WORD-begin)
@@ -848,12 +850,15 @@
 	 ;; ("SPC" . avy-goto-char)
 	 ;; ("SPC" . ace-jump-char-mode)
 
-	 ;; Vim :: Super g
+	 ;; Vim :: power g
          ;; ---------------
-	 ;; ("g" . nil)  ;; interupting 'gcc' comment key binding 2021-04-21
+	 ("g" . nil)  ;; interupting 'gcc' comment key binding 2021-04-21
 	 ;; ("gg" . beginning-of-buffer)
 	 ;; ("g" . beginning-of-buffer)
-	 ("g" . evil-goto-first-line)
+	 ;; ("g" . evil-goto-first-line)
+	 ("gg" . evil-goto-first-line)
+	 ("go" . evil-jump-backward)
+	 ("gi" . evil-jump-forward)
 	 ;; ("G" . end-of-buffer)
 	 ("G" . evil-goto-line)  ; end of buffer in evil mode
 
@@ -1900,7 +1905,7 @@
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-background-color "lightyellow")))
       ;; (add-hook 'evil-insert-state-entry-hook (lambda () (set-foreground-color "black")))
       (add-hook 'evil-insert-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light yellow")))
-      (add-hook 'evil-insert-state-entry-hook (lambda () (face-remap-add-relative 'default :underline "gray85")))
+      (add-hook 'evil-insert-state-entry-hook (lambda () (face-remap-add-relative 'default :underline "light yellow")))
       (add-hook 'evil-insert-state-exit-hook (lambda () (face-remap-add-relative 'default :underline nil)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-face-attribute hl-line-face nil :weight 'normal)))
       ;; (add-hook 'evil-insert-state-exit-hook (lambda () (set-background-color original-background)))
@@ -1911,7 +1916,7 @@
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :background "light cyan")))
       ;; (add-hook 'evil-visual-state-entry-hook (lambda () (set-background-color "darkgray")))
       (add-hook 'evil-visual-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light cyan")))
-      (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :underline "gray85")))
+      (add-hook 'evil-visual-state-entry-hook (lambda () (face-remap-add-relative 'default :underline "light cyan")))
       (add-hook 'evil-visual-state-exit-hook (lambda () (face-remap-add-relative 'default :underline nil)))
       ;; (add-hook 'evil-visual-state-exit-hook (lambda () (set-background-color original-background)))
       (add-hook 'evil-visual-state-exit-hook (lambda () (hl-line-mode 0)))
@@ -2005,8 +2010,15 @@
 ;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
-(define-key evil-normal-state-map (kbd "<escape>") nil)
-(define-key evil-normal-state-map (kbd "<escape> x") 'counsel-M-x)  ; reventing error that esc-x to call M-x
+
+;; (define-key evil-normal-state-map (kbd "<escape>") nil)
+;; (define-key evil-normal-state-map (kbd "<escape>") 'evil-force-normal-state)
+;; (define-key evil-normal-state-map (kbd "<escape> x") 'counsel-M-x)
+(define-key evil-normal-state-map (kbd "<escape>") 'counsel-M-x)  ; preventing error that esc-x is deleting x
+;; (define-key evil-visual-state-map (kbd "<escape>") nil)
+;; (define-key evil-visual-state-map (kbd "<escape>") 'evil-force-normal-state)
+;; (define-key evil-visual-state-map (kbd "<escape> x") 'counsel-M-x)
+
 (define-key evil-normal-state-map (kbd "RET")   'other-window)
 
 (define-key evil-visual-state-map (kbd "C-t")     'edit-indirect-region)  ; in Emacs mode, "C-t" binded as well
@@ -2087,10 +2099,10 @@
   :init
   ;; https://www.emacswiki.org/emacs/KeyChord
   ;; Max time delay between two key presses to be considered a key chord
-  (setq key-chord-two-keys-delay 0.1) ; default 0.1
+  (setq key-chord-two-keys-delay 0.2) ; default 0.1
   ;; Max time delay between two presses of the same key to be considered a key chord.
   ;; Should normally be a little longer than `key-chord-two-keys-delay'.
-  (setq key-chord-one-key-delay 0.2) ; default 0.2
+  (setq key-chord-one-key-delay 0.3) ; default 0.2
   (key-chord-define evil-insert-state-map "jj" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "kk" 'evil-normal-state)
   (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)  ; preventing from navigating accedently, immediately or unconsciousely
