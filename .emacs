@@ -2743,7 +2743,7 @@ T - tag prefix
 ;; (global-set-key (kbd "<f6>") 'ivy-resume)
 (global-set-key (kbd "M-x") 'counsel-M-x)
 ;; https://www.reddit.com/r/emacs/comments/a6yrqx/find_file_recursively_with_ivy_and_counsel/
-;; (global-set-key (kbd "C-x C-f") 'counsel-file-jump) ; include sub folders, but can't change path
+(global-set-key (kbd "C-c f") 'counsel-file-jump) ; include sub folders, but can't change path
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 ;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
 ;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
