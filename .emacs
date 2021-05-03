@@ -287,8 +287,8 @@
 ;; (run-with-timer 15 3 (lambda () (insert "success ")))
 ;; The third arg must be a function, -> lambda
 ;; https://emacs.stackexchange.com/questions/7534/run-with-timer-error-invalid-or-unitialized-timer
-(run-with-timer 150 30 (lambda () (message "run-with-timer: Just Do It, Keep It Simple ")))
-(run-at-time 50 50 (lambda () (message "run-at-time: Think Big, Start Small ")))
+(run-with-timer 150 30 (lambda () (message "run-with-timer: Just Do It, Keep It Simple, Get It Done ")))
+(run-at-time 50 50 (lambda () (message "run-at-time: Think Big, Start Small, Move Fast ")))
 
 
 ;; == Link Abbreviation 2021-04-19 ==
@@ -746,6 +746,8 @@
 	 ;; ("p" . previous-line)
 	 ;; ("f" . right-word)
 	 ;; ("b" . left-word)
+	 ("f" . evil-forward-WORD-begin)
+	 ("b" . evil-backward-WORD-begin)
 	 ;; window
 	 ("0" . delete-window)
 	 ("1" . delete-other-windows)      ; show only current selected widnow
@@ -776,8 +778,9 @@
 	 ("`" . evil-goto-mark)
 	 ;; ("`" . my-org-next-link-open)
 	 ;; ("~" . ace-link)
+	 ;; ("`" . ace-link)
 	 ;; ("F" . ace-link)
-	 ("f" . ace-link)
+	 ;; ("f" . ace-link)
 	 ;; ("w" . my-minimap-mode)
 	 ;; ("w" . sublimity-mode)
 	 ("w" . avy-goto-char-2)
@@ -793,12 +796,12 @@
 	 ("k" . backward-paragraph)
 	 ;; ("h" . backward-sentence)
          ;; ("l" . forward-sentence)
-	 ;; ("h" . beginning-of-visual-line)
-         ;; ("l" . end-of-visual-line)
+	 ("h" . beginning-of-visual-line)
+         ("l" . end-of-visual-line)
 	 ;; ("h" . left-word)
          ;; ("l" . right-word)
-	 ("h" . evil-backward-WORD-begin)
-         ("l" . evil-forward-WORD-begin)
+	 ;; ("h" . evil-backward-WORD-begin)
+         ;; ("l" . evil-forward-WORD-begin)
 	 ;; ("w" . right-word)
          ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
 	 ("/" . evil-search-forward)
@@ -823,21 +826,22 @@
 	 
 	 ;; <SPACE> binidng 
          ;; ---------------
-	 ("SPC" . nil)
+	 ;; ("SPC" . nil)
+	 ("SPC" . ace-window)
 	 ;; ("SPC o" . ace-window)
-	 ;; power search
-	 ("SPC p" . powerthesaurus-lookup-word-at-point)
-	 ("SPC d" . define-word-at-point)
-	 ("SPC t" . google-translate-at-point)
-	 ("SPC a" . counsel-ag-thing-at-point)
-	 ;; engines - googles
-	 ("SPC gt" . engine/search-google-trans)
-	 ("SPC gn" . engine/search-google-news)
-	 ;; engines - others
-	 ("SPC ej" . engine/search-just_the_word)         ; C-x / j
-	 ("SPC eo" . engine/search-onelook)               ; C-x / o
-	 ("SPC ee" . engine/search-etymology-dictionary)  ; C-x / e
-	 ("SPC ey" . engine/search-youglish)              ; C-x / y
+	 ;; ;; power search
+	 ;; ("SPC p" . powerthesaurus-lookup-word-at-point)
+	 ;; ("SPC d" . define-word-at-point)
+	 ;; ("SPC t" . google-translate-at-point)
+	 ;; ("SPC a" . counsel-ag-thing-at-point)
+	 ;; ;; engines - googles
+	 ;; ("SPC gt" . engine/search-google-trans)
+	 ;; ("SPC gn" . engine/search-google-news)
+	 ;; ;; engines - others
+	 ;; ("SPC ej" . engine/search-just_the_word)         ; C-x / j
+	 ;; ("SPC eo" . engine/search-onelook)               ; C-x / o
+	 ;; ("SPC ee" . engine/search-etymology-dictionary)  ; C-x / e
+	 ;; ("SPC ey" . engine/search-youglish)              ; C-x / y
 	 ;; others
 	 ;; ("SPC" . evil-exit-emacs-state)
 	 ;; ("SPC" . ace-window)
@@ -851,7 +855,7 @@
 	 ;; ("g" . beginning-of-buffer)
 	 ("g" . evil-goto-first-line)
 	 ;; ("G" . end-of-buffer)
-	 ("G" . evil-goto-line)
+	 ("G" . evil-goto-line)  ; end of buffer in evil mode
 
 	 ;; Org binding
          ;; ------------
@@ -873,11 +877,15 @@
 	 ;; <ESCAPE> binidng 
          ;; ---------------
 	 ("<escape> x" . counsel-M-x)
-	 ("<escape> f" . counsel-find-file)
-	 ("<escape> r" . ranger)
-	 ("<escape> RET" . ace-window)
-	 ("<escape> a" . ace-window)
-	 
+	 ;; ("<escape> f" . counsel-find-file)
+	 ;; ("<escape> r" . ranger)
+	 ;; ("<escape> RET" . ace-window)
+	 ;; ("<escape> a" . ace-window)
+	 ("<escape> p" . powerthesaurus-lookup-word-at-point)
+	 ("<escape> d" . define-word-at-point)
+	 ("<escape> t" . google-translate-at-point)
+	 ("<escape> a" . counsel-ag-thing-at-point)
+
 	 ;; Unbind-keys
 	 ;; -----------
 	 ;; ("h" . nil)
@@ -887,9 +895,9 @@
 	 ;; ("r" . revert-buffer)
 	 ("r" . writeroom-mode)
 	 ;; ("a" . end-of-buffer)
-	 ("a" . evil-goto-line)
+	 ;; ("a" . evil-goto-line)  ; end of line
 	 ;; ("a" . counsel-ag)
-	 ;; ("a" . ace-link)
+	 ("a" . ace-link)
 	 ;; ("c" . cfw:open-org-calendar)
 	 ;; ("z" . end-of-buffer)
 	 ("z" . View-exit)  ;; like 'e'
