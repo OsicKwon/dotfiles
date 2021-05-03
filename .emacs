@@ -744,8 +744,8 @@
 	 ;; -----------
 	 ;; ("n" . forward-line)
 	 ;; ("p" . previous-line)
-	 ("f" . right-word)
-	 ("b" . left-word)
+	 ;; ("f" . right-word)
+	 ;; ("b" . left-word)
 	 ;; window
 	 ("0" . delete-window)
 	 ("1" . delete-other-windows)      ; show only current selected widnow
@@ -776,7 +776,8 @@
 	 ("`" . evil-goto-mark)
 	 ;; ("`" . my-org-next-link-open)
 	 ;; ("~" . ace-link)
-	 ("F" . ace-link)
+	 ;; ("F" . ace-link)
+	 ("f" . ace-link)
 	 ;; ("w" . my-minimap-mode)
 	 ;; ("w" . sublimity-mode)
 	 ("w" . avy-goto-char-2)
@@ -790,10 +791,14 @@
 	 ;; ("k" . previous-line)
 	 ("j" . forward-paragraph)
 	 ("k" . backward-paragraph)
-	 ("h" . backward-sentence)
-         ("l" . forward-sentence)
+	 ;; ("h" . backward-sentence)
+         ;; ("l" . forward-sentence)
 	 ;; ("h" . beginning-of-visual-line)
          ;; ("l" . end-of-visual-line)
+	 ;; ("h" . left-word)
+         ;; ("l" . right-word)
+	 ("h" . evil-backward-WORD-begin)
+         ("l" . evil-forward-WORD-begin)
 	 ;; ("w" . right-word)
          ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
 	 ("/" . evil-search-forward)
@@ -1094,6 +1099,9 @@
     (previous-window-any-frame)
     (setq enable-local-variables :none)
     (setq-default buffer-save-without-query nil)
+    (other-window 1)
+    (org-cycle)
+    (other-window 1)
   )
 
 (global-set-key (kbd "C-c C-x i") 'my-indirect-buffer)
@@ -1116,6 +1124,9 @@
   (view-mode)
   (setq enable-local-variables :none)
   (setq-default buffer-save-without-query nil)
+  (other-window 1)
+  (org-cycle)
+  (other-window 1)
   )
 
 
