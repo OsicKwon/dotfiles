@@ -70,6 +70,29 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+
+;; == find-file-in-project 2021-05-03 ==
+;; search including subdirectories
+;; https://github.com/redguardtoo/find-file-in-project
+(use-package find-file-in-project
+  :ensure t
+  :init
+  (require 'find-file-in-project)
+  (global-set-key (kbd "C-x C-f") 'find-file-in-project)
+  )
+
+
+;; just use winner mode insted
+;; == zoom-window 2021-05-03 ==
+;; (use-package zoom-window
+;;   :ensure t
+;;   :init
+;;   (require 'zoom-window)
+;;   :config
+;;   (global-set-key (kbd "C-c z") 'zoom-window-zoom)
+;;   )
+
+
 ;; == writeroom 2021-05-02 ==
 ;; example :: https://github.com/Jassob/.emacs.d
 (use-package writeroom-mode :ensure t
@@ -971,11 +994,11 @@
 
 ;; Solved View-mode for all and enable package installation 2021-04-08
 ;; https://www.reddit.com/r/emacs/comments/741tx6/how_to_change_default_findfile_action_for/
-(defun my-view-mode ()
-  (view-mode 1)
-  (when (and (stringp buffer-file-name)
-             (string-match "\\.el\\'" buffer-file-name))
-    (view-mode 0)))
+;; (defun my-view-mode ()
+;;   (view-mode 1)
+;;   (when (and (stringp buffer-file-name)
+;;              (string-match "\\.el\\'" buffer-file-name))
+;;     (view-mode 0)))
 
 ;; (add-hook 'find-file-hook 'my-view-mode) 
 
@@ -1023,10 +1046,10 @@
 ;; https://www.reddit.com/r/emacs/comments/knoyz2/need_help_toggling_modes_and_settings_when/
 (defun my-view-mode ()
   "Custom behaviours for `view-mode'."
-  (if view-mode
-      (face-remap-add-relative 'mode-line '((:foreground "white" :background "black") mode-line))
-    (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
-    )
+  ;; (if view-mode
+  ;;     (face-remap-add-relative 'mode-line '((:foreground "white" :background "black") mode-line))
+  ;;   (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
+  ;;   )
   (if view-mode
       ;; https://emacs.stackexchange.com/questions/32123/evil-binding-q-to-view-quit-in-view-mode-instead-of-evil-record-macro
       (evil-emacs-state 1)  ;; always related between evil and view-mode 2021-04-04
@@ -2515,9 +2538,7 @@ T - tag prefix
 (global-set-key (kbd "C-c c") 'org-capture)
 ;; https://www.reddit.com/r/emacs/comments/7zqc7b/share_your_org_capture_templates/
 (setq org-capture-templates
-    '(("t" "Todo" entry (file "~/Documents/nvALT/org/Refile.org")
-       "* TODO %?\n%U" :empty-lines 1)
-
+    '(
       ("i" "Inbox")
       ("iw" "on Working" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Inbox on Working")
        "- [ ] %U - %^{Initial Text} :: %?")
@@ -2534,11 +2555,11 @@ T - tag prefix
       ("esi" "with Selected Area & Location")
       ("ec" "with Clipboard")      
 
-      ("x" "Emacs")
-      ("xi" "Inbox Emacs" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Emacs Config")
-       "- [ ] %U - %^{Initial Text} :: %?")
-      ("xs" "Scrap Emacs" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Emacs Scrap")
-       "** %^{Header Title}\n%U\n\n%?" :empty-lines 2)
+      ;; ("x" "Emacs")
+      ;; ("xi" "Inbox Emacs" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Emacs Config")
+      ;;  "- [ ] %U - %^{Initial Text} :: %?")
+      ;; ("xs" "Scrap Emacs" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Emacs Scrap")
+      ;;  "** %^{Header Title}\n%U\n\n%?" :empty-lines 2)
 
 
       ;; ----------------------------------------------------------
@@ -2551,9 +2572,9 @@ T - tag prefix
       ;; ("x" "Big3" plain ()
       ;; "%U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
 
-      ("x" "Big3" plain ()
-       "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3} ")
-       ;; "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
+      ;; ("x" "Big3" plain ()
+      ;;  "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3} ")
+      ;;  ;; "- [ ] %U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
 
       ;; https://www.youtube.com/watch?v=qCdScs4YO8k
       ("d" "Demo")
@@ -2716,7 +2737,7 @@ T - tag prefix
 ;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
 ;; (global-set-key (kbd "<f6>") 'ivy-resume)
 (global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 ;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
 ;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
 ;; (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
