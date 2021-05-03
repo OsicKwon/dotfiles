@@ -73,9 +73,12 @@
 
 ;; == find-file-in-project 2021-05-03 ==
 ;; search including subdirectories
+;; git only ???????????
+;; better to use 'counsel-find-jump' 2021-05-03
 ;; https://github.com/redguardtoo/find-file-in-project
 (use-package find-file-in-project
   :ensure t
+  :disabled
   :init
   (require 'find-file-in-project)
   (global-set-key (kbd "C-x C-f") 'find-file-in-project)
@@ -312,6 +315,7 @@
 ;; https://emacs.stackexchange.com/questions/7534/run-with-timer-error-invalid-or-unitialized-timer
 (run-with-timer 1500 300 (lambda () (message "run-with-timer: Just Do It, Keep It Simple, Get It Done ")))
 (run-at-time 500 500 (lambda () (message "run-at-time: Think Big, Start Small, Move Fast ")))
+(run-with-idle-timer 4 4 (lambda () (message "run-with-idle-timer: Start at the end")))
 
 
 ;; == Link Abbreviation 2021-04-19 ==
@@ -2034,13 +2038,14 @@
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
 
-;; (define-key evil-normal-state-map (kbd "<escape>") nil)
-;; (define-key evil-normal-state-map (kbd "<escape>") 'evil-force-normal-state)
-;; (define-key evil-normal-state-map (kbd "<escape> x") 'counsel-M-x)
-(define-key evil-normal-state-map (kbd "<escape>") 'counsel-M-x)  ; preventing error that esc-x is deleting x
-;; (define-key evil-visual-state-map (kbd "<escape>") nil)
-;; (define-key evil-visual-state-map (kbd "<escape>") 'evil-force-normal-state)
-;; (define-key evil-visual-state-map (kbd "<escape> x") 'counsel-M-x)
+;; Noraml mode
+(define-key evil-normal-state-map (kbd "<escape>") nil)
+(define-key evil-normal-state-map (kbd "<escape><escape>") 'evil-force-normal-state)
+(define-key evil-normal-state-map (kbd "<escape> x") 'counsel-M-x)
+;; Visual mode
+(define-key evil-visual-state-map (kbd "<escape>") nil)
+(define-key evil-visual-state-map (kbd "<escape><escape>") 'evil-force-normal-state)
+(define-key evil-visual-state-map (kbd "<escape> x") 'counsel-M-x)
 
 (define-key evil-normal-state-map (kbd "RET")   'other-window)
 
@@ -2737,7 +2742,9 @@ T - tag prefix
 ;; (global-set-key (kbd "C-c C-r") 'ivy-resume)
 ;; (global-set-key (kbd "<f6>") 'ivy-resume)
 (global-set-key (kbd "M-x") 'counsel-M-x)
-;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+;; https://www.reddit.com/r/emacs/comments/a6yrqx/find_file_recursively_with_ivy_and_counsel/
+;; (global-set-key (kbd "C-x C-f") 'counsel-file-jump) ; include sub folders, but can't change path
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
 ;; (global-set-key (kbd "<f1> f") 'counsel-describe-function)
 ;; (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
 ;; (global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
