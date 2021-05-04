@@ -315,7 +315,7 @@
 ;; https://emacs.stackexchange.com/questions/7534/run-with-timer-error-invalid-or-unitialized-timer
 (run-with-timer 1500 300 (lambda () (message "run-with-timer: Just Do It, Keep It Simple, Get It Done ")))
 (run-at-time 500 500 (lambda () (message "run-at-time: Think Big, Start Small, Move Fast ")))
-(run-with-idle-timer 4 4 (lambda () (message "run-with-idle-timer: Start at the end")))
+(run-with-idle-timer 60 60 (lambda () (message "run-with-idle-timer: Start at the end")))
 
 
 ;; == Link Abbreviation 2021-04-19 ==
@@ -908,6 +908,7 @@
 
 	 ;; <ESCAPE> binidng 
          ;; ---------------
+	 ("<escape> <escape>" . keyboard-quit)
 	 ("<escape> x" . counsel-M-x)
 	 ;; ("<escape> f" . counsel-find-file)
 	 ;; ("<escape> r" . ranger)
@@ -917,6 +918,7 @@
 	 ("<escape> d" . define-word-at-point)
 	 ("<escape> t" . google-translate-at-point)
 	 ("<escape> a" . counsel-ag-thing-at-point)
+	 ("<escape> y" . engine/search-youglish)
 
 	 ;; Unbind-keys
 	 ;; -----------
