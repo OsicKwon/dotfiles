@@ -98,7 +98,10 @@
 
 ;; == writeroom 2021-05-02 ==
 ;; example :: https://github.com/Jassob/.emacs.d
-(use-package writeroom-mode :ensure t
+;; just use winner-mode instead
+(use-package writeroom-mode
+  :ensure t
+  :disabled
   :init (setq writeroom-width 120)
   (add-hook 'writeroom-mode-hook (lambda () (display-line-numbers-mode -1)))
   :bind (:map writeroom-mode-map
@@ -157,12 +160,13 @@
 (global-set-key (kbd "C-c x d") 'define-word-at-point)
 (global-set-key (kbd "C-c x t") 'google-translate-at-point)
 (global-set-key (kbd "C-c x a") 'counsel-ag-thing-at-point)
+(global-set-key (kbd "C-c x e y") 'engine/search-youglish)
 
 ;; an alternatvie with SPC prefix
-(global-set-key (kbd "C-c SPC p") 'powerthesaurus-lookup-word-at-point)
-(global-set-key (kbd "C-c SPC d") 'define-word-at-point)
-(global-set-key (kbd "C-c SPC t") 'google-translate-at-point)
-(global-set-key (kbd "C-c SPC a") 'counsel-ag-thing-at-point)
+;; (global-set-key (kbd "C-c SPC p") 'powerthesaurus-lookup-word-at-point)
+;; (global-set-key (kbd "C-c SPC d") 'define-word-at-point)
+;; (global-set-key (kbd "C-c SPC t") 'google-translate-at-point)
+;; (global-set-key (kbd "C-c SPC a") 'counsel-ag-thing-at-point)
 
 ;; ;; an alternatvie with <escape> prefix
 ;; (global-set-key (kbd "<escape> c p") 'powerthesaurus-lookup-word-at-point)
@@ -313,9 +317,11 @@
 ;; (run-with-timer 15 3 (lambda () (insert "success ")))
 ;; The third arg must be a function, -> lambda
 ;; https://emacs.stackexchange.com/questions/7534/run-with-timer-error-invalid-or-unitialized-timer
-(run-with-timer 1500 300 (lambda () (message "run-with-timer: Just Do It, Keep It Simple, Get It Done ")))
-(run-at-time 500 500 (lambda () (message "run-at-time: Think Big, Start Small, Move Fast ")))
-(run-with-idle-timer 60 60 (lambda () (message "run-with-idle-timer: Start at the end")))
+(run-with-timer 1000 1000 (lambda () (message "run-with-timer: Just Do It, Keep It Simple, Get It Done ")))
+;; (run-at-time 500 500 (lambda () (message "run-at-time: Think Big, Start Small, Move Fast ")))
+(run-with-timer 500 500 (lambda () (message "run-with-timer: Think Big, Start Small, Move Fast ")))
+;; (run-with-idle-timer 30 30 (lambda () (message "run-with-idle-timer: Start at the end")))
+(run-with-idle-timer 30 30 (lambda () (message "run-with-idle-timer: Just Do It from Starting at The End")))
 
 
 ;; == Link Abbreviation 2021-04-19 ==
@@ -831,6 +837,8 @@
          ;; ("l" . right-word)
 	 ;; ("h" . evil-backward-WORD-begin)
          ;; ("l" . evil-forward-WORD-begin)
+	 ("h" . org-tree-slide-move-previous-tree)
+	 ("l" . org-tree-slide-move-next-tree)
 	 ;; ("w" . right-word)
          ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
 	 ("/" . evil-search-forward)
@@ -843,51 +851,55 @@
 	 ;; ("f" . evil-scroll-page-down)
 	 ;; ("b" . evil-scroll-page-up)
          ;; ("0" . beginning-of-visual-line)
-	 ;; ("]" . switch-to-next-buffer)
-	 ;; ("[" . switch-to-prev-buffer)
-	 ("]" . org-tree-slide-move-next-tree)
-	 ("[" . org-tree-slide-move-previous-tree)
+	 ("]" . switch-to-next-buffer)
+	 ("[" . switch-to-prev-buffer)
+	 ;; ("]" . org-tree-slide-move-next-tree)
+	 ;; ("[" . org-tree-slide-move-previous-tree)
 	 ;; ("\\" . counsel-buffer-or-recentf)
 	 ;; ("\\" . imenu-list)
 	 ;; ("\\" . my-view-general-prefix)
 	 ("m" . imenu-list)
 	 ;; ("m" . counsel-M-x)
+
+	 ;; Vim :: power g
+         ;; ---------------
+	 ;; ("g" . nil)  ;; interupting 'gcc' comment key binding 2021-04-21
+	 ;; ("gg" . beginning-of-buffer)
+	 ;; ("g" . beginning-of-buffer)
+	 ("g" . evil-goto-first-line)
+	 ;; ("gg" . evil-goto-first-line)
+	 ;; ("go" . evil-jump-backward)
+	 ;; ("gi" . evil-jump-forward)
+	 ;; ("G" . end-of-buffer)
+	 ("G" . evil-goto-line)  ; end of buffer in evil mode
 	 
 	 ;; <SPACE> binidng 
          ;; ---------------
-	 ;; ("SPC" . nil)
-	 ("SPC" . ace-window)
+	 ("SPC" . nil)
+	 ;; ("SPC" . ace-window)
 	 ;; ("SPC o" . ace-window)
 	 ;; ;; power search
-	 ;; ("SPC p" . powerthesaurus-lookup-word-at-point)
-	 ;; ("SPC d" . define-word-at-point)
-	 ;; ("SPC t" . google-translate-at-point)
-	 ;; ("SPC a" . counsel-ag-thing-at-point)
+	 ("SPC p" . powerthesaurus-lookup-word-at-point)
+	 ("SPC d" . define-word-at-point)
+	 ("SPC t" . google-translate-at-point)
+	 ("SPC a" . counsel-ag-thing-at-point)
+	 ("SPC g" . engine/search-google)
+	 ("SPC y" . engine/search-youglish)
 	 ;; ;; engines - googles
 	 ;; ("SPC gt" . engine/search-google-trans)
 	 ;; ("SPC gn" . engine/search-google-news)
 	 ;; ;; engines - others
+	 ;; just type the word with M-x
 	 ;; ("SPC ej" . engine/search-just_the_word)         ; C-x / j
 	 ;; ("SPC eo" . engine/search-onelook)               ; C-x / o
 	 ;; ("SPC ee" . engine/search-etymology-dictionary)  ; C-x / e
 	 ;; ("SPC ey" . engine/search-youglish)              ; C-x / y
+	 ;; ("SPC eg" . engine/search-google)                ; C-x / g
 	 ;; others
 	 ;; ("SPC" . evil-exit-emacs-state)
 	 ;; ("SPC" . ace-window)
 	 ;; ("SPC" . avy-goto-char)
 	 ;; ("SPC" . ace-jump-char-mode)
-
-	 ;; Vim :: power g
-         ;; ---------------
-	 ("g" . nil)  ;; interupting 'gcc' comment key binding 2021-04-21
-	 ;; ("gg" . beginning-of-buffer)
-	 ;; ("g" . beginning-of-buffer)
-	 ;; ("g" . evil-goto-first-line)
-	 ("gg" . evil-goto-first-line)
-	 ("go" . evil-jump-backward)
-	 ("gi" . evil-jump-forward)
-	 ;; ("G" . end-of-buffer)
-	 ("G" . evil-goto-line)  ; end of buffer in evil mode
 
 	 ;; Org binding
          ;; ------------
@@ -908,17 +920,19 @@
 
 	 ;; <ESCAPE> binidng 
          ;; ---------------
+	 ("<escape>" . nil)
+	 ;; ("<escape>" . keyboard-quit)
 	 ("<escape> <escape>" . keyboard-quit)
 	 ("<escape> x" . counsel-M-x)
 	 ;; ("<escape> f" . counsel-find-file)
 	 ;; ("<escape> r" . ranger)
 	 ;; ("<escape> RET" . ace-window)
 	 ;; ("<escape> a" . ace-window)
-	 ("<escape> p" . powerthesaurus-lookup-word-at-point)
-	 ("<escape> d" . define-word-at-point)
-	 ("<escape> t" . google-translate-at-point)
-	 ("<escape> a" . counsel-ag-thing-at-point)
-	 ("<escape> y" . engine/search-youglish)
+	 ;; ("<escape> p" . powerthesaurus-lookup-word-at-point)
+	 ;; ("<escape> d" . define-word-at-point)
+	 ;; ("<escape> t" . google-translate-at-point)
+	 ;; ("<escape> a" . counsel-ag-thing-at-point)
+	 ;; ("<escape> y" . engine/search-youglish)
 
 	 ;; Unbind-keys
 	 ;; -----------
@@ -927,7 +941,7 @@
 	 ;; Additional-keys
 	 ;; -----------
 	 ;; ("r" . revert-buffer)
-	 ("r" . writeroom-mode)
+	 ;; ("r" . writeroom-mode)
 	 ;; ("a" . end-of-buffer)
 	 ;; ("a" . evil-goto-line)  ; end of line
 	 ;; ("a" . counsel-ag)
@@ -944,8 +958,6 @@
 	 ;; ("v" . evil-visual-state)
 	 ;; ("RET" . evil-exit-emacs-state)
 	 ;; ("SPC" . evil-exit-emacs-state)
-	 ;; ("l" . org-tree-slide-move-next-tree)
-	 ;; ("h" . org-tree-slide-move-previous-tree)
 	 ;;
 	 ("q" . kill-current-buffer)    ; same as (s-k)
 	 ;; ("q" . View-exit)
@@ -2115,7 +2127,7 @@
     "d" 'define-word-at-point
     "t" 'google-translate-at-point
     "a" 'counsel-ag-thing-at-point
-    "r" 'writeroom-mode
+    ;; "r" 'writeroom-mode
     "m" 'imenu-list
    )
   :config
