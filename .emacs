@@ -108,8 +108,8 @@
               ("s-?" . nil)
               ("C-c C-w SPC" . #'writeroom-toggle-mode-line))
         (:map global-map
-              ;; ("C-c r" . #'writeroom-mode)))
-              ("C-r" . #'writeroom-mode)))
+              ("C-c r" . #'writeroom-mode)))
+              ;; ("C-r" . #'writeroom-mode)))
 
 
 ;; vi-like line insertion
@@ -2113,6 +2113,8 @@
     "d" 'define-word-at-point
     "t" 'google-translate-at-point
     "a" 'counsel-ag-thing-at-point
+    "r" 'writeroom-mode
+    "m" 'imenu-list
    )
   :config
   (global-evil-leader-mode)
