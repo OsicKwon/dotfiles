@@ -150,22 +150,25 @@
 ;; https://www.gnu.org/software/emacs/manual/html_mono/eww.html
 (add-hook 'eww-after-render-hook 'view-mode)
 (add-hook 'eww-after-render-hook 'olivetti-narrow-width)
+(add-hook 'eww-after-render-hook (lambda () (text-scale-increase 0.5)))
 ;; (add-hook 'eww-after-render-hook 'evil-normal-state)
 ;; https://gitea.polonkai.eu/gergely/my-emacs-d/commit/0c381769c1987fd21fe4af3e111bbe6ec3e9f8c8
 (setq eww-search-prefix "https://www.google.com/?q=")
 
 
 ;; == Custom Key-binding Starting with C-c x ==
+;; *******************************
+;; just type the command functions
+;; *******************************
+;; ;; at-point things key bindings 2021-04-27
+;; (global-set-key (kbd "C-c x p") 'powerthesaurus-lookup-word-at-point)
+;; (global-set-key (kbd "C-c x d") 'define-word-at-point)
+;; (global-set-key (kbd "C-c x t") 'google-translate-at-point)
+;; (global-set-key (kbd "C-c x a") 'counsel-ag-thing-at-point)
 
-;; at-point things key bindings 2021-04-27
-(global-set-key (kbd "C-c x p") 'powerthesaurus-lookup-word-at-point)
-(global-set-key (kbd "C-c x d") 'define-word-at-point)
-(global-set-key (kbd "C-c x t") 'google-translate-at-point)
-(global-set-key (kbd "C-c x a") 'counsel-ag-thing-at-point)
-
-;; useful view-mode functionalities 2021-05-04
-(global-set-key (kbd "C-c x i") 'my-clone-indirect-buffer)
-(global-set-key (kbd "C-c x o") 'my-org-indirect-buffer)
+;; ;; useful view-mode functionalities 2021-05-04
+;; (global-set-key (kbd "C-c x i") 'my-clone-indirect-buffer)
+;; (global-set-key (kbd "C-c x o") 'my-org-indirect-buffer)
 
 ;; an alternatvie with SPC prefix
 ;; (global-set-key (kbd "C-c SPC p") 'powerthesaurus-lookup-word-at-point)
@@ -810,8 +813,6 @@
 	 ("p" . toggle-window-dedicated)
 	 ("s" . swiper)
 	 ;; ("a" . avy-goto-char)
-	 ("," . org-narrow-to-subtree)
-	 ("." . widen)
 	 ;; ("`" . beacon-blink)
 	 ;; ("`" . pop-global-mark)
 	 ;; ("`" . avy-goto-char-2)
@@ -865,8 +866,10 @@
 	 ;; ("\\" . counsel-buffer-or-recentf)
 	 ;; ("\\" . imenu-list)
 	 ;; ("\\" . my-view-general-prefix)
-	 ("m" . imenu-list)
+	 ;; ("m" . imenu-list)
+	 ("m" . imenu-list-minor-mode)
 	 ;; ("m" . counsel-M-x)
+	 ;; ("m" . evil-exit-emacs-state)
 
 	 ;; Vim :: power g
          ;; ---------------
@@ -947,7 +950,7 @@
 
 	 ;; Additional-keys
 	 ;; -----------
-	 ;; ("r" . revert-buffer)
+	 ("r" . revert-buffer)
 	 ;; ("r" . writeroom-mode)
 	 ;; ("a" . end-of-buffer)
 	 ;; ("a" . evil-goto-line)  ; end of line
@@ -971,11 +974,18 @@
 	 ("x" . my-kill-current-buffer-and-window)
 	 ("c" . recenter-top-bottom)
 	 ;; ("i" . my-indirect-buffer)
-	 ("i" . my-clone-indirect-buffer)
+	 ;; ("i" . my-clone-indirect-buffer)
 	 ;; ("i" . evil-insert-state)
-	 ("o" . my-org-indirect-buffer)
+	 ;; ("o" . my-org-indirect-buffer)
+	 ("i" . org-narrow-to-subtree)
+	 ("o" . widen)
 	 ;; ("ic" . my-clone-indirect-buffer)
 	 ;; ("io" . my-org-indirect-buffer)
+
+	 ;; ("," . org-narrow-to-subtree)
+	 ;; ("." . widen)
+	 ("," . my-clone-indirect-buffer)
+	 ("." . my-org-indirect-buffer)
 
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)
@@ -1370,7 +1380,7 @@
  '(minimap-automatically-delete-window 'visible)
  '(minimap-mode nil)
  '(org-agenda-files
-   '("~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/interx-Pantos-Dispatcher-20210507.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-start-on-weekday 0)
  '(org-agenda-time-grid
    '((daily today require-timed)
@@ -2139,6 +2149,8 @@
     "a" 'counsel-ag-thing-at-point
     ;; "r" 'writeroom-mode
     "m" 'imenu-list
+    "i" 'org-narrow-to-subtree
+    "o" 'widen
    )
   :config
   (global-evil-leader-mode)
@@ -2570,28 +2582,20 @@ T - tag prefix
 ;; https://www.reddit.com/r/emacs/comments/7zqc7b/share_your_org_capture_templates/
 (setq org-capture-templates
     '(
-      ("i" "Inbox")
-      ("iw" "on Working" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Inbox on Working")
+      ("i" "Inbox" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Inbox on Working")
        "- [ ] %U - %^{Initial Text} :: %?")
-      ("ic" "with Clipboard")
-      ("is" "with Selected")
-      ("ih" "with Scheduled")
+
+      ("s" "Scrap with selected area" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Scrap")
+       "** %? \nselected area:\n---------------\n %i \n---------------\nsource: %a - %U" :empty-lines 1)
 
       ("r" "Remind" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Remind")
        "- [ ] %U - %^{Title} :: %?")
-
-      ("e" "English")
-      ("ei" "Just Input")
-      ("es" "with Selected Area")
-      ("esi" "with Selected Area & Location")
-      ("ec" "with Clipboard")      
 
       ;; ("x" "Emacs")
       ;; ("xi" "Inbox Emacs" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Emacs Config")
       ;;  "- [ ] %U - %^{Initial Text} :: %?")
       ;; ("xs" "Scrap Emacs" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Emacs Scrap")
       ;;  "** %^{Header Title}\n%U\n\n%?" :empty-lines 2)
-
 
       ;; ----------------------------------------------------------
       ;; insert at CURRENT POSITION in a buffer 2021-04-02
@@ -2609,14 +2613,19 @@ T - tag prefix
 
       ;; https://www.youtube.com/watch?v=qCdScs4YO8k
       ("d" "Demo")
+
       ("da" "A option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
        "* %^{Initial Text} src: %a  %?")
+
       ("db" "B option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
        "* %^{Initial Text|Opt1|Opt2|Opt3} %?")
+
       ("dc" "C option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
        "* %^{Initial Text|Opt1|Opt2|Opt3} \n SCEHDULED: %^t \n Some test heare %?")
+
       ("dd" "D option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
        "** %? " :empty-lines 2)
+
       ("de" "E option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
        "** demo heading \n area: %i \n\n clipboard: %c \n\n source: %a" :empty-lines 2)
      )
