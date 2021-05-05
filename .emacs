@@ -146,8 +146,7 @@
 (setq org-clock-idle-time 15)
 
 
-;; == eww config ==
-;; == 2021-04-27 ==
+;; == eww config  2021-04-27 ==
 ;; https://www.gnu.org/software/emacs/manual/html_mono/eww.html
 (add-hook 'eww-after-render-hook 'view-mode)
 (add-hook 'eww-after-render-hook 'olivetti-narrow-width)
@@ -155,12 +154,18 @@
 ;; https://gitea.polonkai.eu/gergely/my-emacs-d/commit/0c381769c1987fd21fe4af3e111bbe6ec3e9f8c8
 (setq eww-search-prefix "https://www.google.com/?q=")
 
+
+;; == Custom Key-binding Starting with C-c x ==
+
 ;; at-point things key bindings 2021-04-27
 (global-set-key (kbd "C-c x p") 'powerthesaurus-lookup-word-at-point)
 (global-set-key (kbd "C-c x d") 'define-word-at-point)
 (global-set-key (kbd "C-c x t") 'google-translate-at-point)
 (global-set-key (kbd "C-c x a") 'counsel-ag-thing-at-point)
-(global-set-key (kbd "C-c x e y") 'engine/search-youglish)
+
+;; useful view-mode functionalities 2021-05-04
+(global-set-key (kbd "C-c x i") 'my-clone-indirect-buffer)
+(global-set-key (kbd "C-c x o") 'my-org-indirect-buffer)
 
 ;; an alternatvie with SPC prefix
 ;; (global-set-key (kbd "C-c SPC p") 'powerthesaurus-lookup-word-at-point)
@@ -245,7 +250,7 @@
 ;; == ranger 2021-04-22 ==
 (use-package ranger
   :ensure t
-  :init   (progn (message "### ranger loaded in :init option"))
+  :init   (message "### ranger loaded in :init option")
   :config (progn (message "### ranger loaded in :config option"))
   :preface (progn (message "### ranger loaded in :preface option"))
 
@@ -274,6 +279,8 @@
 ;; Required :: M-x all-the-icons-install-fonts
 (use-package neotree 
   :ensure t
+  :disabled
+  :init (message ">>> neotree loaded")
   :config
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq neo-reset-size-on-open t)
@@ -1026,8 +1033,6 @@
 ;; (add-hook 'kill-buffer-enter-hook (lambda () (read-only-mode -1)))
 ;; (add-hook 'kill-buffer-enter-hook (lambda () (view-mode -1)))
 
-
-
 ;; (defun my-view-mode-after-load-hook ()
 ;;   "Stuff to run in `view-mode'."
 ;;   ;; (remove-hook 'text-mode-hook 'view-mode))
@@ -1064,6 +1069,11 @@
 ;; https://www.reddit.com/r/emacs/comments/knoyz2/need_help_toggling_modes_and_settings_when/
 (defun my-view-mode ()
   "Custom behaviours for `view-mode'."
+  (unless (display-graphic-p)
+    (if view-mode
+      (face-remap-add-relative 'mode-line '((:foreground "red" :background "white") mode-line))
+    (face-remap-add-relative 'mode-line '((:foreground "white" :background "black") mode-line))
+    ))
   ;; (if view-mode
   ;;     (face-remap-add-relative 'mode-line '((:foreground "white" :background "black") mode-line))
   ;;   (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
@@ -2607,6 +2617,8 @@ T - tag prefix
        "* %^{Initial Text|Opt1|Opt2|Opt3} \n SCEHDULED: %^t \n Some test heare %?")
       ("dd" "D option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
        "** %? " :empty-lines 2)
+      ("de" "E option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
+       "** demo heading \n area: %i \n\n clipboard: %c \n\n source: %a" :empty-lines 2)
      )
   )
 ;; (global-set-key (kbd "C-M-]") (kbd "C-0 M-x org-capture"))  ; just tried, but not worked 2021-04-02
