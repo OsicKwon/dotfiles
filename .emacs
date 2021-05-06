@@ -545,9 +545,9 @@
 
 
 ;; == imenu 2021-05-02 ==
-(use-package imenu
+(use-package imenu-list
   :ensure t
-  :bind ("C-." . imenu-list-minor-mode)
+  ;; :bind ("C-." . imenu-list-minor-mode)
   :config
   ;; https://github.com/bmag/imenu-list
   (setq imenu-list-focus-after-activation t)
@@ -555,10 +555,9 @@
   ;; https://github.com/bmag/imenu-list
   ;; (setq imenu-list-auto-resize t)
   ;; https://github.com/bmag/imenu-list/blob/1447cdc8c0268e332fb4adc0c643702245d31bde/imenu-list.el#L431
-  (setq imenu-list-size 0.20)
-  (setq org-imenu-depth 2)
+  (setq imenu-list-size 0.20)  ; default 0.2, in case of long head, use setq-local variable in the file that you want
   )
-
+(setq org-imenu-depth 3) ; put outside of imenu-list package (bulit-in variable)
 
 ;; Local Variables Auto-Load without Confirmation 2021-04-12
 ;; https://emacs.stackexchange.com/questions/28/safe-way-to-enable-local-variables
