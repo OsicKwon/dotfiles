@@ -71,6 +71,72 @@
 ;; --------------------
 
 
+;; == markdown-preview-mode 2021 ==
+;; Error in both 'require' and 'use-package' methods 2021-05-06
+;; (require 'markdown-preview-mode)
+;; (use-package markdown-preview-mode
+;;   :ensure t
+;;   :init (require 'markdown-preview-mode)
+;;   )
+
+;; additional css from github
+;; https://github.com/ancane/markdown-preview-mode/issues/29
+;; (setq markdown-preview-stylesheets
+;;       (list "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.9.0/github-markdown.min.css"
+;;             "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" "
+;;   <style>
+;;    .markdown-body {
+;;      box-sizing: border-box;
+;;      min-width: 200px;
+;;      max-width: 980px;
+;;      margin: 0 auto;
+;;      padding: 45px;
+;;    }
+
+;;    @media (max-width: 767px) {
+;;      .markdown-body {
+;;        padding: 15px;
+;;      }
+;;    }
+;;   </style>
+;; "))
+
+(setq markdown-preview-stylesheets
+      (list "
+  <style>
+   .markdown-body {
+     box-sizing: border-box;
+     min-width: 200px;
+     max-width: 980px;
+     margin: 0 auto;
+     padding: 15px;
+   }
+
+   @media (max-width: 767px) {
+     .markdown-body {
+       padding: 15px;
+     }
+   }
+  </style>
+"))
+
+
+(setq markdown-preview-javascript
+      (list "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" "
+  <script>
+   $(document).on('mdContentChange', function() {
+     $('pre code').each(function(i, block) {
+       hljs.highlightBlock(block);
+     });
+   });
+  </script>
+"))
+
+
+
+;; https://www.reddit.com/r/emacs/comments/2kdztw/emacs_in_evil_mode_show_tildes_for_blank_lines/
+(setq-default indicate-empty-lines t)
+
 ;; == find-file-in-project 2021-05-03 ==
 ;; search including subdirectories
 ;; git only ???????????
@@ -1245,12 +1311,14 @@
 
   "p" '(powerthesaurus-lookup-word-at-point :which-key "powerthesaurus")
   "d" '(define-word-at-point :which-key "define word")
+  "t" '(google-translate-at-point :which-key "google translate")
+  "a" '(counsel-ag-thing-at-point :which-key "counsel-ag-at-point")
 
-  "t" '(google-translate-at-point)
-  "a" '(counsel-ag-thing-at-point)
-  "m" '(imenu-list)
-  "i" '(org-narrow-to-subtree)
-  "o" '(widen)
+  "i" '(org-narrow-to-subtree :which-key "narrow subtree")
+  "o" '(widen :which-key "widen trees")
+
+  "m" '(imenu-list :which-key "imenu-list")
+  "x" '(my-kill-current-buffer-and-window :which-key "kill buffer and close window")
 
 ))
 
@@ -1734,13 +1802,17 @@
 )
 (global-set-key (kbd "C-x C-b") 'buffer-list-switch)
 
-(global-set-key (kbd "C-M-]") 'switch-to-next-buffer)
-(global-set-key (kbd "C-M-[") 'switch-to-prev-buffer)
+;; (global-set-key (kbd "C-M-]") 'switch-to-next-buffer)
+;; (global-set-key (kbd "C-M-[") 'switch-to-prev-buffer)
+(global-set-key (kbd "<C-M-up>")     'counsel-find-file)
+(global-set-key (kbd "<C-M-down>")   'ivy-switch-buffer)
+(global-set-key (kbd "<C-M-left>")   'switch-to-prev-buffer)
+(global-set-key (kbd "<C-M-right>")  'switch-to-next-buffer)
 
 (global-set-key (kbd "s-<return>") 'other-window)
 
 
-;; indent-guide package 2021-02-24
+;; == indent-guide package 2021-02-24 ==
 (indent-guide-global-mode)
 
 
@@ -1802,15 +1874,15 @@
 ;; https://github.com/rnkn/dotfiles/blob/74dff2b1eadf3134c01e376cf8f42b24a0d1cc05/emacs/settings.el#L416-L417
 
 
-;;================
-;; WINDOW Control
-;;================
+;;=====================
+;; == WINDOW Control ==
+;;=====================
 
 ;; == Window Navigating ==
-(global-set-key (kbd "<C-M-up>")     'windmove-up)
-(global-set-key (kbd "<C-M-down>")   'windmove-down)
-(global-set-key (kbd "<C-M-left>")   'windmove-left)
-(global-set-key (kbd "<C-M-right>")  'windmove-right)
+;; (global-set-key (kbd "<C-M-up>")     'windmove-up)
+;; (global-set-key (kbd "<C-M-down>")   'windmove-down)
+;; (global-set-key (kbd "<C-M-left>")   'windmove-left)
+;; (global-set-key (kbd "<C-M-right>")  'windmove-right)
 
 
 ;; == Window Resizing ==
