@@ -157,6 +157,7 @@
 
 
 ;; == Custom Key-binding Starting with C-c x ==
+;; custom >>> general.el
 ;; *******************************
 ;; just type the command functions
 ;; *******************************
@@ -169,6 +170,8 @@
 ;; ;; useful view-mode functionalities 2021-05-04
 ;; (global-set-key (kbd "C-c x i") 'my-clone-indirect-buffer)
 ;; (global-set-key (kbd "C-c x o") 'my-org-indirect-buffer)
+;; (global-set-key (kbd "C-c x i") 'org-narrow-to-subtree)
+;; (global-set-key (kbd "C-c x o") 'widen)
 
 ;; an alternatvie with SPC prefix
 ;; (global-set-key (kbd "C-c SPC p") 'powerthesaurus-lookup-word-at-point)
@@ -1226,6 +1229,32 @@
 ;; ]
 
 
+;; == general 2021-04-09 ==
+;; general << evil-leader
+;; general << custom key binding
+;; https://dev.to/huytd/emacs-from-scratch-1cg6
+(use-package general
+  :ensure t
+  :config (general-define-key
+  :states '(normal visual insert emacs)
+  ;; :prefix "SPC"
+  :prefix "\\"  ;; like the leader key in vim
+  :non-normal-prefix "M-SPC"
+  ;; :non-normal-prefix "C-SPC"  ;; conflicted with 'mark set' like 'visual' mode in evil
+  :keymaps 'override
+
+  "p" '(powerthesaurus-lookup-word-at-point :which-key "powerthesaurus")
+  "d" '(define-word-at-point :which-key "define word")
+
+  "t" '(google-translate-at-point)
+  "a" '(counsel-ag-thing-at-point)
+  "m" '(imenu-list)
+  "i" '(org-narrow-to-subtree)
+  "o" '(widen)
+
+))
+
+
 ;; [ evil goggles - display visual hint 2021-04-02
 ;; https://github.com/edkolev/evil-goggles
 (use-package evil-goggles
@@ -2139,6 +2168,7 @@
 ;; == evil-leader 2021-04-28 ==
 (use-package evil-leader
   :ensure t
+  :disabled
   :init
   (require 'evil-leader)
   (evil-leader/set-key
