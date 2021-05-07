@@ -1320,6 +1320,9 @@
   "m" '(imenu-list :which-key "imenu-list")
   "x" '(my-kill-current-buffer-and-window :which-key "kill buffer and close window")
 
+  "," '(my-clone-indirect-buffer :which-key "my-clone-indirect-buffer")
+  "." '(my-org-indirect-buffer :which-key "my-org-indirect-buffer")
+
 ))
 
 
@@ -1802,8 +1805,9 @@
 )
 (global-set-key (kbd "C-x C-b") 'buffer-list-switch)
 
-;; (global-set-key (kbd "C-M-]") 'switch-to-next-buffer)
-;; (global-set-key (kbd "C-M-[") 'switch-to-prev-buffer)
+(global-set-key (kbd "C-M-]") 'switch-to-next-buffer)
+(global-set-key (kbd "C-M-[") 'switch-to-prev-buffer)
+
 (global-set-key (kbd "<C-M-up>")     'counsel-find-file)
 (global-set-key (kbd "<C-M-down>")   'ivy-switch-buffer)
 (global-set-key (kbd "<C-M-left>")   'switch-to-prev-buffer)
