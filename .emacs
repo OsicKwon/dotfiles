@@ -1296,11 +1296,13 @@
 
 
 ;; == general 2021-04-09 ==
+;; ~~~ Use M-x Typing ~~~
 ;; general << evil-leader
 ;; general << custom key binding
 ;; https://dev.to/huytd/emacs-from-scratch-1cg6
 (use-package general
   :ensure t
+  :disabled
   :config (general-define-key
   :states '(normal visual insert emacs)
   ;; :prefix "SPC"
@@ -2642,6 +2644,7 @@ T - tag prefix
  '(
    (shell . t)
    (python . t)
+   (ipython . t)
    ;; (jupyter . t)
    (R . t)
    (plantuml . t)
