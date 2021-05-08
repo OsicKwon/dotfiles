@@ -2655,7 +2655,7 @@ T - tag prefix
  '(
    (shell . t)
    (python . t)
-   (ipython . t)
+   ;; (ipython . t)
    ;; (jupyter . t)
    (R . t)
    (plantuml . t)
