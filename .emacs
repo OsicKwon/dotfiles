@@ -71,6 +71,16 @@
 ;; --------------------
 
 
+;; 2021-05-07
+;; https://www.reddit.com/r/emacs/comments/n71hj2/python_how_would_you_configure_emacs_for_data/
+(use-package ein
+  :ensure t
+  :init 
+  (setq ein:polymode t
+        ein:output-area-inlined-images t)
+  )
+
+
 ;; == markdown-preview-mode 2021 ==
 ;; Error in both 'require' and 'use-package' methods 2021-05-06
 ;; (require 'markdown-preview-mode)
@@ -736,6 +746,7 @@
       '(
 	;; "https://lifehacker.com/rss"
 	))
+
 
 ;; https://emacs.stackexchange.com/questions/2440/elfeed-mark-all-messages-as-read
 (defun elfeed-mark-all-as-read ()
