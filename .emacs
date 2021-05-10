@@ -71,6 +71,18 @@
 ;; --------------------
 
 
+
+;; == adaptive-wrap 2021-05-10 ==
+;; wrap indent
+;; https://elpa.gnu.org/packages/adaptive-wrap.html
+;; https://stackoverflow.com/questions/13559061/emacs-how-to-keep-the-indentation-level-of-a-very-long-wrapped-line
+;; https://emacs.stackexchange.com/questions/15193/word-wrap-that-preserves-indent-from-previous-line
+(use-package adaptive-wrap
+  :ensure t
+  :init
+  (add-hook 'text-mode-hook 'adaptive-wrap-prefix-mode)
+  )
+
 ;; 2021-05-07
 ;; https://www.reddit.com/r/emacs/comments/n71hj2/python_how_would_you_configure_emacs_for_data/
 (use-package ein
@@ -119,12 +131,12 @@
      min-width: 200px;
      max-width: 980px;
      margin: 0 auto;
-     padding: 15px;
+     padding: 5px;
    }
 
    @media (max-width: 767px) {
      .markdown-body {
-       padding: 15px;
+       padding: 5px;
      }
    }
   </style>
@@ -357,18 +369,29 @@
 
 ;; == neotree with all-the-icons 2021-04-22 ==
 ;; https://github.com/domtronn/all-the-icons.el
-(use-package all-the-icons :ensure t)
+(use-package all-the-icons
+  :ensure t
+  )
 ;; Required :: M-x all-the-icons-install-fonts
 (use-package neotree 
   :ensure t
-  :disabled
   :init (message ">>> neotree loaded")
   :config
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   (setq neo-reset-size-on-open t)
   (setq neo-window-fixed-size nil)
-  (setq neo-window-width 70)
+  (setq neo-window-width 60)
   )
+
+;; word-wrap
+;; https://github.com/jaypei/emacs-neotree/issues/224
+(add-hook 'neo-after-create-hook
+	  #'(lambda (_)
+	      (with-current-buffer (get-buffer neo-buffer-name)
+		(setq truncate-lines t)
+		(setq word-wrap nil)
+		(make-local-variable 'auto-hscroll-mode)
+		(setq auto-hscroll-mode nil))))
 
 
 ;; == Insert org-heading without breaking line 2021-04-22 ==
@@ -2190,7 +2213,7 @@
 
 ;; (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)  ; use H/M/L instead
 (define-key evil-normal-state-map (kbd "ZQ")     'evil-emacs-state)  ; Same as Original Vim
-;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
+(define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
 
