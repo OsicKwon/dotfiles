@@ -623,10 +623,10 @@
   )
 
 
-;; == imenu 2021-05-02 ==
+;; == imenu-list 2021-05-02 ==
 (use-package imenu-list
   :ensure t
-  ;; :bind ("C-." . imenu-list-minor-mode)
+  :bind ("C-." . imenu-list-minor-mode)
   :config
   ;; https://github.com/bmag/imenu-list
   (setq imenu-list-focus-after-activation t)
@@ -1048,6 +1048,7 @@
 	 ("t" . org-tree-slide-mode)
 	 ;; ("v" . ace-window)
 	 ("v" . evil-exit-emacs-state)
+	 ;; ("vi" . evil-exit-emacs-state)
 	 ;; ("v" . evil-visual-state)
 	 ;; ("RET" . evil-exit-emacs-state)
 	 ;; ("SPC" . evil-exit-emacs-state)
@@ -2196,11 +2197,12 @@
 ;; Noraml mode
 (define-key evil-normal-state-map (kbd "<escape>") nil)
 (define-key evil-normal-state-map (kbd "<escape><escape>") 'evil-force-normal-state)
+;; (define-key evil-normal-state-map (kbd "<escape><escape>") 'view-mode)
 (define-key evil-normal-state-map (kbd "<escape> x") 'counsel-M-x)
-;; Visual mode
-(define-key evil-visual-state-map (kbd "<escape>") nil)
-(define-key evil-visual-state-map (kbd "<escape><escape>") 'evil-force-normal-state)
-(define-key evil-visual-state-map (kbd "<escape> x") 'counsel-M-x)
+;; Visual mode (use M-x, not <escpae> x -> close to vanilla vim
+;; (define-key evil-visual-state-map (kbd "<escape>") nil)
+;; (define-key evil-visual-state-map (kbd "<escape><escape>") 'evil-force-normal-state)
+;; (define-key evil-visual-state-map (kbd "<escape> x") 'counsel-M-x)
 
 (define-key evil-normal-state-map (kbd "RET")   'other-window)
 
