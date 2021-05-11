@@ -398,6 +398,31 @@
 		(make-local-variable 'auto-hscroll-mode)
 		(setq auto-hscroll-mode nil))))
 
+;; https://www.emacswiki.org/emacs/NeoTree
+;; (add-hook 'neotree-mode-hook
+;; 	  (lambda ()
+;; 	    (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
+;; 	    (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-quick-look)
+;; 	    (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+;; 	    (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
+;; 	    (define-key evil-normal-state-local-map (kbd "g") 'neotree-refresh)
+;; 	    (define-key evil-normal-state-local-map (kbd "n") 'neotree-next-line)
+;; 	    (define-key evil-normal-state-local-map (kbd "p") 'neotree-previous-line)
+;; 	    (define-key evil-normal-state-local-map (kbd "A") 'neotree-stretch-toggle)
+;; 	    (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle)))
+
+;; In recent versions of evil-mode you can create key bindings for specific modes using evil-define-key,
+;; so another way to override mappings in neotree-mode is as shown below:
+;; (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+;; (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+;; (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+;; (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+;; (evil-define-key 'normal neotree-mode-map (kbd "g") 'neotree-refresh)
+;; (evil-define-key 'normal neotree-mode-map (kbd "n") 'neotree-next-line)
+;; (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-previous-line)
+;; (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
+;; (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
+
 
 ;; == Insert org-heading without breaking line 2021-04-22 ==
 ;; https://emacs.stackexchange.com/questions/43845/org-mode-evil-insert-heading-set-cursor-to-line-ending-and-change-to-insert
@@ -789,6 +814,9 @@
 (define-key elfeed-search-mode-map (kbd "k") 'previous-line)
 (define-key elfeed-search-mode-map (kbd "T") 'elfeed-search-first-entry)
 (define-key elfeed-search-mode-map (kbd "B") 'elfeed-search-last-entry)
+;; like Vim
+(define-key elfeed-search-mode-map (kbd "H") 'elfeed-search-first-entry)
+(define-key elfeed-search-mode-map (kbd "L") 'elfeed-search-last-entry)
 
 ;; https://noonker.github.io/posts/2020-04-22-elfeed/
 (defun elfeed-eww-open (&optional use-generic-p)
