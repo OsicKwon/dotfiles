@@ -376,12 +376,17 @@
 (use-package neotree 
   :ensure t
   :init (message ">>> neotree loaded")
+  :hook (neotree-mode . (lambda () (olivetti-set-width 0.97)))
   :config
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  ;; (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq neo-theme nil)
   (setq neo-reset-size-on-open t)
   (setq neo-window-fixed-size nil)
   (setq neo-window-width 60)
   )
+
+;; (add-hook 'neotree-mode-hook (lambda () (olivetti-set-width 0.90)))
+;; (add-hook 'neotree-mode-hook (lambda () (message "test")))
 
 ;; word-wrap
 ;; https://github.com/jaypei/emacs-neotree/issues/224
@@ -3218,6 +3223,18 @@ T - tag prefix
 ;;     (shrink-window 7)  ; seven times
 ;;     (other-window 1)
 ;;     ))
+
+
+(defun my-startup ()
+  (interactive)  ; to show in M-x as a function
+  (org-agenda nil "a")
+  (split-window-vertically)
+  (find-file "~/Documents/nvALT/org_capture_note.txt")
+  (other-window 2)
+  (find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
+  )
+
+
 ;; ===
 ;; EOF
 ;; ===
