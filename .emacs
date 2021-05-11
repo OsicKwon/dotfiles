@@ -1706,8 +1706,8 @@
 
 ;; == annotate.el 2021-04-19 ==
 ;; https://github.com/bastibe/annotate.el
-;; (load "annotate")
-;; (require 'annotate)
+(load "annotate")
+(require 'annotate)
 
 
 ;; mew-log-commands 2021-03-18
@@ -1924,6 +1924,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
+ '(annotate-highlight ((t (:background "coral" :underline "coral"))))
+ '(annotate-highlight-secondary ((t (:background "khaki" :underline "khaki"))))
  '(aw-leading-char-face ((t (:background "black" :foreground "White" :box (:line-width 3 :color "Black") :slant italic :weight bold :height 1.4))))
  '(evil-goggles-change-face ((t (:inherit diff-removed))))
  '(evil-goggles-delete-face ((t (:inherit diff-removed))))
@@ -2245,8 +2247,8 @@
 ;; but, works in markdown folding -> use in markdown keybinding
 ;; (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
 
-(define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)
-;; (define-key evil-normal-state-map (kbd "ZQ")     'evil-emacs-state)  ; Same as Original Vim
+;; (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)
+(define-key evil-normal-state-map (kbd "ZQ")     'evil-emacs-state)  ; Same as Original Vim
 ;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
