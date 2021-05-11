@@ -930,7 +930,8 @@
 	 ;; ("f" . ace-link)
 	 ;; ("w" . my-minimap-mode)
 	 ;; ("w" . sublimity-mode)
-	 ("w" . avy-goto-char-2)
+	 ("w" . avy-goto-char-1)
+	 ;; ("w" . avy-goto-char-2)
 	 ;; ("w" . ace-window)
 	 ;; ("w" . other-window)
 	 ;; ("w" . ace-jump-char-mode)
@@ -1453,7 +1454,7 @@
   )
 
 
-;; pdf-tools 2021-03-31
+;; == pdf-tools 2021-03-31 ==
 ;; https://github.com/politza/pdf-tools/issues/206
 ;; (require 'pdf-tools)
 ;; (use-package pdf-tools :ensure t)
@@ -1520,7 +1521,7 @@
  '(minimap-automatically-delete-window 'visible)
  '(minimap-mode nil)
  '(org-agenda-files
-   '("~/Documents/nvALT/interx-Pantos-Dispatcher-20210507.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-start-on-weekday 0)
  '(org-agenda-time-grid
    '((daily today require-timed)
@@ -2211,9 +2212,9 @@
 ;; but, works in markdown folding -> use in markdown keybinding
 ;; (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
 
-;; (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)  ; use H/M/L instead
-(define-key evil-normal-state-map (kbd "ZQ")     'evil-emacs-state)  ; Same as Original Vim
-(define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
+(define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)
+;; (define-key evil-normal-state-map (kbd "ZQ")     'evil-emacs-state)  ; Same as Original Vim
+;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
 
@@ -2227,7 +2228,7 @@
 ;; (define-key evil-visual-state-map (kbd "<escape><escape>") 'evil-force-normal-state)
 ;; (define-key evil-visual-state-map (kbd "<escape> x") 'counsel-M-x)
 
-(define-key evil-normal-state-map (kbd "RET")   'other-window)
+;; (define-key evil-normal-state-map (kbd "RET")   'other-window)
 
 (define-key evil-visual-state-map (kbd "C-t")     'edit-indirect-region)  ; in Emacs mode, "C-t" binded as well
 ;; https://vim.fandom.com/wiki/Capitalize_words_and_regions_easily
