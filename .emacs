@@ -989,8 +989,8 @@
 	 ;; ("k" . evil-backward-paragraph)
 	 ("j" . forward-paragraph)
 	 ("k" . backward-paragraph)
-	 ;; ("J" . org-next-visible-heading)
-	 ;; ("K" . org-previous-visible-heading)
+	 ("J" . org-next-visible-heading)       ; required in Org 9.4+
+	 ("K" . org-previous-visible-heading)   ; required in Org 9.4+
 	 ("h" . backward-sentence)
          ("l" . forward-sentence)
 	 ;; ("h" . beginning-of-visual-line)
