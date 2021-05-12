@@ -157,7 +157,8 @@
 
 
 ;; https://www.reddit.com/r/emacs/comments/2kdztw/emacs_in_evil_mode_show_tildes_for_blank_lines/
-(setq-default indicate-empty-lines t)
+;; (setq-default indicate-empty-lines t)
+
 
 ;; == find-file-in-project 2021-05-03 ==
 ;; search including subdirectories
@@ -628,31 +629,6 @@
   )
 
 
-;; == org-superstar 2021-05-12 ==
-;; https://git.v0.io/hlissner/doom-emacs/commit/5c4f3c62a 
-(use-package org-superstar
-  :ensure t
-  :disabled
-  :hook (org-mode . org-superstar-mode)
-  :config
-  ;; Make leading stars truly invisible, by rendering them as spaces!
-  ;; (setq org-superstar-leading-bullet ?\s
-  ;;       org-hide-leading-stars nil)
-  ;; Don't do anything special for item bullets or TODOs by default; these slow
-  ;; down larger org buffers.
-  ;; (setq org-superstar-prettify-item-bullets nil
-  ;;       org-superstar-special-todo-items nil
-  ;;       ;; ...but configure it in case the user wants it later
-  ;;       org-superstar-todo-bullet-alist
-  ;;       '(("TODO" . 9744)
-  ;;         ("[ ]"  . 9744)
-  ;;         ("DONE" . 9745)
-  ;;         ("[X]"  . 9745))))
-  )
-;; https://www.reddit.com/r/emacs/comments/fpfypw/orgsuperstarmode_a_reimagining_of_orgbullets_with/
-;; (setq org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
-;; (setq org-superstar-headline-bullets-list '("■" "⚬" "▪" "•" "▭" "◦" "·" "□" "○" "■" "●" "◆" "◔" "▣" "❑" "⚀" "𝇇" "✗" "✓" "☺"))
-
 ;; == rainbow-delimiters ==
 (use-package rainbow-delimiters
   :ensure t
@@ -720,7 +696,7 @@
   ;; https://github.com/bmag/imenu-list/blob/1447cdc8c0268e332fb4adc0c643702245d31bde/imenu-list.el#L431
   (setq imenu-list-size 0.20)  ; default 0.2, in case of long head, use setq-local variable in the file that you want
   )
-(setq org-imenu-depth 3) ; put outside of imenu-list package (bulit-in variable)
+;; (setq org-imenu-depth 3) ; put outside of imenu-list package (bulit-in variable)
 
 ;; Local Variables Auto-Load without Confirmation 2021-04-12
 ;; https://emacs.stackexchange.com/questions/28/safe-way-to-enable-local-variables
