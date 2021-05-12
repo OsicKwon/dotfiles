@@ -651,7 +651,7 @@
   )
 ;; https://www.reddit.com/r/emacs/comments/fpfypw/orgsuperstarmode_a_reimagining_of_orgbullets_with/
 ;; (setq org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿"))
-(setq org-superstar-headline-bullets-list '("■" "⚬" "▪" "•" "▭" "◦" "·" "□" "○" "■" "●" "◆" "◔" "▣" "❑" "⚀" "𝇇" "✗" "✓" "☺"))
+;; (setq org-superstar-headline-bullets-list '("■" "⚬" "▪" "•" "▭" "◦" "·" "□" "○" "■" "●" "◆" "◔" "▣" "❑" "⚀" "𝇇" "✗" "✓" "☺"))
 
 ;; == rainbow-delimiters ==
 (use-package rainbow-delimiters
@@ -1013,8 +1013,8 @@
 	 ;; ("k" . evil-backward-paragraph)
 	 ("j" . forward-paragraph)
 	 ("k" . backward-paragraph)
-	 ("J" . org-next-visible-heading)
-	 ("K" . org-previous-visible-heading)
+	 ;; ("J" . org-next-visible-heading)
+	 ;; ("K" . org-previous-visible-heading)
 	 ("h" . backward-sentence)
          ("l" . forward-sentence)
 	 ;; ("h" . beginning-of-visual-line)
