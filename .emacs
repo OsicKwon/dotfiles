@@ -1005,20 +1005,22 @@
 	 ;; ---------
 	 ;; ("j" . forward-line)
 	 ;; ("k" . previous-line)
+	 ;; ("j" . evil-next-visual-line)
+	 ;; ("k" . evil-previous-visual-line)
 	 ;; ("j" . View-scroll-line-forward)
 	 ;; ("k" . View-scroll-line-backward)
 	 ("j" . forward-paragraph)
 	 ("k" . backward-paragraph)
-	 ;; ("h" . backward-sentence)
-         ;; ("l" . forward-sentence)
+	 ("h" . backward-sentence)
+         ("l" . forward-sentence)
 	 ;; ("h" . beginning-of-visual-line)
          ;; ("l" . end-of-visual-line)
 	 ;; ("h" . left-word)
          ;; ("l" . right-word)
 	 ;; ("h" . evil-backward-WORD-begin)
          ;; ("l" . evil-forward-WORD-begin)
-	 ("h" . org-tree-slide-move-previous-tree)
-	 ("l" . org-tree-slide-move-next-tree)
+	 ;; ("h" . org-tree-slide-move-previous-tree)
+	 ;; ("l" . org-tree-slide-move-next-tree)
 	 ;; ("w" . right-word)
          ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
 	 ("/" . evil-search-forward)
@@ -1031,10 +1033,10 @@
 	 ;; ("f" . evil-scroll-page-down)
 	 ;; ("b" . evil-scroll-page-up)
          ;; ("0" . beginning-of-visual-line)
-	 ("]" . switch-to-next-buffer)
-	 ("[" . switch-to-prev-buffer)
-	 ;; ("]" . org-tree-slide-move-next-tree)
-	 ;; ("[" . org-tree-slide-move-previous-tree)
+	 ;; ("]" . switch-to-next-buffer)
+	 ;; ("[" . switch-to-prev-buffer)
+	 ("]" . org-tree-slide-move-next-tree)
+	 ("[" . org-tree-slide-move-previous-tree)
 	 ;; ("\\" . counsel-buffer-or-recentf)
 	 ;; ("\\" . imenu-list)
 	 ;; ("\\" . my-view-general-prefix)
@@ -1093,6 +1095,8 @@
 	 ;; ("ow" . widen)
 	 ;; ("oa" . org-agenda)
 	 ;; ("oc" . org-capture)
+	 ("{" . org-backward-element)
+	 ("}" . org-forward-element)
 
 	 ;; Trans Functions
          ;; ------------
@@ -1448,7 +1452,7 @@
   (evil-goggles-use-diff-faces))
 ;; ]
 
-;; pluse (like beacon) bulit-in 2021-04-02
+;; == pluse (like beacon) bulit-in 2021-04-02 ==
 ;; https://karthinks.com/software/batteries-included-with-emacs/
 (defun pulse-line (&rest _)
       "Pulse the current line."
@@ -1912,8 +1916,8 @@
 )
 (global-set-key (kbd "C-x C-b") 'buffer-list-switch)
 
-(global-set-key (kbd "C-M-]") 'switch-to-next-buffer)
-(global-set-key (kbd "C-M-[") 'switch-to-prev-buffer)
+;; (global-set-key (kbd "C-M-]") 'switch-to-next-buffer)
+;; (global-set-key (kbd "C-M-[") 'switch-to-prev-buffer)
 
 (global-set-key (kbd "<C-M-up>")     'counsel-find-file)
 (global-set-key (kbd "<C-M-down>")   'ivy-switch-buffer)
@@ -2123,7 +2127,7 @@
 (unless (package-installed-p 'evil)
   (package-install 'evil))
 
-;; Enable Evil
+;; == Evil mode ==
 ;; (require 'evil)
 ;; (evil-mode 1)
 (use-package evil
@@ -2501,6 +2505,11 @@
     (olivetti-set-width 0.99)
     ) 
   (global-set-key (kbd "C-M-'") 'olivetti-default-width)
+
+
+  (global-set-key (kbd "C-M-[") 'olivetti-shrink)
+  (global-set-key (kbd "C-M-]") 'olivetti-expand)
+
 )
 
 
