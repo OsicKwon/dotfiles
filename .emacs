@@ -189,17 +189,23 @@
 ;; just use winner-mode instead
 (use-package writeroom-mode
   :ensure t
-  :disabled
-  :init (setq writeroom-width 120)
+  :init (setq writeroom-width 0.97)
   (add-hook 'writeroom-mode-hook (lambda () (display-line-numbers-mode -1)))
   :bind (:map writeroom-mode-map
-              ("C-c C-w <" . #'writeroom-decrease-width)
-              ("C-c C-w >" . #'writeroom-increase-width)
+              ;; ("C-c C-w <" . #'writeroom-decrease-width)
+              ;; ("C-c C-w >" . #'writeroom-increase-width)
+              ;; ("C-c {" . #'writeroom-decrease-width)
+              ;; ("C-c }" . #'writeroom-increase-width)
+              ("C-M-<" . #'writeroom-decrease-width)
+              ("C-M->" . #'writeroom-increase-width)
+              ("C-M-," . #'writeroom-decrease-width)
+              ("C-M-." . #'writeroom-increase-width)
               ("C-c C-w =" . #'writeroom-adjust-width)
               ("s-?" . nil)
               ("C-c C-w SPC" . #'writeroom-toggle-mode-line))
         (:map global-map
-              ("C-c r" . #'writeroom-mode)))
+              ;; ("C-c r" . #'writeroom-mode)))
+              ("C-M-w" . #'writeroom-mode)))
               ;; ("C-r" . #'writeroom-mode)))
 
 
@@ -963,7 +969,8 @@
 	 ;; ("f" . ace-link)
 	 ;; ("w" . my-minimap-mode)
 	 ;; ("w" . sublimity-mode)
-	 ("w" . avy-goto-char-1)
+	 ("w" . writeroom-mode)
+	 ;; ("w" . avy-goto-char)
 	 ;; ("w" . avy-goto-char-2)
 	 ;; ("w" . ace-window)
 	 ;; ("w" . other-window)
@@ -1098,7 +1105,7 @@
 	 ("a" . ace-link)
 	 ;; ("c" . cfw:open-org-calendar)
 	 ;; ("z" . end-of-buffer)
-	 ("z" . View-exit)  ;; like 'e'
+	 ("z" . View-exit) ;; like 'e'
 	 ;; ("x" . View-exit)  ;; like 'e'
 	 ;; ("z" . evil-exit-emacs-state)
 	 ;; ("z" . kill-current-buffer)  ; same as (s-k)
@@ -2444,8 +2451,7 @@
 )
 
 
-;; Olivetti 2021-02-11
-;; -------------------
+;; == Olivetti 2021-02-11 ==
 ;; to remove boundry -> '(fringe-mode 0 nil (fringe)) in `(custom-set-variables` lines in front of this file. 
 ;; (require 'olivetti)
 (use-package olivetti
