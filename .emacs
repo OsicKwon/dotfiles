@@ -991,8 +991,10 @@
 	 ("k" . backward-paragraph)
 	 ("J" . org-next-visible-heading)       ; required in Org 9.4+
 	 ("K" . org-previous-visible-heading)   ; required in Org 9.4+
-	 ("h" . backward-sentence)
-         ("l" . forward-sentence)
+	 ("l" . org-next-visible-heading)       ; required in Org 9.4+
+	 ("h" . org-previous-visible-heading)   ; required in Org 9.4+
+	 ;; ("h" . backward-sentence)
+         ;; ("l" . forward-sentence)
 	 ;; ("h" . beginning-of-visual-line)
          ;; ("l" . end-of-visual-line)
 	 ;; ("h" . left-word)
@@ -2068,9 +2070,11 @@
   (exec-path-from-shell-initialize))
 
 
-;; which-key package 2021-01-28
-;; ----------------------------
-(which-key-mode)
+;; == which-key package 2021-01-28 ==
+(use-package which-key
+  :ensure t
+  :config (which-key-mode)
+  )
 
 ;; https://gitter.im/syl20bnr/spacemacs?at=5912366c33e9ee771c8e538d
 ;; ---

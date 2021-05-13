@@ -187,6 +187,7 @@ Plugin 'rking/ag.vim'                   " Silver Searcher (ag) 2021-03-28
 Plugin 'liuchengxu/vim-which-key'       " 2021-04-16
 Plugin 'itchyny/vim-cursorword'         " 2021-04-16
 Plugin 'francoiscabrol/ranger.vim'      " 2021-04-24 - I don't know how
+Plugin 'mhinz/vim-startify'
 
 "----------Python-----------
 Plugin 'nvie/vim-flake8'
