@@ -970,7 +970,8 @@
 	 ;; ("f" . ace-link)
 	 ;; ("w" . my-minimap-mode)
 	 ;; ("w" . sublimity-mode)
-	 ("w" . writeroom-mode)
+	 ;; ("w" . writeroom-mode)
+	 ("w" . avy-goto-word-1)
 	 ;; ("w" . avy-goto-char)
 	 ;; ("w" . avy-goto-char-2)
 	 ;; ("w" . ace-window)
@@ -1114,8 +1115,8 @@
 
 	 ;; Additional-keys
 	 ;; -----------
-	 ("r" . revert-buffer)
-	 ;; ("r" . writeroom-mode)
+	 ;; ("r" . revert-buffer)
+	 ("r" . writeroom-mode)
 	 ;; ("a" . end-of-buffer)
 	 ;; ("a" . evil-goto-line)  ; end of line
 	 ;; ("a" . counsel-ag)
