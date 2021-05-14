@@ -1049,8 +1049,8 @@
 	 ;; ("\\" . counsel-buffer-or-recentf)
 	 ;; ("\\" . imenu-list)
 	 ;; ("\\" . my-view-general-prefix)
-	 ;; ("m" . imenu-list)
-	 ("m" . imenu-list-minor-mode)
+	 ("m" . imenu-list)
+	 ;; ("m" . imenu-list-minor-mode)
 	 ;; ("m" . counsel-M-x)
 	 ;; ("m" . evil-exit-emacs-state)
 
@@ -2305,9 +2305,9 @@
 ;; (define-key evil-normal-state-map (kbd "<escape><escape>") 'view-mode)
 (define-key evil-normal-state-map (kbd "<escape> x") 'counsel-M-x)
 ;; Visual mode (use M-x, not <escpae> x -> close to vanilla vim
-;; (define-key evil-visual-state-map (kbd "<escape>") nil)
-;; (define-key evil-visual-state-map (kbd "<escape><escape>") 'evil-force-normal-state)
-;; (define-key evil-visual-state-map (kbd "<escape> x") 'counsel-M-x)
+(define-key evil-visual-state-map (kbd "<escape>") nil)
+(define-key evil-visual-state-map (kbd "<escape><escape>") 'evil-force-normal-state)
+(define-key evil-visual-state-map (kbd "<escape> x") 'counsel-M-x)
 
 ;; (define-key evil-normal-state-map (kbd "RET")   'other-window)
 
