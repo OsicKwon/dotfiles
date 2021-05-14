@@ -221,6 +221,20 @@
 ;; (setq default-korean-keyboard 'korean-hangul2)
 ;; (global-set-key (kbd "S-SPC") 'toggle-input-method)  ; may conflict with osx korean key
 
+;; for future reference 2021-05-14
+;; https://stackoverflow.com/questions/2901541/which-coding-system-should-i-use-in-emacs
+;; (setq utf-translate-cjk-mode nil) ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
+;; (set-language-environment 'utf-8)
+;; (set-keyboard-coding-system 'utf-8-mac) ; For old Carbon emacs on OS X only
+;; (setq locale-coding-system 'utf-8)
+;; (set-default-coding-systems 'utf-8)
+;; (set-terminal-coding-system 'utf-8)
+;; (set-selection-coding-system
+;;  (if (eq system-type 'windows-nt)
+;;      'utf-16-le  ;; https://rufflewind.com/2014-07-20/pasting-unicode-in-emacs-on-windows
+;;    'utf-8))
+;; (prefer-coding-system 'utf-8)
+
 
 ;; org-clock 2021-04-29
 ;; http://ohyecloudy.com/emacsian/2017/10/14/org-clock-persistence/
@@ -686,6 +700,7 @@
 ;; == imenu-list 2021-05-02 ==
 (use-package imenu-list
   :ensure t
+  :after imenu
   :bind ("C-." . imenu-list-minor-mode)
   :config
   ;; https://github.com/bmag/imenu-list
@@ -695,8 +710,11 @@
   ;; (setq imenu-list-auto-resize t)
   ;; https://github.com/bmag/imenu-list/blob/1447cdc8c0268e332fb4adc0c643702245d31bde/imenu-list.el#L431
   (setq imenu-list-size 0.20)  ; default 0.2, in case of long head, use setq-local variable in the file that you want
+  (setq org-imenu-depth 3) ; put outside of imenu-list package (bulit-in variable)
+  (imenu-list-minor-mode)
   )
-;; (setq org-imenu-depth 3) ; put outside of imenu-list package (bulit-in variable)
+
+
 
 ;; Local Variables Auto-Load without Confirmation 2021-04-12
 ;; https://emacs.stackexchange.com/questions/28/safe-way-to-enable-local-variables
@@ -992,10 +1010,10 @@
 	 ("k" . backward-paragraph)
 	 ("J" . org-next-visible-heading)       ; required in Org 9.4+
 	 ("K" . org-previous-visible-heading)   ; required in Org 9.4+
-	 ("l" . org-next-visible-heading)       ; required in Org 9.4+
-	 ("h" . org-previous-visible-heading)   ; required in Org 9.4+
-	 ;; ("h" . backward-sentence)
-         ;; ("l" . forward-sentence)
+	 ;; ("l" . org-next-visible-heading)       ; required in Org 9.4+
+	 ;; ("h" . org-previous-visible-heading)   ; required in Org 9.4+
+	 ("h" . backward-sentence)
+         ("l" . forward-sentence)
 	 ;; ("h" . beginning-of-visual-line)
          ;; ("l" . end-of-visual-line)
 	 ;; ("h" . left-word)
@@ -1578,6 +1596,7 @@
  '(latex-run-command "pdflatex")
  '(minimap-automatically-delete-window 'visible)
  '(minimap-mode nil)
+ '(org-adapt-indentation nil)
  '(org-agenda-files
    '("~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-start-on-weekday 0)
@@ -1905,13 +1924,13 @@
 )
 (global-set-key (kbd "C-x C-b") 'buffer-list-switch)
 
-;; (global-set-key (kbd "C-M-]") 'switch-to-next-buffer)
-;; (global-set-key (kbd "C-M-[") 'switch-to-prev-buffer)
+(global-set-key (kbd "C-M-]") 'switch-to-next-buffer)
+(global-set-key (kbd "C-M-[") 'switch-to-prev-buffer)
 
-(global-set-key (kbd "<C-M-up>")     'counsel-find-file)
-(global-set-key (kbd "<C-M-down>")   'ivy-switch-buffer)
-(global-set-key (kbd "<C-M-left>")   'switch-to-prev-buffer)
-(global-set-key (kbd "<C-M-right>")  'switch-to-next-buffer)
+;; (global-set-key (kbd "<C-M-up>")     'counsel-find-file)
+;; (global-set-key (kbd "<C-M-down>")   'ivy-switch-buffer)
+;; (global-set-key (kbd "<C-M-left>")   'switch-to-prev-buffer)
+;; (global-set-key (kbd "<C-M-right>")  'switch-to-next-buffer)
 
 (global-set-key (kbd "s-<return>") 'other-window)
 
@@ -1985,10 +2004,10 @@
 ;;=====================
 
 ;; == Window Navigating ==
-;; (global-set-key (kbd "<C-M-up>")     'windmove-up)
-;; (global-set-key (kbd "<C-M-down>")   'windmove-down)
-;; (global-set-key (kbd "<C-M-left>")   'windmove-left)
-;; (global-set-key (kbd "<C-M-right>")  'windmove-right)
+(global-set-key (kbd "<C-M-up>")     'windmove-up)
+(global-set-key (kbd "<C-M-down>")   'windmove-down)
+(global-set-key (kbd "<C-M-left>")   'windmove-left)
+(global-set-key (kbd "<C-M-right>")  'windmove-right)
 
 
 ;; == Window Resizing ==
@@ -2496,11 +2515,10 @@
     (olivetti-set-width 0.99)
     ) 
   (global-set-key (kbd "C-M-'") 'olivetti-default-width)
-
-
-  (global-set-key (kbd "C-M-[") 'olivetti-shrink)
-  (global-set-key (kbd "C-M-]") 'olivetti-expand)
-
+  ;; (global-set-key (kbd "C-M-[") 'olivetti-shrink)
+  ;; (global-set-key (kbd "C-M-]") 'olivetti-expand)
+  (global-set-key (kbd "C-M-{") 'olivetti-shrink)
+  (global-set-key (kbd "C-M-}") 'olivetti-expand)
 )
 
 
@@ -3293,8 +3311,9 @@ T - tag prefix
   (find-file "~/Documents/nvALT/org_capture_note.txt")
   (other-window 2)
   (find-file "~/Documents/nvALT/INBOX_TODO_2021.txt")
+  (other-window 2)
+  (shrink-window 5)  ; five times
   )
-
 
 ;; ===
 ;; EOF

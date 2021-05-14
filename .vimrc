@@ -485,7 +485,9 @@ set statusline+=%f              " path
 set stl+=%{&modified?'\ [+]':''}  " 
 " set statusline+=%m              " modified flag [+]
 " set statusline+=\ -\            " separator
+set statusline+=┆            " separator
 " set statusline+=%y              " [filetype] of the file
+set statusline+=\ %Y              " FILETYPE of the file
 " set statusline+=┆\             " separator
 set statusline+=%{FileSize()}
 " set statusline+=%#PmenuSel#
@@ -496,8 +498,8 @@ set statusline+=%{FileSize()}
 set stl+=%{&ignorecase?'┆\ IGNORE\ ã':''}
 ""~~~~~~~~~~~~~~~~<center>~~~~~~~~~~~~~~~~~~~~~~~~
 set statusline+=%=              " right align
-set statusline+=\ %Y              " FILETYPE of the file
-set statusline+=┆            " separator
+" set statusline+=\ %Y              " FILETYPE of the file
+" set statusline+=┆            " separator
 " set statusline+=%#PmenuSel#
 " set statusline+=%#MoreMsg#
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
@@ -588,9 +590,10 @@ nnoremap <right> <nop>
 " useful but not vimway
 " nnoremap <tab> <C-w>w
 " nnoremap <S-tab> <C-w>W
-nnoremap <tab> za
-nnoremap <S-tab> zM
-nnoremap <S-M-tab> zR
+" ---
+" nnoremap <tab> za
+" nnoremap <S-tab> zM
+" nnoremap <S-M-tab> zR
 
 "RESIZING WINDOWS but Not Vim Way
 " nnoremap <up>       :3wincmd +<CR>
@@ -1191,8 +1194,10 @@ map <F11> :cnext<Return>
 "----------------------
 " PaperColor Filetypes
 "----------------------
+autocmd BufEnter *.sh    colorscheme PaperColor | set background=dark
 autocmd BufEnter *.py    colorscheme PaperColor | set background=dark
 autocmd BufEnter *.vimrc colorscheme PaperColor | set background=dark
+
 autocmd BufEnter *.php colorscheme Pencil | set background=dark
 autocmd BufEnter *.html colorscheme Pencil | set background=dark
 autocmd BufEnter *.phtml colorscheme Pencil | set background=dark
