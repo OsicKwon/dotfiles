@@ -71,7 +71,6 @@
 ;; --------------------
 
 
-
 ;; == adaptive-wrap 2021-05-10 ==
 ;; wrap indent
 ;; https://elpa.gnu.org/packages/adaptive-wrap.html
@@ -80,7 +79,8 @@
 (use-package adaptive-wrap
   :ensure t
   :init
-  (add-hook 'text-mode-hook 'adaptive-wrap-prefix-mode)
+  ;; (add-hook 'text-mode-hook 'adaptive-wrap-prefix-mode)  ; interfered with org-mode paragraph indentation 2021-05-14
+  (add-hook 'markdown-mode-hook 'adaptive-wrap-prefix-mode)   ; use markdown mode only
   )
 
 ;; 2021-05-07
@@ -700,7 +700,7 @@
 ;; == imenu-list 2021-05-02 ==
 (use-package imenu-list
   :ensure t
-  :after imenu
+  :init (imenu-list-minor-mode)  ; for org file (pre-loading)
   :bind ("C-." . imenu-list-minor-mode)
   :config
   ;; https://github.com/bmag/imenu-list
@@ -710,8 +710,8 @@
   ;; (setq imenu-list-auto-resize t)
   ;; https://github.com/bmag/imenu-list/blob/1447cdc8c0268e332fb4adc0c643702245d31bde/imenu-list.el#L431
   (setq imenu-list-size 0.20)  ; default 0.2, in case of long head, use setq-local variable in the file that you want
-  (setq org-imenu-depth 3) ; put outside of imenu-list package (bulit-in variable)
-  (imenu-list-minor-mode)
+  (setq org-imenu-depth 3)     ; put outside of imenu-list package (bulit-in variable)
+  (imenu-list-smart-toggle)    ; toggle off after :init (imenu-list-minor-mode)
   )
 
 
@@ -1049,7 +1049,8 @@
 	 ;; ("\\" . counsel-buffer-or-recentf)
 	 ;; ("\\" . imenu-list)
 	 ;; ("\\" . my-view-general-prefix)
-	 ("m" . imenu-list)
+	 ("m" . imenu-list-smart-toggle)
+	 ;; ("m" . imenu-list)
 	 ;; ("m" . imenu-list-minor-mode)
 	 ;; ("m" . counsel-M-x)
 	 ;; ("m" . evil-exit-emacs-state)
@@ -1825,9 +1826,7 @@
 ;; (setq recentf-auto-cleanup 'never)
 
 
-;; ----------------------------
-;; Dashboard package 2021-03-12
-;; ----------------------------
+;; == Dashboard package 2021-03-12 ==
 ;; (require 'dashboard)
 ;; (dashboard-setup-startup-hook)
 ;; Or if you use use-package
@@ -1991,7 +1990,6 @@
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
  '(pulse-highlight-start-face ((t (:background "dark gray")))))
-
 
 ;; white mode-line came from Binder/Olivetti reddit like below:
 ;; https://www.reddit.com/r/emacs/comments/fc8hc2/binder_modes_for_structuring_a_multifile_writing/
@@ -2999,7 +2997,7 @@ T - tag prefix
 
 
 ;; ---------------------------------------
-;; Ivy, Swiper, Counsel Bundle 2021-03-03
+;; == Ivy, Swiper, Counsel Bundle 2021-03-03 ==
 ;; ---------------------------------------
 ;; https://github.com/abo-abo/swiper
 ;; (ivy-mode 1)  " replaced Helm search - think about this more 2021-03-05
@@ -3314,6 +3312,7 @@ T - tag prefix
   (other-window 2)
   (shrink-window 5)  ; five times
   )
+
 
 ;; ===
 ;; EOF
