@@ -194,6 +194,8 @@ Plugin 'nvie/vim-flake8'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'sirver/ultisnips'
 Plugin 'klen/python-mode'
+Plugin 'jpalardy/vim-slime'
+Plugin 'hanschen/vim-ipython-cell'
 
 "------Other_plugins--------
 " Plugin 'itchyny/calendar.vim'
@@ -208,6 +210,8 @@ set omnifunc=syntaxcomplete#Complete
 syntax on
 
 " let g:indentLine_char = '¦'
+" let g:indentLine_char = '┆'
+let g:indentLine_char = '┊'
 " let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:searchfold_maxdepth=1
 let g:solarized_termcolors=256
@@ -485,9 +489,10 @@ set statusline+=%f              " path
 set stl+=%{&modified?'\ [+]':''}  " 
 " set statusline+=%m              " modified flag [+]
 " set statusline+=\ -\            " separator
-set statusline+=┆            " separator
-" set statusline+=%y              " [filetype] of the file
-set statusline+=\ %Y              " FILETYPE of the file
+" set statusline+=┆            " separator
+set statusline+=\               " separator
+set statusline+=%y              " [filetype] of the file
+" set statusline+=\ %Y              " FILETYPE of the file
 " set statusline+=┆\             " separator
 set statusline+=%{FileSize()}
 " set statusline+=%#PmenuSel#
@@ -1086,6 +1091,8 @@ nnoremap <silent> <leader>us  :UndotreeShow<cr>
 nnoremap <silent> <leader>uh  :UndotreeHide<cr>
 " markdown support"
 vnoremap <silent> <leader>* s**<C-r>"**<esc>
+" Others
+nnoremap <silent> <leader>s  :Startify<cr>
 
 "------------
 " EasyMotion
@@ -1094,7 +1101,7 @@ vnoremap <silent> <leader>* s**<C-r>"**<esc>
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
 " s{char}{char} to move to {char}{char}
-nmap <leader>s <Plug>(easymotion-overwin-f2)
+" nmap <leader>s <Plug>(easymotion-overwin-f2)
 " Move to line
 map <Leader>L <Plug>(easymotion-bd-jk)
 nmap <Leader>L <Plug>(easymotion-overwin-line)
@@ -1194,8 +1201,8 @@ map <F11> :cnext<Return>
 "----------------------
 " PaperColor Filetypes
 "----------------------
-autocmd BufEnter *.sh    colorscheme PaperColor | set background=dark
-autocmd BufEnter *.py    colorscheme PaperColor | set background=dark
+autocmd BufEnter *.sh    colorscheme PaperColor | set background=dark | set nospell
+autocmd BufEnter *.py    colorscheme PaperColor | set background=dark | set nospell
 autocmd BufEnter *.vimrc colorscheme PaperColor | set background=dark
 
 autocmd BufEnter *.php colorscheme Pencil | set background=dark
