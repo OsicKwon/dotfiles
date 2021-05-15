@@ -1137,9 +1137,9 @@
 	 ;; ("r" . revert-buffer)
 	 ("r" . writeroom-mode)
 	 ;; ("a" . end-of-buffer)
-	 ;; ("a" . evil-goto-line)  ; end of line
+	 ("a" . evil-goto-line)  ; end of line
 	 ;; ("a" . counsel-ag)
-	 ("a" . ace-link)
+	 ("A" . ace-link)
 	 ;; ("c" . cfw:open-org-calendar)
 	 ;; ("z" . end-of-buffer)
 	 ("z" . View-exit) ;; like 'e'
@@ -2777,6 +2777,8 @@ T - tag prefix
    (latex . t)
    (java . t)
    (js . t)
+   (sql . t)
+   (gnuplot . t)
    ))
 
 
