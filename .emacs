@@ -1314,6 +1314,10 @@
 (add-hook 'view-mode-hook #'my-view-mode)
 
 
+;; refer to 'make-indirect-buffer'
+;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Indirect-Buffers.html
+
+
 ;; (put 'clone-indirect-buffer-other-window 'disabled "\n Use 'make-indirect-buffer' instead due to view-mode with face issues")
 ;; (put 'org-tree-to-indirect-buffer 'disabled "\n Use 'my-indirect-buffer' instead due to view-mode with face issues")
 ;; (setq disabled-command-function 'ignore)
@@ -1817,11 +1821,13 @@
 
 
 ;; ---------------------------------------------------
+;; == recentf ==
 ;; Recent opened file history 2020-12-31
 ;; (Interchangable/trade-off with `Dashboard` package)
 ;; ---------------------------------------------------
-;; (require 'recentf)
-;; (recentf-mode 1)
+(require 'recentf)
+(recentf-mode 1)
+(recentf-open-files)  ; run when starting emacs
 ;; (global-set-key "\C-xf" 'recentf-open-files)
 ;; (setq recentf-auto-cleanup 'never)
 
@@ -1989,7 +1995,7 @@
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
- '(pulse-highlight-start-face ((t (:background "dark gray")))))
+ '(pulse-highlight-start-face ((t (:background "cyan")))))
 
 ;; white mode-line came from Binder/Olivetti reddit like below:
 ;; https://www.reddit.com/r/emacs/comments/fc8hc2/binder_modes_for_structuring_a_multifile_writing/
@@ -3315,6 +3321,15 @@ T - tag prefix
   (shrink-window 5)  ; five times
   )
 
+(defun my-follow-mode()
+  (interactive)
+  (split-window-right)
+  (split-window-right)
+  (balance-windows)
+  (follow-mode 1)
+  (view-mode 1)
+  )
+  
 
 ;; ===
 ;; EOF

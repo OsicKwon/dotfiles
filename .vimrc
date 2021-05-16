@@ -8,7 +8,7 @@
 "
 " since 2020
 " **************************
-" Persudae Plain Vanila Vim
+" Pursue Plain Vanila Vim
 " **************************
 
 "-----------------
