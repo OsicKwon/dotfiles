@@ -71,6 +71,27 @@
 ;; --------------------
 
 
+
+;; == pyvenv 2021-05-16 ==
+;; python virtual environment package
+;; https://github.com/daviwil/emacs-from-scratch/wiki/LSP-Python-(pyright)-config-in-emacs-from-scratch#wiki-pages-box
+(use-package pyvenv
+  :ensure t
+  :disabled
+  :init
+  (setenv "WORKON_HOME" "~/.venvs/")
+  :config
+  ;; (pyvenv-mode t)
+
+  ;; Set correct Python interpreter
+  (setq pyvenv-post-activate-hooks
+        (list (lambda ()
+                (setq python-shell-interpreter (concat pyvenv-virtual-env "bin/python")))))
+  (setq pyvenv-post-deactivate-hooks
+        (list (lambda ()
+                (setq python-shell-interpreter "python3")))))
+
+
 ;; == adaptive-wrap 2021-05-10 ==
 ;; wrap indent
 ;; https://elpa.gnu.org/packages/adaptive-wrap.html
@@ -472,10 +493,17 @@
 ;; https://emacs.stackexchange.com/questions/6029/is-it-possible-to-execute-a-function-or-command-at-a-specific-time
 (when (display-graphic-p)
   (progn
+
     (run-at-time "09:00" nil 'cfw:open-org-calendar)
     (run-at-time "12:00" nil 'cfw:open-org-calendar)
     (run-at-time "15:00" nil 'cfw:open-org-calendar)
     (run-at-time "18:00" nil 'cfw:open-org-calendar)
+
+    ;; (run-at-time "13:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
+    ;; (run-at-time "14:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
+    ;; (run-at-time "16:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
+    ;; (run-at-time "17:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
+
 ))
 ;; (run-with-timer 15 3 (lambda () (insert "success ")))
 ;; The third arg must be a function, -> lambda
@@ -878,7 +906,7 @@
 ;;     (unless (use-region-p) (forward-line))))
 
 ;; (define-key elfeed-search-mode-map (kbd "t") 'elfeed-w3m-open)
-(define-key elfeed-search-mode-map (kbd "w") 'elfeed-eww-open)
+;; (define-key elfeed-search-mode-map (kbd "w") 'elfeed-eww-open)
 (define-key elfeed-search-mode-map (kbd "e") 'elfeed-eww-open)
 ;; (define-key elfeed-search-mode-map (kbd "f") 'elfeed-firefox-open)
 
@@ -1046,6 +1074,8 @@
 	 ;; ("{" . org-previous-visible-heading)
 	 ;; ("{" . org-backward-element)
 	 ;; ("}" . org-forward-element)
+	 ("}" . olivetti-expand)
+	 ("{" . olivetti-shrink)
 	 ;; ("\\" . counsel-buffer-or-recentf)
 	 ;; ("\\" . imenu-list)
 	 ;; ("\\" . my-view-general-prefix)
@@ -1111,6 +1141,7 @@
 	 ;; ("t" . nil)
 	 ;; ("tp" . powerthesaurus-lookup-word-at-point)
 	 ;; ("td" . define-word-at-point)
+	 ("t" . my-org-targeting)
 
 	 ;; <ESCAPE> binidng 
          ;; ---------------
@@ -1134,36 +1165,42 @@
 
 	 ;; Additional-keys
 	 ;; -----------
-	 ;; ("r" . revert-buffer)
-	 ("r" . writeroom-mode)
+	 ("r" . revert-buffer)
+	 ;; ("R" . revert-buffer)
+	 ;; ("r" . writeroom-mode)
+	 ("R" . writeroom-mode)
 	 ;; ("a" . end-of-buffer)
-	 ("a" . evil-goto-line)  ; end of line
-	 ;; ("a" . counsel-ag)
-	 ("A" . ace-link)
+	 ;; ("a" . evil-goto-line)  ; end of line
+	 ("a" . ace-link)
+	 ;; ("A" . ace-link)
+	 ("A" . counsel-ag-at-point)
 	 ;; ("c" . cfw:open-org-calendar)
 	 ;; ("z" . end-of-buffer)
 	 ("z" . View-exit) ;; like 'e'
 	 ;; ("x" . View-exit)  ;; like 'e'
 	 ;; ("z" . evil-exit-emacs-state)
 	 ;; ("z" . kill-current-buffer)  ; same as (s-k)
-	 ("t" . org-tree-slide-mode)
+	 ;; ("t" . org-tree-slide-mode)
+	 ("T" . org-tree-slide-mode)
 	 ;; ("v" . ace-window)
 	 ("v" . evil-exit-emacs-state)
 	 ;; ("vi" . evil-exit-emacs-state)
 	 ;; ("v" . evil-visual-state)
 	 ;; ("RET" . evil-exit-emacs-state)
 	 ;; ("SPC" . evil-exit-emacs-state)
+	 ("F" . my-follow-mode)
 	 ;;
 	 ("q" . kill-current-buffer)    ; same as (s-k)
 	 ;; ("q" . View-exit)
 	 ("x" . my-kill-current-buffer-and-window)
+	 ;; ("X" . my-kill-current-buffer-and-other-windows)
 	 ("c" . recenter-top-bottom)
 	 ;; ("i" . my-indirect-buffer)
-	 ;; ("i" . my-clone-indirect-buffer)
+	 ("i" . my-clone-indirect-buffer)
 	 ;; ("i" . evil-insert-state)
-	 ;; ("o" . my-org-indirect-buffer)
-	 ("i" . org-narrow-to-subtree)
-	 ("o" . widen)
+	 ("o" . my-org-indirect-buffer)
+	 ;; ("i" . org-narrow-to-subtree)
+	 ;; ("o" . widen)
 	 ;; ("ic" . my-clone-indirect-buffer)
 	 ;; ("io" . my-org-indirect-buffer)
 
@@ -1399,6 +1436,12 @@
   (delete-window)
   )
 
+;; Integrated to my-follow-mode 2021-05-17
+;; (defun my-kill-current-buffer-and-other-windows()
+;;   (interactive)
+;;   (kill-current-buffer)
+;;   (delete-other-windows)
+;;   )
 
 
 ;; [ winner mode 2021-04-02
@@ -1449,7 +1492,7 @@
 ))
 
 
-;; [ evil goggles - display visual hint 2021-04-02
+;; == evil goggles - display visual hint 2021-04-02 ==
 ;; https://github.com/edkolev/evil-goggles
 (use-package evil-goggles
   :ensure t
@@ -1464,7 +1507,7 @@
   (evil-goggles-use-diff-faces))
 ;; ]
 
-;; == pluse (like beacon) bulit-in 2021-04-02 ==
+;; == pulse (like beacon) bulit-in 2021-04-02 ==
 ;; https://karthinks.com/software/batteries-included-with-emacs/
 (defun pulse-line (&rest _)
       "Pulse the current line."
@@ -1825,9 +1868,9 @@
 ;; Recent opened file history 2020-12-31
 ;; (Interchangable/trade-off with `Dashboard` package)
 ;; ---------------------------------------------------
-(require 'recentf)
-(recentf-mode 1)
-(recentf-open-files)  ; run when starting emacs
+;; (require 'recentf)
+;; (recentf-mode 1)
+;; (recentf-open-files)  ; run when starting emacs
 ;; (global-set-key "\C-xf" 'recentf-open-files)
 ;; (setq recentf-auto-cleanup 'never)
 
@@ -1865,10 +1908,8 @@
 			  (projects . 5)
 			  (agenda . 5)
 			  ;; (registers . 5)
-			  )
-  )
-  
-)
+			  )))
+
 
 ;;===============
 ;; FIXED SETTING
@@ -2309,9 +2350,9 @@
 ;; (define-key evil-normal-state-map (kbd "<escape><escape>") 'view-mode)
 (define-key evil-normal-state-map (kbd "<escape> x") 'counsel-M-x)
 ;; Visual mode (use M-x, not <escpae> x -> close to vanilla vim
-(define-key evil-visual-state-map (kbd "<escape>") nil)
-(define-key evil-visual-state-map (kbd "<escape><escape>") 'evil-force-normal-state)
-(define-key evil-visual-state-map (kbd "<escape> x") 'counsel-M-x)
+;; (define-key evil-visual-state-map (kbd "<escape>") nil)
+;; (define-key evil-visual-state-map (kbd "<escape><escape>") 'evil-force-normal-state)
+;; (define-key evil-visual-state-map (kbd "<escape> x") 'counsel-M-x)
 
 ;; (define-key evil-normal-state-map (kbd "RET")   'other-window)
 
@@ -2519,10 +2560,10 @@
     (olivetti-set-width 0.99)
     ) 
   (global-set-key (kbd "C-M-'") 'olivetti-default-width)
-  ;; (global-set-key (kbd "C-M-[") 'olivetti-shrink)
   ;; (global-set-key (kbd "C-M-]") 'olivetti-expand)
-  (global-set-key (kbd "C-M-{") 'olivetti-shrink)
+  ;; (global-set-key (kbd "C-M-[") 'olivetti-shrink)
   (global-set-key (kbd "C-M-}") 'olivetti-expand)
+  (global-set-key (kbd "C-M-{") 'olivetti-shrink)
 )
 
 
@@ -2677,16 +2718,22 @@ T - tag prefix
 ;; // end of hydra
 
 
-;; beacon mode package 2021-03-03
+;; == beacon mode package 2021-03-03 ==
 ;; Emacs 26.3 ok, but Emacs 27.1 issue
 ;; Pros compared to pulse.el :
 ;; 1. show beacon without text when `other-window`
 ;; 2. show exact position(column) in a line
-(beacon-mode 1)                             ; Interupted `org-tree-slide-mode`
-(setq beacon-size 5)
-(setq beacon-color "black")
-(setq beacon-blink-when-window-scrolls nil) ; Solved 'org-tree-slide-mode` issue 2021-03-29
-(setq beacon-blink-when-focused t)
+(use-package beacon
+  :ensure t
+  :init (message ">>> beacon-mode activated")
+  :config
+  (beacon-mode 1)                             ; Interupted `org-tree-slide-mode`
+  (setq beacon-size 5)
+  (setq beacon-color "black")
+  (setq beacon-blink-when-window-scrolls nil) ; Solved 'org-tree-slide-mode` issue 2021-03-29
+  (setq beacon-blink-when-focused t)
+  )
+
 
 ;; command-log-mode 2021-03-09
 ;; https://github.com/lewang/command-log-mode 
@@ -3321,15 +3368,46 @@ T - tag prefix
   (shrink-window 5)  ; five times
   )
 
-(defun my-follow-mode()
-  (interactive)
-  (split-window-right)
-  (split-window-right)
-  (balance-windows)
-  (follow-mode 1)
-  (view-mode 1)
-  )
+
+;; (defun my-follow-mode()
+;;   (interactive)
+;;   (split-window-right)
+;;   (split-window-right)
+;;   (balance-windows)
+;;   (follow-mode 1)
+;;   (view-mode 1)
+;;   )
   
+
+;; Combine my-follow-mode + toggle functionality 2021-05-17
+;; http://ergoemacs.org/emacs/elisp_toggle_command.html
+(defun my-follow-mode ()
+  "Toggle URL `http://ergoemacs.org/emacs/elisp_toggle_command.html'Version 2015-12-17"
+  (interactive)
+  ;; use a property “following”. Value is t or nil
+  (if (get 'my-follow-mode 'following)
+      (progn
+	(kill-current-buffer)
+	(delete-other-windows)
+	(put 'my-follow-mode 'following nil))
+    (progn
+      (split-window-right)
+      (split-window-right)
+      (balance-windows)
+      (follow-mode 1)
+      (view-mode 1)
+      (put 'my-follow-mode 'following t))))
+
+
+(defun my-org-targeting()
+  (interactive)
+  (if (get 'my-org-targeting 'targeting)
+      (progn
+	(widen)
+	(put 'my-org-targeting 'targeting nil))
+    (progn
+      (org-narrow-to-subtree)
+      (put 'my-org-targeting 'targeting t))))
 
 ;; ===
 ;; EOF
