@@ -70,6 +70,55 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; my-tab 2021-05-18
+(defun my-tab()
+  (interactive)
+  (back-to-indentation)
+  (indent-for-tab-command)
+  ;; (end-of-visual-line)
+  )
+(global-set-key (kbd "<tab>")     'my-tab)
+(global-set-key (kbd "M-<right>") 'my-tab)
+
+;; my-backtab
+(defun my-backtab()
+  (interactive)
+  (back-to-indentation)
+  (delete-backward-char 1)
+  ;; (end-of-visual-line)
+  )
+(global-set-key (kbd "<backtab>") 'my-backtab)
+(global-set-key (kbd "M-<left>")  'my-backtab)
+
+;; my-swap up
+(defun my-swap-up()
+  (interactive)
+  (beginning-of-visual-line)
+  (kill-visual-line)
+  (delete-backward-char 1)
+  (beginning-of-visual-line)
+  ;; (kill-whole-line)
+  (electric-newline-and-maybe-indent)
+  (previous-line)
+  (yank)
+  ;; (previous-line)
+  (beginning-of-visual-line)
+  )
+(global-set-key (kbd "M-<up>") 'my-swap-up)
+
+;; my-swap down
+(defun my-swap-down()
+  (interactive)
+  (beginning-of-visual-line)
+  ;; (kill-visual-line)
+  (kill-whole-line)
+  ;; (newline)
+  (next-line)
+  (yank)
+  (beginning-of-visual-line)
+  (previous-line)
+  )
+(global-set-key (kbd "M-<down>") 'my-swap-down)
 
 
 ;; == pyvenv 2021-05-16 ==
