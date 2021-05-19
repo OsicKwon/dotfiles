@@ -70,6 +70,20 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+
+;; == evil-numbers :: ctrl a, ctrl x 2021-05-18 =
+;; https://emacs.stackexchange.com/questions/41919/have-ctrl-a-increase-a-number-just-like-in-vim
+(use-package evil-numbers
+  :ensure t
+  :disabled
+  :init
+  (require 'evil-numbers)
+  ;; (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
+  ;; (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
+  (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)  ; confilicted with C-x 3
+  )
+
 ;; my-tab 2021-05-18
 (defun my-tab()
   (interactive)
@@ -77,7 +91,9 @@
   (indent-for-tab-command)
   ;; (end-of-visual-line)
   )
-(global-set-key (kbd "<tab>")     'my-tab)
+;; https://stackoverflow.com/questions/29468271/emacs-how-to-bind-key-only-in-regular-buffers-and-not-in-the-minibuffer
+(global-set-key "\t" 'my-tab)  ; major mode only
+;; (global-set-key (kbd "<tab>")     'my-tab)
 (global-set-key (kbd "M-<right>") 'my-tab)
 
 ;; my-backtab
@@ -819,7 +835,7 @@
 (use-package dired-narrow :ensure t)
 
 
-;; Google Translate 2021-04-11
+;; == Google Translate 2021-04-11 ==
 ;; https://github.com/atykhonov/google-translate/issues/137
 (use-package google-translate
   :demand t
@@ -827,8 +843,8 @@
   :ensure t
   :init
   (require 'google-translate)
-  (setq google-translate-default-source-language "en")
-  (setq google-translate-default-target-language "ko")
+  ;; (setq google-translate-default-source-language "en")
+  ;; (setq google-translate-default-target-language "ko")
   (setq google-translate-output-destination 'echo-area)
   (setq google-translate-show-phonetic t)
 
@@ -1046,8 +1062,10 @@
 	 ("DEL" . beacon-blink)
 	 ;; ("o" . ace-window)
 	 ;; ("o" . other-window)
-	 ("=" . balance-windows)
-	 ("-" . maximize-window)
+	 ("=" . text-scale-increase)
+	 ("-" . text-scale-decrease)
+	 ("+" . balance-windows)
+	 ("_" . maximize-window)
 	 ("p" . toggle-window-dedicated)
 
 	 ("s" . swiper)
@@ -1072,6 +1090,7 @@
 	 ;; ("w" . ace-window)
 	 ;; ("w" . other-window)
 	 ;; ("w" . ace-jump-char-mode)
+	 ;; ("w" . my-follow-mode)
 
          ;; Vim style
 	 ;; ---------
@@ -1089,16 +1108,16 @@
 	 ("K" . org-previous-visible-heading)   ; required in Org 9.4+
 	 ;; ("l" . org-next-visible-heading)       ; required in Org 9.4+
 	 ;; ("h" . org-previous-visible-heading)   ; required in Org 9.4+
-	 ("h" . backward-sentence)
-         ("l" . forward-sentence)
+	 ;; ("h" . backward-sentence)
+         ;; ("l" . forward-sentence)
 	 ;; ("h" . beginning-of-visual-line)
          ;; ("l" . end-of-visual-line)
 	 ;; ("h" . left-word)
          ;; ("l" . right-word)
 	 ;; ("h" . evil-backward-WORD-begin)
          ;; ("l" . evil-forward-WORD-begin)
-	 ;; ("h" . org-tree-slide-move-previous-tree)
-	 ;; ("l" . org-tree-slide-move-next-tree)
+	 ("h" . org-tree-slide-move-previous-tree)
+	 ("l" . org-tree-slide-move-next-tree)
 	 ;; ("w" . right-word)
          ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
 	 ("/" . evil-search-forward)
@@ -1106,15 +1125,14 @@
 	 ("n" . evil-search-next)
 	 ("N" . evil-search-previous)
 	 ;; ("n" . evil-normal-state)
-	 ;; ("i" . View-exit)  ;; like 'e'
          ("e" . View-scroll-line-forward)             ; scroll down (forward) - opposite to 'y'
 	 ;; ("f" . evil-scroll-page-down)
 	 ;; ("b" . evil-scroll-page-up)
          ;; ("0" . beginning-of-visual-line)
 	 ;; ("]" . switch-to-next-buffer)
 	 ;; ("[" . switch-to-prev-buffer)
-	 ("]" . org-tree-slide-move-next-tree)
-	 ("[" . org-tree-slide-move-previous-tree)
+	 ;; ("]" . org-tree-slide-move-next-tree)
+	 ;; ("[" . org-tree-slide-move-previous-tree)
 	 ;; ("}" . org-tree-slide-move-next-tree)
 	 ;; ("{" . org-tree-slide-move-previous-tree)
 	 ;; ("]" . org-next-visible-heading)
@@ -1123,8 +1141,10 @@
 	 ;; ("{" . org-previous-visible-heading)
 	 ;; ("{" . org-backward-element)
 	 ;; ("}" . org-forward-element)
-	 ("}" . olivetti-expand)
-	 ("{" . olivetti-shrink)
+	 ;; ("}" . olivetti-expand)
+	 ;; ("{" . olivetti-shrink)
+	 ("]" . olivetti-expand)
+	 ("[" . olivetti-shrink)
 	 ;; ("\\" . counsel-buffer-or-recentf)
 	 ;; ("\\" . imenu-list)
 	 ;; ("\\" . my-view-general-prefix)
@@ -1190,7 +1210,6 @@
 	 ;; ("t" . nil)
 	 ;; ("tp" . powerthesaurus-lookup-word-at-point)
 	 ;; ("td" . define-word-at-point)
-	 ("t" . my-org-targeting)
 
 	 ;; <ESCAPE> binidng 
          ;; ---------------
@@ -1214,10 +1233,11 @@
 
 	 ;; Additional-keys
 	 ;; -----------
-	 ("r" . revert-buffer)
+	 ;; ("r" . revert-buffer)
+	 ("r" . my-org-narrowing)
 	 ;; ("R" . revert-buffer)
-	 ;; ("r" . writeroom-mode)
-	 ("R" . writeroom-mode)
+	 ("r" . writeroom-mode)
+	 ;; ("R" . writeroom-mode)
 	 ;; ("a" . end-of-buffer)
 	 ;; ("a" . evil-goto-line)  ; end of line
 	 ("a" . ace-link)
@@ -1229,8 +1249,9 @@
 	 ;; ("x" . View-exit)  ;; like 'e'
 	 ;; ("z" . evil-exit-emacs-state)
 	 ;; ("z" . kill-current-buffer)  ; same as (s-k)
-	 ;; ("t" . org-tree-slide-mode)
-	 ("T" . org-tree-slide-mode)
+	 ("t" . org-tree-slide-mode)
+	 ;; ("T" . org-tree-slide-mode)
+	 ;; ("t" . my-org-targeting)
 	 ;; ("v" . ace-window)
 	 ("v" . evil-exit-emacs-state)
 	 ;; ("vi" . evil-exit-emacs-state)
@@ -1242,13 +1263,15 @@
 	 ("q" . kill-current-buffer)    ; same as (s-k)
 	 ;; ("q" . View-exit)
 	 ("x" . my-kill-current-buffer-and-window)
-	 ;; ("X" . my-kill-current-buffer-and-other-windows)
+	 ("X" . my-kill-current-buffer-and-other-windows)
 	 ("c" . recenter-top-bottom)
+	 ;; ("i" . View-exit)  ;; like 'e'
 	 ;; ("i" . my-indirect-buffer)
-	 ("i" . my-clone-indirect-buffer)
+	 ;; ("i" . my-clone-indirect-buffer)
 	 ;; ("i" . evil-insert-state)
 	 ("o" . my-org-indirect-buffer)
 	 ;; ("i" . org-narrow-to-subtree)
+	 ("i" . my-org-narrowing)
 	 ;; ("o" . widen)
 	 ;; ("ic" . my-clone-indirect-buffer)
 	 ;; ("io" . my-org-indirect-buffer)
@@ -1259,8 +1282,8 @@
 	 ("." . my-org-indirect-buffer)
 
 	 ;; olivetti
-	 (";" . olivetti-narrow-width)
-	 ("'" . olivetti-default-width)
+	 (";" . olivetti-narrow-width)  ; toggle function
+	 ;; ("'" . olivetti-default-width)  ; turn to toggle functionality
          )
   )
 
@@ -1486,11 +1509,12 @@
   )
 
 ;; Integrated to my-follow-mode 2021-05-17
-;; (defun my-kill-current-buffer-and-other-windows()
-;;   (interactive)
-;;   (kill-current-buffer)
-;;   (delete-other-windows)
-;;   )
+;; come again 2021-05-18
+(defun my-kill-current-buffer-and-other-windows()
+  (interactive)
+  (kill-current-buffer)
+  (delete-other-windows)
+  )
 
 
 ;; [ winner mode 2021-04-02
@@ -2597,24 +2621,36 @@
   ;; (setq olivetti-body-width 100)  ;; maximum
   (setq olivetti-minimum-body-width 30)
   :config
-  ;; functions by width
-  (defun olivetti-narrow-width ()
-    (interactive)
-    (olivetti-set-width 95)
-    ) 
-  (global-set-key (kbd "C-M-;") 'olivetti-narrow-width)
 
-  (defun olivetti-default-width ()
-    (interactive)
-    (olivetti-set-width 0.99)
-    ) 
-  (global-set-key (kbd "C-M-'") 'olivetti-default-width)
+  ;; functions by width
+  ;; (defun olivetti-narrow-width ()
+  ;;   (interactive)
+  ;;   (olivetti-set-width 95)
+  ;;   ) 
+  ;; (global-set-key (kbd "C-M-;") 'olivetti-narrow-width)
+
+  ;; (defun olivetti-default-width ()
+  ;;   (interactive)
+  ;;   (olivetti-set-width 0.99)
+  ;;   ) 
+  ;; (global-set-key (kbd "C-M-'") 'olivetti-default-width)
   ;; (global-set-key (kbd "C-M-]") 'olivetti-expand)
   ;; (global-set-key (kbd "C-M-[") 'olivetti-shrink)
   (global-set-key (kbd "C-M-}") 'olivetti-expand)
   (global-set-key (kbd "C-M-{") 'olivetti-shrink)
 )
 
+;; Improved by toggle option 2021-05-18
+(defun olivetti-narrow-width()
+  (interactive)
+  (if (get 'olivetti-narrow-width 'narrowed)
+      (progn
+	(olivetti-set-width 0.99)
+	(put 'olivetti-narrow-width 'narrowed nil))
+    (progn
+      (olivetti-set-width 95)
+      (put 'olivetti-narrow-width 'narrowed t))))
+(global-set-key (kbd "C-M-;") 'olivetti-narrow-width)
 
 ;; Undo-Tree Package 2021-02-13
 ;; ------------------------------
@@ -3436,8 +3472,9 @@ T - tag prefix
   ;; use a property “following”. Value is t or nil
   (if (get 'my-follow-mode 'following)
       (progn
-	(kill-current-buffer)
+	;; (kill-current-buffer)
 	(delete-other-windows)
+	(follow-mode 0)
 	(put 'my-follow-mode 'following nil))
     (progn
       (split-window-right)
@@ -3448,15 +3485,26 @@ T - tag prefix
       (put 'my-follow-mode 'following t))))
 
 
-(defun my-org-targeting()
+;; (defun my-org-targeting()
+;;   (interactive)
+;;   (if (get 'my-org-targeting 'targeting)
+;;       (progn
+;; 	(widen)
+;; 	(put 'my-org-targeting 'targeting nil))
+;;     (progn
+;;       (org-narrow-to-subtree)
+;;       (put 'my-org-targeting 'targeting t))))
+
+
+(defun my-org-narrowing()
   (interactive)
-  (if (get 'my-org-targeting 'targeting)
+  (if (get 'my-org-narrowing 'narrowing)
       (progn
 	(widen)
-	(put 'my-org-targeting 'targeting nil))
+	(put 'my-org-narrowing 'narrowing nil))
     (progn
       (org-narrow-to-subtree)
-      (put 'my-org-targeting 'targeting t))))
+      (put 'my-org-narrowing 'narrowing t))))
 
 ;; ===
 ;; EOF
