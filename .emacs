@@ -77,11 +77,11 @@
 ;; https://elpa.gnu.org/packages/adaptive-wrap.html
 ;; https://stackoverflow.com/questions/13559061/emacs-how-to-keep-the-indentation-level-of-a-very-long-wrapped-line
 ;; https://emacs.stackexchange.com/questions/15193/word-wrap-that-preserves-indent-from-previous-line
-(use-package adaptive-wrap
-  :ensure t
-  :init
-  (add-hook 'text-mode-hook 'adaptive-wrap-prefix-mode)
-  )
+;; (use-package adaptive-wrap
+;;   :ensure t
+;;   :init
+;;   (add-hook 'text-mode-hook 'adaptive-wrap-prefix-mode)
+;;   )
 
 ;; 2021-05-07
 ;; https://www.reddit.com/r/emacs/comments/n71hj2/python_how_would_you_configure_emacs_for_data/
