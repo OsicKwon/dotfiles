@@ -2452,7 +2452,8 @@
 ;; (define-key evil-normal-state-map (kbd "<tab>") 'evil-toggle-fold)
 
 ;; (define-key evil-normal-state-map (kbd "z")     'evil-emacs-state)
-(define-key evil-normal-state-map (kbd "ZQ")     'evil-emacs-state)  ; Same as Original Vim
+;; (define-key evil-normal-state-map (kbd "ZQ")     'evil-emacs-state)  ; Same as Original Vim
+(define-key evil-normal-state-map (kbd "ZQ")     'save-buffers-kill-emacs)  ; Same as Original Vim
 ;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
@@ -2668,7 +2669,7 @@
 (use-package olivetti
   :ensure t
   :init
-  (require 'olivetti)
+  ;; (require 'olivetti)  ; not start when emacs starting including minibuffer issues
   ;; (add-hook 'text-mode-hook 'olivetti-mode)
   ;; (add-hook 'prog-mode-hook 'olivetti-mode)
   (add-hook 'after-change-major-mode-hook 'olivetti-mode)  ; cover text-mode and prog-mode
