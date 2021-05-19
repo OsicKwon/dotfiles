@@ -162,13 +162,20 @@
 ;; https://elpa.gnu.org/packages/adaptive-wrap.html
 ;; https://stackoverflow.com/questions/13559061/emacs-how-to-keep-the-indentation-level-of-a-very-long-wrapped-line
 ;; https://emacs.stackexchange.com/questions/15193/word-wrap-that-preserves-indent-from-previous-line
+<<<<<<< HEAD
+;; (use-package adaptive-wrap
+;;   :ensure t
+;;   :init
+;;   (add-hook 'text-mode-hook 'adaptive-wrap-prefix-mode)
+;;   )
+=======
 (use-package adaptive-wrap
   :ensure t
   :init
   ;; (add-hook 'text-mode-hook 'adaptive-wrap-prefix-mode)  ; interfered with org-mode paragraph indentation 2021-05-14
   (add-hook 'markdown-mode-hook 'adaptive-wrap-prefix-mode)   ; use markdown mode only
   )
-
+>>>>>>> 7d8f2a9225c3cdf8d787dbca07be6b6502c85652
 
 ;; 2021-05-07
 ;; https://www.reddit.com/r/emacs/comments/n71hj2/python_how_would_you_configure_emacs_for_data/
