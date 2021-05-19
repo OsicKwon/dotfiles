@@ -794,7 +794,9 @@
 ;; == imenu-list 2021-05-02 ==
 (use-package imenu-list
   :ensure t
-  :init (imenu-list-minor-mode)  ; for org file (pre-loading)
+  :init
+  (require 'imenu-list)  ; pre-loading required like this for org files ??
+  ;; (imenu-list-minor-mode)  ; for org file (pre-loading)
   :bind ("C-." . imenu-list-minor-mode)
   :config
   ;; https://github.com/bmag/imenu-list
@@ -805,7 +807,7 @@
   ;; https://github.com/bmag/imenu-list/blob/1447cdc8c0268e332fb4adc0c643702245d31bde/imenu-list.el#L431
   (setq imenu-list-size 0.20)  ; default 0.2, in case of long head, use setq-local variable in the file that you want
   (setq org-imenu-depth 3)     ; put outside of imenu-list package (bulit-in variable)
-  (imenu-list-smart-toggle)    ; toggle off after :init (imenu-list-minor-mode)
+  ;; (imenu-list-smart-toggle)    ; toggle off after :init (imenu-list-minor-mode)
   )
 
 
@@ -1099,14 +1101,16 @@
 	 ;; ("k" . previous-line)
 	 ;; ("j" . evil-next-visual-line)
 	 ;; ("k" . evil-previous-visual-line)
-	 ;; ("j" . View-scroll-line-forward)
-	 ;; ("k" . View-scroll-line-backward)
+	 ("j" . View-scroll-line-forward)
+	 ("k" . View-scroll-line-backward)
 	 ;; ("j" . evil-forward-paragraph)
 	 ;; ("k" . evil-backward-paragraph)
-	 ("j" . forward-paragraph)
-	 ("k" . backward-paragraph)
-	 ("J" . org-next-visible-heading)       ; required in Org 9.4+
-	 ("K" . org-previous-visible-heading)   ; required in Org 9.4+
+	 ;; ("j" . forward-paragraph)
+	 ;; ("k" . backward-paragraph)
+	 ("J" . forward-paragraph)
+	 ("K" . backward-paragraph)
+	 ;; ("J" . org-next-visible-heading)       ; required in Org 9.4+
+	 ;; ("K" . org-previous-visible-heading)   ; required in Org 9.4+
 	 ;; ("l" . org-next-visible-heading)       ; required in Org 9.4+
 	 ;; ("h" . org-previous-visible-heading)   ; required in Org 9.4+
 	 ;; ("h" . backward-sentence)
