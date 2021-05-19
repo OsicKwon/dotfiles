@@ -144,6 +144,7 @@
   :ensure t
   :disabled
   :init
+  (require 'pyvenv)
   (setenv "WORKON_HOME" "~/.venvs/")
   :config
   ;; (pyvenv-mode t)
@@ -165,6 +166,7 @@
 (use-package adaptive-wrap
   :ensure t
   :init
+  (require 'adaptive-wrap)
   ;; (add-hook 'text-mode-hook 'adaptive-wrap-prefix-mode)  ; interfered with org-mode paragraph indentation 2021-05-14
   (add-hook 'markdown-mode-hook 'adaptive-wrap-prefix-mode)   ; use markdown mode only
   )
@@ -175,6 +177,7 @@
 (use-package ein
   :ensure t
   :init 
+  (require 'ein)
   (setq ein:polymode t
         ein:output-area-inlined-images t)
   )
@@ -277,7 +280,9 @@
 ;; just use winner-mode instead
 (use-package writeroom-mode
   :ensure t
-  :init (setq writeroom-width 0.97)
+  :init
+  (require 'writeroom-mode)
+  (setq writeroom-width 0.97)
   (add-hook 'writeroom-mode-hook (lambda () (display-line-numbers-mode -1)))
   :bind (:map writeroom-mode-map
               ;; ("C-c C-w <" . #'writeroom-decrease-width)
@@ -440,21 +445,29 @@
 (use-package all-the-icons-ivy-rich
   :ensure t
   :disabled
-  :init (all-the-icons-ivy-rich-mode 1))
+  :init
+  (require 'all-the-icons-ivy-rich)
+  (all-the-icons-ivy-rich-mode 1))
 
 
 ;; == indirect edit in selection 2021-04-23 ==
 ;; so powerful !!
 ;; https://github.com/Fanael/edit-indirect
-(use-package edit-indirect :ensure t)
-(global-set-key (kbd "C-t") 'edit-indirect-region)
+(use-package edit-indirect
+  :ensure t
+  :init
+  (require 'edit-indirect)
+  (global-set-key (kbd "C-t") 'edit-indirect-region)
+  )
 
 ;; == ranger 2021-04-22 ==
 (use-package ranger
   :ensure t
-  :init   (message "### ranger loaded in :init option")
-  :config (progn (message "### ranger loaded in :config option"))
-  :preface (progn (message "### ranger loaded in :preface option"))
+  :init
+  (require 'ranger)
+  (message ">>> ranger loaded in :init option")
+  :config (progn (message ">>> ranger loaded in :config option"))
+  :preface (progn (message ">>> ranger loaded in :preface option"))
 
   )
 
@@ -483,7 +496,9 @@
 ;; Required :: M-x all-the-icons-install-fonts
 (use-package neotree 
   :ensure t
-  :init (message ">>> neotree loaded")
+  :init
+  (require 'neotree)
+  (message ">>> neotree loaded")
   :hook (neotree-mode . (lambda () (olivetti-set-width 0.97)))
   :config
   ;; (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
@@ -650,6 +665,7 @@
 ;; (require 'ox-tufte)
 (use-package ox-tufte
   :ensure t
+  :init (require 'ox-tufte)
   :disabled
   )
 ;; FYI > other recommendation for export HTML css
@@ -659,7 +675,7 @@
 
 ;; == centered cursor mode 2021-04-19 ==
 ;; https://github.com/andre-r/centered-cursor-mode.el
-(use-package centered-cursor-mode :ensure t)
+(use-package centered-cursor-mode :ensure t :init (require 'centered-cursor-mode))
 
 
 ;; == Paredit 2021-04-19 ==
@@ -679,8 +695,8 @@
 (use-package esup
   :ensure t
   ;; https://blog.d46.us/advanced-emacs-startup/
-  :init   ; Code to run immediately
-  :config ; Code to run after the package is loaded
+  :init (require 'esup)   ; Code to run immediately
+  :config                 ; Code to run after the package is loaded
   ;; https://github.com/jschaf/esup/issues/60#issuecomment-461217431
   (setq esup-user-init-file (file-truename "~/dotfiles/.emacs"))
   ;; Work around a bug where esup tries to step into the byte-compiled
@@ -696,13 +712,15 @@
 ;; Collection of Ridiculously Useful eXtensions for Emacs
 ;; https://emacsredux.com/blog/2020/12/08/favorite-emacs-packages/ 
 ;; https://github.com/bbatsov/crux
-;; (use-package crux :ensure t)
+;; (use-package crux :ensure t :init (require 'crux))
 
 
 ;; == highlight under cursor 2021-04-18 ==
 ;; https://xenodium.com/ <- Powerful Emacs Contents
 ;; https://xenodium.com/emacs-highlight-symbol-mode/
-(use-package highlight-symbol :ensure t
+(use-package highlight-symbol
+  :ensure t
+  :init (require 'highlight-symbol)
   :config
   (if (display-graphic-p)
       (set-face-attribute 'highlight-symbol-face nil :background "light yellow" :foreground "#FA009A" :underline t)
@@ -721,8 +739,11 @@
 ;; pros :: Nice-looking
 ;; cons :: Interupting column align such as ':tag'
 (setq org-hide-emphasis-markers t)
-(use-package org-appear :ensure t)
-(add-hook 'org-mode-hook 'org-appear-mode)
+(use-package org-appear
+  :ensure t
+  :init (require 'org-appear)
+  :config (add-hook 'org-mode-hook 'org-appear-mode)
+  )
 
 
 ;; == org-bullets ==
@@ -740,6 +761,7 @@
 ;; == rainbow-delimiters ==
 (use-package rainbow-delimiters
   :ensure t
+  :init (require 'rainbow-delimiters)
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
   )
@@ -752,8 +774,8 @@
 
 
 ;; == dimmer (not needed) ==
-;; (require 'dimmer)
 ;; (use-package dimmer :ensure t)
+;; (require 'dimmer)
 ;;  (dimmer-configure-which-key)
 ;;  (dimmer-configure-helm)
 ;;  (dimmer-mode t)
@@ -774,7 +796,7 @@
 
 
 ;; minimap mode 2021-04-13
-(use-package minimap :ensure t)
+(use-package minimap :ensure t :init (require 'minimap))
 ;; for org-mode
 ;; https://github.com/dengste/minimap/issues/22
 (setq minimap-major-modes '(prog-mode text-mode))
@@ -910,6 +932,7 @@
 ;; == elfeed 2021-04-09 ==
 (use-package elfeed
   :ensure t
+  :init (require 'elfeed)
   :bind (
 	 ;; ("j" . next-line)      ; interfered minibuffer
 	 ;; ("k" . previous-line)  ; interfered minibuffer
@@ -986,6 +1009,7 @@
 ;; http://pragmaticemacs.com/emacs/read-your-rss-feeds-in-emacs-with-elfeed/
 (use-package elfeed-org
   :ensure t
+  :init (require 'elfeed-org)
   :config
   (elfeed-org)
   (setq rmh-elfeed-org-files (list "~/Documents/nvALT/setx-elfeed.txt")))
@@ -1018,6 +1042,8 @@
 ;; https://gist.github.com/ivan-krukov/63a586f2121519ca51b201c634402a84
 
 (use-package view
+  ;; :ensure t  ; built-in
+  :init (require 'view)
   :config
   (setq view-read-only t) ;; enter view-mode for read-only file
   ;; https://github.com/jwiegley/use-package/issues/455#issuecomment-347750540
@@ -1545,6 +1571,7 @@
 (use-package general
   :ensure t
   :disabled
+  :init (require 'general)
   :config (general-define-key
   :states '(normal visual insert emacs)
   ;; :prefix "SPC"
@@ -1575,6 +1602,7 @@
 (use-package evil-goggles
   :ensure t
   :disabled
+  :init (require 'evil-goggles)
   :config
   (evil-goggles-mode)
 
@@ -1611,6 +1639,7 @@
 ;; (require 'engine-mode)
 (use-package engine-mode
   :ensure t
+  :init (require 'engine-mode)
   :defer 1 ; do not load right at startup
   :init
   (engine-mode t)
@@ -1665,6 +1694,7 @@
 ;; https://xenodium.com/trying-out-emacs-pdf-tools/
 (use-package pdf-tools
   :ensure t
+  :init (require 'pdf-tools)
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :config
   (pdf-tools-install)
@@ -1790,6 +1820,7 @@
 ;; (require 'writegood-mode)
 (use-package writegood-mode
   :ensure t
+  :init (require 'writegood-mode)
   :config
     (add-hook 'text-mode-hook 'writegood-mode)
     (add-hook 'org-mode-hook 'writegood-mode)
@@ -1848,6 +1879,7 @@
 ;; (require 'web-mode)
 (use-package web-mode
   :ensure t
+  :init (require 'web-mode)
   :config
     (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -1960,6 +1992,7 @@
 (use-package dashboard
   :ensure t
   :disabled
+  :init (require 'dashboard)
   :config
   (dashboard-setup-startup-hook)
 
@@ -2216,6 +2249,7 @@
 ;; == which-key package 2021-01-28 ==
 (use-package which-key
   :ensure t
+  :init (require 'which-key)
   :config (which-key-mode)
   )
 
@@ -2235,7 +2269,7 @@
 ;; (require 'deft)
 (use-package deft
   :ensure t
-  :init
+  :init (require 'deft)
   :config
   (setq deft-extensions '("txt" "tex" "org" "md"))
   (setq deft-directory "~/Documents/nvALT/")
@@ -2265,6 +2299,7 @@
 ;; (evil-mode 1)
 (use-package evil
   :ensure t
+  :init (require 'evil)
   :config
     (evil-mode 1)
 )
@@ -2515,6 +2550,7 @@
   :ensure t
   :defer 1
   :init
+  (require 'key-chord)
   ;; https://www.emacswiki.org/emacs/KeyChord
   ;; Max time delay between two key presses to be considered a key chord
   (setq key-chord-two-keys-delay 0.2) ; default 0.1
@@ -2530,11 +2566,23 @@
   )
 
 
-;; avy (like ace-jump and easy-motion in vim) 2021-03-04
-;; (global-set-key (kbd "C-M-s") 'avy-goto-char)
-(global-set-key (kbd "C-:") 'avy-goto-char)
-;; (global-set-key (kbd "M-s") 'avy-goto-char)
-;; (global-set-key (kbd "C-'") 'avy-goto-char-2)
+;; == ace-link ==
+(use-package ace-link
+  :ensure t
+  :init (require 'ace-link)
+  )
+
+
+;; == avy (like ace-jump and easy-motion in vim) 2021-03-04 ==
+(use-package avy
+  :ensure t
+  :init (require 'avy)
+  :config
+  ;; (global-set-key (kbd "C-M-s") 'avy-goto-char)
+  (global-set-key (kbd "C-:") 'avy-goto-char)
+  ;; (global-set-key (kbd "M-s") 'avy-goto-char)
+  ;; (global-set-key (kbd "C-'") 'avy-goto-char-2)
+  )
 
 
 ;;----------------------------------------------------------------
@@ -2548,7 +2596,7 @@
 ;;   "ace-jump-mode"
 ;;   "Emacs quick move minor mode"
 ;;   t)
-(use-package ace-jump-mode :ensure t)
+(use-package ace-jump-mode :ensure t :init (require 'ace-jump-mode))
 ;; you can select the key you prefer to
 ;; (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 ;; (define-key global-map (kbd "C-c SPC") 'ace-jump-char-mode)
@@ -2588,6 +2636,7 @@
 (use-package projectile
   :ensure t
   :init
+  (require 'projectile)
   (projectile-mode +1)
   :config
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
@@ -2606,6 +2655,7 @@
   :ensure t
   :disabled
   :init
+  (require 'helm-projectile)
   ;; (setq helm-projectile-fuzzy-match nil)
   ;; (helm-projectile-on)
   :config
@@ -2615,10 +2665,10 @@
 
 ;; == Olivetti 2021-02-11 ==
 ;; to remove boundry -> '(fringe-mode 0 nil (fringe)) in `(custom-set-variables` lines in front of this file. 
-;; (require 'olivetti)
 (use-package olivetti
   :ensure t
   :init
+  (require 'olivetti)
   ;; (add-hook 'text-mode-hook 'olivetti-mode)
   ;; (add-hook 'prog-mode-hook 'olivetti-mode)
   (add-hook 'after-change-major-mode-hook 'olivetti-mode)  ; cover text-mode and prog-mode
@@ -2815,7 +2865,9 @@ T - tag prefix
 ;; 2. show exact position(column) in a line
 (use-package beacon
   :ensure t
-  :init (message ">>> beacon-mode activated")
+  :init
+  (require 'beacon)
+  (message ">>> beacon-mode activated")
   :config
   (beacon-mode 1)                             ; Interupted `org-tree-slide-mode`
   (setq beacon-size 5)
@@ -2837,10 +2889,10 @@ T - tag prefix
 ;; (add-hook 'dired-mode-hook 'org-download-enable)
 ;; (setq-default org-download-image-dir "~/Pictures")
 ;; https://github.com/abo-abo/org-download/issues/95#issue-413481682
-;; (require 'org-download)
 (use-package org-download
   :ensure t
   :init
+  (require 'org-download)
   :config
   ;; Drag and drop to Dired
   (add-hook 'dired-mode-hook 'org-download-enable)
@@ -2855,10 +2907,10 @@ T - tag prefix
 ;; calendar view 2021-03-05
 ;; to show calendar :: M-x cfw:open-calendar-buffer
 ;; (require 'calfw)
-(use-package calfw :ensure t)
+(use-package calfw :ensure t :init (require 'calfw))
 ;; For Org User (https://github.com/kiwanami/emacs-calfw#for-org-users)
 ;; (require 'calfw-org)
-(use-package calfw-org :ensure t)
+(use-package calfw-org :ensure t :init (require 'calfw-org))
 ;; Then, M-x cfw:open-org-calendar
 
 ;; For iCal(Google Calendar) Users: (https://github.com/kiwanami/emacs-calfw#for-ical-google-calendar-users)
@@ -3182,7 +3234,9 @@ T - tag prefix
 
 ;; https://blog.sumtypeofway.com/posts/emacs-config.html
 (use-package ivy
+  :ensure t
   :diminish
+  :init (require 'ivy)
   :custom
   ;; (ivy-height 25)
   (ivy-use-virtual-buffers t)
@@ -3260,6 +3314,8 @@ T - tag prefix
 ;; (ivy-rich-mode 1)
 
 ;; (use-package ivy-rich
+;;   :ensure t
+;;   :init (require 'ivy-rich)
 ;;   :config
 ;;   (ivy-rich-modify-column 'ivy-switch-buffer
 ;;                           'ivy-rich-switch-buffer-major-mode
@@ -3269,7 +3325,9 @@ T - tag prefix
   :ensure t
   :hook (ivy-mode . ivy-rich-mode)
   :custom (ivy-rich-path-style 'abbrev)
-  :init (ivy-rich-mode 1)
+  :init
+  (require 'ivy-rich)
+  (ivy-rich-mode 1)
   :config
   (ivy-rich-modify-columns
    'ivy-switch-buffer
@@ -3301,7 +3359,7 @@ T - tag prefix
 ;; smex with ido for M-x :: consider helm or counsel alternatively
 ;; 2021-01-07
 ;; (require 'smex)
-(use-package smex :ensure t)
+(use-package smex :ensure t :init (require 'smex))
 (smex-initialize)
 ;; (global-set-key (kbd "M-x") 'smex)
 ;; (global-set-key (kbd "M-X") 'smex-major-mode-commands)
@@ -3316,7 +3374,7 @@ T - tag prefix
 
 ;; Multiple-Cursors(mc/) Package 2020-12-19
 ;; (require 'multiple-cursors)
-(use-package multiple-cursors :ensure t)
+(use-package multiple-cursors :ensure t :init (require 'multiple-cursors))
 ; for multiple-line
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 ; for keyword
@@ -3356,6 +3414,7 @@ T - tag prefix
   :after python
   :defer t
   :init
+  (require 'elpy)
   ;; (elpy-enable)
   (add-hook 'python-mode-hook #'elpy-enable)
   )
