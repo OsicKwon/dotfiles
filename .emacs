@@ -1149,18 +1149,18 @@
 	 ;; ---------
 	 ;; ("j" . forward-line)
 	 ;; ("k" . previous-line)
-	 ("j" . evil-next-visual-line)
-	 ("k" . evil-previous-visual-line)
+	 ;; ("j" . evil-next-visual-line)
+	 ;; ("k" . evil-previous-visual-line)
 	 ;; ("j" . View-scroll-line-forward)
 	 ;; ("k" . View-scroll-line-backward)
-	 ;; ("j" . evil-forward-paragraph)
-	 ;; ("k" . evil-backward-paragraph)
+	 ("j" . evil-forward-paragraph)
+	 ("k" . evil-backward-paragraph)
 	 ;; ("j" . forward-paragraph)
 	 ;; ("k" . backward-paragraph)
-	 ("J" . forward-paragraph)
-	 ("K" . backward-paragraph)
-	 ;; ("J" . org-next-visible-heading)       ; required in Org 9.4+
-	 ;; ("K" . org-previous-visible-heading)   ; required in Org 9.4+
+	 ;; ("J" . forward-paragraph)
+	 ;; ("K" . backward-paragraph)
+	 ("J" . org-next-visible-heading)       ; required in Org 9.4+
+	 ("K" . org-previous-visible-heading)   ; required in Org 9.4+
 	 ;; ("l" . org-next-visible-heading)       ; required in Org 9.4+
 	 ;; ("h" . org-previous-visible-heading)   ; required in Org 9.4+
 	 ;; ("h" . backward-sentence)
