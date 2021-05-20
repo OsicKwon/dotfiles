@@ -71,6 +71,25 @@
 ;; --------------------
 
 
+;; == hl-todo mode (highlight todo) 2021-05-20 ==
+;; https://github.com/tarsius/hl-todo
+(use-package hl-todo
+  :ensure t
+  :init
+  (require 'hl-todo)
+  (setq hl-todo-keyword-faces
+		'(
+		  ("HOLD"   . "gray")
+		  ("WAIT"   . "gray")
+		  ("SCHED"   . "gray")
+		  ("DOING"   . "blue")
+		  ("EXPIRED"   . "dark gray")
+		))
+  :config
+  (add-hook 'org-mode-hook 'hl-todo-mode)
+  )
+
+
 ;; == evil-numbers :: ctrl a, ctrl x 2021-05-18 =
 ;; https://emacs.stackexchange.com/questions/41919/have-ctrl-a-increase-a-number-just-like-in-vim
 (use-package evil-numbers
@@ -598,7 +617,7 @@
 ;; (run-at-time 500 500 (lambda () (message "run-at-time: Think Big, Start Small, Move Fast ")))
 (run-with-timer 500 500 (lambda () (message "run-with-timer: Think Big, Start Small, Move Fast ")))
 ;; (run-with-idle-timer 30 30 (lambda () (message "run-with-idle-timer: Start at the end")))
-(run-with-idle-timer 30 30 (lambda () (message "run-with-idle-timer: Just Do It from Starting at The End")))
+(run-with-idle-timer 300 300 (lambda () (message "run-with-idle-timer: Just Do It from Starting at The End")))
 
 
 ;; == Link Abbreviation 2021-04-19 ==
