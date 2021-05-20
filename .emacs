@@ -84,11 +84,16 @@
   (define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)  ; confilicted with C-x 3
   )
 
+;; https://www.xemacs.org/Links/tutorials_1.html
+(setq-default tab-width 4)
+
 ;; my-tab 2021-05-18
 (defun my-tab()
   (interactive)
   (back-to-indentation)
-  (indent-for-tab-command)
+  ;; (indent-for-tab-command)
+  ;; https://www.reddit.com/r/emacs/comments/1vz4ax/what_is_the_correct_way_to_insert_a_tab_midline/
+  (insert "\t")
   ;; (end-of-visual-line)
   )
 ;; https://stackoverflow.com/questions/29468271/emacs-how-to-bind-key-only-in-regular-buffers-and-not-in-the-minibuffer
@@ -1042,7 +1047,7 @@
 ;; https://gist.github.com/ivan-krukov/63a586f2121519ca51b201c634402a84
 
 (use-package view
-  ;; :ensure t  ; built-in
+  :ensure nil  ; built-in
   :init (require 'view)
   :config
   (setq view-read-only t) ;; enter view-mode for read-only file
@@ -2093,7 +2098,12 @@
 
 
 ;; == indent-guide package 2021-02-24 ==
-(indent-guide-global-mode)
+(use-package indent-guide
+  :ensure t
+  :disabled
+  :init (require 'indent-guide)
+  :config (indent-guide-global-mode)
+  )
 
 
 ;; Others
@@ -2936,8 +2946,10 @@ T - tag prefix
 
 
 ;; built-in org-mouse turn on
-(require `org-mouse)
-;; (use-package org-mouse :ensure t)
+(use-package org-mouse
+  :ensure nil  ; built-in
+  :init (require `org-mouse)
+  )
 
 (setq org-log-done 'time)                                     ; Show Closed(DONE) date in ORG-mode
 (global-set-key "\C-ca" 'org-agenda)                          ; Org Agenda View shortcut
