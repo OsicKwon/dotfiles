@@ -1203,7 +1203,7 @@
 	 ;; ("\\" . counsel-buffer-or-recentf)
 	 ;; ("\\" . imenu-list)
 	 ;; ("\\" . my-view-general-prefix)
-	 ("m" . imenu-list-smart-toggle)
+	 ;; ("m" . imenu-list-smart-toggle)
 	 ;; ("m" . imenu-list)
 	 ;; ("m" . imenu-list-minor-mode)
 	 ;; ("m" . counsel-M-x)
@@ -1333,8 +1333,9 @@
 
 	 ;; ("," . org-narrow-to-subtree)
 	 ;; ("." . widen)
-	 ("," . my-clone-indirect-buffer)
-	 ("." . my-org-indirect-buffer)
+	 ;; ("," . my-clone-indirect-buffer)
+	 ;; ("." . my-org-indirect-buffer)
+	 ("." . imenu-list-smart-toggle)
 
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)  ; toggle function
@@ -1778,12 +1779,12 @@
  '(minimap-mode nil)
  '(org-adapt-indentation nil)
  '(org-agenda-files
-   '("~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/projx-IncomeTax.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-start-on-weekday 0)
  '(org-agenda-time-grid
    '((daily today require-timed)
-     (800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000)
-     "......" "----------------"))
+	 (800 900 1000 1100 1200 1300 1400 1500 1600 1700 1800 1900 2000)
+	 "......" "----------------"))
  '(org-agenda-use-time-grid t)
  '(org-babel-python-command "python3")
  '(org-confirm-babel-evaluate nil)
@@ -1793,10 +1794,10 @@
  '(org-fontify-whole-heading-line t)
  '(org-link-frame-setup
    '((vm . vm-visit-folder-other-frame)
-     (vm-imap . vm-visit-imap-folder-other-frame)
-     (gnus . org-gnus-no-new-news)
-     (file . find-file-other-window)
-     (wl . wl-other-frame)))
+	 (vm-imap . vm-visit-imap-folder-other-frame)
+	 (gnus . org-gnus-no-new-news)
+	 (file . find-file-other-window)
+	 (wl . wl-other-frame)))
  '(package-selected-packages
    '(evil-leader workgroups2 workgroups cm-mode all-the-icons neotree ranger org-crypt key-chord dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
@@ -2089,6 +2090,11 @@
         (add-hook 'LaTeX-mode-hook 'turn-on-flyspell)  ; for AUCTeX
       )
 )
+
+
+;; https://stackoverflow.com/questions/16084022/emacs-flyspell-deactivate-c-key-binding
+(eval-after-load "flyspell"
+  '(define-key flyspell-mode-map (kbd "C-.") nil))
 
 
 ;; show relative number line in programming modes
