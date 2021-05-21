@@ -70,6 +70,12 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; == reveal-in-osx-finder 2021-05-20 ==
+;; for current opend file
+;; https://stackoverflow.com/questions/20510333/in-emacs-how-to-show-current-file-in-finder
+(use-package reveal-in-osx-finder
+  :ensure t
+  :init (require 'reveal-in-osx-finder))
 
 ;; == hl-todo mode (highlight todo) 2021-05-20 ==
 ;; https://github.com/tarsius/hl-todo
@@ -83,7 +89,7 @@
 		  ("WAIT"   . "gray")
 		  ("SCHED"   . "gray")
 		  ("DOING"   . "blue")
-		  ("EXPIRED"   . "dark gray")
+		  ("EXPIRED"   . "orange")
 		))
   :config
   (add-hook 'org-mode-hook 'hl-todo-mode)
@@ -971,15 +977,27 @@
 
 ;; https://emacs.stackexchange.com/questions/2440/elfeed-mark-all-messages-as-read
 (defun elfeed-mark-all-as-read ()
-      (interactive)
-      (mark-whole-buffer)
-      (elfeed-search-untag-all-unread))
+  (interactive)
+  (mark-whole-buffer)
+  (elfeed-search-untag-all-unread))
+
+
+(defun my-elfeed-follow-view()
+  (interactive)
+  (elfeed-eww-open)
+  (my-follow-mode)
+  (sleep-for 0.5)
+  (olivetti-set-width 0.90)
+  )
+
 
 (define-key elfeed-search-mode-map (kbd "R") 'elfeed-mark-all-as-read)
+(define-key elfeed-search-mode-map (kbd "SPC") 'my-elfeed-follow-view)
 
 ;; get idea from https://noonker.github.io/posts/2020-04-22-elfeed/
 (define-key elfeed-search-mode-map (kbd "j") 'next-line)
 (define-key elfeed-search-mode-map (kbd "k") 'previous-line)
+;;
 (define-key elfeed-search-mode-map (kbd "T") 'elfeed-search-first-entry)
 (define-key elfeed-search-mode-map (kbd "B") 'elfeed-search-last-entry)
 ;; like Vim
@@ -1570,6 +1588,8 @@
   (interactive)
   (kill-current-buffer)
   (delete-other-windows)
+  (follow-mode 0)                      ; for my-follow-mode
+  (put 'my-follow-mode 'following nil) ; for my-follow-mode
   )
 
 
@@ -3584,6 +3604,7 @@ T - tag prefix
       (balance-windows)
       (follow-mode 1)
       (view-mode 1)
+	  (olivetti-set-width 0.90)
       (put 'my-follow-mode 'following t))))
 
 
