@@ -632,10 +632,13 @@
 ;; https://yiufung.net/post/org-mode-hidden-gems-pt3/
 ;; https://orgmode.org/manual/Link-Abbreviations.html
 (setq org-link-abbrev-alist
-      '(
-	("google" . "https://www.google.com/search?q=")
-	)
-      )
+	  '(
+		("google" . "https://www.google.com/search?q=")
+		;; https://emacs.stackexchange.com/questions/18688/radio-targets-in-external-org-mode-file-for-glossary-application
+		("fin" . "file:~/Documents/nvALT/projx-CPA_CFA.txt::")
+		("eng" . "file:~/Documents/nvALT/mainx-engx-EnglishLibrary.txt")
+		)
+	  )
 
 
 ;; Demote sequence for list bullets 2021-04-19
