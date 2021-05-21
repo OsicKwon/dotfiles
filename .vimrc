@@ -210,8 +210,8 @@ set omnifunc=syntaxcomplete#Complete
 syntax on
 
 " let g:indentLine_char = '¦'
-" let g:indentLine_char = '┆'
-let g:indentLine_char = '┊'
+let g:indentLine_char = '┆'
+" let g:indentLine_char = '┊'
 " let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:searchfold_maxdepth=1
 let g:solarized_termcolors=256

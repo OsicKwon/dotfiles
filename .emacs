@@ -70,6 +70,7 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+
 ;; == reveal-in-osx-finder 2021-05-20 ==
 ;; for current opend file
 ;; https://stackoverflow.com/questions/20510333/in-emacs-how-to-show-current-file-in-finder
@@ -636,7 +637,7 @@
 		("google" . "https://www.google.com/search?q=")
 		;; https://emacs.stackexchange.com/questions/18688/radio-targets-in-external-org-mode-file-for-glossary-application
 		("fin" . "file:~/Documents/nvALT/projx-CPA_CFA.txt::")
-		("eng" . "file:~/Documents/nvALT/mainx-engx-EnglishLibrary.txt")
+		("eng" . "file:~/Documents/nvALT/mainx-engx-EnglishLibrary.txt::")
 		)
 	  )
 
