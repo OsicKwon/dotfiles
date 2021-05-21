@@ -638,6 +638,7 @@
 		;; https://emacs.stackexchange.com/questions/18688/radio-targets-in-external-org-mode-file-for-glossary-application
 		("fin" . "file:~/Documents/nvALT/projx-CPA_CFA.txt::")
 		("eng" . "file:~/Documents/nvALT/mainx-engx-EnglishLibrary.txt::")
+		;; ("eng" . "file:~/Documents/nvALT/mainx-engx-EnglishLibrary.txt::*")  ; create a header without asking only if not exist
 		)
 	  )
 
@@ -863,7 +864,6 @@
   ;; https://github.com/bmag/imenu-list/blob/1447cdc8c0268e332fb4adc0c643702245d31bde/imenu-list.el#L431
   (setq imenu-list-size 0.20)  ; default 0.2, in case of long head, use setq-local variable in the file that you want
   (setq org-imenu-depth 3)     ; put outside of imenu-list package (bulit-in variable)
-  ;; (imenu-list-smart-toggle)    ; toggle off after :init (imenu-list-minor-mode)
   )
 
 
@@ -3636,3 +3636,7 @@ T - tag prefix
 ;; ===
 ;; EOF
 ;; ===
+
+;; local variables:
+;; eval: (message "test")
+;; end:
