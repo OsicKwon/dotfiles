@@ -40,15 +40,15 @@
 ;; https://github.com/raxod502/straight.el#getting-started
 (defvar bootstrap-version)
 (let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
+	   (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+	  (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
+	(with-current-buffer
+		(url-retrieve-synchronously
+		 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+		 'silent 'inhibit-cookies)
+	  (goto-char (point-max))
+	  (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
 ;; Users of Emacs versions >= 27 will want to add:
@@ -71,6 +71,15 @@
 ;; --------------------
 
 
+;; == read-aloud 2021-05-22 ==
+;; https://github.com/gromnitsky/read-aloud.el
+(use-package read-aloud
+  :ensure t
+  :init (require 'read-aloud)
+  :config (setq read-aloud-engine "say") ; for mac
+  )
+
+
 ;; == reveal-in-osx-finder 2021-05-20 ==
 ;; for current opend file
 ;; https://stackoverflow.com/questions/20510333/in-emacs-how-to-show-current-file-in-finder
@@ -86,9 +95,9 @@
   (require 'hl-todo)
   (setq hl-todo-keyword-faces
 		'(
-		  ("HOLD"   . "gray")
-		  ("WAIT"   . "gray")
-		  ("SCHED"   . "gray")
+		  ("HOLD"   . "dark gray")
+		  ("WAIT"   . "dark gray")
+		  ("SCHED"   . "dark gray")
 		  ("DOING"   . "blue")
 		  ("EXPIRED"   . "orange")
 		))
