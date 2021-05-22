@@ -3638,5 +3638,5 @@ T - tag prefix
 ;; ===
 
 ;; local variables:
-;; eval: (message "test")
+;; eval: (message "test 2")
 ;; end:
