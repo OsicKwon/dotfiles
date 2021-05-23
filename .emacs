@@ -70,6 +70,95 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; xr
+
+
+;; == org-super-agenda 2021-05-22 ==
+(use-package org-super-agenda
+  :ensure t
+  :init (require 'org-super-agenda)
+  :config
+  (org-super-agenda-mode)
+  ;; https://github.com/alphapapa/org-super-agenda/blob/master/examples.org
+  ;; https://archive.baty.net/2019/org-super-agenda/
+  ;; (setq org-super-agenda-groups '(
+  ;; 								  ;; (:auto-group t) 
+  ;; 								  ;; ;; (:name "Today" :time-grid t :scheduled today)
+  ;; 								  (:name "= Due today =" :deadline today :scheduled today)
+  ;; 								  ;; ;; (:name "Important" :priority "A")
+  ;; 								  (:name "= Overdue =" :deadline past :scheduled past)
+  ;; 								  (:name "= Due soon =" :deadline future)
+  ;; 								  ;; (:name "= Waiting =" :todo "WAIT")
+  ;; 								  ))
+  ;; https://github.com/alphapapa/org-super-agenda/issues/72
+  (setq org-agenda-custom-commands
+		'(("z" "Super view"
+		   ((agenda "" ((org-agenda-span 'day)
+						(org-super-agenda-groups
+						 '(
+						   (:name "Today"
+								  :time-grid t
+								  :date today
+								  :todo "TODAY"
+								  :scheduled today
+								  :order 1)
+						   (:name "= Overdue =" :deadline past :scheduled past)
+						   (:name "= Due soon =" :deadline future :order 2)
+						   ))))
+			(alltodo "" ((org-agenda-overriding-header "")
+						 (org-super-agenda-groups
+						  '((:name "Important"
+								   :tag "Important"
+								   :priority "A"
+								   :order 2)
+							(:name "DOING"
+								   :todo "DOING"
+								   :face (:underline t)
+								   :order 5)
+							;; (:name "TODO"
+							;; 	   :todo "TODO"
+							;; 	   :order 5)
+							(:name ">>> Next to do <<<"
+								   :todo ("TODO" "NEXT")
+								   :order 5)
+							(:name "Personal"
+								   :tag "@personal"
+								   :order 10)
+							(:name "Work"
+								   :tag "@work"
+								   :order 15)
+							(:name "To read"
+								   :tag "Read"
+								   :order 30)
+							(:name "Waiting"
+								   :todo "WAITING"
+								   :order 40)
+							(:name "Wait"
+								   :todo "WAIT"
+								   :order 40)
+							(:name "Due Today"
+								   :deadline today
+								   :order 2)
+							))))))))
+  ;; (setq org-super-agenda-header-separator "_")
+  )
+
+
+;; == org-sidebar 2021-05-22 ==
+;; conflicted with olivetti
+;; a possible solution ? - https://www.emacswiki.org/emacs/TruncateLines
+(use-package org-sidebar
+  :ensure t
+  :init (require 'org-sidebar)
+  )
+
+
+;; == wordnut (wordnet) 2021-05-22 ==
+(use-package wordnut
+  :ensure t
+  :init (require 'wordnut)
+  )
+
 
 ;; == read-aloud 2021-05-22 ==
 ;; https://github.com/gromnitsky/read-aloud.el
@@ -863,7 +952,8 @@
   :init
   (require 'imenu-list)  ; pre-loading required like this for org files ??
   ;; (imenu-list-minor-mode)  ; for org file (pre-loading)
-  :bind ("C-." . imenu-list-minor-mode)
+  ;; :bind ("C-." . imenu-list-minor-mode)
+  :bind ("C-M-." . imenu-list)  ; toggle not available
   :config
   ;; https://github.com/bmag/imenu-list
   (setq imenu-list-focus-after-activation t)
@@ -873,8 +963,8 @@
   ;; https://github.com/bmag/imenu-list/blob/1447cdc8c0268e332fb4adc0c643702245d31bde/imenu-list.el#L431
   (setq imenu-list-size 0.20)  ; default 0.2, in case of long head, use setq-local variable in the file that you want
   (setq org-imenu-depth 3)     ; put outside of imenu-list package (bulit-in variable)
+  (add-hook 'imenu-list-minor-mode-hook (lambda () (olivetti-set-width 0.95)))
   )
-
 
 
 ;; Local Variables Auto-Load without Confirmation 2021-04-12
@@ -1366,7 +1456,8 @@
 	 ;; ("." . widen)
 	 ;; ("," . my-clone-indirect-buffer)
 	 ;; ("." . my-org-indirect-buffer)
-	 ("." . imenu-list-smart-toggle)
+	 ;; ("." . imenu-list-smart-toggle)  ; toggle available
+	 ("." . imenu-list)  ; toggle not available
 
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)  ; toggle function
@@ -2126,8 +2217,8 @@
 
 
 ;; https://stackoverflow.com/questions/16084022/emacs-flyspell-deactivate-c-key-binding
-(eval-after-load "flyspell"
-  '(define-key flyspell-mode-map (kbd "C-.") nil))
+;; (eval-after-load "flyspell"
+;;   '(define-key flyspell-mode-map (kbd "C-.") nil))
 
 
 ;; show relative number line in programming modes
