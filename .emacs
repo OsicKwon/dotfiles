@@ -72,6 +72,28 @@
 
 ;; xr
 
+;; 2021-05-24
+(defun my-paragraph-forward()
+  (interactive)
+  ;; https://emacs.stackexchange.com/questions/53167/check-whether-buffer-is-in-org-mode
+  (if (string-equal major-mode "org-mode")
+	  (org-next-visible-heading 1)
+	(progn
+	  (forward-paragraph)
+	  (next-line)
+	  )))
+
+
+(defun my-paragraph-backward()
+  (interactive)
+  (if (string-equal major-mode "org-mode")
+	  (org-previous-visible-heading 1)
+	(progn
+	  (backward-paragraph 2)
+	  (next-line)
+	  (beginning-of-visual-line)
+	  )))
+
 
 ;; == org-super-agenda 2021-05-22 ==
 (use-package org-super-agenda
@@ -962,8 +984,9 @@
   ;; (setq imenu-list-auto-resize t)
   ;; https://github.com/bmag/imenu-list/blob/1447cdc8c0268e332fb4adc0c643702245d31bde/imenu-list.el#L431
   (setq imenu-list-size 0.20)  ; default 0.2, in case of long head, use setq-local variable in the file that you want
-  (setq org-imenu-depth 3)     ; put outside of imenu-list package (bulit-in variable)
+  (setq org-imenu-depth 2)     ; put outside of imenu-list package (bulit-in variable) recommended
   (add-hook 'imenu-list-minor-mode-hook (lambda () (olivetti-set-width 0.95)))
+  (add-hook 'imenu-list-major-mode-hook (lambda () (olivetti-set-width 0.95)))
   )
 
 
@@ -1274,37 +1297,41 @@
 	 ;; ("k" . evil-previous-visual-line)
 	 ;; ("j" . View-scroll-line-forward)
 	 ;; ("k" . View-scroll-line-backward)
-	 ("j" . evil-forward-paragraph)
-	 ("k" . evil-backward-paragraph)
+	 ;; ("j" . evil-forward-paragraph)
+	 ;; ("k" . evil-backward-paragraph)
+	 ("j" . my-paragraph-forward)
+	 ("k" . my-paragraph-backward)
 	 ;; ("j" . forward-paragraph)
 	 ;; ("k" . backward-paragraph)
-	 ;; ("J" . forward-paragraph)
-	 ;; ("K" . backward-paragraph)
-	 ("J" . org-next-visible-heading)       ; required in Org 9.4+
-	 ("K" . org-previous-visible-heading)   ; required in Org 9.4+
+	 ("J" . forward-paragraph)
+	 ("K" . backward-paragraph)
+	 ;; ("J" . org-next-visible-heading)       ; required in Org 9.4+
+	 ;; ("K" . org-previous-visible-heading)   ; required in Org 9.4+
 	 ;; ("l" . org-next-visible-heading)       ; required in Org 9.4+
 	 ;; ("h" . org-previous-visible-heading)   ; required in Org 9.4+
 	 ;; ("h" . backward-sentence)
-         ;; ("l" . forward-sentence)
+	 ;; ("l" . forward-sentence)
+	 ("H" . backward-sentence)
+	 ("L" . forward-sentence)
 	 ;; ("h" . beginning-of-visual-line)
-         ;; ("l" . end-of-visual-line)
+	 ;; ("l" . end-of-visual-line)
 	 ;; ("h" . left-word)
-         ;; ("l" . right-word)
+	 ;; ("l" . right-word)
 	 ;; ("h" . evil-backward-WORD-begin)
-         ;; ("l" . evil-forward-WORD-begin)
+	 ;; ("l" . evil-forward-WORD-begin)
 	 ("h" . org-tree-slide-move-previous-tree)
 	 ("l" . org-tree-slide-move-next-tree)
 	 ;; ("w" . right-word)
-         ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
+	 ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
 	 ("/" . evil-search-forward)
 	 ("?" . evil-search-backward)
 	 ("n" . evil-search-next)
 	 ("N" . evil-search-previous)
 	 ;; ("n" . evil-normal-state)
-         ("e" . View-scroll-line-forward)             ; scroll down (forward) - opposite to 'y'
+	 ("e" . View-scroll-line-forward)             ; scroll down (forward) - opposite to 'y'
 	 ;; ("f" . evil-scroll-page-down)
 	 ;; ("b" . evil-scroll-page-up)
-         ;; ("0" . beginning-of-visual-line)
+	 ;; ("0" . beginning-of-visual-line)
 	 ;; ("]" . switch-to-next-buffer)
 	 ;; ("[" . switch-to-prev-buffer)
 	 ;; ("]" . org-tree-slide-move-next-tree)
@@ -1331,7 +1358,7 @@
 	 ;; ("m" . evil-exit-emacs-state)
 
 	 ;; Vim :: power g
-         ;; ---------------
+	 ;; ---------------
 	 ;; ("g" . nil)  ;; interupting 'gcc' comment key binding 2021-04-21
 	 ;; ("gg" . beginning-of-buffer)
 	 ;; ("g" . beginning-of-buffer)
@@ -1382,13 +1409,13 @@
 	 ;; ("oc" . org-capture)
 
 	 ;; Trans Functions
-         ;; ------------
+	 ;; ------------
 	 ;; ("t" . nil)
 	 ;; ("tp" . powerthesaurus-lookup-word-at-point)
 	 ;; ("td" . define-word-at-point)
 
 	 ;; <ESCAPE> binidng 
-         ;; ---------------
+	 ;; ---------------
 	 ("<escape>" . nil)
 	 ;; ("<escape>" . keyboard-quit)
 	 ("<escape> <escape>" . keyboard-quit)
@@ -2647,7 +2674,7 @@
 (define-key evil-normal-state-map ")" 'forward-sentence)
 
 
-;; evil undo 2021-02-06
+;; == evil undo 2021-02-06 ==
 ;; https://emacs.stackexchange.com/questions/3358/how-can-i-get-undo-behavior-in-evil-similar-to-vims
 (setq evil-want-fine-undo 't)
 (setq evil-want-fine-undo 'fine)
@@ -2867,16 +2894,21 @@
       (put 'olivetti-narrow-width 'narrowed t))))
 (global-set-key (kbd "C-M-;") 'olivetti-narrow-width)
 
-;; Undo-Tree Package 2021-02-13
+;; == Undo-Tree Package 2021-02-13 ==
 ;; ------------------------------
 ;; prevent accidents :: Redo(C-?)
 ;; ------------------------------
-(global-undo-tree-mode)                                      
-(setq undo-tree-visualizer-timestamps t)
-(setq undo-tree-visualizer-diff t)
-(setq undo-tree-auto-save-history t)
-;; https://emacs.stackexchange.com/questions/26993/saving-persistent-undo-to-a-single-directory-alist-format
-(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+(use-package undo-tree
+  :ensure t
+  :init (require 'undo-tree)
+  :config
+  (global-undo-tree-mode)                                      
+  (setq undo-tree-visualizer-timestamps t)
+  (setq undo-tree-visualizer-diff t)
+  (setq undo-tree-auto-save-history t)
+  ;; https://emacs.stackexchange.com/questions/26993/saving-persistent-undo-to-a-single-directory-alist-format
+  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+  )
 
 
 ;; ---------------------------------------------------
@@ -3308,8 +3340,8 @@ T - tag prefix
 
 ;; scroll window up/down by one line
 ;; http://pragmaticemacs.com/emacs/scrolling-and-moving-by-line/
-(global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
-(global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
+;; (global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
+;; (global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
 
 
 ;; org refile-multi_level 2020-12-12
@@ -3518,9 +3550,9 @@ T - tag prefix
 (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
 
 
-;; smex with ido for M-x :: consider helm or counsel alternatively
+;; == smex ==
+;; with ido for M-x :: consider helm or counsel alternatively
 ;; 2021-01-07
-;; (require 'smex)
 (use-package smex :ensure t :init (require 'smex))
 (smex-initialize)
 ;; (global-set-key (kbd "M-x") 'smex)
@@ -3701,6 +3733,7 @@ T - tag prefix
 	;; (kill-current-buffer)
 	(delete-other-windows)
 	(follow-mode 0)
+	(olivetti-set-width 0.99)
 	(put 'my-follow-mode 'following nil))
     (progn
       (split-window-right)
@@ -3726,10 +3759,11 @@ T - tag prefix
 (defun my-org-narrowing()
   (interactive)
   (if (get 'my-org-narrowing 'narrowing)
-      (progn
-	(widen)
-	(put 'my-org-narrowing 'narrowing nil))
-    (progn
+	  (progn
+		(widen)
+		(recenter)
+		(put 'my-org-narrowing 'narrowing nil))
+	(progn
       (org-narrow-to-subtree)
       (put 'my-org-narrowing 'narrowing t))))
 
