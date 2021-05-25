@@ -118,14 +118,13 @@
 		   ((agenda "" ((org-agenda-span 'day)
 						(org-super-agenda-groups
 						 '(
-						   (:name "Today"
+						   (:name "TODAY"
 								  :time-grid t
 								  :date today
 								  :todo "TODAY"
 								  :scheduled today
+								  :deadline today
 								  :order 1)
-						   (:name "= Overdue =" :deadline past :scheduled past)
-						   (:name "= Due soon =" :deadline future :order 2)
 						   ))))
 			(alltodo "" ((org-agenda-overriding-header "")
 						 (org-super-agenda-groups
@@ -133,25 +132,21 @@
 								   :tag "Important"
 								   :priority "A"
 								   :order 2)
+							(:name "OVERDUE"   :scheduled past :deadline past)
+							(:name "DUE SOON"  :deadline future :scheduled future :todo "SCHED" :order 4)
 							(:name "DOING"
 								   :todo "DOING"
-								   :face (:underline t)
+								   ;; :face (:underline t)
 								   :order 5)
 							;; (:name "TODO"
 							;; 	   :todo "TODO"
 							;; 	   :order 5)
-							(:name ">>> Next to do <<<"
+							(:name "NEXT ACTIONS"
 								   :todo ("TODO" "NEXT")
 								   :order 5)
-							(:name "Personal"
-								   :tag "@personal"
-								   :order 10)
 							(:name "Work"
 								   :tag "@work"
 								   :order 15)
-							(:name "To read"
-								   :tag "Read"
-								   :order 30)
 							(:name "Waiting"
 								   :todo "WAITING"
 								   :order 40)
@@ -163,7 +158,25 @@
 								   :order 2)
 							))))))))
   ;; (setq org-super-agenda-header-separator "_")
+  (setq org-super-agenda-unmatched-name "OTHER ITEMS")
   )
+
+;; == org-agenda 2021-05-24 ==
+
+;; ref : https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html
+;; (setq org-agenda-custom-commands
+;;       '(
+;; 		("c" "Simple agenda view"
+;;          ((agenda "")
+;;           (alltodo "")))
+;; 		("x" "Simple agenda view"
+;;          ((agenda "")
+;;           (alltodo "")))
+;; 		))
+
+;; (setq org-agenda-block-separator nil)
+(setq org-agenda-hide-tags-regexp ".")
+(setq org-agenda-block-separator "=============================================")
 
 
 ;; == org-sidebar 2021-05-22 ==
@@ -3096,7 +3109,7 @@ T - tag prefix
 )
 
 
-;; calendar view 2021-03-05
+;; == calendar view 2021-03-05 ==
 ;; to show calendar :: M-x cfw:open-calendar-buffer
 ;; (require 'calfw)
 (use-package calfw :ensure t :init (require 'calfw))
@@ -3106,9 +3119,10 @@ T - tag prefix
 ;; Then, M-x cfw:open-org-calendar
 
 ;; For iCal(Google Calendar) Users: (https://github.com/kiwanami/emacs-calfw#for-ical-google-calendar-users)
-(require 'calfw-ical)
+(use-package calfw-ical :ensure t :init (require 'calfw-ical))
 ;; not working for now 2021-04-12
-;; (cfw:open-ical-calendar "https://calendar.google.com/calendar/ical/osic.kwon%40gmail.com/public/basic.ics")
+;; (cfw:open-ical-calendar "https://calendar.google.com/calendar/ical/en.canadian%23holiday%40group.v.calendar.google.com/public/basic.ics")
+(setq cfw:display-calendar-holidays nil)
 
 
 
@@ -3766,6 +3780,17 @@ T - tag prefix
 	(progn
       (org-narrow-to-subtree)
       (put 'my-org-narrowing 'narrowing t))))
+
+
+(defun my-english-workgroup()
+  (interactive)
+  (split-window-right)
+  (other-window 1)
+  (find-file "~/Documents/nvALT/mainx-engx-EnglishLibrary.txt")
+  )
+(global-set-key (kbd "C-c w e") 'my-english-workgroup)
+
+
 
 ;; ===
 ;; EOF
