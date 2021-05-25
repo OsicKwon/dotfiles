@@ -169,7 +169,7 @@
 ;; 		("c" "Simple agenda view"
 ;;          ((agenda "")
 ;;           (alltodo "")))
-;; 		("x" "Simple agenda view"
+;; 		("z" "Super view"
 ;;          ((agenda "")
 ;;           (alltodo "")))
 ;; 		))
@@ -177,6 +177,15 @@
 ;; (setq org-agenda-block-separator nil)
 (setq org-agenda-hide-tags-regexp ".")
 (setq org-agenda-block-separator "=============================================")
+
+;; not working properly as of 2021-05-25
+;; (add-hook 'org-agenda-mode-hook
+;;           (lambda ()
+;;             (local-set-key (kbd "j") #'org-agenda-next-line)
+;;             (local-set-key (kbd "k") #'org-agenda-previous-line)
+;;             (local-set-key (kbd "J") #'org-agenda-forward-block)
+;;             (local-set-key (kbd "K") #'org-agenda-backward-block)
+;; 			))
 
 
 ;; == org-sidebar 2021-05-22 ==
@@ -1844,6 +1853,8 @@
   (defengine google-news "https://news.google.com/search?q=%s")
   (defengine google-trans "https://translate.google.ca/?sl=auto&tl=ko&text=%s&op=translate")
   (defengine google-map "https://www.google.com/maps/search/%s")
+  (defengine google-gmail "https://mail.google.com/mail/ca/u/0/#search/%s")
+
 
   (defengine naver "https://m.search.naver.com/search.naver?sm=mtp_hty.top&where=m&query=%s")
   (defengine koDic "http://dic.impact.pe.kr/ecmaster-cgi/search.cgi?bool=and&word=yes&kwd=%s")
