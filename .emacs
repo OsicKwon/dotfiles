@@ -72,6 +72,20 @@
 
 ;; xr
 
+(defun my-forward-sentence()
+  (interactive)
+  (forward-sentence 1)
+  (forward-to-word 1)
+  ;; (evil-forward-section-begin)
+  (mark-end-of-sentence 1)
+  ;; (sleep-for 1)
+  ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Waiting.html 
+  (sit-for 1)  ; update display
+  ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Reading-One-Event.html
+  (if (read-event) (keyboard-quit))
+  )
+
+
 ;; 2021-05-24
 (defun my-paragraph-forward()
   (interactive)
@@ -132,30 +146,30 @@
 								   :tag "Important"
 								   :priority "A"
 								   :order 2)
+							(:name "Due Today"
+								   :deadline today
+								   :order 2)
 							(:name "OVERDUE"   :scheduled past :deadline past)
-							(:name "DUE SOON"  :deadline future :scheduled future :todo "SCHED" :order 4)
 							(:name "DOING"
 								   :todo "DOING"
 								   ;; :face (:underline t)
-								   :order 5)
+								   :order 13)
+							(:name "DUE SOON"  :deadline future :scheduled future :todo "SCHED" :order 14)
 							;; (:name "TODO"
 							;; 	   :todo "TODO"
 							;; 	   :order 5)
 							(:name "NEXT ACTIONS"
 								   :todo ("TODO" "NEXT")
-								   :order 5)
-							(:name "Work"
-								   :tag "@work"
 								   :order 15)
+							;; (:name "Work"
+							;; 	   :tag "@work"
+							;; 	   :order 15)
 							(:name "Waiting"
 								   :todo "WAITING"
 								   :order 40)
 							(:name "Wait"
 								   :todo "WAIT"
 								   :order 40)
-							(:name "Due Today"
-								   :deadline today
-								   :order 2)
 							))))))))
   ;; (setq org-super-agenda-header-separator "_")
   (setq org-super-agenda-unmatched-name "OTHER ITEMS")
@@ -471,7 +485,8 @@
               ("C-c C-w SPC" . #'writeroom-toggle-mode-line))
         (:map global-map
               ;; ("C-c r" . #'writeroom-mode)))
-              ("C-M-w" . #'writeroom-mode)))
+              ;; ("C-M-w" . #'writeroom-mode)))
+              ("C-M-r" . #'writeroom-mode)))
               ;; ("C-r" . #'writeroom-mode)))
 
 
@@ -1313,6 +1328,7 @@
 
          ;; Vim style
 	 ;; ---------
+	 ;; - j/k -
 	 ;; ("j" . forward-line)
 	 ;; ("k" . previous-line)
 	 ;; ("j" . evil-next-visual-line)
@@ -1329,20 +1345,25 @@
 	 ("K" . backward-paragraph)
 	 ;; ("J" . org-next-visible-heading)       ; required in Org 9.4+
 	 ;; ("K" . org-previous-visible-heading)   ; required in Org 9.4+
+	 ;; - h/l -
 	 ;; ("l" . org-next-visible-heading)       ; required in Org 9.4+
 	 ;; ("h" . org-previous-visible-heading)   ; required in Org 9.4+
-	 ;; ("h" . backward-sentence)
-	 ;; ("l" . forward-sentence)
-	 ("H" . backward-sentence)
-	 ("L" . forward-sentence)
+	 ("h" . backward-sentence)
+	 ("l" . forward-sentence)
+	 ;; ("H" . backward-sentence)
+	 ;; ("L" . forward-sentence)
+	 ;; ("L" . my-forward-sentence)
 	 ;; ("h" . beginning-of-visual-line)
 	 ;; ("l" . end-of-visual-line)
 	 ;; ("h" . left-word)
 	 ;; ("l" . right-word)
 	 ;; ("h" . evil-backward-WORD-begin)
 	 ;; ("l" . evil-forward-WORD-begin)
-	 ("h" . org-tree-slide-move-previous-tree)
-	 ("l" . org-tree-slide-move-next-tree)
+	 ;; ("h" . org-tree-slide-move-previous-tree)
+	 ;; ("l" . org-tree-slide-move-next-tree)
+	 ("H" . org-tree-slide-move-previous-tree)
+	 ("L" . org-tree-slide-move-next-tree)
+	 ;; ---
 	 ;; ("w" . right-word)
 	 ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
 	 ("/" . evil-search-forward)
@@ -1511,6 +1532,7 @@
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)  ; toggle function
 	 ;; ("'" . olivetti-default-width)  ; turn to toggle functionality
+	 ("'" . my-forward-sentence)
          )
   )
 
