@@ -80,9 +80,11 @@
   (mark-end-of-sentence 1)
   ;; (sleep-for 1)
   ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Waiting.html 
-  (sit-for 1)  ; update display
+  ;; (sit-for 1)  ; update display
   ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Reading-One-Event.html
-  (if (read-event) (keyboard-quit))
+  ;; (setq ring-bell-function 'ignore)
+  ;; (if (read-event) (progn (interactive) (keyboard-quit) (lambda () (setq ring-bell-function t))))
+  ;; (if (read-event) (keyboard-quit))
   )
 
 
@@ -151,7 +153,7 @@
 								   :order 2)
 							(:name "OVERDUE"   :scheduled past :deadline past)
 							(:name "DOING"
-								   :todo "DOING"
+								   :todo ("DOING" "REVIEW" "RESUME")
 								   ;; :face (:underline t)
 								   :order 13)
 							(:name "DUE SOON"  :deadline future :scheduled future :todo "SCHED" :order 14)
@@ -208,6 +210,9 @@
 (use-package org-sidebar
   :ensure t
   :init (require 'org-sidebar)
+  :config
+  (global-set-key (kbd "C-M-s") 'org-sidebar-toggle)
+  (global-set-key (kbd "C-M-e") 'org-sidebar-tree-toggle)
   )
 
 
@@ -580,10 +585,11 @@
 ;; https://www.reddit.com/r/emacs/comments/7au3hj/how_do_you_manage_your_emacs_windows_and_stay_sane/
 (use-package workgroups2
   :ensure t
+  :disabled  ; give up 2021-05-27 - messed orders
   :init
   (require 'workgroups2)
   ;; Change prefix key (before activating WG)
-  (setq wg-prefix-key (kbd "C-c z"))  ; not work for me
+  ;; (setq wg-prefix-key (kbd "C-c z"))  ; not work for me
   ;; Change workgroups session file
   (setq wg-session-file "~/.emacs.d/.emacs_workgroups")
   ;; (workgroups-mode 1)   ; put this one at the bottom of .emacs
@@ -597,10 +603,11 @@
 
 ;; [Replace to] Workgroup2 << == Purpose 2021-04-26 ==
 ;; https://github.com/bmag/emacs-purpose
+;; confilict with ivy-counsel
 ;; (require 'window-purpose)
 ;; (use-package window-purpose :ensure t)
 ;; (purpose-mode)
-;; (define-key purpose-mode-map (kbd "C-x b") nil)  ;; conflicted with ivy-switch-view
+;; ;; (define-key purpose-mode-map (kbd "C-x b") nil)  ;; conflicted with ivy-switch-view
 ;; (add-to-list 'purpose-user-mode-purposes '(<major-mode> . <purpose>))
 ;; (add-to-list 'purpose-user-name-purposes '(<name> . <purpose>))
 ;; (add-to-list 'purpose-user-regexp-purposes '(<pattern> . <purpose>))
@@ -610,7 +617,11 @@
 ;; [Replace to] Workgroup2 << == Burly :: save window configuration in bookmark 2021-04-26 ==
 ;; https://www.reddit.com/r/emacs/comments/jf9kqn/wip_burlyel_save_and_restore_buffers_and_window/
 ;; https://github.com/alphapapa/burly.el
-;; (use-package burly :ensure t)
+(use-package burly
+  :ensure t
+  :disabled  ; org heading not found issues
+  :init (require 'burly)
+  )
 
 ;; [Replace to] Workgroup2 << altrnatives :: desktop-save-mode, register, ivy-view, bookmark+
 ;; instead of desktop-save-mode belows:
@@ -620,12 +631,6 @@
 ;; https://emacs.stackexchange.com/questions/19190/desktop-save-mode-fails-to-save-window-layout 
 ;; https://jloubert.com/blog/simple-views/
 ;; (add-to-list 'desktop-globals-to-save 'ivy-views)
-
-
-;; == split window and then select other window 2021-04-25 ==
-;; https://stackoverflow.com/questions/6464738/how-can-i-switch-focus-after-buffer-split-in-emacs
-;; (global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
-;; (global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
 
 
 ;; == all-the-icons-ivy-rich 2021-04-23 ==
@@ -1976,7 +1981,7 @@
  '(minimap-mode nil)
  '(org-adapt-indentation nil)
  '(org-agenda-files
-   '("~/Documents/nvALT/projx-IncomeTax.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/projx-JobBoard2021.txt" "~/Documents/nvALT/projx-IncomeTax.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-start-on-weekday 0)
  '(org-agenda-time-grid
    '((daily today require-timed)
@@ -2000,6 +2005,7 @@
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
  '(show-paren-mode t)
+ '(wg-special-buffer-serdes-functions '(wg-serialize-comint-buffer))
  '(writeroom-restore-window-config t))
 
 
@@ -2417,6 +2423,12 @@
 ;; Conflicted to ORG-MODE (kbd "S-C- ... ")(SHIFT+CONTRL) / (kbd "M-S- ... ")(Meta+SHIFT)  2021-02-28
 
 
+;; == split window and then select other window 2021-04-25 ==
+;; https://stackoverflow.com/questions/6464738/how-can-i-switch-focus-after-buffer-split-in-emacs
+(global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
+(global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
+
+
 ;; == ace-window 2021-02-23 ==
 (global-set-key (kbd "M-o") 'ace-window)
 ;; (global-set-key (kbd "M-w") 'ace-swap-window)
@@ -2545,6 +2557,7 @@
 ;; https://evil.readthedocs.io/en/latest/hooks.html
 (setq original-background (face-attribute 'default :background))
 (setq original-foreground (face-attribute 'default :foreground))
+(setq original-hl-line-background (face-attribute 'hl-line :background))
 
 ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "gray")))
 ;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
@@ -2569,12 +2582,13 @@
       (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light gray")))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "lightgray")))
       (add-hook 'evil-normal-state-exit-hook (lambda () (hl-line-mode 0)))
+      ;; (add-hook 'evil-normal-state-exit-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background original-hl-line-background)))
       (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :background original-background)))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightgray")))
       ;; (add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color original-background)))
       ;; (add-hook 'evil-normal-state-exit-hook (lambda () (set-foreground-color original-foreground)))
       ;;
-      ;; =OPERATOR=
+      ;; <OPERATOR>
       ;; (add-hook 'evil-operator-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
       ;; (add-hook 'evil-operator-state-entry-hook (lambda () (set-background-color "gray")))
       ;;
@@ -3186,6 +3200,12 @@ T - tag prefix
 (add-to-list 'org-emphasis-alist '("~" (:foreground "red3")))
 (add-to-list 'org-emphasis-alist '("/" (:foreground "dark blue" :slant italic)))
 
+;; priorities to '#Z'
+(setq org-highest-priority ?A
+      org-default-priority ?B
+      org-lowest-priority  ?Z
+)
+
 ;; (setq org-emphasis-alist
 ;;       '(
 ;; 	("~" (:foreground "red3"))
@@ -3283,19 +3303,19 @@ T - tag prefix
       ;; https://www.youtube.com/watch?v=qCdScs4YO8k
       ("d" "Demo")
 
-      ("da" "A option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
+      ("da" "A source" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
        "* %^{Initial Text} src: %a  %?")
 
       ("db" "B option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
        "* %^{Initial Text|Opt1|Opt2|Opt3} %?")
 
-      ("dc" "C option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
+      ("dc" "C option and scheduled" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
        "* %^{Initial Text|Opt1|Opt2|Opt3} \n SCEHDULED: %^t \n Some test heare %?")
 
-      ("dd" "D option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
+      ("dd" "D empty line 2" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
        "** %? " :empty-lines 2)
 
-      ("de" "E option" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
+      ("de" "E clipboard and sources" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Demo")
        "** demo heading \n area: %i \n\n clipboard: %c \n\n source: %a" :empty-lines 2)
      )
   )
@@ -3824,6 +3844,40 @@ T - tag prefix
 (global-set-key (kbd "C-c w e") 'my-english-workgroup)
 
 
+;; https://github.com/abo-abo/swiper/issues/1079
+;; (defun peng-save-ivy-views ()
+;; (interactive)
+;; (with-temp-file "~/.emacs.d/ivy-views"
+;; (prin1 ivy-views (current-buffer))
+;; (message "save ivy-views to ~/.emacs.d/ivy-views")))
+
+;; (defun peng-load-ivy-views ()
+;; (interactive)
+;; (setq ivy-views
+;; (with-temp-buffer
+;; (insert-file-contents "~/.emacs.d/ivy-views")
+;; (read (current-buffer))))
+;; (message "load ivy-views"))
+
+;; https://raw.githubusercontent.com/pengpengxp/.emacs.d/ubuntu16.04/lisp/init-ivy.el
+;; (defun peng-save-ivy-views ()
+;;   (interactive)
+;;   (with-temp-file "~/.emacs.d/ivy-views"
+;; 	(prin1 ivy-views (current-buffer))
+;; 	(message "save ivy-views to ~/.emacs.d/ivy-views")))
+;; (defun peng-load-ivy-views ()
+;;   (interactive)
+;;   (setq ivy-views
+;; 		(with-temp-buffer
+;; 		  (insert-file-contents "~/.emacs.d/ivy-views")
+;; 		  (read (current-buffer))))
+;;   (message "load ivy-views"))
+;; (defun peng-clear-ivy-views ()
+;;   (interactive)
+;;   (setq ivy-views nil))
+;; ;;; add auto save
+;; (add-hook 'kill-emacs-hook #'(lambda () (peng-save-ivy-views)))
+;; (add-hook 'emacs-startup-hook #'(lambda () (peng-load-ivy-views)))
 
 ;; ===
 ;; EOF

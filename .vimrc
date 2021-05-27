@@ -129,7 +129,6 @@ Plugin 'tpope/vim-repeat'
 " Plugin 'gcmt/wildfire.vim'             " good but conflict with Tagbar keys like <C-m>|<enter>
 " Plugin 'shougo/neocomplete.vim'        " lua required
 " Plugin 'valloric/youcompleteme'        " gave up due to too-hard to insall 2020-11-20
-" Plugin 'davidhalter/jedi-vim'          " not working - hard to solve 2020-11-20
 " Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
 Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'terryma/vim-expand-region'
@@ -1205,9 +1204,9 @@ autocmd BufEnter *.sh    colorscheme PaperColor | set background=dark | set nosp
 autocmd BufEnter *.py    colorscheme PaperColor | set background=dark | set nospell
 autocmd BufEnter *.vimrc colorscheme PaperColor | set background=dark
 
-autocmd BufEnter *.php colorscheme Pencil | set background=dark
-autocmd BufEnter *.html colorscheme Pencil | set background=dark
-autocmd BufEnter *.phtml colorscheme Pencil | set background=dark
+autocmd BufEnter *.php   colorscheme molokai | set background=dark
+autocmd BufEnter *.html  colorscheme molokai | set background=dark
+autocmd BufEnter *.phtml colorscheme molokai | set background=dark
 
 
 "---------------
