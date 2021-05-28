@@ -72,6 +72,18 @@
 
 ;; xr
 
+;; == perspective 2021-05-27 ==
+;; https://github.com/nex3/perspective-el
+(use-package perspective
+  :ensure t
+  :disabled  ; little weired
+  :init (require 'perspective)
+  :bind
+  ("C-x C-b" . persp-list-buffers)   ; or use a nicer switcher, see below
+  :config
+  (persp-mode))
+
+
 (defun my-forward-sentence()
   (interactive)
   (forward-sentence 1)
@@ -585,7 +597,7 @@
 ;; https://www.reddit.com/r/emacs/comments/7au3hj/how_do_you_manage_your_emacs_windows_and_stay_sane/
 (use-package workgroups2
   :ensure t
-  :disabled  ; give up 2021-05-27 - messed orders
+  :disabled  ; can't customize what I want
   :init
   (require 'workgroups2)
   ;; Change prefix key (before activating WG)
@@ -619,7 +631,6 @@
 ;; https://github.com/alphapapa/burly.el
 (use-package burly
   :ensure t
-  :disabled  ; org heading not found issues
   :init (require 'burly)
   )
 
@@ -628,6 +639,7 @@
 ;; https://www.reddit.com/r/emacs/comments/171me2/auto_save_and_restore_sessions/
 ;; https://bmag.github.io/2015/12/26/desktop.html
 ;; (setq desktop-path '("~/.emacs.d/.cache/"))
+;; (desktop-save-mode 1)
 ;; https://emacs.stackexchange.com/questions/19190/desktop-save-mode-fails-to-save-window-layout 
 ;; https://jloubert.com/blog/simple-views/
 ;; (add-to-list 'desktop-globals-to-save 'ivy-views)
@@ -2210,7 +2222,7 @@
 ;; (recentf-mode 1)
 ;; (recentf-open-files)  ; run when starting emacs
 ;; (global-set-key "\C-xf" 'recentf-open-files)
-;; (setq recentf-auto-cleanup 'never)
+(setq recentf-auto-cleanup 'never)
 
 
 ;; == Dashboard package 2021-03-12 ==
@@ -2425,8 +2437,8 @@
 
 ;; == split window and then select other window 2021-04-25 ==
 ;; https://stackoverflow.com/questions/6464738/how-can-i-switch-focus-after-buffer-split-in-emacs
-(global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
-(global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
+;; (global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
+;; (global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
 
 
 ;; == ace-window 2021-02-23 ==
@@ -3859,12 +3871,14 @@ T - tag prefix
 ;; (read (current-buffer))))
 ;; (message "load ivy-views"))
 
-;; https://raw.githubusercontent.com/pengpengxp/.emacs.d/ubuntu16.04/lisp/init-ivy.el
+
+;; ;; https://raw.githubusercontent.com/pengpengxp/.emacs.d/ubuntu16.04/lisp/init-ivy.el
 ;; (defun peng-save-ivy-views ()
 ;;   (interactive)
 ;;   (with-temp-file "~/.emacs.d/ivy-views"
 ;; 	(prin1 ivy-views (current-buffer))
 ;; 	(message "save ivy-views to ~/.emacs.d/ivy-views")))
+
 ;; (defun peng-load-ivy-views ()
 ;;   (interactive)
 ;;   (setq ivy-views
@@ -3872,12 +3886,15 @@ T - tag prefix
 ;; 		  (insert-file-contents "~/.emacs.d/ivy-views")
 ;; 		  (read (current-buffer))))
 ;;   (message "load ivy-views"))
+
 ;; (defun peng-clear-ivy-views ()
 ;;   (interactive)
 ;;   (setq ivy-views nil))
+
 ;; ;;; add auto save
 ;; (add-hook 'kill-emacs-hook #'(lambda () (peng-save-ivy-views)))
 ;; (add-hook 'emacs-startup-hook #'(lambda () (peng-load-ivy-views)))
+
 
 ;; ===
 ;; EOF
