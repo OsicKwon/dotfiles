@@ -160,6 +160,7 @@
 								  :scheduled today
 								  :deadline today
 								  :order 1)
+						   (:discard (:anything t))
 						   ))))
 			(alltodo "" ((org-agenda-overriding-header "")
 						 (org-super-agenda-groups
@@ -170,18 +171,24 @@
 							(:name "Due Today"
 								   :deadline today
 								   :order 2)
-							(:name "OVERDUE"   :scheduled past :deadline past)
+							(:name "OVERDUE"   
+								   :scheduled past
+								   :deadline past)
 							(:name "DOING"
 								   :todo ("DOING" "REVIEW" "RESUME")
 								   ;; :face (:underline t)
-								   :order 13)
-							(:name "DUE SOON"  :deadline future :scheduled future :todo "SCHED" :order 14)
+								   :order 15)
+							(:name "DUE SOON"
+								   :deadline future
+								   :scheduled future
+								   :todo "SCHED"
+								   :order 14)
 							;; (:name "TODO"
 							;; 	   :todo "TODO"
 							;; 	   :order 5)
 							(:name "NEXT ACTIONS"
 								   :todo ("TODO" "NEXT")
-								   :order 15)
+								   :order 18)
 							;; (:name "Work"
 							;; 	   :tag "@work"
 							;; 	   :order 15)
@@ -269,7 +276,7 @@
 		  ("HOLD"   . "dark gray")
 		  ("WAIT"   . "dark gray")
 		  ("SCHED"   . "dark gray")
-		  ("DOING"   . "blue")
+		  ("DOING"   . "royal blue")
 		  ("EXPIRED"   . "orange")
 		))
   :config
@@ -713,7 +720,7 @@
   :ensure t
   :init
   (require 'neotree)
-  (message ">>> neotree loaded")
+  ;; (message ">>> neotree loaded")
   :hook (neotree-mode . (lambda () (olivetti-set-width 0.97)))
   :config
   ;; (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
@@ -1945,7 +1952,7 @@
 ;; https://xenodium.com/trying-out-emacs-pdf-tools/
 (use-package pdf-tools
   :ensure t
-  :init (require 'pdf-tools)
+  ;; :init (require 'pdf-tools)
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :config
   (pdf-tools-install)
@@ -2005,7 +2012,7 @@
  '(minimap-mode nil)
  '(org-adapt-indentation nil)
  '(org-agenda-files
-   '("~/Documents/nvALT/org_capture_note.txt" "~/Documents/nvALT/projx-JobBoard2021.txt" "~/Documents/nvALT/projx-IncomeTax.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/projx-Jiwoo-Citizenship.txt" "~/Documents/nvALT/org_capture_note.txt" "~/Documents/nvALT/projx-JobBoard2021.txt" "~/Documents/nvALT/projx-IncomeTax.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-start-on-weekday 0)
  '(org-agenda-time-grid
    '((daily today require-timed)
