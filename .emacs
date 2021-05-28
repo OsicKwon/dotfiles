@@ -72,6 +72,13 @@
 
 ;; xr
 
+;; == evil-visualstar 2021-05-28 ==
+(use-package evil-visualstar
+  :ensure t
+  :init (require 'evil-visualstar)
+  :config (global-evil-visualstar-mode)
+  )
+
 ;; == perspective 2021-05-27 ==
 ;; https://github.com/nex3/perspective-el
 (use-package perspective
@@ -84,7 +91,7 @@
   (persp-mode))
 
 
-(defun my-forward-sentence()
+(defun my-forward-sentence ()
   (interactive)
   (forward-sentence 1)
   (forward-to-word 1)
@@ -101,7 +108,7 @@
 
 
 ;; 2021-05-24
-(defun my-paragraph-forward()
+(defun my-paragraph-forward ()
   (interactive)
   ;; https://emacs.stackexchange.com/questions/53167/check-whether-buffer-is-in-org-mode
   (if (string-equal major-mode "org-mode")
@@ -112,7 +119,7 @@
 	  )))
 
 
-(defun my-paragraph-backward()
+(defun my-paragraph-backward ()
   (interactive)
   (if (string-equal major-mode "org-mode")
 	  (org-previous-visible-heading 1)
@@ -287,7 +294,7 @@
 (setq-default tab-width 4)
 
 ;; my-tab 2021-05-18
-(defun my-tab()
+(defun my-tab ()
   (interactive)
   (back-to-indentation)
   ;; (indent-for-tab-command)
@@ -301,7 +308,7 @@
 (global-set-key (kbd "M-<right>") 'my-tab)
 
 ;; my-backtab
-(defun my-backtab()
+(defun my-backtab ()
   (interactive)
   (back-to-indentation)
   (delete-backward-char 1)
@@ -311,7 +318,7 @@
 (global-set-key (kbd "M-<left>")  'my-backtab)
 
 ;; my-swap up
-(defun my-swap-up()
+(defun my-swap-up ()
   (interactive)
   (beginning-of-visual-line)
   (kill-visual-line)
@@ -327,7 +334,7 @@
 (global-set-key (kbd "M-<up>") 'my-swap-up)
 
 ;; my-swap down
-(defun my-swap-down()
+(defun my-swap-down ()
   (interactive)
   (beginning-of-visual-line)
   ;; (kill-visual-line)
@@ -626,12 +633,15 @@
 ;; (setq purpose-use-default-configuration t) ; not really necessary, default is t
 ;; (purpose-compile-user-configuration) ; activates your changes
 
-;; [Replace to] Workgroup2 << == Burly :: save window configuration in bookmark 2021-04-26 ==
+;; == Burly :: save window configuration in bookmark 2021-04-26 ==
 ;; https://www.reddit.com/r/emacs/comments/jf9kqn/wip_burlyel_save_and_restore_buffers_and_window/
 ;; https://github.com/alphapapa/burly.el
 (use-package burly
   :ensure t
   :init (require 'burly)
+  :bind
+  ("C-c b w" . burly-bookmark-windows)
+  ("C-c b o" . burly-open-bookmark)
   )
 
 ;; [Replace to] Workgroup2 << altrnatives :: desktop-save-mode, register, ivy-view, bookmark+
@@ -1162,8 +1172,9 @@
   (elfeed-search-untag-all-unread))
 
 
-(defun my-elfeed-follow-view()
+(defun my-elfeed-follow-view ()
   (interactive)
+  ;; (elfeed-search-untag-all-unread)  ; problem : skip to next line
   (elfeed-eww-open)
   (my-follow-mode)
   (sleep-for 0.5)
@@ -1172,7 +1183,8 @@
 
 
 (define-key elfeed-search-mode-map (kbd "R") 'elfeed-mark-all-as-read)
-(define-key elfeed-search-mode-map (kbd "SPC") 'my-elfeed-follow-view)
+;; (define-key elfeed-search-mode-map (kbd "SPC") 'my-elfeed-follow-view)
+(define-key elfeed-search-mode-map (kbd "e") 'my-elfeed-follow-view)
 
 ;; get idea from https://noonker.github.io/posts/2020-04-22-elfeed/
 (define-key elfeed-search-mode-map (kbd "j") 'next-line)
@@ -1219,8 +1231,8 @@
 ;;     (unless (use-region-p) (forward-line))))
 
 ;; (define-key elfeed-search-mode-map (kbd "t") 'elfeed-w3m-open)
-;; (define-key elfeed-search-mode-map (kbd "w") 'elfeed-eww-open)
-(define-key elfeed-search-mode-map (kbd "e") 'elfeed-eww-open)
+(define-key elfeed-search-mode-map (kbd "w") 'elfeed-eww-open)
+;; (define-key elfeed-search-mode-map (kbd "e") 'elfeed-eww-open)
 ;; (define-key elfeed-search-mode-map (kbd "f") 'elfeed-firefox-open)
 
 ;; Update when it's starting
@@ -1365,10 +1377,10 @@
 	 ;; - h/l -
 	 ;; ("l" . org-next-visible-heading)       ; required in Org 9.4+
 	 ;; ("h" . org-previous-visible-heading)   ; required in Org 9.4+
-	 ("h" . backward-sentence)
-	 ("l" . forward-sentence)
-	 ;; ("H" . backward-sentence)
-	 ;; ("L" . forward-sentence)
+	 ;; ("h" . backward-sentence)
+	 ;; ("l" . forward-sentence)
+	 ("H" . backward-sentence)
+	 ("L" . forward-sentence)
 	 ;; ("L" . my-forward-sentence)
 	 ;; ("h" . beginning-of-visual-line)
 	 ;; ("l" . end-of-visual-line)
@@ -1376,10 +1388,10 @@
 	 ;; ("l" . right-word)
 	 ;; ("h" . evil-backward-WORD-begin)
 	 ;; ("l" . evil-forward-WORD-begin)
-	 ;; ("h" . org-tree-slide-move-previous-tree)
-	 ;; ("l" . org-tree-slide-move-next-tree)
-	 ("H" . org-tree-slide-move-previous-tree)
-	 ("L" . org-tree-slide-move-next-tree)
+	 ("h" . org-tree-slide-move-previous-tree)
+	 ("l" . org-tree-slide-move-next-tree)
+	 ;; ("H" . org-tree-slide-move-previous-tree)
+	 ;; ("L" . org-tree-slide-move-next-tree)
 	 ;; ---
 	 ;; ("w" . right-word)
 	 ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
@@ -1993,7 +2005,7 @@
  '(minimap-mode nil)
  '(org-adapt-indentation nil)
  '(org-agenda-files
-   '("~/Documents/nvALT/projx-JobBoard2021.txt" "~/Documents/nvALT/projx-IncomeTax.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/org_capture_note.txt" "~/Documents/nvALT/projx-JobBoard2021.txt" "~/Documents/nvALT/projx-IncomeTax.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-start-on-weekday 0)
  '(org-agenda-time-grid
    '((daily today require-timed)
@@ -3789,6 +3801,7 @@ T - tag prefix
   (other-window 2)
   (shrink-window 5)  ; five times
   )
+(global-set-key (kbd "C-c w s") 'my-startup)
 
 
 ;; (defun my-follow-mode()
@@ -3847,13 +3860,22 @@ T - tag prefix
       (put 'my-org-narrowing 'narrowing t))))
 
 
-(defun my-english-workgroup()
+(defun my-english-workgroup ()
   (interactive)
   (split-window-right)
   (other-window 1)
   (find-file "~/Documents/nvALT/mainx-engx-EnglishLibrary.txt")
   )
 (global-set-key (kbd "C-c w e") 'my-english-workgroup)
+
+
+(defun my-finance-workgroup ()
+  (interactive)
+  (split-window-right)
+  (other-window 1)
+  (find-file "~/Documents/nvALT/projx-CPA_CFA.txt")
+  )
+(global-set-key (kbd "C-c w f") 'my-finance-workgroup)
 
 
 ;; https://github.com/abo-abo/swiper/issues/1079
