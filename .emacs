@@ -385,7 +385,7 @@
   :ensure t
   :init
   (require 'adaptive-wrap)
-  ;; (add-hook 'text-mode-hook 'adaptive-wrap-prefix-mode)  ; interfered with org-mode paragraph indentation 2021-05-14
+  ;; (add-hook 'text-mode-hook 'adaptive-wrap-prefix-mode)  ; interfered with org-indent-mode paragraph indentation 2021-05-14
   (add-hook 'markdown-mode-hook 'adaptive-wrap-prefix-mode)   ; use markdown mode only
   )
 
@@ -647,8 +647,9 @@
   :ensure t
   :init (require 'burly)
   :bind
-  ("C-c b w" . burly-bookmark-windows)
-  ("C-c b o" . burly-open-bookmark)
+  ;; ("C-c b w" . burly-bookmark-windows)
+  ("C-c y" . burly-bookmark-windows)
+  ;; ("C-c b o" . burly-open-bookmark)
   )
 
 ;; [Replace to] Workgroup2 << altrnatives :: desktop-save-mode, register, ivy-view, bookmark+
@@ -680,6 +681,8 @@
   :init
   (require 'edit-indirect)
   (global-set-key (kbd "C-t") 'edit-indirect-region)
+  :config
+  ;; (add-hook 'edit-indirect-after-creation-hook 'whitespace-mode)
   )
 
 ;; == ranger 2021-04-22 ==
@@ -1877,14 +1880,17 @@
 
 (dolist (command '(scroll-up-command
 		   scroll-down-command
-                   recenter-top-bottom
+		   recenter-top-bottom
 		   other-window   ; beacon is better in same buffer with different window
 		   ace-window     ; beacon is better in same buffer with differnet window
 		   org-forward-element
-                   org-backward-element
+		   org-backward-element
 		   forward-paragraph
-                   backward-paragraph
+		   backward-paragraph
 		   swiper
+		   evil-ex-search
+		   evil-ex-search-forward
+		   evil-ex-search-backward
 		   ;; org-cycle      ; delay ??
 		   ))
   (advice-add command :after #'pulse-line)
@@ -2607,17 +2613,20 @@
     (progn
       ;; if graphic (GUI)
       ;; <NORMAL>
-      (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :underline "gray85")))
-      (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :underline nil)))
+      ;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :underline "gray85")))
+      (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :underline "gray95")))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (face-remap-add-relative 'default :background "light gray")))
       (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light gray")))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (set-background-color "lightgray")))
+      ;; (add-hook 'evil-normal-state-entry-hook (lambda () (setq display-line-numbers 'relative)))
+      (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :underline nil)))
       (add-hook 'evil-normal-state-exit-hook (lambda () (hl-line-mode 0)))
       ;; (add-hook 'evil-normal-state-exit-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background original-hl-line-background)))
       (add-hook 'evil-normal-state-exit-hook (lambda () (face-remap-add-relative 'default :background original-background)))
       ;; (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :background "lightgray")))
       ;; (add-hook 'evil-normal-state-exit-hook (lambda () (set-background-color original-background)))
       ;; (add-hook 'evil-normal-state-exit-hook (lambda () (set-foreground-color original-foreground)))
+      ;; (add-hook 'evil-normal-state-exit-hook (lambda () (setq display-line-numbers nil)))
       ;;
       ;; <OPERATOR>
       ;; (add-hook 'evil-operator-state-entry-hook (lambda () (face-remap-add-relative 'default :background "lightgray")))
@@ -3510,6 +3519,7 @@ T - tag prefix
 ;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
 ;; (global-set-key (kbd "C-c g") 'counsel-git)
 ;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
+(global-set-key (kbd "C-c b") 'counsel-bookmark)
 (global-set-key (kbd "C-c k") 'counsel-ag)  ;; connected gitignore, but solved (--skip-vcs-ignores)
 ;; (global-set-key (kbd "C-c k") 'counsel-ack)  ;; ignore git status 2021-03-28
 (global-set-key (kbd "C-c t") 'counsel-outline)
@@ -3839,7 +3849,7 @@ T - tag prefix
       (split-window-right)
       (balance-windows)
       (follow-mode 1)
-      (view-mode 1)
+      ;; (view-mode 1)
 	  (olivetti-set-width 0.90)
       (put 'my-follow-mode 'following t))))
 
