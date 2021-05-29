@@ -648,7 +648,7 @@
   :init (require 'burly)
   :bind
   ;; ("C-c b w" . burly-bookmark-windows)
-  ("C-c y" . burly-bookmark-windows)
+  ("C-c C-b" . burly-bookmark-windows)
   ;; ("C-c b o" . burly-open-bookmark)
   )
 
