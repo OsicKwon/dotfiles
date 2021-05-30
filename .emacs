@@ -1,4 +1,5 @@
-;; -*- find-file-hook: view-mode; -*-
+;; -*- find-file-hook: view-mode; lexical-binding: t; -*-
+ 
 ;; since 2020
 ;;    ___  ____ ___  ____ ___________
 ;;   / _ \/ __ `__ \/ __ `/ ___/ ___/
@@ -71,6 +72,22 @@
 ;; --------------------
 
 ;; xr
+
+;; == debug on error ==
+;; https://dustinlacewell.github.io/emacs.d/
+;; Show tracebacks when errors happen. 
+(setq debug-on-error t)
+
+
+;; https://dustinlacewell.github.io/emacs.d/
+(require 'cl-lib)
+(require 'seq)
+(use-package f :demand t)          ;; files
+(use-package dash :demand t)       ;; lists
+(use-package ht :demand t)         ;; hash-tables
+(use-package s :demand t)          ;; strings
+;; (use-package a :demand t)          ;; association lists
+(use-package anaphora :demand t)   ;; anaphora
 
 
 ;; == elegance 2021-05-30 ==
@@ -168,6 +185,17 @@
 								  :scheduled today
 								  :deadline today
 								  :order 1)
+							(:name "Due Today"
+								   :deadline today
+								   :order 2)
+							(:name "OVERDUE"   
+								   :scheduled past
+								   :deadline past)
+							(:name "DUE SOON"
+								   :deadline future
+								   :scheduled future
+								   :todo "SCHED"
+								   :order 14)
 						   (:discard (:anything t))
 						   ))))
 			(alltodo "" ((org-agenda-overriding-header "")
@@ -176,21 +204,10 @@
 								   :tag "Important"
 								   :priority "A"
 								   :order 2)
-							(:name "Due Today"
-								   :deadline today
-								   :order 2)
-							(:name "OVERDUE"   
-								   :scheduled past
-								   :deadline past)
 							(:name "DOING"
 								   :todo ("DOING" "REVIEW" "RESUME")
 								   ;; :face (:underline t)
 								   :order 15)
-							(:name "DUE SOON"
-								   :deadline future
-								   :scheduled future
-								   :todo "SCHED"
-								   :order 14)
 							;; (:name "TODO"
 							;; 	   :todo "TODO"
 							;; 	   :order 5)
@@ -816,10 +833,10 @@
 (when (display-graphic-p)
   (progn
 
-    (run-at-time "09:00" nil 'cfw:open-org-calendar)
-    (run-at-time "12:00" nil 'cfw:open-org-calendar)
-    (run-at-time "15:00" nil 'cfw:open-org-calendar)
-    (run-at-time "18:00" nil 'cfw:open-org-calendar)
+    ;; (run-at-time "09:00" nil 'cfw:open-org-calendar)
+    ;; (run-at-time "12:00" nil 'cfw:open-org-calendar)
+    ;; (run-at-time "15:00" nil 'cfw:open-org-calendar)
+    ;; (run-at-time "18:00" nil 'cfw:open-org-calendar)
 
     ;; (run-at-time "13:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
     ;; (run-at-time "14:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
