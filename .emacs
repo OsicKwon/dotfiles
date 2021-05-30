@@ -331,7 +331,7 @@
   )
 
 ;; https://www.xemacs.org/Links/tutorials_1.html
-(setq-default tab-width 4)
+;; (setq-default tab-width 4)
 
 ;; my-tab 2021-05-18
 (defun my-tab ()
