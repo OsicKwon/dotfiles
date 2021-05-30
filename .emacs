@@ -682,7 +682,7 @@
   :bind
   ;; ("C-c b w" . burly-bookmark-windows)
   ("C-c C-b" . burly-bookmark-windows)
-  ;; ("C-c b o" . burly-open-bookmark)
+  ("C-c b" . burly-open-bookmark)
   )
 
 ;; [Replace to] Workgroup2 << altrnatives :: desktop-save-mode, register, ivy-view, bookmark+
@@ -3554,7 +3554,7 @@ T - tag prefix
 ;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
 ;; (global-set-key (kbd "C-c g") 'counsel-git)
 ;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
-(global-set-key (kbd "C-c b") 'counsel-bookmark)
+;; (global-set-key (kbd "C-c b") 'counsel-bookmark)
 (global-set-key (kbd "C-c k") 'counsel-ag)  ;; connected gitignore, but solved (--skip-vcs-ignores)
 ;; (global-set-key (kbd "C-c k") 'counsel-ack)  ;; ignore git status 2021-03-28
 (global-set-key (kbd "C-c t") 'counsel-outline)
