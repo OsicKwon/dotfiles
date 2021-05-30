@@ -250,7 +250,7 @@
 ;; conflicted with olivetti
 ;; a possible solution ? - https://www.emacswiki.org/emacs/TruncateLines
 (use-package org-sidebar
-  :ensure nil
+  :ensure t
   :init (require 'org-sidebar)
   :config
   (global-set-key (kbd "C-M-s") 'org-sidebar-toggle)
