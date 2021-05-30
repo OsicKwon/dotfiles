@@ -230,11 +230,19 @@
 ;; 			))
 
 
+;; == dash 2021-05-30 ==
+;; essential :: org-sidebar error -> solved after installing dash package
+(use-package dash
+  :ensure t
+  :init (require 'dash)
+  )
+
+
 ;; == org-sidebar 2021-05-22 ==
 ;; conflicted with olivetti
 ;; a possible solution ? - https://www.emacswiki.org/emacs/TruncateLines
 (use-package org-sidebar
-  :ensure t
+  :ensure nil
   :init (require 'org-sidebar)
   :config
   (global-set-key (kbd "C-M-s") 'org-sidebar-toggle)
