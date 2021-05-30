@@ -72,6 +72,14 @@
 
 ;; xr
 
+
+;; == elegance 2021-05-30 ==
+;; (add-to-list 'load-path "~/.emacs.d/elegant-emacs")
+;; (require 'elegance)
+;; (require 'sanity)
+;; (require 'elegant-light-theme)
+
+
 ;; == evil-visualstar 2021-05-28 ==
 (use-package evil-visualstar
   :ensure t
