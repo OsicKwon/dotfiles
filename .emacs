@@ -1420,10 +1420,10 @@
 	 ;; - h/l -
 	 ;; ("l" . org-next-visible-heading)       ; required in Org 9.4+
 	 ;; ("h" . org-previous-visible-heading)   ; required in Org 9.4+
-	 ;; ("h" . backward-sentence)
-	 ;; ("l" . forward-sentence)
-	 ("H" . backward-sentence)
-	 ("L" . forward-sentence)
+	 ("h" . backward-sentence)
+	 ("l" . forward-sentence)
+	 ;; ("H" . backward-sentence)
+	 ;; ("L" . forward-sentence)
 	 ;; ("L" . my-forward-sentence)
 	 ;; ("h" . beginning-of-visual-line)
 	 ;; ("l" . end-of-visual-line)
@@ -1431,8 +1431,8 @@
 	 ;; ("l" . right-word)
 	 ;; ("h" . evil-backward-WORD-begin)
 	 ;; ("l" . evil-forward-WORD-begin)
-	 ("h" . org-tree-slide-move-previous-tree)
-	 ("l" . org-tree-slide-move-next-tree)
+	 ;; ("h" . org-tree-slide-move-previous-tree)
+	 ;; ("l" . org-tree-slide-move-next-tree)
 	 ;; ("H" . org-tree-slide-move-previous-tree)
 	 ;; ("L" . org-tree-slide-move-next-tree)
 	 ;; ---
@@ -1467,7 +1467,7 @@
 	 ;; ("\\" . imenu-list)
 	 ;; ("\\" . my-view-general-prefix)
 	 ;; ("m" . imenu-list-smart-toggle)
-	 ;; ("m" . imenu-list)
+	 ("m" . imenu-list)
 	 ;; ("m" . imenu-list-minor-mode)
 	 ;; ("m" . counsel-M-x)
 	 ;; ("m" . evil-exit-emacs-state)
@@ -1599,7 +1599,9 @@
 	 ;; ("," . my-clone-indirect-buffer)
 	 ;; ("." . my-org-indirect-buffer)
 	 ;; ("." . imenu-list-smart-toggle)  ; toggle available
-	 ("." . imenu-list)  ; toggle not available
+	 ;; ("." . imenu-list)  ; toggle not available
+	 ("." . org-tree-slide-move-next-tree)
+	 ("," . org-tree-slide-move-previous-tree)
 
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)  ; toggle function
