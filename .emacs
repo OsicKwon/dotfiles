@@ -169,72 +169,71 @@
   ;; https://github.com/alphapapa/org-super-agenda/blob/master/examples.org
   ;; https://archive.baty.net/2019/org-super-agenda/
   ;; (setq org-super-agenda-groups '(
-  ;; 	  ;; (:auto-group t) 
-  ;; 	  ;; ;; (:name "Today" :time-grid t :scheduled today)
-  ;; 	  (:name "= Due today =" :deadline today :scheduled today)
-  ;; 	  ;; ;; (:name "Important" :priority "A")
-  ;; 	  (:name "= Overdue =" :deadline past :scheduled past)
-  ;; 	  (:name "= Due soon =" :deadline future)
-  ;; 	  ;; (:name "= Waiting =" :todo "WAIT")
- ;; 	  ))
+				    ;; ;; (:auto-group t) 
+				    ;; ;; ;; (:name "Today" :time-grid t :scheduled today)
+				    ;; (:name "= Due today =" :deadline today :scheduled today)
+				    ;; ;; ;; (:name "Important" :priority "A")
+				    ;; (:name "= Overdue =" :deadline past :scheduled past)
+				    ;; (:name "= Due soon =" :deadline future)
+				    ;; ;; (:name "= Waiting =" :todo "WAIT")
+				    ;; ))
   ;; https://github.com/alphapapa/org-super-agenda/issues/72
   (setq org-agenda-custom-commands
-	'(("z" "Super view"
-	   ((agenda "" ((org-agenda-span 'day)
-		(org-super-agenda-groups
-		 '(
-		   (:name "TODAY"
-			  :time-grid t
-			  :date today
-			  :todo "TODAY"
-			  :scheduled today
-			  :deadline today
-			  :order 1)
-		(:name "Due Today"
-			   :deadline today
-			   :order 2)
-		(:name "OVERDUE"   
-			   :scheduled past
-			   :deadline past)
-		(:name "DUE SOON"
-			   :deadline future
-			   :scheduled future
-			   :todo "SCHED"
-			   :order 14)
-		(:discard (:anything t))
-		   ))))
-	(alltodo "" ((org-agenda-overriding-header "")
-		 (org-super-agenda-groups
-		  '((:name "Important"
-			   :tag "Important"
-			   :priority "A"
-			   :order 2)
-		(:name "DOING"
-			   :todo ("DOING" "REVIEW" "RESUME")
-			   ;; :face (:underline t)
-			   :order 15)
-		;; (:name "TODO"
-		;; 	   :todo "TODO"
-		;; 	   :order 5)
-		(:name "NEXT ACTIONS"
-			   :todo ("TODO" "NEXT")
-			   :order 18)
-		;; (:name "Work"
-		;; 	   :tag "@work"
-		;; 	   :order 15)
-		(:name "Waiting"
-			   :todo "WAITING"
-			   :order 40)
-		(:name "Wait"
-			   :todo "WAIT"
-			   :order 40)
-		))))))))
+				    '(("z" "Super view"
+				    ((agenda "" ((org-agenda-span 'day)
+					    (org-super-agenda-groups
+					    '(
+					    (:name "TODAY"
+						    :time-grid t
+						    :date today
+						    :todo "TODAY"
+						    :scheduled today
+						    :deadline today
+						    :order 1)
+					    (:name "Due Today"
+						    :deadline today
+						    :order 2)
+					    (:name "OVERDUE"   
+						    :scheduled past
+						    :deadline past)
+					    (:name "DUE SOON"
+						    :scheduled future
+						    :deadline future
+						    :todo "SCHED"
+						    :order 14)
+					    (:discard (:anything t))
+					    ))))
+				    (alltodo "" ((org-agenda-overriding-header "")
+					    (org-super-agenda-groups
+					    '((:name "Important"
+						    :tag "Important"
+						    :priority "A"
+						    :order 2)
+					    (:name "DOING"
+						    :todo ("DOING" "REVIEW" "RESUME")
+						    ;; :face (:underline t)
+						    :order 15)
+					    ;; (:name "TODO"
+					    ;; 	   :todo "TODO"
+					    ;; 	   :order 5)
+					    (:name "NEXT ACTIONS"
+						    :todo ("TODO" "NEXT")
+						    :order 18)
+					    ;; (:name "Work"
+					    ;; 	   :tag "@work"
+					    ;; 	   :order 15)
+					    (:name "Waiting"
+						    :todo "WAITING"
+						    :order 40)
+					    (:name "Wait"
+						    :todo "WAIT"
+						    :order 40)
+					    ))))))))
   ;; (setq org-super-agenda-header-separator "_")
   (setq org-super-agenda-unmatched-name "OTHER ITEMS")
   )
 
 ;; == org-agenda 2021-05-24 ==
-
 ;; ref : https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html
 ;; (setq org-agenda-custom-commands
 ;;       '(
@@ -246,9 +245,37 @@
 ;;           (alltodo "")))
 ;; 		))
 
-;; (setq org-agenda-block-separator nil)
+;; (setq org-agenda-block-separator t)  ; ??
 (setq org-agenda-hide-tags-regexp ".")
 (setq org-agenda-block-separator "=============================================")
+
+;; ;; https://www.reddit.com/r/orgmode/comments/6ybjjw/aligned_agenda_view_anyway_to_make_this_more/
+;; (setq org-agenda-prefix-format
+;;       (quote
+;;        ((agenda . "%-12c%?-12t% s")
+;;         (timeline . "% s")
+;;         (todo . "%-12c")
+;;         (tags . "%-12c")
+;;         (search . "%-12c"))))
+
+(setq org-agenda-deadline-leaders (quote ("!D!: " "D%2d: " "")))
+(setq org-agenda-scheduled-leaders (quote ("" "S%3d: ")))
+
+;; https://stackoverflow.com/questions/58820073/s-in-org-agenda-prefix-format-doesnt-display-dates-in-the-todo-view
+;; (setq org-agenda-prefix-format
+;;       '((agenda  . " %i %-12:c%?-12t% s")
+;;         (todo  . " %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d\" scheduled) \"\")) %i %-12:c")
+;;         (tags  . " %i %-12:c")
+;;         (search . " %i %-12:c")))
+
+(setq org-agenda-prefix-format '(
+				 ;; (agenda  . " %i %-30:c")
+				 ;; (todo  . " %i %-28:c")
+				 (agenda  . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
+				 (todo  . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
+				 ))
+
+
 
 ;; not working properly as of 2021-05-25
 ;; (add-hook 'org-agenda-mode-hook
