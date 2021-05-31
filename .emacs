@@ -185,27 +185,25 @@
 					    '(
 					    (:name "TODAY"
 						    :time-grid t
-						    :date today
-						    :todo "TODAY"
+						    ;; :date today
+						    ;; :todo "TODAY"
 						    :scheduled today
-						    :deadline today
+						    ;; :deadline today
 						    :order 1)
 					    (:name "Due Today"
 						    :deadline today
 						    :order 2)
 					    (:name "OVERDUE"   
-						    :scheduled past
+						    ;; :scheduled past
 						    :deadline past)
 					    (:name "DUE SOON"
-						    :scheduled future
-						    :deadline future
-						    :todo "SCHED"
-						    :order 14)
+						   :deadline future
+						   :order 3)
 					    (:discard (:anything t))
 					    ))))
 				    (alltodo "" ((org-agenda-overriding-header "")
 					    (org-super-agenda-groups
-					    '((:name "Important"
+					    '((:name "TOP PRIORITY"
 						    :tag "Important"
 						    :priority "A"
 						    :order 2)
@@ -223,11 +221,22 @@
 					    ;; 	   :tag "@work"
 					    ;; 	   :order 15)
 					    (:name "Waiting"
-						    :todo "WAITING"
+						    :todo ("WAITING" "WAIT")
+						    :order 35)
+					    (:name "SCHEDULED"
+						    :todo "SCHED"
+						    :scheduled t
 						    :order 40)
-					    (:name "Wait"
-						    :todo "WAIT"
-						    :order 40)
+					    ;; order is important because it is first-come-take-all, which obtain previous setting
+					    (:name "COMING SOON"
+						    ;; :scheduled future  ; future == t
+						   :scheduled (before "2021-06-30")
+						   :order 50)
+					    (:name "SCHEDULED by 2021"
+						    ;; :scheduled future  ; future == t
+						   :scheduled (after  "2021-07-01")
+						   :scheduled (before "2021-12-31")
+						   :order 55)
 					    ))))))))
   ;; (setq org-super-agenda-header-separator "_")
   (setq org-super-agenda-unmatched-name "OTHER ITEMS")
