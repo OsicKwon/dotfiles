@@ -180,26 +180,27 @@
   ;; https://github.com/alphapapa/org-super-agenda/issues/72
   (setq org-agenda-custom-commands
 				    '(("z" "Super view"
-				    ((agenda "" ((org-agenda-span 'day)
+				       (
+					(agenda "" ((org-agenda-span 'day)
 					    (org-super-agenda-groups
 					    '(
 					    (:name "TODAY"
 						    :time-grid t
-						    ;; :date today
-						    ;; :todo "TODAY"
+						    :date today
+						    :todo "TODAY"
 						    :scheduled today
-						    ;; :deadline today
+						    :deadline today
 						    :order 1)
 					    (:name "Due Today"
 						    :deadline today
 						    :order 2)
 					    (:name "OVERDUE"   
-						    ;; :scheduled past
+						    :scheduled past
 						    :deadline past)
 					    (:name "DUE SOON"
 						   :deadline future
 						   :order 3)
-					    (:discard (:anything t))
+					    ;; (:discard (:anything t))
 					    ))))
 				    (alltodo "" ((org-agenda-overriding-header "")
 					    (org-super-agenda-groups
@@ -256,7 +257,7 @@
 
 ;; (setq org-agenda-block-separator t)  ; ??
 (setq org-agenda-hide-tags-regexp ".")
-(setq org-agenda-block-separator "=============================================")
+(setq org-agenda-block-separator "=================================================================")
 
 ;; ;; https://www.reddit.com/r/orgmode/comments/6ybjjw/aligned_agenda_view_anyway_to_make_this_more/
 ;; (setq org-agenda-prefix-format
@@ -267,8 +268,8 @@
 ;;         (tags . "%-12c")
 ;;         (search . "%-12c"))))
 
-(setq org-agenda-deadline-leaders (quote ("!D!: " "D%2d: " "")))
-(setq org-agenda-scheduled-leaders (quote ("" "S%3d: ")))
+;; (setq org-agenda-deadline-leaders (quote ("!D!: " "D%2d: " "")))
+;; (setq org-agenda-scheduled-leaders (quote ("" "S%3d: ")))
 
 ;; https://stackoverflow.com/questions/58820073/s-in-org-agenda-prefix-format-doesnt-display-dates-in-the-todo-view
 ;; (setq org-agenda-prefix-format
