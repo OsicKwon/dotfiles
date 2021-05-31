@@ -73,6 +73,11 @@
 
 ;; xr
 
+
+;; no error beep sound 2021-05-31
+;; (setq ring-bell-function 'ignore)
+
+
 ;; == debug on error ==
 ;; https://dustinlacewell.github.io/emacs.d/
 ;; Show tracebacks when errors happen. 
@@ -1230,11 +1235,10 @@
 (define-key elfeed-search-mode-map (kbd "e") 'my-elfeed-follow-view)
 
 ;; get idea from https://noonker.github.io/posts/2020-04-22-elfeed/
-(define-key elfeed-search-mode-map (kbd "j") 'next-line)
-(define-key elfeed-search-mode-map (kbd "k") 'previous-line)
-;;
-(define-key elfeed-search-mode-map (kbd "T") 'elfeed-search-first-entry)
-(define-key elfeed-search-mode-map (kbd "B") 'elfeed-search-last-entry)
+;; (define-key elfeed-search-mode-map (kbd "j") 'next-line)
+;; (define-key elfeed-search-mode-map (kbd "k") 'previous-line)
+;; (define-key elfeed-search-mode-map (kbd "T") 'elfeed-search-first-entry)
+;; (define-key elfeed-search-mode-map (kbd "B") 'elfeed-search-last-entry)
 ;; like Vim
 (define-key elfeed-search-mode-map (kbd "H") 'elfeed-search-first-entry)
 (define-key elfeed-search-mode-map (kbd "L") 'elfeed-search-last-entry)
@@ -1431,8 +1435,8 @@
 	 ;; ("l" . right-word)
 	 ;; ("h" . evil-backward-WORD-begin)
 	 ;; ("l" . evil-forward-WORD-begin)
-	 ;; ("h" . org-tree-slide-move-previous-tree)
-	 ;; ("l" . org-tree-slide-move-next-tree)
+	 ("h" . org-tree-slide-move-previous-tree)
+	 ("l" . org-tree-slide-move-next-tree)
 	 ;; ("H" . org-tree-slide-move-previous-tree)
 	 ;; ("L" . org-tree-slide-move-next-tree)
 	 ;; ---
