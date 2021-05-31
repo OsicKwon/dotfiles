@@ -169,66 +169,66 @@
   ;; https://github.com/alphapapa/org-super-agenda/blob/master/examples.org
   ;; https://archive.baty.net/2019/org-super-agenda/
   ;; (setq org-super-agenda-groups '(
-  ;; 								  ;; (:auto-group t) 
-  ;; 								  ;; ;; (:name "Today" :time-grid t :scheduled today)
-  ;; 								  (:name "= Due today =" :deadline today :scheduled today)
-  ;; 								  ;; ;; (:name "Important" :priority "A")
-  ;; 								  (:name "= Overdue =" :deadline past :scheduled past)
-  ;; 								  (:name "= Due soon =" :deadline future)
-  ;; 								  ;; (:name "= Waiting =" :todo "WAIT")
-  ;; 								  ))
+  ;; 	  ;; (:auto-group t) 
+  ;; 	  ;; ;; (:name "Today" :time-grid t :scheduled today)
+  ;; 	  (:name "= Due today =" :deadline today :scheduled today)
+  ;; 	  ;; ;; (:name "Important" :priority "A")
+  ;; 	  (:name "= Overdue =" :deadline past :scheduled past)
+  ;; 	  (:name "= Due soon =" :deadline future)
+  ;; 	  ;; (:name "= Waiting =" :todo "WAIT")
+ ;; 	  ))
   ;; https://github.com/alphapapa/org-super-agenda/issues/72
   (setq org-agenda-custom-commands
-		'(("z" "Super view"
-		   ((agenda "" ((org-agenda-span 'day)
-						(org-super-agenda-groups
-						 '(
-						   (:name "TODAY"
-								  :time-grid t
-								  :date today
-								  :todo "TODAY"
-								  :scheduled today
-								  :deadline today
-								  :order 1)
-							(:name "Due Today"
-								   :deadline today
-								   :order 2)
-							(:name "OVERDUE"   
-								   :scheduled past
-								   :deadline past)
-							(:name "DUE SOON"
-								   :deadline future
-								   :scheduled future
-								   :todo "SCHED"
-								   :order 14)
-						   (:discard (:anything t))
-						   ))))
-			(alltodo "" ((org-agenda-overriding-header "")
-						 (org-super-agenda-groups
-						  '((:name "Important"
-								   :tag "Important"
-								   :priority "A"
-								   :order 2)
-							(:name "DOING"
-								   :todo ("DOING" "REVIEW" "RESUME")
-								   ;; :face (:underline t)
-								   :order 15)
-							;; (:name "TODO"
-							;; 	   :todo "TODO"
-							;; 	   :order 5)
-							(:name "NEXT ACTIONS"
-								   :todo ("TODO" "NEXT")
-								   :order 18)
-							;; (:name "Work"
-							;; 	   :tag "@work"
-							;; 	   :order 15)
-							(:name "Waiting"
-								   :todo "WAITING"
-								   :order 40)
-							(:name "Wait"
-								   :todo "WAIT"
-								   :order 40)
-							))))))))
+	'(("z" "Super view"
+	   ((agenda "" ((org-agenda-span 'day)
+		(org-super-agenda-groups
+		 '(
+		   (:name "TODAY"
+			  :time-grid t
+			  :date today
+			  :todo "TODAY"
+			  :scheduled today
+			  :deadline today
+			  :order 1)
+		(:name "Due Today"
+			   :deadline today
+			   :order 2)
+		(:name "OVERDUE"   
+			   :scheduled past
+			   :deadline past)
+		(:name "DUE SOON"
+			   :deadline future
+			   :scheduled future
+			   :todo "SCHED"
+			   :order 14)
+		(:discard (:anything t))
+		   ))))
+	(alltodo "" ((org-agenda-overriding-header "")
+		 (org-super-agenda-groups
+		  '((:name "Important"
+			   :tag "Important"
+			   :priority "A"
+			   :order 2)
+		(:name "DOING"
+			   :todo ("DOING" "REVIEW" "RESUME")
+			   ;; :face (:underline t)
+			   :order 15)
+		;; (:name "TODO"
+		;; 	   :todo "TODO"
+		;; 	   :order 5)
+		(:name "NEXT ACTIONS"
+			   :todo ("TODO" "NEXT")
+			   :order 18)
+		;; (:name "Work"
+		;; 	   :tag "@work"
+		;; 	   :order 15)
+		(:name "Waiting"
+			   :todo "WAITING"
+			   :order 40)
+		(:name "Wait"
+			   :todo "WAIT"
+			   :order 40)
+		))))))))
   ;; (setq org-super-agenda-header-separator "_")
   (setq org-super-agenda-unmatched-name "OTHER ITEMS")
   )
@@ -2404,7 +2404,6 @@
 ;; == indent-guide package 2021-02-24 ==
 (use-package indent-guide
   :ensure t
-  :disabled
   :init (require 'indent-guide)
   :config (indent-guide-global-mode)
   )
