@@ -281,7 +281,7 @@
 (setq org-agenda-prefix-format '(
 				 ;; (agenda  . " %i %-30:c")
 				 ;; (todo  . " %i %-28:c")
-				 (agenda  . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
+				 ;; (agenda  . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
 				 (todo  . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
 				 ))
 
@@ -2442,7 +2442,10 @@
 (use-package indent-guide
   :ensure t
   :init (require 'indent-guide)
-  :config (indent-guide-global-mode)
+  :config
+  ;; (indent-guide-global-mode)
+  (add-hook 'text-mode-hook 'indent-guide-mode)
+  (add-hook 'prog-mode-hook 'indent-guide-mode)
   )
 
 
