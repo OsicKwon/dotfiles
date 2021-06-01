@@ -238,7 +238,19 @@
 						   :scheduled (after  "2021-07-01")
 						   :scheduled (before "2021-12-31")
 						   :order 55)
-					    ))))))))
+					    ))))
+				    ;; https://daryl.wakatara.com/a-better-gtd-and-crm-flow-for-emacs-org-mode/
+				    (tags (concat "w" (format-time-string "%V")) ((org-agenda-overriding-header  (concat "ToDos Week " (format-time-string "%V")))
+										  (org-super-agenda-groups
+										   '((:discard (:deadline t))
+										     (:name "CRA"
+											    :tag "CRA")
+										     (:name "Loka"
+											    :tag "loka")
+										     (:name "Ping"
+	   										    :tag "ping")
+										     ))))
+				    ))))
   ;; (setq org-super-agenda-header-separator "_")
   (setq org-super-agenda-unmatched-name "OTHER ITEMS")
   )
@@ -268,8 +280,8 @@
 ;;         (tags . "%-12c")
 ;;         (search . "%-12c"))))
 
-;; (setq org-agenda-deadline-leaders (quote ("!D!: " "D%2d: " "")))
-;; (setq org-agenda-scheduled-leaders (quote ("" "S%3d: ")))
+(setq org-agenda-deadline-leaders (quote ("!D!: " "D%2d: " "")))
+(setq org-agenda-scheduled-leaders (quote ("" "S%3d: ")))
 
 ;; https://stackoverflow.com/questions/58820073/s-in-org-agenda-prefix-format-doesnt-display-dates-in-the-todo-view
 ;; (setq org-agenda-prefix-format
@@ -282,7 +294,7 @@
 				 ;; (agenda  . " %i %-30:c")
 				 ;; (todo  . " %i %-28:c")
 				 (agenda  . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
-				 (todo  . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
+				 (todo    . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
 				 ))
 
 
