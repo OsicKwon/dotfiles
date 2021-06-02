@@ -1634,10 +1634,6 @@
 	 ;; ("<escape> a" . counsel-ag-thing-at-point)
 	 ;; ("<escape> y" . engine/search-youglish)
 
-	 ;; Unbind-keys
-	 ;; -----------
-	 ;; ("h" . nil)
-
 	 ;; Additional-keys
 	 ;; -----------
 	 ;; ("r" . revert-buffer)
@@ -1671,7 +1667,8 @@
 	 ;; ("q" . View-exit)
 	 ("x" . my-kill-current-buffer-and-window)
 	 ("X" . my-kill-current-buffer-and-other-windows)
-	 ("c" . recenter-top-bottom)
+	 ;; ("c" . recenter-top-bottom)
+	 ("c" . recenter)
 	 ;; ("i" . View-exit)  ;; like 'e'
 	 ;; ("i" . my-indirect-buffer)
 	 ;; ("i" . my-clone-indirect-buffer)
@@ -1700,6 +1697,12 @@
 	 ;; ("'" . olivetti-default-width)  ; turn to toggle functionality
 	 ;; ("'" . my-forward-sentence)
 	 ("'" . my-hl-line-mode-toggle)
+
+	 ;; Unbind-keys
+	 ;; -----------
+	 ;; ("h" . nil)
+	 ("/" . nil)
+
          )
   )
 
@@ -3140,6 +3143,7 @@
 )
 
 ;; Improved by toggle option 2021-05-18
+;; TODO :: change name to 'my-olivetti-narrow-toggle
 (defun olivetti-narrow-width()
   (interactive)
   (olivetti-set-width 95)
@@ -3151,6 +3155,7 @@
       (olivetti-set-width 95)
       (put 'olivetti-narrow-width 'narrowed t))))
 (global-set-key (kbd "C-M-;") 'olivetti-narrow-width)
+
 
 ;; == Undo-Tree Package 2021-02-13 ==
 ;; ------------------------------
@@ -3996,12 +4001,6 @@ T - tag prefix
   "Using follow-mode with 3 divided windows"
   (interactive)
   ;; use a property “following”. Value is t or nil
-  (split-window-right)
-  (split-window-right)
-  (balance-windows)
-  (follow-mode 1)
-  ;; (view-mode 1)
-  (olivetti-set-width 0.90)
   (if (get 'my-follow-mode 'following)
       (progn
 	;; (kill-current-buffer)
@@ -4032,14 +4031,13 @@ T - tag prefix
 
 (defun my-hl-line-mode-toggle ()
   (interactive)
-  (hl-line-mode 1)
   (if (get 'my-hl-line-mode-toggle 'hl-line-showing)
       (progn
 	(hl-line-mode 0)
-	(face-remap-add-relative 'hl-line nil :background "light gray")
 	(put 'my-hl-line-mode-toggle 'hl-line-showing nil))
     (progn
       (hl-line-mode 1)
+      (face-remap-add-relative 'hl-line nil :background "light gray")
       (put 'my-hl-line-mode-toggle 'hl-line-showing t))
     ))
 
