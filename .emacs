@@ -74,6 +74,7 @@
 ;; xr
 
 
+
 ;; no error beep sound 2021-05-31
 ;; (setq ring-bell-function 'ignore)
 
@@ -81,7 +82,7 @@
 ;; == debug on error ==
 ;; https://dustinlacewell.github.io/emacs.d/
 ;; Show tracebacks when errors happen. 
-(setq debug-on-error t)
+;; (setq debug-on-error t)
 
 
 ;; https://dustinlacewell.github.io/emacs.d/
@@ -160,6 +161,22 @@
 	  )))
 
 
+(defun my-real-paragraph-forward ()
+  (interactive)
+  (forward-paragraph)
+  (next-line)
+  )
+
+
+(defun my-real-paragraph-backward ()
+  (interactive)
+  (backward-paragraph 2)
+  (next-line)
+  (beginning-of-visual-line)
+  )
+
+
+
 ;; == org-super-agenda 2021-05-22 ==
 (use-package org-super-agenda
   :ensure t
@@ -179,7 +196,20 @@
 				    ;; ))
   ;; https://github.com/alphapapa/org-super-agenda/issues/72
   (setq org-agenda-custom-commands
-				    '(("z" "Super view"
+	'(
+
+	  ;; https://emacs.stackexchange.com/questions/52994/org-mode-agenda-show-list-of-tasks-done-in-the-past-and-not-those-clocked
+	  ("w" "Weekly review"
+	   agenda ""
+	   ((org-agenda-start-day "-14d")
+	    (org-agenda-span 14)
+	    (org-agenda-start-on-weekday 1)
+	    (org-agenda-start-with-log-mode '(closed))
+	    (org-agenda-archives-mode t)
+	    (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "^\\*\\* DONE "))))
+
+
+	  ("z" "Super view"
 				       (
 					(agenda "" ((org-agenda-span 'day)
 					    (org-super-agenda-groups
@@ -280,8 +310,8 @@
 ;;         (tags . "%-12c")
 ;;         (search . "%-12c"))))
 
-(setq org-agenda-deadline-leaders (quote ("!D!: " "D%2d: " "")))
-(setq org-agenda-scheduled-leaders (quote ("" "S%3d: ")))
+;; (setq org-agenda-deadline-leaders (quote ("!D!: " "D%2d: " "")))
+;; (setq org-agenda-scheduled-leaders (quote ("" "S%3d: ")))
 
 ;; https://stackoverflow.com/questions/58820073/s-in-org-agenda-prefix-format-doesnt-display-dates-in-the-todo-view
 ;; (setq org-agenda-prefix-format
@@ -293,8 +323,8 @@
 (setq org-agenda-prefix-format '(
 				 ;; (agenda  . " %i %-30:c")
 				 ;; (todo  . " %i %-28:c")
-				 (agenda  . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
-				 (todo    . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
+				 ;; (agenda  . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
+				 (todo  . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
 				 ))
 
 
@@ -587,7 +617,7 @@
   :ensure t
   :init
   (require 'writeroom-mode)
-  (setq writeroom-width 0.97)
+  (setq writeroom-width 0.50)
   (add-hook 'writeroom-mode-hook (lambda () (display-line-numbers-mode -1)))
   :bind (:map writeroom-mode-map
               ;; ("C-c C-w <" . #'writeroom-decrease-width)
@@ -887,10 +917,10 @@
 (when (display-graphic-p)
   (progn
 
-    ;; (run-at-time "09:00" nil 'cfw:open-org-calendar)
-    ;; (run-at-time "12:00" nil 'cfw:open-org-calendar)
-    ;; (run-at-time "15:00" nil 'cfw:open-org-calendar)
-    ;; (run-at-time "18:00" nil 'cfw:open-org-calendar)
+    (run-at-time "09:00" nil 'cfw:open-org-calendar)
+    (run-at-time "12:00" nil 'cfw:open-org-calendar)
+    (run-at-time "15:00" nil 'cfw:open-org-calendar)
+    (run-at-time "18:00" nil 'cfw:open-org-calendar)
 
     ;; (run-at-time "13:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
     ;; (run-at-time "14:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
@@ -1185,8 +1215,8 @@
   :ensure t
   :init
   (require 'google-translate)
-  ;; (setq google-translate-default-source-language "en")
-  ;; (setq google-translate-default-target-language "ko")
+  (setq google-translate-default-source-language "en")
+  (setq google-translate-default-target-language "ko")
   (setq google-translate-output-destination 'echo-area)
   (setq google-translate-show-phonetic t)
 
@@ -1417,7 +1447,7 @@
 	 ("7" . ivy-switch-view)
 	 ("8" . winner-undo)
 	 ("9" . winner-redo)
-	 ("RET" . other-window)
+	 ;; ("RET" . other-window)
 	 ("DEL" . beacon-blink)
 	 ;; ("o" . ace-window)
 	 ;; ("o" . other-window)
@@ -1425,7 +1455,9 @@
 	 ("-" . text-scale-decrease)
 	 ("+" . balance-windows)
 	 ("_" . maximize-window)
-	 ("p" . toggle-window-dedicated)
+	 ;; ("p" . toggle-window-dedicated)
+	 ("p" . previous-line)
+	 ("D" . toggle-window-dedicated)
 
 	 ("s" . swiper)
 	 ;; ("a" . avy-goto-char)
@@ -1466,8 +1498,8 @@
 	 ("k" . my-paragraph-backward)
 	 ;; ("j" . forward-paragraph)
 	 ;; ("k" . backward-paragraph)
-	 ("J" . forward-paragraph)
-	 ("K" . backward-paragraph)
+	 ("J" . my-real-paragraph-forward)
+	 ("K" . my-real-paragraph-backward)
 	 ;; ("J" . org-next-visible-heading)       ; required in Org 9.4+
 	 ;; ("K" . org-previous-visible-heading)   ; required in Org 9.4+
 	 ;; - h/l -
@@ -1491,12 +1523,15 @@
 	 ;; ---
 	 ;; ("w" . right-word)
 	 ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
-	 ("/" . evil-search-forward)
-	 ("?" . evil-search-backward)
-	 ("n" . evil-search-next)
-	 ("N" . evil-search-previous)
+	 ;; ("/" . evil-search-forward)
+	 ;; ("?" . evil-search-backward)
+	 ;; ("n" . evil-search-next)
+	 ("n" . next-line)
+	 ;; ("N" . evil-search-previous)
 	 ;; ("n" . evil-normal-state)
-	 ("e" . View-scroll-line-forward)             ; scroll down (forward) - opposite to 'y'
+	 ;; ("e" . View-scroll-line-forward)             ; scroll down (forward) - opposite to 'y'
+	 ("e" . evil-scroll-line-down)
+	 ("y" . evil-scroll-line-up)
 	 ;; ("f" . evil-scroll-page-down)
 	 ;; ("b" . evil-scroll-page-up)
 	 ;; ("0" . beginning-of-visual-line)
@@ -1607,8 +1642,8 @@
 	 ;; ("r" . revert-buffer)
 	 ("r" . my-org-narrowing)
 	 ;; ("R" . revert-buffer)
-	 ("r" . writeroom-mode)
-	 ;; ("R" . writeroom-mode)
+	 ;; ("r" . writeroom-mode)
+	 ("R" . writeroom-mode)
 	 ;; ("a" . end-of-buffer)
 	 ;; ("a" . evil-goto-line)  ; end of line
 	 ("a" . ace-link)
@@ -1640,9 +1675,11 @@
 	 ;; ("i" . my-indirect-buffer)
 	 ;; ("i" . my-clone-indirect-buffer)
 	 ;; ("i" . evil-insert-state)
-	 ("o" . my-org-indirect-buffer)
+	 ("o" . other-window)
+	 ;; ("o" . my-org-indirect-buffer)
+	 ("i" . my-org-indirect-buffer)
 	 ;; ("i" . org-narrow-to-subtree)
-	 ("i" . my-org-narrowing)
+	 ;; ("i" . my-org-narrowing)
 	 ;; ("o" . widen)
 	 ;; ("ic" . my-clone-indirect-buffer)
 	 ;; ("io" . my-org-indirect-buffer)
@@ -1761,6 +1798,7 @@
   (if view-mode
       ;; https://emacs.stackexchange.com/questions/32123/evil-binding-q-to-view-quit-in-view-mode-instead-of-evil-record-macro
       (evil-emacs-state 1)  ;; always related between evil and view-mode 2021-04-04
+      ;; (evil-operator-state 1)
     )
   ;; (if view-mode
   ;;     (centered-cursor-mode 1)
@@ -1768,18 +1806,17 @@
   ;;   )
   (when (display-graphic-p) 
     (if view-mode
-	;; (face-remap-add-relative 'default '((:background "controlHighlightColor")))
-	;; (face-remap-add-relative 'default '((:background "gray95")))
 	(face-remap-add-relative 'default '((:background "gray90")))
-	;; (face-remap-add-relative 'default '((:background "gray")))
-	;; (face-remap-add-relative 'default '((:background "light gray")))
-	;; (face-remap-add-relative 'default '((:background "#fdf6e3")))
       (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
       )
     ;; (if (evil-emacs-state-p)
     ;;   (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
     ;; )
-  )
+
+    ;; (if view-mode
+    ;; 	(hl-line-mode 1)
+    ;;   (hl-line-mode 1)
+    ;;   )
 
   ;; (if view-mode 
   ;;     (progn
@@ -1794,9 +1831,28 @@
   ;;     )
   ;;   )
 
-  )
+  ))
 
 (add-hook 'view-mode-hook #'my-view-mode)
+
+;; (add-hook 'view-mode-hook (lambda () (hl-line-mode 1) (face-remap-add-relative 'hl-line nil :background "light gray")))
+;; (add-hook 'view-mode-hook (lambda () (message "view in")))
+;; (add-hook 'view-mode-off-hook (lambda () (message "view out")))
+
+
+;;https://emacs.stackexchange.com/questions/28918/how-to-check-the-current-state-in-evil-mode
+;; (cond
+;;  ((eq evil-state 'visual) (message "visual mode"))
+;;  ((eq evil-state 'normal) (message "normal mode"))
+;;  ((eq evil-state 'insert) (message "insert mode"))
+;;  ((eq evil-state 'emacs) (message "emacs mode"))
+;;  )
+
+
+;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Combining-Conditions.html
+;; (if (and (view-mode) (eq (evil-state) 'emacs))
+;;     (message "foo is a list starting with x"))
+
 
 
 ;; refer to 'make-indirect-buffer'
@@ -1883,6 +1939,8 @@
   (kill-current-buffer)
   (delete-window)
   )
+(global-set-key (kbd "C-M-x") 'my-kill-current-buffer-and-window)
+
 
 ;; Integrated to my-follow-mode 2021-05-17
 ;; come again 2021-05-18
@@ -1895,7 +1953,8 @@
   )
 
 
-;; [ winner mode 2021-04-02
+;; == winner mode 2021-04-02 ==
+;; [
 (winner-mode 1)
 ;; Not Working with Capital: Left / Right
 ;; (global-set-key (kbd "C-c C-<Left>") 'winner-undo)
@@ -1905,8 +1964,11 @@
 ;; Both OK with: inside <C-left> and outside C-<left>
 ;; (global-set-key (kbd "C-c <C-left>") 'winner-undo)
 ;; (global-set-key (kbd "C-c <C-right>") 'winner-redo)
-(global-set-key (kbd "C-c C-<left>") 'winner-undo)
-(global-set-key (kbd "C-c C-<right>") 'winner-redo)
+;; (global-set-key (kbd "C-c C-<left>") 'winner-undo)
+;; (global-set-key (kbd "C-c C-<right>") 'winner-redo)
+;; 'C-M-s-left/right' not working
+(global-set-key (kbd "<C-s-left>") 'winner-undo)
+(global-set-key (kbd "<C-s-right>") 'winner-redo)
 ;; ]
 
 
@@ -2404,8 +2466,8 @@
       ;; (menu-bar-mode -1)
       (scroll-bar-mode -1)
       ;; (global-hl-line-mode t)
-    )
- )
+    ))
+ 
 
 ;; Spell Check 2021-02-14
 (when (display-graphic-p)
@@ -2454,7 +2516,10 @@
 (use-package indent-guide
   :ensure t
   :init (require 'indent-guide)
-  :config (indent-guide-global-mode)
+  :config
+  ;; (indent-guide-global-mode)
+  (add-hook 'text-mode-hook 'indent-guide-mode)
+  (add-hook 'prog-mode-hook 'indent-guide-mode)
   )
 
 
@@ -2672,6 +2737,7 @@
     (evil-mode 1)
 )
 
+;; default starting mode among emacs or normal
 (setq-default evil-default-state 'emacs)
 ;; (setq-default evil-default-state 'normal)
 
@@ -2749,6 +2815,7 @@
       ;; <EMACS>
       (add-hook 'evil-emacs-state-entry-hook (lambda () (face-remap-add-relative 'default :background original-background)))
       (add-hook 'evil-emacs-state-entry-hook (lambda () (face-remap-add-relative 'default :foreground original-foreground)))
+      (add-hook 'evil-emacs-state-entry-hook (lambda () (hl-line-mode 0)))
     )
     ;; else (optional - terminal mode)
       (add-hook 'evil-normal-state-entry-hook (lambda () (hl-line-mode 1) (set-face-attribute hl-line-face nil :underline t :background original-background)))
@@ -3920,8 +3987,9 @@ T - tag prefix
 
 ;; Combine my-follow-mode + toggle functionality 2021-05-17
 ;; http://ergoemacs.org/emacs/elisp_toggle_command.html
+;; "Toggle URL `http://ergoemacs.org/emacs/elisp_toggle_command.html'Version 2015-12-17"
 (defun my-follow-mode ()
-  "Toggle URL `http://ergoemacs.org/emacs/elisp_toggle_command.html'Version 2015-12-17"
+  "Using follow-mode with 3 divided windows"
   (interactive)
   ;; use a property “following”. Value is t or nil
   (if (get 'my-follow-mode 'following)
@@ -3980,6 +4048,25 @@ T - tag prefix
   (find-file "~/Documents/nvALT/projx-CPA_CFA.txt")
   )
 (global-set-key (kbd "C-c w f") 'my-finance-workgroup)
+
+
+(defun my-job-workgroup ()
+  (interactive)
+  (split-window-right)
+  (other-window 1)
+  (find-file "~/Documents/nvALT/projx-JobBoard2021.txt")
+  )
+(global-set-key (kbd "C-c w j") 'my-job-workgroup)
+
+
+(defun my-reload-dot-emacs ()
+  "Reload .emacs without re-starting emacs and interupting my workflow"
+  (interactive)
+  (load-file "~/dotfiles/.emacs")
+  ;; (sit-for 2)
+  (message ">>> Reloaded .emacs successfully")
+  )
+(global-set-key (kbd "C-M-s-r") 'my-reload-dot-emacs)
 
 
 ;; https://github.com/abo-abo/swiper/issues/1079
