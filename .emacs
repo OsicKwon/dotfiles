@@ -127,7 +127,7 @@
   (forward-sentence 1)
   (forward-to-word 1)
   ;; (evil-forward-section-begin)
-  (mark-end-of-sentence 1)
+  ;; (mark-end-of-sentence 1)  ; for selection
   ;; (sleep-for 1)
   ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Waiting.html 
   ;; (sit-for 1)  ; update display
@@ -1508,8 +1508,8 @@
 	 ;; ("h" . backward-sentence)
 	 ;; ("l" . forward-sentence)
 	 ("H" . backward-sentence)
-	 ("L" . forward-sentence)
-	 ;; ("L" . my-forward-sentence)
+	 ;; ("L" . forward-sentence)
+	 ("L" . my-forward-sentence)
 	 ;; ("h" . beginning-of-visual-line)
 	 ;; ("l" . end-of-visual-line)
 	 ;; ("h" . left-word)
@@ -1524,6 +1524,7 @@
 	 ;; ("w" . right-word)
 	 ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
 	 ;; ("/" . evil-search-forward)
+	 ;; ("/" . my-hl-line-mode-toggle)
 	 ;; ("?" . evil-search-backward)
 	 ;; ("n" . evil-search-next)
 	 ("n" . next-line)
@@ -1692,11 +1693,13 @@
 	 ("." . imenu-list)  ; toggle not available
 	 ;; ("." . org-tree-slide-move-next-tree)
 	 ;; ("," . org-tree-slide-move-previous-tree)
+	 ("," . mwe-commands-exec)
 
 	 ;; olivetti
 	 (";" . olivetti-narrow-width)  ; toggle function
 	 ;; ("'" . olivetti-default-width)  ; turn to toggle functionality
-	 ("'" . my-forward-sentence)
+	 ;; ("'" . my-forward-sentence)
+	 ("'" . my-hl-line-mode-toggle)
          )
   )
 
@@ -3139,6 +3142,7 @@
 ;; Improved by toggle option 2021-05-18
 (defun olivetti-narrow-width()
   (interactive)
+  (olivetti-set-width 95)
   (if (get 'olivetti-narrow-width 'narrowed)
       (progn
 	(olivetti-set-width 0.99)
@@ -3992,6 +3996,12 @@ T - tag prefix
   "Using follow-mode with 3 divided windows"
   (interactive)
   ;; use a property “following”. Value is t or nil
+  (split-window-right)
+  (split-window-right)
+  (balance-windows)
+  (follow-mode 1)
+  ;; (view-mode 1)
+  (olivetti-set-width 0.90)
   (if (get 'my-follow-mode 'following)
       (progn
 	;; (kill-current-buffer)
@@ -4018,6 +4028,20 @@ T - tag prefix
 ;;     (progn
 ;;       (org-narrow-to-subtree)
 ;;       (put 'my-org-targeting 'targeting t))))
+
+
+(defun my-hl-line-mode-toggle ()
+  (interactive)
+  (hl-line-mode 1)
+  (if (get 'my-hl-line-mode-toggle 'hl-line-showing)
+      (progn
+	(hl-line-mode 0)
+	(face-remap-add-relative 'hl-line nil :background "light gray")
+	(put 'my-hl-line-mode-toggle 'hl-line-showing nil))
+    (progn
+      (hl-line-mode 1)
+      (put 'my-hl-line-mode-toggle 'hl-line-showing t))
+    ))
 
 
 (defun my-org-narrowing()
