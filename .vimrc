@@ -109,6 +109,8 @@ Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'powerline/powerline'
 Plugin 'flazz/vim-colorschemes'
 " Plugin 'altercation/vim-colors-solarized'
+" Plugin 'kyoz/purify'
+Plugin 'kyoz/purify', { 'rtp': 'vim' }
 
 "--------SnipMate-----------
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -141,6 +143,14 @@ Plugin 'w0rp/ale'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'junegunn/gv.vim'
+
+"----------Python-----------
+Plugin 'nvie/vim-flake8'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'sirver/ultisnips'
+Plugin 'klen/python-mode'
+Plugin 'jpalardy/vim-slime'
+Plugin 'hanschen/vim-ipython-cell'
 
 "----------Data-------------
 " Plugin 'chrisbra/csv.vim'              " not working. instead, >> Plug 'chrisbra/csv.vim'
@@ -187,14 +197,6 @@ Plugin 'liuchengxu/vim-which-key'       " 2021-04-16
 Plugin 'itchyny/vim-cursorword'         " 2021-04-16
 Plugin 'francoiscabrol/ranger.vim'      " 2021-04-24 - I don't know how
 " Plugin 'mhinz/vim-startify'
-
-"----------Python-----------
-Plugin 'nvie/vim-flake8'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'sirver/ultisnips'
-Plugin 'klen/python-mode'
-Plugin 'jpalardy/vim-slime'
-Plugin 'hanschen/vim-ipython-cell'
 
 "------Other_plugins--------
 " Plugin 'itchyny/calendar.vim'
@@ -605,15 +607,26 @@ nnoremap <right> <nop>
 " nnoremap <left>     :3wincmd <<CR>
 " nnoremap <right>    :3wincmd ><CR>
 
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" on mac, meta M is recognized a prefix for special character
 " nnoremap <M-k> :3wincmd +<cr>
 " nnoremap <M-j> :3wincmd -<cr>
 " nnoremap <M-h> :3wincmd <<cr>
 " nnoremap <M-l> :3wincmd ><cr>
 
-nnoremap <C-k> :3wincmd +<cr>
-nnoremap <C-j> :3wincmd -<cr>
-nnoremap <C-h> :3wincmd <<cr>
-nnoremap <C-l> :3wincmd ><cr>
+" so, use a special key as a M-hjkl for macvim
+" in terminal, turn off 'option key' as a meta
+" in iterm2, meta key as a 'Noraml'
+" but, emacs needs the meta key!!
+" https://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
+nnoremap ˙ :3wincmd <<cr>
+nnoremap ∆ :3wincmd -<cr>
+nnoremap ˚ :3wincmd +<cr>
+nnoremap ¬ :3wincmd ><cr>
 
 " nnoremap <silent><space>wh <C-w>h
 " nnoremap <silent><space>wj <C-w>j
@@ -625,10 +638,10 @@ nnoremap k gk
 
 " Hard Mode (Anti-Pattern)
 " tips: '+' and '-' move lines, or 'gj' and 'gk' 2021-03-09
-" nnoremap hh <nop>
-" nnoremap jj <nop>
-" nnoremap kk <nop>
-" nnoremap ll <nop>
+" nnoremap hh <nop>  " use F | T
+" nnoremap jj <nop>  " use { } ( )
+" nnoremap kk <nop>  " use { } ( )
+" nnoremap ll <nop>  " use f | t
 "}}}
 
 " --------
@@ -1066,7 +1079,7 @@ endif"}}}
 " Focusing Mode
 "---------------
 " nnoremap <silent> <leader>f :FocusToggle<cr>
-nnoremap <silent> <leader>r :FocusMode<cr>
+" nnoremap <silent> <leader>r :FocusMode<cr>
 nnoremap <silent> <leader>d :DarkFocusMode<cr>
 nnoremap <silent> <leader>e :EditMode<cr>
 nnoremap <silent> <leader>q :UnFocusMode<cr>
@@ -1074,6 +1087,7 @@ nnoremap <silent> <leader>q :UnFocusMode<cr>
 "------------
 " Utilities
 "------------
+nnoremap <silent> <leader>r  :Ranger<cr>
 nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
 nnoremap <silent> <leader>t  :TagbarToggle<cr>
 nnoremap <silent> <leader>b  :bro old<cr>
@@ -1206,8 +1220,9 @@ autocmd BufEnter *.vimrc colorscheme PaperColor | set background=dark
 
 autocmd BufEnter *.php   colorscheme molokai | set background=dark
 autocmd BufEnter *.html  colorscheme molokai | set background=dark
-autocmd BufEnter *.phtml colorscheme molokai | set background=dark
+autocmd BufEnter *.phtml colorscheme purify | set background=dark
 
+autocmd FileType html,xml,py,lisp,js,org set nospell
 
 "---------------
 " MODE SETTINGS

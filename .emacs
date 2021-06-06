@@ -75,6 +75,7 @@
 
 
 
+
 ;; no error beep sound 2021-05-31
 ;; (setq ring-bell-function 'ignore)
 
@@ -765,8 +766,8 @@
   :init (require 'burly)
   :bind
   ;; ("C-c b w" . burly-bookmark-windows)
-  ("C-c C-b" . burly-bookmark-windows)
-  ("C-c b" . burly-open-bookmark)
+  ("C-c b w" . burly-bookmark-windows)
+  ("C-c b o" . burly-open-bookmark)
   )
 
 ;; [Replace to] Workgroup2 << altrnatives :: desktop-save-mode, register, ivy-view, bookmark+
@@ -808,7 +809,9 @@
   :init
   (require 'ranger)
   (message ">>> ranger loaded in :init option")
-  :config (progn (message ">>> ranger loaded in :config option"))
+  :config
+  (progn (message ">>> ranger loaded in :config option"))
+  (global-set-key (kbd "C-c r") 'ranger)
   :preface (progn (message ">>> ranger loaded in :preface option"))
 
   )
@@ -1434,8 +1437,10 @@
 	 ;; ("p" . previous-line)
 	 ;; ("f" . right-word)
 	 ;; ("b" . left-word)
-	 ("f" . evil-forward-WORD-begin)
-	 ("b" . evil-backward-WORD-begin)
+	 ;; ("f" . evil-forward-WORD-begin)
+	 ;; ("b" . evil-backward-WORD-begin)
+	 ("f" . evil-scroll-page-down)
+	 ("b" . evil-scroll-page-up)
 	 ;; window
 	 ("0" . delete-window)
 	 ("1" . delete-other-windows)      ; show only current selected widnow
@@ -1498,8 +1503,10 @@
 	 ("k" . my-paragraph-backward)
 	 ;; ("j" . forward-paragraph)
 	 ;; ("k" . backward-paragraph)
-	 ("J" . my-real-paragraph-forward)
-	 ("K" . my-real-paragraph-backward)
+	 ;; ("J" . my-real-paragraph-forward)
+	 ;; ("K" . my-real-paragraph-backward)
+	 ("J" . evil-next-visual-line)
+	 ("K" . evil-previous-visual-line)
 	 ;; ("J" . org-next-visible-heading)       ; required in Org 9.4+
 	 ;; ("K" . org-previous-visible-heading)   ; required in Org 9.4+
 	 ;; - h/l -
@@ -1507,9 +1514,12 @@
 	 ;; ("h" . org-previous-visible-heading)   ; required in Org 9.4+
 	 ;; ("h" . backward-sentence)
 	 ;; ("l" . forward-sentence)
-	 ("H" . backward-sentence)
+	 ;; ("H" . backward-sentence)
 	 ;; ("L" . forward-sentence)
-	 ("L" . my-forward-sentence)
+	 ;; ("L" . my-forward-sentence)
+	 ;; ("L" . evil-forward-sentence-begin)
+	 ("H" . evil-backward-char)
+	 ("L" . evil-forward-char)
 	 ;; ("h" . beginning-of-visual-line)
 	 ;; ("l" . end-of-visual-line)
 	 ;; ("h" . left-word)
@@ -1523,7 +1533,7 @@
 	 ;; ---
 	 ;; ("w" . right-word)
 	 ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
-	 ;; ("/" . evil-search-forward)
+	 ("/" . evil-search-forward)
 	 ;; ("/" . my-hl-line-mode-toggle)
 	 ;; ("?" . evil-search-backward)
 	 ;; ("n" . evil-search-next)
@@ -1701,7 +1711,7 @@
 	 ;; Unbind-keys
 	 ;; -----------
 	 ;; ("h" . nil)
-	 ("/" . nil)
+	 ;; ("/" . nil)
 
          )
   )
@@ -2460,7 +2470,7 @@
   ;; (require 'paren) (set-face-background 'show-paren-match (face-background 'default))
   ;; (set-face-foreground 'show-paren-match "#def")
   ;; (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
-  (set-face-background 'show-paren-match "black")
+  (set-face-background 'show-paren-match "blue")
 )
 
 
@@ -3400,6 +3410,14 @@ T - tag prefix
 (global-set-key "\C-ca" 'org-agenda)                          ; Org Agenda View shortcut
 (global-set-key (kbd "C-M-<return>") 'org-insert-subheading)  ; Org Insert Sub-Heading 2021-03-31
 
+(global-set-key "\C-coh" 'org-metaleft)
+(global-set-key "\C-col" 'org-metaright)
+(global-set-key "\C-coj" 'org-metadown)
+(global-set-key "\C-cok" 'org-metaup)
+
+(global-set-key "\C-coH" 'org-shiftleft)
+(global-set-key "\C-coL" 'org-shiftright)
+
 (add-to-list 'org-emphasis-alist '("~" (:foreground "red3")))
 (add-to-list 'org-emphasis-alist '("/" (:foreground "dark blue" :slant italic)))
 
@@ -3476,6 +3494,9 @@ T - tag prefix
     '(
       ("i" "Inbox" checkitem (file+headline "~/Documents/nvALT/org_capture_note.txt" "Inbox on Working")
        "- [ ] %U - %^{Initial Text} :: %?")
+
+      ("t" "Task TODO" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Tasks")
+       "** %^{Select Type|TODO|SCHED|WAIT|HOLD} %? \nDEADLINE: %^t" :empty-lines 1)
 
       ("s" "Scrap with selected area" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Scrap")
        "** %? \nselected area:\n---------------\n %i \n---------------\nsource: %a - %U" :empty-lines 1)
@@ -3612,6 +3633,8 @@ T - tag prefix
 ;; http://pragmaticemacs.com/emacs/scrolling-and-moving-by-line/
 ;; (global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
 ;; (global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
+(global-set-key (kbd "M-n") 'forward-paragraph)
+(global-set-key (kbd "M-p") 'backward-paragraph)
 
 
 ;; org refile-multi_level 2020-12-12
@@ -3682,7 +3705,7 @@ T - tag prefix
 ;; (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
 ;; (global-set-key (kbd "C-c g") 'counsel-git)
 ;; (global-set-key (kbd "C-c j") 'counsel-git-grep)
-;; (global-set-key (kbd "C-c b") 'counsel-bookmark)
+(global-set-key (kbd "C-c b b") 'counsel-bookmark)
 (global-set-key (kbd "C-c k") 'counsel-ag)  ;; connected gitignore, but solved (--skip-vcs-ignores)
 ;; (global-set-key (kbd "C-c k") 'counsel-ack)  ;; ignore git status 2021-03-28
 (global-set-key (kbd "C-c t") 'counsel-outline)

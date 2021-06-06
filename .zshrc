@@ -113,3 +113,6 @@ export EDITOR="/usr/local/Cellar/vim/8.1.2350/bin/vim"
 # clear
 # fortune | cowsay && tput setaf 2 && toilet -f pagga $(echo $USER) && date
 fortune | cowsay && tput setaf 2 && toilet -f pagga Z-shell && date
+
+# https://github.com/kyoz/purify/tree/master/zsh
+ZSH_THEME="purify"
