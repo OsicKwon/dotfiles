@@ -219,7 +219,8 @@ let g:solarized_termcolors=256
 let g:NERDTreeWinSize=40
 " let g:org_indent=1
 let g:highlightedyank_highlight_duration = 500
-
+" https://stackoverflow.com/questions/21628743/cant-get-the-jedi-vim-plugin-to-work
+" let g:jedi#force_py_version = 3
 
 "----------------------------------------------
  "MARKDOWN SUPPORT for 'plasticboy/vim-markdown'
