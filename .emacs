@@ -3497,7 +3497,7 @@ T - tag prefix
        "- [ ] %U - %^{Initial Text} :: %?")
 
       ("t" "Task TODO" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Tasks")
-       "** %^{Select Type|TODO|SCHED|WAIT|HOLD} %? \nDEADLINE: %^t" :empty-lines 1)
+       "** %^{Select Type|TODO|SCHED|WAIT|HOLD} %? \nSCHEDULED: %^t" :empty-lines 1)
 
       ("s" "Scrap with selected area" entry (file+headline "~/Documents/nvALT/org_capture_note.txt" "Scrap")
        "** %? \nselected area:\n---------------\n %i \n---------------\nsource: %a - %U" :empty-lines 1)
