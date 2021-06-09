@@ -512,6 +512,7 @@
 ;; https://www.reddit.com/r/emacs/comments/n71hj2/python_how_would_you_configure_emacs_for_data/
 (use-package ein
   :ensure t
+  :disabled
   :init 
   (require 'ein)
   (setq ein:polymode t
@@ -938,7 +939,7 @@
 ;; (run-at-time 500 500 (lambda () (message "run-at-time: Think Big, Start Small, Move Fast ")))
 (run-with-timer 500 500 (lambda () (message "run-with-timer: Think Big, Start Small, Move Fast ")))
 ;; (run-with-idle-timer 30 30 (lambda () (message "run-with-idle-timer: Start at the end")))
-(run-with-idle-timer 300 300 (lambda () (message "run-with-idle-timer: Just Do It from Starting at The End")))
+;; (run-with-idle-timer 300 300 (lambda () (message "run-with-idle-timer: Just Do It from Starting at The End")))
 
 
 ;; == Link Abbreviation 2021-04-19 ==
@@ -1460,8 +1461,8 @@
 	 ("-" . text-scale-decrease)
 	 ("+" . balance-windows)
 	 ("_" . maximize-window)
-	 ;; ("p" . toggle-window-dedicated)
-	 ("p" . previous-line)
+	 ;; ("p" . previous-line)
+	 ("p" . toggle-window-dedicated)
 	 ("D" . toggle-window-dedicated)
 
 	 ("s" . swiper)
@@ -1532,12 +1533,12 @@
 	 ;; ("L" . org-tree-slide-move-next-tree)
 	 ;; ---
 	 ;; ("w" . right-word)
-	 ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
+	 ("N" . View-search-last-regexp-backward)  ; Regex previous result
 	 ("/" . evil-search-forward)
 	 ;; ("/" . my-hl-line-mode-toggle)
-	 ;; ("?" . evil-search-backward)
-	 ;; ("n" . evil-search-next)
-	 ("n" . next-line)
+	 ("?" . evil-search-backward)
+	 ("n" . evil-search-next)
+	 ;; ("n" . next-line)
 	 ;; ("N" . evil-search-previous)
 	 ;; ("n" . evil-normal-state)
 	 ;; ("e" . View-scroll-line-forward)             ; scroll down (forward) - opposite to 'y'
@@ -3910,8 +3911,8 @@ T - tag prefix
 ;; === JEDI ===
 ;; jedi 2021-01-16
 ;; https://tkf.github.io/emacs-jedi/latest/
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)                 ; optional
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (setq jedi:complete-on-dot t)                 ; optional
 
 
 ;; ;; ;; Use IPython for REPL
@@ -3924,9 +3925,9 @@ T - tag prefix
 (setq python-indent-guess-indent-offset-verbose nil)
 
 (setq org-babel-python-command "python3")
-;; (setq python-shell-interpreter "python3")
-(setq python-shell-interpreter "ipython3"
-      python-shell-interpreter-args "-i --simple-prompt")
+(setq python-shell-interpreter "python3")
+;; (setq python-shell-interpreter "ipython3"
+;;       python-shell-interpreter-args "-i --simple-prompt")
 
 ;; (setq python-shell-completion-native-enable t)
 ;; (setq python-shell-completion-toggle t)
@@ -3937,6 +3938,7 @@ T - tag prefix
 ;; https://sqrtminusone.xyz/posts/2021-05-01-org-python/
 (use-package jupyter
   :ensure t
+  :disabled
   :straight t
   )
 

@@ -608,10 +608,15 @@ nnoremap <right> <nop>
 " nnoremap <left>     :3wincmd <<CR>
 " nnoremap <right>    :3wincmd ><CR>
 
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
+"
+nnoremap <C-k> :3wincmd +<cr>
+nnoremap <C-j> :3wincmd -<cr>
+nnoremap <C-h> :3wincmd <<cr>
+nnoremap <C-l> :3wincmd ><cr>
 
 " on mac, meta M is recognized a prefix for special character
 " nnoremap <M-k> :3wincmd +<cr>
@@ -624,10 +629,10 @@ nnoremap <C-l> <C-w>l
 " in iterm2, meta key as a 'Noraml'
 " but, emacs needs the meta key!!
 " https://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
-nnoremap ˙ :3wincmd <<cr>
-nnoremap ∆ :3wincmd -<cr>
-nnoremap ˚ :3wincmd +<cr>
-nnoremap ¬ :3wincmd ><cr>
+" nnoremap ˙ :3wincmd <<cr>
+" nnoremap ∆ :3wincmd -<cr>
+" nnoremap ˚ :3wincmd +<cr>
+" nnoremap ¬ :3wincmd ><cr>
 
 " nnoremap <silent><space>wh <C-w>h
 " nnoremap <silent><space>wj <C-w>j
@@ -689,10 +694,10 @@ vnoremap <right> <nop>
 "  Command
 " ---------
 "{{{
-cnoremap <up> <nop>
-cnoremap <down> <nop>
-cnoremap <left> <nop>
-cnoremap <right> <nop>
+" cnoremap <up> <nop>
+" cnoremap <down> <nop>
+" cnoremap <left> <nop>
+" cnoremap <right> <nop>
 
 " Emacs style Keybinding in command mode
 "----------------------------------------
@@ -1223,7 +1228,16 @@ autocmd BufEnter *.php   colorscheme molokai | set background=dark
 autocmd BufEnter *.html  colorscheme molokai | set background=dark
 autocmd BufEnter *.phtml colorscheme purify | set background=dark
 
-autocmd FileType html,xml,py,lisp,js,org set nospell
+autocmd FileType html,xml,py,lisp,js,org,dat,csv set nospell
+
+
+"----------------
+" Korean / Hangul
+"----------------
+" https://johngrib.github.io/blog/2017/05/04/input-source/
+" 2021-06-09
+" set langmap=ㅁa,ㅠb,ㅊc,ㅇd,ㄷe,ㄹf,ㅎg,ㅗh,ㅑi,ㅓj,ㅏk,ㅣl,ㅡm,ㅜn,ㅐo,ㅔp,ㅂq,ㄱr,ㄴs,ㅅt,ㅕu,ㅍv,ㅈw,ㅌx,ㅛy,ㅋz
+
 
 "---------------
 " MODE SETTINGS
