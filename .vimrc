@@ -152,6 +152,9 @@ Plugin 'klen/python-mode'
 Plugin 'jpalardy/vim-slime'
 Plugin 'hanschen/vim-ipython-cell'
 
+"----------Javascript-----------
+Plugin 'pangloss/vim-javascript'
+
 "----------Data-------------
 " Plugin 'chrisbra/csv.vim'              " not working. instead, >> Plug 'chrisbra/csv.vim'
 Plugin 'mechatroner/rainbow_csv'
