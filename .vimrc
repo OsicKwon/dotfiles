@@ -27,7 +27,7 @@ set sidescroll=1                      " options: 0, 1, 2, ....
 " set virtualedit=all
 set modeline
 set modelines=10
-set spell
+set nospell
 set spelllang=en_ca
 " set spelllang=EN_ca
 " set colorcolumn=80,120
@@ -103,7 +103,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "---------Themes------------
-" Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'itchyny/lightline.vim'
 " Plugin 'powerline/powerline'
@@ -256,7 +256,7 @@ augroup END
 " for markdown-folding plugin setting
 autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
 
-let g:airline_theme='tomorrow'  "default minimalist bubblegum raven angr
+let g:airline_theme='bubblegum'  "default minimalist bubblegum raven angr
 " air-line
 let g:airline_powerline_fonts = 1
 
@@ -269,10 +269,10 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 "{{{
 " unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
 let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.linenr = '␤'
 let g:airline_symbols.linenr = '¶'
@@ -283,10 +283,10 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
 " airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
