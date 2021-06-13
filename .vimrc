@@ -164,6 +164,9 @@ Plugin 'klen/python-mode'
 Plugin 'jpalardy/vim-slime'
 Plugin 'hanschen/vim-ipython-cell'
 
+"----------Javascript-----------
+Plugin 'pangloss/vim-javascript'
+
 "----------Data-------------
 " Plugin 'chrisbra/csv.vim'              " not working. instead, >> in Plug 'chrisbra/csv.vim'
 Plugin 'mechatroner/rainbow_csv'
@@ -285,7 +288,11 @@ augroup END
 " for markdown-folding plugin setting
 autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
 
+<<<<<<< HEAD
 let g:airline_theme='bubblegum'  "default minimalist bubblegum raven angr tomorrow
+=======
+let g:airline_theme='bubblegum'  "default minimalist bubblegum raven angr
+>>>>>>> a5bbfe0ff8953c781f127a9d130c700a2dd350a6
 " air-line
 let g:airline_powerline_fonts = 1
 
@@ -297,11 +304,16 @@ let g:airline_left_sep=''
 " the separator used on the right side
 let g:airline_right_sep=''
 "{{{
+<<<<<<< HEAD
 " " unicode symbols
+=======
+" unicode symbols
+>>>>>>> a5bbfe0ff8953c781f127a9d130c700a2dd350a6
 " let g:airline_left_sep = '»'
 " let g:airline_left_sep = '▶'
 " let g:airline_right_sep = '«'
 " let g:airline_right_sep = '◀'
+<<<<<<< HEAD
 " let g:airline_symbols.linenr = '␊'
 " let g:airline_symbols.linenr = '␤'
 " let g:airline_symbols.linenr = '¶'
@@ -312,13 +324,31 @@ let g:airline_right_sep=''
 " let g:airline_symbols.whitespace = 'Ξ'
 
 " " airline symbols
+=======
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+>>>>>>> a5bbfe0ff8953c781f127a9d130c700a2dd350a6
 " let g:airline_left_sep = ''
 " let g:airline_left_alt_sep = ''
 " let g:airline_right_sep = ''
 " let g:airline_right_alt_sep = ''
+<<<<<<< HEAD
 " let g:airline_symbols.branch = ''
 " let g:airline_symbols.readonly = ''
 " let g:airline_symbols.linenr = ''
+=======
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+>>>>>>> a5bbfe0ff8953c781f127a9d130c700a2dd350a6
 "}}}
 
 set thesaurus+=~/.vim/thesaurus/mthesaur.txt
