@@ -20,14 +20,16 @@ set history=500                       " default was 50
 " set autoread                          " preventing something that I just write
 " au FocusGained,BufEnter * :silent! !  " -- reload when entering the buffer or gaining focus
 " au FocusLost,WinLeave * :silent! w    " -- save when exiting the buffer or losing focus
-
+set encoding=utf-8
 set clipboard=unnamed
 set ttimeoutlen=0                     " eliminating time delay to Normal mode
 set sidescroll=1                      " options: 0, 1, 2, ....
 " set virtualedit=all
+set complete+=kspell
+set completeopt=menuone,longest
 set modeline
 set modelines=10
-set spell
+set nospell
 set spelllang=en_ca
 " set spelllang=EN_ca
 " set colorcolumn=80,120
@@ -93,9 +95,17 @@ call plug#begin('~/.vim/plugged')
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'chrisbra/csv.vim'
 " Plug 'jceb/vim-orgmode'
+Plug 'davidhalter/jedi-vim'
+
 call plug#end()
 
+set completeopt+=longest,menuone,noinsert
 
+
+
+" ------
+" VUNDLE
+" ------
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
@@ -103,7 +113,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "---------Themes------------
-" Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'itchyny/lightline.vim'
 " Plugin 'powerline/powerline'
@@ -138,6 +148,7 @@ Plugin 'terryma/vim-expand-region'
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
 " Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
 Plugin 'w0rp/ale'
+Plugin 'puremourning/vimspector'
 
 "----------Git--------------
 Plugin 'airblade/vim-gitgutter'
@@ -145,15 +156,16 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'junegunn/gv.vim'
 
 "----------Python-----------
-Plugin 'nvie/vim-flake8'
-Plugin 'davidhalter/jedi-vim'
 Plugin 'sirver/ultisnips'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'zchee/deoplete-jedi'
+Plugin 'nvie/vim-flake8'
 Plugin 'klen/python-mode'
 Plugin 'jpalardy/vim-slime'
 Plugin 'hanschen/vim-ipython-cell'
 
 "----------Data-------------
-" Plugin 'chrisbra/csv.vim'              " not working. instead, >> Plug 'chrisbra/csv.vim'
+" Plugin 'chrisbra/csv.vim'              " not working. instead, >> in Plug 'chrisbra/csv.vim'
 Plugin 'mechatroner/rainbow_csv'
 
 "---------Writing-----------
@@ -193,10 +205,12 @@ Plugin 'ervandew/supertab'
 Plugin 'machakann/vim-highlightedyank'  " 2021-02-26
 " Plugin 'justinmk/vim-dirvish'
 Plugin 'rking/ag.vim'                   " Silver Searcher (ag) 2021-03-28
-Plugin 'liuchengxu/vim-which-key'       " 2021-04-16
+" Plugin 'liuchengxu/vim-which-key'       " 2021-04-16
 Plugin 'itchyny/vim-cursorword'         " 2021-04-16
 Plugin 'francoiscabrol/ranger.vim'      " 2021-04-24 - I don't know how
 " Plugin 'mhinz/vim-startify'
+Plugin 'szw/vim-maximizer'
+
 
 "------Other_plugins--------
 " Plugin 'itchyny/calendar.vim'
@@ -221,6 +235,24 @@ let g:NERDTreeWinSize=40
 let g:highlightedyank_highlight_duration = 500
 " https://stackoverflow.com/questions/21628743/cant-get-the-jedi-vim-plugin-to-work
 " let g:jedi#force_py_version = 3
+
+" https://www.reddit.com/r/vim/comments/5w6wac/vim_users_of_reddit_whats_your_favorite/
+set completeopt-=preview
+set completeopt+=menu,menuone,noinsert,noselect
+set shortmess+=c
+
+augroup OmniCompletionSetup
+    autocmd!
+    autocmd FileType c          set omnifunc=ccomplete#Complete
+    autocmd FileType php        set omnifunc=phpcomplete#CompletePHP
+    autocmd FileType python     set omnifunc=jedi#completions
+    autocmd FileType ruby       set omnifunc=rubycomplete#Complete
+    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType html       set omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType css        set omnifunc=csscomplete#CompleteCSS
+    autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
+augroup END
+
 
 "----------------------------------------------
  "MARKDOWN SUPPORT for 'plasticboy/vim-markdown'
@@ -253,7 +285,7 @@ augroup END
 " for markdown-folding plugin setting
 autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
 
-let g:airline_theme='tomorrow'  "default minimalist bubblegum raven angr
+let g:airline_theme='bubblegum'  "default minimalist bubblegum raven angr tomorrow
 " air-line
 let g:airline_powerline_fonts = 1
 
@@ -265,28 +297,28 @@ let g:airline_left_sep=''
 " the separator used on the right side
 let g:airline_right_sep=''
 "{{{
-" unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
+" " unicode symbols
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.linenr = '␊'
+" let g:airline_symbols.linenr = '␤'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.branch = '⎇'
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = '∥'
+" let g:airline_symbols.whitespace = 'Ξ'
 
-" airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
+" " airline symbols
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
+" let g:airline_symbols.branch = ''
+" let g:airline_symbols.readonly = ''
+" let g:airline_symbols.linenr = ''
 "}}}
 
 set thesaurus+=~/.vim/thesaurus/mthesaur.txt
@@ -1216,6 +1248,13 @@ map <F9> :make<Return>:copen<Return>
 map <F10> :cprevious<Return>
 map <F11> :cnext<Return>
 
+
+" -------
+" Python
+" -------
+" Finally, make your code look pretty:
+" https://realpython.com/vim-and-python-a-match-made-in-heaven/
+let python_highlight_all=1
 
 "----------------------
 " PaperColor Filetypes
