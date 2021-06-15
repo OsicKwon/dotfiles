@@ -95,7 +95,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'chrisbra/csv.vim'
 " Plug 'jceb/vim-orgmode'
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim'
 
 call plug#end()
 
@@ -157,10 +157,10 @@ Plugin 'junegunn/gv.vim'
 
 "----------Python-----------
 Plugin 'sirver/ultisnips'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'zchee/deoplete-jedi'
+" Plugin 'davidhalter/jedi-vim'
+" Plugin 'zchee/deoplete-jedi'
 Plugin 'nvie/vim-flake8'
-Plugin 'klen/python-mode'
+" Plugin 'klen/python-mode'
 Plugin 'jpalardy/vim-slime'
 Plugin 'hanschen/vim-ipython-cell'
 
@@ -288,13 +288,9 @@ augroup END
 " for markdown-folding plugin setting
 autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
 
-<<<<<<< HEAD
-let g:airline_theme='bubblegum'  "default minimalist bubblegum raven angr tomorrow
-=======
-let g:airline_theme='bubblegum'  "default minimalist bubblegum raven angr
->>>>>>> a5bbfe0ff8953c781f127a9d130c700a2dd350a6
+let g:airline_theme='wombat'  "default minimalist bubblegum raven angr tomorrow wombat
 " air-line
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -304,27 +300,11 @@ let g:airline_left_sep=''
 " the separator used on the right side
 let g:airline_right_sep=''
 "{{{
-<<<<<<< HEAD
-" " unicode symbols
-=======
 " unicode symbols
->>>>>>> a5bbfe0ff8953c781f127a9d130c700a2dd350a6
 " let g:airline_left_sep = '»'
 " let g:airline_left_sep = '▶'
 " let g:airline_right_sep = '«'
 " let g:airline_right_sep = '◀'
-<<<<<<< HEAD
-" let g:airline_symbols.linenr = '␊'
-" let g:airline_symbols.linenr = '␤'
-" let g:airline_symbols.linenr = '¶'
-" let g:airline_symbols.branch = '⎇'
-" let g:airline_symbols.paste = 'ρ'
-" let g:airline_symbols.paste = 'Þ'
-" let g:airline_symbols.paste = '∥'
-" let g:airline_symbols.whitespace = 'Ξ'
-
-" " airline symbols
-=======
 let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.linenr = '␤'
 let g:airline_symbols.linenr = '¶'
@@ -335,20 +315,13 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
 " airline symbols
->>>>>>> a5bbfe0ff8953c781f127a9d130c700a2dd350a6
 " let g:airline_left_sep = ''
 " let g:airline_left_alt_sep = ''
 " let g:airline_right_sep = ''
 " let g:airline_right_alt_sep = ''
-<<<<<<< HEAD
-" let g:airline_symbols.branch = ''
-" let g:airline_symbols.readonly = ''
-" let g:airline_symbols.linenr = ''
-=======
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
->>>>>>> a5bbfe0ff8953c781f127a9d130c700a2dd350a6
 "}}}
 
 set thesaurus+=~/.vim/thesaurus/mthesaur.txt
@@ -530,7 +503,7 @@ set stl+=%{&spell?&spelllang:''}
 set stl+=%{&spell?'\ ┆\ ':''}
 " set statusline+=%{&spelllang}
 " set statusline+=\ \|\            " separator
-"set statusline+=%#Tabline#
+" set statusline+=%#Tabline#
 "set statusline+=\               " blank
 " set statusline+=\ %{fugitive#statusline()}\   
 set statusline+=\ %{fugitive#head()}\   
@@ -1158,6 +1131,7 @@ nnoremap <silent> <leader>q :UnFocusMode<cr>
 nnoremap <silent> <leader>r  :Ranger<cr>
 nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
 nnoremap <silent> <leader>t  :TagbarToggle<cr>
+nnoremap <silent> <leader>m  :MaximizerToggle<cr>
 nnoremap <silent> <leader>b  :bro old<cr>
 " maximize window size -> insted, vanila Vim: c-w _ / c-w
 " nnoremap <silent> <leader>mw  :vert resize 999<cr>
@@ -1286,8 +1260,9 @@ map <F11> :cnext<Return>
 " https://realpython.com/vim-and-python-a-match-made-in-heaven/
 let python_highlight_all=1
 
+
 "----------------------
-" PaperColor Filetypes
+" Color Filetypes
 "----------------------
 autocmd BufEnter *.sh    colorscheme PaperColor | set background=dark | set nospell
 autocmd BufEnter *.py    colorscheme PaperColor | set background=dark | set nospell

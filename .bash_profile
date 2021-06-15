@@ -12,6 +12,7 @@ export PATH
 
 export CLICOLOR=1
 export LSCOLORS=GxBxCxDxexegedabagaced
+export TERM=xterm-256color
  
 parse_git_branch() {
    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'

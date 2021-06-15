@@ -73,8 +73,9 @@
 
 ;; xr
 
-
-
+; org-hide background to black in terminal 2021-06-14
+;; (unless (display-graphic-p)
+;;   (set-face-foreground 'org-hide :foreground "black"))
 
 ;; no error beep sound 2021-05-31
 ;; (setq ring-bell-function 'ignore)
@@ -1093,6 +1094,23 @@
   :ensure t
   :init (require 'org-appear)
   :config (add-hook 'org-mode-hook 'org-appear-mode)
+  )
+
+;; https://github.com/integral-dw/org-superstar-mode/issues/9
+(use-package org-superstar
+  :ensure t
+  :disabled
+  :hook
+  (org-mode . (lambda () (org-superstar-mode 1)))
+  :config
+  (setq org-superstar-headline-bullets-list
+	'("◉" "●" "○" "♦" "◆" "►" "▸"))
+  (setq org-superstar-todo-bullet-alist '(("NEXT" . ?☐)
+					  ("WAIT" . ?*)
+					  ("SOME" . ?☼)
+					  ("DONE" . ?☑)
+					  ("CANC" . ?❌)))
+  (setq org-superstar-special-todo-items t)
   )
 
 
@@ -2198,6 +2216,7 @@
  '(org-fontify-done-headline t)
  '(org-fontify-quote-and-verse-blocks t)
  '(org-fontify-whole-heading-line t)
+ '(org-hide-emphasis-markers t)
  '(org-link-frame-setup
    '((vm . vm-visit-folder-other-frame)
      (vm-imap . vm-visit-imap-folder-other-frame)
@@ -2586,6 +2605,7 @@
  '(mode-line-inactive ((t (:inherit (shadow mode-line)))))
  '(org-document-title ((t (:foreground "midnight blue" :weight bold :height 1.4))))
  '(org-ellipsis ((t nil)))
+ '(org-hide ((t (:foreground "textBackgroundColor"))))
  '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
  '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
@@ -2631,8 +2651,8 @@
 
 ;; == split window and then select other window 2021-04-25 ==
 ;; https://stackoverflow.com/questions/6464738/how-can-i-switch-focus-after-buffer-split-in-emacs
-;; (global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
-;; (global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
+(global-set-key "\C-x2" (lambda () (interactive)(split-window-vertically) (other-window 1)))
+(global-set-key "\C-x3" (lambda () (interactive)(split-window-horizontally) (other-window 1)))
 
 
 ;; == ace-window 2021-02-23 ==
