@@ -95,7 +95,7 @@ call plug#begin('~/.vim/plugged')
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'chrisbra/csv.vim'
 " Plug 'jceb/vim-orgmode'
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim'
 
 call plug#end()
 
@@ -157,10 +157,10 @@ Plugin 'junegunn/gv.vim'
 
 "----------Python-----------
 Plugin 'sirver/ultisnips'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'zchee/deoplete-jedi'
+" Plugin 'davidhalter/jedi-vim'
+" Plugin 'zchee/deoplete-jedi'
 Plugin 'nvie/vim-flake8'
-Plugin 'klen/python-mode'
+" Plugin 'klen/python-mode'
 Plugin 'jpalardy/vim-slime'
 Plugin 'hanschen/vim-ipython-cell'
 
@@ -238,6 +238,7 @@ let g:NERDTreeWinSize=40
 let g:highlightedyank_highlight_duration = 500
 " https://stackoverflow.com/questions/21628743/cant-get-the-jedi-vim-plugin-to-work
 " let g:jedi#force_py_version = 3
+let g:ranger_map_keys = 0  " disable default ranger key -> <leader>f
 
 " https://www.reddit.com/r/vim/comments/5w6wac/vim_users_of_reddit_whats_your_favorite/
 set completeopt-=preview
@@ -503,7 +504,7 @@ set stl+=%{&spell?&spelllang:''}
 set stl+=%{&spell?'\ ┆\ ':''}
 " set statusline+=%{&spelllang}
 " set statusline+=\ \|\            " separator
-"set statusline+=%#Tabline#
+" set statusline+=%#Tabline#
 "set statusline+=\               " blank
 " set statusline+=\ %{fugitive#statusline()}\
 set statusline+=\ %{fugitive#head()}\
@@ -1106,12 +1107,17 @@ if has('gui_running')"{{{
     highlight Folded guibg=grey guifg=blue
 endif"}}}
 
+
+
+
 "========================================
 " LEADER KEY
 " > could be, 'a', 'ab', 'A', 'AB', etc
 " > The Less The Better
 "========================================
 " let mapleader = ','
+" let mapleader = ' '
+" nnoremap <leader>; :
 
 " delete all contents for whole ine
 " nnoremap <leader>d :normal ggVGD<cr>i
@@ -1121,9 +1127,9 @@ endif"}}}
 "---------------
 " nnoremap <silent> <leader>f :FocusToggle<cr>
 " nnoremap <silent> <leader>r :FocusMode<cr>
-nnoremap <silent> <leader>d :DarkFocusMode<cr>
-nnoremap <silent> <leader>e :EditMode<cr>
-nnoremap <silent> <leader>q :UnFocusMode<cr>
+" nnoremap <silent> <leader>d :DarkFocusMode<cr>
+" nnoremap <silent> <leader>e :EditMode<cr>
+" nnoremap <silent> <leader>q :UnFocusMode<cr>
 
 "------------
 " Utilities
@@ -1131,12 +1137,13 @@ nnoremap <silent> <leader>q :UnFocusMode<cr>
 nnoremap <silent> <leader>r  :Ranger<cr>
 nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
 nnoremap <silent> <leader>t  :TagbarToggle<cr>
+nnoremap <silent> <leader>m  :MaximizerToggle<cr>
 nnoremap <silent> <leader>b  :bro old<cr>
 " maximize window size -> insted, vanila Vim: c-w _ / c-w
 " nnoremap <silent> <leader>mw  :vert resize 999<cr>
 " nnoremap <silent> <leader>mh  :resize 999<cr>
 
-nnoremap <silent> <leader><leader>r :source $MYVIMRC<cr>
+" nnoremap <silent> <leader><leader>r :source $MYVIMRC<cr>
     \ :echo " .vimrc reloaded "<cr>
 " undo leader shortcuts "
 nnoremap <silent> <leader>uu  :UndotreeToggle<cr>
@@ -1259,8 +1266,9 @@ map <F11> :cnext<Return>
 " https://realpython.com/vim-and-python-a-match-made-in-heaven/
 let python_highlight_all=1
 
+
 "----------------------
-" PaperColor Filetypes
+" Color Filetypes
 "----------------------
 autocmd BufEnter *.sh    colorscheme PaperColor | set background=dark | set nospell
 autocmd BufEnter *.py    colorscheme PaperColor | set background=dark | set nospell
