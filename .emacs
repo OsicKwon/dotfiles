@@ -73,6 +73,14 @@
 
 ;; xr
 
+;; use TAB in org-mode terminal used for org-cycle
+;; https://www.reddit.com/r/emacs/comments/6ypcv2/eviljumpforward_is_not_mapped_to_ci_when_editing/
+(with-eval-after-load 'evil-maps
+  (define-key evil-motion-state-map (kbd "SPC") nil)
+  (define-key evil-motion-state-map (kbd "RET") nil)
+  (define-key evil-motion-state-map (kbd "TAB") nil))
+
+
 ; org-hide background to black in terminal 2021-06-14
 ;; (unless (display-graphic-p)
 ;;   (set-face-foreground 'org-hide :foreground "black"))
