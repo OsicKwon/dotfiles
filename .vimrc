@@ -71,8 +71,8 @@ augroup END
 "--------
 set hlsearch
 set incsearch
-set noignorecase
-set nosmartcase
+set ignorecase " Search 'This' > this, This, THIS -- selected all
+set smartcase  " Search 'This' > this, This, THIS -- only 'This' selected
 
 
 
