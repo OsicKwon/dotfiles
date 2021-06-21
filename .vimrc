@@ -729,10 +729,10 @@ vnoremap <right> <nop>
 "  Command
 " ---------
 "{{{
-" cnoremap <up> <nop>
-" cnoremap <down> <nop>
-" cnoremap <left> <nop>
-" cnoremap <right> <nop>
+cnoremap <up> <nop>
+cnoremap <down> <nop>
+cnoremap <left> <nop>
+cnoremap <right> <nop>
 
 " Emacs style Keybinding in command mode
 "----------------------------------------

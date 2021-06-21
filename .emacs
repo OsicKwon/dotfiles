@@ -3012,18 +3012,19 @@
 ;; == evil-leader 2021-04-28 ==
 (use-package evil-leader
   :ensure t
-  :disabled
   :init
   (require 'evil-leader)
   (evil-leader/set-key
-    "p" 'powerthesaurus-lookup-word-at-point
-    "d" 'define-word-at-point
-    "t" 'google-translate-at-point
-    "a" 'counsel-ag-thing-at-point
+    ;; "p" 'powerthesaurus-lookup-word-at-point
+    ;; "d" 'define-word-at-point
+    ;; "t" 'google-translate-at-point
+    ;; "a" 'counsel-ag-thing-at-point
     ;; "r" 'writeroom-mode
-    "m" 'imenu-list
-    "i" 'org-narrow-to-subtree
-    "o" 'widen
+    "t" 'imenu-list
+    "w" 'avy-goto-word-1
+    "n" 'neotree-show
+    ;; "i" 'org-narrow-to-subtree
+    ;; "o" 'widen
    )
   :config
   (global-evil-leader-mode)
