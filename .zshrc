@@ -103,7 +103,7 @@ source $ZSH/oh-my-zsh.sh
 alias emacs="/opt/local/bin/emacs"
 
 alias vim="/usr/local/Cellar/vim/8.1.2350/bin/vim"
-alias vi="/usr/local/Cellar/vim/8.1.2350/bin/vim"
+alias vi=vim
 
 export VISUAL="/usr/local/Cellar/vim/8.1.2350/bin/vim"
 export EDITOR="/usr/local/Cellar/vim/8.1.2350/bin/vim"
@@ -116,3 +116,9 @@ fortune | cowsay && tput setaf 2 && toilet -f pagga Z-shell && date
 
 # https://github.com/kyoz/purify/tree/master/zsh
 ZSH_THEME="purify"
+
+# https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
+source /Users/osickwon/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
