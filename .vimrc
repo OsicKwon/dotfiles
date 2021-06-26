@@ -35,6 +35,7 @@ set spelllang=en_ca
 " set colorcolumn=80,120
 set path+=**                  " include sub directories when searching 2021-01-06
 set updatetime=1000           " for gitgutter 2021-01-13
+" set textwidth=80
 "}}}
 
 
@@ -93,9 +94,10 @@ filetype off
 call plug#begin('~/.vim/plugged')
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'chrisbra/csv.vim'
+" Plug 'chrisbra/csv.vim'
 " Plug 'jceb/vim-orgmode'
 " Plug 'davidhalter/jedi-vim'
+" Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
@@ -125,7 +127,7 @@ Plugin 'kyoz/purify', { 'rtp': 'vim' }
 "--------SnipMate-----------
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
+" Plugin 'garbas/vim-snipmate'
 " Optional:
 Plugin 'honza/vim-snippets'
 
@@ -190,7 +192,7 @@ Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'beloglazov/vim-online-thesaurus' " 2021-02-26
 
 "------Functionality--------
-Plugin 'kien/ctrlp.vim'
+" Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'          " not a vimway instead use find command
 Plugin 'mbbill/undotree'
 " Plugin 'sjl/gundo.vim'                  " visualize your Vim undo tree
@@ -239,6 +241,11 @@ let g:highlightedyank_highlight_duration = 500
 " https://stackoverflow.com/questions/21628743/cant-get-the-jedi-vim-plugin-to-work
 " let g:jedi#force_py_version = 3
 let g:ranger_map_keys = 0  " disable default ranger key -> <leader>f
+" https://github.com/vim-syntastic/syntastic/issues/2242
+" solved f-string issue (invalid syntax error)
+let g:syntastic_python_checkers = ['python']
+let g:syntastic_python_python_exec = 'python3'
+
 
 " https://www.reddit.com/r/vim/comments/5w6wac/vim_users_of_reddit_whats_your_favorite/
 set completeopt-=preview
@@ -291,7 +298,7 @@ autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
 
 let g:airline_theme='wombat'  "default minimalist bubblegum raven angr tomorrow wombat powerlineish
 " air-line
-" let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -315,6 +322,20 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
+" powerline symbols
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.colnr = ' :'
+" let g:airline_symbols.colnr = 'C:'
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ' :'
+let g:airline_symbols.maxlinenr = '☰  '
+let g:airline_symbols.dirty='⚡'
+" let g:airline_symbols.dirty=''
+
 " airline symbols
 " let g:airline_left_sep = ''
 " let g:airline_left_alt_sep = ''
@@ -322,7 +343,8 @@ let g:airline_symbols.whitespace = 'Ξ'
 " let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
+let g:airline_symbols.linenr = ' :'
+" let g:airline_symbols.linenr = ' L:'
 "}}}
 
 set thesaurus+=~/.vim/thesaurus/mthesaur.txt
@@ -520,11 +542,11 @@ set statusline+=%{GitStatus()}
 set statusline+=┆\             " separator
 set stl+=%{&modified?'**⤴\ ':''}  " test not working
 " set stl+=%{&modified?'𝓔𝓭𝓲𝓽𝓮𝓭\ ':''}  " test not working
-" 𝓜𝓸𝓸𝓭𝓲𝓯𝓲𝓮𝓭 / 𝓒𝓱𝓪𝓷𝓰𝓮𝓭 / 𝓔𝓭𝓲𝓽𝓮𝓭 / 𝓡𝓮𝓿𝓲𝓼𝓮𝓭 / ✘ / ☡ / ⤴  
-" 𝘌𝘋𝘐𝘛 / ℰ𝒹𝒾𝓉 
+" 𝓜𝓸𝓸𝓭𝓲𝓯𝓲𝓮𝓭 / 𝓒𝓱𝓪𝓷𝓰𝓮𝓭 / 𝓔𝓭𝓲𝓽𝓮𝓭 / 𝓡𝓮𝓿𝓲𝓼𝓮𝓭 / ✘ / ☡ / ⤴
+" 𝘌𝘋𝘐𝘛 / ℰ𝒹𝒾𝓉
 set statusline+=%f              " path
 " set statusline+=\               " blank
-set stl+=%{&modified?'\ [+]':''}  " 
+set stl+=%{&modified?'\ [+]':''}  "
 " set statusline+=%m              " modified flag [+]
 " set statusline+=\ -\            " separator
 " set statusline+=┆            " separator
@@ -684,6 +706,9 @@ nnoremap k gk
 " nnoremap jj <nop>  " use { } ( )
 " nnoremap kk <nop>  " use { } ( )
 " nnoremap ll <nop>  " use f | t
+"
+nnoremap K ggVGD
+"
 "}}}
 
 " --------
@@ -1083,7 +1108,8 @@ command! T2 call TestFunction2()
 
 if has('gui_running')"{{{
     set guioptions=     " disabled mac style tab"
-    set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
+    " set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
+    set guifont=Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete\ Mono:h14
     " set guifont=MesloLGS\ Nerd\ Font:h14
     set lines=999 columns=9999  " full size windows 2021-04-21
     cd ~/Documents/nvALT/
