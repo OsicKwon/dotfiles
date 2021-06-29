@@ -73,6 +73,7 @@ augroup END
 set hlsearch
 set incsearch
 " set ignorecase " Search 'This' > this, This, THIS -- selected all
+set noignorecase
 set smartcase  " Search 'This' > this, This, THIS -- only 'This' selected
 
 
@@ -99,7 +100,15 @@ call plug#begin('~/.vim/plugged')
 " Plug 'davidhalter/jedi-vim'
 " Plug 'sheerun/vim-polyglot'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}  " Dot Net core 2.1 required
+" https://github.com/neovim/neovim/issues/4612#issuecomment-354718725
+Plug 'tyru/open-browser.vim' "{
+  " Disable netrw gx mapping.
+  let g:netrw_nogx = get(g:, 'netrw_nogx', 1)
+  nmap gx <Plug>(openbrowser-open)
+  vmap gx <Plug>(openbrowser-open)
+"}
 call plug#end()
+
 
 set completeopt+=longest,menuone,noinsert
 
