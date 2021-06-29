@@ -1339,7 +1339,7 @@
   )
 
 
-(define-key elfeed-search-mode-map (kbd "R") 'elfeed-mark-all-as-read)
+;; (define-key elfeed-search-mode-map (kbd "R") 'elfeed-mark-all-as-read)  ; risky
 ;; (define-key elfeed-search-mode-map (kbd "SPC") 'my-elfeed-follow-view)
 (define-key elfeed-search-mode-map (kbd "e") 'my-elfeed-follow-view)
 
@@ -2211,7 +2211,7 @@
  '(minimap-mode nil)
  '(org-adapt-indentation nil)
  '(org-agenda-files
-   '("~/Documents/nvALT/projx-clue.txt" "~/Documents/nvALT/projx-Jiwoo-Citizenship.txt" "~/Documents/nvALT/org_capture_note.txt" "~/Documents/nvALT/projx-JobBoard2021.txt" "~/Documents/nvALT/projx-IncomeTax.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/notex-Ontario_Benefits_Stopped_20201215.txt" "~/Documents/nvALT/projx-clue.txt" "~/Documents/nvALT/projx-Jiwoo-Citizenship.txt" "~/Documents/nvALT/org_capture_note.txt" "~/Documents/nvALT/projx-JobBoard2021.txt" "~/Documents/nvALT/projx-IncomeTax.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-start-on-weekday 0)
  '(org-agenda-time-grid
    '((daily today require-timed)

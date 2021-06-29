@@ -25,8 +25,8 @@ set clipboard=unnamed
 set ttimeoutlen=0                     " eliminating time delay to Normal mode
 set sidescroll=1                      " options: 0, 1, 2, ....
 " set virtualedit=all
-set complete+=kspell
-set completeopt=menuone,longest
+" set complete+=kspell
+" set completeopt=menuone,longest
 set modeline
 set modelines=10
 set nospell
@@ -72,7 +72,7 @@ augroup END
 "--------
 set hlsearch
 set incsearch
-set ignorecase " Search 'This' > this, This, THIS -- selected all
+" set ignorecase " Search 'This' > this, This, THIS -- selected all
 set smartcase  " Search 'This' > this, This, THIS -- only 'This' selected
 
 
@@ -98,11 +98,10 @@ call plug#begin('~/.vim/plugged')
 " Plug 'jceb/vim-orgmode'
 " Plug 'davidhalter/jedi-vim'
 " Plug 'sheerun/vim-polyglot'
-
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}  " Dot Net core 2.1 required
 call plug#end()
 
 set completeopt+=longest,menuone,noinsert
-
 
 
 " ------
@@ -123,6 +122,7 @@ Plugin 'flazz/vim-colorschemes'
 " Plugin 'altercation/vim-colors-solarized'
 " Plugin 'kyoz/purify'
 Plugin 'kyoz/purify', { 'rtp': 'vim' }
+Plugin 'joshdick/onedark.vim'
 
 "--------SnipMate-----------
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -246,6 +246,17 @@ let g:ranger_map_keys = 0  " disable default ranger key -> <leader>f
 let g:syntastic_python_checkers = ['python']
 let g:syntastic_python_python_exec = 'python3'
 
+let g:purify_bold = 0        " default: 1
+let g:purify_italic = 0      " default: 1
+let g:purify_underline = 1   " default: 1
+let g:purify_undercurl = 0   " default: 1
+let g:purify_inverse = 0     " default: 1
+" let g:purify_override_colors = {
+"     \ 'pink':  { 'gui': '#FF87FF', 'cterm': '213' },
+"     \ 'yellow':  { 'gui': '#fdf6e3', 'cterm': '230' },
+"     \ 'green': { 'gui': '#5FD700', 'cterm': '76' }
+" \ }
+let g:tagbar_sort = 0
 
 " https://www.reddit.com/r/vim/comments/5w6wac/vim_users_of_reddit_whats_your_favorite/
 set completeopt-=preview
@@ -333,8 +344,8 @@ let g:airline_symbols.colnr = ' :'
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ' :'
 let g:airline_symbols.maxlinenr = '☰  '
-let g:airline_symbols.dirty='⚡'
-" let g:airline_symbols.dirty=''
+" let g:airline_symbols.dirty='⚡'
+let g:airline_symbols.dirty=''
 
 " airline symbols
 " let g:airline_left_sep = ''
@@ -766,6 +777,8 @@ cnoremap <C-a> <Home>
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 cnoremap <C-d> <Delete>
+" https://superuser.com/questions/846854/in-vim-how-do-you-delete-to-end-of-line-while-in-command-mode
+cnoremap <C-k> <C-\>estrpart(getcmdline(),0,getcmdpos()-1)<CR>
 cnoremap <M-b> <S-Left>
 cnoremap <M-f> <S-Right>
 cnoremap <M-d> <S-Right><Delete>
@@ -1300,8 +1313,8 @@ autocmd BufEnter *.sh    colorscheme PaperColor | set background=dark | set nosp
 autocmd BufEnter *.py    colorscheme PaperColor | set background=dark | set nospell
 autocmd BufEnter *.vimrc colorscheme PaperColor | set background=dark
 
-autocmd BufEnter *.php   colorscheme molokai | set background=dark
-autocmd BufEnter *.html  colorscheme molokai | set background=dark
+autocmd BufEnter *.php   colorscheme purify | set background=dark
+autocmd BufEnter *.html  colorscheme purify | set background=dark
 autocmd BufEnter *.phtml colorscheme purify | set background=dark
 
 autocmd FileType html,xml,py,lisp,js,org,dat,csv set nospell
