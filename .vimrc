@@ -25,8 +25,14 @@ set clipboard=unnamed
 set ttimeoutlen=0                     " eliminating time delay to Normal mode
 set sidescroll=1                      " options: 0, 1, 2, ....
 " set virtualedit=all
-" set complete+=kspell
-" set completeopt=menuone,longest
+set complete+=kspell
+set completeopt=menuone,longest
+set completeopt+=longest,menuone,noinsert
+" https://www.reddit.com/r/vim/comments/5w6wac/vim_users_of_reddit_whats_your_favorite/
+set completeopt-=preview
+set completeopt+=menu,menuone,noinsert,noselect
+set shortmess+=c
+
 set modeline
 set modelines=10
 set nospell
@@ -36,6 +42,14 @@ set spelllang=en_ca
 set path+=**                  " include sub directories when searching 2021-01-06
 set updatetime=1000           " for gitgutter 2021-01-13
 " set textwidth=80
+"
+" https://www.reddit.com/r/vim/comments/h8pgor/til_conceal_in_vim/
+set concealcursor=""
+set conceallevel=0 " Nothing is hidden
+" set conceallevel=1 " Hide stuff as concealchar, or as listchar.
+" set conceallevel=2 " Hide stuff as concealchar, or completely.
+" set conceallevel=3 " Hide completely.
+"
 "}}}
 
 
@@ -72,8 +86,8 @@ augroup END
 "--------
 set hlsearch
 set incsearch
-" set ignorecase " Search 'This' > this, This, THIS -- selected all
-set noignorecase
+set ignorecase " Search 'This' > this, This, THIS -- selected all
+" set noignorecase
 set smartcase  " Search 'This' > this, This, THIS -- only 'This' selected
 
 
@@ -110,7 +124,6 @@ Plug 'tyru/open-browser.vim' "{
 call plug#end()
 
 
-set completeopt+=longest,menuone,noinsert
 
 
 " ------
@@ -150,16 +163,21 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 " Plugin 'terryma/vim-multiple-cursors'  " good but not Vim way
 " Plugin 'gcmt/wildfire.vim'             " good but conflict with Tagbar keys like <C-m>|<enter>
-" Plugin 'shougo/neocomplete.vim'        " lua required
-" Plugin 'valloric/youcompleteme'        " gave up due to too-hard to insall 2020-11-20
-" Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
 Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'terryma/vim-expand-region'
 " Plugin 'w0rp/ale'                      " Asynchronous Lint Engine ??
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
-" Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
 Plugin 'w0rp/ale'
 Plugin 'puremourning/vimspector'
+Plugin 'jpalardy/vim-slime'               " syntax highlight
+
+
+"------AutoComplete---------
+" Plugin 'valloric/youcompleteme'        " gave up due to too-hard to insall 2020-11-20
+" Plugin 'sirver/ultisnips'
+" Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
+" Plugin 'shougo/neocomplete.vim'        " lua required
+" Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
 
 "----------Git--------------
 Plugin 'airblade/vim-gitgutter'
@@ -167,13 +185,10 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'junegunn/gv.vim'
 
 "----------Python-----------
-Plugin 'sirver/ultisnips'
 " Plugin 'davidhalter/jedi-vim'
-" Plugin 'zchee/deoplete-jedi'
 Plugin 'nvie/vim-flake8'
 " Plugin 'klen/python-mode'
-Plugin 'jpalardy/vim-slime'
-Plugin 'hanschen/vim-ipython-cell'
+" Plugin 'hanschen/vim-ipython-cell'  " ipython
 
 "----------Javascript-----------
 Plugin 'pangloss/vim-javascript'
@@ -214,7 +229,6 @@ Plugin 'easymotion/vim-easymotion'
 " Plugin 'haya14busa/incsearch-easymotion.vim'
 Plugin 'mileszs/ack.vim'
 " Plugin 'searchfold.vim'               " embigiuous with marker
-" Plugin 'wincent/command-t'            " ruby required
 Plugin 'ervandew/supertab'
 Plugin 'machakann/vim-highlightedyank'  " 2021-02-26
 " Plugin 'justinmk/vim-dirvish'
@@ -224,7 +238,7 @@ Plugin 'itchyny/vim-cursorword'         " 2021-04-16
 Plugin 'francoiscabrol/ranger.vim'      " 2021-04-24 - I don't know how
 " Plugin 'mhinz/vim-startify'
 Plugin 'szw/vim-maximizer'
-
+Plugin 'AutoComplPop'
 
 "------Other_plugins--------
 " Plugin 'itchyny/calendar.vim'
@@ -247,8 +261,9 @@ let g:solarized_termcolors=256
 let g:NERDTreeWinSize=40
 " let g:org_indent=1
 let g:highlightedyank_highlight_duration = 500
+
 " https://stackoverflow.com/questions/21628743/cant-get-the-jedi-vim-plugin-to-work
-" let g:jedi#force_py_version = 3
+let g:jedi#force_py_version = 3
 let g:ranger_map_keys = 0  " disable default ranger key -> <leader>f
 " https://github.com/vim-syntastic/syntastic/issues/2242
 " solved f-string issue (invalid syntax error)
@@ -266,11 +281,10 @@ let g:purify_inverse = 0     " default: 1
 "     \ 'green': { 'gui': '#5FD700', 'cterm': '76' }
 " \ }
 let g:tagbar_sort = 0
+let g:SuperTabDefaultCompletionType = "<c-n>"  " reverse selection order
 
-" https://www.reddit.com/r/vim/comments/5w6wac/vim_users_of_reddit_whats_your_favorite/
-set completeopt-=preview
-set completeopt+=menu,menuone,noinsert,noselect
-set shortmess+=c
+
+autocmd FileType python setlocal completeopt-=preview
 
 augroup OmniCompletionSetup
     autocmd!
@@ -727,7 +741,8 @@ nnoremap k gk
 " nnoremap kk <nop>  " use { } ( )
 " nnoremap ll <nop>  " use f | t
 "
-nnoremap K ggVGD
+" nnoremap K ggVGD
+nnoremap K ggVGp
 "
 "}}}
 
@@ -1316,7 +1331,7 @@ let python_highlight_all=1
 
 
 "----------------------
-" Color Filetypes
+" File Type Setting
 "----------------------
 autocmd BufEnter *.sh    colorscheme PaperColor | set background=dark | set nospell
 autocmd BufEnter *.py    colorscheme PaperColor | set background=dark | set nospell
@@ -1325,6 +1340,8 @@ autocmd BufEnter *.vimrc colorscheme PaperColor | set background=dark
 autocmd BufEnter *.php   colorscheme purify | set background=dark
 autocmd BufEnter *.html  colorscheme purify | set background=dark
 autocmd BufEnter *.phtml colorscheme purify | set background=dark
+
+autocmd BufEnter *.json, json set conceallevel=0
 
 autocmd FileType html,xml,py,lisp,js,org,dat,csv set nospell
 
@@ -1352,3 +1369,5 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 "  5 -> blinking vertical bar
 "  6 -> solid vertical bar
 
+
+set conceallevel=0 " Nothing is hidden
