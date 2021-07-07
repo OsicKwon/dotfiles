@@ -83,7 +83,7 @@ augroup END
 "         \ | hi CursorLineNr guibg=black
 " augroup END
 "}}}
-"
+
 
 "--------
 " SEARCH
@@ -172,7 +172,7 @@ Plugin 'terryma/vim-expand-region'
 " Plugin 'w0rp/ale'                      " Asynchronous Lint Engine ??
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
 Plugin 'w0rp/ale'
-Plugin 'puremourning/vimspector'
+" Plugin 'puremourning/vimspector'        " require hight version of mac
 Plugin 'jpalardy/vim-slime'               " syntax highlight
 
 
@@ -203,7 +203,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mechatroner/rainbow_csv'
 
 "---------Writing-----------
-Plugin 'junegunn/goyo.vim'
+" Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'godlygeek/tabular'
@@ -336,7 +336,19 @@ augroup END
 autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
 
 let g:airline_theme='wombat'  "default minimalist bubblegum raven angr tomorrow wombat powerlineish
-let g:airline_section_b = airline#section#create('%{virtualenv#statusline()}')
+
+let g:airline#extensions#virtualenv#enabled = 1
+" let g:airline_section_y = airline#section#create('%{virtualenv#statusline()}')
+"
+" if !empty($PYENV_VIRTUAL_ENV)
+if !empty($VIRTUAL_ENV)
+  " let g:airline_section_y = "%{split($PYENV_VIRTUAL_ENV, '/')[-1]}"
+  let g:airline_section_y = airline#section#create('%{virtualenv#statusline()}')
+el
+  " let g:airline_section_y = "testtesttest   %{&fileencoding?&fileencoding:&encoding}  %{&fileformat}\ "
+  let g:airline_section_y = "%{&fileencoding?&fileencoding:&encoding}[%{&fileformat}]"
+endif
+
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
@@ -1390,5 +1402,3 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 "  5 -> blinking vertical bar
 "  6 -> solid vertical bar
 
-
-set conceallevel=0 " Nothing is hidden
