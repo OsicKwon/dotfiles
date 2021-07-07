@@ -49,7 +49,11 @@ set conceallevel=0 " Nothing is hidden
 " set conceallevel=1 " Hide stuff as concealchar, or as listchar.
 " set conceallevel=2 " Hide stuff as concealchar, or completely.
 " set conceallevel=3 " Hide completely.
-"
+set matchpairs+=<:>
+" show more
+" set scrolloff=5
+" set sidescrolloff=5
+
 "}}}
 
 
@@ -189,6 +193,7 @@ Plugin 'junegunn/gv.vim'
 Plugin 'nvie/vim-flake8'
 " Plugin 'klen/python-mode'
 " Plugin 'hanschen/vim-ipython-cell'  " ipython
+Plugin 'jmcantrell/vim-virtualenv'
 
 "----------Javascript-----------
 Plugin 'pangloss/vim-javascript'
@@ -331,7 +336,7 @@ augroup END
 autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
 
 let g:airline_theme='wombat'  "default minimalist bubblegum raven angr tomorrow wombat powerlineish
-" air-line
+let g:airline_section_b = airline#section#create('%{virtualenv#statusline()}')
 let g:airline_powerline_fonts = 1
 
 if !exists('g:airline_symbols')
@@ -367,7 +372,7 @@ let g:airline_symbols.colnr = ' :'
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ' :'
 let g:airline_symbols.maxlinenr = '☰  '
-" let g:airline_symbols.dirty='⚡'
+let g:airline_symbols.dirty='⚡'
 let g:airline_symbols.dirty=''
 
 " airline symbols
@@ -850,9 +855,24 @@ else
 endif
 
 
+" Search for (visual)selected text, forwards or backwards.
+" https://vim.fandom.com/wiki/Search_for_visually_selected_text
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
+
+
 "===========
 " FUNCTIONS
 "===========
+
 
 "-----------
 " Draw Line
@@ -1200,7 +1220,8 @@ endif"}}}
 nnoremap <silent> <leader>r  :Ranger<cr>
 nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
 nnoremap <silent> <leader>t  :TagbarToggle<cr>
-nnoremap <silent> <leader>m  :MaximizerToggle<cr>
+" nnoremap <silent> <leader>m  :MaximizerToggle<cr>
+nnoremap <silent> <leader>x  :MaximizerToggle<cr>
 nnoremap <silent> <leader>b  :bro old<cr>
 " maximize window size -> insted, vanila Vim: c-w _ / c-w
 " nnoremap <silent> <leader>mw  :vert resize 999<cr>

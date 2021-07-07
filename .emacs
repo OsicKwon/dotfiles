@@ -1464,10 +1464,10 @@
 	 ;; ("p" . previous-line)
 	 ;; ("f" . right-word)
 	 ;; ("b" . left-word)
-	 ;; ("f" . evil-forward-WORD-begin)
-	 ;; ("b" . evil-backward-WORD-begin)
-	 ("f" . evil-scroll-page-down)
-	 ("b" . evil-scroll-page-up)
+	 ("f" . evil-forward-WORD-begin)
+	 ("b" . evil-backward-WORD-begin)
+	 ;; ("f" . evil-scroll-page-down)
+	 ;; ("b" . evil-scroll-page-up)
 	 ;; window
 	 ("0" . delete-window)
 	 ("1" . delete-other-windows)      ; show only current selected widnow
