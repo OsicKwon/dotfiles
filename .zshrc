@@ -110,7 +110,6 @@ alias vi=vim
 export VISUAL="/usr/local/Cellar/vim/8.1.2350/bin/vim"
 export EDITOR="/usr/local/Cellar/vim/8.1.2350/bin/vim"
 
-
 alias python=/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 alias python3=/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 
@@ -120,7 +119,6 @@ fortune | cowsay && tput setaf 2 && toilet -f pagga Z-shell && date
 
 # https://github.com/kyoz/purify/tree/master/zsh
 ZSH_THEME="purify"
-
 
 # https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
