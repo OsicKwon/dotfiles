@@ -1,3 +1,5 @@
+# must execute "$ source ~/.zshrc"
+#
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -108,7 +110,9 @@ alias vi=vim
 export VISUAL="/usr/local/Cellar/vim/8.1.2350/bin/vim"
 export EDITOR="/usr/local/Cellar/vim/8.1.2350/bin/vim"
 
-# must execute "$ source ~/.zshrc"
+
+alias python=/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
+alias python3=/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 
 # clear
 # fortune | cowsay && tput setaf 2 && toilet -f pagga $(echo $USER) && date
@@ -117,8 +121,10 @@ fortune | cowsay && tput setaf 2 && toilet -f pagga Z-shell && date
 # https://github.com/kyoz/purify/tree/master/zsh
 ZSH_THEME="purify"
 
+
 # https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 source /Users/osickwon/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
