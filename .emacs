@@ -1341,7 +1341,8 @@
 
 ;; (define-key elfeed-search-mode-map (kbd "R") 'elfeed-mark-all-as-read)  ; risky
 ;; (define-key elfeed-search-mode-map (kbd "SPC") 'my-elfeed-follow-view)
-(define-key elfeed-search-mode-map (kbd "e") 'my-elfeed-follow-view)
+;; (define-key elfeed-search-mode-map (kbd "e") 'my-elfeed-follow-view)
+(define-key elfeed-search-mode-map (kbd "F") 'my-elfeed-follow-view)
 
 ;; get idea from https://noonker.github.io/posts/2020-04-22-elfeed/
 ;; (define-key elfeed-search-mode-map (kbd "j") 'next-line)
@@ -1704,8 +1705,8 @@
 	 ;; ("q" . View-exit)
 	 ("x" . my-kill-current-buffer-and-window)
 	 ("X" . my-kill-current-buffer-and-other-windows)
-	 ;; ("c" . recenter-top-bottom)
-	 ("c" . recenter)
+	 ("c" . recenter-top-bottom)
+	 ;; ("c" . recenter)
 	 ;; ("i" . View-exit)  ;; like 'e'
 	 ;; ("i" . my-indirect-buffer)
 	 ;; ("i" . my-clone-indirect-buffer)
@@ -2211,7 +2212,7 @@
  '(minimap-mode nil)
  '(org-adapt-indentation nil)
  '(org-agenda-files
-   '("~/Documents/nvALT/notex-Ontario_Benefits_Stopped_20201215.txt" "~/Documents/nvALT/projx-clue.txt" "~/Documents/nvALT/projx-Jiwoo-Citizenship.txt" "~/Documents/nvALT/org_capture_note.txt" "~/Documents/nvALT/projx-JobBoard2021.txt" "~/Documents/nvALT/projx-IncomeTax.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/projx-Jiwoo-SAT.txt" "~/Documents/nvALT/notex-Ontario_Benefits_Stopped_20201215.txt" "~/Documents/nvALT/projx-clue.txt" "~/Documents/nvALT/projx-Jiwoo-Citizenship.txt" "~/Documents/nvALT/org_capture_note.txt" "~/Documents/nvALT/projx-JobBoard2021.txt" "~/Documents/nvALT/projx-IncomeTax.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-start-on-weekday 0)
  '(org-agenda-time-grid
    '((daily today require-timed)
@@ -3021,7 +3022,8 @@
     ;; "a" 'counsel-ag-thing-at-point
     ;; "r" 'writeroom-mode
     "t" 'imenu-list
-    "w" 'avy-goto-word-1
+    "w" 'avy-goto-word-0
+    "f" 'avy-goto-char
     "n" 'neotree-show
     ;; "i" 'org-narrow-to-subtree
     ;; "o" 'widen

@@ -28,6 +28,9 @@ PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
 PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
 export PATH
 
+# no space between ' = ' <- in bash, space is not allowed to assign
+alias python='python3'
+alias pip='pip3'
 
 ##
 # Your previous /Users/osickwon/.bash_profile file was backed up as /Users/osickwon/.bash_profile.macports-saved_2020-08-27_at_10:46:29

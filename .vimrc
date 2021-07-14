@@ -288,6 +288,9 @@ let g:purify_inverse = 0     " default: 1
 let g:tagbar_sort = 0
 let g:SuperTabDefaultCompletionType = "<c-n>"  " reverse selection order
 
+" C-c C-c, to send, .1 (pane #, ensure <prefix>q in tmux)
+let g:slime_target = "tmux"
+
 
 autocmd FileType python setlocal completeopt-=preview
 
@@ -759,7 +762,8 @@ nnoremap k gk
 " nnoremap ll <nop>  " use f | t
 "
 " nnoremap K ggVGD
-nnoremap K ggVGp
+" nnoremap K ggVGp
+nnoremap K ggVGDI
 "
 "}}}
 
@@ -1232,8 +1236,8 @@ endif"}}}
 nnoremap <silent> <leader>r  :Ranger<cr>
 nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
 nnoremap <silent> <leader>t  :TagbarToggle<cr>
-" nnoremap <silent> <leader>m  :MaximizerToggle<cr>
-nnoremap <silent> <leader>x  :MaximizerToggle<cr>
+nnoremap <silent> <leader>m  :MaximizerToggle<cr>
+" nnoremap <silent> <leader>x  :MaximizerToggle<cr>  " risky in x deleting
 nnoremap <silent> <leader>b  :bro old<cr>
 " maximize window size -> insted, vanila Vim: c-w _ / c-w
 " nnoremap <silent> <leader>mw  :vert resize 999<cr>
@@ -1332,6 +1336,8 @@ command HA call HardMode() | echo "HardMode Activated"
 ab xorg -*- mode: org; -*-
 ab xti #+TITLE:
 ab xftp ftp://osickwon@ftp.osickwon.heliohost.org/public_html/
+" run python with current buffer
+cab rp !clear; python3 %
 
 
 "-----------

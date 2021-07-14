@@ -113,9 +113,17 @@ export EDITOR="/usr/local/Cellar/vim/8.1.2350/bin/vim"
 alias python=/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 alias python3=/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 
-# clear
+# ______________________________ 
+clear
 # fortune | cowsay && tput setaf 2 && toilet -f pagga $(echo $USER) && date
-fortune | cowsay && tput setaf 2 && toilet -f pagga Z-shell && date
+# fortune | cowsay && tput setaf 2 && toilet -f pagga Z-shell && date
+date | cowsay
+# ------------------------------ 
+#         \   ^__^
+#          \  (oo)\_______
+#             (__)\       )\/\
+#                 ||----w |
+#                 ||     ||
 
 # https://github.com/kyoz/purify/tree/master/zsh
 ZSH_THEME="purify"
