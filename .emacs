@@ -1488,9 +1488,6 @@
 	 ("-" . text-scale-decrease)
 	 ("+" . balance-windows)
 	 ("_" . maximize-window)
-	 ;; ("p" . previous-line)
-	 ("p" . toggle-window-dedicated)
-	 ("D" . toggle-window-dedicated)
 
 	 ("s" . swiper)
 	 ;; ("a" . avy-goto-char)
@@ -1560,13 +1557,13 @@
 	 ;; ("L" . org-tree-slide-move-next-tree)
 	 ;; ---
 	 ;; ("w" . right-word)
-	 ("N" . View-search-last-regexp-backward)  ; Regex previous result
+	 ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
 	 ("/" . evil-search-forward)
 	 ;; ("/" . my-hl-line-mode-toggle)
 	 ("?" . evil-search-backward)
 	 ("n" . evil-search-next)
 	 ;; ("n" . next-line)
-	 ;; ("N" . evil-search-previous)
+	 ("N" . evil-search-previous)
 	 ;; ("n" . evil-normal-state)
 	 ;; ("e" . View-scroll-line-forward)             ; scroll down (forward) - opposite to 'y'
 	 ("e" . evil-scroll-line-down)
@@ -1679,11 +1676,20 @@
 	 ;; ("R" . revert-buffer)
 	 ;; ("r" . writeroom-mode)
 	 ("R" . writeroom-mode)
+
+	 ;; ("p" . previous-line)
+	 ("p" . toggle-window-dedicated)
+	 ;; ("D" . toggle-window-dedicated)
+	 ("D" . define-word-at-point)
+	 ("P" . powerthesaurus-lookup-word-at-point)
+	 ("T" . google-translate-at-point)
+	 ("U" . engine/search-youglish)
+
 	 ;; ("a" . end-of-buffer)
 	 ;; ("a" . evil-goto-line)  ; end of line
 	 ("a" . ace-link)
 	 ;; ("A" . ace-link)
-	 ("A" . counsel-ag-at-point)
+	 ("A" . counsel-ag-thing-at-point)
 	 ;; ("c" . cfw:open-org-calendar)
 	 ;; ("z" . end-of-buffer)
 	 ("z" . View-exit) ;; like 'e'
@@ -1713,7 +1719,8 @@
 	 ;; ("i" . evil-insert-state)
 	 ("o" . other-window)
 	 ;; ("o" . my-org-indirect-buffer)
-	 ("i" . my-org-indirect-buffer)
+	 ("I" . my-org-indirect-buffer)
+	 ("i" . evil-insert-state)
 	 ;; ("i" . org-narrow-to-subtree)
 	 ;; ("i" . my-org-narrowing)
 	 ;; ("o" . widen)

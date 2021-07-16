@@ -246,7 +246,7 @@ Plugin 'szw/vim-maximizer'
 Plugin 'AutoComplPop'
 
 "------Other_plugins--------
-" Plugin 'itchyny/calendar.vim'
+Plugin 'itchyny/calendar.vim'
 Plugin 'jceb/vim-orgmode'
 Plugin 'tpope/vim-speeddating'
 " Plugin 'takac/vim-hardtime'
@@ -756,10 +756,10 @@ nnoremap k gk
 
 " Hard Mode (Anti-Pattern)
 " tips: '+' and '-' move lines, or 'gj' and 'gk' 2021-03-09
-" nnoremap hh <nop>  " use F | T
-" nnoremap jj <nop>  " use { } ( )
-" nnoremap kk <nop>  " use { } ( )
-" nnoremap ll <nop>  " use f | t
+nnoremap hh <nop>
+nnoremap jj <nop>
+nnoremap kk <nop>
+nnoremap ll <nop>
 "
 " nnoremap K ggVGD
 " nnoremap K ggVGp
@@ -1191,16 +1191,17 @@ if has('gui_running')"{{{
     " set nocursorcolumn
     set background=light
     " colorscheme basic-light
-    colorscheme default
+    " colorscheme default
+    colorscheme github
     " highlight LineNr guibg=white
     highlight SignColumn guibg='white'       " for gitgutter
     highlight FoldColumn guibg='white'       " for foldcolumn
     " highlight Visual guifg=black guibg=Cyan gui=NONE
     " highlight CursorLineNr guibg=black guifg=white
     " highlight CursorLine gui=underline guibg=NONE
-    hi TabLine gui=NONE guibg=black guifg=white  " Deactive Area
-    " hi TabLineSel gui=NONE guibg=black guifg=white
-    " hi TabLineFill gui=NONE guibg=black guifg=white
+    " hi TabLine gui=NONE guibg=black guifg=white  " Deactive Area
+    hi TabLineSel gui=NONE guibg=black guifg=white
+    " hi TabLineFill gui=NONE guibg=black guifg=white  " Backgroud Aera
     let g:airline_theme='serene'  "default raven serene luna monochrome powerlineish term transparent distinguished
     " hi EasyMotionTarget guifg=red guibg=yellow
     highlight Folded guibg=grey guifg=blue
