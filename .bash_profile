@@ -1,15 +1,15 @@
-# vim: set nospell :
+# vim: set nospell foldmethod=manual:
 
 # must be run: $ source ~/.bash_profile
 # to edit in command line :: C-x C-e
 
 export CLICOLOR=1
 export LSCOLORS=GxBxCxDxexegedabagaced
- 
+
 parse_git_branch() {
    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
- 
+
 # Cursor setup
 export PS1="\e[0;35m->> \e[1;34m\W\e[0;32m\$(parse_git_branch)\e[0;37m $ "
 
@@ -28,7 +28,7 @@ PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
 PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
 export PATH
 
-# no space between ' = ' <- in bash, space is not allowed to assign
+# # no space between ' = ' <- in bash, space is not allowed to assign
 alias python='python3'
 alias pip='pip3'
 
@@ -57,7 +57,17 @@ echo "-------------------------------------------------------------";
 
 
 # Vim Defualt Setup
-alias vim="/usr/local/Cellar/vim/8.1.2350/bin/vim"
+
+# vim 8.1
+# export PATH="/usr/local/bin/vim:$PATH"
+# alias vim="/usr/local/bin/vim"
+# # alias vim="/usr/local/Cellar/vim/8.1.2350/bin/vim"
+
+# # Macports Version : vim 8.2
+# # vimrc plugin syntax error issue
+# export PATH="/opt/local/bin/vim:$PATH"
+# alias vim="/opt/local/bin/vim"
+
 alias vi=vim
 export VISUAL=vim
 export EDITOR=$VISUAL

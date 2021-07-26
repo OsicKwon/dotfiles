@@ -22,7 +22,7 @@ set history=500                       " default was 50
 " au FocusLost,WinLeave * :silent! w    " -- save when exiting the buffer or losing focus
 set encoding=utf-8
 set clipboard=unnamed
-set ttimeoutlen=0                     " eliminating time delay to Normal mode
+" set ttimeoutlen=0                     " eliminating time delay to Normal mode
 set sidescroll=1                      " options: 0, 1, 2, ....
 " set virtualedit=all
 set complete+=kspell
@@ -62,6 +62,13 @@ set matchpairs+=<:>
 "--------
 set nu
 set rnu "relativenumber
+" https://jeffkreeftmeijer.com/vim-number/
+" interrupted functional buffers like Tagbar ...
+" augroup numbertoggle
+"   autocmd!
+"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+" augroup END
 
 
 "-----------
@@ -71,6 +78,8 @@ set rnu "relativenumber
 augroup auto_set_number
     autocmd InsertEnter * set nornu | set nocursorline " | set nocursorcolumn
     autocmd InsertLeave * set rnu   | set cursorline   " | set cursorcolumn
+    " autocmd InsertEnter * set nocursorline " | set nocursorcolumn
+    " autocmd InsertLeave * set cursorline   " | set cursorcolumn
 augroup END
 " augroup auto_set_number
 "     autocmd InsertEnter * set nornu
@@ -149,6 +158,9 @@ Plugin 'flazz/vim-colorschemes'
 " Plugin 'kyoz/purify'
 Plugin 'kyoz/purify', { 'rtp': 'vim' }
 Plugin 'joshdick/onedark.vim'
+Plugin 'rakr/vim-one'
+Plugin 'gosukiwi/vim-atom-dark'
+Plugin 'arcticicestudio/nord-vim'
 
 "--------SnipMate-----------
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -178,7 +190,7 @@ Plugin 'jpalardy/vim-slime'               " syntax highlight
 
 "------AutoComplete---------
 " Plugin 'valloric/youcompleteme'        " gave up due to too-hard to insall 2020-11-20
-" Plugin 'sirver/ultisnips'
+Plugin 'sirver/ultisnips'
 " Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
 " Plugin 'shougo/neocomplete.vim'        " lua required
 " Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
@@ -689,6 +701,11 @@ vnoremap <space> :
 "  Normal
 " --------
 "{{{
+"
+" https://www.youtube.com/watch?v=p2SbmpVl6zw
+" nnoremap <CR> :nohlsearch<cr>  "interrupted in mini window
+"
+"
 nnoremap <up>    <nop>
 nnoremap <down>  <nop>
 nnoremap <left>  <nop>
@@ -756,10 +773,10 @@ nnoremap k gk
 
 " Hard Mode (Anti-Pattern)
 " tips: '+' and '-' move lines, or 'gj' and 'gk' 2021-03-09
-nnoremap hh <nop>
-nnoremap jj <nop>
-nnoremap kk <nop>
-nnoremap ll <nop>
+" nnoremap hh <nop>
+" nnoremap jj <nop>
+" nnoremap kk <nop>
+" nnoremap ll <nop>
 "
 " nnoremap K ggVGD
 " nnoremap K ggVGp
@@ -1191,15 +1208,15 @@ if has('gui_running')"{{{
     " set nocursorcolumn
     set background=light
     " colorscheme basic-light
-    " colorscheme default
-    colorscheme github
+    colorscheme default
+    " colorscheme github
     " highlight LineNr guibg=white
     highlight SignColumn guibg='white'       " for gitgutter
     highlight FoldColumn guibg='white'       " for foldcolumn
     " highlight Visual guifg=black guibg=Cyan gui=NONE
     " highlight CursorLineNr guibg=black guifg=white
     " highlight CursorLine gui=underline guibg=NONE
-    " hi TabLine gui=NONE guibg=black guifg=white  " Deactive Area
+    hi TabLine gui=NONE guibg=black guifg=gray  " Deactive Area
     hi TabLineSel gui=NONE guibg=black guifg=white
     " hi TabLineFill gui=NONE guibg=black guifg=white  " Backgroud Aera
     let g:airline_theme='serene'  "default raven serene luna monochrome powerlineish term transparent distinguished
