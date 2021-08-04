@@ -372,6 +372,7 @@
 ;; == wordnut (wordnet) 2021-05-22 ==
 (use-package wordnut
   :ensure t
+  :disabled
   :init (require 'wordnut)
   )
 
@@ -380,6 +381,7 @@
 ;; https://github.com/gromnitsky/read-aloud.el
 (use-package read-aloud
   :ensure t
+  :disabled
   :init (require 'read-aloud)
   :config (setq read-aloud-engine "say") ; for mac
   )
@@ -482,26 +484,6 @@
 (global-set-key (kbd "M-<down>") 'my-swap-down)
 
 
-;; == pyvenv 2021-05-16 ==
-;; python virtual environment package
-;; https://github.com/daviwil/emacs-from-scratch/wiki/LSP-Python-(pyright)-config-in-emacs-from-scratch#wiki-pages-box
-(use-package pyvenv
-  :ensure t
-  :disabled
-  :init
-  (require 'pyvenv)
-  (setenv "WORKON_HOME" "~/.venvs/")
-  :config
-  ;; (pyvenv-mode t)
-
-  ;; Set correct Python interpreter
-  (setq pyvenv-post-activate-hooks
-        (list (lambda ()
-                (setq python-shell-interpreter (concat pyvenv-virtual-env "bin/python")))))
-  (setq pyvenv-post-deactivate-hooks
-        (list (lambda ()
-                (setq python-shell-interpreter "python3")))))
-
 
 ;; == adaptive-wrap 2021-05-10 ==
 ;; wrap indent
@@ -516,17 +498,6 @@
   (add-hook 'markdown-mode-hook 'adaptive-wrap-prefix-mode)   ; use markdown mode only
   )
 
-
-;; 2021-05-07
-;; https://www.reddit.com/r/emacs/comments/n71hj2/python_how_would_you_configure_emacs_for_data/
-(use-package ein
-  :ensure t
-  :disabled
-  :init 
-  (require 'ein)
-  (setq ein:polymode t
-        ein:output-area-inlined-images t)
-  )
 
 
 ;; == markdown-preview-mode 2021 ==
@@ -1490,7 +1461,6 @@
 	 ("_" . maximize-window)
 
 	 ("s" . swiper)
-	 ;; ("a" . avy-goto-char)
 	 ;; ("`" . beacon-blink)
 	 ;; ("`" . pop-global-mark)
 	 ;; ("`" . avy-goto-char-2)
@@ -1671,8 +1641,8 @@
 
 	 ;; Additional-keys
 	 ;; -----------
-	 ;; ("r" . revert-buffer)
-	 ("r" . my-org-narrowing)
+	 ("r" . revert-buffer)
+	 ;; ("r" . my-org-narrowing)
 	 ;; ("R" . revert-buffer)
 	 ;; ("r" . writeroom-mode)
 	 ("R" . writeroom-mode)
@@ -1686,10 +1656,12 @@
 	 ("U" . engine/search-youglish)
 
 	 ;; ("a" . end-of-buffer)
+	 ;; ("a" . avy-goto-char)
 	 ;; ("a" . evil-goto-line)  ; end of line
-	 ("a" . ace-link)
-	 ;; ("A" . ace-link)
-	 ("A" . counsel-ag-thing-at-point)
+	 ;; ("a" . ace-link)
+	 ("a" . counsel-ag-thing-at-point)
+	 ("A" . ace-link)
+	 ;; ("A" . counsel-ag-thing-at-point)
 	 ;; ("c" . cfw:open-org-calendar)
 	 ;; ("z" . end-of-buffer)
 	 ("z" . View-exit) ;; like 'e'
@@ -1720,9 +1692,9 @@
 	 ("o" . other-window)
 	 ;; ("o" . my-org-indirect-buffer)
 	 ("I" . my-org-indirect-buffer)
-	 ("i" . evil-insert-state)
+	 ;; ("i" . evil-insert-state)
 	 ;; ("i" . org-narrow-to-subtree)
-	 ;; ("i" . my-org-narrowing)
+	 ("i" . my-org-narrowing)
 	 ;; ("o" . widen)
 	 ;; ("ic" . my-clone-indirect-buffer)
 	 ;; ("io" . my-org-indirect-buffer)
@@ -2790,6 +2762,12 @@
     (evil-mode 1)
 )
 
+;; split then select other window 2021-07-28
+;; https://www.reddit.com/r/emacs/comments/8fq1bp/evil_split_screens/
+;; https://emacs.stackexchange.com/questions/35192/open-vertical-splits-to-the-right
+(setq evil-vsplit-window-right t)
+(setq evil-split-window-below t)
+
 ;; default starting mode among emacs or normal
 (setq-default evil-default-state 'emacs)
 ;; (setq-default evil-default-state 'normal)
@@ -3032,6 +3010,7 @@
     "w" 'avy-goto-word-0
     "f" 'avy-goto-char
     "n" 'neotree-show
+    "F" 'my-follow-mode
     ;; "i" 'org-narrow-to-subtree
     ;; "o" 'widen
    )
@@ -3988,6 +3967,37 @@ T - tag prefix
   :after ox)
 
 
+;; == pyvenv 2021-05-16 ==
+;; python virtual environment package
+;; https://github.com/daviwil/emacs-from-scratch/wiki/LSP-Python-(pyright)-config-in-emacs-from-scratch#wiki-pages-box
+(use-package pyvenv
+  :ensure t
+  :disabled
+  :init
+  (require 'pyvenv)
+  (setenv "WORKON_HOME" "~/.venvs/")
+  :config
+  ;; (pyvenv-mode t)
+
+  ;; Set correct Python interpreter
+  (setq pyvenv-post-activate-hooks
+        (list (lambda ()
+                (setq python-shell-interpreter (concat pyvenv-virtual-env "bin/python")))))
+  (setq pyvenv-post-deactivate-hooks
+        (list (lambda ()
+                (setq python-shell-interpreter "python3")))))
+
+
+;; 2021-05-07
+;; https://www.reddit.com/r/emacs/comments/n71hj2/python_how_would_you_configure_emacs_for_data/
+(use-package ein
+  :ensure t
+  :disabled
+  :init 
+  (require 'ein)
+  (setq ein:polymode t
+        ein:output-area-inlined-images t)
+  )
 
 ;; Optional :: Put below line at the bottom of .emacs
 ;; (workgroups-mode 1)  ;; confiliced with its key-binding C-c, which I don't want to use

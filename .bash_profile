@@ -1,3 +1,4 @@
+echo "FROM BASH_PROFILE"
 # vim: set nospell foldmethod=manual:
 
 # must be run: $ source ~/.bash_profile
@@ -20,7 +21,7 @@ export JAVA_HOME=$JAVA_HOME_11
 ## Python Setting ##
 # Setting PATH for Python 3.6
 # The original version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
+# PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
 # export PATH
 
 # Setting PATH for Python 3.7
@@ -60,8 +61,8 @@ echo "-------------------------------------------------------------";
 
 # vim 8.1
 # export PATH="/usr/local/bin/vim:$PATH"
-# alias vim="/usr/local/bin/vim"
-# # alias vim="/usr/local/Cellar/vim/8.1.2350/bin/vim"
+alias vim="/usr/local/bin/vim"
+# alias vim="/usr/local/Cellar/vim/8.1.2350/bin/vim"
 
 # # Macports Version : vim 8.2
 # # vimrc plugin syntax error issue
@@ -75,4 +76,3 @@ export EDITOR=$VISUAL
 # mvim : macvim
 # https://stackoverflow.com/questions/2056137/how-to-run-mvim-macvim-from-terminal/2057486
 alias mvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
-

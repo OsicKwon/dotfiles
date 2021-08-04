@@ -126,12 +126,12 @@ export EDITOR=$VISUAL
 alias python=/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 alias python3=/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 
-# ______________________________ 
+# ______________________________
 clear
 # fortune | cowsay && tput setaf 2 && toilet -f pagga $(echo $USER) && date
 # fortune | cowsay && tput setaf 2 && toilet -f pagga Z-shell && date
-date +"%Y-%m-%d %a %R" | cowsay
-# ------------------------------ 
+cal && date +"%Y-%m-%d %a %R" | cowsay
+# ------------------------------
 #         \   ^__^
 #          \  (oo)\_______
 #             (__)\       )\/\
@@ -146,4 +146,3 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 source /Users/osickwon/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-

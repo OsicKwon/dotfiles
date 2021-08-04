@@ -20,6 +20,9 @@ set history=500                       " default was 50
 " set autoread                          " preventing something that I just write
 " au FocusGained,BufEnter * :silent! !  " -- reload when entering the buffer or gaining focus
 " au FocusLost,WinLeave * :silent! w    " -- save when exiting the buffer or losing focus
+" https://morgan.cugerone.com/blog/troubleshooting-vim-error-while-processing-cursorhold-autocommands-in-command-line-window/
+autocmd CursorHold * silent! checktime
+
 set encoding=utf-8
 set clipboard=unnamed
 " set ttimeoutlen=0                     " eliminating time delay to Normal mode
@@ -53,6 +56,7 @@ set matchpairs+=<:>
 " show more
 " set scrolloff=5
 " set sidescrolloff=5
+set mouse=a
 
 "}}}
 
@@ -137,8 +141,6 @@ Plug 'tyru/open-browser.vim' "{
 call plug#end()
 
 
-
-
 " ------
 " VUNDLE
 " ------
@@ -181,9 +183,8 @@ Plugin 'tpope/vim-repeat'
 " Plugin 'gcmt/wildfire.vim'             " good but conflict with Tagbar keys like <C-m>|<enter>
 Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'terryma/vim-expand-region'
-" Plugin 'w0rp/ale'                      " Asynchronous Lint Engine ??
+Plugin 'w0rp/ale'                        " Asynchronous Lint Engine ?? -> very powerful
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
-Plugin 'w0rp/ale'
 " Plugin 'puremourning/vimspector'        " require hight version of mac
 Plugin 'jpalardy/vim-slime'               " syntax highlight
 
@@ -206,6 +207,9 @@ Plugin 'nvie/vim-flake8'
 " Plugin 'klen/python-mode'
 " Plugin 'hanschen/vim-ipython-cell'  " ipython
 Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'psf/black'
+Plugin 'integralist/vim-mypy'
+Plugin 'fisadev/vim-isort'
 
 "----------Javascript-----------
 Plugin 'pangloss/vim-javascript'
@@ -213,6 +217,11 @@ Plugin 'pangloss/vim-javascript'
 "----------Data-------------
 " Plugin 'chrisbra/csv.vim'              " not working. instead, >> in Plug 'chrisbra/csv.vim'
 Plugin 'mechatroner/rainbow_csv'
+
+"-------PlantUML------------
+Plugin 'aklt/plantuml-syntax'
+Plugin 'weirongxu/plantuml-previewer.vim'
+Plugin 'tyru/open-browser.vim'
 
 "---------Writing-----------
 " Plugin 'junegunn/goyo.vim'
@@ -268,6 +277,19 @@ call vundle#end()
 filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 syntax on
+
+" == ale ==
+" https://www.youtube.com/watch?v=4FKPySR6HLk
+let g:ale_linters = {'python': ['flake8', 'pydocstyle', 'mypy']}
+let g:ale_fixers = {
+            \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \ 'python': ['black', 'isort'],
+            \ }
+" \ 'python': ['black', 'isort'], << isort not working for now 2021-07-26
+let g:ale_fix_on_save = 1
+
+" https://github.com/dense-analysis/ale/issues/2885
+" let g:ale_python_isort_options = '--settings-path .'
 
 " let g:indentLine_char = '¦'
 let g:indentLine_char = '┆'
@@ -472,15 +494,15 @@ highlight FoldColumn ctermbg=NONE  " for foldcolumn
 " LIGHTLINE THEME
 "-----------------
 let g:lightline = {
-      \ 'colorscheme': 'default',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
-      \ },
-      \ }
+    \ 'colorscheme': 'default',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'FugitiveHead'
+    \ },
+    \ }
 
 "------------
 " TAB CONTROL
@@ -697,10 +719,38 @@ vnoremap <space> :
 " better way -> :b {keyword that I remember}<tab>
 
 
+
+" mouse enabled
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-E>
+
+
 " --------
 "  Normal
 " --------
 "{{{
+"
+"
+nnoremap Y y$
+
+nnoremap n nzzzv
+nnoremap N Nzzzv
+" nnoremap * *zzzv
+" nnoremap # #zzzv
+" nnoremap } }zzzv
+" nnoremap { {zzzv
+" nnoremap ) )zzzv
+" nnoremap ( (zzzv
+" nnoremap <c-d> <c-d>zzzv
+" nnoremap <c-u> <c-u>zzzv
+"
+" == ALE plugin ==
+" https://til.hashrocket.com/posts/szvpivakjq-go-to-next-ale-error
+:nmap ]a :ALENextWrap<CR>
+:nmap [a :ALEPreviousWrap<CR>
+:nmap ]A :ALELast<CR>
+:nmap [A :ALEFirst<CR>
+"
 "
 " https://www.youtube.com/watch?v=p2SbmpVl6zw
 " nnoremap <CR> :nohlsearch<cr>  "interrupted in mini window
@@ -788,6 +838,19 @@ nnoremap K ggVGDI
 "  Insert
 " --------
 "{{{
+"
+" undo break points
+inoremap ,       ,<c-g>u
+inoremap .       .<c-g>u
+inoremap !       !<c-g>u
+inoremap ?       ?<c-g>u
+inoremap [       [<c-g>u
+inoremap {       {<c-g>u
+inoremap (       (<c-g>u
+" inoremap <space> <space><c-g>u
+inoremap <cr>    <cr><c-g>u
+"
+"
 inoremap <up>    <nop>
 inoremap <down>  <nop>
 inoremap <left>  <nop>
@@ -905,6 +968,30 @@ vnoremap <silent> # :<C-U>
 "===========
 " FUNCTIONS
 "===========
+
+" follow-mode like emacs 2021-08-04
+function! FollowMode()
+    norm gg
+    windo set noscrollbind
+    vsplit
+    vsplit
+    wincmd H  " move far left
+    wincmd l  " move to right
+    execute "normal \<C-f>"
+    wincmd l  " move to right
+    :exe "normal \<C-f>"
+    execute "normal \<PageDown>"
+    windo set scrollbind
+    wincmd h  " move to left
+endfunction
+command! FollowMode call FollowMode()
+nnoremap <silent> <leader>F : FollowMode<cr>
+" -------------------
+" all the same belows
+" -------------------
+" execute "normal \<C-f>"
+" :exe "normal \<C-f>"
+" execute "normal \<PageDown>"
 
 
 "-----------
@@ -1425,4 +1512,3 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 "  4 -> solid underscore
 "  5 -> blinking vertical bar
 "  6 -> solid vertical bar
-
