@@ -756,10 +756,10 @@ nnoremap k gk
 
 " Hard Mode (Anti-Pattern)
 " tips: '+' and '-' move lines, or 'gj' and 'gk' 2021-03-09
-nnoremap hh <nop>
-nnoremap jj <nop>
-nnoremap kk <nop>
-nnoremap ll <nop>
+" nnoremap hh <nop>
+" nnoremap jj <nop>
+" nnoremap kk <nop>
+" nnoremap ll <nop>
 "
 " nnoremap K ggVGD
 " nnoremap K ggVGp
@@ -1181,8 +1181,9 @@ command! T2 call TestFunction2()
 
 if has('gui_running')"{{{
     set guioptions=     " disabled mac style tab"
-    " set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
-    set guifont=Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete\ Mono:h14
+    set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
+    " set guifont=Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete\ Mono:h14
+    " set guifont=RobotoMono\ Nerd\ Font:h14
     " set guifont=MesloLGS\ Nerd\ Font:h14
     set lines=999 columns=9999  " full size windows 2021-04-21
     cd ~/Documents/nvALT/
@@ -1191,8 +1192,8 @@ if has('gui_running')"{{{
     " set nocursorcolumn
     set background=light
     " colorscheme basic-light
-    " colorscheme default
-    colorscheme github
+    colorscheme default
+    " colorscheme github
     " highlight LineNr guibg=white
     highlight SignColumn guibg='white'       " for gitgutter
     highlight FoldColumn guibg='white'       " for foldcolumn
@@ -1200,7 +1201,7 @@ if has('gui_running')"{{{
     " highlight CursorLineNr guibg=black guifg=white
     " highlight CursorLine gui=underline guibg=NONE
     " hi TabLine gui=NONE guibg=black guifg=white  " Deactive Area
-    hi TabLineSel gui=NONE guibg=black guifg=white
+    " hi TabLineSel gui=NONE guibg=black guifg=white
     " hi TabLineFill gui=NONE guibg=black guifg=white  " Backgroud Aera
     let g:airline_theme='serene'  "default raven serene luna monochrome powerlineish term transparent distinguished
     " hi EasyMotionTarget guifg=red guibg=yellow
