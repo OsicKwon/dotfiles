@@ -991,12 +991,14 @@ function! FollowMode()
         vsplit
         vsplit
         " 1/3
-        wincmd H  " move far left
+        " wincmd H  " move far left to choose first window
+        wincmd h  " navigate to left
+        wincmd h  " navigate to left
         " 2/3
-        wincmd l  " move to right
+        wincmd l  " navigate to right
         execute "normal \<C-f>"
         " 3/3
-        wincmd l  " move to right
+        wincmd l  " navigate to right
         :exe "normal \<C-f>"
         execute "normal \<PageDown>"
         " whole
@@ -1360,14 +1362,15 @@ endif"}}}
 "------------
 " Utilities
 "------------
+nnoremap <silent> <leader>p  :PlantumlOpen<cr>
 nnoremap <silent> <leader>r  :Ranger<cr>
 nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
 
 " :TagbarOpen f -> jump opening / j -> jump if opened already
 " https://github.com/preservim/tagbar/blob/master/doc/tagbar.txt
 " https://vi.stackexchange.com/questions/3885/how-to-map-two-commands-with-only-one-key
-nnoremap <silent> <leader>t  :TagbarToggle<cr>
-nnoremap <silent> <leader>T  :TagbarOpen f<cr> :set noscrollbind<cr> :wincmd =<CR>
+nnoremap <silent> <leader>t  :TagbarToggle<cr> :wincmd =<cr>
+nnoremap <silent> <leader>T  :TagbarOpen f<cr> :set noscrollbind<cr> :wincmd =<cr>
 
 nnoremap <silent> <leader>m  :MaximizerToggle<cr>
 " nnoremap <silent> <leader>x  :MaximizerToggle<cr>  " risky in x deleting
