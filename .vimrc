@@ -73,7 +73,11 @@ set rnu "relativenumber
 "   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
 "   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 " augroup END
-
+" augroup numbertoggle
+"   autocmd!
+"   autocmd FocusGained * set rnu
+"   autocmd FocusLost   * set nu
+" augroup END
 
 "-----------
 " Autogroup
@@ -718,8 +722,6 @@ vnoremap <space> :
 " nnoremap <silent><space>bl :buffers<CR>:buffer<Space>
 " better way -> :b {keyword that I remember}<tab>
 
-
-
 " mouse enabled
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
@@ -971,18 +973,38 @@ vnoremap <silent> # :<C-U>
 
 " follow-mode like emacs 2021-08-04
 function! FollowMode()
-    norm gg
-    windo set noscrollbind
-    vsplit
-    vsplit
-    wincmd H  " move far left
-    wincmd l  " move to right
-    execute "normal \<C-f>"
-    wincmd l  " move to right
-    :exe "normal \<C-f>"
-    execute "normal \<PageDown>"
-    windo set scrollbind
-    wincmd h  " move to left
+    let g:CurrentLineNumber=line(".")
+    if exists('g:OnFollowing')
+        unlet g:OnFollowing
+        :TagbarClose
+        windo set noscrollbind
+        windo set wrap
+        wincmd o  " only window
+        norm zz
+    else
+        let g:OnFollowing=1
+        execute "TagbarClose"
+        wincmd o  " only window
+        norm gg
+        setlocal foldlevel=99
+        windo set noscrollbind
+        vsplit
+        vsplit
+        " 1/3
+        wincmd H  " move far left
+        " 2/3
+        wincmd l  " move to right
+        execute "normal \<C-f>"
+        " 3/3
+        wincmd l  " move to right
+        :exe "normal \<C-f>"
+        execute "normal \<PageDown>"
+        " whole
+        windo set scrollbind
+        windo set nowrap
+        wincmd h  " move to left
+    endif
+    execute "normal!" . (g:CurrentLineNumber) . "gg"
 endfunction
 command! FollowMode call FollowMode()
 nnoremap <silent> <leader>F : FollowMode<cr>
@@ -1340,7 +1362,13 @@ endif"}}}
 "------------
 nnoremap <silent> <leader>r  :Ranger<cr>
 nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
+
+" :TagbarOpen f -> jump opening / j -> jump if opened already
+" https://github.com/preservim/tagbar/blob/master/doc/tagbar.txt
+" https://vi.stackexchange.com/questions/3885/how-to-map-two-commands-with-only-one-key
 nnoremap <silent> <leader>t  :TagbarToggle<cr>
+nnoremap <silent> <leader>T  :TagbarOpen f<cr> :set noscrollbind<cr> :wincmd =<CR>
+
 nnoremap <silent> <leader>m  :MaximizerToggle<cr>
 " nnoremap <silent> <leader>x  :MaximizerToggle<cr>  " risky in x deleting
 nnoremap <silent> <leader>b  :bro old<cr>
