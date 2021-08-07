@@ -25,7 +25,8 @@ autocmd CursorHold * silent! checktime
 
 set encoding=utf-8
 set clipboard=unnamed
-" set ttimeoutlen=0                     " eliminating time delay to Normal mode
+set ttimeoutlen=10000                     " eliminating time delay in Normal mode
+set timeoutlen=10000                     " eliminating time delay in Normal mode
 set sidescroll=1                      " options: 0, 1, 2, ....
 " set virtualedit=all
 set complete+=kspell
@@ -228,7 +229,7 @@ Plugin 'weirongxu/plantuml-previewer.vim'
 Plugin 'tyru/open-browser.vim'
 
 "---------Writing-----------
-" Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'godlygeek/tabular'
@@ -825,11 +826,11 @@ nnoremap k gk
 
 " Hard Mode (Anti-Pattern)
 " tips: '+' and '-' move lines, or 'gj' and 'gk' 2021-03-09
-" nnoremap hh <nop>
-" nnoremap jj <nop>
-" nnoremap kk <nop>
-" nnoremap ll <nop>
-"
+nnoremap hh <nop>
+nnoremap jj <nop>
+nnoremap kk <nop>
+nnoremap ll <nop>
+""
 " nnoremap K ggVGD
 " nnoremap K ggVGp
 nnoremap K ggVGDI
@@ -1071,10 +1072,11 @@ function! HardMode()
     " silent! unmap <S-tab>
     Limelight!
     set scrolloff=0
-    set noignorecase
-    set nosmartcase
+    " set noignorecase
+    " set nosmartcase
 endfunction
 command! HardMode call HardMode()
+nnoremap <silent> <leader>h : HardMode<cr>
 "}}}
 
 " Disabled to prevent from overuse
@@ -1087,12 +1089,17 @@ function! EasyMode()
     silent! nnoremap j gj
     silent! nnoremap k gk
     silent! unmap <tab>
+    silent! noremap <up>    <nop>
+    silent! noremap <down>  <nop>
+    silent! noremap <left>  <nop>
+    silent! noremap <right> <nop>
     Limelight!
     set scrolloff=0
     set ignorecase
     set smartcase
 endfunction
 command! EasyMode call EasyMode()
+nnoremap <silent> <leader>e : EasyMode<cr>
 "}}}
 
 function! SuperEasyMode()
@@ -1117,6 +1124,7 @@ function! SuperEasyMode()
     set scrolloff=999
 endfunction
 command! SuperEasyMode call SuperEasyMode()
+nnoremap <silent> <leader>s : SuperEasyMode<cr>
 "}}}
 
 
@@ -1124,7 +1132,7 @@ command! SuperEasyMode call SuperEasyMode()
 " Focusing
 "----------
 
-function! FocusMode()"{{{
+function! FocusMode()
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnFocusing')
@@ -1136,7 +1144,7 @@ function! FocusMode()"{{{
         unlet g:OnEditing
         call UnFocusMode()
     endif
-    Goyo
+    Goyo 100
     Limelight
     autocmd InsertLeave * :set norelativenumber | hi CursorLine gui=NONE
     set scrolloff=999  " centering
@@ -1155,9 +1163,11 @@ function! FocusMode()"{{{
         silent !tmux set status off
     endif
 endfunction
-command! FocusMode call FocusMode()"}}}
+command! FocusMode call FocusMode()
+nnoremap <silent> <leader>S :FocusMode<cr>
 
-function! DarkFocusMode()"{{{
+
+function! DarkFocusMode()"
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnFocusing')
@@ -1169,14 +1179,15 @@ function! DarkFocusMode()"{{{
         unlet g:OnEditing
         call UnFocusMode()
     endif
-    Goyo
+    Goyo 100
     Limelight 0.8
     autocmd InsertLeave * :set norelativenumber
     set scrolloff=999  " centering
     set sidescrolloff=30
     set ignorecase
     set smartcase
-    call EasyMode()
+    " call EasyMode()
+    call SuperEasyMode()
     " set variable
     let g:OnFocusing=1
     if has('gui_running')
@@ -1188,9 +1199,11 @@ function! DarkFocusMode()"{{{
         silent !tmux set status off
     endif
 endfunction
-command! DarkFocusMode call DarkFocusMode()"}}}
+command! DarkFocusMode call DarkFocusMode()"
+nnoremap <silent> <leader>D :DarkFocusMode<cr>
 
-function! EditMode()"{{{
+
+function! EditMode()"
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnEditing')
@@ -1220,7 +1233,9 @@ function! EditMode()"{{{
     endif
     " normal zz
 endfunction
-command! EditMode call EditMode()"}}}
+command! EditMode call EditMode()"
+nnoremap <silent> <leader>E :EditMode<cr>
+
 
 function! UnFocusMode()
 "{{{
@@ -1231,8 +1246,8 @@ function! UnFocusMode()
     autocmd InsertLeave * :set relativenumber
     set scrolloff=0
     set sidescrolloff=0
-    set noignorecase
-    set nosmartcase
+    " set noignorecase
+    " set nosmartcase
     syntax enable  " redraw markdown highlighting
     " syntax on
     call HardMode()
@@ -1257,7 +1272,8 @@ function! UnFocusMode()
     endif
 endfunction
 command! UnFocusMode call UnFocusMode()
-"}}}
+nnoremap <silent> <leader>U :UnFocusMode<cr>
+
 
 " ==========================
 " Debugging & Test Function"
@@ -1389,7 +1405,7 @@ nnoremap <silent> <leader>uh  :UndotreeHide<cr>
 " markdown support"
 vnoremap <silent> <leader>* s**<C-r>"**<esc>
 " Others
-nnoremap <silent> <leader>s  :Startify<cr>
+" nnoremap <silent> <leader>s  :Startify<cr>
 
 "------------
 " EasyMotion

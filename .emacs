@@ -2946,6 +2946,11 @@
 (define-key evil-normal-state-map (kbd "gCiw") (kbd "guiw~l"))   ; gciw :: confilicted with evil-commentary
 (define-key evil-normal-state-map (kbd "gCC") (kbd "guu~l"))
 
+;; (define-key evil-normal-state-map (kbd "hh") nil)
+;; (define-key evil-normal-state-map (kbd "jj") nil)
+;; (define-key evil-normal-state-map (kbd "kk") nil)
+;; (define-key evil-normal-state-map (kbd "ll") nil)
+
 (define-key evil-normal-state-map (kbd "DEL") 'beacon-blink)
 
 
