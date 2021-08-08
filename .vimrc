@@ -25,8 +25,8 @@ autocmd CursorHold * silent! checktime
 
 set encoding=utf-8
 set clipboard=unnamed
-set ttimeoutlen=10000                     " eliminating time delay in Normal mode
-set timeoutlen=10000                     " eliminating time delay in Normal mode
+" set ttimeoutlen=3000                     " eliminating time delay in Normal mode
+" set timeoutlen=3000
 set sidescroll=1                      " options: 0, 1, 2, ....
 " set virtualedit=all
 set complete+=kspell
@@ -329,7 +329,12 @@ let g:SuperTabDefaultCompletionType = "<c-n>"  " reverse selection order
 
 " C-c C-c, to send, .1 (pane #, ensure <prefix>q in tmux)
 let g:slime_target = "tmux"
-
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+" Color name (:help gui-colors) or RGB color
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
 
 autocmd FileType python setlocal completeopt-=preview
 
@@ -480,12 +485,13 @@ augroup END
 " COLOR
 "--------
 set background=dark
-" colorscheme papercolor
+colorscheme papercolor
 " colorscheme solarized
 " colorscheme monokai
 " highlight LineNr ctermfg=darkgray
 highlight SignColumn ctermbg=NONE  " for gitgutter
 highlight FoldColumn ctermbg=NONE  " for foldcolumn
+highlight EndOfBuffer ctermfg=black
 
 "----------------------
 " SPLIT VERTICAL COLOR
@@ -1164,10 +1170,10 @@ function! FocusMode()
     endif
 endfunction
 command! FocusMode call FocusMode()
-nnoremap <silent> <leader>S :FocusMode<cr>
+" nnoremap <silent> <leader>S :FocusMode<cr>
 
 
-function! DarkFocusMode()"
+function! DarkFocusMode()
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnFocusing')
@@ -1180,7 +1186,7 @@ function! DarkFocusMode()"
         call UnFocusMode()
     endif
     Goyo 100
-    Limelight 0.8
+    Limelight
     autocmd InsertLeave * :set norelativenumber
     set scrolloff=999  " centering
     set sidescrolloff=30
@@ -1199,9 +1205,10 @@ function! DarkFocusMode()"
         silent !tmux set status off
     endif
 endfunction
-command! DarkFocusMode call DarkFocusMode()"
-nnoremap <silent> <leader>D :DarkFocusMode<cr>
-
+" command! DarkFocusMode call DarkFocusMode()
+" nnoremap <silent> <leader>D :DarkFocusMode<cr>
+command! DistractionFreeMode call DarkFocusMode()
+nnoremap <silent> <leader>D :DistractionFreeMode<cr>
 
 function! EditMode()"
     " let g:line_size_before = &lines

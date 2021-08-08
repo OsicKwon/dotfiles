@@ -1513,8 +1513,13 @@
 	 ;; ("L" . forward-sentence)
 	 ;; ("L" . my-forward-sentence)
 	 ;; ("L" . evil-forward-sentence-begin)
-	 ("H" . evil-backward-char)
-	 ("L" . evil-forward-char)
+	 ;; ("H" . evil-backward-char)
+	 ;; ("L" . evil-forward-char)
+
+	 ("H" . evil-window-top)
+	 ("M" . evil-window-middle)
+	 ("L" . evil-window-bottom)
+
 	 ;; ("h" . beginning-of-visual-line)
 	 ;; ("l" . end-of-visual-line)
 	 ;; ("h" . left-word)
