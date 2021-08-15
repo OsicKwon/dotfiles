@@ -1304,8 +1304,13 @@ if has('gui_running')"{{{
     " highlight Visual guifg=black guibg=Cyan gui=NONE
     " highlight CursorLineNr guibg=black guifg=white
     " highlight CursorLine gui=underline guibg=NONE
+<<<<<<< HEAD
+    " hi TabLine gui=NONE guibg=black guifg=white  " Deactive Area
+    " hi TabLineSel gui=NONE guibg=black guifg=white
+=======
     hi TabLine gui=NONE guibg=black guifg=gray  " Deactive Area
     hi TabLineSel gui=NONE guibg=black guifg=white
+>>>>>>> a9a1692e3305d8a26791a32a7af9807868b6fa0b
     " hi TabLineFill gui=NONE guibg=black guifg=white  " Backgroud Aera
     let g:airline_theme='serene'  "default raven serene luna monochrome powerlineish term transparent distinguished
     " hi EasyMotionTarget guifg=red guibg=yellow

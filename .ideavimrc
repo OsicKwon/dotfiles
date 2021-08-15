@@ -1,2 +1,12 @@
+" 2021-08-04
+"
+set clipboard=unnamed
+" search
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" key remap
 nnoremap <space> :
 inoremap jj <esc>

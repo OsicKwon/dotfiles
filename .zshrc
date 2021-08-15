@@ -104,21 +104,34 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias emacs="/opt/local/bin/emacs"
 
-alias vim="/usr/local/Cellar/vim/8.1.2350/bin/vim"
-alias vi=vim
+# alias vim="/usr/local/Cellar/vim/8.1.2350/bin/vim"
+# alias vi=vim
+# export VISUAL="/usr/local/Cellar/vim/8.1.2350/bin/vim"
+# export EDITOR="/usr/local/Cellar/vim/8.1.2350/bin/vim"
 
-export VISUAL="/usr/local/Cellar/vim/8.1.2350/bin/vim"
-export EDITOR="/usr/local/Cellar/vim/8.1.2350/bin/vim"
+# vim 8.1
+# export PATH="/usr/local/bin/vim:$PATH"
+# alias vim="/usr/local/bin/vim"
+
+# # Macports Version : vim 8.2
+# # vimrc plugin syntax error issue
+# export PATH="/opt/local/bin/vim:$PATH"
+# alias vim="/opt/local/bin/vim"
+
+alias vi=vim
+export VISUAL=vim
+export EDITOR=$VISUAL
+
 
 alias python=/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 alias python3=/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 
-# ______________________________ 
+# ______________________________
 clear
 # fortune | cowsay && tput setaf 2 && toilet -f pagga $(echo $USER) && date
 # fortune | cowsay && tput setaf 2 && toilet -f pagga Z-shell && date
-date | cowsay
-# ------------------------------ 
+cal && date +"%Y-%m-%d %a %R" | cowsay
+# ------------------------------
 #         \   ^__^
 #          \  (oo)\_______
 #             (__)\       )\/\
@@ -133,4 +146,3 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 source /Users/osickwon/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
