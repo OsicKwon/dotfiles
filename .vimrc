@@ -25,7 +25,7 @@ autocmd CursorHold * silent! checktime
 
 set encoding=utf-8
 set clipboard=unnamed
-" set ttimeoutlen=3000                     " eliminating time delay in Normal mode
+" set ttimeoutlen=0                     " eliminating time delay in Normal mode
 " set timeoutlen=3000
 set sidescroll=1                      " options: 0, 1, 2, ....
 " set virtualedit=all
@@ -192,7 +192,7 @@ Plugin 'w0rp/ale'                        " Asynchronous Lint Engine ?? -> very p
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
 " Plugin 'puremourning/vimspector'        " require hight version of mac
 Plugin 'jpalardy/vim-slime'               " syntax highlight
-
+Plugin 'prettier/vim-prettier'
 
 "------AutoComplete---------
 " Plugin 'valloric/youcompleteme'        " gave up due to too-hard to insall 2020-11-20
@@ -207,7 +207,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'junegunn/gv.vim'
 
 "----------Python-----------
-" Plugin 'davidhalter/jedi-vim'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'nvie/vim-flake8'
 " Plugin 'klen/python-mode'
 " Plugin 'hanschen/vim-ipython-cell'  " ipython
@@ -219,6 +219,9 @@ Plugin 'fisadev/vim-isort'
 "----------Javascript-----------
 Plugin 'pangloss/vim-javascript'
 
+"-----------PHP-------------
+Plugin 'stanangeloff/php.vim'
+"
 "----------Data-------------
 " Plugin 'chrisbra/csv.vim'              " not working. instead, >> in Plug 'chrisbra/csv.vim'
 Plugin 'mechatroner/rainbow_csv'
@@ -276,6 +279,7 @@ Plugin 'itchyny/calendar.vim'
 Plugin 'jceb/vim-orgmode'
 Plugin 'tpope/vim-speeddating'
 " Plugin 'takac/vim-hardtime'
+" Plugin 'psliwka/vim-smoothie'
 
 call vundle#end()
 
@@ -285,10 +289,14 @@ syntax on
 
 " == ale ==
 " https://www.youtube.com/watch?v=4FKPySR6HLk
-let g:ale_linters = {'python': ['flake8', 'pydocstyle', 'mypy']}
+let g:ale_linters = {
+            \ 'python': ['flake8', 'pydocstyle', 'mypy'],
+            \ 'javascript': ['eslint'],
+            \ }
 let g:ale_fixers = {
             \ '*': ['remove_trailing_lines', 'trim_whitespace'],
             \ 'python': ['black', 'isort'],
+            \ 'javascript': ['prettier', 'eslint'],
             \ }
 " \ 'python': ['black', 'isort'], << isort not working for now 2021-07-26
 let g:ale_fix_on_save = 1
@@ -308,6 +316,9 @@ let g:highlightedyank_highlight_duration = 500
 
 " https://stackoverflow.com/questions/21628743/cant-get-the-jedi-vim-plugin-to-work
 let g:jedi#force_py_version = 3
+
+let g:jedi#completions_enabled = 0
+
 let g:ranger_map_keys = 0  " disable default ranger key -> <leader>f
 " https://github.com/vim-syntastic/syntastic/issues/2242
 " solved f-string issue (invalid syntax error)
@@ -1011,9 +1022,11 @@ function! FollowMode()
         " whole
         windo set scrollbind
         windo set nowrap
-        wincmd h  " move to left
+        wincmd h
+        wincmd h
     endif
     execute "normal!" . (g:CurrentLineNumber) . "gg"
+    norm zz
 endfunction
 command! FollowMode call FollowMode()
 nnoremap <silent> <leader>F : FollowMode<cr>
@@ -1033,9 +1046,9 @@ nnoremap <silent> <leader>F : FollowMode<cr>
 function! UnderLine()
     normal yy
     normal p
-    s/./-/g
+    s/\S/-/g
     noh
-    " echo "underlined"
+    echo "underlined"
 endfunction
 command! UnderLine call UnderLine()
 "}}}
@@ -1044,7 +1057,7 @@ command! UnderLine call UnderLine()
 function! DoubleLine()
     normal yy
     normal p
-    s/./=/g
+    s/\S/=/g
     noh
 endfunction
 command! DoubleLine call DoubleLine()
@@ -1054,7 +1067,7 @@ command! DoubleLine call DoubleLine()
 function! SurroundLine()
     normal yy
     normal p
-    s/./-/g
+    s/\S/-/g
     t-2  " copy current line to above 2 up
     noh
 endfunction
@@ -1154,7 +1167,7 @@ function! FocusMode()
     Limelight
     autocmd InsertLeave * :set norelativenumber | hi CursorLine gui=NONE
     set scrolloff=999  " centering
-    set sidescrolloff=30
+    " set sidescrolloff=30
     set ignorecase
     set smartcase
     call SuperEasyMode()
@@ -1186,10 +1199,9 @@ function! DarkFocusMode()
         call UnFocusMode()
     endif
     Goyo 100
-    Limelight
     autocmd InsertLeave * :set norelativenumber
     set scrolloff=999  " centering
-    set sidescrolloff=30
+    " set sidescrolloff=30
     set ignorecase
     set smartcase
     " call EasyMode()
@@ -1200,6 +1212,7 @@ function! DarkFocusMode()
         " set guifont=Menlo-Regular:h20
         " set lines=99 columns=999   " to maximize window size"
         colorscheme dark
+        Limelight
         set cursorline!
     elseif exists('$TMUX')
         silent !tmux set status off
@@ -1225,6 +1238,7 @@ function! EditMode()"
     Goyo 100%x100%
     Limelight!
     autocmd InsertLeave * :set norelativenumber
+    set nu
     set ignorecase
     set smartcase
     call EasyMode()
@@ -1336,7 +1350,7 @@ if has('gui_running')"{{{
     set guifont=Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete\ Mono:h14
     " set guifont=MesloLGS\ Nerd\ Font:h14
     set lines=999 columns=9999  " full size windows 2021-04-21
-    cd ~/Documents/nvALT/
+    " cd ~/Documents/nvALT/
     set linespace=1
     " set colorcolumn=105
     " set nocursorcolumn
@@ -1539,7 +1553,7 @@ autocmd BufEnter *.php   colorscheme purify | set background=dark
 autocmd BufEnter *.html  colorscheme purify | set background=dark
 autocmd BufEnter *.phtml colorscheme purify | set background=dark
 
-autocmd BufEnter *.json, json set conceallevel=0
+" autocmd BufEnter *.json, json set conceallevel=0
 
 autocmd FileType html,xml,py,lisp,js,org,dat,csv set nospell
 
