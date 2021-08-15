@@ -25,7 +25,8 @@ autocmd CursorHold * silent! checktime
 
 set encoding=utf-8
 set clipboard=unnamed
-" set ttimeoutlen=0                     " eliminating time delay to Normal mode
+" set ttimeoutlen=3000                     " eliminating time delay in Normal mode
+" set timeoutlen=3000
 set sidescroll=1                      " options: 0, 1, 2, ....
 " set virtualedit=all
 set complete+=kspell
@@ -73,7 +74,11 @@ set rnu "relativenumber
 "   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
 "   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 " augroup END
-
+" augroup numbertoggle
+"   autocmd!
+"   autocmd FocusGained * set rnu
+"   autocmd FocusLost   * set nu
+" augroup END
 
 "-----------
 " Autogroup
@@ -224,7 +229,7 @@ Plugin 'weirongxu/plantuml-previewer.vim'
 Plugin 'tyru/open-browser.vim'
 
 "---------Writing-----------
-" Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'godlygeek/tabular'
@@ -324,7 +329,12 @@ let g:SuperTabDefaultCompletionType = "<c-n>"  " reverse selection order
 
 " C-c C-c, to send, .1 (pane #, ensure <prefix>q in tmux)
 let g:slime_target = "tmux"
-
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+" Color name (:help gui-colors) or RGB color
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
 
 autocmd FileType python setlocal completeopt-=preview
 
@@ -475,12 +485,13 @@ augroup END
 " COLOR
 "--------
 set background=dark
-" colorscheme papercolor
+colorscheme papercolor
 " colorscheme solarized
 " colorscheme monokai
 " highlight LineNr ctermfg=darkgray
 highlight SignColumn ctermbg=NONE  " for gitgutter
 highlight FoldColumn ctermbg=NONE  " for foldcolumn
+highlight EndOfBuffer ctermfg=black
 
 "----------------------
 " SPLIT VERTICAL COLOR
@@ -718,8 +729,6 @@ vnoremap <space> :
 " nnoremap <silent><space>bl :buffers<CR>:buffer<Space>
 " better way -> :b {keyword that I remember}<tab>
 
-
-
 " mouse enabled
 map <ScrollWheelUp> <C-Y>
 map <ScrollWheelDown> <C-E>
@@ -823,11 +832,11 @@ nnoremap k gk
 
 " Hard Mode (Anti-Pattern)
 " tips: '+' and '-' move lines, or 'gj' and 'gk' 2021-03-09
-" nnoremap hh <nop>
-" nnoremap jj <nop>
-" nnoremap kk <nop>
-" nnoremap ll <nop>
-"
+nnoremap hh <nop>
+nnoremap jj <nop>
+nnoremap kk <nop>
+nnoremap ll <nop>
+""
 " nnoremap K ggVGD
 " nnoremap K ggVGp
 nnoremap K ggVGDI
@@ -971,18 +980,40 @@ vnoremap <silent> # :<C-U>
 
 " follow-mode like emacs 2021-08-04
 function! FollowMode()
-    norm gg
-    windo set noscrollbind
-    vsplit
-    vsplit
-    wincmd H  " move far left
-    wincmd l  " move to right
-    execute "normal \<C-f>"
-    wincmd l  " move to right
-    :exe "normal \<C-f>"
-    execute "normal \<PageDown>"
-    windo set scrollbind
-    wincmd h  " move to left
+    let g:CurrentLineNumber=line(".")
+    if exists('g:OnFollowing')
+        unlet g:OnFollowing
+        :TagbarClose
+        windo set noscrollbind
+        windo set wrap
+        wincmd o  " only window
+        norm zz
+    else
+        let g:OnFollowing=1
+        execute "TagbarClose"
+        wincmd o  " only window
+        norm gg
+        setlocal foldlevel=99
+        windo set noscrollbind
+        vsplit
+        vsplit
+        " 1/3
+        " wincmd H  " move far left to choose first window
+        wincmd h  " navigate to left
+        wincmd h  " navigate to left
+        " 2/3
+        wincmd l  " navigate to right
+        execute "normal \<C-f>"
+        " 3/3
+        wincmd l  " navigate to right
+        :exe "normal \<C-f>"
+        execute "normal \<PageDown>"
+        " whole
+        windo set scrollbind
+        windo set nowrap
+        wincmd h  " move to left
+    endif
+    execute "normal!" . (g:CurrentLineNumber) . "gg"
 endfunction
 command! FollowMode call FollowMode()
 nnoremap <silent> <leader>F : FollowMode<cr>
@@ -1047,10 +1078,11 @@ function! HardMode()
     " silent! unmap <S-tab>
     Limelight!
     set scrolloff=0
-    set noignorecase
-    set nosmartcase
+    " set noignorecase
+    " set nosmartcase
 endfunction
 command! HardMode call HardMode()
+nnoremap <silent> <leader>h : HardMode<cr>
 "}}}
 
 " Disabled to prevent from overuse
@@ -1063,12 +1095,17 @@ function! EasyMode()
     silent! nnoremap j gj
     silent! nnoremap k gk
     silent! unmap <tab>
+    silent! noremap <up>    <nop>
+    silent! noremap <down>  <nop>
+    silent! noremap <left>  <nop>
+    silent! noremap <right> <nop>
     Limelight!
     set scrolloff=0
     set ignorecase
     set smartcase
 endfunction
 command! EasyMode call EasyMode()
+nnoremap <silent> <leader>e : EasyMode<cr>
 "}}}
 
 function! SuperEasyMode()
@@ -1093,6 +1130,7 @@ function! SuperEasyMode()
     set scrolloff=999
 endfunction
 command! SuperEasyMode call SuperEasyMode()
+nnoremap <silent> <leader>s : SuperEasyMode<cr>
 "}}}
 
 
@@ -1100,7 +1138,7 @@ command! SuperEasyMode call SuperEasyMode()
 " Focusing
 "----------
 
-function! FocusMode()"{{{
+function! FocusMode()
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnFocusing')
@@ -1112,7 +1150,7 @@ function! FocusMode()"{{{
         unlet g:OnEditing
         call UnFocusMode()
     endif
-    Goyo
+    Goyo 100
     Limelight
     autocmd InsertLeave * :set norelativenumber | hi CursorLine gui=NONE
     set scrolloff=999  " centering
@@ -1131,9 +1169,11 @@ function! FocusMode()"{{{
         silent !tmux set status off
     endif
 endfunction
-command! FocusMode call FocusMode()"}}}
+command! FocusMode call FocusMode()
+" nnoremap <silent> <leader>S :FocusMode<cr>
 
-function! DarkFocusMode()"{{{
+
+function! DarkFocusMode()
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnFocusing')
@@ -1145,14 +1185,15 @@ function! DarkFocusMode()"{{{
         unlet g:OnEditing
         call UnFocusMode()
     endif
-    Goyo
-    Limelight 0.8
+    Goyo 100
+    Limelight
     autocmd InsertLeave * :set norelativenumber
     set scrolloff=999  " centering
     set sidescrolloff=30
     set ignorecase
     set smartcase
-    call EasyMode()
+    " call EasyMode()
+    call SuperEasyMode()
     " set variable
     let g:OnFocusing=1
     if has('gui_running')
@@ -1164,9 +1205,12 @@ function! DarkFocusMode()"{{{
         silent !tmux set status off
     endif
 endfunction
-command! DarkFocusMode call DarkFocusMode()"}}}
+" command! DarkFocusMode call DarkFocusMode()
+" nnoremap <silent> <leader>D :DarkFocusMode<cr>
+command! DistractionFreeMode call DarkFocusMode()
+nnoremap <silent> <leader>D :DistractionFreeMode<cr>
 
-function! EditMode()"{{{
+function! EditMode()"
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnEditing')
@@ -1196,7 +1240,9 @@ function! EditMode()"{{{
     endif
     " normal zz
 endfunction
-command! EditMode call EditMode()"}}}
+command! EditMode call EditMode()"
+nnoremap <silent> <leader>E :EditMode<cr>
+
 
 function! UnFocusMode()
 "{{{
@@ -1207,8 +1253,8 @@ function! UnFocusMode()
     autocmd InsertLeave * :set relativenumber
     set scrolloff=0
     set sidescrolloff=0
-    set noignorecase
-    set nosmartcase
+    " set noignorecase
+    " set nosmartcase
     syntax enable  " redraw markdown highlighting
     " syntax on
     call HardMode()
@@ -1233,7 +1279,8 @@ function! UnFocusMode()
     endif
 endfunction
 command! UnFocusMode call UnFocusMode()
-"}}}
+nnoremap <silent> <leader>U :UnFocusMode<cr>
+
 
 " ==========================
 " Debugging & Test Function"
@@ -1339,9 +1386,16 @@ endif"}}}
 "------------
 " Utilities
 "------------
+nnoremap <silent> <leader>p  :PlantumlOpen<cr>
 nnoremap <silent> <leader>r  :Ranger<cr>
 nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
-nnoremap <silent> <leader>t  :TagbarToggle<cr>
+
+" :TagbarOpen f -> jump opening / j -> jump if opened already
+" https://github.com/preservim/tagbar/blob/master/doc/tagbar.txt
+" https://vi.stackexchange.com/questions/3885/how-to-map-two-commands-with-only-one-key
+nnoremap <silent> <leader>t  :TagbarToggle<cr> :wincmd =<cr>
+nnoremap <silent> <leader>T  :TagbarOpen f<cr> :set noscrollbind<cr> :wincmd =<cr>
+
 nnoremap <silent> <leader>m  :MaximizerToggle<cr>
 " nnoremap <silent> <leader>x  :MaximizerToggle<cr>  " risky in x deleting
 nnoremap <silent> <leader>b  :bro old<cr>
@@ -1359,7 +1413,7 @@ nnoremap <silent> <leader>uh  :UndotreeHide<cr>
 " markdown support"
 vnoremap <silent> <leader>* s**<C-r>"**<esc>
 " Others
-nnoremap <silent> <leader>s  :Startify<cr>
+" nnoremap <silent> <leader>s  :Startify<cr>
 
 "------------
 " EasyMotion

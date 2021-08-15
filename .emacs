@@ -1513,8 +1513,13 @@
 	 ;; ("L" . forward-sentence)
 	 ;; ("L" . my-forward-sentence)
 	 ;; ("L" . evil-forward-sentence-begin)
-	 ("H" . evil-backward-char)
-	 ("L" . evil-forward-char)
+	 ;; ("H" . evil-backward-char)
+	 ;; ("L" . evil-forward-char)
+
+	 ("H" . evil-window-top)
+	 ("M" . evil-window-middle)
+	 ("L" . evil-window-bottom)
+
 	 ;; ("h" . beginning-of-visual-line)
 	 ;; ("l" . end-of-visual-line)
 	 ;; ("h" . left-word)
@@ -2945,6 +2950,11 @@
 ;; https://vim.fandom.com/wiki/Capitalize_words_and_regions_easily
 (define-key evil-normal-state-map (kbd "gCiw") (kbd "guiw~l"))   ; gciw :: confilicted with evil-commentary
 (define-key evil-normal-state-map (kbd "gCC") (kbd "guu~l"))
+
+;; (define-key evil-normal-state-map (kbd "hh") nil)
+;; (define-key evil-normal-state-map (kbd "jj") nil)
+;; (define-key evil-normal-state-map (kbd "kk") nil)
+;; (define-key evil-normal-state-map (kbd "ll") nil)
 
 (define-key evil-normal-state-map (kbd "DEL") 'beacon-blink)
 
