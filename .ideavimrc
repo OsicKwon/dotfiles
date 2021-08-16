@@ -10,3 +10,4 @@ set smartcase
 " key remap
 nnoremap <space> :
 inoremap jj <esc>
+nnoremap Y y$

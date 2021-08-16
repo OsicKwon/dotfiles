@@ -71,7 +71,22 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
-;; xr
+
+;; Enable mouse support
+;; https://stackoverflow.com/questions/5710334/how-can-i-get-mouse-selection-to-work-in-emacs-and-iterm2-on-mac
+(unless window-system
+  (require 'mouse)
+  (xterm-mouse-mode t)
+  (global-set-key [mouse-4] (lambda ()
+                              (interactive)
+                              (scroll-down 1)))
+  (global-set-key [mouse-5] (lambda ()
+                              (interactive)
+                              (scroll-up 1)))
+  (defun track-mouse (e))
+  (setq mouse-sel-mode t)
+)
+
 
 ;; use TAB in org-mode terminal used for org-cycle
 ;; https://www.reddit.com/r/emacs/comments/6ypcv2/eviljumpforward_is_not_mapped_to_ci_when_editing/
@@ -2038,7 +2053,6 @@
 ;; https://github.com/edkolev/evil-goggles
 (use-package evil-goggles
   :ensure t
-  :disabled
   :init (require 'evil-goggles)
   :config
   (evil-goggles-mode)
@@ -2950,6 +2964,8 @@
 ;; https://vim.fandom.com/wiki/Capitalize_words_and_regions_easily
 (define-key evil-normal-state-map (kbd "gCiw") (kbd "guiw~l"))   ; gciw :: confilicted with evil-commentary
 (define-key evil-normal-state-map (kbd "gCC") (kbd "guu~l"))
+
+(define-key evil-normal-state-map (kbd "Y") (kbd "y$"))  ; yank until end of line from current cursor position
 
 ;; (define-key evil-normal-state-map (kbd "hh") nil)
 ;; (define-key evil-normal-state-map (kbd "jj") nil)
