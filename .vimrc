@@ -143,6 +143,7 @@ Plug 'tyru/open-browser.vim' "{
   nmap gx <Plug>(openbrowser-open)
   vmap gx <Plug>(openbrowser-open)
 "}
+" Plug 'mg979/vim-visual-multi', {'branch': 'master'}  " multi-cursor
 call plug#end()
 
 
@@ -184,7 +185,7 @@ Plugin 'tpope/vim-commentary'
 " Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
-" Plugin 'terryma/vim-multiple-cursors'  " good but not Vim way
+" Plugin 'terryma/vim-multiple-cursors'  " good but not Vim way :: change to Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " Plugin 'gcmt/wildfire.vim'             " good but conflict with Tagbar keys like <C-m>|<enter>
 Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'terryma/vim-expand-region'
@@ -207,7 +208,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'junegunn/gv.vim'
 
 "----------Python-----------
-Plugin 'davidhalter/jedi-vim'
+" Plugin 'davidhalter/jedi-vim'
 Plugin 'nvie/vim-flake8'
 " Plugin 'klen/python-mode'
 " Plugin 'hanschen/vim-ipython-cell'  " ipython
@@ -496,7 +497,7 @@ augroup END
 " COLOR
 "--------
 set background=dark
-colorscheme papercolor
+colorscheme PaperColor
 " colorscheme solarized
 " colorscheme monokai
 " highlight LineNr ctermfg=darkgray
@@ -997,6 +998,7 @@ function! FollowMode()
         :TagbarClose
         windo set noscrollbind
         windo set wrap
+        windo set rnu
         wincmd o  " only window
         norm zz
     else
@@ -1006,6 +1008,7 @@ function! FollowMode()
         norm gg
         setlocal foldlevel=99
         windo set noscrollbind
+        windo set nornu
         vsplit
         vsplit
         " 1/3
@@ -1022,6 +1025,8 @@ function! FollowMode()
         " whole
         windo set scrollbind
         windo set nowrap
+        autocmd InsertLeave * set nornu | set nocursorline " | set nocursorcolumn
+        call EasyMode()
         wincmd h
         wincmd h
     endif

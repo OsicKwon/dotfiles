@@ -1490,10 +1490,11 @@
 	 ;; ("w" . my-minimap-mode)
 	 ;; ("w" . sublimity-mode)
 	 ;; ("w" . writeroom-mode)
-	 ("w" . avy-goto-word-1)
+	 ;; ("w" . avy-goto-word-1)
 	 ;; ("w" . avy-goto-char)
 	 ;; ("w" . avy-goto-char-2)
 	 ;; ("w" . ace-window)
+	 ("w" . evil-scroll-line-up)
 	 ;; ("w" . other-window)
 	 ;; ("w" . ace-jump-char-mode)
 	 ;; ("w" . my-follow-mode)
@@ -1541,8 +1542,10 @@
 	 ;; ("l" . right-word)
 	 ;; ("h" . evil-backward-WORD-begin)
 	 ;; ("l" . evil-forward-WORD-begin)
-	 ("h" . org-tree-slide-move-previous-tree)
-	 ("l" . org-tree-slide-move-next-tree)
+	 ;; ("h" . org-tree-slide-move-previous-tree)
+	 ;; ("l" . org-tree-slide-move-next-tree)
+	 ("h" . org-cycle)
+	 ("l" . org-cycle)
 	 ;; ("H" . org-tree-slide-move-previous-tree)
 	 ;; ("L" . org-tree-slide-move-next-tree)
 	 ;; ---
@@ -1557,7 +1560,8 @@
 	 ;; ("n" . evil-normal-state)
 	 ;; ("e" . View-scroll-line-forward)             ; scroll down (forward) - opposite to 'y'
 	 ("e" . evil-scroll-line-down)
-	 ("y" . evil-scroll-line-up)
+	 ;; ("y" . evil-scroll-line-up)
+	 ("y" . avy-goto-word-1)
 	 ;; ("f" . evil-scroll-page-down)
 	 ;; ("b" . evil-scroll-page-up)
 	 ;; ("0" . beginning-of-visual-line)
@@ -2953,8 +2957,9 @@
 (define-key evil-normal-state-map (kbd "<escape><escape>") 'evil-force-normal-state)
 ;; (define-key evil-normal-state-map (kbd "<escape><escape>") 'view-mode)
 (define-key evil-normal-state-map (kbd "<escape> x") 'counsel-M-x)
+
 ;; Visual mode (use M-x, not <escpae> x -> close to vanilla vim
-;; (define-key evil-visual-state-map (kbd "<escape>") nil)
+;; (define-key evil-visual-state-map (kbd "<escape>") nil)  ; enable this first
 ;; (define-key evil-visual-state-map (kbd "<escape><escape>") 'evil-force-normal-state)
 ;; (define-key evil-visual-state-map (kbd "<escape> x") 'counsel-M-x)
 
@@ -3786,6 +3791,16 @@ T - tag prefix
       '((t
          lambda (_caller)
          (/ (frame-height) 2))))
+
+(use-package counsel
+  :after ivy
+  :ensure t
+  )
+
+(use-package swiper
+  :after ivy
+  :ensure t
+  )
 
 ;; https://emacs.stackexchange.com/questions/32862/ivy-disable-completion-for-a-command-in-minibuffer
 (define-key ivy-minibuffer-map (kbd "TAB") 'ivy-insert-current)
