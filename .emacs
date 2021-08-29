@@ -1546,8 +1546,8 @@
 	 ;; ("l" . org-tree-slide-move-next-tree)
 	 ("h" . org-cycle)
 	 ("l" . org-cycle)
-	 ;; ("H" . org-tree-slide-move-previous-tree)
-	 ;; ("L" . org-tree-slide-move-next-tree)
+	 ("H" . org-tree-slide-move-previous-tree)
+	 ("L" . org-tree-slide-move-next-tree)
 	 ;; ---
 	 ;; ("w" . right-word)
 	 ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result

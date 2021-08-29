@@ -754,8 +754,8 @@ map <ScrollWheelDown> <C-E>
 "
 nnoremap Y y$
 
-nnoremap n nzzzv
-nnoremap N Nzzzv
+" nnoremap n nzzzv
+" nnoremap N Nzzzv
 " nnoremap * *zzzv
 " nnoremap # #zzzv
 " nnoremap } }zzzv
@@ -1258,6 +1258,7 @@ function! EditMode()"
         silent !tmux set status off
     endif
     " normal zz
+    setlocal foldlevel=99
 endfunction
 command! EditMode call EditMode()"
 nnoremap <silent> <leader>E :EditMode<cr>
@@ -1352,7 +1353,7 @@ command! T2 call TestFunction2()
 if has('gui_running')"{{{
     set guioptions=     " disabled mac style tab"
     " set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
-    set guifont=Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete\ Mono:h14
+    set guifont=Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete\ Mono:h18
     " set guifont=MesloLGS\ Nerd\ Font:h14
     set lines=999 columns=9999  " full size windows 2021-04-21
     " cd ~/Documents/nvALT/
