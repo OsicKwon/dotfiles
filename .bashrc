@@ -24,3 +24,5 @@ PS1+="\[${white}\]-> \[${reset}\]";
 export PS1;
 
 alias emacs="/opt/local/bin/emacs"
+clear
+neofetch

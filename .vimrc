@@ -143,6 +143,7 @@ Plug 'tyru/open-browser.vim' "{
   nmap gx <Plug>(openbrowser-open)
   vmap gx <Plug>(openbrowser-open)
 "}
+" Plug 'mg979/vim-visual-multi', {'branch': 'master'}  " multi-cursor
 call plug#end()
 
 
@@ -184,7 +185,7 @@ Plugin 'tpope/vim-commentary'
 " Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
-" Plugin 'terryma/vim-multiple-cursors'  " good but not Vim way
+" Plugin 'terryma/vim-multiple-cursors'  " good but not Vim way :: change to Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 " Plugin 'gcmt/wildfire.vim'             " good but conflict with Tagbar keys like <C-m>|<enter>
 Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'terryma/vim-expand-region'
@@ -207,7 +208,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'junegunn/gv.vim'
 
 "----------Python-----------
-Plugin 'davidhalter/jedi-vim'
+" Plugin 'davidhalter/jedi-vim'
 Plugin 'nvie/vim-flake8'
 " Plugin 'klen/python-mode'
 " Plugin 'hanschen/vim-ipython-cell'  " ipython
@@ -496,7 +497,7 @@ augroup END
 " COLOR
 "--------
 set background=dark
-colorscheme papercolor
+colorscheme PaperColor
 " colorscheme solarized
 " colorscheme monokai
 " highlight LineNr ctermfg=darkgray
@@ -753,8 +754,8 @@ map <ScrollWheelDown> <C-E>
 "
 nnoremap Y y$
 
-nnoremap n nzzzv
-nnoremap N Nzzzv
+" nnoremap n nzzzv
+" nnoremap N Nzzzv
 " nnoremap * *zzzv
 " nnoremap # #zzzv
 " nnoremap } }zzzv
@@ -997,6 +998,7 @@ function! FollowMode()
         :TagbarClose
         windo set noscrollbind
         windo set wrap
+        windo set rnu
         wincmd o  " only window
         norm zz
     else
@@ -1006,6 +1008,7 @@ function! FollowMode()
         norm gg
         setlocal foldlevel=99
         windo set noscrollbind
+        windo set nornu
         vsplit
         vsplit
         " 1/3
@@ -1022,6 +1025,8 @@ function! FollowMode()
         " whole
         windo set scrollbind
         windo set nowrap
+        autocmd InsertLeave * set nornu | set nocursorline " | set nocursorcolumn
+        call EasyMode()
         wincmd h
         wincmd h
     endif
@@ -1253,6 +1258,7 @@ function! EditMode()"
         silent !tmux set status off
     endif
     " normal zz
+    setlocal foldlevel=99
 endfunction
 command! EditMode call EditMode()"
 nnoremap <silent> <leader>E :EditMode<cr>
@@ -1346,9 +1352,14 @@ command! T2 call TestFunction2()
 
 if has('gui_running')"{{{
     set guioptions=     " disabled mac style tab"
+<<<<<<< HEAD
     set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
     " set guifont=Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete\ Mono:h14
     " set guifont=RobotoMono\ Nerd\ Font:h14
+=======
+    " set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
+    set guifont=Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete\ Mono:h18
+>>>>>>> 85d8613d05edf2ca7aa6f4e52a0ea20b0178d451
     " set guifont=MesloLGS\ Nerd\ Font:h14
     set lines=999 columns=9999  " full size windows 2021-04-21
     " cd ~/Documents/nvALT/
