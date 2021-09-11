@@ -7,7 +7,27 @@ set incsearch
 set ignorecase
 set smartcase
 
+set visualbell
+
+let mapleader = "\"
+
+" https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
+set surround
+set commentary
+" set easymotion
+set multiple-cursors
+set highlightedyank
+" set NERDTree
+
 " key remap
 nnoremap <space> :
+vnoremap <space> :
 inoremap jj <esc>
+inoremap kk <esc>
 nnoremap Y y$
+
+nnoremap <leader>n :NERDTree
+
+" https://www.jvt.me/posts/2020/05/15/intellij-vim-changelist/
+nnoremap g; :action JumpToLastChange<Enter>
+nnoremap g, :action JumpToNextChange<Enter>

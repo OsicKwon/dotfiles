@@ -16,7 +16,7 @@
 "-----------------
 "{{{
 set nocompatible
-set history=500                       " default was 50
+set history=500                         " default was 50
 " set autoread                          " preventing something that I just write
 " au FocusGained,BufEnter * :silent! !  " -- reload when entering the buffer or gaining focus
 " au FocusLost,WinLeave * :silent! w    " -- save when exiting the buffer or losing focus
@@ -24,10 +24,11 @@ set history=500                       " default was 50
 autocmd CursorHold * silent! checktime
 
 set encoding=utf-8
+set noswapfile                          " edit duplicated open file anywhere
 set clipboard=unnamed
 " set ttimeoutlen=0                     " eliminating time delay in Normal mode
 " set timeoutlen=3000
-set sidescroll=1                      " options: 0, 1, 2, ....
+set sidescroll=1                        " options: 0, 1, 2, ....
 " set virtualedit=all
 set complete+=kspell
 set completeopt=menuone,longest
@@ -169,6 +170,7 @@ Plugin 'joshdick/onedark.vim'
 Plugin 'rakr/vim-one'
 Plugin 'gosukiwi/vim-atom-dark'
 Plugin 'arcticicestudio/nord-vim'
+Plugin 'nanotech/jellybeans.vim'
 
 "--------SnipMate-----------
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -1006,7 +1008,7 @@ function! FollowMode()
         execute "TagbarClose"
         wincmd o  " only window
         norm gg
-        setlocal foldlevel=99
+        setlocal foldlevel=99  " unfold all
         windo set noscrollbind
         windo set nornu
         vsplit
@@ -1275,6 +1277,7 @@ function! UnFocusMode()
     set sidescrolloff=0
     " set noignorecase
     " set nosmartcase
+    setlocal foldlevel=99  " unfold all
     syntax enable  " redraw markdown highlighting
     " syntax on
     call HardMode()
@@ -1352,6 +1355,7 @@ command! T2 call TestFunction2()
 
 if has('gui_running')"{{{
     set guioptions=     " disabled mac style tab"
+    " set guioptions+=c   " to confirm exit
     " set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
     set guifont=Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete\ Mono:h18
     " set guifont=MesloLGS\ Nerd\ Font:h14
@@ -1512,9 +1516,13 @@ command HA call HardMode() | echo "HardMode Activated"
 " --- very magic mode -> \v
 " --- lazy mode(non-greedy) -> .{-}
 " after -> :put A or (insert mode)"AP
-ab xorg -*- mode: org; -*-
-ab xti #+TITLE:
-ab xftp ftp://osickwon@ftp.osickwon.heliohost.org/public_html/
+ab ttt testtesttest
+iab xorg -*- mode: org; -*-
+iab xti #+TITLE:
+iab xftp ftp://osickwon@ftp.osickwon.heliohost.org/public_html/
+iab bp breakpoint()
+iab tt time.sleep(1)
+iab ip from IPython import embed; embed()
 " run python with current buffer
 cab rp !clear; python3 %
 

@@ -128,7 +128,9 @@ alias python3=/Library/Frameworks/Python.framework/Versions/3.7/bin/python3
 
 # ______________________________
 clear
-neofetch
+
+# neofetch  # show system logo
+
 # fortune | cowsay && tput setaf 2 && toilet -f pagga $(echo $USER) && date
 # fortune | cowsay && tput setaf 2 && toilet -f pagga Z-shell && date
 # cal && date +"%Y-%m-%d %a %R" | cowsay
