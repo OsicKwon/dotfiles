@@ -24,7 +24,7 @@ set history=500                         " default was 50
 autocmd CursorHold * silent! checktime
 
 set encoding=utf-8
-set noswapfile                          " edit duplicated open file anywhere
+" set noswapfile                          " edit duplicated opened file anywhere
 set clipboard=unnamed
 " set ttimeoutlen=0                     " eliminating time delay in Normal mode
 " set timeoutlen=3000
@@ -853,7 +853,10 @@ nnoremap ll <nop>
 ""
 " nnoremap K ggVGD
 " nnoremap K ggVGp
-nnoremap K ggVGDI
+" nnoremap K ggVGDI
+" https://www.reddit.com/r/vim/comments/ilp32r/deleting_a_line_without_copying_it/
+" not save to clipboard. instead, use register '_'
+nnoremap K ggVG"_d
 "
 "}}}
 
