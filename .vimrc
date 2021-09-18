@@ -1356,6 +1356,11 @@ command! T2 call TestFunction2()
 " notice: all gui seeting shoud be located inside this if statement 2021-03-18
 " ---
 
+" https://superuser.com/questions/198981/show-gvim-scrollbar-only-when-needed
+" scrollbar when only needed
+" au VimEnter * if line('$') > &lines | set go+=r | else | set go-=r | endif
+" au VimResized * if line('$') > &lines | set go+=r | else | set go-=r | endif
+
 if has('gui_running')"{{{
     set guioptions=     " disabled mac style tab"
     " set guioptions+=c   " to confirm exit
