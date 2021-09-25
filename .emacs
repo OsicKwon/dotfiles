@@ -648,10 +648,12 @@
 
 ;; -- Org Table --
 ;; https://prometheo.tistory.com/8
-;; (set-face-font 'default "Monaco-12")
-;; (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-;;                   '("AppleGothic" . "unicode-bmp"))
-;; (setq face-font-rescale-alist '(("AppleGothic" . 1.2)))
+(set-face-font 'default "Menlo")
+(set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+                  '("AppleGothic" . "unicode-bmp"))
+(setq face-font-rescale-alist '(("AppleGothic" . 1.2)))
+;;                   '("Nanum Gothic" . "unicode-bmp"))
+;; (setq face-font-rescale-alist '(("Nanum Gothic" . 1.2307692307692308)))
 
 ;; -- keyborad --
 ;; (setq default-korean-keyboard 'korean-hangul2)
