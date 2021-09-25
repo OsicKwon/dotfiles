@@ -1,5 +1,9 @@
 " 2021-08-04
 "
+" ideavim
+" https://youtrack.jetbrains.com/issue/VIM-765
+set dialogescape=off
+
 set clipboard=unnamed
 " search
 set hlsearch

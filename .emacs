@@ -644,7 +644,16 @@
 (global-set-key (kbd "C-o") (lambda () (interactive)(end-of-line)(newline)))
 
 
-;; Korean Hangul 2021-04-29
+;; == Korean Hangul 2021-04-29 ==
+
+;; -- Org Table --
+;; https://prometheo.tistory.com/8
+;; (set-face-font 'default "Monaco-12")
+;; (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+;;                   '("AppleGothic" . "unicode-bmp"))
+;; (setq face-font-rescale-alist '(("AppleGothic" . 1.2)))
+
+;; -- keyborad --
 ;; (setq default-korean-keyboard 'korean-hangul2)
 ;; (global-set-key (kbd "S-SPC") 'toggle-input-method)  ; may conflict with osx korean key
 
