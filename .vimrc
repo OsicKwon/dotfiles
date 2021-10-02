@@ -341,8 +341,18 @@ let g:purify_inverse = 0     " default: 1
 let g:tagbar_sort = 0
 let g:SuperTabDefaultCompletionType = "<c-n>"  " reverse selection order
 
+" ===============
 " C-c C-c, to send, .1 (pane #, ensure <prefix>q in tmux)
+" ---------------
+" to use
+" ---------------
+" :SlimeConfig
+" tmux socket name or absolute path: default
+" tmux target pane: 0.1 or .1  -> which means that 'pane 0' -> 'pane 1'
+" ---------------
 let g:slime_target = "tmux"
+" ===============
+
 " Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
