@@ -25,4 +25,4 @@ export PS1;
 
 alias emacs="/opt/local/bin/emacs"
 clear
-neofetch
+# neofetch  # display system logo with information

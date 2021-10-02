@@ -72,6 +72,8 @@
 ;; --------------------
 
 
+;; (global-set-key (kbd "<escape> C-n") nil)
+
 ;; Enable mouse support
 ;; https://stackoverflow.com/questions/5710334/how-can-i-get-mouse-selection-to-work-in-emacs-and-iterm2-on-mac
 (unless window-system
@@ -379,8 +381,8 @@
   :ensure t
   :init (require 'org-sidebar)
   :config
-  (global-set-key (kbd "C-M-s") 'org-sidebar-toggle)
-  (global-set-key (kbd "C-M-e") 'org-sidebar-tree-toggle)
+  ;; (global-set-key (kbd "C-M-s") 'org-sidebar-toggle)
+  ;; (global-set-key (kbd "C-M-e") 'org-sidebar-tree-toggle)
   )
 
 
@@ -642,7 +644,18 @@
 (global-set-key (kbd "C-o") (lambda () (interactive)(end-of-line)(newline)))
 
 
-;; Korean Hangul 2021-04-29
+;; == Korean Hangul 2021-04-29 ==
+
+;; -- Org Table --
+;; https://prometheo.tistory.com/8
+(set-face-font 'default "Menlo")
+(set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+                  '("AppleGothic" . "unicode-bmp"))
+(setq face-font-rescale-alist '(("AppleGothic" . 1.2)))
+;;                   '("Nanum Gothic" . "unicode-bmp"))
+;; (setq face-font-rescale-alist '(("Nanum Gothic" . 1.2307692307692308)))
+
+;; -- keyborad --
 ;; (setq default-korean-keyboard 'korean-hangul2)
 ;; (global-set-key (kbd "S-SPC") 'toggle-input-method)  ; may conflict with osx korean key
 
@@ -1490,11 +1503,11 @@
 	 ;; ("w" . my-minimap-mode)
 	 ;; ("w" . sublimity-mode)
 	 ;; ("w" . writeroom-mode)
-	 ;; ("w" . avy-goto-word-1)
+	 ("w" . avy-goto-word-1)
 	 ;; ("w" . avy-goto-char)
 	 ;; ("w" . avy-goto-char-2)
 	 ;; ("w" . ace-window)
-	 ("w" . evil-scroll-line-up)
+	 ;; ("w" . evil-scroll-line-up)
 	 ;; ("w" . other-window)
 	 ;; ("w" . ace-jump-char-mode)
 	 ;; ("w" . my-follow-mode)
@@ -1542,12 +1555,12 @@
 	 ;; ("l" . right-word)
 	 ;; ("h" . evil-backward-WORD-begin)
 	 ;; ("l" . evil-forward-WORD-begin)
-	 ;; ("h" . org-tree-slide-move-previous-tree)
-	 ;; ("l" . org-tree-slide-move-next-tree)
-	 ("h" . org-cycle)
-	 ("l" . org-cycle)
-	 ("H" . org-tree-slide-move-previous-tree)
-	 ("L" . org-tree-slide-move-next-tree)
+	 ("h" . org-tree-slide-move-previous-tree)
+	 ("l" . org-tree-slide-move-next-tree)
+	 ;; ("h" . org-cycle)
+	 ;; ("l" . org-cycle)
+	 ;; ("H" . org-tree-slide-move-previous-tree)
+	 ;; ("L" . org-tree-slide-move-next-tree)
 	 ;; ---
 	 ;; ("w" . right-word)
 	 ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
@@ -1561,7 +1574,7 @@
 	 ;; ("e" . View-scroll-line-forward)             ; scroll down (forward) - opposite to 'y'
 	 ("e" . evil-scroll-line-down)
 	 ;; ("y" . evil-scroll-line-up)
-	 ("y" . avy-goto-word-1)
+	 ;; ("y" . avy-goto-word-1)
 	 ;; ("f" . evil-scroll-page-down)
 	 ;; ("b" . evil-scroll-page-up)
 	 ;; ("0" . beginning-of-visual-line)
@@ -2240,6 +2253,7 @@
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
  '(show-paren-mode t)
  '(wg-special-buffer-serdes-functions '(wg-serialize-comint-buffer))
+ '(whitespace-line-column 120)
  '(writeroom-restore-window-config t))
 
 
@@ -3678,12 +3692,17 @@ T - tag prefix
 ;; Key Bindings 2020-12-10
 ;;==========================
 
-;; scroll window up/down by one line
+;; Scroll window up/down by one line
 ;; http://pragmaticemacs.com/emacs/scrolling-and-moving-by-line/
-;; (global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
-;; (global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
-(global-set-key (kbd "M-n") 'forward-paragraph)
-(global-set-key (kbd "M-p") 'backward-paragraph)
+;;keep cursor at same position when scrolling
+;; (setq scroll-preserve-screen-position 1)
+(setq scroll-preserve-screen-position nil)
+;;scroll window up/down by one line
+(global-set-key (kbd "M-n") (kbd "C-u 1 C-v"))
+(global-set-key (kbd "M-p") (kbd "C-u 1 M-v"))
+
+;; (global-set-key (kbd "M-n") 'forward-paragraph)
+;; (global-set-key (kbd "M-p") 'backward-paragraph)
 
 
 ;; org refile-multi_level 2020-12-12
@@ -3920,6 +3939,7 @@ T - tag prefix
 
 
 ;; Multiple-Cursors(mc/) Package 2020-12-19
+;; https://github.com/magnars/multiple-cursors.el
 ;; (require 'multiple-cursors)
 (use-package multiple-cursors :ensure t :init (require 'multiple-cursors))
 ; for multiple-line
@@ -4243,6 +4263,8 @@ T - tag prefix
 ;; ;;; add auto save
 ;; (add-hook 'kill-emacs-hook #'(lambda () (peng-save-ivy-views)))
 ;; (add-hook 'emacs-startup-hook #'(lambda () (peng-load-ivy-views)))
+
+(emacs-init-time)
 
 
 ;; ===
