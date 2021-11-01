@@ -15,10 +15,8 @@
 " INITIAL SETTING
 "-----------------
 "{{{
-" https://webinstall.dev/vim-leader/
-" let mapleader = ' '
 set nocompatible
-set history=500                         " default was 50
+set history=500                       " default was 50
 " set autoread                          " preventing something that I just write
 " au FocusGained,BufEnter * :silent! !  " -- reload when entering the buffer or gaining focus
 " au FocusLost,WinLeave * :silent! w    " -- save when exiting the buffer or losing focus
@@ -26,11 +24,9 @@ set history=500                         " default was 50
 autocmd CursorHold * silent! checktime
 
 set encoding=utf-8
-set noswapfile                          " edit duplicated opened file anywhere
 set clipboard=unnamed
-" set ttimeoutlen=0                     " eliminating time delay in Normal mode
-" set timeoutlen=3000
-set sidescroll=1                        " options: 0, 1, 2, ....
+" set ttimeoutlen=0                     " eliminating time delay to Normal mode
+set sidescroll=1                      " options: 0, 1, 2, ....
 " set virtualedit=all
 set complete+=kspell
 set completeopt=menuone,longest
@@ -77,11 +73,7 @@ set rnu "relativenumber
 "   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
 "   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 " augroup END
-" augroup numbertoggle
-"   autocmd!
-"   autocmd FocusGained * set rnu
-"   autocmd FocusLost   * set nu
-" augroup END
+
 
 "-----------
 " Autogroup
@@ -146,7 +138,6 @@ Plug 'tyru/open-browser.vim' "{
   nmap gx <Plug>(openbrowser-open)
   vmap gx <Plug>(openbrowser-open)
 "}
-" Plug 'mg979/vim-visual-multi', {'branch': 'master'}  " multi-cursor
 call plug#end()
 
 
@@ -172,7 +163,6 @@ Plugin 'joshdick/onedark.vim'
 Plugin 'rakr/vim-one'
 Plugin 'gosukiwi/vim-atom-dark'
 Plugin 'arcticicestudio/nord-vim'
-Plugin 'nanotech/jellybeans.vim'
 
 "--------SnipMate-----------
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -189,7 +179,7 @@ Plugin 'tpope/vim-commentary'
 " Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
-" Plugin 'terryma/vim-multiple-cursors'  " good but not Vim way :: change to Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+" Plugin 'terryma/vim-multiple-cursors'  " good but not Vim way
 " Plugin 'gcmt/wildfire.vim'             " good but conflict with Tagbar keys like <C-m>|<enter>
 Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'terryma/vim-expand-region'
@@ -197,7 +187,7 @@ Plugin 'w0rp/ale'                        " Asynchronous Lint Engine ?? -> very p
 " Plugin 'ap/vim-css-color'              " complicted with vim modeline filetype markdown
 " Plugin 'puremourning/vimspector'        " require hight version of mac
 Plugin 'jpalardy/vim-slime'               " syntax highlight
-Plugin 'prettier/vim-prettier'
+
 
 "------AutoComplete---------
 " Plugin 'valloric/youcompleteme'        " gave up due to too-hard to insall 2020-11-20
@@ -224,9 +214,6 @@ Plugin 'fisadev/vim-isort'
 "----------Javascript-----------
 Plugin 'pangloss/vim-javascript'
 
-"-----------PHP-------------
-Plugin 'stanangeloff/php.vim'
-"
 "----------Data-------------
 " Plugin 'chrisbra/csv.vim'              " not working. instead, >> in Plug 'chrisbra/csv.vim'
 Plugin 'mechatroner/rainbow_csv'
@@ -237,7 +224,7 @@ Plugin 'weirongxu/plantuml-previewer.vim'
 Plugin 'tyru/open-browser.vim'
 
 "---------Writing-----------
-Plugin 'junegunn/goyo.vim'
+" Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'godlygeek/tabular'
@@ -284,8 +271,6 @@ Plugin 'itchyny/calendar.vim'
 Plugin 'jceb/vim-orgmode'
 Plugin 'tpope/vim-speeddating'
 " Plugin 'takac/vim-hardtime'
-" Plugin 'psliwka/vim-smoothie'
-Plugin 'vifm/vifm.vim'
 
 call vundle#end()
 
@@ -295,14 +280,10 @@ syntax on
 
 " == ale ==
 " https://www.youtube.com/watch?v=4FKPySR6HLk
-let g:ale_linters = {
-            \ 'python': ['flake8', 'pydocstyle', 'mypy'],
-            \ 'javascript': ['eslint'],
-            \ }
+let g:ale_linters = {'python': ['flake8', 'pydocstyle', 'mypy']}
 let g:ale_fixers = {
             \ '*': ['remove_trailing_lines', 'trim_whitespace'],
             \ 'python': ['black', 'isort'],
-            \ 'javascript': ['prettier', 'eslint'],
             \ }
 " \ 'python': ['black', 'isort'], << isort not working for now 2021-07-26
 let g:ale_fix_on_save = 1
@@ -322,9 +303,6 @@ let g:highlightedyank_highlight_duration = 500
 
 " https://stackoverflow.com/questions/21628743/cant-get-the-jedi-vim-plugin-to-work
 let g:jedi#force_py_version = 3
-
-let g:jedi#completions_enabled = 0
-
 let g:ranger_map_keys = 0  " disable default ranger key -> <leader>f
 " https://github.com/vim-syntastic/syntastic/issues/2242
 " solved f-string issue (invalid syntax error)
@@ -344,24 +322,9 @@ let g:purify_inverse = 0     " default: 1
 let g:tagbar_sort = 0
 let g:SuperTabDefaultCompletionType = "<c-n>"  " reverse selection order
 
-" ===============
 " C-c C-c, to send, .1 (pane #, ensure <prefix>q in tmux)
-" ---------------
-" to use
-" ---------------
-" :SlimeConfig
-" tmux socket name or absolute path: default
-" tmux target pane: 0.1 or .1  -> which means that 'pane 0' -> 'pane 1'
-" ---------------
 let g:slime_target = "tmux"
-" ===============
 
-" Color name (:help cterm-colors) or ANSI code
-let g:limelight_conceal_ctermfg = 'gray'
-let g:limelight_conceal_ctermfg = 240
-" Color name (:help gui-colors) or RGB color
-let g:limelight_conceal_guifg = 'DarkGray'
-let g:limelight_conceal_guifg = '#777777'
 
 autocmd FileType python setlocal completeopt-=preview
 
@@ -512,13 +475,12 @@ augroup END
 " COLOR
 "--------
 set background=dark
-colorscheme PaperColor
+" colorscheme papercolor
 " colorscheme solarized
 " colorscheme monokai
 " highlight LineNr ctermfg=darkgray
 highlight SignColumn ctermbg=NONE  " for gitgutter
 highlight FoldColumn ctermbg=NONE  " for foldcolumn
-highlight EndOfBuffer ctermfg=black
 
 "----------------------
 " SPLIT VERTICAL COLOR
@@ -551,8 +513,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
-" back space
-set bs=2
+set bs=2              " back space
 
 
 "---------
@@ -753,14 +714,11 @@ set wildmode=list,full
 nnoremap <space> :
 vnoremap <space> :
 
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
-
 " Buffer: show list and ready to choose
 " nnoremap <silent><space>bl :buffers<CR>:buffer<Space>
 " better way -> :b {keyword that I remember}<tab>
+
+
 
 " mouse enabled
 map <ScrollWheelUp> <C-Y>
@@ -775,8 +733,8 @@ map <ScrollWheelDown> <C-E>
 "
 nnoremap Y y$
 
-" nnoremap n nzzzv
-" nnoremap N Nzzzv
+nnoremap n nzzzv
+nnoremap N Nzzzv
 " nnoremap * *zzzv
 " nnoremap # #zzzv
 " nnoremap } }zzzv
@@ -792,12 +750,8 @@ nnoremap Y y$
 :nmap [a :ALEPreviousWrap<CR>
 :nmap ]A :ALELast<CR>
 :nmap [A :ALEFirst<CR>
-
-" -- buffer navigation --
-" https://stackoverflow.com/questions/5559029/quickly-switching-buffers-in-vim-normal-mode
-:nmap ]b :bn<CR>
-:nmap [b :bp<CR>
-
+"
+"
 " https://www.youtube.com/watch?v=p2SbmpVl6zw
 " nnoremap <CR> :nohlsearch<cr>  "interrupted in mini window
 "
@@ -838,8 +792,8 @@ nnoremap <right> <nop>
 " nnoremap <C-k> <C-w>k
 " nnoremap <C-l> <C-w>l
 "
-nnoremap <C-j> :3wincmd +<cr>
-nnoremap <C-k> :3wincmd -<cr>
+nnoremap <C-k> :3wincmd +<cr>
+nnoremap <C-j> :3wincmd -<cr>
 nnoremap <C-h> :3wincmd <<cr>
 nnoremap <C-l> :3wincmd ><cr>
 
@@ -869,17 +823,14 @@ nnoremap k gk
 
 " Hard Mode (Anti-Pattern)
 " tips: '+' and '-' move lines, or 'gj' and 'gk' 2021-03-09
-nnoremap hh <nop>
-nnoremap jj <nop>
-nnoremap kk <nop>
-nnoremap ll <nop>
-""
+" nnoremap hh <nop>
+" nnoremap jj <nop>
+" nnoremap kk <nop>
+" nnoremap ll <nop>
+"
 " nnoremap K ggVGD
 " nnoremap K ggVGp
-" nnoremap K ggVGDI
-" https://www.reddit.com/r/vim/comments/ilp32r/deleting_a_line_without_copying_it/
-" not save to clipboard. instead, use register '_'
-nnoremap K ggVG"_d
+nnoremap K ggVGDI
 "
 "}}}
 
@@ -1020,46 +971,18 @@ vnoremap <silent> # :<C-U>
 
 " follow-mode like emacs 2021-08-04
 function! FollowMode()
-    let g:CurrentLineNumber=line(".")
-    if exists('g:OnFollowing')
-        unlet g:OnFollowing
-        :TagbarClose
-        windo set noscrollbind
-        windo set wrap
-        windo set rnu
-        wincmd o  " only window
-        norm zz
-    else
-        let g:OnFollowing=1
-        execute "TagbarClose"
-        wincmd o  " only window
-        norm gg
-        setlocal foldlevel=99  " unfold all
-        windo set noscrollbind
-        windo set nornu
-        vsplit
-        vsplit
-        " 1/3
-        " wincmd H  " move far left to choose first window
-        wincmd h  " navigate to left
-        wincmd h  " navigate to left
-        " 2/3
-        wincmd l  " navigate to right
-        execute "normal \<C-f>"
-        " 3/3
-        wincmd l  " navigate to right
-        :exe "normal \<C-f>"
-        execute "normal \<PageDown>"
-        " whole
-        windo set scrollbind
-        windo set nowrap
-        autocmd InsertLeave * set nornu | set nocursorline " | set nocursorcolumn
-        call EasyMode()
-        wincmd h
-        wincmd h
-    endif
-    execute "normal!" . (g:CurrentLineNumber) . "gg"
-    norm zz
+    norm gg
+    windo set noscrollbind
+    vsplit
+    vsplit
+    wincmd H  " move far left
+    wincmd l  " move to right
+    execute "normal \<C-f>"
+    wincmd l  " move to right
+    :exe "normal \<C-f>"
+    execute "normal \<PageDown>"
+    windo set scrollbind
+    wincmd h  " move to left
 endfunction
 command! FollowMode call FollowMode()
 nnoremap <silent> <leader>F : FollowMode<cr>
@@ -1079,9 +1002,9 @@ nnoremap <silent> <leader>F : FollowMode<cr>
 function! UnderLine()
     normal yy
     normal p
-    s/\S/-/g
+    s/./-/g
     noh
-    echo "underlined"
+    " echo "underlined"
 endfunction
 command! UnderLine call UnderLine()
 "}}}
@@ -1090,7 +1013,7 @@ command! UnderLine call UnderLine()
 function! DoubleLine()
     normal yy
     normal p
-    s/\S/=/g
+    s/./=/g
     noh
 endfunction
 command! DoubleLine call DoubleLine()
@@ -1100,7 +1023,7 @@ command! DoubleLine call DoubleLine()
 function! SurroundLine()
     normal yy
     normal p
-    s/\S/-/g
+    s/./-/g
     t-2  " copy current line to above 2 up
     noh
 endfunction
@@ -1124,11 +1047,10 @@ function! HardMode()
     " silent! unmap <S-tab>
     Limelight!
     set scrolloff=0
-    " set noignorecase
-    " set nosmartcase
+    set noignorecase
+    set nosmartcase
 endfunction
 command! HardMode call HardMode()
-nnoremap <silent> <leader>h : HardMode<cr>
 "}}}
 
 " Disabled to prevent from overuse
@@ -1141,17 +1063,12 @@ function! EasyMode()
     silent! nnoremap j gj
     silent! nnoremap k gk
     silent! unmap <tab>
-    silent! noremap <up>    <nop>
-    silent! noremap <down>  <nop>
-    silent! noremap <left>  <nop>
-    silent! noremap <right> <nop>
     Limelight!
     set scrolloff=0
     set ignorecase
     set smartcase
 endfunction
 command! EasyMode call EasyMode()
-nnoremap <silent> <leader>e : EasyMode<cr>
 "}}}
 
 function! SuperEasyMode()
@@ -1176,7 +1093,6 @@ function! SuperEasyMode()
     set scrolloff=999
 endfunction
 command! SuperEasyMode call SuperEasyMode()
-nnoremap <silent> <leader>s : SuperEasyMode<cr>
 "}}}
 
 
@@ -1184,7 +1100,7 @@ nnoremap <silent> <leader>s : SuperEasyMode<cr>
 " Focusing
 "----------
 
-function! FocusMode()
+function! FocusMode()"{{{
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnFocusing')
@@ -1196,11 +1112,11 @@ function! FocusMode()
         unlet g:OnEditing
         call UnFocusMode()
     endif
-    Goyo 100
+    Goyo
     Limelight
     autocmd InsertLeave * :set norelativenumber | hi CursorLine gui=NONE
     set scrolloff=999  " centering
-    " set sidescrolloff=30
+    set sidescrolloff=30
     set ignorecase
     set smartcase
     call SuperEasyMode()
@@ -1215,11 +1131,9 @@ function! FocusMode()
         silent !tmux set status off
     endif
 endfunction
-command! FocusMode call FocusMode()
-" nnoremap <silent> <leader>S :FocusMode<cr>
+command! FocusMode call FocusMode()"}}}
 
-
-function! DarkFocusMode()
+function! DarkFocusMode()"{{{
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnFocusing')
@@ -1231,32 +1145,28 @@ function! DarkFocusMode()
         unlet g:OnEditing
         call UnFocusMode()
     endif
-    Goyo 100
+    Goyo
+    Limelight 0.8
     autocmd InsertLeave * :set norelativenumber
     set scrolloff=999  " centering
-    " set sidescrolloff=30
+    set sidescrolloff=30
     set ignorecase
     set smartcase
-    " call EasyMode()
-    call SuperEasyMode()
+    call EasyMode()
     " set variable
     let g:OnFocusing=1
     if has('gui_running')
         " set guifont=Menlo-Regular:h20
         " set lines=99 columns=999   " to maximize window size"
         colorscheme dark
-        Limelight
         set cursorline!
     elseif exists('$TMUX')
         silent !tmux set status off
     endif
 endfunction
-" command! DarkFocusMode call DarkFocusMode()
-" nnoremap <silent> <leader>D :DarkFocusMode<cr>
-command! DistractionFreeMode call DarkFocusMode()
-nnoremap <silent> <leader>D :DistractionFreeMode<cr>
+command! DarkFocusMode call DarkFocusMode()"}}}
 
-function! EditMode()"
+function! EditMode()"{{{
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
     if exists('g:OnEditing')
@@ -1271,7 +1181,6 @@ function! EditMode()"
     Goyo 100%x100%
     Limelight!
     autocmd InsertLeave * :set norelativenumber
-    set nu
     set ignorecase
     set smartcase
     call EasyMode()
@@ -1286,11 +1195,8 @@ function! EditMode()"
         silent !tmux set status off
     endif
     " normal zz
-    setlocal foldlevel=99
 endfunction
-command! EditMode call EditMode()"
-nnoremap <silent> <leader>E :EditMode<cr>
-
+command! EditMode call EditMode()"}}}
 
 function! UnFocusMode()
 "{{{
@@ -1301,9 +1207,8 @@ function! UnFocusMode()
     autocmd InsertLeave * :set relativenumber
     set scrolloff=0
     set sidescrolloff=0
-    " set noignorecase
-    " set nosmartcase
-    setlocal foldlevel=99  " unfold all
+    set noignorecase
+    set nosmartcase
     syntax enable  " redraw markdown highlighting
     " syntax on
     call HardMode()
@@ -1328,8 +1233,7 @@ function! UnFocusMode()
     endif
 endfunction
 command! UnFocusMode call UnFocusMode()
-nnoremap <silent> <leader>U :UnFocusMode<cr>
-
+"}}}
 
 " ==========================
 " Debugging & Test Function"
@@ -1379,20 +1283,14 @@ command! T2 call TestFunction2()
 " notice: all gui seeting shoud be located inside this if statement 2021-03-18
 " ---
 
-" https://superuser.com/questions/198981/show-gvim-scrollbar-only-when-needed
-" scrollbar when only needed
-" au VimEnter * if line('$') > &lines | set go+=r | else | set go-=r | endif
-" au VimResized * if line('$') > &lines | set go+=r | else | set go-=r | endif
-
 if has('gui_running')"{{{
     set guioptions=     " disabled mac style tab"
-    " set guioptions+=c   " to confirm exit
-    " set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
-    set guifont=Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete\ Mono:h14
+    set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
+    " set guifont=Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete\ Mono:h14
+    " set guifont=RobotoMono\ Nerd\ Font:h14
     " set guifont=MesloLGS\ Nerd\ Font:h14
-    " au VimEnter *  NERDTree
     set lines=999 columns=9999  " full size windows 2021-04-21
-    " cd ~/Documents/nvALT/
+    cd ~/Documents/nvALT/
     set linespace=1
     " set colorcolumn=105
     " set nocursorcolumn
@@ -1406,8 +1304,13 @@ if has('gui_running')"{{{
     " highlight Visual guifg=black guibg=Cyan gui=NONE
     " highlight CursorLineNr guibg=black guifg=white
     " highlight CursorLine gui=underline guibg=NONE
+<<<<<<< HEAD
+    " hi TabLine gui=NONE guibg=black guifg=white  " Deactive Area
+    " hi TabLineSel gui=NONE guibg=black guifg=white
+=======
     hi TabLine gui=NONE guibg=black guifg=gray  " Deactive Area
     hi TabLineSel gui=NONE guibg=black guifg=white
+>>>>>>> a9a1692e3305d8a26791a32a7af9807868b6fa0b
     " hi TabLineFill gui=NONE guibg=black guifg=white  " Backgroud Aera
     let g:airline_theme='serene'  "default raven serene luna monochrome powerlineish term transparent distinguished
     " hi EasyMotionTarget guifg=red guibg=yellow
@@ -1441,16 +1344,9 @@ endif"}}}
 "------------
 " Utilities
 "------------
-nnoremap <silent> <leader>p  :PlantumlOpen<cr>
 nnoremap <silent> <leader>r  :Ranger<cr>
 nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
-
-" :TagbarOpen f -> jump opening / j -> jump if opened already
-" https://github.com/preservim/tagbar/blob/master/doc/tagbar.txt
-" https://vi.stackexchange.com/questions/3885/how-to-map-two-commands-with-only-one-key
-nnoremap <silent> <leader>t  :TagbarToggle<cr> :wincmd =<cr>
-nnoremap <silent> <leader>T  :TagbarOpen f<cr> :set noscrollbind<cr> :wincmd =<cr>
-
+nnoremap <silent> <leader>t  :TagbarToggle<cr>
 nnoremap <silent> <leader>m  :MaximizerToggle<cr>
 " nnoremap <silent> <leader>x  :MaximizerToggle<cr>  " risky in x deleting
 nnoremap <silent> <leader>b  :bro old<cr>
@@ -1468,7 +1364,7 @@ nnoremap <silent> <leader>uh  :UndotreeHide<cr>
 " markdown support"
 vnoremap <silent> <leader>* s**<C-r>"**<esc>
 " Others
-" nnoremap <silent> <leader>s  :Startify<cr>
+nnoremap <silent> <leader>s  :Startify<cr>
 
 "------------
 " EasyMotion
@@ -1548,13 +1444,9 @@ command HA call HardMode() | echo "HardMode Activated"
 " --- very magic mode -> \v
 " --- lazy mode(non-greedy) -> .{-}
 " after -> :put A or (insert mode)"AP
-ab ttt testtesttest
-iab xorg -*- mode: org; -*-
-iab xti #+TITLE:
-iab xftp ftp://osickwon@ftp.osickwon.heliohost.org/public_html/
-iab bp breakpoint()
-iab tt time.sleep(1)
-iab ip from IPython import embed; embed()
+ab xorg -*- mode: org; -*-
+ab xti #+TITLE:
+ab xftp ftp://osickwon@ftp.osickwon.heliohost.org/public_html/
 " run python with current buffer
 cab rp !clear; python3 %
 
@@ -1599,7 +1491,7 @@ autocmd BufEnter *.php   colorscheme purify | set background=dark
 autocmd BufEnter *.html  colorscheme purify | set background=dark
 autocmd BufEnter *.phtml colorscheme purify | set background=dark
 
-" autocmd BufEnter *.json, json set conceallevel=0
+autocmd BufEnter *.json, json set conceallevel=0
 
 autocmd FileType html,xml,py,lisp,js,org,dat,csv set nospell
 
