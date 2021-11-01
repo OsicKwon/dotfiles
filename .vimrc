@@ -15,6 +15,8 @@
 " INITIAL SETTING
 "-----------------
 "{{{
+" https://webinstall.dev/vim-leader/
+" let mapleader = ' '
 set nocompatible
 set history=500                         " default was 50
 " set autoread                          " preventing something that I just write
@@ -24,7 +26,7 @@ set history=500                         " default was 50
 autocmd CursorHold * silent! checktime
 
 set encoding=utf-8
-" set noswapfile                          " edit duplicated opened file anywhere
+set noswapfile                          " edit duplicated opened file anywhere
 set clipboard=unnamed
 " set ttimeoutlen=0                     " eliminating time delay in Normal mode
 " set timeoutlen=3000
@@ -283,6 +285,7 @@ Plugin 'jceb/vim-orgmode'
 Plugin 'tpope/vim-speeddating'
 " Plugin 'takac/vim-hardtime'
 " Plugin 'psliwka/vim-smoothie'
+Plugin 'vifm/vifm.vim'
 
 call vundle#end()
 
@@ -538,7 +541,8 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
-set bs=2              " back space
+" back space
+set bs=2
 
 
 "---------
@@ -739,6 +743,11 @@ set wildmode=list,full
 nnoremap <space> :
 vnoremap <space> :
 
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
+
 " Buffer: show list and ready to choose
 " nnoremap <silent><space>bl :buffers<CR>:buffer<Space>
 " better way -> :b {keyword that I remember}<tab>
@@ -773,8 +782,12 @@ nnoremap Y y$
 :nmap [a :ALEPreviousWrap<CR>
 :nmap ]A :ALELast<CR>
 :nmap [A :ALEFirst<CR>
-"
-"
+
+" -- buffer navigation --
+" https://stackoverflow.com/questions/5559029/quickly-switching-buffers-in-vim-normal-mode
+:nmap ]b :bn<CR>
+:nmap [b :bp<CR>
+
 " https://www.youtube.com/watch?v=p2SbmpVl6zw
 " nnoremap <CR> :nohlsearch<cr>  "interrupted in mini window
 "
@@ -815,8 +828,8 @@ nnoremap <right> <nop>
 " nnoremap <C-k> <C-w>k
 " nnoremap <C-l> <C-w>l
 "
-nnoremap <C-k> :3wincmd +<cr>
-nnoremap <C-j> :3wincmd -<cr>
+nnoremap <C-j> :3wincmd +<cr>
+nnoremap <C-k> :3wincmd -<cr>
 nnoremap <C-h> :3wincmd <<cr>
 nnoremap <C-l> :3wincmd ><cr>
 
@@ -1367,7 +1380,7 @@ if has('gui_running')"{{{
     " set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
     set guifont=Meslo\ LG\ S\ Regular\ Nerd\ Font\ Complete\ Mono:h14
     " set guifont=MesloLGS\ Nerd\ Font:h14
-    au VimEnter *  NERDTree
+    " au VimEnter *  NERDTree
     set lines=999 columns=9999  " full size windows 2021-04-21
     " cd ~/Documents/nvALT/
     set linespace=1

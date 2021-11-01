@@ -26,6 +26,12 @@ set highlightedyank
 " key remap
 nnoremap <space> :
 vnoremap <space> :
+
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
+
 inoremap jj <esc>
 inoremap kk <esc>
 nnoremap Y y$

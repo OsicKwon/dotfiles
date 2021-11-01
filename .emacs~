@@ -648,16 +648,18 @@
 
 ;; -- Org Table --
 ;; https://prometheo.tistory.com/8
-;; (set-face-font 'default "Menlo")
-
-;; (set-fontset-font "fontset-default" 'hangul '("AppleGothic" . "unicode-bmp"))
-;; (setq face-font-rescale-alist '(("AppleGothic" . 1.2)))
-
+(set-face-font 'default "Menlo")
+(set-face-font "fontset-default" 'hangle
+                  '("AppleGothic" . "unicode-bmp"))
+(setq face-font-rescale-alist '(("AppleGothic" . 1.2)))
+;;                   '("Nanum Gothic" . "unicode-bmp"))
 ;; (setq face-font-rescale-alist '(("Nanum Gothic" . 1.2307692307692308)))
-
 ;; (set-fontset-font "fontset-default" 'hangul '("D2Coding" . "unicode-bmp"))
-;; (set-fontset-font "fontset-default" '(#x1100 . #xffdc) '("D2Coding" . "unicode-bmp"))
+
+;; (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+;;                   '("D2Coding" . "unicode-bmp"))
 ;; (setq face-font-rescale-alist '(("D2Coding" . 1.2)))
+
 
 
 ;; -- keyborad --
@@ -1508,11 +1510,11 @@
 	 ;; ("w" . my-minimap-mode)
 	 ;; ("w" . sublimity-mode)
 	 ;; ("w" . writeroom-mode)
-	 ;; ("w" . avy-goto-word-1)
+	 ("w" . avy-goto-word-1)
 	 ;; ("w" . avy-goto-char)
 	 ;; ("w" . avy-goto-char-2)
 	 ;; ("w" . ace-window)
-	 ("w" . evil-scroll-line-up)
+	 ;; ("w" . evil-scroll-line-up)
 	 ;; ("w" . other-window)
 	 ;; ("w" . ace-jump-char-mode)
 	 ;; ("w" . my-follow-mode)
@@ -1560,10 +1562,10 @@
 	 ;; ("l" . right-word)
 	 ;; ("h" . evil-backward-WORD-begin)
 	 ;; ("l" . evil-forward-WORD-begin)
-	 ;; ("h" . org-tree-slide-move-previous-tree)
-	 ;; ("l" . org-tree-slide-move-next-tree)
-	 ("h" . org-cycle)
-	 ("l" . org-cycle)
+	 ("h" . org-tree-slide-move-previous-tree)
+	 ("l" . org-tree-slide-move-next-tree)
+	 ;; ("h" . org-cycle)
+	 ;; ("l" . org-cycle)
 	 ;; ("H" . org-tree-slide-move-previous-tree)
 	 ;; ("L" . org-tree-slide-move-next-tree)
 	 ;; ---
@@ -2232,7 +2234,7 @@
  '(minimap-mode nil)
  '(org-adapt-indentation nil)
  '(org-agenda-files
-   '("~/Documents/nvALT/projx-Jiwoo-SAT.txt" "~/Documents/nvALT/notex-Ontario_Benefits_Stopped_20201215.txt" "~/Documents/nvALT/projx-Jiwoo-Citizenship.txt" "~/Documents/nvALT/org_capture_note.txt" "~/Documents/nvALT/projx-JobBoard2021.txt" "~/Documents/nvALT/projx-IncomeTax.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/projx-Jiwoo-SAT.txt" "~/Documents/nvALT/notex-Ontario_Benefits_Stopped_20201215.txt" "~/Documents/nvALT/projx-clue.txt" "~/Documents/nvALT/projx-Jiwoo-Citizenship.txt" "~/Documents/nvALT/org_capture_note.txt" "~/Documents/nvALT/projx-JobBoard2021.txt" "~/Documents/nvALT/projx-IncomeTax.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-start-on-weekday 0)
  '(org-agenda-time-grid
    '((daily today require-timed)
@@ -2955,10 +2957,6 @@
 ;; evil key binding
 (define-key evil-normal-state-map (kbd "SPC")   'evil-ex)
 (define-key evil-visual-state-map (kbd "SPC")   'evil-ex)
-(define-key evil-normal-state-map (kbd ";")   'evil-ex)
-(define-key evil-visual-state-map (kbd ";")   'evil-ex)
-(define-key evil-normal-state-map (kbd ":") 'evil-repeat-find-char)
-(define-key evil-visual-state-map (kbd ":") 'evil-repeat-find-char)
 (define-key evil-normal-state-map (kbd "j")     'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k")     'evil-previous-visual-line)
 (define-key evil-normal-state-map (kbd "C-u")   'evil-scroll-up)
@@ -3054,7 +3052,6 @@
   :ensure t
   :init
   (require 'evil-leader)
-  ;; (evil-leader/set-leader "<SPC>")
   (evil-leader/set-key
     ;; "p" 'powerthesaurus-lookup-word-at-point
     ;; "d" 'define-word-at-point
