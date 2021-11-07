@@ -41,3 +41,5 @@ nnoremap <leader>n :NERDTree
 " https://www.jvt.me/posts/2020/05/15/intellij-vim-changelist/
 nnoremap g; :action JumpToLastChange<Enter>
 nnoremap g, :action JumpToNextChange<Enter>
+
+

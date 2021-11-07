@@ -3850,6 +3850,12 @@ T - tag prefix
 (setq ivy-re-builders-alist
       '((t . ivy--regex-ignore-order)))
 
+
+;; fuzzy match -> search without space 2021-11-05
+;; https://oremacs.com/2016/01/06/ivy-flx/
+;; (setq ivy-re-builders-alist
+;;       '((t . ivy--regex-fuzzy))))
+
 ;; ignore gitignore file in counsel-ag 2021-03-28
 ;; https://stackoverflow.com/questions/48048529/silver-searcher-how-to-unignore-files-in-the-gitignore
 ;; https://github.com/abo-abo/swiper/issues/1641
