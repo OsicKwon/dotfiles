@@ -747,9 +747,8 @@ set wildmode=list,full
 " KEY-REMAP
 "============
 
-" --------
-"  Space
-" --------
+" nnoremap <space> ;
+" vnoremap <space> ;
 nnoremap <space> :
 vnoremap <space> :
 
@@ -771,7 +770,6 @@ map <ScrollWheelDown> <C-E>
 "  Normal
 " --------
 "{{{
-"
 "
 nnoremap Y y$
 
@@ -869,10 +867,10 @@ nnoremap k gk
 
 " Hard Mode (Anti-Pattern)
 " tips: '+' and '-' move lines, or 'gj' and 'gk' 2021-03-09
-nnoremap hh <nop>
-nnoremap jj <nop>
-nnoremap kk <nop>
-nnoremap ll <nop>
+" nnoremap hh <nop>
+" nnoremap jj <nop>
+" nnoremap kk <nop>
+" nnoremap ll <nop>
 ""
 " nnoremap K ggVGD
 " nnoremap K ggVGp
@@ -1110,10 +1108,10 @@ command! SurroundLine call SurroundLine()
 
 function! HardMode()
 "{{{
-    silent! nnoremap hh <nop>
-    silent! nnoremap jj <nop>
-    silent! nnoremap kk <nop>
-    silent! nnoremap ll <nop>
+    " silent! nnoremap hh <nop>
+    " silent! nnoremap jj <nop>
+    " silent! nnoremap kk <nop>
+    " silent! nnoremap ll <nop>
     silent! unmap j
     silent! unmap k
     silent! noremap <up>    <nop>
@@ -1151,7 +1149,7 @@ function! EasyMode()
     set smartcase
 endfunction
 command! EasyMode call EasyMode()
-nnoremap <silent> <leader>e : EasyMode<cr>
+" nnoremap <silent> <leader>e : EasyMode<cr>
 "}}}
 
 function! SuperEasyMode()
@@ -1172,7 +1170,7 @@ function! SuperEasyMode()
     nnoremap <tab> za
     " nnoremap <tab> zo
     " nnoremap <S-tab> zc
-    Limelight
+    Limelight!
     set scrolloff=999
 endfunction
 command! SuperEasyMode call SuperEasyMode()
@@ -1239,6 +1237,7 @@ function! DarkFocusMode()
     set smartcase
     " call EasyMode()
     call SuperEasyMode()
+    Limelight
     " set variable
     let g:OnFocusing=1
     if has('gui_running')
@@ -1254,7 +1253,7 @@ endfunction
 " command! DarkFocusMode call DarkFocusMode()
 " nnoremap <silent> <leader>D :DarkFocusMode<cr>
 command! DistractionFreeMode call DarkFocusMode()
-nnoremap <silent> <leader>D :DistractionFreeMode<cr>
+nnoremap <silent> <leader>d :DistractionFreeMode<cr>
 
 function! EditMode()"
     " let g:line_size_before = &lines
@@ -1289,7 +1288,7 @@ function! EditMode()"
     setlocal foldlevel=99
 endfunction
 command! EditMode call EditMode()"
-nnoremap <silent> <leader>E :EditMode<cr>
+nnoremap <silent> <leader>e :EditMode<cr>
 
 
 function! UnFocusMode()
@@ -1328,7 +1327,7 @@ function! UnFocusMode()
     endif
 endfunction
 command! UnFocusMode call UnFocusMode()
-nnoremap <silent> <leader>U :UnFocusMode<cr>
+nnoremap <silent> <leader>q :UnFocusMode<cr>
 
 
 " ==========================
