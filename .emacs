@@ -72,6 +72,22 @@
 ;; --------------------
 
 
+;; == Define word ==
+;; https://github.com/abo-abo/define-word/issues/31#issuecomment-982888898
+;; 2021-12-27
+(use-package define-word
+  :ensure t
+  :defer t
+  ;; :bind (("C-c d" . define-word-at-point)
+  ;;        ("C-c D" . define-word))
+  :config
+  (setq define-word-default-service 'webster)
+  ;; (setq define-word-default-service 'wordnik)
+  )
+
+
+
+
 ;; (global-set-key (kbd "<escape> C-n") nil)
 
 ;; Enable mouse support
