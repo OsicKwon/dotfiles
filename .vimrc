@@ -46,6 +46,7 @@ set nospell
 set spelllang=en_ca
 " set spelllang=EN_ca
 " set colorcolumn=80,120
+" set colorcolumn=88
 set path+=**                  " include sub directories when searching 2021-01-06
 set updatetime=1000           " for gitgutter 2021-01-13
 " set textwidth=80
@@ -146,7 +147,7 @@ Plug 'tyru/open-browser.vim' "{
   nmap gx <Plug>(openbrowser-open)
   vmap gx <Plug>(openbrowser-open)
 "}
-" Plug 'mg979/vim-visual-multi', {'branch': 'master'}  " multi-cursor
+" Plug 'mg979/vim-visual-multi', {'branch': 'master'}  " multi-cursor // contlict to ctrl-n key binding
 call plug#end()
 
 
@@ -747,8 +748,6 @@ set wildmode=list,full
 " KEY-REMAP
 "============
 
-" nnoremap <space> ;
-" vnoremap <space> ;
 nnoremap <space> :
 vnoremap <space> :
 
@@ -1060,7 +1059,8 @@ function! FollowMode()
     norm zz
 endfunction
 command! FollowMode call FollowMode()
-nnoremap <silent> <leader>F : FollowMode<cr>
+nnoremap <silent> <leader>f : FollowMode<cr>
+
 " -------------------
 " all the same belows
 " -------------------
@@ -1473,8 +1473,8 @@ vnoremap <silent> <leader>* s**<C-r>"**<esc>
 " EasyMotion
 "------------
 " <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
+" map  <Leader>f <Plug>(easymotion-bd-f)
+" nmap <Leader>f <Plug>(easymotion-overwin-f)
 " s{char}{char} to move to {char}{char}
 " nmap <leader>s <Plug>(easymotion-overwin-f2)
 " Move to line
@@ -1594,9 +1594,9 @@ autocmd BufEnter *.sh    colorscheme PaperColor | set background=dark | set nosp
 autocmd BufEnter *.py    colorscheme PaperColor | set background=dark | set nospell
 autocmd BufEnter *.vimrc colorscheme PaperColor | set background=dark
 
-autocmd BufEnter *.php   colorscheme purify | set background=dark
-autocmd BufEnter *.html  colorscheme purify | set background=dark
-autocmd BufEnter *.phtml colorscheme purify | set background=dark
+" autocmd BufEnter *.php   colorscheme purify | set background=dark
+" autocmd BufEnter *.html  colorscheme purify | set background=dark
+" autocmd BufEnter *.phtml colorscheme purify | set background=dark
 
 " autocmd BufEnter *.json, json set conceallevel=0
 

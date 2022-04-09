@@ -718,6 +718,7 @@
 ;; https://www.gnu.org/software/emacs/manual/html_mono/eww.html
 (add-hook 'eww-after-render-hook 'view-mode)
 (add-hook 'eww-after-render-hook 'olivetti-narrow-width)
+(add-hook 'eww-after-render-hook (lambda () (olivetti-set-width 0.90)))
 (add-hook 'eww-after-render-hook (lambda () (text-scale-increase 0.5)))
 ;; (add-hook 'eww-after-render-hook 'evil-normal-state)
 ;; https://gitea.polonkai.eu/gergely/my-emacs-d/commit/0c381769c1987fd21fe4af3e111bbe6ec3e9f8c8
@@ -1362,16 +1363,16 @@
 ;; (define-key elfeed-search-mode-map (kbd "R") 'elfeed-mark-all-as-read)  ; risky
 ;; (define-key elfeed-search-mode-map (kbd "SPC") 'my-elfeed-follow-view)
 ;; (define-key elfeed-search-mode-map (kbd "e") 'my-elfeed-follow-view)
-(define-key elfeed-search-mode-map (kbd "F") 'my-elfeed-follow-view)
+(define-key elfeed-search-mode-map (kbd "f") 'my-elfeed-follow-view)
 
 ;; get idea from https://noonker.github.io/posts/2020-04-22-elfeed/
-;; (define-key elfeed-search-mode-map (kbd "j") 'next-line)
-;; (define-key elfeed-search-mode-map (kbd "k") 'previous-line)
+(define-key elfeed-search-mode-map (kbd "j") 'next-line)
+(define-key elfeed-search-mode-map (kbd "k") 'previous-line)
 ;; (define-key elfeed-search-mode-map (kbd "T") 'elfeed-search-first-entry)
 ;; (define-key elfeed-search-mode-map (kbd "B") 'elfeed-search-last-entry)
 ;; like Vim
-(define-key elfeed-search-mode-map (kbd "H") 'elfeed-search-first-entry)
-(define-key elfeed-search-mode-map (kbd "L") 'elfeed-search-last-entry)
+(define-key elfeed-search-mode-map (kbd "h") 'elfeed-search-first-entry)
+(define-key elfeed-search-mode-map (kbd "l") 'elfeed-search-last-entry)
 
 ;; https://noonker.github.io/posts/2020-04-22-elfeed/
 (defun elfeed-eww-open (&optional use-generic-p)
@@ -1739,8 +1740,8 @@
 	 ;;
 	 ("q" . kill-current-buffer)    ; same as (s-k)
 	 ;; ("q" . View-exit)
-	 ("x" . my-kill-current-buffer-and-window)
-	 ("X" . my-kill-current-buffer-and-other-windows)
+	 ;; ("x" . my-kill-current-buffer-and-window)
+	 ("x" . my-kill-current-buffer-and-other-windows)
 	 ("c" . recenter-top-bottom)
 	 ;; ("c" . recenter)
 	 ;; ("i" . View-exit)  ;; like 'e'
