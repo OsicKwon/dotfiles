@@ -71,6 +71,65 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; == Hide all Stars ==
+;; 2022-05-30
+;; https://www.reddit.com/r/emacs/comments/9wukv8/hide_all_stars_in_org_mode/
+(defun chunyang-org-mode-remove-stars ()
+  (font-lock-add-keywords
+   nil
+   '(("^\\*+"
+      (0
+       (prog1 nil
+         (put-text-property (match-beginning 0) (match-end 0)
+                            'invisible t)))))))
+
+(add-hook 'org-mode-hook #'chunyang-org-mode-remove-stars)
+
+;; == zone mode 2022-05-13 ==
+;; https://www.emacswiki.org/emacs/ZoneMode
+;; (require 'zone)
+;; (zone-when-idle 120)
+;; (setq zone-programs [zone-pgm-rotate])
+
+;; zone-pgm-jitter
+;; zone-pgm-putz-with-case
+;; zone-pgm-dissolve
+;; zone-pgm-whack-chars
+;; zone-pgm-rotate
+;; zone-pgm-rotate-LR-lockstep
+;; zone-pgm-rotate-RL-lockstep
+;; zone-pgm-rotate-LR-variable
+;; zone-pgm-rotate-RL-variable
+;; zone-pgm-drip
+;; zone-pgm-drip-fretfully
+;; zone-pgm-five-oclock-swan-dive
+;; zone-pgm-martini-swan-dive
+;; zone-pgm-paragraph-spaz
+;; zone-pgm-stress
+
+(defun zone-choose (pgm)
+  "Choose a PGM to run for `zone'."
+  (interactive
+   (list
+    (completing-read
+     "Program: "
+     (mapcar 'symbol-name zone-programs))))
+  (let ((zone-programs (list (intern pgm))))
+    (zone))) 
+
+
+;; == org-tree-slide 2022-05-13 ==
+(use-package org-tree-slide
+  :ensure t
+  :config (setq org-tree-slide-cursor-init nil)   ; starting at the current heading
+  )
+
+
+;; == Plainlist Alphabetical in ORG-MODE ==
+;; 2022-04-24
+;; https://emacs.stackexchange.com/questions/32740/checkboxes-change-bullet-points-to-letters
+(setq org-list-allow-alphabetical t)
+
 
 ;; == Define word ==
 ;; https://github.com/abo-abo/define-word/issues/31#issuecomment-982888898
@@ -84,8 +143,6 @@
   (setq define-word-default-service 'webster)
   ;; (setq define-word-default-service 'wordnik)
   )
-
-
 
 
 ;; (global-set-key (kbd "<escape> C-n") nil)
@@ -1460,7 +1517,8 @@
   (setq view-read-only t) ;; enter view-mode for read-only file
   ;; https://github.com/jwiegley/use-package/issues/455#issuecomment-347750540
   ;; (define-key key-translation-map (kbd "\\") (kbd "M-SPC"))  ; for general package key-binding like a leader key
-  :bind (("M-z" . view-mode) 
+  ;; :bind (("M-z" . view-mode) 
+  :bind (("s-z" . view-mode) 
 	 :map view-mode-map
 
 	 ;; Default (built-in)
@@ -1647,17 +1705,20 @@
 	 ("SPC d" . define-word-at-point)
 	 ("SPC t" . google-translate-at-point)
 	 ("SPC a" . counsel-ag-thing-at-point)
-	 ("SPC g" . engine/search-google)
-	 ("SPC y" . engine/search-youglish)
+	 ;; ("SPC g" . engine/search-google)
+	 ;; ("SPC y" . engine/search-youglish)
 	 ;; ;; engines - googles
-	 ;; ("SPC gt" . engine/search-google-trans)
-	 ;; ("SPC gn" . engine/search-google-news)
+	 ("SPC egg" . engine/search-google)
+	 ("SPC egt" . engine/search-google-trans)
+	 ("SPC egn" . engine/search-google-news)
+	 ("SPC egi" . engine/search-google-images)
 	 ;; ;; engines - others
 	 ;; just type the word with M-x
-	 ;; ("SPC ej" . engine/search-just_the_word)         ; C-x / j
-	 ;; ("SPC eo" . engine/search-onelook)               ; C-x / o
-	 ;; ("SPC ee" . engine/search-etymology-dictionary)  ; C-x / e
-	 ;; ("SPC ey" . engine/search-youglish)              ; C-x / y
+	 ("SPC ej" . engine/search-just_the_word)         ; C-x / j
+	 ("SPC eo" . engine/search-onelook)               ; C-x / o
+	 ("SPC ee" . engine/search-etymology-dictionary)  ; C-x / e
+	 ("SPC ey" . engine/search-youglish)              ; C-x / y
+	 ("SPC en" . engine/search-naver)
 	 ;; ("SPC eg" . engine/search-google)                ; C-x / g
 	 ;; others
 	 ;; ("SPC" . evil-exit-emacs-state)
@@ -1738,8 +1799,8 @@
 	 ;; ("SPC" . evil-exit-emacs-state)
 	 ("F" . my-follow-mode)
 	 ;;
-	 ("q" . kill-current-buffer)    ; same as (s-k)
-	 ;; ("q" . View-exit)
+	 ;; ("q" . kill-current-buffer)    ; same as (s-k)
+	 ("q" . View-exit)
 	 ;; ("x" . my-kill-current-buffer-and-window)
 	 ("x" . my-kill-current-buffer-and-other-windows)
 	 ("c" . recenter-top-bottom)
@@ -1888,7 +1949,8 @@
   ;;   )
   (when (display-graphic-p) 
     (if view-mode
-	(face-remap-add-relative 'default '((:background "gray90")))
+	;; (face-remap-add-relative 'default '((:background "gray90")))
+	(face-remap-add-relative 'default '((:background "#fdf6e3")))
       (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
       )
     ;; (if (evil-emacs-state-p)
@@ -2208,7 +2270,7 @@
 
 
 ;; turn on visible bell 2021-03-29
-;; (setq visible-bell t)
+(setq visible-bell t)
 
 
 ;; dedicated window 2021-03-27
@@ -2242,7 +2304,7 @@
  '(doc-view-continuous t)
  '(evil-undo-system 'undo-tree)
  '(fringe-mode 0 nil (fringe))
- '(global-undo-tree-mode t)
+ ;; '(global-undo-tree-mode t)
  '(google-translate-backend-method 'curl t nil "Customized with use-package google-translate")
  '(latex-run-command "pdflatex")
  '(minimap-automatically-delete-window 'visible)
@@ -2743,7 +2805,8 @@
 
 ;; company mode 2021-01-24
 ;; I think it's a kind of auto-completion
-(add-hook 'after-init-hook 'global-company-mode)
+;; use auto-complete-mode
+;; (add-hook 'after-init-hook 'global-company-mode)
 
 
 ;; auto complete 2021-01-16
@@ -2751,6 +2814,7 @@
 (require 'auto-complete)
 (require 'auto-complete-config)
 (ac-config-default)
+(add-hook 'after-init-hook 'auto-complete-mode)
 
 
 ;; yasnippet 2021-01-16

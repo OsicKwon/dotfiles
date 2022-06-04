@@ -61,7 +61,7 @@ echo "-------------------------------------------------------------";
 
 # vim 8.1
 # export PATH="/usr/local/bin/vim:$PATH"
-alias vim="/usr/local/bin/vim"
+# alias vim="/usr/local/bin/vim"
 # alias vim="/usr/local/Cellar/vim/8.1.2350/bin/vim"
 
 # # Macports Version : vim 8.2

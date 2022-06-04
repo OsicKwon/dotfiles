@@ -14,7 +14,6 @@
 "-----------------
 " INITIAL SETTING
 "-----------------
-"{{{
 " https://webinstall.dev/vim-leader/
 " let mapleader = ' '
 set nocompatible
@@ -63,7 +62,7 @@ set matchpairs+=<:>
 " set sidescrolloff=5
 set mouse=a
 
-"}}}
+
 
 
 "--------
@@ -87,7 +86,6 @@ set rnu "relativenumber
 "-----------
 " Autogroup
 "-----------
-"{{{
 augroup auto_set_number
     autocmd InsertEnter * set nornu | set nocursorline " | set nocursorcolumn
     autocmd InsertLeave * set rnu   | set cursorline   " | set cursorcolumn
@@ -104,7 +102,7 @@ augroup END
 "         \ | hi CursorLine gui=underline guibg=NONE
 "         \ | hi CursorLineNr guibg=black
 " augroup END
-"}}}
+
 
 
 "--------
@@ -202,7 +200,7 @@ Plugin 'prettier/vim-prettier'
 
 "------AutoComplete---------
 " Plugin 'valloric/youcompleteme'        " gave up due to too-hard to insall 2020-11-20
-Plugin 'sirver/ultisnips'
+" Plugin 'sirver/ultisnips'
 " Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
 " Plugin 'shougo/neocomplete.vim'        " lua required
 " Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
@@ -220,7 +218,7 @@ Plugin 'nvie/vim-flake8'
 Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'psf/black'
 Plugin 'integralist/vim-mypy'
-Plugin 'fisadev/vim-isort'
+" Plugin 'fisadev/vim-isort'
 
 "----------Javascript-----------
 Plugin 'pangloss/vim-javascript'
@@ -383,7 +381,6 @@ augroup END
  "MARKDOWN SUPPORT for 'plasticboy/vim-markdown'
  "A Text file as a Markdown file 2020-11-21
 "----------------------------------------------
-"{{{
 augroup text_to_markdown
     " autocmd BufRead,BufNewFile *.txt set filetype=markdown
     " let g:vim_markdown_folding_disabled = 1
@@ -405,7 +402,7 @@ augroup END
 
 " this is for markdown files only
 " foldmethod from 'expr' to 'manual'
-"}}}
+
 
 " for markdown-folding plugin setting
 autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
@@ -433,7 +430,6 @@ endif
 let g:airline_left_sep=''
 " the separator used on the right side
 let g:airline_right_sep=''
-"{{{
 " unicode symbols
 " let g:airline_left_sep = '»'
 " let g:airline_left_sep = '▶'
@@ -471,7 +467,7 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ' :'
 " let g:airline_symbols.linenr = ' L:'
-"}}}
+
 
 set thesaurus+=~/.vim/thesaurus/mthesaur.txt
 set thesaurus+=~/.vim/thesaurus/test_thesaur.txt
@@ -582,7 +578,6 @@ set cursorline
 set ruler
 set laststatus=2
 set showcmd
-"{{{
 " Status Line Custom
 let g:currentmode={
     \ 'n'  : 'Normal',
@@ -605,7 +600,7 @@ let g:currentmode={
     \ '!'  : 'Shell',
     \ 't'  : 'Terminal'
     \}
-"}}}
+
 
 function! GitBranch()
   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
@@ -630,7 +625,6 @@ function! FileSize()
     endif
 endfunction
 
-""{{{
 set statusline=
 " set statusline+=\               " blank
 " set statusline=\[%{mode()}\]    " current mode
@@ -722,7 +716,7 @@ set statusline+=┆\           " separator
 " set statusline+=\ ¦           " separator
 set statusline+=%{strftime('%H:%M')}
 set statusline+=\         " blank
-""}}}
+"
 
 "--------------
 " TEXT EDITING
@@ -768,7 +762,7 @@ map <ScrollWheelDown> <C-E>
 " --------
 "  Normal
 " --------
-"{{{
+"
 "
 nnoremap Y y$
 
@@ -878,12 +872,11 @@ nnoremap k gk
 " not save to clipboard. instead, use register '_'
 nnoremap K ggVG"_d
 "
-"}}}
+
 
 " --------
 "  Insert
 " --------
-"{{{
 "
 " undo break points
 inoremap ,       ,<c-g>u
@@ -931,12 +924,11 @@ vnoremap <up> <nop>
 vnoremap <down> <nop>
 vnoremap <left> <nop>
 vnoremap <right> <nop>
-"}}}
+
 
 " ---------
 "  Command
 " ---------
-"{{{
 cnoremap <up> <nop>
 cnoremap <down> <nop>
 cnoremap <left> <nop>
@@ -958,7 +950,7 @@ cnoremap <M-d> <S-Right><Delete>
 " cnoremap <Esc>f <S-Right>
 " cnoremap <Esc>d <S-Right><Delete>
 cnoremap <C-g> <C-c>
-"}}}
+
 
 
 " conflicted with commantary.vim
@@ -1073,7 +1065,6 @@ nnoremap <silent> <leader>f : FollowMode<cr>
 " Draw Line
 "-----------
 
-"{{{
 function! UnderLine()
     normal yy
     normal p
@@ -1082,9 +1073,8 @@ function! UnderLine()
     echo "underlined"
 endfunction
 command! UnderLine call UnderLine()
-"}}}
 
-"{{{
+
 function! DoubleLine()
     normal yy
     normal p
@@ -1092,9 +1082,8 @@ function! DoubleLine()
     noh
 endfunction
 command! DoubleLine call DoubleLine()
-"}}}
 
-"{{{
+
 function! SurroundLine()
     normal yy
     normal p
@@ -1103,11 +1092,11 @@ function! SurroundLine()
     noh
 endfunction
 command! SurroundLine call SurroundLine()
-"}}}
+
 
 
 function! HardMode()
-"{{{
+"
     " silent! nnoremap hh <nop>
     " silent! nnoremap jj <nop>
     " silent! nnoremap kk <nop>
@@ -1127,11 +1116,11 @@ function! HardMode()
 endfunction
 command! HardMode call HardMode()
 nnoremap <silent> <leader>h : HardMode<cr>
-"}}}
+
 
 " Disabled to prevent from overuse
 function! EasyMode()
-"{{{
+"
     silent! unmap hh
     silent! unmap jj
     silent! unmap kk
@@ -1150,10 +1139,10 @@ function! EasyMode()
 endfunction
 command! EasyMode call EasyMode()
 " nnoremap <silent> <leader>e : EasyMode<cr>
-"}}}
+
 
 function! SuperEasyMode()
-"{{{
+"
     call EasyMode()
     silent! unmap   <up>
     silent! unmap   <down>
@@ -1175,7 +1164,7 @@ function! SuperEasyMode()
 endfunction
 command! SuperEasyMode call SuperEasyMode()
 nnoremap <silent> <leader>s : SuperEasyMode<cr>
-"}}}
+
 
 
 "----------
@@ -1292,7 +1281,7 @@ nnoremap <silent> <leader>e :EditMode<cr>
 
 
 function! UnFocusMode()
-"{{{
+"
     Goyo!
     Limelight!
     silent! unlet g:OnFocusing
@@ -1333,7 +1322,7 @@ nnoremap <silent> <leader>q :UnFocusMode<cr>
 " ==========================
 " Debugging & Test Function"
 " ==========================
-"{{{
+"
 " --------------
 " argument test"
 " --------------
@@ -1366,7 +1355,7 @@ function! TestFunction2()
     put A  " same as "AP
 endfunction
 command! T2 call TestFunction2()
-"}}}
+
 
 
 " [FYI] checking terminal mode
@@ -1383,7 +1372,7 @@ command! T2 call TestFunction2()
 " au VimEnter * if line('$') > &lines | set go+=r | else | set go-=r | endif
 " au VimResized * if line('$') > &lines | set go+=r | else | set go-=r | endif
 
-if has('gui_running')"{{{
+if has('gui_running')"
     set guioptions=     " disabled mac style tab"
     " set guioptions+=c   " to confirm exit
     " set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h14
@@ -1411,7 +1400,7 @@ if has('gui_running')"{{{
     let g:airline_theme='serene'  "default raven serene luna monochrome powerlineish term transparent distinguished
     " hi EasyMotionTarget guifg=red guibg=yellow
     highlight Folded guibg=grey guifg=blue
-endif"}}}
+endif
 
 
 
@@ -1490,7 +1479,7 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 "------------
 " IncSearch
 "------------
-" You can use other keymappings like <C-l> instead of <CR> if you want to{{{
+" You can use other keymappings like <C-l> instead of <CR> if you want to
 " use these mappings as default search and sometimes want to move cursor with
 " EasyMotion.
 
