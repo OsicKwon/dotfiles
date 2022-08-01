@@ -133,7 +133,7 @@ filetype off
 call plug#begin('~/.vim/plugged')
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'chrisbra/csv.vim'
+Plug 'chrisbra/csv.vim'
 " Plug 'jceb/vim-orgmode'
 " Plug 'davidhalter/jedi-vim'
 " Plug 'sheerun/vim-polyglot'
@@ -167,10 +167,10 @@ Plugin 'flazz/vim-colorschemes'
 " Plugin 'altercation/vim-colors-solarized'
 " Plugin 'kyoz/purify'
 Plugin 'kyoz/purify', { 'rtp': 'vim' }
-Plugin 'joshdick/onedark.vim'
-Plugin 'rakr/vim-one'
-Plugin 'gosukiwi/vim-atom-dark'
-Plugin 'arcticicestudio/nord-vim'
+" Plugin 'joshdick/onedark.vim'
+" Plugin 'rakr/vim-one'
+" Plugin 'gosukiwi/vim-atom-dark'
+" Plugin 'arcticicestudio/nord-vim'
 Plugin 'nanotech/jellybeans.vim'
 
 "--------SnipMate-----------
@@ -285,6 +285,7 @@ Plugin 'tpope/vim-speeddating'
 " Plugin 'takac/vim-hardtime'
 " Plugin 'psliwka/vim-smoothie'
 Plugin 'vifm/vifm.vim'
+" Plugin 'bling/vim-bufferline'
 
 call vundle#end()
 
@@ -745,10 +746,10 @@ set wildmode=list,full
 nnoremap <space> :
 vnoremap <space> :
 
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
+" nnoremap ; :
+" nnoremap : ;
+" vnoremap ; :
+" vnoremap : ;
 
 " Buffer: show list and ready to choose
 " nnoremap <silent><space>bl :buffers<CR>:buffer<Space>
@@ -1397,7 +1398,7 @@ if has('gui_running')"
     hi TabLine gui=NONE guibg=black guifg=gray  " Deactive Area
     hi TabLineSel gui=NONE guibg=black guifg=white
     " hi TabLineFill gui=NONE guibg=black guifg=white  " Backgroud Aera
-    let g:airline_theme='serene'  "default raven serene luna monochrome powerlineish term transparent distinguished
+    let g:airline_theme='luna'  "default raven serene luna monochrome powerlineish term transparent distinguished
     " hi EasyMotionTarget guifg=red guibg=yellow
     highlight Folded guibg=grey guifg=blue
 endif

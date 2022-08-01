@@ -73,7 +73,10 @@ ZSH_THEME="af-magic"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+    git
+    fzf
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -149,3 +152,8 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 source /Users/osickwon/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+# == fzf 2022-07-31 ==
+# https://github.com/junegunn/fzf
+export FZF_BASE="$HOME/.fzf"

@@ -1,10 +1,10 @@
 ;; -*- find-file-hook: view-mode; lexical-binding: t; -*-
- 
+
 ;; since 2020
 ;;    ___  ____ ___  ____ ___________
 ;;   / _ \/ __ `__ \/ __ `/ ___/ ___/
-;; _/  __/ / / / / / /_/ / /__(__  ) 
-;;(_)___/_/ /_/ /_/\__,_/\___/____/  
+;; _/  __/ / / / / / /_/ / /__(__  )
+;;(_)___/_/ /_/ /_/\__,_/\___/____/
 
 ;; *******************************************************************************************************
 ;; NOTICE / REMINDER / TIPS
@@ -27,11 +27,13 @@
 ;; and `package-pinned-packages`. Most users will not need or want to do this.
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 ;; -- Unnecessary call -- see Line #6 in this file
-(package-initialize)
- 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+;; disabled due to loading time
+; (package-initialize)
+
+;; disabled due to loading time
+; (unless (package-installed-p 'use-package)
+;   (package-refresh-contents)
+;   (package-install 'use-package))
 
 ;; http://ohyecloudy.com/emacsian/2019/12/15/package-use-package-ensure-imenu/
 (setq use-package-enable-imenu-support t)
@@ -41,15 +43,15 @@
 ;; https://github.com/raxod502/straight.el#getting-started
 (defvar bootstrap-version)
 (let ((bootstrap-file
-	   (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-	  (bootstrap-version 5))
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
-	(with-current-buffer
-		(url-retrieve-synchronously
-		 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-		 'silent 'inhibit-cookies)
-	  (goto-char (point-max))
-	  (eval-print-last-sexp)))
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
 ;; Users of Emacs versions >= 27 will want to add:
@@ -70,6 +72,18 @@
 ;; --------------------
 ;; == RECENT SETTING ==
 ;; --------------------
+
+
+;; == restart-emacs 2022-08-01 ==
+;; https://github.com/iqbalansari/restart-emacs
+(use-package restart-emacs
+             :ensure t
+             :config (setq restart-emacs-restore-frames t)
+             )
+
+; (add-hook 'view-mode-hook 'centered-cursor-mode)
+; (add-hook 'evil-normal-state-entry-hook  (lambda () (centered-cursor-mode -1)))
+
 
 ;; == Hide all Stars ==
 ;; 2022-05-30
@@ -115,7 +129,7 @@
      "Program: "
      (mapcar 'symbol-name zone-programs))))
   (let ((zone-programs (list (intern pgm))))
-    (zone))) 
+    (zone)))
 
 
 ;; == org-tree-slide 2022-05-13 ==
@@ -181,7 +195,7 @@
 
 ;; == debug on error ==
 ;; https://dustinlacewell.github.io/emacs.d/
-;; Show tracebacks when errors happen. 
+;; Show tracebacks when errors happen.
 ;; (setq debug-on-error t)
 
 
@@ -229,7 +243,7 @@
   ;; (evil-forward-section-begin)
   ;; (mark-end-of-sentence 1)  ; for selection
   ;; (sleep-for 1)
-  ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Waiting.html 
+  ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Waiting.html
   ;; (sit-for 1)  ; update display
   ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/Reading-One-Event.html
   ;; (setq ring-bell-function 'ignore)
@@ -243,22 +257,22 @@
   (interactive)
   ;; https://emacs.stackexchange.com/questions/53167/check-whether-buffer-is-in-org-mode
   (if (string-equal major-mode "org-mode")
-	  (org-next-visible-heading 1)
-	(progn
-	  (forward-paragraph)
-	  (next-line)
-	  )))
+      (org-next-visible-heading 1)
+    (progn
+      (forward-paragraph)
+      (next-line)
+      )))
 
 
 (defun my-paragraph-backward ()
   (interactive)
   (if (string-equal major-mode "org-mode")
-	  (org-previous-visible-heading 1)
-	(progn
-	  (backward-paragraph 2)
-	  (next-line)
-	  (beginning-of-visual-line)
-	  )))
+      (org-previous-visible-heading 1)
+    (progn
+      (backward-paragraph 2)
+      (next-line)
+      (beginning-of-visual-line)
+      )))
 
 
 (defun my-real-paragraph-forward ()
@@ -286,101 +300,101 @@
   ;; https://github.com/alphapapa/org-super-agenda/blob/master/examples.org
   ;; https://archive.baty.net/2019/org-super-agenda/
   ;; (setq org-super-agenda-groups '(
-				    ;; ;; (:auto-group t) 
-				    ;; ;; ;; (:name "Today" :time-grid t :scheduled today)
-				    ;; (:name "= Due today =" :deadline today :scheduled today)
-				    ;; ;; ;; (:name "Important" :priority "A")
-				    ;; (:name "= Overdue =" :deadline past :scheduled past)
-				    ;; (:name "= Due soon =" :deadline future)
-				    ;; ;; (:name "= Waiting =" :todo "WAIT")
-				    ;; ))
+                    ;; ;; (:auto-group t)
+                    ;; ;; ;; (:name "Today" :time-grid t :scheduled today)
+                    ;; (:name "= Due today =" :deadline today :scheduled today)
+                    ;; ;; ;; (:name "Important" :priority "A")
+                    ;; (:name "= Overdue =" :deadline past :scheduled past)
+                    ;; (:name "= Due soon =" :deadline future)
+                    ;; ;; (:name "= Waiting =" :todo "WAIT")
+                    ;; ))
   ;; https://github.com/alphapapa/org-super-agenda/issues/72
   (setq org-agenda-custom-commands
-	'(
+    '(
 
-	  ;; https://emacs.stackexchange.com/questions/52994/org-mode-agenda-show-list-of-tasks-done-in-the-past-and-not-those-clocked
-	  ("w" "Weekly review"
-	   agenda ""
-	   ((org-agenda-start-day "-14d")
-	    (org-agenda-span 14)
-	    (org-agenda-start-on-weekday 1)
-	    (org-agenda-start-with-log-mode '(closed))
-	    (org-agenda-archives-mode t)
-	    (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "^\\*\\* DONE "))))
+      ;; https://emacs.stackexchange.com/questions/52994/org-mode-agenda-show-list-of-tasks-done-in-the-past-and-not-those-clocked
+      ("w" "Weekly review"
+       agenda ""
+       ((org-agenda-start-day "-14d")
+        (org-agenda-span 14)
+        (org-agenda-start-on-weekday 1)
+        (org-agenda-start-with-log-mode '(closed))
+        (org-agenda-archives-mode t)
+        (org-agenda-skip-function '(org-agenda-skip-entry-if 'notregexp "^\\*\\* DONE "))))
 
 
-	  ("z" "Super view"
-				       (
-					(agenda "" ((org-agenda-span 'day)
-					    (org-super-agenda-groups
-					    '(
-					    (:name "TODAY"
-						    :time-grid t
-						    :date today
-						    :todo "TODAY"
-						    :scheduled today
-						    :deadline today
-						    :order 1)
-					    (:name "Due Today"
-						    :deadline today
-						    :order 2)
-					    (:name "OVERDUE"   
-						    :scheduled past
-						    :deadline past)
-					    (:name "DUE SOON"
-						   :deadline future
-						   :order 3)
-					    ;; (:discard (:anything t))
-					    ))))
-				    (alltodo "" ((org-agenda-overriding-header "")
-					    (org-super-agenda-groups
-					    '((:name "TOP PRIORITY"
-						    :tag "Important"
-						    :priority "A"
-						    :order 2)
-					    (:name "DOING"
-						    :todo ("DOING" "REVIEW" "RESUME")
-						    ;; :face (:underline t)
-						    :order 15)
-					    ;; (:name "TODO"
-					    ;; 	   :todo "TODO"
-					    ;; 	   :order 5)
-					    (:name "NEXT ACTIONS"
-						    :todo ("TODO" "NEXT")
-						    :order 18)
-					    ;; (:name "Work"
-					    ;; 	   :tag "@work"
-					    ;; 	   :order 15)
-					    (:name "Waiting"
-						    :todo ("WAITING" "WAIT")
-						    :order 35)
-					    (:name "SCHEDULED"
-						    :todo "SCHED"
-						    :scheduled t
-						    :order 40)
-					    ;; order is important because it is first-come-take-all, which obtain previous setting
-					    (:name "COMING SOON"
-						    ;; :scheduled future  ; future == t
-						   :scheduled (before "2021-06-30")
-						   :order 50)
-					    (:name "SCHEDULED by 2021"
-						    ;; :scheduled future  ; future == t
-						   :scheduled (after  "2021-07-01")
-						   :scheduled (before "2021-12-31")
-						   :order 55)
-					    ))))
-				    ;; https://daryl.wakatara.com/a-better-gtd-and-crm-flow-for-emacs-org-mode/
-				    (tags (concat "w" (format-time-string "%V")) ((org-agenda-overriding-header  (concat "ToDos Week " (format-time-string "%V")))
-										  (org-super-agenda-groups
-										   '((:discard (:deadline t))
-										     (:name "CRA"
-											    :tag "CRA")
-										     (:name "Loka"
-											    :tag "loka")
-										     (:name "Ping"
-	   										    :tag "ping")
-										     ))))
-				    ))))
+      ("z" "Super view"
+                       (
+                    (agenda "" ((org-agenda-span 'day)
+                        (org-super-agenda-groups
+                        '(
+                        (:name "TODAY"
+                            :time-grid t
+                            :date today
+                            :todo "TODAY"
+                            :scheduled today
+                            :deadline today
+                            :order 1)
+                        (:name "Due Today"
+                            :deadline today
+                            :order 2)
+                        (:name "OVERDUE"
+                            :scheduled past
+                            :deadline past)
+                        (:name "DUE SOON"
+                           :deadline future
+                           :order 3)
+                        ;; (:discard (:anything t))
+                        ))))
+                    (alltodo "" ((org-agenda-overriding-header "")
+                        (org-super-agenda-groups
+                        '((:name "TOP PRIORITY"
+                            :tag "Important"
+                            :priority "A"
+                            :order 2)
+                        (:name "DOING"
+                            :todo ("DOING" "REVIEW" "RESUME")
+                            ;; :face (:underline t)
+                            :order 15)
+                        ;; (:name "TODO"
+                        ;;     :todo "TODO"
+                        ;;     :order 5)
+                        (:name "NEXT ACTIONS"
+                            :todo ("TODO" "NEXT")
+                            :order 18)
+                        ;; (:name "Work"
+                        ;;     :tag "@work"
+                        ;;     :order 15)
+                        (:name "Waiting"
+                            :todo ("WAITING" "WAIT")
+                            :order 35)
+                        (:name "SCHEDULED"
+                            :todo "SCHED"
+                            :scheduled t
+                            :order 40)
+                        ;; order is important because it is first-come-take-all, which obtain previous setting
+                        (:name "COMING SOON"
+                            ;; :scheduled future  ; future == t
+                           :scheduled (before "2021-06-30")
+                           :order 50)
+                        (:name "SCHEDULED by 2021"
+                            ;; :scheduled future  ; future == t
+                           :scheduled (after  "2021-07-01")
+                           :scheduled (before "2021-12-31")
+                           :order 55)
+                        ))))
+                    ;; https://daryl.wakatara.com/a-better-gtd-and-crm-flow-for-emacs-org-mode/
+                    (tags (concat "w" (format-time-string "%V")) ((org-agenda-overriding-header  (concat "ToDos Week " (format-time-string "%V")))
+                                          (org-super-agenda-groups
+                                           '((:discard (:deadline t))
+                                             (:name "CRA"
+                                                :tag "CRA")
+                                             (:name "Loka"
+                                                :tag "loka")
+                                             (:name "Ping"
+                                                :tag "ping")
+                                             ))))
+                    ))))
   ;; (setq org-super-agenda-header-separator "_")
   (setq org-super-agenda-unmatched-name "OTHER ITEMS")
   )
@@ -389,13 +403,13 @@
 ;; ref : https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html
 ;; (setq org-agenda-custom-commands
 ;;       '(
-;; 		("c" "Simple agenda view"
+;;      ("c" "Simple agenda view"
 ;;          ((agenda "")
 ;;           (alltodo "")))
-;; 		("z" "Super view"
+;;      ("z" "Super view"
 ;;          ((agenda "")
 ;;           (alltodo "")))
-;; 		))
+;;      ))
 
 ;; (setq org-agenda-block-separator t)  ; ??
 (setq org-agenda-hide-tags-regexp ".")
@@ -421,11 +435,11 @@
 ;;         (search . " %i %-12:c")))
 
 (setq org-agenda-prefix-format '(
-				 ;; (agenda  . " %i %-30:c")
-				 ;; (todo  . " %i %-28:c")
-				 ;; (agenda  . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
-				 (todo  . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
-				 ))
+                 ;; (agenda  . " %i %-30:c")
+                 ;; (todo  . " %i %-28:c")
+                 ;; (agenda  . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
+                 (todo  . "  %i %-28:c %(let ((scheduled (org-get-scheduled-time (point)))) (if scheduled (format-time-string \"%Y-%m-%d >>> \" scheduled) \"\"))")
+                 ))
 
 
 
@@ -436,7 +450,7 @@
 ;;             (local-set-key (kbd "k") #'org-agenda-previous-line)
 ;;             (local-set-key (kbd "J") #'org-agenda-forward-block)
 ;;             (local-set-key (kbd "K") #'org-agenda-backward-block)
-;; 			))
+;;          ))
 
 
 ;; == dash 2021-05-30 ==
@@ -491,13 +505,13 @@
   :init
   (require 'hl-todo)
   (setq hl-todo-keyword-faces
-		'(
-		  ("HOLD"   . "dark gray")
-		  ("WAIT"   . "dark gray")
-		  ("SCHED"   . "dark gray")
-		  ("DOING"   . "royal blue")
-		  ("EXPIRED"   . "orange")
-		))
+        '(
+          ("HOLD"   . "dark gray")
+          ("WAIT"   . "dark gray")
+          ("SCHED"   . "dark gray")
+          ("DOING"   . "royal blue")
+          ("EXPIRED"   . "orange")
+        ))
   :config
   (add-hook 'org-mode-hook 'hl-todo-mode)
   )
@@ -864,7 +878,7 @@
 ;; https://bmag.github.io/2015/12/26/desktop.html
 ;; (setq desktop-path '("~/.emacs.d/.cache/"))
 ;; (desktop-save-mode 1)
-;; https://emacs.stackexchange.com/questions/19190/desktop-save-mode-fails-to-save-window-layout 
+;; https://emacs.stackexchange.com/questions/19190/desktop-save-mode-fails-to-save-window-layout
 ;; https://jloubert.com/blog/simple-views/
 ;; (add-to-list 'desktop-globals-to-save 'ivy-views)
 
@@ -927,7 +941,7 @@
   :ensure t
   )
 ;; Required :: M-x all-the-icons-install-fonts
-(use-package neotree 
+(use-package neotree
   :ensure t
   :init
   (require 'neotree)
@@ -947,25 +961,25 @@
 ;; word-wrap
 ;; https://github.com/jaypei/emacs-neotree/issues/224
 (add-hook 'neo-after-create-hook
-	  #'(lambda (_)
-	      (with-current-buffer (get-buffer neo-buffer-name)
-		(setq truncate-lines t)
-		(setq word-wrap nil)
-		(make-local-variable 'auto-hscroll-mode)
-		(setq auto-hscroll-mode nil))))
+      #'(lambda (_)
+          (with-current-buffer (get-buffer neo-buffer-name)
+        (setq truncate-lines t)
+        (setq word-wrap nil)
+        (make-local-variable 'auto-hscroll-mode)
+        (setq auto-hscroll-mode nil))))
 
 ;; https://www.emacswiki.org/emacs/NeoTree
 ;; (add-hook 'neotree-mode-hook
-;; 	  (lambda ()
-;; 	    (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
-;; 	    (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-quick-look)
-;; 	    (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
-;; 	    (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
-;; 	    (define-key evil-normal-state-local-map (kbd "g") 'neotree-refresh)
-;; 	    (define-key evil-normal-state-local-map (kbd "n") 'neotree-next-line)
-;; 	    (define-key evil-normal-state-local-map (kbd "p") 'neotree-previous-line)
-;; 	    (define-key evil-normal-state-local-map (kbd "A") 'neotree-stretch-toggle)
-;; 	    (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle)))
+;;    (lambda ()
+;;      (define-key evil-normal-state-local-map (kbd "TAB") 'neotree-enter)
+;;      (define-key evil-normal-state-local-map (kbd "SPC") 'neotree-quick-look)
+;;      (define-key evil-normal-state-local-map (kbd "q") 'neotree-hide)
+;;      (define-key evil-normal-state-local-map (kbd "RET") 'neotree-enter)
+;;      (define-key evil-normal-state-local-map (kbd "g") 'neotree-refresh)
+;;      (define-key evil-normal-state-local-map (kbd "n") 'neotree-next-line)
+;;      (define-key evil-normal-state-local-map (kbd "p") 'neotree-previous-line)
+;;      (define-key evil-normal-state-local-map (kbd "A") 'neotree-stretch-toggle)
+;;      (define-key evil-normal-state-local-map (kbd "H") 'neotree-hidden-file-toggle)))
 
 ;; In recent versions of evil-mode you can create key bindings for specific modes using evil-define-key,
 ;; so another way to override mappings in neotree-mode is as shown below:
@@ -1000,7 +1014,7 @@
 ;; == Timers 2021-04-20 ==
 ;; https://emacs.stackexchange.com/questions/7534/run-with-timer-error-invalid-or-unitialized-timer
 ;; Open my calendar every 1 hour
-;; (run-with-timer 0 3600 #'my-default-screen) 
+;; (run-with-timer 0 3600 #'my-default-screen)
 ;; https://emacs.stackexchange.com/questions/22692/effect-of-multiple-idle-timers
 ;; (run-with-idle-timer 2 nil #'message "Function 1")
 ;; (run-with-idle-timer 300 nil #'my-default-screen)
@@ -1035,14 +1049,14 @@
 ;; https://yiufung.net/post/org-mode-hidden-gems-pt3/
 ;; https://orgmode.org/manual/Link-Abbreviations.html
 (setq org-link-abbrev-alist
-	  '(
-		("google" . "https://www.google.com/search?q=")
-		;; https://emacs.stackexchange.com/questions/18688/radio-targets-in-external-org-mode-file-for-glossary-application
-		("fin" . "file:~/Documents/nvALT/projx-CPA_CFA.txt::")
-		("eng" . "file:~/Documents/nvALT/mainx-engx-EnglishLibrary.txt::")
-		;; ("eng" . "file:~/Documents/nvALT/mainx-engx-EnglishLibrary.txt::*")  ; create a header without asking only if not exist
-		)
-	  )
+      '(
+        ("google" . "https://www.google.com/search?q=")
+        ;; https://emacs.stackexchange.com/questions/18688/radio-targets-in-external-org-mode-file-for-glossary-application
+        ("fin" . "file:~/Documents/nvALT/projx-CPA_CFA.txt::")
+        ("eng" . "file:~/Documents/nvALT/mainx-engx-EnglishLibrary.txt::")
+        ;; ("eng" . "file:~/Documents/nvALT/mainx-engx-EnglishLibrary.txt::*")  ; create a header without asking only if not exist
+        )
+      )
 
 
 ;; Demote sequence for list bullets 2021-04-19
@@ -1070,7 +1084,7 @@
 ;; If the number is negative, and the number of empty lines is at least -N,
 ;; all empty lines are shown.
 ;; --------------------------------------------------------------------------
-;; but, not wokring properly on evil-mode 
+;; but, not wokring properly on evil-mode
 ;; in evil-mode, it seems to be (setq org-cycle-separator-lines 0), which is no blank line
 ;; https://yiufung.net/post/org-mode-hidden-gems-pt1/
 ;; --------------------------------------------------------------------------
@@ -1107,7 +1121,7 @@
   )
 ;; FYI > other recommendation for export HTML css
 ;; https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
-;; https://github.com/thi-ng/org-spec 
+;; https://github.com/thi-ng/org-spec
 
 
 ;; == centered cursor mode 2021-04-19 ==
@@ -1147,7 +1161,7 @@
 
 ;; crux  2021-04-18
 ;; Collection of Ridiculously Useful eXtensions for Emacs
-;; https://emacsredux.com/blog/2020/12/08/favorite-emacs-packages/ 
+;; https://emacsredux.com/blog/2020/12/08/favorite-emacs-packages/
 ;; https://github.com/bbatsov/crux
 ;; (use-package crux :ensure t :init (require 'crux))
 
@@ -1190,12 +1204,12 @@
   (org-mode . (lambda () (org-superstar-mode 1)))
   :config
   (setq org-superstar-headline-bullets-list
-	'("◉" "●" "○" "♦" "◆" "►" "▸"))
+    '("◉" "●" "○" "♦" "◆" "►" "▸"))
   (setq org-superstar-todo-bullet-alist '(("NEXT" . ?☐)
-					  ("WAIT" . ?*)
-					  ("SOME" . ?☼)
-					  ("DONE" . ?☑)
-					  ("CANC" . ?❌)))
+                      ("WAIT" . ?*)
+                      ("SOME" . ?☼)
+                      ("DONE" . ?☑)
+                      ("CANC" . ?❌)))
   (setq org-superstar-special-todo-items t)
   )
 
@@ -1206,7 +1220,8 @@
   :after org
   :init
   (require 'org-bullets)
-  (setq org-bullets-bullet-list '("■" "⚬" "▪" "•" "▭" "◦" "·" "□" "○" "■" "●" "◆" "◔" "▣" "❑" "⚀" "𝇇" "✗" "✓" "☺"))
+  ; (setq org-bullets-bullet-list '("■" "⚬" "▪" "•" "▭" "◦" "·" "□" "○" "■" "●" "◆" "◔" "▣" "❑" "⚀" "𝇇" "✗" "✓" "☺"))
+  (setq org-bullets-bullet-list '("◉" "○" "✸" "✿" "⚬" "•" "◦" "·" "■" "▪" "▭" "□" "■" "◆" "◔" "▣" "❑" "⚀" "𝇇" "✗" "✓" "☺"))
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   )
@@ -1299,14 +1314,14 @@
 ;; https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Local-Variables.html
 ;; -----------------------------------------------------
 ;; t (the default)
-;;     Set the safe variables, and query (once) about any unsafe variables. 
+;;     Set the safe variables, and query (once) about any unsafe variables.
 ;; :safe
-;;     Set only the safe variables and do not query. 
+;;     Set only the safe variables and do not query.
 ;; :all
-;;     Set all the variables and do not query. 
+;;     Set all the variables and do not query.
 ;; :none <- "I guess it works, but I am not sure." 2021-04-12
 ;; nil
-;;     Don’t set any variables. 
+;;     Don’t set any variables.
 ;; -----------------------------------------------------
 
 
@@ -1337,7 +1352,7 @@
     "reverse translate if prefix"
     (interactive)
     (if current-prefix-arg
-	(google-translate-at-point)
+    (google-translate-at-point)
       (google-translate-at-point-reverse)))
   :bind
   ;; ("C-t". my-google-translate-at-point)
@@ -1352,12 +1367,12 @@
   ;; http://ergoemacs.org/emacs/elisp_idioms_prompting_input.html
   (if (y-or-n-p "Calendar view?")
       (progn
-	(interactive)
-	;; https://github.com/kiwanami/emacs-calfw/issues/45
-	(select-frame (make-frame '((name . "calendar"))))         ; makes a new frame and selects it
-	(set-face-attribute 'default (selected-frame) :height 135) ; reduces the font size of the new frame
-	(cfw:open-org-calendar) ; opens the calendar there
-	)
+    (interactive)
+    ;; https://github.com/kiwanami/emacs-calfw/issues/45
+    (select-frame (make-frame '((name . "calendar"))))         ; makes a new frame and selects it
+    (set-face-attribute 'default (selected-frame) :height 135) ; reduces the font size of the new frame
+    (cfw:open-org-calendar) ; opens the calendar there
+    )
     (progn
       ;; code if user answered no.
       ;; (counsel-recentf)
@@ -1389,15 +1404,18 @@
   :ensure t
   :init (require 'elfeed)
   :bind (
-	 ;; ("j" . next-line)      ; interfered minibuffer
-	 ;; ("k" . previous-line)  ; interfered minibuffer
-	 ;; ("R" . elfeed-mark-all-as-read)
-	 )
+     ;; ("j" . next-line)      ; interfered minibuffer
+     ;; ("k" . previous-line)  ; interfered minibuffer
+     ;; ("R" . elfeed-mark-all-as-read)
+     )
   )
+
 (setq elfeed-feeds
       '(
-	;; "https://lifehacker.com/rss"
-	))
+    ;; "https://lifehacker.com/rss"
+    ))
+
+(global-set-key (kbd "C-c e") 'elfeed)
 
 
 ;; https://emacs.stackexchange.com/questions/2440/elfeed-mark-all-messages-as-read
@@ -1517,330 +1535,339 @@
   (setq view-read-only t) ;; enter view-mode for read-only file
   ;; https://github.com/jwiegley/use-package/issues/455#issuecomment-347750540
   ;; (define-key key-translation-map (kbd "\\") (kbd "M-SPC"))  ; for general package key-binding like a leader key
-  ;; :bind (("M-z" . view-mode) 
-  :bind (("s-z" . view-mode) 
-	 :map view-mode-map
+  ;; :bind (("M-z" . view-mode)
+  :bind (("s-z" . view-mode)
+    :map view-mode-map
 
-	 ;; Default (built-in)
-	 ;; ------------------
-	 ;; <spc> page down
-	 ;; <del> page up
-	 ;; d . half-page down
-	 ;; u . half-page up
-	 ;; y . scroll up (backward)
-	 ;; < . top
-	 ;; > . bottom
-	 ;; s . I-search
-	 ;; / . Regex Search ( \ . backward)
-	 ;; n / p . next / previous Regex search result
-	 ;; = . line number
-	 ;; e . edit
-	 ;; h . help (use '?')
-	 ;; q . quit ,but not close buffer
+    ;; Default (built-in)
+    ;; ------------------
+    ;; <spc> page down
+    ;; <del> page up
+    ;; d . half-page down
+    ;; u . half-page up
+    ;; y . scroll up (backward)
+    ;; < . top
+    ;; > . bottom
+    ;; s . I-search
+    ;; / . Regex Search ( \ . backward)
+    ;; n / p . next / previous Regex search result
+    ;; = . line number
+    ;; e . edit
+    ;; h . help (use '?')
+    ;; q . quit ,but not close buffer
 
-	 ;; Emacs style
-	 ;; -----------
-	 ;; ("n" . forward-line)
-	 ;; ("p" . previous-line)
-	 ;; ("f" . right-word)
-	 ;; ("b" . left-word)
-	 ("f" . evil-forward-WORD-begin)
-	 ("b" . evil-backward-WORD-begin)
-	 ;; ("f" . evil-scroll-page-down)
-	 ;; ("b" . evil-scroll-page-up)
-	 ;; window
-	 ("0" . delete-window)
-	 ("1" . delete-other-windows)      ; show only current selected widnow
-	 ("2" . split-window-vertically)
-	 ("3" . split-window-horizontally)
-	 ("4" . window-swap-states)        ; alternatively ace-swap-window
-	 ("5" . transpose-frame)
-	 ("6" . ivy-push-view)
-	 ("7" . ivy-switch-view)
-	 ("8" . winner-undo)
-	 ("9" . winner-redo)
-	 ;; ("RET" . other-window)
-	 ("DEL" . beacon-blink)
-	 ;; ("o" . ace-window)
-	 ;; ("o" . other-window)
-	 ("=" . text-scale-increase)
-	 ("-" . text-scale-decrease)
-	 ("+" . balance-windows)
-	 ("_" . maximize-window)
+    ;; Emacs style
+    ;; -----------
+    ;; ("n" . forward-line)
+    ;; ("p" . previous-line)
+    ("p" . outline-up-heading)
+    ;; ("f" . right-word)
+    ;; ("b" . left-word)
+    ("f" . evil-forward-WORD-begin)
+    ("b" . evil-backward-WORD-begin)
+    ;; ("f" . evil-scroll-page-down)
+    ;; ("b" . evil-scroll-page-up)
+    ;; window
+    ("0" . delete-window)
+    ("1" . delete-other-windows)      ; show only current selected widnow
+    ("2" . split-window-vertically)
+    ("3" . split-window-horizontally)
+    ("4" . window-swap-states)        ; alternatively ace-swap-window
+    ("5" . transpose-frame)
+    ("6" . ivy-push-view)
+    ("7" . ivy-switch-view)
+    ("8" . winner-undo)
+    ("9" . winner-redo)
+    ;; ("RET" . other-window)
+    ("DEL" . beacon-blink)
+    ;; ("o" . ace-window)
+    ;; ("o" . other-window)
+    ("=" . text-scale-increase)
+    ("-" . text-scale-decrease)
+    ("+" . balance-windows)
+    ("_" . maximize-window)
 
-	 ("s" . swiper)
-	 ;; ("`" . beacon-blink)
-	 ;; ("`" . pop-global-mark)
-	 ;; ("`" . avy-goto-char-2)
-	 ;; ("`" . cfw:open-org-calendar)
-	 ;; ("`" . org-open-at-point-global)
-	 ("`" . evil-goto-mark)
-	 ;; ("`" . my-org-next-link-open)
-	 ;; ("~" . ace-link)
-	 ;; ("`" . ace-link)
-	 ;; ("F" . ace-link)
-	 ;; ("f" . ace-link)
-	 ;; ("w" . my-minimap-mode)
-	 ;; ("w" . sublimity-mode)
-	 ;; ("w" . writeroom-mode)
-	 ;; ("w" . avy-goto-word-1)
-	 ;; ("w" . avy-goto-char)
-	 ;; ("w" . avy-goto-char-2)
-	 ;; ("w" . ace-window)
-	 ("w" . evil-scroll-line-up)
-	 ;; ("w" . other-window)
-	 ;; ("w" . ace-jump-char-mode)
-	 ;; ("w" . my-follow-mode)
+    ("s" . swiper)
+    ;; ("`" . beacon-blink)
+    ;; ("`" . pop-global-mark)
+    ;; ("`" . avy-goto-char-2)
+    ;; ("`" . cfw:open-org-calendar)
+    ;; ("`" . org-open-at-point-global)
+    ("`" . evil-goto-mark)
+    ;; ("`" . my-org-next-link-open)
+    ;; ("~" . ace-link)
+    ;; ("`" . ace-link)
+    ;; ("F" . ace-link)
+    ;; ("f" . ace-link)
+    ;; ("w" . my-minimap-mode)
+    ;; ("w" . sublimity-mode)
+    ;; ("w" . writeroom-mode)
+    ;; ("w" . avy-goto-word-1)
+    ("w" . avy-goto-char)
+    ;; ("w" . avy-goto-char-2)
+    ;; ("w" . ace-window)
+    ;; ("w" . evil-scroll-line-up)
+    ;; ("w" . other-window)
+    ;; ("w" . ace-jump-char-mode)
+    ;; ("w" . my-follow-mode)
 
-         ;; Vim style
-	 ;; ---------
-	 ;; - j/k -
-	 ;; ("j" . forward-line)
-	 ;; ("k" . previous-line)
-	 ;; ("j" . evil-next-visual-line)
-	 ;; ("k" . evil-previous-visual-line)
-	 ;; ("j" . View-scroll-line-forward)
-	 ;; ("k" . View-scroll-line-backward)
-	 ;; ("j" . evil-forward-paragraph)
-	 ;; ("k" . evil-backward-paragraph)
-	 ("j" . my-paragraph-forward)
-	 ("k" . my-paragraph-backward)
-	 ;; ("j" . forward-paragraph)
-	 ;; ("k" . backward-paragraph)
-	 ;; ("J" . my-real-paragraph-forward)
-	 ;; ("K" . my-real-paragraph-backward)
-	 ("J" . evil-next-visual-line)
-	 ("K" . evil-previous-visual-line)
-	 ;; ("J" . org-next-visible-heading)       ; required in Org 9.4+
-	 ;; ("K" . org-previous-visible-heading)   ; required in Org 9.4+
-	 ;; - h/l -
-	 ;; ("l" . org-next-visible-heading)       ; required in Org 9.4+
-	 ;; ("h" . org-previous-visible-heading)   ; required in Org 9.4+
-	 ;; ("h" . backward-sentence)
-	 ;; ("l" . forward-sentence)
-	 ;; ("H" . backward-sentence)
-	 ;; ("L" . forward-sentence)
-	 ;; ("L" . my-forward-sentence)
-	 ;; ("L" . evil-forward-sentence-begin)
-	 ;; ("H" . evil-backward-char)
-	 ;; ("L" . evil-forward-char)
+        ;; Vim style
+    ;; ---------
+    ;; - j/k -
+    ;; ("j" . forward-line)
+    ;; ("k" . previous-line)
+    ;; ("j" . evil-next-visual-line)
+    ;; ("k" . evil-previous-visual-line)
+    ;; ("j" . View-scroll-line-forward)
+    ;; ("k" . View-scroll-line-backward)
+    ;; ("j" . evil-forward-paragraph)
+    ;; ("k" . evil-backward-paragraph)
+    ("j" . my-paragraph-forward)
+    ("k" . my-paragraph-backward)
+    ;; ("j" . forward-paragraph)
+    ;; ("k" . backward-paragraph)
+    ;; ("J" . my-real-paragraph-forward)
+    ;; ("K" . my-real-paragraph-backward)
+    ; ("J" . evil-next-visual-line)
+    ; ("K" . evil-previous-visual-line)
+    ("J" . org-forward-heading-same-level)
+    ("K" . org-backward-heading-same-level)
+    ;; ("J" . org-next-visible-heading)       ; required in Org 9.4+
+    ;; ("K" . org-previous-visible-heading)   ; required in Org 9.4+
+    ;; - h/l -
+    ;; ("l" . org-next-visible-heading)       ; required in Org 9.4+
+    ;; ("h" . org-previous-visible-heading)   ; required in Org 9.4+
+    ;; ("h" . backward-sentence)
+    ;; ("l" . forward-sentence)
+    ("H" . backward-sentence)
+    ;; ("L" . forward-sentence)
+    ("L" . my-forward-sentence)
+    ;; ("L" . evil-forward-sentence-begin)
+    ;; ("H" . evil-backward-char)
+    ;; ("L" . evil-forward-char)
 
-	 ("H" . evil-window-top)
-	 ("M" . evil-window-middle)
-	 ("L" . evil-window-bottom)
+    ; ("H" . evil-window-top)
+    ; ("M" . evil-window-middle)
+    ; ("L" . evil-window-bottom)
 
-	 ;; ("h" . beginning-of-visual-line)
-	 ;; ("l" . end-of-visual-line)
-	 ;; ("h" . left-word)
-	 ;; ("l" . right-word)
-	 ;; ("h" . evil-backward-WORD-begin)
-	 ;; ("l" . evil-forward-WORD-begin)
-	 ;; ("h" . org-tree-slide-move-previous-tree)
-	 ;; ("l" . org-tree-slide-move-next-tree)
-	 ("h" . org-cycle)
-	 ("l" . org-cycle)
-	 ;; ("H" . org-tree-slide-move-previous-tree)
-	 ;; ("L" . org-tree-slide-move-next-tree)
-	 ;; ---
-	 ;; ("w" . right-word)
-	 ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
-	 ("/" . evil-search-forward)
-	 ;; ("/" . my-hl-line-mode-toggle)
-	 ("?" . evil-search-backward)
-	 ("n" . evil-search-next)
-	 ;; ("n" . next-line)
-	 ("N" . evil-search-previous)
-	 ;; ("n" . evil-normal-state)
-	 ;; ("e" . View-scroll-line-forward)             ; scroll down (forward) - opposite to 'y'
-	 ("e" . evil-scroll-line-down)
-	 ;; ("y" . evil-scroll-line-up)
-	 ;; ("y" . avy-goto-word-1)
-	 ;; ("f" . evil-scroll-page-down)
-	 ;; ("b" . evil-scroll-page-up)
-	 ;; ("0" . beginning-of-visual-line)
-	 ;; ("]" . switch-to-next-buffer)
-	 ;; ("[" . switch-to-prev-buffer)
-	 ;; ("]" . org-tree-slide-move-next-tree)
-	 ;; ("[" . org-tree-slide-move-previous-tree)
-	 ;; ("}" . org-tree-slide-move-next-tree)
-	 ;; ("{" . org-tree-slide-move-previous-tree)
-	 ;; ("]" . org-next-visible-heading)
-	 ;; ("[" . org-previous-visible-heading)
-	 ;; ("}" . org-next-visible-heading)
-	 ;; ("{" . org-previous-visible-heading)
-	 ;; ("{" . org-backward-element)
-	 ;; ("}" . org-forward-element)
-	 ;; ("}" . olivetti-expand)
-	 ;; ("{" . olivetti-shrink)
-	 ("]" . olivetti-expand)
-	 ("[" . olivetti-shrink)
-	 ;; ("\\" . counsel-buffer-or-recentf)
-	 ;; ("\\" . imenu-list)
-	 ;; ("\\" . my-view-general-prefix)
-	 ;; ("m" . imenu-list-smart-toggle)
-	 ;; ("m" . imenu-list)
-	 ;; ("m" . imenu-list-minor-mode)
-	 ;; ("m" . counsel-M-x)
-	 ;; ("m" . evil-exit-emacs-state)
+    ;; ("h" . beginning-of-visual-line)
+    ;; ("l" . end-of-visual-line)
+    ;; ("h" . left-word)
+    ;; ("l" . right-word)
+    ;; ("h" . evil-backward-WORD-begin)
+    ;; ("l" . evil-forward-WORD-begin)
+    ;; ("h" . org-tree-slide-move-previous-tree)
+    ;; ("l" . org-tree-slide-move-next-tree)
+    ("h" . org-cycle)
+    ("l" . org-cycle)
+    ;; ("H" . org-tree-slide-move-previous-tree)
+    ;; ("L" . org-tree-slide-move-next-tree)
+    ;; ---
+    ;; ("w" . right-word)
+    ;; ("N" . View-search-last-regexp-backward)  ; Regex previous result
+    ("/" . evil-search-forward)
+    ;; ("/" . my-hl-line-mode-toggle)
+    ("?" . evil-search-backward)
+    ("n" . evil-search-next)
+    ;; ("n" . next-line)
+    ("N" . evil-search-previous)
+    ;; ("n" . evil-normal-state)
+    ;; ("e" . View-scroll-line-forward)             ; scroll down (forward) - opposite to 'y'
+    ("e" . evil-scroll-line-down)
+    ;; ("y" . evil-scroll-line-up)
+    ;; ("y" . avy-goto-word-1)
+    ;; ("f" . evil-scroll-page-down)
+    ;; ("b" . evil-scroll-page-up)
+    ;; ("0" . beginning-of-visual-line)
+    ;; ("]" . switch-to-next-buffer)
+    ;; ("[" . switch-to-prev-buffer)
+    ;; ("]" . org-tree-slide-move-next-tree)
+    ;; ("[" . org-tree-slide-move-previous-tree)
+    ;; ("}" . org-tree-slide-move-next-tree)
+    ;; ("{" . org-tree-slide-move-previous-tree)
+    ;; ("]" . org-next-visible-heading)
+    ;; ("[" . org-previous-visible-heading)
+    ;; ("}" . org-next-visible-heading)
+    ;; ("{" . org-previous-visible-heading)
+    ;; ("{" . org-backward-element)
+    ;; ("}" . org-forward-element)
+    ;; ("}" . olivetti-expand)
+    ;; ("{" . olivetti-shrink)
+    ("]" . olivetti-expand)
+    ("[" . olivetti-shrink)
+    ;; ("\\" . counsel-buffer-or-recentf)
+    ;; ("\\" . imenu-list)
+    ;; ("\\" . my-view-general-prefix)
+    ;; ("m" . imenu-list-smart-toggle)
+    ;; ("m" . imenu-list)
+    ;; ("m" . imenu-list-minor-mode)
+    ;; ("m" . counsel-M-x)
+    ;; ("m" . evil-exit-emacs-state)
 
-	 ;; Vim :: power g
-	 ;; ---------------
-	 ;; ("g" . nil)  ;; interupting 'gcc' comment key binding 2021-04-21
-	 ;; ("gg" . beginning-of-buffer)
-	 ;; ("g" . beginning-of-buffer)
-	 ("g" . evil-goto-first-line)
-	 ;; ("gg" . evil-goto-first-line)
-	 ;; ("go" . evil-jump-backward)
-	 ;; ("gi" . evil-jump-forward)
-	 ;; ("G" . end-of-buffer)
-	 ("G" . evil-goto-line)  ; end of buffer in evil mode
-	 
-	 ;; <SPACE> binidng 
-         ;; ---------------
-	 ("SPC" . nil)
-	 ;; ("SPC" . ace-window)
-	 ;; ("SPC o" . ace-window)
-	 ;; ;; power search
-	 ("SPC p" . powerthesaurus-lookup-word-at-point)
-	 ("SPC d" . define-word-at-point)
-	 ("SPC t" . google-translate-at-point)
-	 ("SPC a" . counsel-ag-thing-at-point)
-	 ;; ("SPC g" . engine/search-google)
-	 ;; ("SPC y" . engine/search-youglish)
-	 ;; ;; engines - googles
-	 ("SPC egg" . engine/search-google)
-	 ("SPC egt" . engine/search-google-trans)
-	 ("SPC egn" . engine/search-google-news)
-	 ("SPC egi" . engine/search-google-images)
-	 ;; ;; engines - others
-	 ;; just type the word with M-x
-	 ("SPC ej" . engine/search-just_the_word)         ; C-x / j
-	 ("SPC eo" . engine/search-onelook)               ; C-x / o
-	 ("SPC ee" . engine/search-etymology-dictionary)  ; C-x / e
-	 ("SPC ey" . engine/search-youglish)              ; C-x / y
-	 ("SPC en" . engine/search-naver)
-	 ;; ("SPC eg" . engine/search-google)                ; C-x / g
-	 ;; others
-	 ;; ("SPC" . evil-exit-emacs-state)
-	 ;; ("SPC" . ace-window)
-	 ;; ("SPC" . avy-goto-char)
-	 ;; ("SPC" . ace-jump-char-mode)
+    ;; Vim :: power g
+    ;; ---------------
+    ;; ("g" . nil)  ;; interupting 'gcc' comment key binding 2021-04-21
+    ;; ("gg" . beginning-of-buffer)
+    ;; ("g" . beginning-of-buffer)
+    ("g" . evil-goto-first-line)
+    ;; ("gg" . evil-goto-first-line)
+    ;; ("go" . evil-jump-backward)
+    ;; ("gi" . evil-jump-forward)
+    ;; ("G" . end-of-buffer)
+    ("G" . evil-goto-line)  ; end of buffer in evil mode
 
-	 ;; Org binding
-         ;; ------------
-	 ;; ("o" . nil)
-	 ;; ("ots" . org-tree-slide-mode)
-	 ;; ("ot" . org-tree-slide-mode)
-	 ;; ("os" . org-tree-slide-mode)
-	 ;; ("or" . org-narrow-to-subtree)
-	 ;; ("ow" . widen)
-	 ;; ("oa" . org-agenda)
-	 ;; ("oc" . org-capture)
+    ;; <SPACE> binidng
+        ;; ---------------
+    ; ("SPC" . nil)
+    ("SPC" . ivy-switch-buffer)
+    ;; ("SPC" . ace-window)
+    ;; ("SPC o" . ace-window)
+    ;; ;; power search
+    ;; ("SPC p" . powerthesaurus-lookup-word-at-point)
+    ;; ("SPC d" . define-word-at-point)
+    ;; ("SPC t" . google-translate-at-point)
+    ;; ("SPC a" . counsel-ag-thing-at-point)
+    ;; ("SPC g" . engine/search-google)
+    ;; ("SPC y" . engine/search-youglish)
+    ;; ;; engines - googles
+    ;; ("SPC egg" . engine/search-google)
+    ;; ("SPC egt" . engine/search-google-trans)
+    ;; ("SPC egn" . engine/search-google-news)
+    ;; ("SPC egi" . engine/search-google-images)
+    ;; ;; engines - others
+    ;; just type the word with M-x
+    ;; ("SPC ej" . engine/search-just_the_word)         ; C-x / j
+    ;; ("SPC eo" . engine/search-onelook)               ; C-x / o
+    ;; ("SPC ee" . engine/search-etymology-dictionary)  ; C-x / e
+    ;; ("SPC ey" . engine/search-youglish)              ; C-x / y
+    ;; ("SPC en" . engine/search-naver)
+    ;; ("SPC eg" . engine/search-google)                ; C-x / g
+    ;; others
+    ;; ("SPC" . evil-exit-emacs-state)
+    ;; ("SPC" . ace-window)
+    ;; ("SPC" . avy-goto-char)
+    ;; ("SPC" . ace-jump-char-mode)
 
-	 ;; Trans Functions
-	 ;; ------------
-	 ;; ("t" . nil)
-	 ;; ("tp" . powerthesaurus-lookup-word-at-point)
-	 ;; ("td" . define-word-at-point)
+    ;; Org binding
+        ;; ------------
+    ;; ("o" . nil)
+    ;; ("ots" . org-tree-slide-mode)
+    ;; ("ot" . org-tree-slide-mode)
+    ;; ("os" . org-tree-slide-mode)
+    ;; ("or" . org-narrow-to-subtree)
+    ;; ("ow" . widen)
+    ;; ("oa" . org-agenda)
+    ;; ("oc" . org-capture)
 
-	 ;; <ESCAPE> binidng 
-	 ;; ---------------
-	 ("<escape>" . nil)
-	 ;; ("<escape>" . keyboard-quit)
-	 ("<escape> <escape>" . keyboard-quit)
-	 ("<escape> x" . counsel-M-x)
-	 ;; ("<escape> f" . counsel-find-file)
-	 ;; ("<escape> r" . ranger)
-	 ;; ("<escape> RET" . ace-window)
-	 ;; ("<escape> a" . ace-window)
-	 ;; ("<escape> p" . powerthesaurus-lookup-word-at-point)
-	 ;; ("<escape> d" . define-word-at-point)
-	 ;; ("<escape> t" . google-translate-at-point)
-	 ;; ("<escape> a" . counsel-ag-thing-at-point)
-	 ;; ("<escape> y" . engine/search-youglish)
+    ;; Trans Functions
+    ;; ------------
+    ;; ("t" . nil)
+    ;; ("tp" . powerthesaurus-lookup-word-at-point)
+    ;; ("td" . define-word-at-point)
 
-	 ;; Additional-keys
-	 ;; -----------
-	 ("r" . revert-buffer)
-	 ;; ("r" . my-org-narrowing)
-	 ;; ("R" . revert-buffer)
-	 ;; ("r" . writeroom-mode)
-	 ("R" . writeroom-mode)
+    ;; <ESCAPE> binidng
+    ;; ---------------
+    ("<escape>" . nil)
+    ;; ("<escape>" . keyboard-quit)
+    ("<escape> <escape>" . keyboard-quit)
+    ("<escape> x" . counsel-M-x)
+    ;; ("<escape> f" . counsel-find-file)
+    ;; ("<escape> r" . ranger)
+    ;; ("<escape> RET" . ace-window)
+    ;; ("<escape> a" . ace-window)
+    ;; ("<escape> p" . powerthesaurus-lookup-word-at-point)
+    ;; ("<escape> d" . define-word-at-point)
+    ;; ("<escape> t" . google-translate-at-point)
+    ;; ("<escape> a" . counsel-ag-thing-at-point)
+    ;; ("<escape> y" . engine/search-youglish)
 
-	 ;; ("p" . previous-line)
-	 ("p" . toggle-window-dedicated)
-	 ;; ("D" . toggle-window-dedicated)
-	 ("D" . define-word-at-point)
-	 ("P" . powerthesaurus-lookup-word-at-point)
-	 ("T" . google-translate-at-point)
-	 ("U" . engine/search-youglish)
+    ;; Additional-keys
+    ;; -----------
+    ("r" . revert-buffer)
+    ;; ("r" . my-org-narrowing)
+    ;; ("R" . revert-buffer)
+    ;; ("r" . writeroom-mode)
+    ("R" . ranger)
+    ("W" . writeroom-mode)
+    ("B" . counsel-switch-buffer)
 
-	 ;; ("a" . end-of-buffer)
-	 ;; ("a" . avy-goto-char)
-	 ;; ("a" . evil-goto-line)  ; end of line
-	 ;; ("a" . ace-link)
-	 ("a" . counsel-ag-thing-at-point)
-	 ("A" . ace-link)
-	 ;; ("A" . counsel-ag-thing-at-point)
-	 ;; ("c" . cfw:open-org-calendar)
-	 ;; ("z" . end-of-buffer)
-	 ("z" . View-exit) ;; like 'e'
-	 ;; ("x" . View-exit)  ;; like 'e'
-	 ;; ("z" . evil-exit-emacs-state)
-	 ;; ("z" . kill-current-buffer)  ; same as (s-k)
-	 ("t" . org-tree-slide-mode)
-	 ;; ("T" . org-tree-slide-mode)
-	 ;; ("t" . my-org-targeting)
-	 ;; ("v" . ace-window)
-	 ("v" . evil-exit-emacs-state)
-	 ;; ("vi" . evil-exit-emacs-state)
-	 ;; ("v" . evil-visual-state)
-	 ;; ("RET" . evil-exit-emacs-state)
-	 ;; ("SPC" . evil-exit-emacs-state)
-	 ("F" . my-follow-mode)
-	 ;;
-	 ;; ("q" . kill-current-buffer)    ; same as (s-k)
-	 ("q" . View-exit)
-	 ;; ("x" . my-kill-current-buffer-and-window)
-	 ("x" . my-kill-current-buffer-and-other-windows)
-	 ("c" . recenter-top-bottom)
-	 ;; ("c" . recenter)
-	 ;; ("i" . View-exit)  ;; like 'e'
-	 ;; ("i" . my-indirect-buffer)
-	 ;; ("i" . my-clone-indirect-buffer)
-	 ;; ("i" . evil-insert-state)
-	 ("o" . other-window)
-	 ;; ("o" . my-org-indirect-buffer)
-	 ("I" . my-org-indirect-buffer)
-	 ;; ("i" . evil-insert-state)
-	 ;; ("i" . org-narrow-to-subtree)
-	 ("i" . my-org-narrowing)
-	 ;; ("o" . widen)
-	 ;; ("ic" . my-clone-indirect-buffer)
-	 ;; ("io" . my-org-indirect-buffer)
+    ;; ("p" . previous-line)
+    ("p" . toggle-window-dedicated)
+    ;; ("D" . toggle-window-dedicated)
+    ("D" . define-word-at-point)
+    ("P" . powerthesaurus-lookup-word-at-point)
+    ("T" . google-translate-at-point)
+    ("U" . engine/search-youglish)
 
-	 ;; ("," . org-narrow-to-subtree)
-	 ;; ("." . widen)
-	 ;; ("," . my-clone-indirect-buffer)
-	 ;; ("." . my-org-indirect-buffer)
-	 ;; ("." . imenu-list-smart-toggle)  ; toggle available
-	 ("." . imenu-list)  ; toggle not available
-	 ;; ("." . org-tree-slide-move-next-tree)
-	 ;; ("," . org-tree-slide-move-previous-tree)
-	 ("," . mwe-commands-exec)
+    ;; ("a" . end-of-buffer)
+    ;; ("a" . avy-goto-char)
+    ;; ("a" . evil-goto-line)  ; end of line
+    ;; ("a" . ace-link)
+    ("A" . counsel-ag-thing-at-point)
+    ("a" . ace-link)
+    ;; ("A" . counsel-ag-thing-at-point)
+    ;; ("c" . cfw:open-org-calendar)
+    ;; ("z" . end-of-buffer)
+    ("z" . View-exit) ;; like 'e'
+    ;; ("x" . View-exit)  ;; like 'e'
+    ;; ("z" . evil-exit-emacs-state)
+    ;; ("z" . kill-current-buffer)  ; same as (s-k)
+    ("t" . org-tree-slide-mode)
+    ;; ("T" . org-tree-slide-mode)
+    ;; ("t" . my-org-targeting)
+    ;; ("v" . ace-window)
+    ("v" . evil-exit-emacs-state)
+    ;; ("vi" . evil-exit-emacs-state)
+    ;; ("v" . evil-visual-state)
+    ;; ("RET" . evil-exit-emacs-state)
+    ;; ("SPC" . evil-exit-emacs-state)
+    ("F" . my-follow-mode)
+    ;;
+    ;; ("q" . kill-current-buffer)    ; same as (s-k)
+    ; ("q" . View-exit)
+    ("q" . my-kill-current-buffer-and-other-windows)
+    ;; ("x" . my-kill-current-buffer-and-window)
+    ; ("x" . my-kill-current-buffer-and-other-windows)
+    ("c" . recenter-top-bottom)
+    ;; ("c" . recenter)
+    ;; ("i" . View-exit)  ;; like 'e'
+    ;; ("i" . my-indirect-buffer)
+    ;; ("i" . my-clone-indirect-buffer)
+    ;; ("i" . evil-insert-state)
+    ("o" . other-window)
+    ;; ("o" . my-org-indirect-buffer)
+    ("I" . my-org-indirect-buffer)
+    ;; ("i" . evil-insert-state)
+    ;; ("i" . org-narrow-to-subtree)
+    ("i" . my-org-narrowing)
+    ;; ("o" . widen)
+    ;; ("ic" . my-clone-indirect-buffer)
+    ;; ("io" . my-org-indirect-buffer)
 
-	 ;; olivetti
-	 (";" . olivetti-narrow-width)  ; toggle function
-	 ;; ("'" . olivetti-default-width)  ; turn to toggle functionality
-	 ;; ("'" . my-forward-sentence)
-	 ("'" . my-hl-line-mode-toggle)
+    ;; ("," . org-narrow-to-subtree)
+    ;; ("." . widen)
+    ;; ("," . my-clone-indirect-buffer)
+    ;; ("." . my-org-indirect-buffer)
+    ;; ("." . imenu-list-smart-toggle)  ; toggle available
+    ("." . imenu-list)  ; toggle not available
+    ;; ("." . org-tree-slide-move-next-tree)
+    ;; ("," . org-tree-slide-move-previous-tree)
+    ("," . mwe-commands-exec)
 
-	 ;; Unbind-keys
-	 ;; -----------
-	 ;; ("h" . nil)
-	 ;; ("/" . nil)
+    ;; olivetti
+    ; (";" . olivetti-narrow-width)  ; toggle function
+    ;; ("'" . olivetti-default-width)  ; turn to toggle functionality
+    ;; ("'" . my-forward-sentence)
+    ; ("'" . my-hl-line-mode-toggle)
+    ("'" . org-tree-slide-move-next-tree)
+    (";" . org-tree-slide-move-previous-tree)
 
-         )
+    ;; Unbind-keys
+    ;; -----------
+    ;; ("h" . nil)
+    ;; ("/" . nil)
+
+        )
   )
 
 
@@ -1851,7 +1878,7 @@
 ;; complicted to Evil cursors
 ;; (setq-default cursor-type 'box)
 ;; (add-hook 'view-mode-hook
-;; 	  (defun view-mode-change-cursor-type-hook ()
+;;    (defun view-mode-change-cursor-type-hook ()
 ;;             (setq cursor-type (if view-mode '(hbar . 10)))))
 
 ;; https://karthinks.com/software/batteries-included-with-emacs/
@@ -1885,7 +1912,7 @@
 ;;              (string-match "\\.el\\'" buffer-file-name))
 ;;     (view-mode 0)))
 
-;; (add-hook 'find-file-hook 'my-view-mode) 
+;; (add-hook 'find-file-hook 'my-view-mode)
 
 ;; (add-hook 'kill-buffer-hook (lambda () (read-only-mode -1)))
 ;; (add-hook 'kill-buffer-hook (lambda () (view-mode -1)))
@@ -1947,10 +1974,10 @@
   ;;     (centered-cursor-mode 1)
   ;;   (centered-cursor-mode 0)
   ;;   )
-  (when (display-graphic-p) 
+  (when (display-graphic-p)
     (if view-mode
-	;; (face-remap-add-relative 'default '((:background "gray90")))
-	(face-remap-add-relative 'default '((:background "#fdf6e3")))
+    ;; (face-remap-add-relative 'default '((:background "gray90")))
+    (face-remap-add-relative 'default '((:background "#fdf6e3")))
       (face-remap-add-relative 'default '((:background "textBackgroundcolor")))
       )
     ;; (if (evil-emacs-state-p)
@@ -1958,16 +1985,16 @@
     ;; )
 
     ;; (if view-mode
-    ;; 	(hl-line-mode 1)
+    ;;  (hl-line-mode 1)
     ;;   (hl-line-mode 1)
     ;;   )
 
-  ;; (if view-mode 
+  ;; (if view-mode
   ;;     (progn
-  ;; 	(face-remap-add-relative 'mode-line '((:foreground "red" :background "black") mode-line))
-  ;; 	(face-remap-add-relative 'default '((:background "controlHighlightColor")))
-  ;; 	(evil-emacs-state 1)  ;; always related between evil and view-mode 2021-04-04
-  ;; 	)
+  ;;    (face-remap-add-relative 'mode-line '((:foreground "red" :background "black") mode-line))
+  ;;    (face-remap-add-relative 'default '((:background "controlHighlightColor")))
+  ;;    (evil-emacs-state 1)  ;; always related between evil and view-mode 2021-04-04
+  ;;    )
   ;;   ;; else
   ;;   (progn
   ;;     (face-remap-add-relative 'mode-line '((:foreground "textColor" :background "textBackgroundColor") mode-line))
@@ -2172,20 +2199,20 @@
       (pulse-momentary-highlight-one-line (point)))
 
 (dolist (command '(scroll-up-command
-		   scroll-down-command
-		   recenter-top-bottom
-		   other-window   ; beacon is better in same buffer with different window
-		   ace-window     ; beacon is better in same buffer with differnet window
-		   org-forward-element
-		   org-backward-element
-		   forward-paragraph
-		   backward-paragraph
-		   swiper
-		   evil-ex-search
-		   evil-ex-search-forward
-		   evil-ex-search-backward
-		   ;; org-cycle      ; delay ??
-		   ))
+           scroll-down-command
+           recenter-top-bottom
+           other-window   ; beacon is better in same buffer with different window
+           ace-window     ; beacon is better in same buffer with differnet window
+           org-forward-element
+           org-backward-element
+           forward-paragraph
+           backward-paragraph
+           swiper
+           evil-ex-search
+           evil-ex-search-forward
+           evil-ex-search-backward
+           ;; org-cycle      ; delay ??
+           ))
   (advice-add command :after #'pulse-line)
 )
 
@@ -2247,7 +2274,7 @@
 ;; (require 'pdf-tools)
 ;; (use-package pdf-tools :ensure t)
 ;; (pdf-tools-install)
-;; 
+;;
 ;; https://xenodium.com/trying-out-emacs-pdf-tools/
 (use-package pdf-tools
   :ensure t
@@ -2270,7 +2297,7 @@
 
 
 ;; turn on visible bell 2021-03-29
-(setq visible-bell t)
+; (setq visible-bell t)
 
 
 ;; dedicated window 2021-03-27
@@ -2297,6 +2324,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ac-auto-show-menu nil)
  '(ansi-color-names-vector
    ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#e090d7" "#8cc4ff" "#eeeeec"])
  '(confirm-kill-emacs 'yes-or-no-p)
@@ -2304,14 +2332,13 @@
  '(doc-view-continuous t)
  '(evil-undo-system 'undo-tree)
  '(fringe-mode 0 nil (fringe))
- ;; '(global-undo-tree-mode t)
  '(google-translate-backend-method 'curl t nil "Customized with use-package google-translate")
  '(latex-run-command "pdflatex")
  '(minimap-automatically-delete-window 'visible)
  '(minimap-mode nil)
  '(org-adapt-indentation nil)
  '(org-agenda-files
-   '("~/Documents/nvALT/projx-Jiwoo-SAT.txt" "~/Documents/nvALT/notex-Ontario_Benefits_Stopped_20201215.txt" "~/Documents/nvALT/projx-Jiwoo-Citizenship.txt" "~/Documents/nvALT/org_capture_note.txt" "~/Documents/nvALT/projx-JobBoard2021.txt" "~/Documents/nvALT/projx-IncomeTax.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/projx-Jiwoo-SAT.txt" "~/Documents/nvALT/notex-Ontario_Benefits_Stopped_20201215.txt" "~/Documents/nvALT/projx-Jiwoo-Citizenship.txt" "~/Documents/nvALT/org_capture_note.txt" "~/Documents/nvALT/projx-JobBoard2021.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
  '(org-agenda-start-on-weekday 0)
  '(org-agenda-time-grid
    '((daily today require-timed)
@@ -2335,7 +2362,7 @@
    '(evil-leader workgroups2 workgroups cm-mode all-the-icons neotree ranger org-crypt key-chord dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
    '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
- '(show-paren-mode t)
+ ;; '(show-paren-mode t)
  '(wg-special-buffer-serdes-functions '(wg-serialize-comint-buffer))
  '(whitespace-line-column 120)
  '(writeroom-restore-window-config t))
@@ -2428,7 +2455,7 @@
 
 ;; Search At Point
 ;; Next/Previous Matching words for Emacs mode 2021-03-20
-;; https://www.emacswiki.org/emacs/SearchAtPoint 
+;; https://www.emacswiki.org/emacs/SearchAtPoint
 (global-set-key (kbd "C-*") 'evil-search-word-forward)
 ;; (global-set-key (kbd "C-#") 'evil-search-word-backward) ;; conflicted with org-table keybinding 2021-03-21
 (global-set-key (kbd "C-&") 'evil-search-word-backward)
@@ -2456,7 +2483,11 @@
 
 ;; (setq org-ellipsis "  ")  ; nerd font `v` nf-oct-chevron_down, hex: f47
 ;; (setq org-ellipsis " ∞ ")
-(setq org-ellipsis " ↩ ")
+; (setq org-ellipsis " ↩ ")
+(setq org-ellipsis " [+] ")
+; (setq org-ellipsis " ··· ")
+
+
 
 ;; -----------------------
 ;; MANUAL INSTALL PACKAGES
@@ -2528,7 +2559,7 @@
 )
 
 
-(unless (display-graphic-p) 
+(unless (display-graphic-p)
   ;; terminal mode
   )
 
@@ -2574,12 +2605,12 @@
 
   ;; agenda conflicted with `recents` list with org-agenda files 2021-03-12
   (setq dashboard-items '(
-			  (bookmarks . 5)
-			  (recents  . 15)
-			  (projects . 5)
-			  (agenda . 5)
-			  ;; (registers . 5)
-			  )))
+              (bookmarks . 5)
+              (recents  . 15)
+              (projects . 5)
+              (agenda . 5)
+              ;; (registers . 5)
+              )))
 
 
 ;;===============
@@ -2593,14 +2624,14 @@
 ;; parenthesis highlight
 ;; to change color :: face color -> (show-paren-match)
 ;; '(show-paren-match ((t (:background "Green"))))
-(show-paren-mode)               ;; little interupted but useful
-(unless (display-graphic-p)
-  ;; https://www.emacswiki.org/emacs/ShowParenMode
-  ;; (require 'paren) (set-face-background 'show-paren-match (face-background 'default))
-  ;; (set-face-foreground 'show-paren-match "#def")
-  ;; (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
-  (set-face-background 'show-paren-match "blue")
-)
+;; (show-paren-mode)               ;; little interupted but useful
+;; (unless (display-graphic-p)
+;;   ;; https://www.emacswiki.org/emacs/ShowParenMode
+;;   ;; (require 'paren) (set-face-background 'show-paren-match (face-background 'default))
+;;   ;; (set-face-foreground 'show-paren-match "#def")
+;;   ;; (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+;;   (set-face-background 'show-paren-match "blue")
+;; )
 
 
 (setq ns-pop-up-frames nil)        ; only one frame use when openning a file 2021-01-28
@@ -2612,7 +2643,7 @@
       (scroll-bar-mode -1)
       ;; (global-hl-line-mode t)
     ))
- 
+
 
 ;; Spell Check 2021-02-14
 (when (display-graphic-p)
@@ -2633,7 +2664,13 @@
 
 
 ;; show relative number line in programming modes
-(add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative)))
+;; (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative)))
+;; relative number for only Evil Normal Entry
+(add-hook 'evil-normal-state-entry-hook (lambda () (setq display-line-numbers 'relative)))
+(add-hook 'evil-visual-state-entry-hook (lambda () (setq display-line-numbers 'relative)))
+(add-hook 'evil-insert-state-entry-hook (lambda () (setq display-line-numbers 'absolute)))
+(add-hook 'evil-emacs-state-entry-hook (lambda () (setq display-line-numbers nil)))
+(add-hook 'view-mode-hook (lambda () (setq display-line-numbers nil)))
 
 
 ;; Focus on `Buffer List` window when it is opened - 2021-02-21
@@ -2676,7 +2713,7 @@
 (add-to-list 'initial-frame-alist '(fullscreen . maximized)) ; Maximize GUI window
 
 ;; Interupted Working Process 2021-02-15
-;; (setq auto-save-visited-mode t)                           ; Auto Save   
+;; (setq auto-save-visited-mode t)                           ; Auto Save
 ;; (setq auto-save-visited-interval 1)                       ; Auto Save - Interval
 (setq auto-save-default nil)                                 ; Preventing auto saved files like `#filename.ext#`
 ;; (setq auto-save-visited-file-name t)
@@ -2713,6 +2750,7 @@
  '(mode-line ((((type x w32 ns)) (:overline t)) (((type tty)) (:inverse-video t))))
  '(mode-line-inactive ((t (:inherit (shadow mode-line)))))
  '(org-document-title ((t (:foreground "midnight blue" :weight bold :height 1.4))))
+ '(org-drawer ((t (:foreground "gray" :underline t :extend t))))
  '(org-ellipsis ((t nil)))
  '(org-hide ((t (:foreground "textBackgroundColor"))))
  '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
@@ -2720,7 +2758,6 @@
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
- '(org-drawer ((t (:foreground "gray" :underline t :extend t))))
  '(pulse-highlight-start-face ((t (:background "cyan")))))
 
 ;; white mode-line came from Binder/Olivetti reddit like below:
@@ -2803,19 +2840,56 @@
                                   ))
 
 
-;; company mode 2021-01-24
-;; I think it's a kind of auto-completion
-;; use auto-complete-mode
-;; (add-hook 'after-init-hook 'global-company-mode)
+; == company mode 2021-01-24 ==
+; I think it's a kind of auto-completion
+; company mode is fater than auo-completion
+(use-package company
+ :ensure t
+ :init
+    (add-hook 'after-init-hook 'global-company-mode)
+    ;; case sensitive
+    ;; https://emacs.stackexchange.com/questions/10837/how-to-make-company-mode-be-case-sensitive-on-plain-text
+    (setq company-dabbrev-downcase nil)
+    ;; show after seconde characters
+    ;; https://emacs.stackexchange.com/questions/4011/i-want-company-mode-to-show-completions-list-after-the-second-character
+    (setq company-minimum-prefix-length 2)
+    (setq company-idle-delay 3)
+    ;; disable icons
+    ;; https://github.com/company-mode/company-mode/issues/1102
+    (setq company-format-margin-function nil)
+    ;; https://github.com/company-mode/company-mode/issues/900
+    (setq company-tooltip-align-annotations t)
+    ;; (setq company-show-numbers t)
+)
 
 
 ;; auto complete 2021-01-16
 ;; https://www.youtube.com/watch?v=HTUE03LnaXA
-(require 'auto-complete)
-(require 'auto-complete-config)
-(ac-config-default)
-(add-hook 'after-init-hook 'auto-complete-mode)
+; (require 'auto-complete)
+; (require 'auto-complete-config)
+; (ac-config-default)
+; (add-hook 'after-init-hook 'auto-complete-mode)
+; (ac-flyspell-workaround)
 
+;; == auto-complete 2021-01-16 ==
+;; https://www.youtube.com/watch?v=HTUE03LnaXA
+;; not aligined popup in org-mode
+(use-package auto-complete
+    :ensure t
+    :init
+        (require 'auto-complete)
+        (require 'auto-complete-config)
+        (progn
+            (ac-config-default)
+            (setq ac-ignore-case nil)
+            (global-auto-complete-mode t)
+        )
+    ;; make it faster
+    ;; https://www.reddit.com/r/emacs/comments/7czblc/why_is_emacs_auto_complete_so_slow/
+    :config (ac-flyspell-workaround)
+)
+(add-hook 'after-init-hook 'auto-complete-mode)
+(add-hook 'org-mode-hook 'auto-complete-mode)
 
 ;; yasnippet 2021-01-16
 ;; https://www.youtube.com/watch?v=HTUE03LnaXA
@@ -2862,13 +2936,13 @@
 
 
 ;; *****************************************************************
-;; 
+;;
 ;; ███████ ██    ██ ██ ██       ███    ███  ██████  ██████  ███████ 
 ;; ██      ██    ██ ██ ██       ████  ████ ██    ██ ██   ██ ██      
-;; █████   ██    ██ ██ ██ █████ ██ ████ ██ ██    ██ ██   ██ █████   
-;; ██       ██  ██  ██ ██       ██  ██  ██ ██    ██ ██   ██ ██      
+;; █████   ██    ██ ██ ██ █████ ██ ████ ██ ██    ██ ██   ██ █████ 
+;; ██       ██  ██  ██ ██       ██  ██  ██ ██    ██ ██   ██ ██    
 ;; ███████   ████   ██ ███████  ██      ██  ██████  ██████  ███████ 
-;;                                                             
+;;
 ;; Enable Evil 2020-12-30
 ;; *****************************************************************
 
@@ -3011,7 +3085,7 @@
 
 ;; evil cursor in modes 2021-02-06
 ;; https://github.com/hlissner/doom-emacs/issues/1848
-;; http://fnwiya.hatenablog.com/entry/2016/01/12/213149 
+;; http://fnwiya.hatenablog.com/entry/2016/01/12/213149
 (setq evil-normal-state-cursor '(box "black")
       evil-insert-state-cursor '((bar . 2) "red")
       evil-visual-state-cursor '((hollow . 2) "blue")
@@ -3037,10 +3111,10 @@
 ;; evil key binding
 (define-key evil-normal-state-map (kbd "SPC")   'evil-ex)
 (define-key evil-visual-state-map (kbd "SPC")   'evil-ex)
-(define-key evil-normal-state-map (kbd ";")   'evil-ex)
-(define-key evil-visual-state-map (kbd ";")   'evil-ex)
-(define-key evil-normal-state-map (kbd ":") 'evil-repeat-find-char)
-(define-key evil-visual-state-map (kbd ":") 'evil-repeat-find-char)
+; (define-key evil-normal-state-map (kbd ";")   'evil-ex)
+; (define-key evil-visual-state-map (kbd ";")   'evil-ex)
+; (define-key evil-normal-state-map (kbd ":") 'evil-repeat-find-char)
+; (define-key evil-visual-state-map (kbd ":") 'evil-repeat-find-char)
 (define-key evil-normal-state-map (kbd "j")     'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k")     'evil-previous-visual-line)
 (define-key evil-normal-state-map (kbd "C-u")   'evil-scroll-up)
@@ -3093,6 +3167,16 @@
 ;; https://stackoverflow.com/questions/20257022/evil-emacs-mode-sentence-motions-and-other-questions
 (setq sentence-end "[\\.\\?\\!] +") ;; . or ? or ! followed by spaces.
 (define-key evil-normal-state-map ")" 'forward-sentence)
+
+
+;; -- evil command key binding to quit --
+;; In evil-mode, :q -> to delete buffer insted of quite emacs
+;; https://www.reddit.com/r/spacemacs/comments/6p3w0l/making_q_not_kill_emacs/
+;; must be located after loading evil-mode
+;; :q should kill the current buffer rather than quitting emacs entirely
+;; (evil-ex-define-cmd "q" 'kill-this-buffer)
+;; Need to type out :quit to close emacs
+;; (evil-ex-define-cmd "quit" 'evil-quit)
 
 
 ;; == evil undo 2021-02-06 ==
@@ -3201,7 +3285,7 @@
 ;; ACE JUMP MODE
 ;;----------------------------------------------------------------
 ;; ace jump mode major function
-;; 
+;;
 ;; (add-to-list 'load-path "/Users/osickwon/.emacs.d/ace-jump-mode/")
 ;; (autoload
 ;;   'ace-jump-mode
@@ -3223,8 +3307,8 @@
 ;;           (lambda ()
 ;;             ;; (local-set-key (kbd "\C-c SPC") 'ace-jump-mode)))
 ;;             (local-set-key (kbd "\C-c SPC") 'ace-jump-char-mode)))
- 
-;; 
+
+;;
 ;; enable a more powerful jump back function from ace jump mode
 ;;
 ;; (autoload
@@ -3276,7 +3360,7 @@
 
 
 ;; == Olivetti 2021-02-11 ==
-;; to remove boundry -> '(fringe-mode 0 nil (fringe)) in `(custom-set-variables` lines in front of this file. 
+;; to remove boundry -> '(fringe-mode 0 nil (fringe)) in `(custom-set-variables` lines in front of this file.
 (use-package olivetti
   :ensure t
   :init
@@ -3293,13 +3377,13 @@
   ;; (defun olivetti-narrow-width ()
   ;;   (interactive)
   ;;   (olivetti-set-width 95)
-  ;;   ) 
+  ;;   )
   ;; (global-set-key (kbd "C-M-;") 'olivetti-narrow-width)
 
   ;; (defun olivetti-default-width ()
   ;;   (interactive)
   ;;   (olivetti-set-width 0.99)
-  ;;   ) 
+  ;;   )
   ;; (global-set-key (kbd "C-M-'") 'olivetti-default-width)
   ;; (global-set-key (kbd "C-M-]") 'olivetti-expand)
   ;; (global-set-key (kbd "C-M-[") 'olivetti-shrink)
@@ -3314,8 +3398,8 @@
   (olivetti-set-width 95)
   (if (get 'olivetti-narrow-width 'narrowed)
       (progn
-	(olivetti-set-width 0.99)
-	(put 'olivetti-narrow-width 'narrowed nil))
+    (olivetti-set-width 0.99)
+    (put 'olivetti-narrow-width 'narrowed nil))
     (progn
       (olivetti-set-width 95)
       (put 'olivetti-narrow-width 'narrowed t))))
@@ -3330,7 +3414,7 @@
   :ensure t
   :init (require 'undo-tree)
   :config
-  (global-undo-tree-mode)                                      
+  (global-undo-tree-mode)
   (setq undo-tree-visualizer-timestamps t)
   (setq undo-tree-visualizer-diff t)
   (setq undo-tree-auto-save-history t)
@@ -3498,7 +3582,7 @@ T - tag prefix
 
 
 ;; command-log-mode 2021-03-09
-;; https://github.com/lewang/command-log-mode 
+;; https://github.com/lewang/command-log-mode
 ;; (require 'command-log-mode)
 ;; (add-hook 'LaTeX-mode-hook 'command-log-mode)
 
@@ -3520,7 +3604,7 @@ T - tag prefix
   (setq-default org-download-image-dir "./img")
   (setq org-download-screenshot-method "screencapture -i %s")
   (setq org-download-screenshot-file "./img/tmp.png")
-  :bind  
+  :bind
 )
 
 
@@ -3543,14 +3627,15 @@ T - tag prefix
 
 
 ;; =====================================================================
-;; 
+;; =====                                                           =====
+;;
 ;;  ██████╗ ██████╗  ██████╗       ███╗   ███╗ ██████╗ ██████╗ ███████╗
 ;; ██╔═══██╗██╔══██╗██╔════╝       ████╗ ████║██╔═══██╗██╔══██╗██╔════╝
-;; ██║   ██║██████╔╝██║  ███╗█████╗██╔████╔██║██║   ██║██║  ██║█████╗  
-;; ██║   ██║██╔══██╗██║   ██║╚════╝██║╚██╔╝██║██║   ██║██║  ██║██╔══╝  
+;; ██║   ██║██████╔╝██║  ███╗█████╗██╔████╔██║██║   ██║██║  ██║█████╗
+;; ██║   ██║██╔══██╗██║   ██║╚════╝██║╚██╔╝██║██║   ██║██║  ██║██╔══╝
 ;; ╚██████╔╝██║  ██║╚██████╔╝      ██║ ╚═╝ ██║╚██████╔╝██████╔╝███████╗
 ;;  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝       ╚═╝     ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝
-;;                                                           
+;;
 ;; =====                        ORG-MODE                           =====
 ;; =====================================================================
 
@@ -3564,6 +3649,7 @@ T - tag prefix
 (setq org-log-done 'time)                                     ; Show Closed(DONE) date in ORG-mode
 (global-set-key "\C-ca" 'org-agenda)                          ; Org Agenda View shortcut
 (global-set-key (kbd "C-M-<return>") 'org-insert-subheading)  ; Org Insert Sub-Heading 2021-03-31
+(global-set-key (kbd "C-s-<return>") 'org-insert-subheading)  ; Org Insert Sub-Heading 2022-06-28
 
 (global-set-key "\C-coh" 'org-metaleft)
 (global-set-key "\C-col" 'org-metaright)
@@ -3584,9 +3670,9 @@ T - tag prefix
 
 ;; (setq org-emphasis-alist
 ;;       '(
-;; 	("~" (:foreground "red3"))
+;;  ("~" (:foreground "red3"))
 ;;         ("/" (italic (:foreground "dark blue")))
-;; 	)
+;;  )
 ;;       )
 
 
@@ -3671,7 +3757,7 @@ T - tag prefix
       ;; tip: When called with a ‘C-0’ (zero) prefix, insert a template at point.
       ;; >> == C-0 M-x `org-capture` == <<
       ;; https://emacs.stackexchange.com/questions/30595/how-to-org-capture-at-current-location
-      ;; 
+      ;;
       ;; ("x" "Big3" plain ()
       ;; "%U %^{Thing1} / %^{Thing2} / %^{Thing3} " :empty-lines 1)
 
@@ -3704,7 +3790,7 @@ T - tag prefix
 ;; Templage Expansion 2021-04-02
 ;; https://orgmode.org/manual/Template-expansion.html
 ;; ------------------------------------------------------------
-;; '%?'        > position point here. 
+;; '%?'        > position point here.
 ;;
 ;; '%t'        > Timestamp, date only.
 ;; '%^t'       > Select Timestamp, date only.
@@ -3717,7 +3803,7 @@ T - tag prefix
 ;; ------------------------------------------------------------
 
 ;; type 2021-04-02
-;; https://orgmode.org/manual/Template-elements.html 
+;; https://orgmode.org/manual/Template-elements.html
 ;; -------
 ;; entry
 ;; item
@@ -3801,7 +3887,7 @@ T - tag prefix
 ;; https://www.reddit.com/r/emacs/comments/4366f9/how_do_orgrefiletargets_work/
 (setq org-refile-targets '((nil :maxlevel . 9)
                            ;; (org-agenda-files :maxlevel . 9)
-			   ))
+               ))
 (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
 (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
 
@@ -4032,8 +4118,10 @@ T - tag prefix
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 
-;; Git-Gutter 2020-12-18
+;; == Git-Gutter 2020-12-18 ==
+;; https://github.com/emacsorphanage/git-gutter
 (global-git-gutter-mode +1)
+(require 'git-gutter)
 
 
 ;; Multiple-Cursors(mc/) Package 2020-12-19
@@ -4050,7 +4138,7 @@ T - tag prefix
 
 ;; org-level whole line background in org-mode 2020-12-27
 ; ':extend t' option required to apply
-; it also adjust in 'customize' menu in emacs configuaration 
+; it also adjust in 'customize' menu in emacs configuaration
 ; -------- Applied Automatically at Line 20 ------------------
 ;(setq org-fontify-whole-heading-line t
 ;      org-fontify-done-headline t
@@ -4058,16 +4146,16 @@ T - tag prefix
 
 
 ;;==============================================================
-;;  ██▓███ ▓██   ██▓▄▄▄█████▓ ██░ ██  ▒█████   ███▄    █ 
-;; ▓██░  ██▒▒██  ██▒▓  ██▒ ▓▒▓██░ ██▒▒██▒  ██▒ ██ ▀█   █ 
+;;  ██▓███ ▓██   ██▓▄▄▄█████▓ ██░ ██  ▒█████   ███▄    █
+;; ▓██░  ██▒▒██  ██▒▓  ██▒ ▓▒▓██░ ██▒▒██▒  ██▒ ██ ▀█   █
 ;; ▓██░ ██▓▒ ▒██ ██░▒ ▓██░ ▒░▒██▀▀██░▒██░  ██▒▓██  ▀█ ██▒
 ;; ▒██▄█▓▒ ▒ ░ ▐██▓░░ ▓██▓ ░ ░▓█ ░██ ▒██   ██░▓██▒  ▐▌██▒
 ;; ▒██▒ ░  ░ ░ ██▒▓░  ▒██▒ ░ ░▓█▒░██▓░ ████▓▒░▒██░   ▓██░
-;; ▒▓▒░ ░  ░  ██▒▒▒   ▒ ░░    ▒ ░░▒░▒░ ▒░▒░▒░ ░ ▒░   ▒ ▒ 
+;; ▒▓▒░ ░  ░  ██▒▒▒   ▒ ░░    ▒ ░░▒░▒░ ▒░▒░▒░ ░ ▒░   ▒ ▒
 ;; ░▒ ░     ▓██ ░▒░     ░     ▒ ░▒░ ░  ░ ▒ ▒░ ░ ░░   ░ ▒░
-;; ░░       ▒ ▒ ░░    ░       ░  ░░ ░░ ░ ░ ▒     ░   ░ ░ 
-;;          ░ ░               ░  ░  ░    ░ ░           ░ 
-;;          ░ ░                                          
+;; ░░       ▒ ▒ ░░    ░       ░  ░░ ░░ ░ ░ ▒     ░   ░ ░
+;;          ░ ░               ░  ░  ░    ░ ░           ░
+;;          ░ ░
 ;;
 ;; Python Development - Since 2021-01-06
 ;;==============================================================
@@ -4097,7 +4185,7 @@ T - tag prefix
 ;; ;;       python-shell-prompt-detect-failure-warning nil)
 ;; ;; (add-to-list 'python-shell-completion-native-disabled-interpreters "jupyter")
 
-(setq python-indent-guess-indent-offset t)  
+(setq python-indent-guess-indent-offset t)
 (setq python-indent-guess-indent-offset-verbose nil)
 
 (setq org-babel-python-command "python3")
@@ -4152,7 +4240,7 @@ T - tag prefix
 (use-package ein
   :ensure t
   :disabled
-  :init 
+  :init
   (require 'ein)
   (setq ein:polymode t
         ein:output-area-inlined-images t)
@@ -4181,7 +4269,7 @@ T - tag prefix
 ;;     ;; (other-window 1)
 ;;     ;; (delete-window)
 ;;     ;; (other-window 1)
-    
+
 ;;     ;; option 2 > calendar view
 ;;     ;; https://stackoverflow.com/questions/27758800/why-does-emacs-leave-a-gap-when-trying-to-maximize-the-frame
 ;;     (setq frame-resize-pixelwise t)  ; real miximize window
@@ -4224,7 +4312,7 @@ T - tag prefix
 ;;   (follow-mode 1)
 ;;   (view-mode 1)
 ;;   )
-  
+
 
 ;; Combine my-follow-mode + toggle functionality 2021-05-17
 ;; http://ergoemacs.org/emacs/elisp_toggle_command.html
@@ -4235,18 +4323,18 @@ T - tag prefix
   ;; use a property “following”. Value is t or nil
   (if (get 'my-follow-mode 'following)
       (progn
-	;; (kill-current-buffer)
-	(delete-other-windows)
-	(follow-mode 0)
-	(olivetti-set-width 0.99)
-	(put 'my-follow-mode 'following nil))
+    ;; (kill-current-buffer)
+    (delete-other-windows)
+    (follow-mode 0)
+    (olivetti-set-width 0.99)
+    (put 'my-follow-mode 'following nil))
     (progn
       (split-window-right)
       (split-window-right)
       (balance-windows)
       (follow-mode 1)
       ;; (view-mode 1)
-	  (olivetti-set-width 0.90)
+      (olivetti-set-width 0.90)
       (put 'my-follow-mode 'following t))))
 
 
@@ -4254,8 +4342,8 @@ T - tag prefix
 ;;   (interactive)
 ;;   (if (get 'my-org-targeting 'targeting)
 ;;       (progn
-;; 	(widen)
-;; 	(put 'my-org-targeting 'targeting nil))
+;;  (widen)
+;;  (put 'my-org-targeting 'targeting nil))
 ;;     (progn
 ;;       (org-narrow-to-subtree)
 ;;       (put 'my-org-targeting 'targeting t))))
@@ -4265,8 +4353,8 @@ T - tag prefix
   (interactive)
   (if (get 'my-hl-line-mode-toggle 'hl-line-showing)
       (progn
-	(hl-line-mode 0)
-	(put 'my-hl-line-mode-toggle 'hl-line-showing nil))
+    (hl-line-mode 0)
+    (put 'my-hl-line-mode-toggle 'hl-line-showing nil))
     (progn
       (hl-line-mode 1)
       (face-remap-add-relative 'hl-line nil :background "light gray")
@@ -4277,11 +4365,11 @@ T - tag prefix
 (defun my-org-narrowing()
   (interactive)
   (if (get 'my-org-narrowing 'narrowing)
-	  (progn
-		(widen)
-		(recenter)
-		(put 'my-org-narrowing 'narrowing nil))
-	(progn
+      (progn
+        (widen)
+        (recenter)
+        (put 'my-org-narrowing 'narrowing nil))
+    (progn
       (org-narrow-to-subtree)
       (put 'my-org-narrowing 'narrowing t))))
 
@@ -4343,15 +4431,15 @@ T - tag prefix
 ;; (defun peng-save-ivy-views ()
 ;;   (interactive)
 ;;   (with-temp-file "~/.emacs.d/ivy-views"
-;; 	(prin1 ivy-views (current-buffer))
-;; 	(message "save ivy-views to ~/.emacs.d/ivy-views")))
+;;  (prin1 ivy-views (current-buffer))
+;;  (message "save ivy-views to ~/.emacs.d/ivy-views")))
 
 ;; (defun peng-load-ivy-views ()
 ;;   (interactive)
 ;;   (setq ivy-views
-;; 		(with-temp-buffer
-;; 		  (insert-file-contents "~/.emacs.d/ivy-views")
-;; 		  (read (current-buffer))))
+;;      (with-temp-buffer
+;;        (insert-file-contents "~/.emacs.d/ivy-views")
+;;        (read (current-buffer))))
 ;;   (message "load ivy-views"))
 
 ;; (defun peng-clear-ivy-views ()
@@ -4361,6 +4449,7 @@ T - tag prefix
 ;; ;;; add auto save
 ;; (add-hook 'kill-emacs-hook #'(lambda () (peng-save-ivy-views)))
 ;; (add-hook 'emacs-startup-hook #'(lambda () (peng-load-ivy-views)))
+;; (add-hook 'emacs-startup-hook #'(lambda () (ranger)))
 
 (emacs-init-time)
 
