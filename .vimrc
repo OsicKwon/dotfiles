@@ -61,7 +61,7 @@ set matchpairs+=<:>
 " set scrolloff=5
 " set sidescrolloff=5
 set mouse=a
-
+set cryptmethod=blowfish
 
 
 
@@ -146,6 +146,10 @@ Plug 'tyru/open-browser.vim' "{
   vmap gx <Plug>(openbrowser-open)
 "}
 " Plug 'mg979/vim-visual-multi', {'branch': 'master'}  " multi-cursor // contlict to ctrl-n key binding
+"
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+"
 call plug#end()
 
 
@@ -362,6 +366,10 @@ let g:limelight_conceal_ctermfg = 240
 " Color name (:help gui-colors) or RGB color
 let g:limelight_conceal_guifg = 'DarkGray'
 let g:limelight_conceal_guifg = '#777777'
+
+
+" https://github.com/junegunn/fzf.vim/issues/1128#issuecomment-706184812
+let g:fzf_layout = { 'down': '50%' }
 
 autocmd FileType python setlocal completeopt-=preview
 
@@ -745,6 +753,7 @@ set wildmode=list,full
 
 nnoremap <space> :
 vnoremap <space> :
+nnoremap q<space> q:
 
 " nnoremap ; :
 " nnoremap : ;
@@ -1592,6 +1601,9 @@ autocmd BufEnter *.vimrc colorscheme PaperColor | set background=dark
 
 autocmd FileType html,xml,py,lisp,js,org,dat,csv set nospell
 
+
+" ftp passive mode ???
+let g:netrw_ftp_cmd="ftp -p"
 
 "----------------
 " Korean / Hangul

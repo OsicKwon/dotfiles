@@ -74,12 +74,34 @@
 ;; --------------------
 
 
+(setq column-number-mode t)                 ;; show column number 2022-08-29
+
+
+;; == fzf 2022-08-07 ==
+;; https://github.com/bling/fzf.el
+;; alternatively, (kbd "C-c f") 'counsel-file-jump) ; include sub folders, but can't change path
+(use-package fzf
+  :bind
+    ;; Don't forget to set keybinds!
+  :config
+  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
+        fzf/executable "fzf"
+        fzf/git-grep-args "-i --line-number %s"
+        ;; command used for `fzf-grep-*` functions
+        ;; example usage for ripgrep:
+        ;; fzf/grep-command "rg --no-heading -nH"
+        fzf/grep-command "grep -nrH"
+        ;; If nil, the fzf buffer will appear at the top of the window
+        fzf/position-bottom t
+        fzf/window-height 50))
+
+
 ;; == restart-emacs 2022-08-01 ==
 ;; https://github.com/iqbalansari/restart-emacs
 (use-package restart-emacs
-             :ensure t
-             :config (setq restart-emacs-restore-frames t)
-             )
+            :ensure t
+            :config (setq restart-emacs-restore-frames t)
+            )
 
 ; (add-hook 'view-mode-hook 'centered-cursor-mode)
 ; (add-hook 'evil-normal-state-entry-hook  (lambda () (centered-cursor-mode -1)))
@@ -88,16 +110,16 @@
 ;; == Hide all Stars ==
 ;; 2022-05-30
 ;; https://www.reddit.com/r/emacs/comments/9wukv8/hide_all_stars_in_org_mode/
-(defun chunyang-org-mode-remove-stars ()
-  (font-lock-add-keywords
-   nil
-   '(("^\\*+"
-      (0
-       (prog1 nil
-         (put-text-property (match-beginning 0) (match-end 0)
-                            'invisible t)))))))
+; (defun org-hide-all-stars ()
+;   (font-lock-add-keywords
+;    nil
+;    '(("^\\*+"
+;       (0
+;        (prog1 nil
+;          (put-text-property (match-beginning 0) (match-end 0)
+;                             'invisible t)))))))
 
-(add-hook 'org-mode-hook #'chunyang-org-mode-remove-stars)
+; (add-hook 'org-mode-hook #'org-hide-all-stars)
 
 ;; == zone mode 2022-05-13 ==
 ;; https://www.emacswiki.org/emacs/ZoneMode
@@ -519,6 +541,7 @@
 
 ;; == evil-numbers :: ctrl a, ctrl x 2021-05-18 =
 ;; https://emacs.stackexchange.com/questions/41919/have-ctrl-a-increase-a-number-just-like-in-vim
+;; too dangerous because it changes the nearest number without recognition of me
 (use-package evil-numbers
   :ensure t
   :disabled
@@ -674,6 +697,7 @@
 ;; == find-file-in-project 2021-05-03 ==
 ;; search including subdirectories
 ;; git only ???????????
+;; no change path
 ;; better to use 'counsel-find-jump' 2021-05-03
 ;; https://github.com/redguardtoo/find-file-in-project
 (use-package find-file-in-project
@@ -1011,36 +1035,36 @@
 ;; (add-hook 'emacs-startup-hook #'my-default-screen)
 
 
-;; == Timers 2021-04-20 ==
-;; https://emacs.stackexchange.com/questions/7534/run-with-timer-error-invalid-or-unitialized-timer
-;; Open my calendar every 1 hour
-;; (run-with-timer 0 3600 #'my-default-screen)
-;; https://emacs.stackexchange.com/questions/22692/effect-of-multiple-idle-timers
-;; (run-with-idle-timer 2 nil #'message "Function 1")
-;; (run-with-idle-timer 300 nil #'my-default-screen)
-;; https://emacs.stackexchange.com/questions/6029/is-it-possible-to-execute-a-function-or-command-at-a-specific-time
-(when (display-graphic-p)
-  (progn
-
-    (run-at-time "09:00" nil 'cfw:open-org-calendar)
-    (run-at-time "12:00" nil 'cfw:open-org-calendar)
-    (run-at-time "15:00" nil 'cfw:open-org-calendar)
-    (run-at-time "18:00" nil 'cfw:open-org-calendar)
-
-    ;; (run-at-time "13:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
-    ;; (run-at-time "14:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
-    ;; (run-at-time "16:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
-    ;; (run-at-time "17:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
-
-))
-;; (run-with-timer 15 3 (lambda () (insert "success ")))
-;; The third arg must be a function, -> lambda
-;; https://emacs.stackexchange.com/questions/7534/run-with-timer-error-invalid-or-unitialized-timer
-(run-with-timer 1000 1000 (lambda () (message "run-with-timer: Just Do It, Keep It Simple, Get It Done ")))
-;; (run-at-time 500 500 (lambda () (message "run-at-time: Think Big, Start Small, Move Fast ")))
-(run-with-timer 500 500 (lambda () (message "run-with-timer: Think Big, Start Small, Move Fast ")))
-;; (run-with-idle-timer 30 30 (lambda () (message "run-with-idle-timer: Start at the end")))
-;; (run-with-idle-timer 300 300 (lambda () (message "run-with-idle-timer: Just Do It from Starting at The End")))
+;; ;; == Timers 2021-04-20 ==
+;; ;; https://emacs.stackexchange.com/questions/7534/run-with-timer-error-invalid-or-unitialized-timer
+;; ;; Open my calendar every 1 hour
+;; ;; (run-with-timer 0 3600 #'my-default-screen)
+;; ;; https://emacs.stackexchange.com/questions/22692/effect-of-multiple-idle-timers
+;; ;; (run-with-idle-timer 2 nil #'message "Function 1")
+;; ;; (run-with-idle-timer 300 nil #'my-default-screen)
+;; ;; https://emacs.stackexchange.com/questions/6029/is-it-possible-to-execute-a-function-or-command-at-a-specific-time
+;; (when (display-graphic-p)
+;;   (progn
+;;
+;;     (run-at-time "09:00" nil 'cfw:open-org-calendar)
+;;     (run-at-time "12:00" nil 'cfw:open-org-calendar)
+;;     (run-at-time "15:00" nil 'cfw:open-org-calendar)
+;;     (run-at-time "18:00" nil 'cfw:open-org-calendar)
+;;
+;;     ;; (run-at-time "13:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
+;;     ;; (run-at-time "14:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
+;;     ;; (run-at-time "16:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
+;;     ;; (run-at-time "17:00" nil '(lambda() (interactive)(find-file "~/Documents/nvALT/org_capture_note.txt")))
+;;
+;; ))
+;; ;; (run-with-timer 15 3 (lambda () (insert "success ")))
+;; ;; The third arg must be a function, -> lambda
+;; ;; https://emacs.stackexchange.com/questions/7534/run-with-timer-error-invalid-or-unitialized-timer
+;; (run-with-timer 1000 1000 (lambda () (message "run-with-timer: Just Do It, Keep It Simple, Get It Done ")))
+;; ;; (run-at-time 500 500 (lambda () (message "run-at-time: Think Big, Start Small, Move Fast ")))
+;; (run-with-timer 500 500 (lambda () (message "run-with-timer: Think Big, Start Small, Move Fast ")))
+;; ;; (run-with-idle-timer 30 30 (lambda () (message "run-with-idle-timer: Start at the end")))
+;; ;; (run-with-idle-timer 300 300 (lambda () (message "run-with-idle-timer: Just Do It from Starting at The End")))
 
 
 ;; == Link Abbreviation 2021-04-19 ==
@@ -1217,6 +1241,7 @@
 ;; == org-bullets ==
 (use-package org-bullets
   :ensure t
+  :disabled
   :after org
   :init
   (require 'org-bullets)
@@ -1289,7 +1314,12 @@
   (require 'imenu-list)  ; pre-loading required like this for org files ??
   ;; (imenu-list-minor-mode)  ; for org file (pre-loading)
   ;; :bind ("C-." . imenu-list-minor-mode)
-  :bind ("C-M-." . imenu-list)  ; toggle not available
+  :bind (:map imenu-list-major-mode-map
+    ("C-M-." . imenu-list)          ; toggle not available
+    ("j" . next-line)
+    ("k" . previous-line)
+    ("o" . imenu-list-ret-dwim)     ; enter
+    )
   :config
   ;; https://github.com/bmag/imenu-list
   (setq imenu-list-focus-after-activation t)
@@ -1792,7 +1822,7 @@
     ("B" . counsel-switch-buffer)
 
     ;; ("p" . previous-line)
-    ("p" . toggle-window-dedicated)
+    ;; ("p" . toggle-window-dedicated)
     ;; ("D" . toggle-window-dedicated)
     ("D" . define-word-at-point)
     ("P" . powerthesaurus-lookup-word-at-point)
@@ -2088,6 +2118,7 @@
   (setq-default buffer-save-without-query t)
   ;; https://emacs.stackexchange.com/questions/28/safe-way-to-enable-local-variables
   (setq enable-local-variables :all)
+  (save-place-mode 1)       ; save current position
   (save-buffer t)
   (org-tree-to-indirect-buffer)
   (revert-buffer :ignore-auto :noconfirm)
@@ -2102,6 +2133,7 @@
   (other-window 1)
   (org-cycle)
   (other-window 1)
+  (save-place-mode -1)      ; turn-off
   )
 
 
@@ -2361,7 +2393,11 @@
  '(package-selected-packages
    '(evil-leader workgroups2 workgroups cm-mode all-the-icons neotree ranger org-crypt key-chord dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
-   '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
+   '(
+     "https://ipn.li/kernelpanic/feed"
+     "http://sachachua.com/blog/tag/emacs-chat/podcast"
+     "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"
+     ))
  ;; '(show-paren-mode t)
  '(wg-special-buffer-serdes-functions '(wg-serialize-comint-buffer))
  '(whitespace-line-column 120)
@@ -2666,11 +2702,12 @@
 ;; show relative number line in programming modes
 ;; (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative)))
 ;; relative number for only Evil Normal Entry
-(add-hook 'evil-normal-state-entry-hook (lambda () (setq display-line-numbers 'relative)))
-(add-hook 'evil-visual-state-entry-hook (lambda () (setq display-line-numbers 'relative)))
-(add-hook 'evil-insert-state-entry-hook (lambda () (setq display-line-numbers 'absolute)))
-(add-hook 'evil-emacs-state-entry-hook (lambda () (setq display-line-numbers nil)))
-(add-hook 'view-mode-hook (lambda () (setq display-line-numbers nil)))
+;; 'visual means -> relative line number in visual outline in org-mode
+; (add-hook 'evil-normal-state-entry-hook (lambda () (setq display-line-numbers 'visual)))
+; (add-hook 'evil-visual-state-entry-hook (lambda () (setq display-line-numbers 'visual)))
+; (add-hook 'evil-insert-state-entry-hook (lambda () (setq display-line-numbers 'absolute)))
+; (add-hook 'evil-emacs-state-entry-hook (lambda () (setq display-line-numbers nil)))
+; (add-hook 'view-mode-hook (lambda () (setq display-line-numbers nil)))
 
 
 ;; Focus on `Buffer List` window when it is opened - 2021-02-21
@@ -3174,7 +3211,7 @@
 ;; https://www.reddit.com/r/spacemacs/comments/6p3w0l/making_q_not_kill_emacs/
 ;; must be located after loading evil-mode
 ;; :q should kill the current buffer rather than quitting emacs entirely
-;; (evil-ex-define-cmd "q" 'kill-this-buffer)
+(evil-ex-define-cmd "q" 'kill-this-buffer)
 ;; Need to type out :quit to close emacs
 ;; (evil-ex-define-cmd "quit" 'evil-quit)
 
@@ -3217,26 +3254,33 @@
 
 ;; == evil-leader 2021-04-28 ==
 (use-package evil-leader
-  :ensure t
-  :init
-  (require 'evil-leader)
-  ;; (evil-leader/set-leader "<SPC>")
-  (evil-leader/set-key
-    ;; "p" 'powerthesaurus-lookup-word-at-point
-    ;; "d" 'define-word-at-point
-    ;; "t" 'google-translate-at-point
-    ;; "a" 'counsel-ag-thing-at-point
-    ;; "r" 'writeroom-mode
-    "t" 'imenu-list
-    "w" 'avy-goto-word-0
-    "f" 'avy-goto-char
-    "n" 'neotree-show
-    "F" 'my-follow-mode
-    ;; "i" 'org-narrow-to-subtree
-    ;; "o" 'widen
-   )
-  :config
-  (global-evil-leader-mode)
+ :ensure t
+ :init
+ (require 'evil-leader)
+ (evil-leader/set-key
+   ;; "p" 'powerthesaurus-lookup-word-at-point
+   ;; "d" 'define-word-at-point
+   ;; "t" 'google-translate-at-point
+   ;; "a" 'counsel-ag-thing-at-point
+   ;; "r" 'writeroom-mode
+   ;; "b" 'counsel-recentf
+   "b" 'ivy-switch-buffer
+   "c" 'flyspell-correct-word-before-point
+   ;; "i" 'org-narrow-to-subtree
+   ;; "n" 'neotree-show
+   ;; "n" 'ranger
+   "n" 'neotree
+   ;; "o" 'widen
+   "r" 'revert-buffer
+   "t" 'imenu-list-minor-mode
+   "w" 'avy-goto-char
+   ;; "w" 'avy-goto-word-0
+   "x" 'kill-current-buffer
+   ;; -- Uppercase --
+   "F" 'my-follow-mode
+  )
+ :config
+ (global-evil-leader-mode)
 )
 
 
