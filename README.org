@@ -1,8 +1,17 @@
-# dotfiles
+#+title: Dotfiles
+#+date: 2020
 
-## Mac
+* .vimrc
 
-## Ubuntu
-i3
+test
 
-## Windows
+
+
+
+
+
+
+* .emacs
+
+
+test
