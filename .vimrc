@@ -115,13 +115,23 @@ set ignorecase " Search 'This' > this, This, THIS -- selected all
 set smartcase  " Search 'This' > this, This, THIS -- only 'This' selected
 
 
-
 "-------
 " NETRW
 "-------
-let g:netrw_altv=1             " open split to the right
+let g:netrw_altv=1               " open split to the right
+
+" Verical Right Preview
+" https://groups.google.com/g/vim_use/c/sL_qSu_Tysk
+let g:netrw_alto=0
+let g:netrw_preview=1            " vertical
+
 " let g:netrw_browse_split=4     " open in prior window
 let g:netrw_liststyle=3        " treeview
+" let g:netrw_liststyle=0
+" Change the size of the Netrw window when it creates a split.
+" let g:netrw_winsize = 70
+" ftp passive mode
+let g:netrw_ftp_cmd="ftp -p"
 
 
 filetype off
@@ -134,10 +144,10 @@ call plug#begin('~/.vim/plugged')
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'chrisbra/csv.vim'
-" Plug 'jceb/vim-orgmode'
+Plug 'jceb/vim-orgmode'
 " Plug 'davidhalter/jedi-vim'
 " Plug 'sheerun/vim-polyglot'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}  " Dot Net core 2.1 required
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " https://github.com/neovim/neovim/issues/4612#issuecomment-354718725
 Plug 'tyru/open-browser.vim' "{
   " Disable netrw gx mapping.
@@ -149,6 +159,7 @@ Plug 'tyru/open-browser.vim' "{
 "
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'romainl/vim-cool' " no need :noh
 "
 call plug#end()
 
@@ -206,6 +217,7 @@ Plugin 'prettier/vim-prettier'
 " Plugin 'valloric/youcompleteme'        " gave up due to too-hard to insall 2020-11-20
 " Plugin 'sirver/ultisnips'
 " Plugin 'mattn/emmet-vim'               " conflicted with <C-y>
+Plugin 'alvan/vim-closetag'
 " Plugin 'shougo/neocomplete.vim'        " lua required
 " Plugin 'neoclide/coc.nvim'               " intellicense - popup suggestion 2020-12-21
 
@@ -259,7 +271,7 @@ Plugin 'beloglazov/vim-online-thesaurus' " 2021-02-26
 
 "------Functionality--------
 " Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'          " not a vimway instead use find command
+" Plugin 'scrooloose/nerdtree'          " not a vimway instead use find command
 Plugin 'mbbill/undotree'
 " Plugin 'sjl/gundo.vim'                  " visualize your Vim undo tree
 " Plugin 'wincent/command-t'            " Ruby required
@@ -284,7 +296,7 @@ Plugin 'AutoComplPop'
 
 "------Other_plugins--------
 Plugin 'itchyny/calendar.vim'
-Plugin 'jceb/vim-orgmode'
+" Plugin 'jceb/vim-orgmode'
 Plugin 'tpope/vim-speeddating'
 " Plugin 'takac/vim-hardtime'
 " Plugin 'psliwka/vim-smoothie'
@@ -300,13 +312,15 @@ syntax on
 " == ale ==
 " https://www.youtube.com/watch?v=4FKPySR6HLk
 let g:ale_linters = {
-            \ 'python': ['flake8', 'pydocstyle', 'mypy'],
+            \ 'python': ['flake8', 'pydocstyle', 'bandit', 'mypy'],
             \ 'javascript': ['eslint'],
+            \ 'php': ['php', 'phpcs'],
             \ }
 let g:ale_fixers = {
             \ '*': ['remove_trailing_lines', 'trim_whitespace'],
             \ 'python': ['black', 'isort'],
             \ 'javascript': ['prettier', 'eslint'],
+            \ 'php': ['phpcbf'],
             \ }
 " \ 'python': ['black', 'isort'], << isort not working for now 2021-07-26
 let g:ale_fix_on_save = 1
@@ -370,6 +384,15 @@ let g:limelight_conceal_guifg = '#777777'
 
 " https://github.com/junegunn/fzf.vim/issues/1128#issuecomment-706184812
 let g:fzf_layout = { 'down': '50%' }
+
+let $FZF_DEFAULT_COMMAND = 'rg --hidden --ignore .git -l -g ""'
+
+
+
+" ignore case
+let g:EasyMotion_smartcase = 1
+
+
 
 autocmd FileType python setlocal completeopt-=preview
 
@@ -751,6 +774,9 @@ set wildmode=list,full
 " KEY-REMAP
 "============
 
+" Fold Toggle
+nnoremap <tab> za
+
 nnoremap <space> :
 vnoremap <space> :
 nnoremap q<space> q:
@@ -1061,7 +1087,7 @@ function! FollowMode()
     norm zz
 endfunction
 command! FollowMode call FollowMode()
-nnoremap <silent> <leader>f : FollowMode<cr>
+nnoremap <silent> <leader>F : FollowMode<cr>
 
 " -------------------
 " all the same belows
@@ -1192,8 +1218,13 @@ function! FocusMode()
     elseif exists('g:OnEditing')
         unlet g:OnEditing
         call UnFocusMode()
+    elseif exists('g:OnDarkFocusing')
+        unlet g:OnDarkFocusing
+        call UnFocusMode()
+    else
+        call UnFocusMode()
     endif
-    Goyo 100
+    Goyo 88
     Limelight
     autocmd InsertLeave * :set norelativenumber | hi CursorLine gui=NONE
     set scrolloff=999  " centering
@@ -1213,22 +1244,27 @@ function! FocusMode()
     endif
 endfunction
 command! FocusMode call FocusMode()
-" nnoremap <silent> <leader>S :FocusMode<cr>
+" nnoremap <silent> <leader>f :FocusMode<cr>
 
 
 function! DarkFocusMode()
     " let g:line_size_before = &lines
     " let g:column_size_before = &columns
-    if exists('g:OnFocusing')
-        unlet g:OnFocusing
+    if exists('g:OnDarkFocusing')
+        unlet g:OnDarkFocusing
         call UnFocusMode()
         echo "debug logging: UnFocusMode executed"
         return 0
     elseif exists('g:OnEditing')
         unlet g:OnEditing
         call UnFocusMode()
+    elseif exists('g:OnFocusing')
+        unlet g:OnFocusing
+        call UnFocusMode()
+    else
+        call UnFocusMode()
     endif
-    Goyo 100
+    Goyo 88
     autocmd InsertLeave * :set norelativenumber
     set scrolloff=999  " centering
     " set sidescrolloff=30
@@ -1238,7 +1274,7 @@ function! DarkFocusMode()
     call SuperEasyMode()
     Limelight
     " set variable
-    let g:OnFocusing=1
+    let g:OnDarkFocusing=1
     if has('gui_running')
         " set guifont=Menlo-Regular:h20
         " set lines=99 columns=999   " to maximize window size"
@@ -1265,6 +1301,11 @@ function! EditMode()"
     elseif exists('g:OnFocusing')
         unlet g:OnFocusing
         call UnFocusMode()
+    elseif exists('g:OnDarkFocusing')
+        unlet g:OnDarkFocusing
+        call UnFocusMode()
+    else
+        call UnFocusMode()
     endif
     Goyo 100%x100%
     Limelight!
@@ -1283,7 +1324,7 @@ function! EditMode()"
     elseif exists('$TMUX')
         silent !tmux set status off
     endif
-    " normal zz
+    normal zz
     setlocal foldlevel=99
 endfunction
 command! EditMode call EditMode()"
@@ -1295,6 +1336,7 @@ function! UnFocusMode()
     Goyo!
     Limelight!
     silent! unlet g:OnFocusing
+    silent! unlet g:OnDarkFocusing
     silent! unlet g:OnEditing
     autocmd InsertLeave * :set relativenumber
     set scrolloff=0
@@ -1441,7 +1483,8 @@ endif
 "------------
 nnoremap <silent> <leader>p  :PlantumlOpen<cr>
 nnoremap <silent> <leader>r  :Ranger<cr>
-nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
+" nnoremap <silent> <leader>n  :NERDTreeToggle<cr>
+nnoremap <silent> <leader>n  :Exp<cr>
 
 " :TagbarOpen f -> jump opening / j -> jump if opened already
 " https://github.com/preservim/tagbar/blob/master/doc/tagbar.txt
@@ -1472,7 +1515,7 @@ vnoremap <silent> <leader>* s**<C-r>"**<esc>
 " EasyMotion
 "------------
 " <Leader>f{char} to move to {char}
-" map  <Leader>f <Plug>(easymotion-bd-f)
+map  <Leader>f <Plug>(easymotion-bd-f)
 " nmap <Leader>f <Plug>(easymotion-overwin-f)
 " s{char}{char} to move to {char}{char}
 " nmap <leader>s <Plug>(easymotion-overwin-f2)
@@ -1484,6 +1527,9 @@ map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 " Easy to Use (Vimium?)
 " map  f <Plug>(easymotion-bd-f)
+" nmap t <Plug>(easymotion-bd-w)
+" nmap f <Plug>(easymotion-bd-w)
+" nmap f <Plug>(easymotion-bd-f)
 " nmap f <Plug>(easymotion-overwin-f)
 
 "------------
@@ -1602,9 +1648,6 @@ autocmd BufEnter *.vimrc colorscheme PaperColor | set background=dark
 autocmd FileType html,xml,py,lisp,js,org,dat,csv set nospell
 
 
-" ftp passive mode ???
-let g:netrw_ftp_cmd="ftp -p"
-
 "----------------
 " Korean / Hangul
 "----------------
@@ -1627,3 +1670,104 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 "  4 -> solid underscore
 "  5 -> blinking vertical bar
 "  6 -> solid vertical bar
+"
+"
+"
+"
+" https://vim.fandom.com/wiki/Word_frequency_statistics_for_a_file
+" Sorts numbers in ascending order.
+" Examples:
+" [2, 3, 1, 11, 2] --> [1, 2, 2, 3, 11]
+" ['2', '1', '10','-1'] --> [-1, 1, 2, 10]
+function! Sorted(list)
+  " Make sure the list consists of numbers (and not strings)
+  " This also ensures that the original list is not modified
+  let nrs = ToNrs(a:list)
+  let sortedList = sort(nrs, "NaturalOrder")
+  echo sortedList
+  return sortedList
+endfunction
+
+" Comparator function for natural ordering of numbers
+function! NaturalOrder(firstNr, secondNr)
+  if a:firstNr < a:secondNr
+    return -1
+  elseif a:firstNr > a:secondNr
+    return 1
+  else
+    return 0
+  endif
+endfunction
+
+" Coerces every element of a list to a number. Returns a new list without
+" modifying the original list.
+function! ToNrs(list)
+  let nrs = []
+  for elem in a:list
+    let nr = 0 + elem
+    call add(nrs, nr)
+  endfor
+  return nrs
+endfunction
+
+function! WordFrequency() range
+  " Words are separated by whitespace or punctuation characters
+  let wordSeparators = '[[:blank:][:punct:]]\+'
+  let allWords = split(join(getline(a:firstline, a:lastline)), wordSeparators)
+  let wordToCount = {}
+  for word in allWords
+    let wordToCount[word] = get(wordToCount, word, 0) + 1
+  endfor
+
+  let countToWords = {}
+  for [word,cnt] in items(wordToCount)
+    let words = get(countToWords,cnt,"")
+    " Append this word to the other words that occur as many times in the text
+    let countToWords[cnt] = words . " " . word
+  endfor
+
+  " Create a new buffer to show the results in
+  new
+  setlocal buftype=nofile bufhidden=hide noswapfile tabstop=20
+
+  " List of word counts in ascending order
+  let sortedWordCounts = Sorted(keys(countToWords))
+
+  call append("$", "count \t words")
+  call append("$", "--------------------------")
+  " Show the most frequent words first -> Descending order
+  for cnt in reverse(sortedWordCounts)
+    let words = countToWords[cnt]
+    call append("$", cnt . "\t" . words)
+  endfor
+endfunction
+
+command! -range=% WordFrequency <line1>,<line2>call WordFrequency()
+
+
+" == COC settings ==
+" Avoid conflict with Vim-Airline
+let g:airline#extensions#coc#enabled = 0
+" COC Enter completion
+" inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
+" COC Tab completion
+" use <tab> to trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+
+
+" Use <c-space> to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif

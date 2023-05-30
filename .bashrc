@@ -26,3 +26,7 @@ export PS1;
 alias emacs="/opt/local/bin/emacs"
 clear
 # neofetch  # display system logo with information
+
+alias exa="exa -lha"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

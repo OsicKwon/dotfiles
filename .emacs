@@ -73,6 +73,54 @@
 ;; == RECENT SETTING ==
 ;; --------------------
 
+;; https://emacs.stackexchange.com/questions/30837/org-tables-wrap-all-fields-in-column-to-a-given-size
+(defun org-table-wrap-to-width (width)
+  "Wrap current column to WIDTH."
+  (interactive (list (read-number "Enter column width: ")))
+  (org-table-check-inside-data-field)
+  (org-table-align)
+
+  (let (cline (ccol (org-table-current-column)) new-row-count (more t))
+    (org-table-goto-line 1)
+    (org-table-goto-column ccol)
+
+    (while more
+      (setq cline (org-table-current-line))
+
+      ;; Cut current field
+      (org-table-copy-region (point) (point) 'cut)
+
+      ;; Justify for width
+      (setq org-table-clip
+            (mapcar 'list (org-wrap (caar org-table-clip) width nil)))
+
+      ;; Add new lines and fill
+      (setq new-row-count (1- (length org-table-clip)))
+      (if (> new-row-count 0)
+          (org-table-insert-n-row-below new-row-count))
+      (org-table-goto-line cline)
+      (org-table-goto-column ccol)
+      (org-table-paste-rectangle)
+      (org-table-goto-line (+ cline new-row-count))
+
+      ;; Move to next line
+      (setq more (org-table-goto-line (+ cline new-row-count 1)))
+      (org-table-goto-column ccol))
+
+    (org-table-goto-line 1)
+    (org-table-goto-column ccol)))
+
+
+
+;; https://github.com/harrybournis/org-fancy-priorities
+(use-package org-fancy-priorities
+  :ensure t
+  :disabled
+  :hook
+  (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list '("[#CRITICAL]" "[#URGENT]" "[#IMPORTANT]" "[#NORMAL]")))
+
 
 (setq column-number-mode t)                 ;; show column number 2022-08-29
 
@@ -528,10 +576,10 @@
   (require 'hl-todo)
   (setq hl-todo-keyword-faces
         '(
-          ("HOLD"   . "dark gray")
-          ("WAIT"   . "dark gray")
-          ("SCHED"   . "dark gray")
-          ("DOING"   . "royal blue")
+          ("HOLD" . "dark gray")
+          ("WAIT" . "dark gray")
+          ("SCHD" . "dark gray")
+          ("DOIN" . "royal blue")
           ("EXPIRED"   . "orange")
         ))
   :config
@@ -1112,14 +1160,14 @@
 ;; in evil-mode, it seems to be (setq org-cycle-separator-lines 0), which is no blank line
 ;; https://yiufung.net/post/org-mode-hidden-gems-pt1/
 ;; --------------------------------------------------------------------------
-;; (setq org-cycle-separator-lines 2)   ;; default: 2 lines -> 1 blank between heading
+(setq org-cycle-separator-lines 2)   ;; default: 2 lines -> 1 blank between heading
 ;; (setq org-cycle-separator-lines 0)   ;; not allow blank line like 'evil-toggle-fold'
-(setq org-cycle-separator-lines -1)  ;; 1 line = 1 blank
+; (setq org-cycle-separator-lines -1)  ;; 1 line = 1 blank
 
 
 ;; == top margin 2021-04-19 ==
 ;; https://stackoverflow.com/questions/12632399/how-to-get-top-and-bottom-margins-in-emacs
-;; (set-frame-parameter nil 'internal-border-width 10)
+(set-frame-parameter nil 'internal-border-width 10)
 
 
 ;; == encrypt 2021-04-19 ==
@@ -1246,7 +1294,9 @@
   :init
   (require 'org-bullets)
   ; (setq org-bullets-bullet-list '("■" "⚬" "▪" "•" "▭" "◦" "·" "□" "○" "■" "●" "◆" "◔" "▣" "❑" "⚀" "𝇇" "✗" "✓" "☺"))
-  (setq org-bullets-bullet-list '("◉" "○" "✸" "✿" "⚬" "•" "◦" "·" "■" "▪" "▭" "□" "■" "◆" "◔" "▣" "❑" "⚀" "𝇇" "✗" "✓" "☺"))
+  ; (setq org-bullets-bullet-list '("◉" "○" "✸" "✿" "⚬" "•" "◦" "·" "■" "▪" "▭" "□" "■" "◆" "◔" "▣" "❑" "⚀" "𝇇" "✗" "✓" "☺"))
+  (setq org-bullets-bullet-list '("○" "□"))
+  ; (setq org-bullets-bullet-list '("○"))
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   )
@@ -1593,8 +1643,8 @@
     ("p" . outline-up-heading)
     ;; ("f" . right-word)
     ;; ("b" . left-word)
-    ("f" . evil-forward-WORD-begin)
-    ("b" . evil-backward-WORD-begin)
+    ;; ("f" . evil-forward-WORD-begin)
+    ;; ("b" . evil-backward-WORD-begin)
     ;; ("f" . evil-scroll-page-down)
     ;; ("b" . evil-scroll-page-up)
     ;; window
@@ -1629,11 +1679,13 @@
     ;; ("`" . ace-link)
     ;; ("F" . ace-link)
     ;; ("f" . ace-link)
+    ("f" . avy-goto-char)
     ;; ("w" . my-minimap-mode)
     ;; ("w" . sublimity-mode)
     ;; ("w" . writeroom-mode)
     ;; ("w" . avy-goto-word-1)
-    ("w" . avy-goto-char)
+    ("w" . avy-goto-word-0)
+    ;; ("w" . avy-goto-char)
     ;; ("w" . avy-goto-char-2)
     ;; ("w" . ace-window)
     ;; ("w" . evil-scroll-line-up)
@@ -1723,8 +1775,8 @@
     ;; ("}" . org-forward-element)
     ;; ("}" . olivetti-expand)
     ;; ("{" . olivetti-shrink)
-    ("]" . olivetti-expand)
-    ("[" . olivetti-shrink)
+    ("[" . olivetti-expand)
+    ("]" . olivetti-shrink)
     ;; ("\\" . counsel-buffer-or-recentf)
     ;; ("\\" . imenu-list)
     ;; ("\\" . my-view-general-prefix)
@@ -1852,6 +1904,7 @@
     ;; ("RET" . evil-exit-emacs-state)
     ;; ("SPC" . evil-exit-emacs-state)
     ("F" . my-follow-mode)
+    ("L" . my-clone-indirect-buffer)
     ;;
     ;; ("q" . kill-current-buffer)    ; same as (s-k)
     ; ("q" . View-exit)
@@ -2365,12 +2418,14 @@
  '(evil-undo-system 'undo-tree)
  '(fringe-mode 0 nil (fringe))
  '(google-translate-backend-method 'curl t nil "Customized with use-package google-translate")
+ '(imenu-list-focus-after-activation t)
+ '(imenu-list-size 0.2)
  '(latex-run-command "pdflatex")
  '(minimap-automatically-delete-window 'visible)
  '(minimap-mode nil)
  '(org-adapt-indentation nil)
  '(org-agenda-files
-   '("~/Documents/nvALT/projx-Jiwoo-SAT.txt" "~/Documents/nvALT/notex-Ontario_Benefits_Stopped_20201215.txt" "~/Documents/nvALT/projx-Jiwoo-Citizenship.txt" "~/Documents/nvALT/org_capture_note.txt" "~/Documents/nvALT/projx-JobBoard2021.txt" "~/Documents/nvALT/mainx-Jiwoo.txt" "~/Documents/nvALT/INBOX_TODO_2021.txt" "~/Documents/nvALT/projx-TorontoLife.txt" "~/Documents/nvALT/projx-eix.txt"))
+   '("~/Documents/nvALT/2023.txt" "~/Documents/nvALT/org_capture_note.txt" "~/Documents/nvALT/mainx-Jiwoo.txt"))
  '(org-agenda-start-on-weekday 0)
  '(org-agenda-time-grid
    '((daily today require-timed)
@@ -2393,12 +2448,7 @@
  '(package-selected-packages
    '(evil-leader workgroups2 workgroups cm-mode all-the-icons neotree ranger org-crypt key-chord dimmer pdfgrep writeroom-mode sr-speedbar dired-narrow google-translate pomidor elfeed highlight-symbol korean-holidays minimap simplenote2 podcaster org-notifications org-wild-notifier ivy-posframe deft ivy-rich shell-pop writegood-mode sublimity php-mode keycast org-alert dashboard flycheck counsel ox-pandoc calfw linguistic ace-link swiper evil-commentary imenu-list org-download org-superstar org-tree-slide org-noter org-bullets define-word powerthesaurus indent-guide ace-window helpful org-roam htmlize ox-reveal transpose-frame centered-window undo-tree olivetti ivy markdown-preview-mode rainbow-delimiters pdf-tools helm-ack helm-ag ack ag helm-projectile projectile evil-surround auctex flymake jedi auto-complete pygen python-mode ein company-jedi ob-ipython company evil ace-jump-mode elpy use-package csv-mode pandoc smex ido-vertical-mode buffer-move markdown-mode multiple-cursors git-gutter helm magit exec-path-from-shell))
  '(podcaster-feeds-urls
-   '(
-     "https://ipn.li/kernelpanic/feed"
-     "http://sachachua.com/blog/tag/emacs-chat/podcast"
-     "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"
-     ))
- ;; '(show-paren-mode t)
+   '("https://ipn.li/kernelpanic/feed" "http://sachachua.com/blog/tag/emacs-chat/podcast" "http://feeds.harvardbusiness.org/harvardbusiness/ideacast"))
  '(wg-special-buffer-serdes-functions '(wg-serialize-comint-buffer))
  '(whitespace-line-column 120)
  '(writeroom-restore-window-config t))
@@ -2530,6 +2580,7 @@
 ;; -----------------------
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (load "mwe-log-commands")
+(load "ob-html")
 ;; (load "sticky-windows.el")  ; more test required 2021-03-27
 
 
@@ -2699,10 +2750,10 @@
 ;;   '(define-key flyspell-mode-map (kbd "C-.") nil))
 
 
-;; show relative number line in programming modes
-;; (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative)))
-;; relative number for only Evil Normal Entry
-;; 'visual means -> relative line number in visual outline in org-mode
+; ; show relative number line in programming modes
+; ; (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative)))
+; ; relative number for only Evil Normal Entry
+; ; 'visual means -> relative line number in visual outline in org-mode
 ; (add-hook 'evil-normal-state-entry-hook (lambda () (setq display-line-numbers 'visual)))
 ; (add-hook 'evil-visual-state-entry-hook (lambda () (setq display-line-numbers 'visual)))
 ; (add-hook 'evil-insert-state-entry-hook (lambda () (setq display-line-numbers 'absolute)))
@@ -2773,6 +2824,7 @@
  '(default ((t (:inherit nil :stipple nil :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Menlo"))))
  '(annotate-highlight ((t (:background "coral" :underline "coral"))))
  '(annotate-highlight-secondary ((t (:background "khaki" :underline "khaki"))))
+ '(avy-lead-face ((t (:background "Black" :foreground "white"))))
  '(aw-leading-char-face ((t (:background "black" :foreground "White" :box (:line-width 3 :color "Black") :slant italic :weight bold :height 1.4))))
  '(evil-goggles-change-face ((t (:inherit diff-removed))))
  '(evil-goggles-delete-face ((t (:inherit diff-removed))))
@@ -2781,11 +2833,15 @@
  '(evil-goggles-undo-redo-change-face ((t (:inherit diff-changed))))
  '(evil-goggles-undo-redo-remove-face ((t (:inherit diff-removed))))
  '(evil-goggles-yank-face ((t (:inherit diff-changed))))
+ '(imenu-list-entry-face-0 ((t (:inherit imenu-list-entry-face :foreground "Blue" :weight bold))))
  '(ivy-minibuffer-match-face-2 ((t (:background "#e99ce8" :box (:line-width -1 :color "#e99ce8") :weight bold))))
  '(ivy-minibuffer-match-face-3 ((t (:background "#bbbbff" :box (:line-width -1 :color "#bbbbff") :weight bold))))
  '(ivy-minibuffer-match-face-4 ((t (:background "#ffbbff" :box (:line-width -1 :color "#ffbbff") :weight bold))))
  '(mode-line ((((type x w32 ns)) (:overline t)) (((type tty)) (:inverse-video t))))
  '(mode-line-inactive ((t (:inherit (shadow mode-line)))))
+ '(org-block ((t (:background "#f1f6f9" :extend t))))
+ '(org-block-begin-line ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#f0f0f0" :extend t))))
+ '(org-block-end-line ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#f0f0f0" :extend t))))
  '(org-document-title ((t (:foreground "midnight blue" :weight bold :height 1.4))))
  '(org-drawer ((t (:foreground "gray" :underline t :extend t))))
  '(org-ellipsis ((t nil)))
@@ -2795,6 +2851,7 @@
  '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
  '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
+ '(org-level-7 ((t (:inherit outline-7 :box (:line-width 2 :color "grey75" :style released-button) :height 1.0))))
  '(pulse-highlight-start-face ((t (:background "cyan")))))
 
 ;; white mode-line came from Binder/Olivetti reddit like below:
@@ -2891,6 +2948,7 @@
     ;; https://emacs.stackexchange.com/questions/4011/i-want-company-mode-to-show-completions-list-after-the-second-character
     (setq company-minimum-prefix-length 2)
     (setq company-idle-delay 3)
+    (setq company-idle-delay 15)
     ;; disable icons
     ;; https://github.com/company-mode/company-mode/issues/1102
     (setq company-format-margin-function nil)
@@ -3167,6 +3225,7 @@
 ;; (define-key evil-normal-state-map (kbd "q")     'evil-emacs-state)
 ;; (define-key evil-normal-state-map (kbd "z")     'view-mode)
 (define-key evil-normal-state-map (kbd "m")     'view-mode)
+; (define-key evil-normal-state-map (kbd "f") 'avy-goto-char)
 
 ;; Noraml mode
 (define-key evil-normal-state-map (kbd "<escape>") nil)
@@ -3273,7 +3332,9 @@
    ;; "o" 'widen
    "r" 'revert-buffer
    "t" 'imenu-list-minor-mode
-   "w" 'avy-goto-char
+   ;; "w" 'avy-goto-char
+   "f" 'avy-goto-char'
+   "w" 'avy-goto-word-0
    ;; "w" 'avy-goto-word-0
    "x" 'kill-current-buffer
    ;; -- Uppercase --
@@ -4065,8 +4126,7 @@ T - tag prefix
 
 ;; fuzzy match -> search without space 2021-11-05
 ;; https://oremacs.com/2016/01/06/ivy-flx/
-;; (setq ivy-re-builders-alist
-;;       '((t . ivy--regex-fuzzy))))
+(setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
 
 ;; ignore gitignore file in counsel-ag 2021-03-28
 ;; https://stackoverflow.com/questions/48048529/silver-searcher-how-to-unignore-files-in-the-gitignore
@@ -4361,25 +4421,48 @@ T - tag prefix
 ;; Combine my-follow-mode + toggle functionality 2021-05-17
 ;; http://ergoemacs.org/emacs/elisp_toggle_command.html
 ;; "Toggle URL `http://ergoemacs.org/emacs/elisp_toggle_command.html'Version 2015-12-17"
+; (defun my-follow-mode ()
+;     "Using follow-mode with 3 divided windows"
+;     (interactive)
+;     ;; use a property “following”. Value is t or nil
+;     (if (get 'my-follow-mode 'following)
+;         (progn
+;             ;; (kill-current-buffer)
+;             (delete-other-windows)
+;             (follow-mode 0)
+;             (olivetti-set-width 0.99)
+;             (put 'my-follow-mode 'following nil))
+;     (progn
+;         (split-window-right)
+;         (split-window-right)
+;         (balance-windows)
+;         (follow-mode 1)
+;         ;; (view-mode 1)
+;         (olivetti-set-width 0.90)
+;         (put 'my-follow-mode 'following t))))
+
+
+;; Powered by ChaptGPT 2023-03-28
+;; with some customizing by me
 (defun my-follow-mode ()
-  "Using follow-mode with 3 divided windows"
-  (interactive)
-  ;; use a property “following”. Value is t or nil
-  (if (get 'my-follow-mode 'following)
-      (progn
-    ;; (kill-current-buffer)
-    (delete-other-windows)
-    (follow-mode 0)
-    (olivetti-set-width 0.99)
-    (put 'my-follow-mode 'following nil))
-    (progn
-      (split-window-right)
-      (split-window-right)
-      (balance-windows)
-      (follow-mode 1)
-      ;; (view-mode 1)
-      (olivetti-set-width 0.90)
-      (put 'my-follow-mode 'following t))))
+    "Using follow-mode with 3 divided windows"
+    (interactive)
+    (let ((following (get 'my-follow-mode 'following)))
+        (if following
+            (progn
+                (delete-other-windows)
+                (follow-mode 0)
+                (olivetti-set-width 0.99)
+                (put 'my-follow-mode 'following nil))
+        (progn
+            (split-window-right)
+            (split-window-right)
+            (balance-windows)
+            (follow-mode 1)
+            ;; (view-mode 1)
+            (olivetti-set-width 0.90)
+            (put 'my-follow-mode 'following t)))))
+
 
 
 ;; (defun my-org-targeting()
