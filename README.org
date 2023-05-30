@@ -2,8 +2,10 @@
 #+date: 2020
 
 * .vimrc
-
-test
+this is a test file
+- test
+- test2
+- test3
 
 
 

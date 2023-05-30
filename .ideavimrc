@@ -42,4 +42,6 @@ nnoremap <leader>n :NERDTree
 nnoremap g; :action JumpToLastChange<Enter>
 nnoremap g, :action JumpToNextChange<Enter>
 
-
+"" https://gist.github.com/dewaka/ef947e52767bf453eaf77c852051eb7e
+nnoremap [m :action MethodUp<cr>
+nnoremap ]m :action MethodDown<cr>
